@@ -212,9 +212,21 @@ def draw_pill(draw, x, y, text, font, bg, fg):
     return box[3] - box[1]
 
 
+def draw_topic_tag(draw, x, y, label, font, bg, fg):
+    """Small uppercase pill tag — replaces the plain top-of-slide text
+    that read like a hyperlink. Reusable as a real designed element."""
+    label = label.upper()
+    pad_x, pad_y = 26, 14
+    tw = draw.textlength(label, font=font)
+    box = [x, y, x + tw + pad_x * 2, y + 34 + pad_y * 2]
+    draw.rounded_rectangle(box, radius=(box[3] - box[1]) // 2, fill=bg)
+    draw.text((x + pad_x, y + pad_y - 2), label, font=font, fill=fg)
+    return box
+
+
 # ---------------------------------------------------------------- templates
 
-def template_full_bleed(img, draw, pal, headline, is_hook, icon, show_check, eyebrow_h):
+def template_full_bleed(img, draw, pal, headline, is_hook, icon, show_check, eyebrow_h, label):
     """Big text directly on the gradient/blob background, stat inline-
     highlighted in the accent color. Clean, bold, minimal."""
     max_w = W - 2 * MARGIN
@@ -237,22 +249,29 @@ def template_full_bleed(img, draw, pal, headline, is_hook, icon, show_check, eye
     for line in lines:
         draw_multicolor_line(draw, text_x, y, line, font, stat, pal["white"], pal["accent"])
         y += line_h
+    y += 30
+    f_tag = ImageFont.truetype(F_BOLD, 28)
+    draw_topic_tag(draw, text_x, y, label, f_tag, pal["badge_bg"], pal["white"])
     return y
 
 
-def template_card(img, draw, pal, headline, is_hook, icon, show_check, eyebrow_h):
+def template_card(img, draw, pal, headline, is_hook, icon, show_check, eyebrow_h, label):
     """Text sits inside a light rounded card floating over the textured
     background — strong contrast, quote-card aesthetic."""
     max_w = W - 2 * MARGIN - 80
     stat = extract_stat(headline)
-    max_size = 92 if is_hook else 72
-    font, lines, size = fit_text(draw, headline, max_w, 6, max_size, 42, F_BOLD)
-    line_h = int(size * 1.22)
+    max_size = 88 if is_hook else 68
+    font, lines, size = fit_text(draw, headline, max_w, 6, max_size, 42, F_BLACK)
+    line_h = int(size * 1.16)
 
     pad = 56
     card_h = line_h * len(lines) + pad * 2
-    card_y = max(eyebrow_h + 40, (H - card_h) // 2 - 20)
+    card_y = max(eyebrow_h + 70, (H - card_h) // 2 - 20)
     card_box = [MARGIN - 10, card_y, W - MARGIN + 10, card_y + card_h]
+
+    f_tag = ImageFont.truetype(F_BOLD, 28)
+    draw_topic_tag(draw, MARGIN - 10, card_y - 76, label, f_tag, pal["badge_bg"], pal["white"])
+
     draw.rounded_rectangle(card_box, radius=36, fill=pal["card"])
 
     if is_hook and icon:
@@ -273,7 +292,7 @@ def template_card(img, draw, pal, headline, is_hook, icon, show_check, eyebrow_h
     return card_box[3]
 
 
-def template_block_split(img, draw, pal, headline, is_hook, icon, show_check, eyebrow_h):
+def template_block_split(img, draw, pal, headline, is_hook, icon, show_check, eyebrow_h, label):
     """A solid accent-color band anchors the bottom third; headline spans
     across the gradient background above it. High visual contrast."""
     band_top = int(H * 0.66)
@@ -297,9 +316,13 @@ def template_block_split(img, draw, pal, headline, is_hook, icon, show_check, ey
         draw_multicolor_line(draw, MARGIN, y, line, font, stat, pal["white"], pal["card"])
         y += line_h
 
-    if show_check:
-        band_font = ImageFont.truetype(F_MEDIUM, 40)
-        draw.text((MARGIN, band_top + 50), "\u2713  Key point", font=band_font, fill=pal["card_text"])
+    # fill the band with a real element: topic tag + big slide-icon mark,
+    # instead of leaving it empty
+    f_tag = ImageFont.truetype(F_BOLD, 30)
+    draw_topic_tag(draw, MARGIN, band_top + 46, label, f_tag, pal["card"], pal["card_text"])
+    isz = 120
+    icon_cx, icon_cy = W - MARGIN - isz / 2, band_top + (H - band_top) / 2 + 20
+    draw_icon(draw, icon_cx, icon_cy, isz, icon or "target", pal["card_text"])
 
     return band_top
 
@@ -319,13 +342,16 @@ def render_slide(eyebrow_left, eyebrow_right, headline, pal,
     f_pill = ImageFont.truetype(F_BOLD, 32)
     f_swipe = ImageFont.truetype(F_BOLD, 34)
 
-    draw.text((MARGIN, 68), eyebrow_left, font=f_eyebrow, fill=pal["light"])
+    # Only the slide-progress counter stays at the very top now — the
+    # plain descriptive text there used to read like a stray hyperlink.
+    # The label itself is now shown as a proper designed tag inside
+    # each template instead.
     rw = draw.textlength(eyebrow_right, font=f_eyebrow)
     draw.text((W - MARGIN - rw, 68), eyebrow_right, font=f_eyebrow, fill=pal["light"])
     eyebrow_h = 150
 
     template = TEMPLATES[template_idx % len(TEMPLATES)]
-    template(img, draw, pal, headline, is_hook, icon, show_check, eyebrow_h)
+    template(img, draw, pal, headline, is_hook, icon, show_check, eyebrow_h, eyebrow_left)
 
     if cta_text:
         draw_pill(draw, MARGIN, H - 220, cta_text, f_pill, pal["pill_bg"], pal["pill_text"])
@@ -346,7 +372,7 @@ def render_carousel(carousel, batch_date, out_dir, carousel_index=0):
     total_slides = 2 + len(carousel["body_slides"])
 
     p = render_slide(
-        eyebrow_left=f"\u00a92026 \u00b7 {niche}", eyebrow_right=f"01/{total_slides:02d}",
+        eyebrow_left=niche, eyebrow_right=f"01/{total_slides:02d}",
         headline=carousel["hook_slide"], pal=pal, show_swipe=True, is_hook=True,
         icon=icon, seed=carousel_index, template_idx=carousel_index,
         out_path=os.path.join(out_dir, "slide_01.png"),
