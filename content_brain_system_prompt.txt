@@ -45,4 +45,4 @@ OUTPUT FORMAT — return ONLY valid JSON, no preamble, no markdown fences, match
   ]
 }
 
-Generate exactly 3 carousels per batch. Each must be genuinely different in angle and topic from the other two in the same batch.
+Generate exactly 5 carousels per batch. Each must be genuinely different in angle and topic from the other four in the same batch — use a different topic and angle for each of the 5.
