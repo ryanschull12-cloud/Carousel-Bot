@@ -2,10 +2,8 @@ name: Daily Carousels
 
 on:
   schedule:
-    # 7:00 AM Ireland time = 06:00 UTC (05:00 UTC during Irish summer time —
-    # GitHub cron always runs in UTC, so adjust by 1 hour around March/October
-    # if exact timing matters to you)
-    - cron: "0 6 * * *"
+    # Runs at 10:00 UTC (11am Irish time)
+    - cron: "0 10 * * *"
   workflow_dispatch: {}   # lets you trigger it manually to test
 
 jobs:
@@ -25,7 +23,7 @@ jobs:
 
       - name: Run carousel generator
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
           GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           TO_EMAIL: ${{ secrets.TO_EMAIL }}
