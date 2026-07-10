@@ -1,4 +1,3 @@
-
 """
 Daily runner: calls the free Mistral API for 3 carousel scripts, renders
 them into images using carousel_engine.py, and emails them to you.
@@ -80,7 +79,7 @@ def main():
     all_images = []
     for i, carousel in enumerate(batch["carousels"], start=1):
         out_dir = f"/tmp/carousel_{i}"
-        images = render_carousel(carousel, batch_date, out_dir)
+        images = render_carousel(carousel, batch_date, out_dir, carousel_index=i - 1)
         all_images.extend(images)
     send_email(all_images, batch_date)
     print(f"Sent {len(all_images)} images across {len(batch['carousels'])} carousels.")
@@ -88,4 +87,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
