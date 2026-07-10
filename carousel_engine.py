@@ -89,10 +89,10 @@ def add_depth_blobs(img, pal, seed=0):
     overlay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     odraw = ImageDraw.Draw(overlay)
     positions = [
-        (W * 0.88, H * 0.10, 320, 55),
-        (W * -0.08, H * 0.5, 400, 42),
-        (W * 0.8, H * 0.95, 360, 48),
-        (W * 0.1, H * 0.92, 300, 40),
+        (W * 0.88, H * 0.10, 320, 38),
+        (W * -0.08, H * 0.5, 400, 28),
+        (W * 0.8, H * 0.95, 360, 32),
+        (W * 0.1, H * 0.92, 300, 26),
     ]
     rot = positions[seed % len(positions):] + positions[:seed % len(positions)]
     for cx, cy, r, alpha in rot[:2]:
@@ -176,21 +176,28 @@ def fit_text(draw, text, max_width, max_lines, max_size, min_size, font_path):
     return font, wrap_text(draw, text, font, max_width), min_size
 
 
-def draw_multicolor_line(draw, x, y, line, font, stat, base_color, highlight_color):
+def draw_multicolor_line(draw, x, y, line, font, stat, base_color, highlight_color, shadow=False):
     """Draw one line of text, coloring the stat substring (if present in
-    this line) in the highlight color instead of a separate badge box."""
+    this line) in the highlight color instead of a separate badge box.
+    Optional soft shadow pass improves legibility over textured backgrounds."""
+
+    def draw_run(cx, cy, text, color):
+        if shadow:
+            draw.text((cx + 2, cy + 4), text, font=font, fill=(0, 0, 0))
+        draw.text((cx, cy), text, font=font, fill=color)
+
     if not stat or stat not in line:
-        draw.text((x, y), line, font=font, fill=base_color)
+        draw_run(x, y, line, base_color)
         return
     before, _, after = line.partition(stat)
     cx = x
     if before:
-        draw.text((cx, y), before, font=font, fill=base_color)
+        draw_run(cx, y, before, base_color)
         cx += draw.textlength(before, font=font)
-    draw.text((cx, y), stat, font=font, fill=highlight_color)
+    draw_run(cx, y, stat, highlight_color)
     cx += draw.textlength(stat, font=font)
     if after:
-        draw.text((cx, y), after, font=font, fill=base_color)
+        draw_run(cx, y, after, base_color)
 
 
 def draw_checkmark_badge(draw, x, y, size, ring_color, mark_color):
@@ -247,7 +254,7 @@ def template_full_bleed(img, draw, pal, headline, is_hook, icon, show_check, eye
     if show_check:
         draw_checkmark_badge(draw, MARGIN, y + (line_h - 50) // 2, 50, pal["accent"], pal["white"])
     for line in lines:
-        draw_multicolor_line(draw, text_x, y, line, font, stat, pal["white"], pal["accent"])
+        draw_multicolor_line(draw, text_x, y, line, font, stat, pal["white"], pal["accent"], shadow=True)
         y += line_h
     y += 30
     f_tag = ImageFont.truetype(F_BOLD, 28)
@@ -313,7 +320,7 @@ def template_block_split(img, draw, pal, headline, is_hook, icon, show_check, ey
     total_h = icon_h + line_h * len(lines)
     y = max(eyebrow_h + 20, (band_top - total_h) // 2) + icon_h
     for line in lines:
-        draw_multicolor_line(draw, MARGIN, y, line, font, stat, pal["white"], pal["card"])
+        draw_multicolor_line(draw, MARGIN, y, line, font, stat, pal["white"], pal["card"], shadow=True)
         y += line_h
 
     # fill the band with a real element: topic tag + big slide-icon mark,
