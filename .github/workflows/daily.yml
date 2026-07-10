@@ -2,8 +2,11 @@ name: Daily Carousels
 
 on:
   schedule:
-    # Runs at 10:00 UTC (11am Irish time)
-    - cron: "0 10 * * *"
+    # 8:30am Irish time. Ireland is UTC+1 during summer (BST/IST) and UTC+0
+    # in winter, so this cron (7:30 UTC) is correct for summer — shift to
+    # "30 8 * * *" (8:30 UTC) once winter time starts (late October) if you
+    # want it to stay pinned to 8:30 Irish time year-round.
+    - cron: "30 7 * * *"
   workflow_dispatch: {}   # lets you trigger it manually to test
 
 jobs:
