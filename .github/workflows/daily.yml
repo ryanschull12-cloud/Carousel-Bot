@@ -44,11 +44,11 @@ jobs:
       - name: Wait for raw URLs to propagate
         run: sleep 15
 
-      - name: Post to Instagram
+      - name: Post carousel 1 to Instagram
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           IG_BUSINESS_ACCOUNT_ID: ${{ secrets.IG_BUSINESS_ACCOUNT_ID }}
           GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           TO_EMAIL: ${{ secrets.TO_EMAIL }}
-        run: python instagram_post.py
+        run: python instagram_post.py --only-index 1
