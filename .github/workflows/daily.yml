@@ -2,12 +2,13 @@ name: Daily Carousels
 
 on:
   schedule:
-    # 8:30am Irish time. Ireland is UTC+1 during summer (BST/IST) and UTC+0
-    # in winter, so this cron (7:30 UTC) is correct for summer — shift to
-    # "30 8 * * *" (8:30 UTC) once winter time starts (late October) if you
-    # want it to stay pinned to 8:30 Irish time year-round.
+    # 8:30am Irish time (currently 7:30 UTC during summer/BST — see note
+    # further down for the winter-time adjustment)
     - cron: "30 7 * * *"
   workflow_dispatch: {}   # lets you trigger it manually to test
+
+permissions:
+  contents: write   # needed so the workflow can commit today's images
 
 jobs:
   generate:
@@ -24,10 +25,30 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run carousel generator
+      - name: Generate carousels + send email
         env:
           MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
           GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           TO_EMAIL: ${{ secrets.TO_EMAIL }}
         run: python runner.py
+
+      - name: Commit and push today's images
+        run: |
+          git config user.name "carousel-bot"
+          git config user.email "actions@github.com"
+          git add posts/
+          git commit -m "Add carousels for $(date +'%Y-%m-%d')" || echo "Nothing to commit"
+          git push
+
+      - name: Wait for raw URLs to propagate
+        run: sleep 15
+
+      - name: Post to Instagram
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_BUSINESS_ACCOUNT_ID: ${{ secrets.IG_BUSINESS_ACCOUNT_ID }}
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          TO_EMAIL: ${{ secrets.TO_EMAIL }}
+        run: python instagram_post.py
