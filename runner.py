@@ -70,9 +70,11 @@ def send_email(image_paths, batch_date):
         "Save the rest to your camera roll for TikTok / manual posting."
     )
     for path in image_paths:
+        ext = os.path.splitext(path)[1].lstrip(".").lower()
+        subtype = "jpeg" if ext in ("jpg", "jpeg") else ext
         with open(path, "rb") as f:
             msg.add_attachment(
-                f.read(), maintype="image", subtype="png",
+                f.read(), maintype="image", subtype=subtype,
                 filename=os.path.basename(os.path.dirname(path)) + "_" + os.path.basename(path),
             )
     with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
