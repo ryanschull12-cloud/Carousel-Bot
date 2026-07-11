@@ -24,6 +24,11 @@ GMAIL_APP_PASSWORD = os.environ["GMAIL_APP_PASSWORD"]
 TO_EMAIL = os.environ.get("TO_EMAIL", GMAIL_ADDRESS)
 
 GRAPH = "https://graph.instagram.com/v21.0"
+def check_response(resp, context):
+    """Raise a detailed error including Instagram's actual response body,
+    instead of the generic message requests.raise_for_status() gives."""
+    if not resp.ok:
+        raise RuntimeError(f"{context} failed ({resp.status_code}): {resp.text}")
 SECONDS_BETWEEN_POSTS = 90
 
 
@@ -39,7 +44,7 @@ def create_child_container(image_url):
         "is_carousel_item": "true",
         "access_token": IG_ACCESS_TOKEN,
     }, timeout=60)
-    resp.raise_for_status()
+    check_response(resp, f"create_child_container({image_url})")
     return resp.json()["id"]
 
 
@@ -50,7 +55,7 @@ def create_carousel_container(child_ids, caption):
         "caption": caption,
         "access_token": IG_ACCESS_TOKEN,
     }, timeout=60)
-    resp.raise_for_status()
+    check_response(resp, "create_carousel_container")
     return resp.json()["id"]
 
 
@@ -61,7 +66,7 @@ def wait_until_ready(container_id, timeout=120):
             "fields": "status_code",
             "access_token": IG_ACCESS_TOKEN,
         }, timeout=30)
-        resp.raise_for_status()
+        check_response(resp, f"wait_until_ready({container_id})")
         status = resp.json().get("status_code")
         if status == "FINISHED":
             return True
@@ -76,7 +81,7 @@ def publish(container_id):
         "creation_id": container_id,
         "access_token": IG_ACCESS_TOKEN,
     }, timeout=60)
-    resp.raise_for_status()
+    check_response(resp, f"publish({container_id})")
     return resp.json()
 
 
