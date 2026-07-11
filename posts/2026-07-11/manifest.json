@@ -1,0 +1,77 @@
+{
+  "batch_date": "2026-07-11",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Your Google Ads are wasting money on tire-kickers. Here\u2019s how to fix it. \ud83d\udd25 #GoogleAds #PaidAds #SmallBusinessMarketing",
+      "niche": "Google Ads mistakes/mechanics",
+      "image_paths": [
+        "posts/2026-07-11/carousel_1/slide_01.jpg",
+        "posts/2026-07-11/carousel_1/slide_02.jpg",
+        "posts/2026-07-11/carousel_1/slide_03.jpg",
+        "posts/2026-07-11/carousel_1/slide_04.jpg",
+        "posts/2026-07-11/carousel_1/slide_05.jpg",
+        "posts/2026-07-11/carousel_1/slide_06.jpg"
+      ],
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Meta Ads underperforming? Your creative is likely the issue. Here\u2019s the data. \ud83d\udcca #MetaAds #InstagramAds #SmallBusiness",
+      "niche": "Meta/Instagram Ads mistakes/mechanics",
+      "image_paths": [
+        "posts/2026-07-11/carousel_2/slide_01.jpg",
+        "posts/2026-07-11/carousel_2/slide_02.jpg",
+        "posts/2026-07-11/carousel_2/slide_03.jpg",
+        "posts/2026-07-11/carousel_2/slide_04.jpg",
+        "posts/2026-07-11/carousel_2/slide_05.jpg",
+        "posts/2026-07-11/carousel_2/slide_06.jpg"
+      ],
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Your Google reviews aren\u2019t just about stars\u2014they\u2019re a ranking hack. \ud83d\ude80 #GoogleReviews #LocalSEO #SmallBusiness",
+      "niche": "Google reviews & local reputation",
+      "image_paths": [
+        "posts/2026-07-11/carousel_3/slide_01.jpg",
+        "posts/2026-07-11/carousel_3/slide_02.jpg",
+        "posts/2026-07-11/carousel_3/slide_03.jpg",
+        "posts/2026-07-11/carousel_3/slide_04.jpg",
+        "posts/2026-07-11/carousel_3/slide_05.jpg",
+        "posts/2026-07-11/carousel_3/slide_06.jpg"
+      ],
+      "post_to_instagram": false
+    },
+    {
+      "index": 4,
+      "caption": "Your landing page is costing you leads. Fix it in 10 mins with this checklist. \u2705 #LandingPage #ConversionRate #SmallBusinessMarketing",
+      "niche": "Landing page / conversion basics",
+      "image_paths": [
+        "posts/2026-07-11/carousel_4/slide_01.jpg",
+        "posts/2026-07-11/carousel_4/slide_02.jpg",
+        "posts/2026-07-11/carousel_4/slide_03.jpg",
+        "posts/2026-07-11/carousel_4/slide_04.jpg",
+        "posts/2026-07-11/carousel_4/slide_05.jpg",
+        "posts/2026-07-11/carousel_4/slide_06.jpg",
+        "posts/2026-07-11/carousel_4/slide_07.jpg"
+      ],
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "\u2018Post daily\u2019 is killing your time and ROI. Here\u2019s the truth. \ud83d\udc80 #SocialMediaMarketing #SmallBusiness #PaidAds",
+      "niche": "General small business marketing myths worth busting",
+      "image_paths": [
+        "posts/2026-07-11/carousel_5/slide_01.jpg",
+        "posts/2026-07-11/carousel_5/slide_02.jpg",
+        "posts/2026-07-11/carousel_5/slide_03.jpg",
+        "posts/2026-07-11/carousel_5/slide_04.jpg",
+        "posts/2026-07-11/carousel_5/slide_05.jpg",
+        "posts/2026-07-11/carousel_5/slide_06.jpg",
+        "posts/2026-07-11/carousel_5/slide_07.jpg"
+      ],
+      "post_to_instagram": false
+    }
+  ]
+}
