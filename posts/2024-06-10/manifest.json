@@ -1,0 +1,79 @@
+{
+  "batch_date": "2024-06-10",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Your Meta Ads are wasting money on the wrong people. Here\u2019s how to fix it. \ud83d\udcb8\u27a1\ufe0f\ud83d\udd25 #MetaAds #SmallBizMarketing #PaidAds",
+      "niche": "Meta/Instagram Ads mistakes/mechanics",
+      "image_paths": [
+        "posts/2024-06-10/carousel_1/slide_01.jpg",
+        "posts/2024-06-10/carousel_1/slide_02.jpg",
+        "posts/2024-06-10/carousel_1/slide_03.jpg",
+        "posts/2024-06-10/carousel_1/slide_04.jpg",
+        "posts/2024-06-10/carousel_1/slide_05.jpg",
+        "posts/2024-06-10/carousel_1/slide_06.jpg"
+      ],
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Spending $500 on Google Ads and getting 3 leads? That\u2019s normal. Here\u2019s what to do instead. \ud83d\udcc9\u27a1\ufe0f\ud83d\udcc8 #GoogleAds #PaidAds #SmallBusiness",
+      "niche": "Google Ads mistakes/mechanics",
+      "image_paths": [
+        "posts/2024-06-10/carousel_2/slide_01.jpg",
+        "posts/2024-06-10/carousel_2/slide_02.jpg",
+        "posts/2024-06-10/carousel_2/slide_03.jpg",
+        "posts/2024-06-10/carousel_2/slide_04.jpg",
+        "posts/2024-06-10/carousel_2/slide_05.jpg",
+        "posts/2024-06-10/carousel_2/slide_06.jpg",
+        "posts/2024-06-10/carousel_2/slide_07.jpg"
+      ],
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Your ad got the click\u2026 but your landing page just killed the sale. Here\u2019s how to fix it. \ud83d\ude80\u27a1\ufe0f\ud83d\udca5 #LandingPage #ConversionRate #MarketingTips",
+      "niche": "Landing page / conversion basics",
+      "image_paths": [
+        "posts/2024-06-10/carousel_3/slide_01.jpg",
+        "posts/2024-06-10/carousel_3/slide_02.jpg",
+        "posts/2024-06-10/carousel_3/slide_03.jpg",
+        "posts/2024-06-10/carousel_3/slide_04.jpg",
+        "posts/2024-06-10/carousel_3/slide_05.jpg",
+        "posts/2024-06-10/carousel_3/slide_06.jpg",
+        "posts/2024-06-10/carousel_3/slide_07.jpg"
+      ],
+      "post_to_instagram": false
+    },
+    {
+      "index": 4,
+      "caption": "\u2018Post daily!\u2019 \u2018Go viral!\u2019 Stop listening to bad advice. Here\u2019s what actually works. \ud83c\udfaf\u27a1\ufe0f\ud83d\udcb0 #SmallBizMarketing #ContentStrategy #PaidAds",
+      "niche": "General small business marketing myths worth busting",
+      "image_paths": [
+        "posts/2024-06-10/carousel_4/slide_01.jpg",
+        "posts/2024-06-10/carousel_4/slide_02.jpg",
+        "posts/2024-06-10/carousel_4/slide_03.jpg",
+        "posts/2024-06-10/carousel_4/slide_04.jpg",
+        "posts/2024-06-10/carousel_4/slide_05.jpg",
+        "posts/2024-06-10/carousel_4/slide_06.jpg",
+        "posts/2024-06-10/carousel_4/slide_07.jpg"
+      ],
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Your Google reviews are killing your sales. Fix it in 5 minutes with this checklist. \ud83d\udcc8\u27a1\ufe0f\ud83d\udd25 #GoogleReviews #LocalBusiness #ReputationManagement",
+      "niche": "Google reviews & local reputation",
+      "image_paths": [
+        "posts/2024-06-10/carousel_5/slide_01.jpg",
+        "posts/2024-06-10/carousel_5/slide_02.jpg",
+        "posts/2024-06-10/carousel_5/slide_03.jpg",
+        "posts/2024-06-10/carousel_5/slide_04.jpg",
+        "posts/2024-06-10/carousel_5/slide_05.jpg",
+        "posts/2024-06-10/carousel_5/slide_06.jpg",
+        "posts/2024-06-10/carousel_5/slide_07.jpg"
+      ],
+      "post_to_instagram": false
+    }
+  ]
+}
