@@ -7,6 +7,7 @@ Must run AFTER the images have been committed and pushed — see
 .github/workflows/daily.yml for the ordering.
 """
 
+import argparse
 import os
 import sys
 import json
@@ -118,8 +119,13 @@ def post_carousel(carousel):
 
 
 def main():
-    if len(sys.argv) > 1:
-        manifest_path = sys.argv[1]
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--manifest", help="Path to a specific manifest.json (defaults to today's/most recent)")
+    parser.add_argument("--only-index", type=int, help="Only post the carousel with this index (e.g. 1 or 2)")
+    args = parser.parse_args()
+
+    if args.manifest:
+        manifest_path = args.manifest
     else:
         matches = sorted(glob.glob("posts/*/manifest.json"))
         if not matches:
@@ -131,6 +137,9 @@ def main():
         manifest = json.load(f)
 
     to_post = [c for c in manifest["carousels"] if c.get("post_to_instagram")]
+    if args.only_index is not None:
+        to_post = [c for c in to_post if c["index"] == args.only_index]
+
     print(f"Posting {len(to_post)} carousel(s) to Instagram...")
 
     for i, carousel in enumerate(to_post):
