@@ -366,7 +366,7 @@ def render_slide(eyebrow_left, eyebrow_right, headline, pal,
     if show_swipe:
         draw.text((MARGIN, H - 120), "Swipe  \u2192", font=f_swipe, fill=pal["white"])
 
-    img.save(out_path)
+    img.convert("RGB").save(out_path, "JPEG", quality=92)
     return out_path
 
 
@@ -382,7 +382,7 @@ def render_carousel(carousel, batch_date, out_dir, carousel_index=0):
         eyebrow_left=niche, eyebrow_right=f"01/{total_slides:02d}",
         headline=carousel["hook_slide"], pal=pal, show_swipe=True, is_hook=True,
         icon=icon, seed=carousel_index, template_idx=carousel_index,
-        out_path=os.path.join(out_dir, "slide_01.png"),
+        out_path=os.path.join(out_dir, "slide_01.jpg"),
     )
     paths.append(p)
 
@@ -391,16 +391,16 @@ def render_carousel(carousel, batch_date, out_dir, carousel_index=0):
             eyebrow_left=carousel["angle"], eyebrow_right=f"{i:02d}/{total_slides:02d}",
             headline=body, pal=pal, show_check=True,
             seed=carousel_index + i, template_idx=carousel_index + i,
-            out_path=os.path.join(out_dir, f"slide_{i:02d}.png"),
+            out_path=os.path.join(out_dir, f"slide_{i:02d}.jpg"),
         )
         paths.append(p)
 
     last = total_slides
     p = render_slide(
         eyebrow_left="Follow for more", eyebrow_right=f"{last:02d}/{total_slides:02d}",
-        headline=carousel["cta_slide"], pal=pal, cta_text="Follow @R&D Marketing",
+        headline=carousel["cta_slide"], pal=pal, cta_text="Follow @youragency",
         seed=carousel_index + last, template_idx=carousel_index + last,
-        out_path=os.path.join(out_dir, f"slide_{last:02d}.png"),
+        out_path=os.path.join(out_dir, f"slide_{last:02d}.jpg"),
     )
     paths.append(p)
 
