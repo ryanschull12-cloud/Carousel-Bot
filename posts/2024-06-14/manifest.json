@@ -1,0 +1,75 @@
+{
+  "batch_date": "2024-06-14",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Google Ads wasting your budget? You\u2019re probably using the wrong match type. Switch to exact/phrase match to stop the bleed. #GoogleAds #PaidAds #SmallBusinessMarketing",
+      "niche": "Google Ads mistakes/mechanics",
+      "image_paths": [
+        "posts/2024-06-14/carousel_1/slide_01.png",
+        "posts/2024-06-14/carousel_1/slide_02.png",
+        "posts/2024-06-14/carousel_1/slide_03.png",
+        "posts/2024-06-14/carousel_1/slide_04.png",
+        "posts/2024-06-14/carousel_1/slide_05.png",
+        "posts/2024-06-14/carousel_1/slide_06.png"
+      ],
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Meta Ads failing? You\u2019re probably not grabbing attention fast enough. Test your hooks in 3 seconds or less. #MetaAds #InstagramAds #PaidAds",
+      "niche": "Meta/Instagram Ads mistakes/mechanics",
+      "image_paths": [
+        "posts/2024-06-14/carousel_2/slide_01.png",
+        "posts/2024-06-14/carousel_2/slide_02.png",
+        "posts/2024-06-14/carousel_2/slide_03.png",
+        "posts/2024-06-14/carousel_2/slide_04.png",
+        "posts/2024-06-14/carousel_2/slide_05.png",
+        "posts/2024-06-14/carousel_2/slide_06.png"
+      ],
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Google reviews aren\u2019t just about stars\u2014they\u2019re about volume and velocity. Boost yours in 30 days. #GoogleReviews #LocalSEO #SmallBusiness",
+      "niche": "Google reviews & local reputation",
+      "image_paths": [
+        "posts/2024-06-14/carousel_3/slide_01.png",
+        "posts/2024-06-14/carousel_3/slide_02.png",
+        "posts/2024-06-14/carousel_3/slide_03.png",
+        "posts/2024-06-14/carousel_3/slide_04.png",
+        "posts/2024-06-14/carousel_3/slide_05.png",
+        "posts/2024-06-14/carousel_3/slide_06.png"
+      ],
+      "post_to_instagram": false
+    },
+    {
+      "index": 4,
+      "caption": "Landing page leaking leads? Check these 3 things first. #ConversionRate #LandingPage #PaidAds",
+      "niche": "Landing page / conversion basics",
+      "image_paths": [
+        "posts/2024-06-14/carousel_4/slide_01.png",
+        "posts/2024-06-14/carousel_4/slide_02.png",
+        "posts/2024-06-14/carousel_4/slide_03.png",
+        "posts/2024-06-14/carousel_4/slide_04.png",
+        "posts/2024-06-14/carousel_4/slide_05.png",
+        "posts/2024-06-14/carousel_4/slide_06.png"
+      ],
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Posting daily? Stop. Quality beats quantity every time. #SocialMediaMarketing #SmallBusinessTips #ContentStrategy",
+      "niche": "General small business marketing myths worth busting",
+      "image_paths": [
+        "posts/2024-06-14/carousel_5/slide_01.png",
+        "posts/2024-06-14/carousel_5/slide_02.png",
+        "posts/2024-06-14/carousel_5/slide_03.png",
+        "posts/2024-06-14/carousel_5/slide_04.png",
+        "posts/2024-06-14/carousel_5/slide_05.png",
+        "posts/2024-06-14/carousel_5/slide_06.png"
+      ],
+      "post_to_instagram": false
+    }
+  ]
+}
