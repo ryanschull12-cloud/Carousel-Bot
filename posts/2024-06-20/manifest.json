@@ -1,0 +1,75 @@
+{
+  "batch_date": "2024-06-20",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Your Meta Ads are wasting money on the wrong people. Here\u2019s how to fix it. \ud83d\udd25 #MetaAds #SmallBusinessMarketing #PaidAdsTips",
+      "niche": "Meta/Instagram Ads mistakes/mechanics",
+      "image_paths": [
+        "posts/2024-06-20/carousel_1/slide_01.png",
+        "posts/2024-06-20/carousel_1/slide_02.png",
+        "posts/2024-06-20/carousel_1/slide_03.png",
+        "posts/2024-06-20/carousel_1/slide_04.png",
+        "posts/2024-06-20/carousel_1/slide_05.png",
+        "posts/2024-06-20/carousel_1/slide_06.png"
+      ],
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Google Ads math you can\u2019t ignore. Are you profitable or just burning cash? \ud83d\udcb8 #GoogleAds #PaidAds #SmallBusiness",
+      "niche": "Google Ads mistakes/mechanics",
+      "image_paths": [
+        "posts/2024-06-20/carousel_2/slide_01.png",
+        "posts/2024-06-20/carousel_2/slide_02.png",
+        "posts/2024-06-20/carousel_2/slide_03.png",
+        "posts/2024-06-20/carousel_2/slide_04.png",
+        "posts/2024-06-20/carousel_2/slide_05.png",
+        "posts/2024-06-20/carousel_2/slide_06.png"
+      ],
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Your Google reviews are leaking revenue. Here\u2019s what we fix first. \ud83d\udcc8 #LocalSEO #GoogleReviews #SmallBusinessTips",
+      "niche": "Google reviews & local reputation",
+      "image_paths": [
+        "posts/2024-06-20/carousel_3/slide_01.png",
+        "posts/2024-06-20/carousel_3/slide_02.png",
+        "posts/2024-06-20/carousel_3/slide_03.png",
+        "posts/2024-06-20/carousel_3/slide_04.png",
+        "posts/2024-06-20/carousel_3/slide_05.png",
+        "posts/2024-06-20/carousel_3/slide_06.png"
+      ],
+      "post_to_instagram": false
+    },
+    {
+      "index": 4,
+      "caption": "Your landing page is leaking sales. Here\u2019s the before/after. \ud83d\ude80 #ConversionRate #LandingPage #PaidAds",
+      "niche": "Landing page / conversion basics",
+      "image_paths": [
+        "posts/2024-06-20/carousel_4/slide_01.png",
+        "posts/2024-06-20/carousel_4/slide_02.png",
+        "posts/2024-06-20/carousel_4/slide_03.png",
+        "posts/2024-06-20/carousel_4/slide_04.png",
+        "posts/2024-06-20/carousel_4/slide_05.png",
+        "posts/2024-06-20/carousel_4/slide_06.png"
+      ],
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Stop wasting time on marketing myths. Here\u2019s what actually works. \ud83c\udfaf #SmallBusinessMarketing #PaidAds #SocialMediaTips",
+      "niche": "General small business marketing myths worth busting",
+      "image_paths": [
+        "posts/2024-06-20/carousel_5/slide_01.png",
+        "posts/2024-06-20/carousel_5/slide_02.png",
+        "posts/2024-06-20/carousel_5/slide_03.png",
+        "posts/2024-06-20/carousel_5/slide_04.png",
+        "posts/2024-06-20/carousel_5/slide_05.png",
+        "posts/2024-06-20/carousel_5/slide_06.png"
+      ],
+      "post_to_instagram": false
+    }
+  ]
+}
