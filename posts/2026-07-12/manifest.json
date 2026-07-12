@@ -3,8 +3,8 @@
   "carousels": [
     {
       "index": 1,
-      "caption": "Your Google Ads are wasting money on the wrong clicks. Here\u2019s how to fix it fast. \ud83d\udcb8\u27a1\ufe0f\ud83d\udcb0 #GoogleAds #PaidAds #SmallBusinessMarketing",
-      "niche": "Google Ads mistakes/mechanics",
+      "caption": "Your 'Maximize Clicks' budget is bleeding cash. Switch to Manual CPC and set a max bid at 2x your avg conversion value. Test for 7 days. #GoogleAds #PaidAds #SmallBizMarketing #AdAudit",
+      "niche": "Google Ads",
       "image_paths": [
         "posts/2026-07-12/carousel_1/slide_01.jpg",
         "posts/2026-07-12/carousel_1/slide_02.jpg",
@@ -17,8 +17,8 @@
     },
     {
       "index": 2,
-      "caption": "Your Instagram ads are burning cash because you\u2019re not refreshing them. Here\u2019s the data. \ud83d\udcca\u27a1\ufe0f\ud83d\udd25 #MetaAds #InstagramMarketing #PaidAds",
-      "niche": "Meta/Instagram Ads mistakes/mechanics",
+      "caption": "Meta hides your worst-performing placements. Reels and Stories convert 40% worse than Feed. Check 'Placement Breakdown' in Ads Manager. #MetaAds #InstagramAds #PaidSocial #ROAS",
+      "niche": "Meta/Instagram Ads",
       "image_paths": [
         "posts/2026-07-12/carousel_2/slide_01.jpg",
         "posts/2026-07-12/carousel_2/slide_02.jpg",
@@ -31,8 +31,8 @@
     },
     {
       "index": 3,
-      "caption": "Your Google reviews are killing your local rankings. Here\u2019s what Google\u2019s algorithm actually cares about. \ud83d\udcc8\u27a1\ufe0f\ud83d\ude80 #GoogleReviews #LocalSEO #SmallBusiness",
-      "niche": "Google reviews & local reputation",
+      "caption": "Your Google reviews are stuck in 2022. Most biz owners never respond. Google demotes profiles with low response rates. Set a 24-hour rule. #LocalSEO #GoogleReviews #SmallBusiness #Reputation",
+      "niche": "Google Reviews & Local SEO",
       "image_paths": [
         "posts/2026-07-12/carousel_3/slide_01.jpg",
         "posts/2026-07-12/carousel_3/slide_02.jpg",
@@ -45,31 +45,29 @@
     },
     {
       "index": 4,
-      "caption": "Your landing page is leaking leads. Here\u2019s the 5-minute fix. \ud83d\udeb0\u27a1\ufe0f\ud83d\udca7 #LandingPage #ConversionOptimization #PaidAds",
-      "niche": "Landing page / conversion basics",
+      "caption": "Ignore the 'audience overlap' warning. It's not hurting your performance. Test it with a split test. #MetaAds #InstagramAds #PaidSocial #AudienceTargeting",
+      "niche": "Meta/Instagram Ads",
       "image_paths": [
         "posts/2026-07-12/carousel_4/slide_01.jpg",
         "posts/2026-07-12/carousel_4/slide_02.jpg",
         "posts/2026-07-12/carousel_4/slide_03.jpg",
         "posts/2026-07-12/carousel_4/slide_04.jpg",
         "posts/2026-07-12/carousel_4/slide_05.jpg",
-        "posts/2026-07-12/carousel_4/slide_06.jpg",
-        "posts/2026-07-12/carousel_4/slide_07.jpg"
+        "posts/2026-07-12/carousel_4/slide_06.jpg"
       ],
       "post_to_instagram": false
     },
     {
       "index": 5,
-      "caption": "Posting daily on social media is killing your engagement. Here\u2019s what actually works. \ud83d\udcf1\u27a1\ufe0f\ud83d\udd25 #SocialMediaMarketing #ContentStrategy #SmallBusiness",
-      "niche": "General small business marketing myths worth busting",
+      "caption": "Your welcome email is a ghost. 60% of new subscribers never open it. Fix it in 5 minutes. #EmailMarketing #WelcomeEmail #SmallBizTips #Conversion",
+      "niche": "Email Marketing",
       "image_paths": [
         "posts/2026-07-12/carousel_5/slide_01.jpg",
         "posts/2026-07-12/carousel_5/slide_02.jpg",
         "posts/2026-07-12/carousel_5/slide_03.jpg",
         "posts/2026-07-12/carousel_5/slide_04.jpg",
         "posts/2026-07-12/carousel_5/slide_05.jpg",
-        "posts/2026-07-12/carousel_5/slide_06.jpg",
-        "posts/2026-07-12/carousel_5/slide_07.jpg"
+        "posts/2026-07-12/carousel_5/slide_06.jpg"
       ],
       "post_to_instagram": false
     }
