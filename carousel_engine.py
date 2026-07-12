@@ -15,6 +15,9 @@ import datetime
 W, H = 1080, 1920
 MARGIN = 76
 
+# Your actual handle — edit this ONE line if it ever changes, nowhere else.
+AGENCY_HANDLE = "@rd.marketing0"
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 FONT_DIR = os.path.join(HERE, "fonts")
 
@@ -72,9 +75,23 @@ def palette_for(batch_date, carousel_index):
 
 NUMBER_PATTERN = re.compile(r"(?:[€$£]\s?\d[\d,]*(?:\.\d+)?[kKmM]?|\d[\d,]*(?:\.\d+)?\s?%)")
 
+# Key terms worth colorizing when there's no number to highlight instead —
+# keeps slides visually punchy even on non-numeric hooks/lines.
+KEYWORD_PATTERN = re.compile(
+    r"\b(Google Ads|Meta Ads|Instagram Ads|Facebook Ads|TikTok Ads|"
+    r"Quality Score|Google Reviews|Local SEO|SEO|ROI|CPC|CPA|CTR|"
+    r"budget|conversions?|remarketing|retargeting)\b",
+    re.IGNORECASE,
+)
+
 
 def extract_stat(text):
+    """Returns the first number/stat if present, otherwise the first
+    key marketing term worth highlighting, otherwise None."""
     m = NUMBER_PATTERN.search(text)
+    if m:
+        return m.group(0)
+    m = KEYWORD_PATTERN.search(text)
     return m.group(0) if m else None
 
 
@@ -174,10 +191,28 @@ def fit_text(draw, text, max_width, max_lines, max_size, min_size, font_path):
     for size in range(max_size, min_size - 1, -4):
         font = ImageFont.truetype(font_path, size)
         lines = wrap_text(draw, text, font, max_width)
-        if len(lines) <= max_lines:
+        if len(lines) <= max_lines and _all_lines_fit(draw, lines, font, max_width):
             return font, lines, size
-    font = ImageFont.truetype(font_path, min_size)
-    return font, wrap_text(draw, text, font, max_width), min_size
+
+    # Guaranteed-fit fallback: a single very long word (a long compound
+    # number, hyphenated term, etc.) can still overflow even at min_size
+    # since wrap_text can't break mid-word. Keep shrinking past min_size
+    # until every line genuinely fits, down to a hard floor so text never
+    # runs off the edge of the canvas.
+    size = min_size
+    while size > 22:
+        size -= 3
+        font = ImageFont.truetype(font_path, size)
+        lines = wrap_text(draw, text, font, max_width)
+        if _all_lines_fit(draw, lines, font, max_width):
+            return font, lines, size
+
+    font = ImageFont.truetype(font_path, 22)
+    return font, wrap_text(draw, text, font, max_width), 22
+
+
+def _all_lines_fit(draw, lines, font, max_width):
+    return all(draw.textlength(line, font=font) <= max_width for line in lines)
 
 
 def draw_multicolor_line(draw, x, y, line, font, stat, base_color, highlight_color, shadow=False):
@@ -402,7 +437,7 @@ def render_carousel(carousel, batch_date, out_dir, carousel_index=0):
     last = total_slides
     p = render_slide(
         eyebrow_left="Follow for more", eyebrow_right=f"{last:02d}/{total_slides:02d}",
-        headline=carousel["cta_slide"], pal=pal, cta_text="Follow @youragency",
+        headline=carousel["cta_slide"], pal=pal, cta_text=f"Follow {AGENCY_HANDLE}",
         seed=carousel_index + last, template_idx=carousel_index + last,
         out_path=os.path.join(out_dir, f"slide_{last:02d}.jpg"),
     )
@@ -427,4 +462,3 @@ if __name__ == "__main__":
     }
     out = render_carousel(sample, "2026-07-10", "/home/claude/sample_v5", carousel_index=0)
     print(out)
-    
