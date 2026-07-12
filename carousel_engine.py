@@ -35,26 +35,30 @@ F_MEDIUM = _font("Poppins-Medium.ttf")
 F_REG = _font("Poppins-Regular.ttf", fallback_regular=True)
 
 PALETTES = [
-    {"bg": (208, 90, 58), "bg2": (168, 62, 40), "white": (255, 255, 255),
-     "light": (255, 235, 227), "accent": (240, 200, 180),
-     "card": (255, 244, 238), "card_text": (120, 45, 25),
-     "pill_bg": (255, 255, 255), "pill_text": (150, 60, 35),
-     "badge_bg": (235, 160, 130), "blob": (235, 130, 95)},
-    {"bg": (30, 42, 68), "bg2": (18, 26, 46), "white": (255, 255, 255),
+    {  # Deep navy — sharp, data/tech feel
+     "bg": (30, 42, 68), "bg2": (18, 26, 46), "white": (255, 255, 255),
      "light": (198, 210, 235), "accent": (120, 165, 235),
      "card": (232, 238, 250), "card_text": (24, 35, 60),
      "pill_bg": (255, 255, 255), "pill_text": (30, 42, 68),
      "badge_bg": (60, 85, 140), "blob": (70, 100, 170)},
-    {"bg": (35, 74, 58), "bg2": (20, 50, 38), "white": (255, 255, 255),
+    {  # Forest green — calm authority feel
+     "bg": (35, 74, 58), "bg2": (20, 50, 38), "white": (255, 255, 255),
      "light": (205, 230, 215), "accent": (150, 215, 175),
      "card": (228, 244, 235), "card_text": (25, 55, 42),
      "pill_bg": (255, 255, 255), "pill_text": (35, 74, 58),
      "badge_bg": (70, 120, 95), "blob": (80, 140, 110)},
-    {"bg": (32, 32, 34), "bg2": (18, 18, 20), "white": (255, 255, 255),
+    {  # Charcoal + gold — premium feel
+     "bg": (32, 32, 34), "bg2": (18, 18, 20), "white": (255, 255, 255),
      "light": (215, 210, 200), "accent": (225, 180, 100),
      "card": (245, 236, 220), "card_text": (45, 36, 15),
      "pill_bg": (255, 255, 255), "pill_text": (32, 32, 34),
      "badge_bg": (90, 78, 50), "blob": (150, 120, 60)},
+    {  # Deep plum/burgundy — bold, distinct from the other three
+     "bg": (58, 28, 48), "bg2": (36, 16, 30), "white": (255, 255, 255),
+     "light": (232, 205, 220), "accent": (220, 140, 180),
+     "card": (245, 232, 240), "card_text": (60, 24, 44),
+     "pill_bg": (255, 255, 255), "pill_text": (58, 28, 48),
+     "badge_bg": (120, 60, 95), "blob": (150, 80, 120)},
 ]
 
 
@@ -423,3 +427,4 @@ if __name__ == "__main__":
     }
     out = render_carousel(sample, "2026-07-10", "/home/claude/sample_v5", carousel_index=0)
     print(out)
+    
