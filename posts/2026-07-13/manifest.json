@@ -1,0 +1,76 @@
+{
+  "batch_date": "2026-07-13",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Your Google Ads aren't just clicks\u2014they're calls. Stop wasting money on tire-kickers. #GoogleAds #SmallBusinessMarketing #PaidAds",
+      "niche": "Google Ads",
+      "image_paths": [
+        "posts/2026-07-13/carousel_1/slide_01.jpg",
+        "posts/2026-07-13/carousel_1/slide_02.jpg",
+        "posts/2026-07-13/carousel_1/slide_03.jpg",
+        "posts/2026-07-13/carousel_1/slide_04.jpg",
+        "posts/2026-07-13/carousel_1/slide_05.jpg",
+        "posts/2026-07-13/carousel_1/slide_06.jpg"
+      ],
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Not all clicks are equal. Stop chasing cheap clicks and start chasing customers. #MetaAds #InstagramAds #PaidAds",
+      "niche": "Meta/Instagram Ads",
+      "image_paths": [
+        "posts/2026-07-13/carousel_2/slide_01.jpg",
+        "posts/2026-07-13/carousel_2/slide_02.jpg",
+        "posts/2026-07-13/carousel_2/slide_03.jpg",
+        "posts/2026-07-13/carousel_2/slide_04.jpg",
+        "posts/2026-07-13/carousel_2/slide_05.jpg",
+        "posts/2026-07-13/carousel_2/slide_06.jpg"
+      ],
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Your Google reviews need more than stars\u2014they need details. #LocalSEO #GoogleReviews #SmallBusiness",
+      "niche": "Google Reviews & Local SEO",
+      "image_paths": [
+        "posts/2026-07-13/carousel_3/slide_01.jpg",
+        "posts/2026-07-13/carousel_3/slide_02.jpg",
+        "posts/2026-07-13/carousel_3/slide_03.jpg",
+        "posts/2026-07-13/carousel_3/slide_04.jpg",
+        "posts/2026-07-13/carousel_3/slide_05.jpg",
+        "posts/2026-07-13/carousel_3/slide_06.jpg"
+      ],
+      "post_to_instagram": false
+    },
+    {
+      "index": 4,
+      "caption": "Your email list isn't dead\u2014it's just boring. Fix that. #EmailMarketing #SmallBusinessTips #PaidAds",
+      "niche": "Email Marketing",
+      "image_paths": [
+        "posts/2026-07-13/carousel_4/slide_01.jpg",
+        "posts/2026-07-13/carousel_4/slide_02.jpg",
+        "posts/2026-07-13/carousel_4/slide_03.jpg",
+        "posts/2026-07-13/carousel_4/slide_04.jpg",
+        "posts/2026-07-13/carousel_4/slide_05.jpg",
+        "posts/2026-07-13/carousel_4/slide_06.jpg"
+      ],
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "5 quick fixes to make your Meta ads work harder. #MetaAds #InstagramAds #PaidAds",
+      "niche": "Meta/Instagram Ads",
+      "image_paths": [
+        "posts/2026-07-13/carousel_5/slide_01.jpg",
+        "posts/2026-07-13/carousel_5/slide_02.jpg",
+        "posts/2026-07-13/carousel_5/slide_03.jpg",
+        "posts/2026-07-13/carousel_5/slide_04.jpg",
+        "posts/2026-07-13/carousel_5/slide_05.jpg",
+        "posts/2026-07-13/carousel_5/slide_06.jpg",
+        "posts/2026-07-13/carousel_5/slide_07.jpg"
+      ],
+      "post_to_instagram": false
+    }
+  ]
+}
