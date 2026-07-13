@@ -20,16 +20,35 @@ The content must work for someone who has never touched an ads dashboard, not ju
 - A reader with zero marketing background should finish every slide understanding it, even if they never run ads themselves. If a smart 16-year-old wouldn't understand a sentence on the first read, rewrite it simpler.
 - Still be specific and concrete (numbers, real scenarios) — simple does not mean vague. "Simple and sharp," not "simple and generic."
 
-=== HOOK SLIDE RULES (strict) ===
-The hook (slide 1) is the single most important line in the whole carousel. It must:
-- Be under 10 words. Hard limit. If it's longer, cut it down, don't let it run.
-- Make a specific, concrete claim — a number, a mistake, a surprising fact — never a vague tease.
-- Avoid formulaic templates. Do NOT default to patterns like "Your $X just vanished, here's why" or "X changes everything" repeated across carousels. Each hook should read like a different person wrote it, not a fill-in-the-blank template.
+=== HOOK SLIDE RULES (strict — based on actual carousel performance research) ===
+The hook (slide 1) carries roughly 80% of whether this carousel gets seen at all — the algorithm decides the post's fate within 2-3 seconds of the hook. Treat it as the most important single line you write, not something to dash off before the "real" content.
 
-Examples of the right length/sharpness (write NEW ones each time, never reuse these):
+The psychology: a strong hook works by opening an information gap — the reader's brain perceives a specific, unresolved gap in their knowledge and feels a near-compulsive urge to close it by swiping. This is NOT the same as vague clickbait ("you won't believe this trick" is dead and audiences are immune to it) — the gap has to be specific and genuinely tied to something the reader cares about.
+
+Every hook must contain:
+1. An audience signal — who this is for, even if implicit (a business owner running ads, someone with bad reviews, etc.)
+2. A real tension or gap — something surprising, wrong, or unresolved that the reader needs the next slide to understand
+3. Specificity — a number, a named mechanic, or a concrete claim. Generic outperforms nothing; specific outperforms generic every time.
+
+Rotate across these 6 proven hook angles (each hits a different psychological trigger — vary which one you use, don't lean on the same one every carousel):
+1. Curiosity — a gap the reader needs closed ("The setting killing your Quality Score")
+2. Mistake/fear — something they're probably already doing wrong ("Your Meta pixel is lying to you")
+3. Contrarian/disbelief — challenges something they believe is true ("More ad spend won't fix this")
+4. Specific proof/numbers — a concrete, surprising stat ("40% more per click, one setting")
+5. Relief/permission — tells them something they feared isn't actually the problem
+6. Behind-the-curtain — what insiders check that most people don't know to check
+
+Hard rules:
+- Under 10 words. If it's longer, cut it, don't let it run.
+- Never vague. "How to grow your ads" is dead on arrival — "The exact setting killing your Quality Score" works because it's specific.
+- Avoid formulaic templates repeated across carousels — do NOT default to the same sentence shape every time (e.g. always "Your $X just vanished, here's why"). Each hook should read like a different person wrote it.
+
+Examples of the right length/sharpness/specificity (write NEW ones each time, never reuse these):
 - "Your Quality Score is costing you 40% more per click"
 - "Meta punishes ads you don't refresh"
 - "Most cosmetic clinics run zero remarketing ads"
+- "The setting killing your Quality Score"
+- "More ad spend won't fix this"
 
 === ORIGINALITY RULES (strict) ===
 - Never reuse the same sentence structure or phrasing pattern more than once within a batch.
@@ -54,6 +73,14 @@ ANGLE ROTATION (don't repeat the same angle two days running):
 5. Quick-win checklist (3-5 actionable steps)
 6. Contrarian take on common "advice"
 
+=== SAVE & SHARE WORTHINESS ===
+Saves and DM shares are weighted far more heavily than likes by the algorithm — a carousel that gets saved/shared reaches far more people than one that just gets liked. Every carousel should pass this test: would someone screenshot or save this to actually use later, or forward it to a business-owner friend? That means:
+- End with something genuinely worth saving (a checklist, a specific number to remember, a checkable fact) — not just a generic "follow for more."
+- Write body slides as if the reader will come back to this post in a month looking for the exact detail — concrete and reference-able, not just motivational.
+
+=== SLIDE COUNT ===
+Use exactly 6 body slides (8 slides total per carousel: hook + 6 body + CTA). This lands in the range that performs best for completion and reach — too short and there's nothing worth saving, too long and people drop off before the payoff.
+
 OUTPUT FORMAT — return ONLY valid JSON, no preamble, no markdown fences, matching this schema exactly:
 
 {
@@ -63,7 +90,7 @@ OUTPUT FORMAT — return ONLY valid JSON, no preamble, no markdown fences, match
       "niche": "string — Google Ads, Meta/Instagram Ads, Google Reviews & Local SEO, or Email Marketing",
       "angle": "string (one of the 6 angles above)",
       "hook_slide": "string — under 10 words, the scroll-stopper",
-      "body_slides": ["string", "string", "string", "string"],
+      "body_slides": ["string", "string", "string", "string", "string", "string"],
       "cta_slide": "string — final slide, soft CTA",
       "caption": "string — TikTok/Instagram caption, under 300 characters, includes 3-5 relevant hashtags",
       "suggested_audio_style": "string — e.g. 'trending upbeat', 'calm voiceover', 'suspenseful build'"
