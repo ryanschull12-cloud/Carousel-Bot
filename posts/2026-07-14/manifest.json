@@ -3,7 +3,7 @@
   "carousels": [
     {
       "index": 1,
-      "caption": "Your Google Ads are leaking money before they even run. Fix the hidden score killing your budget. #GoogleAds #SmallBusinessTips #PaidAds",
+      "caption": "Your Google Ads budget isn't just money\u2014it's a bet on who sees your ad. Are you betting on the right people? \ud83d\udd25 #GoogleAdsTips #SmallBusinessMarketing #AdWordsMistakes",
       "niche": "Google Ads",
       "image_paths": [
         "posts/2026-07-14/carousel_1/slide_01.jpg",
@@ -19,7 +19,7 @@
     },
     {
       "index": 2,
-      "caption": "Your Meta ads are bleeding money on the wrong people. Refresh your audience and watch costs drop. #MetaAds #InstagramAds #PaidMarketing",
+      "caption": "Meta Ads aren't magic\u2014they're math. Are you giving them enough data to work? \ud83d\udcca #MetaAds #InstagramMarketing #SmallBusinessTips",
       "niche": "Meta/Instagram Ads",
       "image_paths": [
         "posts/2026-07-14/carousel_2/slide_01.jpg",
@@ -35,7 +35,7 @@
     },
     {
       "index": 3,
-      "caption": "Your Google reviews aren\u2019t just ratings\u2014they\u2019re a ranking signal. Reply fast to climb higher. #LocalSEO #GoogleReviews #SmallBusiness",
+      "caption": "Google doesn't just read your reviews\u2014it reads how you respond. Are you making the most of them? \ud83c\udf1f #LocalSEO #GoogleReviews #SmallBusinessGrowth",
       "niche": "Google Reviews & Local SEO",
       "image_paths": [
         "posts/2026-07-14/carousel_3/slide_01.jpg",
@@ -51,7 +51,7 @@
     },
     {
       "index": 4,
-      "caption": "Your email list isn\u2019t just a number\u2014it\u2019s a sales tool. Clean it to make it work harder. #EmailMarketing #SmallBusinessTips #PaidAds",
+      "caption": "Your email list isn't a numbers game\u2014it's an engagement game. Are you playing to win? \ud83d\udce7 #EmailMarketing #SmallBusinessTips #ListCleanse",
       "niche": "Email Marketing",
       "image_paths": [
         "posts/2026-07-14/carousel_4/slide_01.jpg",
@@ -67,7 +67,7 @@
     },
     {
       "index": 5,
-      "caption": "Your Meta ads are wasting money on the wrong people. Fix it in 10 minutes with this checklist. #MetaAds #InstagramMarketing #PaidAds",
+      "caption": "Instagram ads aren't a set-and-forget game. Are you giving them the signals they need to work? \ud83c\udfaf #InstagramAds #MetaAds #SmallBusinessMarketing",
       "niche": "Meta/Instagram Ads",
       "image_paths": [
         "posts/2026-07-14/carousel_5/slide_01.jpg",
@@ -77,7 +77,9 @@
         "posts/2026-07-14/carousel_5/slide_05.jpg",
         "posts/2026-07-14/carousel_5/slide_06.jpg",
         "posts/2026-07-14/carousel_5/slide_07.jpg",
-        "posts/2026-07-14/carousel_5/slide_08.jpg"
+        "posts/2026-07-14/carousel_5/slide_08.jpg",
+        "posts/2026-07-14/carousel_5/slide_09.jpg",
+        "posts/2026-07-14/carousel_5/slide_10.jpg"
       ],
       "post_to_instagram": false
     }
