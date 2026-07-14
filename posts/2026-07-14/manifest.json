@@ -1,0 +1,85 @@
+{
+  "batch_date": "2026-07-14",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Your Google Ads are leaking money before they even run. Fix the hidden score killing your budget. #GoogleAds #SmallBusinessTips #PaidAds",
+      "niche": "Google Ads",
+      "image_paths": [
+        "posts/2026-07-14/carousel_1/slide_01.jpg",
+        "posts/2026-07-14/carousel_1/slide_02.jpg",
+        "posts/2026-07-14/carousel_1/slide_03.jpg",
+        "posts/2026-07-14/carousel_1/slide_04.jpg",
+        "posts/2026-07-14/carousel_1/slide_05.jpg",
+        "posts/2026-07-14/carousel_1/slide_06.jpg",
+        "posts/2026-07-14/carousel_1/slide_07.jpg",
+        "posts/2026-07-14/carousel_1/slide_08.jpg"
+      ],
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Your Meta ads are bleeding money on the wrong people. Refresh your audience and watch costs drop. #MetaAds #InstagramAds #PaidMarketing",
+      "niche": "Meta/Instagram Ads",
+      "image_paths": [
+        "posts/2026-07-14/carousel_2/slide_01.jpg",
+        "posts/2026-07-14/carousel_2/slide_02.jpg",
+        "posts/2026-07-14/carousel_2/slide_03.jpg",
+        "posts/2026-07-14/carousel_2/slide_04.jpg",
+        "posts/2026-07-14/carousel_2/slide_05.jpg",
+        "posts/2026-07-14/carousel_2/slide_06.jpg",
+        "posts/2026-07-14/carousel_2/slide_07.jpg",
+        "posts/2026-07-14/carousel_2/slide_08.jpg"
+      ],
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Your Google reviews aren\u2019t just ratings\u2014they\u2019re a ranking signal. Reply fast to climb higher. #LocalSEO #GoogleReviews #SmallBusiness",
+      "niche": "Google Reviews & Local SEO",
+      "image_paths": [
+        "posts/2026-07-14/carousel_3/slide_01.jpg",
+        "posts/2026-07-14/carousel_3/slide_02.jpg",
+        "posts/2026-07-14/carousel_3/slide_03.jpg",
+        "posts/2026-07-14/carousel_3/slide_04.jpg",
+        "posts/2026-07-14/carousel_3/slide_05.jpg",
+        "posts/2026-07-14/carousel_3/slide_06.jpg",
+        "posts/2026-07-14/carousel_3/slide_07.jpg",
+        "posts/2026-07-14/carousel_3/slide_08.jpg"
+      ],
+      "post_to_instagram": false
+    },
+    {
+      "index": 4,
+      "caption": "Your email list isn\u2019t just a number\u2014it\u2019s a sales tool. Clean it to make it work harder. #EmailMarketing #SmallBusinessTips #PaidAds",
+      "niche": "Email Marketing",
+      "image_paths": [
+        "posts/2026-07-14/carousel_4/slide_01.jpg",
+        "posts/2026-07-14/carousel_4/slide_02.jpg",
+        "posts/2026-07-14/carousel_4/slide_03.jpg",
+        "posts/2026-07-14/carousel_4/slide_04.jpg",
+        "posts/2026-07-14/carousel_4/slide_05.jpg",
+        "posts/2026-07-14/carousel_4/slide_06.jpg",
+        "posts/2026-07-14/carousel_4/slide_07.jpg",
+        "posts/2026-07-14/carousel_4/slide_08.jpg"
+      ],
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Your Meta ads are wasting money on the wrong people. Fix it in 10 minutes with this checklist. #MetaAds #InstagramMarketing #PaidAds",
+      "niche": "Meta/Instagram Ads",
+      "image_paths": [
+        "posts/2026-07-14/carousel_5/slide_01.jpg",
+        "posts/2026-07-14/carousel_5/slide_02.jpg",
+        "posts/2026-07-14/carousel_5/slide_03.jpg",
+        "posts/2026-07-14/carousel_5/slide_04.jpg",
+        "posts/2026-07-14/carousel_5/slide_05.jpg",
+        "posts/2026-07-14/carousel_5/slide_06.jpg",
+        "posts/2026-07-14/carousel_5/slide_07.jpg",
+        "posts/2026-07-14/carousel_5/slide_08.jpg"
+      ],
+      "post_to_instagram": false
+    }
+  ]
+}
