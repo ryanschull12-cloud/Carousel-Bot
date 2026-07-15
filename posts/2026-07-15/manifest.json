@@ -1,0 +1,85 @@
+{
+  "batch_date": "2026-07-15",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Your Meta pixel might be counting sales that never happened. Here\u2019s how to catch the lie before it costs you. \ud83d\udc40 #MetaAds #PixelFix #SmallBusinessTips",
+      "niche": "Meta/Instagram Ads",
+      "image_paths": [
+        "posts/2026-07-15/carousel_1/slide_01.jpg",
+        "posts/2026-07-15/carousel_1/slide_02.jpg",
+        "posts/2026-07-15/carousel_1/slide_03.jpg",
+        "posts/2026-07-15/carousel_1/slide_04.jpg",
+        "posts/2026-07-15/carousel_1/slide_05.jpg",
+        "posts/2026-07-15/carousel_1/slide_06.jpg",
+        "posts/2026-07-15/carousel_1/slide_07.jpg",
+        "posts/2026-07-15/carousel_1/slide_08.jpg"
+      ],
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Spending 40% more per click on Google Ads? One setting is likely the problem. Here\u2019s the fix. \ud83d\udcb8 #GoogleAds #MatchTypes #SaveMoney",
+      "niche": "Google Ads",
+      "image_paths": [
+        "posts/2026-07-15/carousel_2/slide_01.jpg",
+        "posts/2026-07-15/carousel_2/slide_02.jpg",
+        "posts/2026-07-15/carousel_2/slide_03.jpg",
+        "posts/2026-07-15/carousel_2/slide_04.jpg",
+        "posts/2026-07-15/carousel_2/slide_05.jpg",
+        "posts/2026-07-15/carousel_2/slide_06.jpg",
+        "posts/2026-07-15/carousel_2/slide_07.jpg",
+        "posts/2026-07-15/carousel_2/slide_08.jpg"
+      ],
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Google doesn\u2019t just care about your star rating. Here\u2019s what it checks first about your business. \ud83c\udf1f #LocalSEO #GoogleReviews #SmallBusinessGrowth",
+      "niche": "Google Reviews & Local SEO",
+      "image_paths": [
+        "posts/2026-07-15/carousel_3/slide_01.jpg",
+        "posts/2026-07-15/carousel_3/slide_02.jpg",
+        "posts/2026-07-15/carousel_3/slide_03.jpg",
+        "posts/2026-07-15/carousel_3/slide_04.jpg",
+        "posts/2026-07-15/carousel_3/slide_05.jpg",
+        "posts/2026-07-15/carousel_3/slide_06.jpg",
+        "posts/2026-07-15/carousel_3/slide_07.jpg",
+        "posts/2026-07-15/carousel_3/slide_08.jpg"
+      ],
+      "post_to_instagram": false
+    },
+    {
+      "index": 4,
+      "caption": "Your welcome email is leaving money on the table. Here\u2019s how to fix it. \ud83d\udc8c #EmailMarketing #WelcomeEmail #SmallBusinessTips",
+      "niche": "Email Marketing",
+      "image_paths": [
+        "posts/2026-07-15/carousel_4/slide_01.jpg",
+        "posts/2026-07-15/carousel_4/slide_02.jpg",
+        "posts/2026-07-15/carousel_4/slide_03.jpg",
+        "posts/2026-07-15/carousel_4/slide_04.jpg",
+        "posts/2026-07-15/carousel_4/slide_05.jpg",
+        "posts/2026-07-15/carousel_4/slide_06.jpg",
+        "posts/2026-07-15/carousel_4/slide_07.jpg",
+        "posts/2026-07-15/carousel_4/slide_08.jpg"
+      ],
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Your Meta ad account might be bleeding money right now. Here\u2019s the 5-minute fix. \ud83e\ude79 #MetaAds #AdAccountAudit #SmallBusinessTips",
+      "niche": "Meta/Instagram Ads",
+      "image_paths": [
+        "posts/2026-07-15/carousel_5/slide_01.jpg",
+        "posts/2026-07-15/carousel_5/slide_02.jpg",
+        "posts/2026-07-15/carousel_5/slide_03.jpg",
+        "posts/2026-07-15/carousel_5/slide_04.jpg",
+        "posts/2026-07-15/carousel_5/slide_05.jpg",
+        "posts/2026-07-15/carousel_5/slide_06.jpg",
+        "posts/2026-07-15/carousel_5/slide_07.jpg",
+        "posts/2026-07-15/carousel_5/slide_08.jpg"
+      ],
+      "post_to_instagram": false
+    }
+  ]
+}
