@@ -1,0 +1,85 @@
+{
+  "batch_date": "2026-07-16",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Your Google Ads budget is leaking $500/month. Turn off Search Partners now. #GoogleAds #SmallBusinessTips #AdSpendHacks",
+      "niche": "Google Ads",
+      "image_paths": [
+        "posts/2026-07-16/carousel_1/slide_01.jpg",
+        "posts/2026-07-16/carousel_1/slide_02.jpg",
+        "posts/2026-07-16/carousel_1/slide_03.jpg",
+        "posts/2026-07-16/carousel_1/slide_04.jpg",
+        "posts/2026-07-16/carousel_1/slide_05.jpg",
+        "posts/2026-07-16/carousel_1/slide_06.jpg",
+        "posts/2026-07-16/carousel_1/slide_07.jpg",
+        "posts/2026-07-16/carousel_1/slide_08.jpg"
+      ],
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Meta ads costing too much? Refresh your creative every 7 days. #MetaAds #InstagramAds #AdCosts",
+      "niche": "Meta/Instagram Ads",
+      "image_paths": [
+        "posts/2026-07-16/carousel_2/slide_01.jpg",
+        "posts/2026-07-16/carousel_2/slide_02.jpg",
+        "posts/2026-07-16/carousel_2/slide_03.jpg",
+        "posts/2026-07-16/carousel_2/slide_04.jpg",
+        "posts/2026-07-16/carousel_2/slide_05.jpg",
+        "posts/2026-07-16/carousel_2/slide_06.jpg",
+        "posts/2026-07-16/carousel_2/slide_07.jpg",
+        "posts/2026-07-16/carousel_2/slide_08.jpg"
+      ],
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Your Google reviews hold a hidden ranking secret. Find it now. #LocalSEO #GoogleReviews #SmallBusinessGrowth",
+      "niche": "Google Reviews & Local SEO",
+      "image_paths": [
+        "posts/2026-07-16/carousel_3/slide_01.jpg",
+        "posts/2026-07-16/carousel_3/slide_02.jpg",
+        "posts/2026-07-16/carousel_3/slide_03.jpg",
+        "posts/2026-07-16/carousel_3/slide_04.jpg",
+        "posts/2026-07-16/carousel_3/slide_05.jpg",
+        "posts/2026-07-16/carousel_3/slide_06.jpg",
+        "posts/2026-07-16/carousel_3/slide_07.jpg",
+        "posts/2026-07-16/carousel_3/slide_08.jpg"
+      ],
+      "post_to_instagram": false
+    },
+    {
+      "index": 4,
+      "caption": "Boost your email open rates with these 4 tweaks. #EmailMarketing #SmallBusinessTips #OpenRates",
+      "niche": "Email Marketing",
+      "image_paths": [
+        "posts/2026-07-16/carousel_4/slide_01.jpg",
+        "posts/2026-07-16/carousel_4/slide_02.jpg",
+        "posts/2026-07-16/carousel_4/slide_03.jpg",
+        "posts/2026-07-16/carousel_4/slide_04.jpg",
+        "posts/2026-07-16/carousel_4/slide_05.jpg",
+        "posts/2026-07-16/carousel_4/slide_06.jpg",
+        "posts/2026-07-16/carousel_4/slide_07.jpg",
+        "posts/2026-07-16/carousel_4/slide_08.jpg"
+      ],
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Spending more on Meta ads? You\u2019re probably targeting the wrong people. #MetaAds #InstagramAds #AdSpendHacks",
+      "niche": "Meta/Instagram Ads",
+      "image_paths": [
+        "posts/2026-07-16/carousel_5/slide_01.jpg",
+        "posts/2026-07-16/carousel_5/slide_02.jpg",
+        "posts/2026-07-16/carousel_5/slide_03.jpg",
+        "posts/2026-07-16/carousel_5/slide_04.jpg",
+        "posts/2026-07-16/carousel_5/slide_05.jpg",
+        "posts/2026-07-16/carousel_5/slide_06.jpg",
+        "posts/2026-07-16/carousel_5/slide_07.jpg",
+        "posts/2026-07-16/carousel_5/slide_08.jpg"
+      ],
+      "post_to_instagram": false
+    }
+  ]
+}
