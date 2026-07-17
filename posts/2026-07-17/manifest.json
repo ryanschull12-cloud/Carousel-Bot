@@ -1,0 +1,85 @@
+{
+  "batch_date": "2026-07-17",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Your Google Ads budget might be funding bots. Here\u2019s how to spot the leaks. #GoogleAds #SmallBusinessTips #PaidAds #AdFraud",
+      "niche": "Google Ads",
+      "image_paths": [
+        "posts/2026-07-17/carousel_1/slide_01.jpg",
+        "posts/2026-07-17/carousel_1/slide_02.jpg",
+        "posts/2026-07-17/carousel_1/slide_03.jpg",
+        "posts/2026-07-17/carousel_1/slide_04.jpg",
+        "posts/2026-07-17/carousel_1/slide_05.jpg",
+        "posts/2026-07-17/carousel_1/slide_06.jpg",
+        "posts/2026-07-17/carousel_1/slide_07.jpg",
+        "posts/2026-07-17/carousel_1/slide_08.jpg"
+      ],
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Meta punishes stale ads. Here\u2019s the exact refresh rate that cut costs by 40%. #MetaAds #InstagramAds #SmallBusinessMarketing #AdTips",
+      "niche": "Meta/Instagram Ads",
+      "image_paths": [
+        "posts/2026-07-17/carousel_2/slide_01.jpg",
+        "posts/2026-07-17/carousel_2/slide_02.jpg",
+        "posts/2026-07-17/carousel_2/slide_03.jpg",
+        "posts/2026-07-17/carousel_2/slide_04.jpg",
+        "posts/2026-07-17/carousel_2/slide_05.jpg",
+        "posts/2026-07-17/carousel_2/slide_06.jpg",
+        "posts/2026-07-17/carousel_2/slide_07.jpg",
+        "posts/2026-07-17/carousel_2/slide_08.jpg"
+      ],
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Your Google rating isn\u2019t as strong as you think. Here\u2019s what\u2019s really moving the needle. #LocalSEO #GoogleReviews #SmallBusiness #ReputationManagement",
+      "niche": "Google Reviews & Local SEO",
+      "image_paths": [
+        "posts/2026-07-17/carousel_3/slide_01.jpg",
+        "posts/2026-07-17/carousel_3/slide_02.jpg",
+        "posts/2026-07-17/carousel_3/slide_03.jpg",
+        "posts/2026-07-17/carousel_3/slide_04.jpg",
+        "posts/2026-07-17/carousel_3/slide_05.jpg",
+        "posts/2026-07-17/carousel_3/slide_06.jpg",
+        "posts/2026-07-17/carousel_3/slide_07.jpg",
+        "posts/2026-07-17/carousel_3/slide_08.jpg"
+      ],
+      "post_to_instagram": false
+    },
+    {
+      "index": 4,
+      "caption": "Your emails are probably in spam. Here\u2019s the 3-step fix. #EmailMarketing #SmallBusinessTips #DigitalMarketing #SpamFix",
+      "niche": "Email Marketing",
+      "image_paths": [
+        "posts/2026-07-17/carousel_4/slide_01.jpg",
+        "posts/2026-07-17/carousel_4/slide_02.jpg",
+        "posts/2026-07-17/carousel_4/slide_03.jpg",
+        "posts/2026-07-17/carousel_4/slide_04.jpg",
+        "posts/2026-07-17/carousel_4/slide_05.jpg",
+        "posts/2026-07-17/carousel_4/slide_06.jpg",
+        "posts/2026-07-17/carousel_4/slide_07.jpg",
+        "posts/2026-07-17/carousel_4/slide_08.jpg"
+      ],
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Spending more on ads won\u2019t fix a weak audience. Here\u2019s how to tighten it up. #MetaAds #InstagramAds #SmallBusinessMarketing #AdTargeting",
+      "niche": "Meta/Instagram Ads",
+      "image_paths": [
+        "posts/2026-07-17/carousel_5/slide_01.jpg",
+        "posts/2026-07-17/carousel_5/slide_02.jpg",
+        "posts/2026-07-17/carousel_5/slide_03.jpg",
+        "posts/2026-07-17/carousel_5/slide_04.jpg",
+        "posts/2026-07-17/carousel_5/slide_05.jpg",
+        "posts/2026-07-17/carousel_5/slide_06.jpg",
+        "posts/2026-07-17/carousel_5/slide_07.jpg",
+        "posts/2026-07-17/carousel_5/slide_08.jpg"
+      ],
+      "post_to_instagram": false
+    }
+  ]
+}
