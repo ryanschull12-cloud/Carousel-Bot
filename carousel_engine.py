@@ -28,8 +28,6 @@ TOPIC_COLORS = {
     "google ads": {"accent": (161, 214, 191), "dark": (30, 90, 65)},      # sage green
     "meta": {"accent": (240, 172, 168), "dark": (140, 45, 45)},           # coral/pink
     "instagram": {"accent": (240, 172, 168), "dark": (140, 45, 45)},
-    "review": {"accent": (235, 197, 112), "dark": (120, 90, 20)},         # golden
-    "seo": {"accent": (235, 197, 112), "dark": (120, 90, 20)},
     "email": {"accent": (196, 176, 226), "dark": (80, 55, 120)},          # lavender
 }
 DEFAULT_COLORS = {"accent": (161, 214, 191), "dark": (30, 90, 65)}
