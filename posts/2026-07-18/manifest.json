@@ -1,0 +1,86 @@
+{
+  "batch_date": "2026-07-18",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Your Google ad shows but no one clicks? It\u2019s not your budget\u2014it\u2019s your description. Swipe to see why and how to fix it. #GoogleAds #SmallBusinessTips #AdWords",
+      "niche": "Google Ads",
+      "image_paths": [
+        "posts/2026-07-18/carousel_1/slide_01.jpg",
+        "posts/2026-07-18/carousel_1/slide_02.jpg",
+        "posts/2026-07-18/carousel_1/slide_03.jpg",
+        "posts/2026-07-18/carousel_1/slide_04.jpg",
+        "posts/2026-07-18/carousel_1/slide_05.jpg",
+        "posts/2026-07-18/carousel_1/slide_06.jpg",
+        "posts/2026-07-18/carousel_1/slide_07.jpg",
+        "posts/2026-07-18/carousel_1/slide_08.jpg"
+      ],
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "1000 views but no sales? Your Meta ad isn\u2019t broken\u2014it\u2019s invisible. Swipe to see the real benchmark and how to fix it. #MetaAds #InstagramAds #SmallBusinessMarketing",
+      "niche": "Meta/Instagram Ads",
+      "image_paths": [
+        "posts/2026-07-18/carousel_2/slide_01.jpg",
+        "posts/2026-07-18/carousel_2/slide_02.jpg",
+        "posts/2026-07-18/carousel_2/slide_03.jpg",
+        "posts/2026-07-18/carousel_2/slide_04.jpg",
+        "posts/2026-07-18/carousel_2/slide_05.jpg",
+        "posts/2026-07-18/carousel_2/slide_06.jpg",
+        "posts/2026-07-18/carousel_2/slide_07.jpg",
+        "posts/2026-07-18/carousel_2/slide_08.jpg"
+      ],
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Your Google reviews are hiding in plain sight. Swipe to see why and how to fix it. #GoogleReviews #LocalSEO #SmallBusinessTips",
+      "niche": "Google Reviews & Local SEO",
+      "image_paths": [
+        "posts/2026-07-18/carousel_3/slide_01.jpg",
+        "posts/2026-07-18/carousel_3/slide_02.jpg",
+        "posts/2026-07-18/carousel_3/slide_03.jpg",
+        "posts/2026-07-18/carousel_3/slide_04.jpg",
+        "posts/2026-07-18/carousel_3/slide_05.jpg",
+        "posts/2026-07-18/carousel_3/slide_06.jpg",
+        "posts/2026-07-18/carousel_3/slide_07.jpg",
+        "posts/2026-07-18/carousel_3/slide_08.jpg"
+      ],
+      "post_to_instagram": false
+    },
+    {
+      "index": 4,
+      "caption": "Your email subject lines are too clever. Swipe to see why boring wins every time. #EmailMarketing #SmallBusinessTips #DigitalMarketing",
+      "niche": "Email Marketing",
+      "image_paths": [
+        "posts/2026-07-18/carousel_4/slide_01.jpg",
+        "posts/2026-07-18/carousel_4/slide_02.jpg",
+        "posts/2026-07-18/carousel_4/slide_03.jpg",
+        "posts/2026-07-18/carousel_4/slide_04.jpg",
+        "posts/2026-07-18/carousel_4/slide_05.jpg",
+        "posts/2026-07-18/carousel_4/slide_06.jpg",
+        "posts/2026-07-18/carousel_4/slide_07.jpg",
+        "posts/2026-07-18/carousel_4/slide_08.jpg"
+      ],
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Your Meta ad dies after 3 days? Swipe to see the 4-step refresh that keeps it alive. #MetaAds #InstagramAds #SmallBusinessMarketing",
+      "niche": "Meta/Instagram Ads",
+      "image_paths": [
+        "posts/2026-07-18/carousel_5/slide_01.jpg",
+        "posts/2026-07-18/carousel_5/slide_02.jpg",
+        "posts/2026-07-18/carousel_5/slide_03.jpg",
+        "posts/2026-07-18/carousel_5/slide_04.jpg",
+        "posts/2026-07-18/carousel_5/slide_05.jpg",
+        "posts/2026-07-18/carousel_5/slide_06.jpg",
+        "posts/2026-07-18/carousel_5/slide_07.jpg",
+        "posts/2026-07-18/carousel_5/slide_08.jpg",
+        "posts/2026-07-18/carousel_5/slide_09.jpg"
+      ],
+      "post_to_instagram": false
+    }
+  ]
+}
