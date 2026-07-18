@@ -72,6 +72,14 @@ ANGLE ROTATION (don't repeat the same angle two days running):
 5. Quick-win checklist (3-5 actionable steps)
 6. Contrarian take on common "advice"
 
+=== BODY SLIDE BREVITY (strict) ===
+Each body slide gets read in under 2 seconds while someone is scrolling — it is NOT a place for a full explanatory sentence with subordinate clauses. Write like a text message, not an essay:
+- Under 12 words per body slide. Hard limit.
+- Cut connecting words and hedging ("actually", "essentially", "basically", "the fact that"). Say the thing directly.
+- A short fragment is often better than a full sentence — "Same audience, same ad, day 3: engagement drops." beats "The same audience seeing your ad repeatedly stops clicking by day 3."
+- One idea per slide. If you need "and" to connect two separate points, split it into two slides instead.
+- The reader should be able to screenshot just the body slides and have it read like a punchy checklist, not a paragraph cut into pieces.
+
 === SAVE & SHARE WORTHINESS ===
 Saves and DM shares are weighted far more heavily than likes by the algorithm — a carousel that gets saved/shared reaches far more people than one that just gets liked. Every carousel should pass this test: would someone screenshot or save this to actually use later, or forward it to a business-owner friend? That means:
 - End with something genuinely worth saving (a checklist, a specific number to remember, a checkable fact) — not just a generic "follow for more."
