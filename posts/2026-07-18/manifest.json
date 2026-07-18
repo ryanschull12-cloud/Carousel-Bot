@@ -3,7 +3,7 @@
   "carousels": [
     {
       "index": 1,
-      "caption": "Your Google ad shows but no one clicks? It\u2019s not your budget\u2014it\u2019s your description. Swipe to see why and how to fix it. #GoogleAds #SmallBusinessTips #AdWords",
+      "caption": "Your Google Ads budget is leaking. Fix the mismatch between your ad and what people are actually searching for. #GoogleAds #PaidAds #SmallBusinessTips",
       "niche": "Google Ads",
       "image_paths": [
         "posts/2026-07-18/carousel_1/slide_01.jpg",
@@ -13,13 +13,14 @@
         "posts/2026-07-18/carousel_1/slide_05.jpg",
         "posts/2026-07-18/carousel_1/slide_06.jpg",
         "posts/2026-07-18/carousel_1/slide_07.jpg",
-        "posts/2026-07-18/carousel_1/slide_08.jpg"
+        "posts/2026-07-18/carousel_1/slide_08.jpg",
+        "posts/2026-07-18/carousel_1/slide_09.jpg"
       ],
       "post_to_instagram": true
     },
     {
       "index": 2,
-      "caption": "1000 views but no sales? Your Meta ad isn\u2019t broken\u2014it\u2019s invisible. Swipe to see the real benchmark and how to fix it. #MetaAds #InstagramAds #SmallBusinessMarketing",
+      "caption": "Your Meta pixel is undercounting your sales by 30%. Fix it with Offline Conversions. #MetaAds #InstagramAds #PaidAds",
       "niche": "Meta/Instagram Ads",
       "image_paths": [
         "posts/2026-07-18/carousel_2/slide_01.jpg",
@@ -29,14 +30,15 @@
         "posts/2026-07-18/carousel_2/slide_05.jpg",
         "posts/2026-07-18/carousel_2/slide_06.jpg",
         "posts/2026-07-18/carousel_2/slide_07.jpg",
-        "posts/2026-07-18/carousel_2/slide_08.jpg"
+        "posts/2026-07-18/carousel_2/slide_08.jpg",
+        "posts/2026-07-18/carousel_2/slide_09.jpg"
       ],
       "post_to_instagram": true
     },
     {
       "index": 3,
-      "caption": "Your Google reviews are hiding in plain sight. Swipe to see why and how to fix it. #GoogleReviews #LocalSEO #SmallBusinessTips",
-      "niche": "Google Reviews & Local SEO",
+      "caption": "Your email list is shrinking because your \u2018From\u2019 name and subject lines aren\u2019t aligned. Fix it in 2 steps. #EmailMarketing #SmallBusinessTips",
+      "niche": "Email Marketing",
       "image_paths": [
         "posts/2026-07-18/carousel_3/slide_01.jpg",
         "posts/2026-07-18/carousel_3/slide_02.jpg",
@@ -45,14 +47,15 @@
         "posts/2026-07-18/carousel_3/slide_05.jpg",
         "posts/2026-07-18/carousel_3/slide_06.jpg",
         "posts/2026-07-18/carousel_3/slide_07.jpg",
-        "posts/2026-07-18/carousel_3/slide_08.jpg"
+        "posts/2026-07-18/carousel_3/slide_08.jpg",
+        "posts/2026-07-18/carousel_3/slide_09.jpg"
       ],
       "post_to_instagram": false
     },
     {
       "index": 4,
-      "caption": "Your email subject lines are too clever. Swipe to see why boring wins every time. #EmailMarketing #SmallBusinessTips #DigitalMarketing",
-      "niche": "Email Marketing",
+      "caption": "Spending more on Google Ads won\u2019t fix a targeting problem. Cut the waste first. #GoogleAds #PaidAds #SmallBusinessTips",
+      "niche": "Google Ads",
       "image_paths": [
         "posts/2026-07-18/carousel_4/slide_01.jpg",
         "posts/2026-07-18/carousel_4/slide_02.jpg",
@@ -61,13 +64,14 @@
         "posts/2026-07-18/carousel_4/slide_05.jpg",
         "posts/2026-07-18/carousel_4/slide_06.jpg",
         "posts/2026-07-18/carousel_4/slide_07.jpg",
-        "posts/2026-07-18/carousel_4/slide_08.jpg"
+        "posts/2026-07-18/carousel_4/slide_08.jpg",
+        "posts/2026-07-18/carousel_4/slide_09.jpg"
       ],
       "post_to_instagram": false
     },
     {
       "index": 5,
-      "caption": "Your Meta ad dies after 3 days? Swipe to see the 4-step refresh that keeps it alive. #MetaAds #InstagramAds #SmallBusinessMarketing",
+      "caption": "Your Instagram ads are invisible because of the settings. Fix it in 5 minutes. #MetaAds #InstagramAds #PaidAds",
       "niche": "Meta/Instagram Ads",
       "image_paths": [
         "posts/2026-07-18/carousel_5/slide_01.jpg",
