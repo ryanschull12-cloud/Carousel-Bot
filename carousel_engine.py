@@ -165,14 +165,14 @@ def render_numbered_slide(number, full_text, niche, slide_num, total_slides, out
     draw_dot_grid(draw)
     draw_header(draw, slide_num, total_slides, colors["dark"])
 
-    badge_size = 68
+    badge_size = 76
     badge_x = MARGIN
     text_x = badge_x + badge_size + 28
     max_w = W - MARGIN - text_x
 
     highlight = find_highlight_word(full_text)
-    font, lines, size = fit_text(draw, full_text, max_w, 6, 62, 36, F_SANS_BOLD)
-    line_h = int(size * 1.28)
+    font, lines, size = fit_text(draw, full_text, max_w, 4, 82, 44, F_SANS_BOLD)
+    line_h = int(size * 1.24)
 
     total_h = line_h * len(lines)
     badge_y = max(280, (H - total_h) // 2 - 20)
