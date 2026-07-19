@@ -362,8 +362,7 @@ def render_carousel(carousel, batch_date, out_dir, carousel_index=0):
     # Slide 9: Recap (second-to-last)
     recap_lines = carousel.get("recap_slide", body_slides)
     if isinstance(recap_lines, str):
-        recap_lines = [line.strip() for line in recap_lines.split("
-") if line.strip()]
+     recap_lines = [line.strip() for line in recap_lines.split("\n") if line.strip()]
     if not recap_lines:
         recap_lines = body_slides
     last_body = total_slides - 1
