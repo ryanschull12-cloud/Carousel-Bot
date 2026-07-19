@@ -1,0 +1,97 @@
+{
+  "batch_date": "2026-07-19",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Google Ads charges per click, not per view. Narrow your audience to people actively searching for what you sell. Save this for your next campaign. #GoogleAds #PaidAds #SmallBusinessMarketing #AdSpend",
+      "niche": "Google Ads",
+      "image_paths": [
+        "posts/2026-07-19/carousel_1/slide_01.jpg",
+        "posts/2026-07-19/carousel_1/slide_02.jpg",
+        "posts/2026-07-19/carousel_1/slide_03.jpg",
+        "posts/2026-07-19/carousel_1/slide_04.jpg",
+        "posts/2026-07-19/carousel_1/slide_05.jpg",
+        "posts/2026-07-19/carousel_1/slide_06.jpg",
+        "posts/2026-07-19/carousel_1/slide_07.jpg",
+        "posts/2026-07-19/carousel_1/slide_08.jpg",
+        "posts/2026-07-19/carousel_1/slide_09.jpg",
+        "posts/2026-07-19/carousel_1/slide_10.jpg",
+        "posts/2026-07-19/carousel_1/slide_11.jpg",
+        "posts/2026-07-19/carousel_1/slide_12.jpg"
+      ],
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Meta ad costs spike in October. Refresh your audience every 3 days to keep engagement high. Save this tip for your next campaign. #MetaAds #InstagramAds #PaidAds #SmallBusinessTips",
+      "niche": "Meta/Instagram Ads",
+      "image_paths": [
+        "posts/2026-07-19/carousel_2/slide_01.jpg",
+        "posts/2026-07-19/carousel_2/slide_02.jpg",
+        "posts/2026-07-19/carousel_2/slide_03.jpg",
+        "posts/2026-07-19/carousel_2/slide_04.jpg",
+        "posts/2026-07-19/carousel_2/slide_05.jpg",
+        "posts/2026-07-19/carousel_2/slide_06.jpg",
+        "posts/2026-07-19/carousel_2/slide_07.jpg",
+        "posts/2026-07-19/carousel_2/slide_08.jpg",
+        "posts/2026-07-19/carousel_2/slide_09.jpg"
+      ],
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Your email list loses value every month. Clean it now to boost open rates and sender reputation. Save this for your next email cleanup. #EmailMarketing #SmallBusiness #PaidAds #ListHealth",
+      "niche": "Email Marketing",
+      "image_paths": [
+        "posts/2026-07-19/carousel_3/slide_01.jpg",
+        "posts/2026-07-19/carousel_3/slide_02.jpg",
+        "posts/2026-07-19/carousel_3/slide_03.jpg",
+        "posts/2026-07-19/carousel_3/slide_04.jpg",
+        "posts/2026-07-19/carousel_3/slide_05.jpg",
+        "posts/2026-07-19/carousel_3/slide_06.jpg",
+        "posts/2026-07-19/carousel_3/slide_07.jpg",
+        "posts/2026-07-19/carousel_3/slide_08.jpg",
+        "posts/2026-07-19/carousel_3/slide_09.jpg"
+      ],
+      "post_to_instagram": false
+    },
+    {
+      "index": 4,
+      "caption": "More ad spend won\u2019t fix bad keyword targeting. Pause high-spend, zero-conversion keywords and redirect to exact-match terms. Save this checklist. #GoogleAds #PaidAds #SmallBusinessMarketing #AdSpend",
+      "niche": "Google Ads",
+      "image_paths": [
+        "posts/2026-07-19/carousel_4/slide_01.jpg",
+        "posts/2026-07-19/carousel_4/slide_02.jpg",
+        "posts/2026-07-19/carousel_4/slide_03.jpg",
+        "posts/2026-07-19/carousel_4/slide_04.jpg",
+        "posts/2026-07-19/carousel_4/slide_05.jpg",
+        "posts/2026-07-19/carousel_4/slide_06.jpg",
+        "posts/2026-07-19/carousel_4/slide_07.jpg",
+        "posts/2026-07-19/carousel_4/slide_08.jpg",
+        "posts/2026-07-19/carousel_4/slide_09.jpg",
+        "posts/2026-07-19/carousel_4/slide_10.jpg",
+        "posts/2026-07-19/carousel_4/slide_11.jpg"
+      ],
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Your Meta pixel might be lying. Check Events Manager weekly for errors and verify your domain. Fix tracking first for accurate data. Save this checklist. #MetaAds #InstagramAds #PaidAds #SmallBusinessTips",
+      "niche": "Meta/Instagram Ads",
+      "image_paths": [
+        "posts/2026-07-19/carousel_5/slide_01.jpg",
+        "posts/2026-07-19/carousel_5/slide_02.jpg",
+        "posts/2026-07-19/carousel_5/slide_03.jpg",
+        "posts/2026-07-19/carousel_5/slide_04.jpg",
+        "posts/2026-07-19/carousel_5/slide_05.jpg",
+        "posts/2026-07-19/carousel_5/slide_06.jpg",
+        "posts/2026-07-19/carousel_5/slide_07.jpg",
+        "posts/2026-07-19/carousel_5/slide_08.jpg",
+        "posts/2026-07-19/carousel_5/slide_09.jpg",
+        "posts/2026-07-19/carousel_5/slide_10.jpg",
+        "posts/2026-07-19/carousel_5/slide_11.jpg"
+      ],
+      "post_to_instagram": false
+    }
+  ]
+}
