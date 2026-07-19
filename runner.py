@@ -2,7 +2,8 @@
 Daily runner: calls the free Mistral API for 5 carousel scripts, renders
 them into images using carousel_engine.py, saves them into the repo
 (so they get public URLs for Instagram posting), writes a manifest for
-the Instagram posting step, and emails all 5 carousels to you.
+the Instagram posting step, and emails all 5 carousels to you with
+TikTok repurposing guidance.
 
 Runs inside GitHub Actions on a schedule — see .github/workflows/daily.yml
 """
@@ -59,16 +60,41 @@ def call_mistral():
     last_error.raise_for_status()
 
 
-def send_email(image_paths, batch_date):
+def send_email(image_paths, batch_date, carousels):
     msg = EmailMessage()
     msg["Subject"] = f"Your carousels for {batch_date}"
     msg["From"] = GMAIL_ADDRESS
     msg["To"] = TO_EMAIL
-    msg.set_content(
-        f"Today's batch of {len(image_paths)} slide images is attached.\n"
-        f"The first {AUTO_POST_COUNT} carousels are also being auto-posted to Instagram.\n"
-        "Save the rest to your camera roll for TikTok / manual posting."
-    )
+
+    # Build email body with TikTok guidance and format tracking
+    body_lines = [
+        f"Today's batch of {len(image_paths)} slide images is attached.",
+        f"",
+        f"=== INSTAGRAM AUTO-POST ===",
+        f"The first {AUTO_POST_COUNT} carousels are being auto-posted to Instagram.",
+        f"",
+        f"=== TIKTOK / MANUAL POSTING ===",
+        f"Carousels {AUTO_POST_COUNT + 1}-5: Save for TikTok or manual posting.",
+        f"",
+        f"TIP FOR TIKTOK:",
+        f"- Crop to 9:16 portrait (TikTok's native ratio)",
+        f"- Add trending audio from TikTok's library (music is a must on TikTok)",
+        f"- Use the caption as your text overlay",
+        f"- 7-9 slides perform best on TikTok (completion rate is the #1 algorithm signal)",
+        f"- Keep key content in the center 900x1600px safe zone",
+        f"",
+        f"=== TODAY'S BATCH SUMMARY ===",
+    ]
+
+    for i, c in enumerate(carousels, start=1):
+        status = "AUTO-POST to Instagram" if i <= AUTO_POST_COUNT else "Manual / TikTok"
+        body_lines.append(f"Carousel {i}: [{c.get('niche', 'N/A')}] {c.get('angle', 'N/A')} | Format: {c.get('format', 'N/A')} | {status}")
+
+    body_lines.append(f"")
+    body_lines.append(f"Save the manual carousels to your camera roll for TikTok posting.")
+
+    msg.set_content("\n".join(body_lines))
+
     for path in image_paths:
         ext = os.path.splitext(path)[1].lstrip(".").lower()
         subtype = "jpeg" if ext in ("jpg", "jpeg") else ext
@@ -104,14 +130,21 @@ def main():
             "index": i,
             "caption": carousel.get("caption", ""),
             "niche": carousel.get("niche", ""),
+            "angle": carousel.get("angle", ""),
+            "format": carousel.get("format", ""),
             "image_paths": images,
             "post_to_instagram": i <= AUTO_POST_COUNT,
+            # Placeholder for future metrics tracking
+            "swipe_through_rate": None,
+            "completion_rate": None,
+            "saves": None,
+            "shares": None,
         })
 
     with open(os.path.join(base_dir, "manifest.json"), "w") as f:
         json.dump(manifest, f, indent=2)
 
-    send_email(all_images, batch_date)
+    send_email(all_images, batch_date, batch["carousels"])
     print(f"Generated {len(all_images)} images across {len(batch['carousels'])} carousels.")
     print(f"Manifest written to {base_dir}/manifest.json")
 
