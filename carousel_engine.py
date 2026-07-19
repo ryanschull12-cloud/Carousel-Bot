@@ -96,7 +96,7 @@ def draw_header(draw, slide_num, total_slides, dark_color):
 
 def find_highlight_word(text):
     import re
-    m = re.search(r"(?:[€$£]\s?\d[\d,]*(?:\.\d+)?[kKmM]?|\d[\d,]*(?:\.\d+)?\s?%)", text)
+    m = re.search(r"(?:[\u20ac$\u00a3]\s?\d[\d,]*(?:\.\d+)?[kKmM]?|\d[\d,]*(?:\.\d+)?\s?%)", text)
     if m:
         return m.group(0)
     words = text.split()
@@ -144,7 +144,7 @@ def draw_checkbox(draw, x, y, size, color):
 def draw_swipe_indicator(draw, dark_color):
     """Subtle swipe indicator bottom-right."""
     f_swipe = ImageFont.truetype(F_SANS_BOLD, 26)
-    swipe_text = "Swipe →"
+    swipe_text = "Swipe \u2192"
     tw = draw.textlength(swipe_text, font=f_swipe)
     draw.text((W - MARGIN - tw, H - 100), swipe_text, font=f_swipe, fill=dark_color)
 
@@ -164,6 +164,16 @@ def render_hook_slide(headline, niche, slide_num, total_slides, out_path):
     draw_dot_grid(draw)
     draw_header(draw, slide_num, total_slides, colors["dark"])
 
+    # Topic title — small, uppercase, above the main headline
+    topic_title = niche.upper() if niche else "MARKETING"
+    f_topic = ImageFont.truetype(F_SANS_BOLD, 28)
+    topic_w = draw.textlength(topic_title, font=f_topic)
+    # Center it, with accent color
+    draw.text(((W - topic_w) / 2, 220), topic_title, font=f_topic, fill=colors["dark"])
+    # Small underline bar
+    bar_w = min(topic_w + 40, 200)
+    draw.rectangle([ (W - bar_w) / 2, 255, (W + bar_w) / 2, 260 ], fill=colors["accent"])
+
     max_w = W - 2 * MARGIN
     # Bumped max size from 92 to 110 for more dramatic hooks
     font, lines, size = fit_text(draw, headline, max_w, 5, 110, 46, F_SERIF_BOLD)
@@ -171,7 +181,7 @@ def render_hook_slide(headline, niche, slide_num, total_slides, out_path):
     highlight = find_highlight_word(headline)
 
     total_h = line_h * len(lines)
-    ty = max(300, (H - total_h) // 2 - 40)
+    ty = max(320, (H - total_h) // 2 - 20)
     for line in lines:
         draw_text_highlighted(draw, MARGIN, ty, line, font, highlight, TEXT, colors["accent"])
         ty += line_h
@@ -236,7 +246,7 @@ def render_recap_slide(recap_lines, niche, slide_num, total_slides, out_path):
 
     # "Save this ↓" header
     f_header = ImageFont.truetype(F_SANS_BOLD, 36)
-    header_text = "Save this ↓"
+    header_text = "Save this \u2193"
     tw = draw.textlength(header_text, font=f_header)
     draw.text(((W - tw) / 2, 180), header_text, font=f_header, fill=colors["dark"])
 
@@ -249,7 +259,7 @@ def render_recap_slide(recap_lines, niche, slide_num, total_slides, out_path):
     y = 280
     for item in recap_lines:
         # Checkmark bullet
-        draw.text((MARGIN + 20, y), "✓", font=f_item, fill=colors["dark"])
+        draw.text((MARGIN + 20, y), "\u2713", font=f_item, fill=colors["dark"])
         # Wrapped item text
         wrapped = wrap_text(draw, item, f_item, max_w - 50)
         for line in wrapped:
@@ -299,7 +309,7 @@ def render_cta_slide(headline, cta_word, cta_promise, support_text, niche, slide
 
     # COMMENT ask (big, underlined)
     f_cta = ImageFont.truetype(F_SANS_BOLD, 52)
-    cta_text = f"Comment ‘{cta_word}’"
+    cta_text = f"Comment \u2018{cta_word}\u2019"
     tw = draw.textlength(cta_text, font=f_cta)
     cta_x = (W - tw) / 2
     draw.text((cta_x, ty), cta_text, font=f_cta, fill=colors["dark"])
@@ -309,7 +319,7 @@ def render_cta_slide(headline, cta_word, cta_promise, support_text, niche, slide
     # Promise line
     if cta_promise:
         f_promise = ImageFont.truetype(F_SANS_BOLD, 32)
-        promise_text = f"and I’ll DM you {cta_promise}"
+        promise_text = f"and I\u2019ll DM you {cta_promise}"
         tw = draw.textlength(promise_text, font=f_promise)
         draw.text(((W - tw) / 2, ty), promise_text, font=f_promise, fill=colors["dark"])
         ty += 60
@@ -362,7 +372,7 @@ def render_carousel(carousel, batch_date, out_dir, carousel_index=0):
     # Slide 9: Recap (second-to-last)
     recap_lines = carousel.get("recap_slide", body_slides)
     if isinstance(recap_lines, str):
-     recap_lines = [line.strip() for line in recap_lines.split("\n") if line.strip()]
+        recap_lines = [line.strip() for line in recap_lines.split("\n") if line.strip()]
     if not recap_lines:
         recap_lines = body_slides
     last_body = total_slides - 1
@@ -388,27 +398,27 @@ if __name__ == "__main__":
         "angle": "Mistake/myth-busting",
         "format": "checklist",
         "hook_slide": "Your Google Ads are burning 30% of budget on browsers",
-        "bridge_slide": "The setting most clinics miss costs them €400/week",
+        "bridge_slide": "The setting most clinics miss costs them \u20ac400/week",
         "body_slides": [
             "Switch broad match to phrase match. Cuts waste 30%",
             "Check search terms weekly, not just the dashboard",
-            "Add negative keywords for ‘free’ and ‘jobs’",
+            "Add negative keywords for \u2018free\u2019 and \u2018jobs\u2019",
             "A good cost-per-lead sits lower than most assume",
             "Pause keywords with zero conversions after 30 days",
-            "Set location targeting to ‘people in’ not ‘interested in’"
+            "Set location targeting to \u2018people in\u2019 not \u2018interested in\u2019"
         ],
         "recap_slide": [
             "Switch broad match to phrase match",
             "Check search terms weekly",
-            "Add negative keywords for ‘free’ and ‘jobs’",
+            "Add negative keywords for \u2018free\u2019 and \u2018jobs\u2019",
             "Good cost-per-lead is lower than you think",
             "Pause zero-conversion keywords after 30 days",
-            "Set location to ‘people in’ only"
+            "Set location to \u2018people in\u2019 only"
         ],
         "cta_slide": "Stop wasting budget. Start booking calls.",
         "cta_word": "AUDIT",
         "cta_promise": "my 7-point Google Ads audit checklist",
-        "caption": "Save this 7-point Google Ads audit checklist ↓ Most business owners don’t know their ads are burning budget on the wrong searches. #googleads #smallbusiness #marketingtips #ppc #businessowner"
+        "caption": "Save this 7-point Google Ads audit checklist \u2193 Most business owners don\u2019t know their ads are burning budget on the wrong searches. #googleads #smallbusiness #marketingtips #ppc #businessowner"
     }
     out = render_carousel(sample, "2026-07-19", "/tmp/sample_carousel")
     print(out)
