@@ -84,6 +84,7 @@ def send_email(image_paths, batch_date):
 
 def main():
     batch = call_mistral()
+    batch_date = batch.get("batch_date", "today")
     # Use the actual system date rather than trusting the model's
     # self-reported date, which can drift or be wrong.
     import datetime
