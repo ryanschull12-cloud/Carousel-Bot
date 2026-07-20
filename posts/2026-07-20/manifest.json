@@ -1,0 +1,95 @@
+{
+  "batch_date": "2026-07-20",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Save this search term audit checklist \u2193\nMost business owners waste \u20ac150-300/month on clicks that never convert. This is how to find and stop them.\n#googleads #ppc #smallbusiness #marketingtips #advertising",
+      "niche": "Google Ads",
+      "image_paths": [
+        "posts/2026-07-20/carousel_1/slide_01.jpg",
+        "posts/2026-07-20/carousel_1/slide_02.jpg",
+        "posts/2026-07-20/carousel_1/slide_03.jpg",
+        "posts/2026-07-20/carousel_1/slide_04.jpg",
+        "posts/2026-07-20/carousel_1/slide_05.jpg",
+        "posts/2026-07-20/carousel_1/slide_06.jpg",
+        "posts/2026-07-20/carousel_1/slide_07.jpg",
+        "posts/2026-07-20/carousel_1/slide_08.jpg",
+        "posts/2026-07-20/carousel_1/slide_09.jpg",
+        "posts/2026-07-20/carousel_1/slide_10.jpg"
+      ],
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Save this Meta ad refresh checklist \u2193\nYour ads stop working after day 3. Here\u2019s the exact refresh trick to keep costs low and clicks high.\n#metaads #instagramads #smallbusiness #marketingtips #ppc",
+      "niche": "Meta/Instagram Ads",
+      "image_paths": [
+        "posts/2026-07-20/carousel_2/slide_01.jpg",
+        "posts/2026-07-20/carousel_2/slide_02.jpg",
+        "posts/2026-07-20/carousel_2/slide_03.jpg",
+        "posts/2026-07-20/carousel_2/slide_04.jpg",
+        "posts/2026-07-20/carousel_2/slide_05.jpg",
+        "posts/2026-07-20/carousel_2/slide_06.jpg",
+        "posts/2026-07-20/carousel_2/slide_07.jpg",
+        "posts/2026-07-20/carousel_2/slide_08.jpg",
+        "posts/2026-07-20/carousel_2/slide_09.jpg",
+        "posts/2026-07-20/carousel_2/slide_10.jpg"
+      ],
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Save this email deliverability checklist \u2193\nMost small businesses lose \u20ac2,000/month from spam folders. This is how to fix it.\n#emailmarketing #deliverability #smallbusiness #marketingtips #emailtips",
+      "niche": "Email Marketing",
+      "image_paths": [
+        "posts/2026-07-20/carousel_3/slide_01.jpg",
+        "posts/2026-07-20/carousel_3/slide_02.jpg",
+        "posts/2026-07-20/carousel_3/slide_03.jpg",
+        "posts/2026-07-20/carousel_3/slide_04.jpg",
+        "posts/2026-07-20/carousel_3/slide_05.jpg",
+        "posts/2026-07-20/carousel_3/slide_06.jpg",
+        "posts/2026-07-20/carousel_3/slide_07.jpg",
+        "posts/2026-07-20/carousel_3/slide_08.jpg",
+        "posts/2026-07-20/carousel_3/slide_09.jpg",
+        "posts/2026-07-20/carousel_3/slide_10.jpg"
+      ],
+      "post_to_instagram": false
+    },
+    {
+      "index": 4,
+      "caption": "Save this match type comparison \u2193\nBroad match vs phrase match: which one costs you \u20ac45 per click?\n#googleads #ppc #smallbusiness #matchtypes #advertising",
+      "niche": "Google Ads",
+      "image_paths": [
+        "posts/2026-07-20/carousel_4/slide_01.jpg",
+        "posts/2026-07-20/carousel_4/slide_02.jpg",
+        "posts/2026-07-20/carousel_4/slide_03.jpg",
+        "posts/2026-07-20/carousel_4/slide_04.jpg",
+        "posts/2026-07-20/carousel_4/slide_05.jpg",
+        "posts/2026-07-20/carousel_4/slide_06.jpg",
+        "posts/2026-07-20/carousel_4/slide_07.jpg",
+        "posts/2026-07-20/carousel_4/slide_08.jpg",
+        "posts/2026-07-20/carousel_4/slide_09.jpg",
+        "posts/2026-07-20/carousel_4/slide_10.jpg"
+      ],
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Save this Meta ad template \u2193\nMost clinics waste \u20ac500/month on ads that don\u2019t convert. Steal this 3-part structure to fix it.\n#metaads #instagramads #smallbusiness #adtemplate #marketingtips",
+      "niche": "Meta/Instagram Ads",
+      "image_paths": [
+        "posts/2026-07-20/carousel_5/slide_01.jpg",
+        "posts/2026-07-20/carousel_5/slide_02.jpg",
+        "posts/2026-07-20/carousel_5/slide_03.jpg",
+        "posts/2026-07-20/carousel_5/slide_04.jpg",
+        "posts/2026-07-20/carousel_5/slide_05.jpg",
+        "posts/2026-07-20/carousel_5/slide_06.jpg",
+        "posts/2026-07-20/carousel_5/slide_07.jpg",
+        "posts/2026-07-20/carousel_5/slide_08.jpg",
+        "posts/2026-07-20/carousel_5/slide_09.jpg",
+        "posts/2026-07-20/carousel_5/slide_10.jpg"
+      ],
+      "post_to_instagram": false
+    }
+  ]
+}
