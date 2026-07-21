@@ -6,28 +6,46 @@ name: Evening Instagram Post
 
 on:
   schedule:
-    # 8:30pm Irish time = 19:30 UTC during summer/BST (12 hours after the
-    # 7:30 UTC morning run). Shift to "30 20 * * *" once winter time starts,
-    # same as the morning workflow's note.
+    # Fires at both 19:30 UTC and 20:30 UTC — same auto BST/GMT handling
+    # as daily.yml, so this never needs manual seasonal edits either.
     - cron: "30 19 * * *"
+    - cron: "30 20 * * *"
   workflow_dispatch: {}
 
 jobs:
   post-second-carousel:
     runs-on: ubuntu-latest
     steps:
+      - name: Check schedule window (handles Irish BST/GMT automatically)
+        id: check_time
+        run: |
+          python3 - <<'EOF'
+          import os
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          now = datetime.now(ZoneInfo("Europe/Dublin"))
+          should_run = "true" if now.hour == 20 else "false"
+          print(f"Irish local time right now: {now.isoformat()} -> should_run={should_run}")
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+              f.write(f"should_run={should_run}\n")
+          EOF
+
       - name: Check out repo
+        if: steps.check_time.outputs.should_run == 'true'
         uses: actions/checkout@v4
 
       - name: Set up Python
+        if: steps.check_time.outputs.should_run == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
       - name: Install dependencies
+        if: steps.check_time.outputs.should_run == 'true'
         run: pip install -r requirements.txt
 
       - name: Post carousel 2 to Instagram
+        if: steps.check_time.outputs.should_run == 'true' && vars.IG_POSTING_PAUSED != 'true'
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           IG_BUSINESS_ACCOUNT_ID: ${{ secrets.IG_BUSINESS_ACCOUNT_ID }}
@@ -35,3 +53,7 @@ jobs:
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           TO_EMAIL: ${{ secrets.TO_EMAIL }}
         run: python instagram_post.py --only-index 2
+
+      - name: Note that Instagram posting is paused
+        if: steps.check_time.outputs.should_run == 'true' && vars.IG_POSTING_PAUSED == 'true'
+        run: echo "IG_POSTING_PAUSED is set to true in repo variables — skipping Instagram auto-post."
