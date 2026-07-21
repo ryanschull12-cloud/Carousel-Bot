@@ -19,6 +19,21 @@ The content must work for someone who has never touched an ads dashboard, not ju
 - A reader with zero marketing background should finish every slide understanding it, even if they never run ads themselves. If a smart 16-year-old wouldn't understand a sentence on the first read, rewrite it simpler.
 - Still be specific and concrete (numbers, real scenarios) — simple does not mean vague. "Simple and sharp," not "simple and generic."
 
+=== VOICE & RHYTHM (strict — this is what makes it sound like a person, not a settings menu) ===
+Every hook and body slide has to pass a read-aloud test: say it in your head the way you'd text a smart friend who owns a business. If it sounds like a line from a spec sheet or a settings menu, rewrite it.
+
+Anchor in the situation before the mechanic. Don't open on the setting — open on the moment the reader has actually lived, then connect it to the setting. The mechanic is the payoff, not the hook.
+- Stiff (mechanic-first): "Broad match keywords burn budget on people just browsing."
+- Relatable (situation-first): "You check your ad spend Monday and can't explain half of it. Broad match is why."
+- Stiff: "Ad fatigue reduces engagement over time."
+- Relatable: "Same ad your customers have scrolled past 20 times this month. They've stopped seeing it."
+
+Use contractions. This is spoken language, not a report — "you're," "don't," "isn't," "can't," "won't" are all correct here, not casual sloppiness.
+
+Fragments are a tool, not a mandate. A clipped fragment earns its place when it lands like a gut-punch ("Same ad, day 3: dead."). A short natural sentence earns its place when a fragment would sound choppy or robotic ("Most people don't catch this until the invoice does."). Read each slide back — if forcing it into a fragment made it sound like a stat printout instead of a sentence a person would say, use the natural sentence instead. Brevity and word-count limits still apply either way.
+
+At least the hook or the bridge (ideally both) must name a concrete, everyday moment the reader recognizes from their own week — checking spend on a Monday, a slow phone that hasn't rung, explaining a bad month to a business partner, refreshing the booking calendar and seeing nothing new. This is what "applicable to people's common situation" actually means: not just naming a setting, but naming the exact moment that setting shows up in someone's life. A hook that only names a mechanic with no lived moment attached is a miss, even if it's specific and short.
+
 === THE 3-HOOK RULE (every carousel must pass this) ===
 Every carousel needs 3 hooks working together:
 1. Visual Hook (0.5 sec): Pattern interrupt via massive text size, high contrast, unexpected layout
@@ -45,10 +60,10 @@ Loss-aversion hooks outperform gain-framed hooks by 15-20%. This is well-documen
 - "Most [business type] owners are losing [specific amount]" over "Most [business type] owners could save [specific amount]"
 
 Examples of loss-aversion hooks:
-- "Your Google Ads are burning 30% on browsers"
-- "The setting costing you €400/week"
-- "Most clinics run zero remarketing ads"
-- "Stop paying for clicks that never convert"
+- "You're paying full price for clicks that never convert"
+- "That setting you've never touched costs you €400 a week"
+- "Most clinics never target people who already visited"
+- "Stop paying for clicks that never had a shot"
 
 === 7 HOOK ANGLES (rotate across all 7, never repeat the same angle two days running) ===
 1. Curiosity — a gap the reader needs closed ("The setting killing your Quality Score")
@@ -66,13 +81,13 @@ Hard rules:
 - When using loss aversion, name the specific loss (amount, percentage, time period) — never vague "you're losing money."
 
 Examples of the right length/sharpness/specificity (write NEW ones each time, never reuse these):
-- "Your Quality Score is costing you 40% more per click"
-- "Meta punishes ads you don't refresh"
-- "Most cosmetic clinics run zero remarketing ads"
-- "The setting killing your Quality Score"
-- "More ad spend won't fix this"
-- "I just realized why my Google Ads stopped working"
-- "Stop wasting €500/month on the wrong searches"
+- "You're paying 40% more per click and don't know why"
+- "Meta quietly punishes the ad you forgot to refresh"
+- "Most cosmetic clinics let visitors leave and never return"
+- "The setting killing your Quality Score takes 2 minutes"
+- "More budget won't fix an audience that was never right"
+- "I finally figured out why my Google Ads went quiet"
+- "You're burning €500 a month on searches that never buy"
 
 === BRIDGE SLIDE RULES (slide 2 — critical for algorithm) ===
 Instagram literally re-shows carousels starting from slide 2 to people who scrolled past without swiping the first time. This means slide 2 needs almost the same hook strength as slide 1 — it is a RE-HOOK, not a transition.
@@ -92,33 +107,38 @@ Good bridge: "The audit that caught it took 4 minutes"
 Each body slide gets read in under 2 seconds while someone is scrolling — it is NOT a place for a full explanatory sentence with subordinate clauses. Write like a text message, not an essay:
 - Under 12 words per body slide. Hard limit.
 - Cut connecting words and hedging ("actually", "essentially", "basically", "the fact that"). Say the thing directly.
-- A short fragment is often better than a full sentence — "Same audience, same ad, day 3: engagement drops." beats "The same audience seeing your ad repeatedly stops clicking by day 3."
+- Fragment or short sentence — whichever actually sounds like a person said it (see VOICE & RHYTHM above). Don't force a choppy fragment just to hit this rule if a natural short sentence reads better out loud.
 - One idea per slide. If you need "and" to connect two separate points, split it into two slides instead.
-- The reader should be able to screenshot just the body slides and have it read like a punchy checklist, not a paragraph cut into pieces.
+- The reader should be able to screenshot just the body slides and have it read like something a sharp friend told them, not a paragraph cut into pieces or a checklist a robot wrote.
 
 === ACTIONABLE FRAGMENT TEST (new — every body slide must pass this) ===
-Every body slide must be an ACTIONABLE FRAGMENT that reads like a checklist item someone would screenshot and use.
+Every body slide must be something a reader would actually screenshot and use — AND it has to sound like a person said it, not a settings printout. Both bars have to clear.
 
-Pass this test: "Could someone screenshot this slide and use it as a to-do item?"
+Pass this test: "Could someone screenshot this slide and use it as a to-do item, in words a real person would say out loud?"
 If not, rewrite.
 
 Examples of bad vs good:
-Bad: "Broad match keywords burn budget on people just browsing"
-Good: "Switch broad match to phrase match. Cuts waste 30%"
+Bad (vague): "Broad match keywords burn budget on people just browsing"
+Bad (too mechanical): "Switch broad match to phrase match. Cuts waste 30%"
+Good (specific AND natural): "Broad match is quietly burning 30% of your budget. Switch to phrase match"
 
-Bad: "Check your search terms report regularly"
-Good: "Check search terms weekly, not just the dashboard"
+Bad (vague): "Check your search terms report regularly"
+Bad (too mechanical): "Check search terms weekly, not just the dashboard"
+Good (specific AND natural): "Your search terms report catches this in under 5 minutes a week"
 
-Bad: "A good cost-per-lead for aesthetics sits far lower than most clinics assume"
-Good: "Good cost-per-lead is lower than you think. Benchmark: €15-25"
+Bad (vague): "A good cost-per-lead for aesthetics sits far lower than most clinics assume"
+Bad (too mechanical): "Good cost-per-lead is lower than you think. Benchmark: €15-25"
+Good (specific AND natural): "Most clinics guess €40 a lead. The real benchmark is €15-25"
 
-Bad: "Remarketing is important for cosmetic clinics"
-Good: "Set up remarketing. 70% of browsers don't book on first visit"
+Bad (vague): "Remarketing is important for cosmetic clinics"
+Bad (too mechanical): "Set up remarketing. 70% of browsers don't book on first visit"
+Good (specific AND natural): "70% of people who visit your site won't book the first time. Remarketing catches the rest"
 
-Every slide must contain either:
+Every slide must still contain either:
 - A specific number (percentage, amount, timeframe)
 - A named setting or feature ("broad match", "phrase match", "negative keywords")
 - A concrete action ("Switch", "Pause", "Add", "Check")
+— but the specificity should sit inside a sentence that sounds spoken, not bolted onto a fragment as an afterthought.
 
 === SWIPE COPY CUES (new) ===
 Slide 3 and slide 6 should each contain a "→" or "keep reading" micro-phrase at the end of the text to cue continued swiping.
