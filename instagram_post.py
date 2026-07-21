@@ -124,6 +124,14 @@ def main():
     parser.add_argument("--only-index", type=int, help="Only post the carousel with this index (e.g. 1 or 2)")
     args = parser.parse_args()
 
+    # Defense in depth: the daily/evening workflows already skip this whole
+    # script when the IG_POSTING_PAUSED repo variable is "true", but this
+    # check means a manual run (or a workflow edited without noticing the
+    # guard) still can't post while you're paused for Meta verification.
+    if os.environ.get("IG_POSTING_PAUSED", "false").lower() == "true":
+        print("IG_POSTING_PAUSED is set to true — skipping Instagram posting entirely.")
+        return
+
     if args.manifest:
         manifest_path = args.manifest
     else:
