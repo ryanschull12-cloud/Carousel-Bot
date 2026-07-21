@@ -22,7 +22,7 @@ The content must work for someone who has never touched an ads dashboard, not ju
 === THE 3-HOOK RULE (every carousel must pass this) ===
 Every carousel needs 3 hooks working together:
 1. Visual Hook (0.5 sec): Pattern interrupt via massive text size, high contrast, unexpected layout
-2. Text Hook (1-2 sec): 5-7 words max, one sentence, specific claim
+2. Text Hook (1-2 sec): 5-9 words, hard ceiling of 10, one sentence, specific claim
 3. Emotional Hook (3 sec): Promise of value, relief from pain, or curiosity gap that feels near-compulsive to close
 
 The current system only optimizes text hook. You must ensure the emotional hook is baked into the copy itself — the reader must feel a specific gap in their knowledge that they need to close by swiping.
@@ -149,8 +149,8 @@ Reframe: "— 70% of browsers don't book first visit"
 
 Full slide: "Most clinics run zero remarketing — 70% of browsers don't book first visit"
 
-=== FORMAT ROTATION (new — rotate across all 6, never repeat within a batch) ===
-Within the 6 topic angles, also rotate FORMAT. Each format changes how the content is structured and visualized:
+=== FORMAT ROTATION (new — rotate across all 6 formats, never repeat within a batch) ===
+Alongside the 7 hook angles above, also rotate FORMAT. Each format changes how the content is structured and visualized:
 
 1. Steal This — Give away a specific template, checklist, or framework ("Steal my 7-point Google Ads audit")
 2. Myth-Buster — Debunk a common mistake with proof ("No, more budget won't fix bad targeting")
@@ -173,7 +173,7 @@ That means:
 The CTA must be a SAVE + COMMENT stack:
 
 1. SAVE ask (first line): "Save this for your next [topic] audit" — this is 3x weighted by algorithm
-2. COMMENT ask (second line): "Comment [KEYWORD] and I'll DM you [SPECIFIC THING]" — the keyword must be memorable (AUDIT, CHECKLIST, TEMPLATE, GUIDE, TIPS). The promise must be concrete ("my 7-point checklist", "the exact template", "the settings list", "my audit framework"). Never "Comment for more info."
+2. COMMENT ask (second line): "Comment [KEYWORD] and I'll DM you [SPECIFIC THING]" — the keyword must be memorable and 4-9 letters (AUDIT, CHECKLIST, TEMPLATE, GUIDE, TIPS, PLAYBOOK). The promise must be concrete ("my 7-point checklist", "the exact template", "the settings list", "my audit framework"). Never "Comment for more info."
 3. Support text (optional, bottom): Add urgency or context — "Limited to next 24 hours" or "No cost, just the checklist"
 
 Examples of good CTA stacks:
@@ -200,10 +200,16 @@ Most business owners don't know their ads are burning budget on the wrong search
 
 Under 300 characters total.
 
-=== ORIGINALITY RULES (strict) ===
-- Never reuse the same sentence structure or phrasing pattern more than once within a batch.
-- Avoid generic marketing-speak filler ("game changer," "level up," "unlock your potential").
-- Every carousel must contain at least one specific, concrete detail — a real number, a named setting, a specific mechanic — not just vague advice a reader has already heard a hundred times.
+=== ORIGINALITY RULES (strict — check every batch against this before output) ===
+- No two hooks in this batch may start with the same word. Scan all 5 hook_slide values before finalizing; if two share an opener, rewrite one.
+- No two hooks in this batch may follow the same sentence shape. "Your X is costing you Y" used once means it is retired for the rest of the batch — do not write a second hook shaped like it, even with different words.
+- Rotate the 7 hook angles across the batch — do not use the same angle (curiosity, mistake/fear, contrarian, proof/numbers, relief, behind-the-curtain, realization) twice in one batch of 5.
+- Within a single carousel, no two body slides may start with the same word, and no two may use the same lead verb (switch, check, add, pause, set, drop, cut, flip, swap, test — rotate them; do not default to "switch"/"check" every time).
+- Rotate the business type used in examples across the batch (cosmetic clinics, gyms, trades, restaurants, dentists, hairdressers) — the same industry should not anchor more than 2 of the 5 carousels.
+- Rotate the specific numbers used across the batch — if one carousel uses 30%, the next should not also reach for 30% or a suspiciously similar figure; pull from realistic but varied benchmarks (percentages, euro amounts, day counts, lead counts).
+- Never reuse a sentence structure or phrasing pattern more than once within a batch, and treat each new batch as if the person has already seen every hook you wrote in prior batches — do not fall back on the safest, most obvious phrasing every time.
+- Banned filler phrases, in hooks or body slides: "game changer," "level up," "unlock your potential," "in today's digital world," "when it comes to," "here's the thing," "the bottom line is."
+- Every carousel must contain at least one specific, concrete detail — a real number, a named setting, a specific mechanic — not vague advice a reader has already heard a hundred times.
 - Write like a sharp operator who actually manages ad accounts daily, not like generic content-mill copy.
 
 === STYLE RULES (non-negotiable) ===
@@ -223,14 +229,14 @@ Use exactly 6 body slides (10 slides total per carousel: hook + bridge + 6 body 
   "carousels": [
     {
       "niche": "string — Google Ads, Meta/Instagram Ads, or Email Marketing",
-      "angle": "string (one of the 6 topic angles)",
+      "angle": "string — one of the 7 hook angles: curiosity, mistake-fear, contrarian, proof-numbers, relief-permission, behind-the-curtain, or realization",
       "format": "string — steal-this, myth-buster, step-by-step, before-after, comparison, or checklist",
       "hook_slide": "string — under 10 words, the scroll-stopper, loss-aversion framed",
       "bridge_slide": "string — re-hook, under 10 words, works standalone for re-served carousels",
       "body_slides": ["string", "string", "string", "string", "string", "string"],
       "recap_slide": ["string", "string", "string", "string", "string", "string"],
       "cta_slide": "string — final slide context line (optional, can be empty)",
-      "cta_word": "string — memorable keyword, 4-8 letters, e.g. AUDIT, TEMPLATE, CHECKLIST, GUIDE, TIPS",
+      "cta_word": "string — memorable keyword, 4-9 letters, e.g. AUDIT, TEMPLATE, CHECKLIST, GUIDE, TIPS",
       "cta_promise": "string — concrete thing being DM'd, e.g. 'my 7-point audit checklist'",
       "caption": "string — starts with save-worthy line, under 300 characters, includes 3-5 relevant hashtags",
       "suggested_audio_style": "string — e.g. 'trending upbeat', 'calm voiceover', 'suspenseful build'"
