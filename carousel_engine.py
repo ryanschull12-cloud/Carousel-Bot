@@ -8,6 +8,7 @@ Carousel image engine — FIXED SIZE EDITION:
 
 from PIL import Image, ImageDraw, ImageFont
 import os
+import re
 
 W, H = 1080, 1350
 MARGIN = 76
@@ -25,6 +26,7 @@ TEXT = (20, 20, 20)
 GRAY = (130, 130, 130)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
+SHADOW = (205, 202, 194)  # soft depth shade for badges, one tone below BG
 
 # FIXED FONT SIZES — never auto-grow beyond these
 HOOK_FONT_SIZE = 96       # Hook slides: big, dramatic, consistent
@@ -137,11 +139,19 @@ def draw_header_v2(draw, niche, slide_num, total_slides, colors):
     draw_slide_counter(draw, slide_num, total_slides, colors["dark"])
 
 
+STAT_RE = re.compile(r"(?:[\u20ac$\u00a3]\s?\d[\d,]*(?:\.\d+)?[kKmM]?|\d[\d,]*(?:\.\d+)?\s?%)")
+
+
+def find_stat(text):
+    """Pull a currency amount or percentage out of a line, if one exists."""
+    m = STAT_RE.search(text)
+    return m.group(0) if m else None
+
+
 def find_highlight_word(text):
-    import re
-    m = re.search(r"(?:[\u20ac$\u00a3]\s?\d[\d,]*(?:\.\d+)?[kKmM]?|\d[\d,]*(?:\.\d+)?\s?%)", text)
-    if m:
-        return m.group(0)
+    stat = find_stat(text)
+    if stat:
+        return stat
     words = text.split()
     if len(words) >= 3:
         return " ".join(words[-2:]).rstrip(".")
@@ -168,6 +178,31 @@ def draw_text_highlighted_v2(draw, x, y, line, font, highlight, text_color, mark
     ascent, _ = font.getmetrics()
     draw_marker_bold(draw, cx, y + ascent * 0.06, hw, ascent * 0.88, marker_color)
     draw.text((x, y), line, font=font, fill=text_color)
+
+
+def draw_corner_flag(draw, colors):
+    """
+    UPGRADE 2 — bold diagonal accent wedge in the top-right corner.
+    A consistent, non-photo, no-extra-font brand mark on every single slide.
+    Sits under the slide counter, which is drawn on top of it afterward.
+    """
+    size = 130
+    draw.polygon([(W, 0), (W, size), (W - size, 0)], fill=colors["accent"])
+
+
+def draw_mega_stat(draw, text, y, colors, max_width, font_path=F_SERIF_BOLD, target=170, min_size=110):
+    """
+    UPGRADE 1 — render a pulled-out number/€/% stat at oversized scale above the
+    headline. Only fires when the hook/bridge line actually contains a stat, so
+    every loss-aversion-framed hook (the format the content brain is told to
+    prioritize) gets a genuine pattern-interrupt instead of just bigger body text.
+    """
+    font, lines, size = fit_text_shrink_only(draw, text, max_width, 1, target, min_size, font_path)
+    line = lines[0] if lines else text
+    x = MARGIN + 20
+    draw.text((x, y), line, font=font, fill=colors["dark"])
+    ascent, descent = font.getmetrics()
+    return y + int((ascent + descent) * 0.92), size
 
 
 def draw_accent_bar(draw, y, colors, width=None):
@@ -233,9 +268,17 @@ def render_hook_slide_fixed(headline, niche, slide_num, total_slides, out_path):
     img = Image.new("RGB", (W, H), BG)
     draw = ImageDraw.Draw(img)
     draw_dot_grid(draw)
+    draw_corner_flag(draw, colors)
     draw_header_v2(draw, niche, slide_num, total_slides, colors)
 
     max_w = W - 2 * MARGIN - 40  # slightly narrower for better line breaks
+
+    # UPGRADE 1: pull a stat out and render it oversized before the headline
+    stat = find_stat(headline)
+    top_y = 260
+    if stat:
+        top_y, _ = draw_mega_stat(draw, stat, top_y, colors, max_w)
+        top_y += 24
 
     # FIXED SIZE: 96px, shrink only if needed
     font, lines, size = fit_text_shrink_only(draw, headline, max_w, 4, HOOK_FONT_SIZE, 52, F_SERIF_BOLD)
@@ -244,14 +287,14 @@ def render_hook_slide_fixed(headline, niche, slide_num, total_slides, out_path):
 
     total_h = line_h * len(lines)
 
-    # CENTER the text block vertically, with generous spacing
-    available_h = H - 280 - 180  # header to progress bar
-    ty = 280 + (available_h - total_h) // 2
+    # CENTER the remaining text block in whatever space is left below the stat
+    available_h = H - top_y - 180  # header/stat to progress bar
+    ty = top_y + max(0, (available_h - total_h) // 2)
 
-    # If text is very short (1-2 lines), add decorative elements
-    if len(lines) <= 2:
+    # If text is very short (1-2 lines) and there's no mega-stat already
+    # doing the attention-grabbing work, add decorative elements
+    if len(lines) <= 2 and not stat:
         draw_decorative_quote_marks(draw, ty - 40, colors)
-        # Add accent bars above and below with more spacing
         draw_accent_bar(draw, ty - 60, colors, width=200)
         draw_accent_bar(draw, ty + total_h + 40, colors, width=200)
     else:
@@ -278,21 +321,32 @@ def render_bridge_slide_fixed(headline, niche, slide_num, total_slides, out_path
     img = Image.new("RGB", (W, H), BG)
     draw = ImageDraw.Draw(img)
     draw_dot_grid(draw)
+    draw_corner_flag(draw, colors)
     draw_header_v2(draw, niche, slide_num, total_slides, colors)
 
     max_w = W - 2 * MARGIN - 40
+
+    # UPGRADE 1, scaled down: bridge should carry the same weight as the hook
+    # without literally duplicating it, so the mega-stat here targets a smaller size
+    stat = find_stat(headline)
+    top_y = 260
+    if stat:
+        top_y, _ = draw_mega_stat(draw, stat, top_y, colors, max_w, target=140, min_size=90)
+        top_y += 20
+
     font, lines, size = fit_text_shrink_only(draw, headline, max_w, 4, BRIDGE_FONT_SIZE, 48, F_SERIF_BOLD)
     line_h = int(size * 1.2)
     highlight = find_highlight_word(headline)
 
     total_h = line_h * len(lines)
-    available_h = H - 280 - 180
-    ty = 280 + (available_h - total_h) // 2
+    available_h = H - top_y - 180
+    ty = top_y + max(0, (available_h - total_h) // 2)
 
     # Bridge gets a vertical accent line on the left for visual distinction
     if len(lines) <= 2:
         draw_vertical_accent_line(draw, MARGIN, ty - 20, ty + total_h + 20, colors)
-        draw_decorative_quote_marks(draw, ty - 30, colors)
+        if not stat:
+            draw_decorative_quote_marks(draw, ty - 30, colors)
     else:
         draw_vertical_accent_line(draw, MARGIN, ty - 10, ty + total_h + 10, colors)
 
@@ -317,6 +371,7 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
     img = Image.new("RGB", (W, H), BG)
     draw = ImageDraw.Draw(img)
     draw_dot_grid(draw)
+    draw_corner_flag(draw, colors)
     draw_header_v2(draw, niche, slide_num, total_slides, colors)
 
     badge_size = 80
@@ -332,14 +387,29 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
     available_h = H - 280 - 200
     badge_y = 280 + (available_h - total_h) // 2
 
-    # Number badge or checkbox
+    # UPGRADE 3: accent block now renders behind EVERY body slide, not just
+    # short-text ones — this is what was making some slides look designed
+    # and others look plain within the same carousel.
+    block_y = badge_y - 24
+    block_h = total_h + 64
+    draw.rounded_rectangle([text_x - 24, block_y, W - MARGIN, block_y + block_h],
+                          radius=14, fill=colors["light"])
+
+    # Number badge or checkbox, now with a soft drop shadow for depth
+    shadow_off = 5
     if number is not None:
         if checklist_mode:
-            draw.rounded_rectangle([badge_x, badge_y, badge_x + badge_size, badge_y + badge_size], 
-                                  radius=8, outline=colors["dark"], width=4)
+            draw.rounded_rectangle([badge_x + shadow_off, badge_y + shadow_off,
+                                     badge_x + badge_size + shadow_off, badge_y + badge_size + shadow_off],
+                                  radius=8, fill=SHADOW)
+            draw.rounded_rectangle([badge_x, badge_y, badge_x + badge_size, badge_y + badge_size],
+                                  radius=8, outline=colors["dark"], width=4, fill=BG)
             f_check = ImageFont.truetype(F_SANS_BOLD, 36)
             draw.text((badge_x + 22, badge_y + 18), "\u2713", font=f_check, fill=colors["dark"])
         else:
+            draw.ellipse([badge_x + shadow_off, badge_y + shadow_off,
+                          badge_x + badge_size + shadow_off, badge_y + badge_size + shadow_off],
+                         fill=SHADOW)
             draw.ellipse([badge_x, badge_y, badge_x + badge_size, badge_y + badge_size], 
                          fill=colors["dark"])
             f_num = ImageFont.truetype(F_SANS_BOLD, int(badge_size * 0.45))
@@ -347,14 +417,6 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
             tw = draw.textlength(num_text, font=f_num)
             draw.text((badge_x + (badge_size - tw) / 2, badge_y + badge_size * 0.24), 
                      num_text, font=f_num, fill=WHITE)
-
-    # If text is very short, center it vertically in the available space
-    # and add a subtle accent block behind it
-    if len(lines) <= 2:
-        block_y = badge_y + (badge_size if not checklist_mode else badge_size) // 2 - 20
-        block_h = total_h + 60
-        draw.rounded_rectangle([text_x - 20, block_y, W - MARGIN, block_y + block_h], 
-                              radius=12, fill=colors["light"])
 
     ty = badge_y + 4
     for line in lines:
