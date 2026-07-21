@@ -25,21 +25,77 @@ TO_EMAIL = os.environ.get("TO_EMAIL", GMAIL_ADDRESS)
 AUTO_POST_COUNT = 2
 
 MISTRAL_URL = "https://api.mistral.ai/v1/chat/completions"
+TAVILY_URL = "https://api.tavily.com/search"
 
 with open("content_brain_system_prompt.txt", "r") as f:
     SYSTEM_PROMPT = f.read()
 
 
-def call_mistral():
+def call_tavily():
+    """
+    Pull a short, recent-news briefing about Google/Meta Ads to hand to
+    Mistral so hooks can reference something genuinely current — this is
+    what the content brain prompt's "recent news briefing" paragraph
+    refers to. Entirely optional: if TAVILY_API_KEY isn't set, or the
+    request fails for any reason (rate limit, timeout, outage), we just
+    skip the briefing and generate the batch as normal. Never blocks.
+    """
+    api_key = os.environ.get("TAVILY_API_KEY")
+    if not api_key:
+        return None
+    try:
+        resp = requests.post(
+            TAVILY_URL,
+            headers={
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {api_key}",
+            },
+            json={
+                "query": "Google Ads OR Meta Ads update change 2026",
+                "topic": "news",
+                "search_depth": "basic",
+                "time_range": "week",
+                "max_results": 3,
+                "include_answer": True,
+            },
+            timeout=20,
+        )
+        resp.raise_for_status()
+        data = resp.json()
+    except Exception as e:
+        print(f"Tavily briefing skipped (non-fatal): {e}")
+        return None
+
+    bits = []
+    if data.get("answer"):
+        bits.append(data["answer"])
+    for r in data.get("results", [])[:3]:
+        title = r.get("title")
+        if title:
+            bits.append(title)
+
+    if not bits:
+        return None
+    return " | ".join(bits)[:800]  # keep it a briefing, not an essay
+
+
+def call_mistral(briefing=None):
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {MISTRAL_API_KEY}",
     }
+    user_content = "Generate today's batch."
+    if briefing:
+        user_content += (
+            "\n\nRecent Google/Meta Ads news briefing (optional context — "
+            "weave in only where it's genuinely useful, never force it, "
+            "never quote it verbatim):\n" + briefing
+        )
     body = {
         "model": "mistral-small-latest",
         "messages": [
             {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": "Generate today's batch."},
+            {"role": "user", "content": user_content},
         ],
         "response_format": {"type": "json_object"},
     }
@@ -83,7 +139,10 @@ def send_email(image_paths, batch_date):
 
 
 def main():
-    batch = call_mistral()
+    briefing = call_tavily()
+    if briefing:
+        print(f"Tavily briefing pulled ({len(briefing)} chars) — passing to Mistral.")
+    batch = call_mistral(briefing)
     batch_date = batch.get("batch_date", "today")
     # Use the actual system date rather than trusting the model's
     # self-reported date, which can drift or be wrong.
