@@ -2,9 +2,13 @@ name: Daily Carousels
 
 on:
   schedule:
-    # 8:30am Irish time (currently 7:30 UTC during summer/BST — see note
-    # further down for the winter-time adjustment)
+    # Fires at both 7:30 UTC and 8:30 UTC. The "Check schedule window" step
+    # below works out which one of those is actually 8:30am in Ireland right
+    # now (Ireland is UTC+1 during BST/summer, UTC+0 during GMT/winter) and
+    # skips the other one automatically — this file no longer needs manual
+    # edits when the clocks change.
     - cron: "30 7 * * *"
+    - cron: "30 8 * * *"
   workflow_dispatch: {}   # lets you trigger it manually to test
 
 permissions:
@@ -14,26 +18,46 @@ jobs:
   generate:
     runs-on: ubuntu-latest
     steps:
+      - name: Check schedule window (handles Irish BST/GMT automatically)
+        id: check_time
+        run: |
+          python3 - <<'EOF'
+          import os
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          now = datetime.now(ZoneInfo("Europe/Dublin"))
+          should_run = "true" if now.hour == 8 else "false"
+          print(f"Irish local time right now: {now.isoformat()} -> should_run={should_run}")
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+              f.write(f"should_run={should_run}\n")
+          EOF
+
       - name: Check out repo
+        if: steps.check_time.outputs.should_run == 'true'
         uses: actions/checkout@v4
 
       - name: Set up Python
+        if: steps.check_time.outputs.should_run == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
       - name: Install dependencies
+        if: steps.check_time.outputs.should_run == 'true'
         run: pip install -r requirements.txt
 
       - name: Generate carousels + send email
+        if: steps.check_time.outputs.should_run == 'true'
         env:
           MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
           GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           TO_EMAIL: ${{ secrets.TO_EMAIL }}
+          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
         run: python runner.py
 
       - name: Commit and push today's images
+        if: steps.check_time.outputs.should_run == 'true'
         run: |
           git config user.name "carousel-bot"
           git config user.email "actions@github.com"
@@ -42,9 +66,11 @@ jobs:
           git push
 
       - name: Wait for raw URLs to propagate
+        if: steps.check_time.outputs.should_run == 'true' && vars.IG_POSTING_PAUSED != 'true'
         run: sleep 15
 
       - name: Post carousel 1 to Instagram
+        if: steps.check_time.outputs.should_run == 'true' && vars.IG_POSTING_PAUSED != 'true'
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           IG_BUSINESS_ACCOUNT_ID: ${{ secrets.IG_BUSINESS_ACCOUNT_ID }}
@@ -52,3 +78,7 @@ jobs:
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           TO_EMAIL: ${{ secrets.TO_EMAIL }}
         run: python instagram_post.py --only-index 1
+
+      - name: Note that Instagram posting is paused
+        if: steps.check_time.outputs.should_run == 'true' && vars.IG_POSTING_PAUSED == 'true'
+        run: echo "IG_POSTING_PAUSED is set to true in repo variables — skipping Instagram auto-post. Carousels were still generated and emailed to you."
