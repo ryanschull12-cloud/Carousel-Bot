@@ -27,8 +27,66 @@ AUTO_POST_COUNT = 2
 MISTRAL_URL = "https://api.mistral.ai/v1/chat/completions"
 TAVILY_URL = "https://api.tavily.com/search"
 
+# How many days of past hooks/angles/formats to remember and feed back to
+# Mistral so it stops repeating itself across days, not just within a
+# single day's batch. Kept short so it stays cheap and doesn't bloat the
+# prompt.
+HISTORY_PATH = "history.json"
+HISTORY_DAYS_TO_KEEP = 10
+
 with open("content_brain_system_prompt.txt", "r") as f:
     SYSTEM_PROMPT = f.read()
+
+
+def load_history():
+    """Read the rolling history file. Missing or corrupt file = start fresh."""
+    if not os.path.exists(HISTORY_PATH):
+        return {"recent_batches": []}
+    try:
+        with open(HISTORY_PATH, "r") as f:
+            return json.load(f)
+    except Exception as e:
+        print(f"Could not read {HISTORY_PATH}, starting fresh ({e})")
+        return {"recent_batches": []}
+
+
+def build_history_briefing(history):
+    """
+    Flatten recent batches into a compact exclusion list Mistral can read
+    before writing today's batch. This is what stops it from reusing a
+    hook, angle+niche+format combo, or industry example it already used
+    last week — without this, every daily call starts from a blank slate.
+    """
+    lines = []
+    for entry in history.get("recent_batches", []):
+        for c in entry.get("carousels", []):
+            lines.append(
+                f"- [{entry.get('date', '?')}] {c.get('niche', '?')} / "
+                f"{c.get('angle', '?')} / {c.get('format', '?')}: "
+                f"\"{c.get('hook', '')}\""
+            )
+    return "\n".join(lines) if lines else None
+
+
+def update_history(history, batch, batch_date):
+    """Append today's batch to the rolling history and write it back to disk."""
+    entry = {
+        "date": batch_date,
+        "carousels": [
+            {
+                "niche": c.get("niche", ""),
+                "angle": c.get("angle", ""),
+                "format": c.get("format", ""),
+                "hook": c.get("hook_slide", ""),
+            }
+            for c in batch.get("carousels", [])
+        ],
+    }
+    batches = [b for b in history.get("recent_batches", []) if b.get("date") != batch_date]
+    batches.append(entry)
+    history["recent_batches"] = batches[-HISTORY_DAYS_TO_KEEP:]
+    with open(HISTORY_PATH, "w") as f:
+        json.dump(history, f, indent=2)
 
 
 def call_tavily():
@@ -79,12 +137,20 @@ def call_tavily():
     return " | ".join(bits)[:800]  # keep it a briefing, not an essay
 
 
-def call_mistral(briefing=None):
+def call_mistral(briefing=None, history_briefing=None):
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {MISTRAL_API_KEY}",
     }
     user_content = "Generate today's batch."
+    if history_briefing:
+        user_content += (
+            "\n\nHooks, angles, and formats used in recent batches. Treat "
+            "this as a hard exclusion list, not a style reference — do not "
+            "repeat any of these hooks, reuse the same angle+niche+format "
+            "combination, or write anything that's a close paraphrase of "
+            "one of these:\n" + history_briefing
+        )
     if briefing:
         user_content += (
             "\n\nRecent Google/Meta Ads news briefing (optional context — "
@@ -92,11 +158,18 @@ def call_mistral(briefing=None):
             "never quote it verbatim):\n" + briefing
         )
     body = {
-        "model": "mistral-small-latest",
+        # Free tier on Mistral's La Plateforme includes Large, not just
+        # Small, at no extra cost — Large follows the nuanced instructions
+        # in the system prompt far more reliably than Small does.
+        "model": "mistral-large-latest",
         "messages": [
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": user_content},
         ],
+        # Default temperature trends conservative/safe for structured JSON
+        # output. Pushed up to encourage more varied phrasing — the
+        # anti-repetition rules in the system prompt do the quality control.
+        "temperature": 0.9,
         "response_format": {"type": "json_object"},
     }
     last_error = None
@@ -139,15 +212,22 @@ def send_email(image_paths, batch_date):
 
 
 def main():
+    history = load_history()
+    history_briefing = build_history_briefing(history)
+    if history_briefing:
+        print(f"Loaded history: {len(history.get('recent_batches', []))} past day(s) on file.")
+
     briefing = call_tavily()
     if briefing:
         print(f"Tavily briefing pulled ({len(briefing)} chars) — passing to Mistral.")
-    batch = call_mistral(briefing)
+    batch = call_mistral(briefing, history_briefing)
     batch_date = batch.get("batch_date", "today")
     # Use the actual system date rather than trusting the model's
     # self-reported date, which can drift or be wrong.
     import datetime
     batch_date = datetime.date.today().isoformat()
+
+    update_history(history, batch, batch_date)
 
     # Images go into ./posts/{date}/carousel_{n}/ — inside the repo working
     # directory (not /tmp) so they can be committed and get public raw URLs
