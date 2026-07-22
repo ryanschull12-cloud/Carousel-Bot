@@ -61,7 +61,7 @@ jobs:
         run: |
           git config user.name "carousel-bot"
           git config user.email "actions@github.com"
-          git add posts/
+          git add posts/ history.json
           git commit -m "Add carousels for $(date +'%Y-%m-%d')" || echo "Nothing to commit"
           git push
 
