@@ -5,11 +5,12 @@ to Instagram, using images already committed and pushed to the repo
 
 Now runs up to THREE times a day at different scheduled times, fully
 automatic — nothing in this script can hold a post back. See
-.github/workflows/daily.yml for the ~8:30am slot, which posts carousel 1
-right after generation, and .github/workflows/posts_later.yml for the
-~1pm/~6pm slots, which post carousels 2 and 3 from that same morning's
-already-committed manifest. Each run is invoked with --only-index N so
-this script only ever handles one carousel per run.
+.github/workflows/daily.yml for the ~8:30am slot (carousel 1, right after
+generation), posts_later.yml for the ~1pm slot (carousel 3), and
+evening-post.yml for the ~8pm slot (carousel 2) — the latter two just
+re-read that same morning's already-committed manifest. Each run is
+invoked with --only-index N so this script only ever handles one carousel
+per run.
 
 PERFORMANCE LOGGING (new): every carousel that actually gets published now
 gets appended to posted_log.json with its media_id, date, niche, angle,
@@ -23,10 +24,10 @@ weekly report), never a gate on whether something posts.
 
 import argparse
 import os
-import sys
 import json
 import time
 import glob
+import datetime
 import smtplib
 import requests
 from email.message import EmailMessage
@@ -121,6 +122,23 @@ def send_failure_alert(carousel_index, error_text):
         smtp.send_message(msg)
 
 
+def send_stale_manifest_alert(found_date, expected_date):
+    msg = EmailMessage()
+    msg["Subject"] = "Instagram auto-post SKIPPED — today's carousels weren't found"
+    msg["From"] = GMAIL_ADDRESS
+    msg["To"] = TO_EMAIL
+    msg.set_content(
+        f"A scheduled Instagram post was skipped because the newest carousel batch on "
+        f"file is dated {found_date!r}, not today ({expected_date}).\n\n"
+        "This almost always means today's morning generation run didn't complete — "
+        "check the Actions tab for a failed 'Daily Carousels' run. Nothing was "
+        "re-posted from a previous day."
+    )
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
+        smtp.login(GMAIL_ADDRESS, GMAIL_APP_PASSWORD)
+        smtp.send_message(msg)
+
+
 def load_posted_log():
     if not os.path.exists(POSTED_LOG_PATH):
         return {"posts": []}
@@ -190,6 +208,27 @@ def main():
 
     with open(manifest_path) as f:
         manifest = json.load(f)
+
+    # This script runs from three separate scheduled workflows across the
+    # day (see daily.yml, evening-post.yml, posts_later.yml). The 1pm/8pm
+    # runs don't generate anything themselves — they just re-read whatever
+    # manifest is newest on disk. If the morning generation run ever fails
+    # or doesn't fire (Mistral outage, a bad Actions run, a clock edge
+    # case), that "newest" manifest silently becomes YESTERDAY's, and
+    # without this check the later runs would re-post already-posted
+    # carousels from the wrong day. Not manifest.json's fault — it's
+    # correct for the day it was written — this just refuses to act on a
+    # manifest that isn't today's.
+    if not args.manifest:
+        today_str = datetime.date.today().isoformat()
+        if manifest.get("batch_date") != today_str:
+            print(
+                f"Newest manifest on disk is dated {manifest.get('batch_date')!r}, "
+                f"not today ({today_str}) — today's generation likely didn't run. "
+                "Skipping rather than re-posting stale content."
+            )
+            send_stale_manifest_alert(manifest.get("batch_date"), today_str)
+            return
 
     to_post = [c for c in manifest["carousels"] if c.get("post_to_instagram")]
     if args.only_index is not None:
