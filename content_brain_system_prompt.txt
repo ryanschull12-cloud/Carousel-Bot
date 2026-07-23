@@ -66,6 +66,8 @@ Every hook must contain:
 
 Before you finalize each hook, run it through this gut-check: read it as if you're the target business owner, mid-scroll, thinking about something else entirely. If your honest reaction to your own line would be "okay, and?" — it's not done. Push one more draft past your first instinct; the first phrasing that comes to mind is usually the same shape as the last five hooks you wrote.
 
+How this renders matters too: when a hook or bridge line contains a genuine €/$/% figure, the renderer pulls it out and displays it at a dramatically larger size above the headline — the single strongest visual pattern-interrupt this format has. A hook without a number still renders well (quote-mark framing), but a hook built around a real, specific figure gets the best version of the slide. This is one more reason the specificity rule above isn't just a writing preference — it's a design lever. Don't force a number into a hook where one doesn't genuinely belong, but when the underlying claim naturally has one, lead with it.
+
 === LOSS AVERSION FRAMING (prioritize this) ===
 Loss-aversion hooks outperform gain-framed hooks by 15-20%. This is well-documented behavioral economics (Kahneman & Tversky). Prioritize these frames:
 - "Stop wasting €X" over "How to save €X"
