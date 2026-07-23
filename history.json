@@ -1,0 +1,39 @@
+{
+  "recent_batches": [
+    {
+      "date": "2026-07-23",
+      "carousels": [
+        {
+          "niche": "Google Ads",
+          "angle": "mistake-fear",
+          "format": "myth-buster",
+          "hook": "Your Google Ads are funding your competitor\u2019s clicks"
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "contrarian",
+          "format": "comparison",
+          "hook": "More ad spend won\u2019t fix this"
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "relief-permission",
+          "format": "steal-this",
+          "hook": "Your email list isn\u2019t dead"
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "behind-the-curtain",
+          "format": "step-by-step",
+          "hook": "The setting plumbers miss costs \u20ac400/week"
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "proof-numbers",
+          "format": "before-after",
+          "hook": "A hairdresser cut cost-per-lead by 60%"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "batch_date": "2026-07-23",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Your Google Ads might be funding your competitor\u2019s clicks. Here\u2019s how to stop it in 2 minutes \u2193\n#googleads #ppc #smallbusiness #marketingtips #businessowner",
+      "niche": "Google Ads",
+      "image_paths": [
+        "posts/2026-07-23/carousel_1/slide_01.jpg",
+        "posts/2026-07-23/carousel_1/slide_02.jpg",
+        "posts/2026-07-23/carousel_1/slide_03.jpg",
+        "posts/2026-07-23/carousel_1/slide_04.jpg",
+        "posts/2026-07-23/carousel_1/slide_05.jpg",
+        "posts/2026-07-23/carousel_1/slide_06.jpg",
+        "posts/2026-07-23/carousel_1/slide_07.jpg",
+        "posts/2026-07-23/carousel_1/slide_08.jpg",
+        "posts/2026-07-23/carousel_1/slide_09.jpg",
+        "posts/2026-07-23/carousel_1/slide_10.jpg"
+      ],
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "More ad spend won\u2019t fix ad fatigue. Here\u2019s how to rotate creatives like a pro \u2193\n#metaads #instagramads #smallbusiness #marketingtips #cafeowner",
+      "niche": "Meta/Instagram Ads",
+      "image_paths": [
+        "posts/2026-07-23/carousel_2/slide_01.jpg",
+        "posts/2026-07-23/carousel_2/slide_02.jpg",
+        "posts/2026-07-23/carousel_2/slide_03.jpg",
+        "posts/2026-07-23/carousel_2/slide_04.jpg",
+        "posts/2026-07-23/carousel_2/slide_05.jpg",
+        "posts/2026-07-23/carousel_2/slide_06.jpg",
+        "posts/2026-07-23/carousel_2/slide_07.jpg",
+        "posts/2026-07-23/carousel_2/slide_08.jpg",
+        "posts/2026-07-23/carousel_2/slide_09.jpg",
+        "posts/2026-07-23/carousel_2/slide_10.jpg"
+      ],
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Your email list isn\u2019t dead\u2014you\u2019re just sending the wrong thing. Here\u2019s how to fix it \u2193\n#emailmarketing #smallbusiness #marketingtips #businessgrowth #entrepreneur",
+      "niche": "Email Marketing",
+      "image_paths": [
+        "posts/2026-07-23/carousel_3/slide_01.jpg",
+        "posts/2026-07-23/carousel_3/slide_02.jpg",
+        "posts/2026-07-23/carousel_3/slide_03.jpg",
+        "posts/2026-07-23/carousel_3/slide_04.jpg",
+        "posts/2026-07-23/carousel_3/slide_05.jpg",
+        "posts/2026-07-23/carousel_3/slide_06.jpg",
+        "posts/2026-07-23/carousel_3/slide_07.jpg",
+        "posts/2026-07-23/carousel_3/slide_08.jpg",
+        "posts/2026-07-23/carousel_3/slide_09.jpg",
+        "posts/2026-07-23/carousel_3/slide_10.jpg"
+      ],
+      "post_to_instagram": false
+    },
+    {
+      "index": 4,
+      "caption": "Plumbers: This one setting is costing you \u20ac400/week. Fix it in 2 minutes \u2193\n#googleads #ppc #smallbusiness #trades #plumber",
+      "niche": "Google Ads",
+      "image_paths": [
+        "posts/2026-07-23/carousel_4/slide_01.jpg",
+        "posts/2026-07-23/carousel_4/slide_02.jpg",
+        "posts/2026-07-23/carousel_4/slide_03.jpg",
+        "posts/2026-07-23/carousel_4/slide_04.jpg",
+        "posts/2026-07-23/carousel_4/slide_05.jpg",
+        "posts/2026-07-23/carousel_4/slide_06.jpg",
+        "posts/2026-07-23/carousel_4/slide_07.jpg",
+        "posts/2026-07-23/carousel_4/slide_08.jpg",
+        "posts/2026-07-23/carousel_4/slide_09.jpg",
+        "posts/2026-07-23/carousel_4/slide_10.jpg"
+      ],
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "A hairdresser cut cost-per-lead by 60% with one tweak. Here\u2019s how \u2193\n#metaads #instagramads #smallbusiness #hairdresser #marketingtips",
+      "niche": "Meta/Instagram Ads",
+      "image_paths": [
+        "posts/2026-07-23/carousel_5/slide_01.jpg",
+        "posts/2026-07-23/carousel_5/slide_02.jpg",
+        "posts/2026-07-23/carousel_5/slide_03.jpg",
+        "posts/2026-07-23/carousel_5/slide_04.jpg",
+        "posts/2026-07-23/carousel_5/slide_05.jpg",
+        "posts/2026-07-23/carousel_5/slide_06.jpg",
+        "posts/2026-07-23/carousel_5/slide_07.jpg",
+        "posts/2026-07-23/carousel_5/slide_08.jpg",
+        "posts/2026-07-23/carousel_5/slide_09.jpg",
+        "posts/2026-07-23/carousel_5/slide_10.jpg"
+      ],
+      "post_to_instagram": false
+    }
+  ]
+}
