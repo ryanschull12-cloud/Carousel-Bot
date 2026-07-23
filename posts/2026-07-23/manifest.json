@@ -3,8 +3,11 @@
   "carousels": [
     {
       "index": 1,
-      "caption": "Your Google Ads might be funding your competitor\u2019s clicks. Here\u2019s how to stop it in 2 minutes \u2193\n#googleads #ppc #smallbusiness #marketingtips #businessowner",
+      "caption": "Save this Google Ads audit checklist \u2193\nMost business owners never check their search terms report \u2014 and waste 25% of their budget on searches that never convert. This 5-minute audit saved a caf\u00e9 \u20ac300/month. #googleads #smallbusiness #ppcaudit #marketingtips",
       "niche": "Google Ads",
+      "angle": "realization",
+      "format": "checklist",
+      "hook": "Monday morning, my spend was normal\u2014my pipeline wasn\u2019t",
       "image_paths": [
         "posts/2026-07-23/carousel_1/slide_01.jpg",
         "posts/2026-07-23/carousel_1/slide_02.jpg",
@@ -21,8 +24,11 @@
     },
     {
       "index": 2,
-      "caption": "More ad spend won\u2019t fix ad fatigue. Here\u2019s how to rotate creatives like a pro \u2193\n#metaads #instagramads #smallbusiness #marketingtips #cafeowner",
+      "caption": "Save this Meta Ads refresh guide \u2193\nAd fatigue kicks in after 3-5 days \u2014 CTR drops 40% by day 7. A gym cut cost-per-lead by 35% just by refreshing creative every 5 days. #metaads #instagramads #smallbusiness #marketingtips",
       "niche": "Meta/Instagram Ads",
+      "angle": "curiosity",
+      "format": "before-after",
+      "hook": "Your ad\u2019s CTR drops 40% by day 7\u2014Meta won\u2019t tell you",
       "image_paths": [
         "posts/2026-07-23/carousel_2/slide_01.jpg",
         "posts/2026-07-23/carousel_2/slide_02.jpg",
@@ -39,8 +45,11 @@
     },
     {
       "index": 3,
-      "caption": "Your email list isn\u2019t dead\u2014you\u2019re just sending the wrong thing. Here\u2019s how to fix it \u2193\n#emailmarketing #smallbusiness #marketingtips #businessgrowth #entrepreneur",
+      "caption": "Steal this post-visit email sequence \u2193\nMost restaurants never send a follow-up after a visit \u2014 missing out on 20% more bookings. A pizzeria added \u20ac2k/month just by sending a 'Thanks for coming' email with a 10% discount. #emailmarketing #smallbusiness #restaurantmarketing #marketingtips",
       "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "The email that books 20% more tables\u2014most restaurants skip it",
       "image_paths": [
         "posts/2026-07-23/carousel_3/slide_01.jpg",
         "posts/2026-07-23/carousel_3/slide_02.jpg",
@@ -53,12 +62,15 @@
         "posts/2026-07-23/carousel_3/slide_09.jpg",
         "posts/2026-07-23/carousel_3/slide_10.jpg"
       ],
-      "post_to_instagram": false
+      "post_to_instagram": true
     },
     {
       "index": 4,
-      "caption": "Plumbers: This one setting is costing you \u20ac400/week. Fix it in 2 minutes \u2193\n#googleads #ppc #smallbusiness #trades #plumber",
+      "caption": "Broad match vs phrase match: which wins? \u2193\nBroad match wastes 30% of your budget on unrelated searches. Phrase match cuts waste while keeping reach. A dentist saved \u20ac500/month just by switching. #googleads #ppc #smallbusiness #marketingtips",
       "niche": "Google Ads",
+      "angle": "proof-numbers",
+      "format": "comparison",
+      "hook": "30% of your budget burns on broad match\u2014here\u2019s the fix",
       "image_paths": [
         "posts/2026-07-23/carousel_4/slide_01.jpg",
         "posts/2026-07-23/carousel_4/slide_02.jpg",
@@ -75,8 +87,11 @@
     },
     {
       "index": 5,
-      "caption": "A hairdresser cut cost-per-lead by 60% with one tweak. Here\u2019s how \u2193\n#metaads #instagramads #smallbusiness #hairdresser #marketingtips",
+      "caption": "Save this lookalike audience guide \u2193\nMost business owners give up on lookalike audiences too soon \u2014 they need 7-14 days to learn. A boutique saw 40% lower CPA just by waiting 10 days before judging. #metaads #instagramads #smallbusiness #marketingtips",
       "niche": "Meta/Instagram Ads",
+      "angle": "relief-permission",
+      "format": "myth-buster",
+      "hook": "Your lookalike audience needs 10 days\u2014you gave it 3",
       "image_paths": [
         "posts/2026-07-23/carousel_5/slide_01.jpg",
         "posts/2026-07-23/carousel_5/slide_02.jpg",

@@ -5,33 +5,33 @@
       "carousels": [
         {
           "niche": "Google Ads",
-          "angle": "mistake-fear",
-          "format": "myth-buster",
-          "hook": "Your Google Ads are funding your competitor\u2019s clicks"
+          "angle": "realization",
+          "format": "checklist",
+          "hook": "Monday morning, my spend was normal\u2014my pipeline wasn\u2019t"
         },
         {
           "niche": "Meta/Instagram Ads",
-          "angle": "contrarian",
-          "format": "comparison",
-          "hook": "More ad spend won\u2019t fix this"
+          "angle": "curiosity",
+          "format": "before-after",
+          "hook": "Your ad\u2019s CTR drops 40% by day 7\u2014Meta won\u2019t tell you"
         },
         {
           "niche": "Email Marketing",
-          "angle": "relief-permission",
+          "angle": "behind-the-curtain",
           "format": "steal-this",
-          "hook": "Your email list isn\u2019t dead"
+          "hook": "The email that books 20% more tables\u2014most restaurants skip it"
         },
         {
           "niche": "Google Ads",
-          "angle": "behind-the-curtain",
-          "format": "step-by-step",
-          "hook": "The setting plumbers miss costs \u20ac400/week"
+          "angle": "proof-numbers",
+          "format": "comparison",
+          "hook": "30% of your budget burns on broad match\u2014here\u2019s the fix"
         },
         {
           "niche": "Meta/Instagram Ads",
-          "angle": "proof-numbers",
-          "format": "before-after",
-          "hook": "A hairdresser cut cost-per-lead by 60%"
+          "angle": "relief-permission",
+          "format": "myth-buster",
+          "hook": "Your lookalike audience needs 10 days\u2014you gave it 3"
         }
       ]
     }
