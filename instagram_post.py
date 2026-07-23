@@ -3,16 +3,22 @@ Publishes carousels marked post_to_instagram=true in today's manifest
 to Instagram, using images already committed and pushed to the repo
 (so they're reachable at a public raw.githubusercontent.com URL).
 
-Must run AFTER the images have been committed and pushed — see
-.github/workflows/daily.yml for the ordering.
+Now runs up to THREE times a day at different scheduled times, fully
+automatic — nothing in this script can hold a post back. See
+.github/workflows/daily.yml for the ~8:30am slot, which posts carousel 1
+right after generation, and .github/workflows/posts_later.yml for the
+~1pm/~6pm slots, which post carousels 2 and 3 from that same morning's
+already-committed manifest. Each run is invoked with --only-index N so
+this script only ever handles one carousel per run.
 
 PERFORMANCE LOGGING (new): every carousel that actually gets published now
 gets appended to posted_log.json with its media_id, date, niche, angle,
 format, and hook. fetch_performance.py reads this file a few days later to
 pull real Instagram engagement numbers and tie them back to what was
-actually written — that's the "self-intelligent" half of the pipeline.
-Without this log there'd be no way to connect a media_id back to which
-hook/angle/format produced it.
+actually written, and the weekly self-review email (performance_report.py)
+reads it too. This is the "review itself" half of the pipeline — it's all
+retrospective (informs what gets written next, and what you see in the
+weekly report), never a gate on whether something posts.
 """
 
 import argparse
@@ -162,13 +168,13 @@ def post_carousel(carousel, posted_log, batch_date):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--manifest", help="Path to a specific manifest.json (defaults to today's/most recent)")
-    parser.add_argument("--only-index", type=int, help="Only post the carousel with this index (e.g. 1 or 2)")
+    parser.add_argument("--only-index", type=int, help="Only post the carousel with this index (e.g. 1, 2, or 3)")
     args = parser.parse_args()
 
-    # Defense in depth: the daily/evening workflows already skip this whole
-    # script when the IG_POSTING_PAUSED repo variable is "true", but this
-    # check means a manual run (or a workflow edited without noticing the
-    # guard) still can't post while you're paused for Meta verification.
+    # Defense in depth: the workflows already skip this whole script when
+    # the IG_POSTING_PAUSED repo variable is "true", but this check means a
+    # manual run (or a workflow edited without noticing the guard) still
+    # can't post while you're paused for Meta verification.
     if os.environ.get("IG_POSTING_PAUSED", "false").lower() == "true":
         print("IG_POSTING_PAUSED is set to true — skipping Instagram posting entirely.")
         return

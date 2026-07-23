@@ -109,7 +109,7 @@ def main():
     for post in posted_log["posts"]:
         if post.get("scored"):
             continue
-        if not post.get("date"):
+        if not post.get("date") or not post.get("media_id"):
             continue
         try:
             posted_date = datetime.date.fromisoformat(post["date"])
