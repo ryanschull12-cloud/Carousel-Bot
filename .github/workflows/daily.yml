@@ -49,6 +49,21 @@ jobs:
         if: steps.check_time.outputs.should_run == 'true'
         run: pip install -r requirements.txt
 
+      - name: Fetch real Instagram performance data
+        if: steps.check_time.outputs.should_run == 'true'
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+        run: python fetch_performance.py
+
+      - name: Commit performance data
+        if: steps.check_time.outputs.should_run == 'true'
+        run: |
+          git config user.name "carousel-bot"
+          git config user.email "actions@github.com"
+          git add posted_log.json performance_history.json
+          git commit -m "Update performance data $(date +'%Y-%m-%d')" || echo "Nothing to commit"
+          git push
+
       - name: Generate carousels + send email
         if: steps.check_time.outputs.should_run == 'true'
         env:
@@ -81,6 +96,15 @@ jobs:
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           TO_EMAIL: ${{ secrets.TO_EMAIL }}
         run: python instagram_post.py --only-index 1
+
+      - name: Commit posting log
+        if: steps.check_time.outputs.should_run == 'true' && vars.IG_POSTING_PAUSED != 'true'
+        run: |
+          git config user.name "carousel-bot"
+          git config user.email "actions@github.com"
+          git add posted_log.json
+          git commit -m "Log Instagram post $(date +'%Y-%m-%d')" || echo "Nothing to commit"
+          git push
 
       - name: Note that Instagram posting is paused
         if: steps.check_time.outputs.should_run == 'true' && vars.IG_POSTING_PAUSED == 'true'
