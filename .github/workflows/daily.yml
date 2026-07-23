@@ -25,9 +25,12 @@ jobs:
           import os
           from datetime import datetime
           from zoneinfo import ZoneInfo
+          event_name = os.environ.get("GITHUB_EVENT_NAME", "")
           now = datetime.now(ZoneInfo("Europe/Dublin"))
-          should_run = "true" if now.hour == 8 else "false"
-          print(f"Irish local time right now: {now.isoformat()} -> should_run={should_run}")
+          # Manual runs always go through, no matter the time.
+          # Scheduled (cron) runs only go through at the 8am Irish hour.
+          should_run = "true" if (event_name == "workflow_dispatch" or now.hour == 8) else "false"
+          print(f"Irish local time right now: {now.isoformat()} (trigger: {event_name}) -> should_run={should_run}")
           with open(os.environ["GITHUB_OUTPUT"], "a") as f:
               f.write(f"should_run={should_run}\n")
           EOF
