@@ -1,0 +1,85 @@
+name: Afternoon & Evening Posts
+
+on:
+  schedule:
+    # Covers ~13:00 and ~18:00 Irish time across both BST (UTC+1) and GMT
+    # (UTC+0) automatically — the "Check schedule window" step below works
+    # out which Irish hour it actually is right now and maps it to the
+    # right carousel index, same trick daily.yml uses for its 8am slot.
+    - cron: "0 12,13,17,18 * * *"
+  workflow_dispatch:
+    inputs:
+      post_index:
+        description: "Carousel index to post (manual test runs only — scheduled runs auto-detect from time of day)"
+        required: false
+        default: "2"
+
+permissions:
+  contents: write   # needed so this workflow can commit posted_log.json
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check schedule window and pick carousel index
+        id: check_time
+        env:
+          POST_INDEX_INPUT: ${{ github.event.inputs.post_index }}
+        run: |
+          python3 - <<'EOF'
+          import os
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          event_name = os.environ.get("GITHUB_EVENT_NAME", "")
+          now = datetime.now(ZoneInfo("Europe/Dublin"))
+          should_run = "false"
+          post_index = ""
+          if event_name == "workflow_dispatch":
+              should_run = "true"
+              post_index = os.environ.get("POST_INDEX_INPUT") or "2"
+          elif now.hour == 13:
+              should_run, post_index = "true", "2"
+          elif now.hour == 18:
+              should_run, post_index = "true", "3"
+          print(f"Irish local time right now: {now.isoformat()} (trigger: {event_name}) -> should_run={should_run}, post_index={post_index}")
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+              f.write(f"should_run={should_run}\n")
+              f.write(f"post_index={post_index}\n")
+          EOF
+
+      - name: Check out repo
+        if: steps.check_time.outputs.should_run == 'true'
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        if: steps.check_time.outputs.should_run == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        if: steps.check_time.outputs.should_run == 'true'
+        run: pip install -r requirements.txt
+
+      - name: Post carousel to Instagram
+        if: steps.check_time.outputs.should_run == 'true' && vars.IG_POSTING_PAUSED != 'true'
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_BUSINESS_ACCOUNT_ID: ${{ secrets.IG_BUSINESS_ACCOUNT_ID }}
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          TO_EMAIL: ${{ secrets.TO_EMAIL }}
+        run: python instagram_post.py --only-index ${{ steps.check_time.outputs.post_index }}
+
+      - name: Commit posting log
+        if: steps.check_time.outputs.should_run == 'true' && vars.IG_POSTING_PAUSED != 'true'
+        run: |
+          git config user.name "carousel-bot"
+          git config user.email "actions@github.com"
+          git add posted_log.json
+          git commit -m "Log Instagram post $(date +'%Y-%m-%d %H:%M')" || echo "Nothing to commit"
+          git push
+
+      - name: Note that Instagram posting is paused
+        if: steps.check_time.outputs.should_run == 'true' && vars.IG_POSTING_PAUSED == 'true'
+        run: echo "IG_POSTING_PAUSED is set to true — skipping this scheduled post."
