@@ -95,12 +95,23 @@ def score(metrics):
 
 
 def main():
+    posted_log = load_json(POSTED_LOG_PATH, {"posts": []})
+    performance = load_json(PERFORMANCE_PATH, {"scored_posts": []})
+
+    # Guarantee both files exist on disk from the very first run onward,
+    # even if there's nothing to score yet. The workflow's next step
+    # unconditionally `git add`s these two paths — a literal missing file
+    # makes `git add` fail the whole job (exit 128, "did not match any
+    # files"), even though "nothing to score on a brand new repo" is a
+    # completely normal, expected state, not an error.
+    if not os.path.exists(POSTED_LOG_PATH):
+        save_json(POSTED_LOG_PATH, posted_log)
+    if not os.path.exists(PERFORMANCE_PATH):
+        save_json(PERFORMANCE_PATH, performance)
+
     if not IG_ACCESS_TOKEN:
         print("IG_ACCESS_TOKEN not set — skipping performance fetch.")
         return
-
-    posted_log = load_json(POSTED_LOG_PATH, {"posts": []})
-    performance = load_json(PERFORMANCE_PATH, {"scored_posts": []})
 
     today = datetime.date.today()
     log_updated = False
