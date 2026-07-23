@@ -40,11 +40,12 @@ TO_EMAIL = os.environ.get("TO_EMAIL", GMAIL_ADDRESS)
 # How many of the day's carousels get auto-posted to Instagram. The rest
 # are still generated and emailed, just not auto-posted. These 3 go out at
 # different times of day, not all at once — carousel 1 posts right after
-# generation here (see daily.yml), carousels 2 and 3 post later the same
-# day from separate scheduled runs (see posts_later.yml) that read this
-# same manifest. All three post fully automatically — nothing holds a post
-# back; the critic pass earlier in this file is what raises the bar on the
-# copy itself before any of this runs.
+# generation here (see daily.yml, ~8:30am), carousel 2 posts from
+# evening-post.yml (~8pm), and carousel 3 posts from posts_later.yml
+# (~1pm), each reading this same morning's already-committed manifest.
+# All three post fully automatically — nothing holds a post back; the
+# critic pass earlier in this file is what raises the bar on the copy
+# itself before any of this runs.
 AUTO_POST_COUNT = 3
 
 MISTRAL_URL = "https://api.mistral.ai/v1/chat/completions"
@@ -316,7 +317,7 @@ def send_email(image_paths, batch_date):
     msg.set_content(
         f"Today's batch of {len(image_paths)} slide images is attached.\n"
         f"Carousels 1-{AUTO_POST_COUNT} are also being auto-posted to Instagram today, spread "
-        "across the day (carousel 1 shortly, 2 around early afternoon, 3 around evening).\n"
+        "across the day (carousel 1 shortly, 3 around 1pm, 2 around 8pm).\n"
         "Save the rest to your camera roll for TikTok / manual posting."
     )
     for path in image_paths:
