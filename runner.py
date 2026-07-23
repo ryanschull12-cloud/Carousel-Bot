@@ -62,6 +62,13 @@ HISTORY_DAYS_TO_KEEP = 10
 PERFORMANCE_PATH = "performance_history.json"
 MIN_SCORED_FOR_BRIEFING = 4  # don't draw conclusions from a tiny sample
 
+# Weekly Claude-authored analysis of that same data, written by
+# self_improve.py (see .github/workflows/weekly_report.yml). Where
+# build_performance_briefing below is cheap raw-stats math recomputed every
+# day, this is a deeper qualitative pass — updated once a week, carried
+# forward across weeks — so the two are complementary, not redundant.
+LEARNED_PATTERNS_PATH = "learned_patterns.txt"
+
 with open("content_brain_system_prompt.txt", "r") as f:
     SYSTEM_PROMPT = f.read()
 
@@ -183,6 +190,19 @@ def build_performance_briefing(performance):
     return "\n".join(lines)
 
 
+def load_learned_patterns():
+    """Read the weekly Claude-authored guidance file. Missing/empty = nothing to inject."""
+    if not os.path.exists(LEARNED_PATTERNS_PATH):
+        return None
+    try:
+        with open(LEARNED_PATTERNS_PATH, "r") as f:
+            content = f.read().strip()
+        return content or None
+    except Exception as e:
+        print(f"Could not read {LEARNED_PATTERNS_PATH}, ignoring ({e})")
+        return None
+
+
 def call_tavily():
     """
     Pull a short, recent-news briefing about Google/Meta Ads to hand to
@@ -265,7 +285,7 @@ def call_mistral(system_prompt, user_content, temperature=0.9):
     last_error.raise_for_status()
 
 
-def generate_batch(briefing, history_briefing, performance_briefing):
+def generate_batch(briefing, history_briefing, performance_briefing, learned_patterns):
     """Draft pass, then a critic pass that rewrites weak hooks before anything renders."""
     user_content = "Generate today's batch."
     if history_briefing:
@@ -283,6 +303,14 @@ def generate_batch(briefing, history_briefing, performance_briefing):
             "audience responds to. Weight it accordingly, but don't discard "
             "angle/format variety entirely just because one bucket is "
             "currently ahead — a small sample can be noisy:\n" + performance_briefing
+        )
+    if learned_patterns:
+        user_content += (
+            "\n\nLearned patterns from a weekly deep-dive review of real "
+            "performance data (written by a separate analysis pass, revised "
+            "weekly — this is informed guidance built on top of the raw "
+            "stats above, not a rulebook that overrides your core style "
+            "rules):\n" + learned_patterns
         )
     if briefing:
         user_content += (
@@ -346,11 +374,15 @@ def main():
     else:
         print("Not enough scored performance data yet — generating on style rules alone.")
 
+    learned_patterns = load_learned_patterns()
+    if learned_patterns:
+        print("Loaded learned_patterns.txt — including this week's Claude-authored guidance.")
+
     briefing = call_tavily()
     if briefing:
         print(f"Tavily briefing pulled ({len(briefing)} chars) — passing to Mistral.")
 
-    batch = generate_batch(briefing, history_briefing, performance_briefing)
+    batch = generate_batch(briefing, history_briefing, performance_briefing, learned_patterns)
     batch_date = batch.get("batch_date", "today")
     # Use the actual system date rather than trusting the model's
     # self-reported date, which can drift or be wrong.
