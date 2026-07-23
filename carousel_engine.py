@@ -48,8 +48,14 @@ CARD_BG = (255, 255, 254)
 
 HOOK_FONT_SIZE = 92
 BRIDGE_FONT_SIZE = 84
-BODY_FONT_SIZE = 40
-BODY_FONT_SIZE_MIN = 28
+# Body copy is bold, not regular weight. Regular weight reads fine at full
+# resolution but most people encounter a carousel as a small feed
+# thumbnail first — thin strokes lose contrast and legibility fast at that
+# size, which is exactly the wrong place to lose it. Bold at a slightly
+# smaller size than the old v2 (56px) still fits the longer standalone-value
+# body slides without sacrificing thumbnail-scale readability.
+BODY_FONT_SIZE = 38
+BODY_FONT_SIZE_MIN = 26
 RECAP_HEADER_SIZE = 46
 RECAP_CARD_TEXT_SIZE = 25
 CTA_SAVE_SIZE = 34
@@ -372,7 +378,7 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
     draw_folio_header(draw, niche, slide_num, total_slides, colors)
 
     max_w = W - 2 * MARGIN - 40
-    font, lines, size = fit_text_shrink_only(draw, full_text, max_w, 7, BODY_FONT_SIZE, BODY_FONT_SIZE_MIN, F_SANS_REG)
+    font, lines, size = fit_text_shrink_only(draw, full_text, max_w, 7, BODY_FONT_SIZE, BODY_FONT_SIZE_MIN, F_SANS_BOLD)
     line_h = int(size * 1.34)
     text_h = line_h * len(lines)
 
@@ -394,28 +400,22 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
     badge_cx = W / 2
     badge_cy = y + badge_size / 2
     shadow_off = 4
-    if checklist_mode:
-        bx0, by0 = badge_cx - badge_size / 2, badge_cy - badge_size / 2
-        draw.rounded_rectangle([bx0 + shadow_off, by0 + shadow_off, bx0 + badge_size + shadow_off, by0 + badge_size + shadow_off],
-                                radius=10, fill=(222, 219, 211))
-        draw.rounded_rectangle([bx0, by0, bx0 + badge_size, by0 + badge_size], radius=10, outline=INK, width=4, fill=BG)
-        # Manual checkmark (two line segments) instead of a unicode glyph —
-        # LiberationSans-Bold has no glyph for U+2713 and silently renders
-        # a "missing glyph" tofu box in its place otherwise.
-        cx1, cy1 = bx0 + badge_size * 0.28, by0 + badge_size * 0.52
-        cx2, cy2 = bx0 + badge_size * 0.44, by0 + badge_size * 0.70
-        cx3, cy3 = bx0 + badge_size * 0.74, by0 + badge_size * 0.32
-        draw.line([(cx1, cy1), (cx2, cy2)], fill=colors["accent"], width=6, joint="curve")
-        draw.line([(cx2, cy2), (cx3, cy3)], fill=colors["accent"], width=6, joint="curve")
-    else:
-        draw.ellipse([badge_cx - badge_size / 2 + shadow_off, badge_cy - badge_size / 2 + shadow_off,
-                      badge_cx + badge_size / 2 + shadow_off, badge_cy + badge_size / 2 + shadow_off], fill=(222, 219, 211))
-        draw.ellipse([badge_cx - badge_size / 2, badge_cy - badge_size / 2,
-                      badge_cx + badge_size / 2, badge_cy + badge_size / 2], fill=INK)
-        f_num = ImageFont.truetype(F_SANS_BOLD, 28)
-        num_text = str(number)
-        nw = draw.textlength(num_text, font=f_num)
-        draw.text((badge_cx - nw / 2, badge_cy - 18), num_text, font=f_num, fill=WHITE)
+    # One consistent badge shape across every format — a numbered ink
+    # circle. The checkbox variant (square outline + checkmark) tested
+    # weaker: it read as clutter next to the format tag pill above it, and
+    # two different "this is item N" signals stacked on one slide was
+    # doing more harm than good. The CHECKLIST/STEAL-THIS/etc. tag pill
+    # already carries the format identity; the circle just needs to say
+    # "you're on step N of the sequence," which a plain number does better
+    # than an icon.
+    draw.ellipse([badge_cx - badge_size / 2 + shadow_off, badge_cy - badge_size / 2 + shadow_off,
+                  badge_cx + badge_size / 2 + shadow_off, badge_cy + badge_size / 2 + shadow_off], fill=(222, 219, 211))
+    draw.ellipse([badge_cx - badge_size / 2, badge_cy - badge_size / 2,
+                  badge_cx + badge_size / 2, badge_cy + badge_size / 2], fill=INK)
+    f_num = ImageFont.truetype(F_SANS_BOLD, 28)
+    num_text = str(number)
+    nw = draw.textlength(num_text, font=f_num)
+    draw.text((badge_cx - nw / 2, badge_cy - 18), num_text, font=f_num, fill=WHITE)
     y = badge_cy + badge_size / 2 + 40
 
     draw_centered_block(draw, lines, font, y, line_h, INK)
