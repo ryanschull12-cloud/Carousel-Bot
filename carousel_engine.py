@@ -45,6 +45,24 @@ CTA_SAVE_SIZE = 36        # CTA save ask
 CTA_COMMENT_SIZE = 52     # CTA comment keyword
 CTA_PROMISE_SIZE = 30     # CTA promise line
 
+# Small text tag drawn on each body slide, keyed by the carousel's declared
+# format. Previously every format except checklist/steal-this rendered as a
+# plain numbered list — before-after, comparison, myth-buster, and
+# step-by-step all looked identical despite the content brain prompt's
+# explicit FORMAT ROTATION rule saying each should be structured and
+# visualized differently. Entries alternate across the tuple by body-slide
+# position, so e.g. before-after slides alternate BEFORE/AFTER tags rather
+# than every slide getting the same label.
+FORMAT_TAG_STYLES = {
+    "before-after": [("BEFORE", "muted"), ("AFTER", "accent")],
+    "comparison": [("THIS", "muted"), ("THAT", "accent")],
+    "myth-buster": [("MYTH", "muted"), ("FACT", "accent")],
+    "step-by-step": [("STEP", "accent")],
+    "steal-this": [("TEMPLATE", "accent")],
+}
+TAG_MUTED = (208, 205, 197)
+TAG_MUTED_TEXT = (95, 92, 85)
+
 TOPIC_COLORS = {
     "google ads": {"accent": (161, 214, 191), "dark": (30, 90, 65), "light": (200, 240, 220)},
     "meta": {"accent": (240, 172, 168), "dark": (140, 45, 45), "light": (255, 220, 215)},
@@ -221,6 +239,22 @@ def draw_accent_bar(draw, y, colors, width=None):
     draw.rectangle([MARGIN, y + bar_h, MARGIN + w, y + bar_h + 4], fill=colors["accent"])
 
 
+def draw_format_tag(draw, x, y, text, style, colors):
+    """Small pill tag (BEFORE/AFTER, MYTH/FACT, STEP, TEMPLATE...) that gives
+    a body slide's declared format an actual visual identity."""
+    f_tag = ImageFont.truetype(F_SANS_BOLD, 20)
+    tw = draw.textlength(text, font=f_tag)
+    pad_x = 14
+    tag_w = tw + pad_x * 2
+    tag_h = 32
+    if style == "accent":
+        bg, fg = colors["dark"], WHITE
+    else:
+        bg, fg = TAG_MUTED, TAG_MUTED_TEXT
+    draw.rounded_rectangle([x, y, x + tag_w, y + tag_h], radius=tag_h // 2, fill=bg)
+    draw.text((x + pad_x, y + 6), text, font=f_tag, fill=fg)
+
+
 def draw_swipe_arrow(draw, colors):
     f_arrow = ImageFont.truetype(F_SANS_BOLD, 30)
     arrow_text = "Swipe →"
@@ -384,13 +418,21 @@ def render_bridge_slide_fixed(headline, niche, slide_num, total_slides, out_path
 # ============================================================
 
 def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slides, out_path,
-                                checklist_mode=False, show_swipe=False):
+                                checklist_mode=False, show_swipe=False, format_type="", body_position=0):
     colors = colors_for(niche)
     img = Image.new("RGB", (W, H), BG)
     draw = ImageDraw.Draw(img)
     draw_dot_grid(draw)
     draw_corner_flag(draw, colors)
     draw_header_v2(draw, niche, slide_num, total_slides, colors)
+
+    # Format-specific tag (BEFORE/AFTER, MYTH/FACT, STEP, TEMPLATE...) at a
+    # fixed position between the header and the content block, so it never
+    # collides regardless of how many lines the body text wraps to.
+    tag_options = FORMAT_TAG_STYLES.get((format_type or "").lower())
+    if tag_options:
+        text, style = tag_options[body_position % len(tag_options)]
+        draw_format_tag(draw, MARGIN, 220, text, style, colors)
 
     badge_size = 80
     badge_x = MARGIN
@@ -623,13 +665,15 @@ def render_carousel(carousel, batch_date, out_dir, carousel_index=0):
                                    os.path.join(out_dir, "slide_02.jpg"))
     paths.append(p)
 
-    checklist_mode = carousel.get("format", "").lower() in ("checklist", "quick-win checklist", "steal-this")
+    format_type = carousel.get("format", "")
+    checklist_mode = format_type.lower() in ("checklist", "quick-win checklist", "steal-this")
     for i, body in enumerate(body_slides, start=1):
         slide_num = i + 2
         show_swipe = (i == 1) or (i == 4) or (i == len(body_slides) - 1)
         p = render_numbered_slide_fixed(i, body, niche, slide_num, total_slides,
                                          os.path.join(out_dir, f"slide_{slide_num:02d}.jpg"),
-                                         checklist_mode=checklist_mode, show_swipe=show_swipe)
+                                         checklist_mode=checklist_mode, show_swipe=show_swipe,
+                                         format_type=format_type, body_position=i - 1)
         paths.append(p)
 
     recap_lines = carousel.get("recap_slide", body_slides)
