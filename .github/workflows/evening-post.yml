@@ -3,6 +3,9 @@ name: Evening Instagram Post
 # Posts carousel 2 using content already generated and committed by the
 # morning "Daily Carousels" workflow — no new content is generated here,
 # this just spaces the second post out by ~12 hours from the first.
+# Together with daily.yml (carousel 1, ~8:30am) and midday-post.yml's
+# posts_later.yml (carousel 3, ~1pm), this spreads all 3 auto-posts across
+# the day instead of firing them all at once.
 
 on:
   schedule:
@@ -11,6 +14,9 @@ on:
     - cron: "30 19 * * *"
     - cron: "30 20 * * *"
   workflow_dispatch: {}
+
+permissions:
+  contents: write   # needed so this workflow can commit posted_log.json
 
 jobs:
   post-second-carousel:
@@ -53,6 +59,15 @@ jobs:
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           TO_EMAIL: ${{ secrets.TO_EMAIL }}
         run: python instagram_post.py --only-index 2
+
+      - name: Commit posting log
+        if: steps.check_time.outputs.should_run == 'true' && vars.IG_POSTING_PAUSED != 'true'
+        run: |
+          git config user.name "carousel-bot"
+          git config user.email "actions@github.com"
+          git add posted_log.json
+          git commit -m "Log Instagram post $(date +'%Y-%m-%d %H:%M')" || echo "Nothing to commit"
+          git push
 
       - name: Note that Instagram posting is paused
         if: steps.check_time.outputs.should_run == 'true' && vars.IG_POSTING_PAUSED == 'true'

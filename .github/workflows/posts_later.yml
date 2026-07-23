@@ -1,30 +1,26 @@
-name: Afternoon & Evening Posts
+name: Midday Instagram Post
+
+# Posts carousel 3 using content already generated and committed by the
+# morning "Daily Carousels" workflow — no new content is generated here.
+# Together with daily.yml (carousel 1, ~8:30am) and the existing
+# evening-post.yml (carousel 2, ~8pm), this spreads all 3 auto-posts
+# across the day instead of firing them all at once.
 
 on:
   schedule:
-    # Covers ~13:00 and ~18:00 Irish time across both BST (UTC+1) and GMT
-    # (UTC+0) automatically — the "Check schedule window" step below works
-    # out which Irish hour it actually is right now and maps it to the
-    # right carousel index, same trick daily.yml uses for its 8am slot.
-    - cron: "0 12,13,17,18 * * *"
-  workflow_dispatch:
-    inputs:
-      post_index:
-        description: "Carousel index to post (manual test runs only — scheduled runs auto-detect from time of day)"
-        required: false
-        default: "2"
-
-permissions:
-  contents: write   # needed so this workflow can commit posted_log.json
+    # Fires at both 12:30 UTC and 13:30 UTC — same auto BST/GMT handling
+    # as daily.yml and evening-post.yml, so this never needs manual
+    # seasonal edits either.
+    - cron: "30 12 * * *"
+    - cron: "30 13 * * *"
+  workflow_dispatch: {}
 
 jobs:
-  post:
+  post-third-carousel:
     runs-on: ubuntu-latest
     steps:
-      - name: Check schedule window and pick carousel index
+      - name: Check schedule window (handles Irish BST/GMT automatically)
         id: check_time
-        env:
-          POST_INDEX_INPUT: ${{ github.event.inputs.post_index }}
         run: |
           python3 - <<'EOF'
           import os
@@ -32,19 +28,10 @@ jobs:
           from zoneinfo import ZoneInfo
           event_name = os.environ.get("GITHUB_EVENT_NAME", "")
           now = datetime.now(ZoneInfo("Europe/Dublin"))
-          should_run = "false"
-          post_index = ""
-          if event_name == "workflow_dispatch":
-              should_run = "true"
-              post_index = os.environ.get("POST_INDEX_INPUT") or "2"
-          elif now.hour == 13:
-              should_run, post_index = "true", "2"
-          elif now.hour == 18:
-              should_run, post_index = "true", "3"
-          print(f"Irish local time right now: {now.isoformat()} (trigger: {event_name}) -> should_run={should_run}, post_index={post_index}")
+          should_run = "true" if (event_name == "workflow_dispatch" or now.hour == 13) else "false"
+          print(f"Irish local time right now: {now.isoformat()} (trigger: {event_name}) -> should_run={should_run}")
           with open(os.environ["GITHUB_OUTPUT"], "a") as f:
               f.write(f"should_run={should_run}\n")
-              f.write(f"post_index={post_index}\n")
           EOF
 
       - name: Check out repo
@@ -61,7 +48,7 @@ jobs:
         if: steps.check_time.outputs.should_run == 'true'
         run: pip install -r requirements.txt
 
-      - name: Post carousel to Instagram
+      - name: Post carousel 3 to Instagram
         if: steps.check_time.outputs.should_run == 'true' && vars.IG_POSTING_PAUSED != 'true'
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
@@ -69,7 +56,7 @@ jobs:
           GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           TO_EMAIL: ${{ secrets.TO_EMAIL }}
-        run: python instagram_post.py --only-index ${{ steps.check_time.outputs.post_index }}
+        run: python instagram_post.py --only-index 3
 
       - name: Commit posting log
         if: steps.check_time.outputs.should_run == 'true' && vars.IG_POSTING_PAUSED != 'true'
@@ -82,4 +69,4 @@ jobs:
 
       - name: Note that Instagram posting is paused
         if: steps.check_time.outputs.should_run == 'true' && vars.IG_POSTING_PAUSED == 'true'
-        run: echo "IG_POSTING_PAUSED is set to true — skipping this scheduled post."
+        run: echo "IG_POSTING_PAUSED is set to true in repo variables — skipping this scheduled post."
