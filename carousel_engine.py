@@ -62,6 +62,12 @@ FORMAT_TAG_STYLES = {
     "myth-buster": [("MYTH", "muted"), ("FACT", "accent")],
     "step-by-step": [("STEP", "accent")],
     "steal-this": [("TEMPLATE", "accent")],
+    # Previously missing entirely, which meant checklist-format carousels —
+    # the format most prone to feeling like six disconnected facts — were
+    # also the only format with zero visual identity tying its slides
+    # together. Same tag every slide is intentional: it's a checklist, the
+    # visual repetition IS the signal that these all belong to one list.
+    "checklist": [("CHECKLIST", "accent")],
 }
 
 TOPIC_COLORS = {
@@ -181,6 +187,21 @@ def draw_topic_icon(draw, cx, cy, kind, color, size=34):
         draw.line([(cx - r * 0.7, cy + r * 0.7), (cx + r * 0.7, cy - r * 0.7)], fill=color, width=4)
 
 
+def draw_bg_accent(draw, colors):
+    """
+    A single, very pale ring arcing in from the bottom-left corner on
+    every slide — mostly off-canvas, thin, in accent_light. Purely a
+    texture/cohesion device: a flat cream field on every single slide
+    read as sparse once slides got more whitespace-forward, and a
+    repeated quiet mark in the same spot on every slide (hook through
+    CTA) is what makes a 10-slide carousel feel like one designed object
+    instead of ten separate cards that happen to share a font.
+    """
+    r = 330
+    cx, cy = -60, H + 60
+    draw.ellipse([cx - r, cy - r, cx + r, cy + r], outline=colors["accent_light"], width=3)
+
+
 # ============================================================
 # SHARED CHROME — folio header, footer, progress bar
 # ============================================================
@@ -252,6 +273,7 @@ def render_hook_slide_fixed(headline, niche, slide_num, total_slides, out_path):
     colors = colors_for(niche)
     img = Image.new("RGB", (W, H), BG)
     draw = ImageDraw.Draw(img)
+    draw_bg_accent(draw, colors)
     draw_folio_header(draw, niche, slide_num, total_slides, colors)
 
     max_w = W - 2 * MARGIN - 20
@@ -298,6 +320,7 @@ def render_bridge_slide_fixed(headline, niche, slide_num, total_slides, out_path
     colors = colors_for(niche)
     img = Image.new("RGB", (W, H), BG)
     draw = ImageDraw.Draw(img)
+    draw_bg_accent(draw, colors)
     draw_folio_header(draw, niche, slide_num, total_slides, colors)
 
     max_w = W - 2 * MARGIN - 20
@@ -345,6 +368,7 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
     colors = colors_for(niche)
     img = Image.new("RGB", (W, H), BG)
     draw = ImageDraw.Draw(img)
+    draw_bg_accent(draw, colors)
     draw_folio_header(draw, niche, slide_num, total_slides, colors)
 
     max_w = W - 2 * MARGIN - 40
@@ -416,6 +440,7 @@ def render_recap_slide_aesthetic(recap_lines, niche, slide_num, total_slides, ou
     colors = colors_for(niche)
     img = Image.new("RGB", (W, H), BG)
     draw = ImageDraw.Draw(img)
+    draw_bg_accent(draw, colors)
     draw_folio_header(draw, niche, slide_num, total_slides, colors)
 
     f_save_big = ImageFont.truetype(F_SERIF_BOLD, RECAP_HEADER_SIZE)
@@ -475,6 +500,7 @@ def render_cta_slide_fixed(headline, cta_word, cta_promise, support_text, niche,
     colors = colors_for(niche)
     img = Image.new("RGB", (W, H), BG)
     draw = ImageDraw.Draw(img)
+    draw_bg_accent(draw, colors)
     draw_folio_header(draw, niche, slide_num, total_slides, colors)
 
     max_w = W - 2 * MARGIN

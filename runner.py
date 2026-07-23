@@ -592,6 +592,11 @@ def main():
             "angle": carousel.get("angle", ""),
             "format": carousel.get("format", ""),
             "hook": carousel.get("hook_slide", ""),
+            # Not rendered anywhere — kept on the manifest purely so a human
+            # (or a future debugging pass) can see what connected argument
+            # the model was going for, since that's now a required field in
+            # the content brain's output schema.
+            "throughline": carousel.get("throughline", ""),
             "image_paths": images,
             "virality_score": score,
         })
