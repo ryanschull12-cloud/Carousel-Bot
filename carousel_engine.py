@@ -4,6 +4,13 @@ Carousel image engine — FIXED SIZE EDITION:
 - Smart shrink-only fitting (if text is too long, shrink; never grow beyond target)
 - Visual fill elements: accent bars, decorative spacing, centered layouts
 - Every slide looks designed and full regardless of text length
+
+DESIGN UPGRADE (v2): hook/bridge slides now ALWAYS get a framing treatment
+(mega-stat OR quote-mark framing) instead of only when text happened to be
+short. Previously any hook/bridge that wrapped to 3-4 lines rendered with
+just two thin bars and nothing else — the plainest, least "scroll-stopping"
+version of the slide that matters most. Accent bars are also thicker and
+higher-contrast now so the pattern-interrupt is felt, not just present.
 """
 
 from PIL import Image, ImageDraw, ImageFont
@@ -115,7 +122,7 @@ def draw_topic_badge(draw, niche, colors):
     pad_x = 20
     badge_w = tw + pad_x * 2
     badge_h = 40
-    draw.rounded_rectangle([MARGIN, 48, MARGIN + badge_w, 48 + badge_h], 
+    draw.rounded_rectangle([MARGIN, 48, MARGIN + badge_w, 48 + badge_h],
                             radius=badge_h // 2, fill=colors["accent"])
     draw.text((MARGIN + pad_x, 48 + 8), topic, font=f_badge, fill=colors["dark"])
 
@@ -139,7 +146,7 @@ def draw_header_v2(draw, niche, slide_num, total_slides, colors):
     draw_slide_counter(draw, slide_num, total_slides, colors["dark"])
 
 
-STAT_RE = re.compile(r"(?:[\u20ac$\u00a3]\s?\d[\d,]*(?:\.\d+)?[kKmM]?|\d[\d,]*(?:\.\d+)?\s?%)")
+STAT_RE = re.compile(r"(?:[€$£]\s?\d[\d,]*(?:\.\d+)?[kKmM]?|\d[\d,]*(?:\.\d+)?\s?%)")
 
 
 def find_stat(text):
@@ -182,7 +189,7 @@ def draw_text_highlighted_v2(draw, x, y, line, font, highlight, text_color, mark
 
 def draw_corner_flag(draw, colors):
     """
-    UPGRADE 2 — bold diagonal accent wedge in the top-right corner.
+    Bold diagonal accent wedge in the top-right corner.
     A consistent, non-photo, no-extra-font brand mark on every single slide.
     Sits under the slide counter, which is drawn on top of it afterward.
     """
@@ -192,7 +199,7 @@ def draw_corner_flag(draw, colors):
 
 def draw_mega_stat(draw, text, y, colors, max_width, font_path=F_SERIF_BOLD, target=170, min_size=110):
     """
-    UPGRADE 1 — render a pulled-out number/€/% stat at oversized scale above the
+    Render a pulled-out number/€/% stat at oversized scale above the
     headline. Only fires when the hook/bridge line actually contains a stat, so
     every loss-aversion-framed hook (the format the content brain is told to
     prioritize) gets a genuine pattern-interrupt instead of just bigger body text.
@@ -206,14 +213,17 @@ def draw_mega_stat(draw, text, y, colors, max_width, font_path=F_SERIF_BOLD, tar
 
 
 def draw_accent_bar(draw, y, colors, width=None):
-    bar_h = 6
+    # Thicker than the original 6px — reads as an intentional design element
+    # from a thumbnail-sized feed preview instead of a hairline.
+    bar_h = 10
     w = width if width else (W - 2 * MARGIN)
-    draw.rectangle([MARGIN, y, MARGIN + w, y + bar_h], fill=colors["accent"])
+    draw.rectangle([MARGIN, y, MARGIN + w, y + bar_h], fill=colors["dark"])
+    draw.rectangle([MARGIN, y + bar_h, MARGIN + w, y + bar_h + 4], fill=colors["accent"])
 
 
 def draw_swipe_arrow(draw, colors):
     f_arrow = ImageFont.truetype(F_SANS_BOLD, 30)
-    arrow_text = "Swipe \u2192"
+    arrow_text = "Swipe →"
     tw = draw.textlength(arrow_text, font=f_arrow)
     pad = 16
     pill_w = tw + pad * 2
@@ -233,7 +243,7 @@ def draw_follow_pill(draw, colors):
     pill_h = 32
     px = (W - pill_w) / 2
     py = H - 60
-    draw.rounded_rectangle([px, py, px + pill_w, py + pill_h], radius=pill_h // 2, 
+    draw.rounded_rectangle([px, py, px + pill_w, py + pill_h], radius=pill_h // 2,
                             outline=colors["dark"], width=1)
     draw.text((px + pad, py + 5), follow_text, font=f_follow, fill=colors["dark"])
 
@@ -242,11 +252,16 @@ def draw_follow_pill(draw, colors):
 # DECORATIVE FILL ELEMENTS — make short text look designed
 # ============================================================
 
-def draw_decorative_quote_marks(draw, y, colors):
-    """Large decorative quote marks to fill space on short hook slides."""
+def draw_decorative_quote_marks(draw, top_y, bottom_y, colors):
+    """
+    Large decorative quote marks framing the hook/bridge text block.
+    Anchored to fixed positions (top of the text zone / bottom of the text
+    zone) instead of to the text block's own height, so they still frame
+    the block correctly whether the headline is one line or four.
+    """
     f_quote = ImageFont.truetype(F_SERIF_BOLD, 120)
-    draw.text((MARGIN - 10, y), "\u201c", font=f_quote, fill=colors["light"])
-    draw.text((W - MARGIN - 50, y + 200), "\u201d", font=f_quote, fill=colors["light"])
+    draw.text((MARGIN - 10, top_y), "“", font=f_quote, fill=colors["light"])
+    draw.text((W - MARGIN - 50, bottom_y), "”", font=f_quote, fill=colors["light"])
 
 
 def draw_vertical_accent_line(draw, x, y0, y1, colors):
@@ -273,7 +288,8 @@ def render_hook_slide_fixed(headline, niche, slide_num, total_slides, out_path):
 
     max_w = W - 2 * MARGIN - 40  # slightly narrower for better line breaks
 
-    # UPGRADE 1: pull a stat out and render it oversized before the headline
+    # Pull a stat out and render it oversized before the headline, when
+    # there is one — this is the strongest pattern-interrupt available.
     stat = find_stat(headline)
     top_y = 260
     if stat:
@@ -291,15 +307,17 @@ def render_hook_slide_fixed(headline, niche, slide_num, total_slides, out_path):
     available_h = H - top_y - 180  # header/stat to progress bar
     ty = top_y + max(0, (available_h - total_h) // 2)
 
-    # If text is very short (1-2 lines) and there's no mega-stat already
-    # doing the attention-grabbing work, add decorative elements
-    if len(lines) <= 2 and not stat:
-        draw_decorative_quote_marks(draw, ty - 40, colors)
-        draw_accent_bar(draw, ty - 60, colors, width=200)
-        draw_accent_bar(draw, ty + total_h + 40, colors, width=200)
-    else:
-        draw_accent_bar(draw, ty - 30, colors)
-        draw_accent_bar(draw, ty + total_h + 20, colors)
+    # DESIGN UPGRADE: every hook slide now gets a framing treatment.
+    # If a mega-stat already did the attention-grabbing work, thick accent
+    # bars are enough. If there's no stat (the headline is pure text),
+    # frame it with quote marks regardless of how many lines it wraps to —
+    # previously this only fired for 1-2 line headlines, so any hook that
+    # wrapped to 3-4 lines (common, given the 96px fixed size) rendered as
+    # plain text between two thin bars.
+    if not stat:
+        draw_decorative_quote_marks(draw, top_y - 10, ty + total_h - 60, colors)
+    draw_accent_bar(draw, ty - 34, colors, width=220 if len(lines) <= 2 and not stat else None)
+    draw_accent_bar(draw, ty + total_h + 24, colors, width=220 if len(lines) <= 2 and not stat else None)
 
     for line in lines:
         draw_text_highlighted_v2(draw, MARGIN + 20, ty, line, font, highlight, TEXT, colors["accent"])
@@ -326,8 +344,8 @@ def render_bridge_slide_fixed(headline, niche, slide_num, total_slides, out_path
 
     max_w = W - 2 * MARGIN - 40
 
-    # UPGRADE 1, scaled down: bridge should carry the same weight as the hook
-    # without literally duplicating it, so the mega-stat here targets a smaller size
+    # Scaled down: bridge should carry the same weight as the hook without
+    # literally duplicating it, so the mega-stat here targets a smaller size
     stat = find_stat(headline)
     top_y = 260
     if stat:
@@ -342,13 +360,13 @@ def render_bridge_slide_fixed(headline, niche, slide_num, total_slides, out_path
     available_h = H - top_y - 180
     ty = top_y + max(0, (available_h - total_h) // 2)
 
-    # Bridge gets a vertical accent line on the left for visual distinction
-    if len(lines) <= 2:
-        draw_vertical_accent_line(draw, MARGIN, ty - 20, ty + total_h + 20, colors)
-        if not stat:
-            draw_decorative_quote_marks(draw, ty - 30, colors)
-    else:
-        draw_vertical_accent_line(draw, MARGIN, ty - 10, ty + total_h + 10, colors)
+    # Bridge always gets the vertical accent line (its signature visual
+    # distinction from the hook slide) plus quote-mark framing whenever
+    # there's no mega-stat doing that job already — same fix as the hook
+    # slide, no longer gated to short headlines only.
+    draw_vertical_accent_line(draw, MARGIN, ty - 24, ty + total_h + 24, colors)
+    if not stat:
+        draw_decorative_quote_marks(draw, top_y - 10, ty + total_h - 60, colors)
 
     for line in lines:
         draw_text_highlighted_v2(draw, MARGIN + 30, ty, line, font, highlight, TEXT, colors["accent"])
@@ -387,13 +405,15 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
     available_h = H - 280 - 200
     badge_y = 280 + (available_h - total_h) // 2
 
-    # UPGRADE 3: accent block now renders behind EVERY body slide, not just
-    # short-text ones — this is what was making some slides look designed
-    # and others look plain within the same carousel.
+    # Accent block renders behind every body slide (not just short-text
+    # ones) so every slide in the carousel looks equally designed, plus a
+    # left-edge accent stripe that echoes the bridge slide's vertical line
+    # so the whole carousel reads as one visual system, not several.
     block_y = badge_y - 24
     block_h = total_h + 64
     draw.rounded_rectangle([text_x - 24, block_y, W - MARGIN, block_y + block_h],
                           radius=14, fill=colors["light"])
+    draw.rectangle([text_x - 24, block_y, text_x - 18, block_y + block_h], fill=colors["accent"])
 
     # Number badge or checkbox, now with a soft drop shadow for depth
     shadow_off = 5
@@ -405,17 +425,17 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
             draw.rounded_rectangle([badge_x, badge_y, badge_x + badge_size, badge_y + badge_size],
                                   radius=8, outline=colors["dark"], width=4, fill=BG)
             f_check = ImageFont.truetype(F_SANS_BOLD, 36)
-            draw.text((badge_x + 22, badge_y + 18), "\u2713", font=f_check, fill=colors["dark"])
+            draw.text((badge_x + 22, badge_y + 18), "✓", font=f_check, fill=colors["dark"])
         else:
             draw.ellipse([badge_x + shadow_off, badge_y + shadow_off,
                           badge_x + badge_size + shadow_off, badge_y + badge_size + shadow_off],
                          fill=SHADOW)
-            draw.ellipse([badge_x, badge_y, badge_x + badge_size, badge_y + badge_size], 
+            draw.ellipse([badge_x, badge_y, badge_x + badge_size, badge_y + badge_size],
                          fill=colors["dark"])
             f_num = ImageFont.truetype(F_SANS_BOLD, int(badge_size * 0.45))
             num_text = str(number)
             tw = draw.textlength(num_text, font=f_num)
-            draw.text((badge_x + (badge_size - tw) / 2, badge_y + badge_size * 0.24), 
+            draw.text((badge_x + (badge_size - tw) / 2, badge_y + badge_size * 0.24),
                      num_text, font=f_num, fill=WHITE)
 
     ty = badge_y + 4
@@ -550,7 +570,7 @@ def render_cta_slide_fixed(headline, cta_word, cta_promise, support_text, niche,
 
     # COMMENT ask — FIXED SIZE, never grows
     f_cta = ImageFont.truetype(F_SANS_BOLD, CTA_COMMENT_SIZE)
-    cta_text = f"Comment \u2018{cta_word}\u2019"
+    cta_text = f"Comment ‘{cta_word}’"
     tw = draw.textlength(cta_text, font=f_cta)
     cta_x = (W - tw) / 2
     draw.text((cta_x, ty), cta_text, font=f_cta, fill=BLACK)
@@ -560,7 +580,7 @@ def render_cta_slide_fixed(headline, cta_word, cta_promise, support_text, niche,
     # Promise
     if cta_promise:
         f_promise = ImageFont.truetype(F_SANS_BOLD, CTA_PROMISE_SIZE)
-        promise_text = f"and I\u2019ll DM you {cta_promise}"
+        promise_text = f"and I’ll DM you {cta_promise}"
         tw = draw.textlength(promise_text, font=f_promise)
         draw.text(((W - tw) / 2, ty), promise_text, font=f_promise, fill=colors["dark"])
         ty += 70
@@ -639,27 +659,27 @@ if __name__ == "__main__":
         "angle": "Mistake/myth-busting",
         "format": "checklist",
         "hook_slide": "Your Google Ads are burning 30% of budget on browsers",
-        "bridge_slide": "The setting most clinics miss costs them \u20ac400/week",
+        "bridge_slide": "The setting most clinics miss costs them €400/week",
         "body_slides": [
             "Switch broad match to phrase match. Cuts waste 30%",
             "Check search terms weekly, not just the dashboard",
-            "Add negative keywords for \u2018free\u2019 and \u2018jobs\u2019",
+            "Add negative keywords for ‘free’ and ‘jobs’",
             "A good cost-per-lead sits lower than most assume",
             "Pause keywords with zero conversions after 30 days",
-            "Set location targeting to \u2018people in\u2019 not \u2018interested in\u2019"
+            "Set location targeting to ‘people in’ not ‘interested in’"
         ],
         "recap_slide": [
             "Switch broad match to phrase match",
             "Check search terms weekly",
-            "Add negative keywords for \u2018free\u2019 and \u2018jobs\u2019",
+            "Add negative keywords for ‘free’ and ‘jobs’",
             "Good cost-per-lead is lower than you think",
             "Pause zero-conversion keywords after 30 days",
-            "Set location to \u2018people in\u2019 only"
+            "Set location to ‘people in’ only"
         ],
         "cta_slide": "Stop wasting budget. Start booking calls.",
         "cta_word": "AUDIT",
         "cta_promise": "my 7-point Google Ads audit checklist",
-        "caption": "Save this 7-point Google Ads audit checklist \u2193 Most business owners don\u2019t know their ads are burning budget on the wrong searches. #googleads #smallbusiness #marketingtips #ppc #businessowner"
+        "caption": "Save this 7-point Google Ads audit checklist ↓ Most business owners don’t know their ads are burning budget on the wrong searches. #googleads #smallbusiness #marketingtips #ppc #businessowner"
     }
     out = render_carousel(sample, "2026-07-19", "/tmp/sample_carousel")
     print(out)

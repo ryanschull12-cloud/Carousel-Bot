@@ -5,6 +5,14 @@ to Instagram, using images already committed and pushed to the repo
 
 Must run AFTER the images have been committed and pushed — see
 .github/workflows/daily.yml for the ordering.
+
+PERFORMANCE LOGGING (new): every carousel that actually gets published now
+gets appended to posted_log.json with its media_id, date, niche, angle,
+format, and hook. fetch_performance.py reads this file a few days later to
+pull real Instagram engagement numbers and tie them back to what was
+actually written — that's the "self-intelligent" half of the pipeline.
+Without this log there'd be no way to connect a media_id back to which
+hook/angle/format produced it.
 """
 
 import argparse
@@ -25,11 +33,16 @@ GMAIL_APP_PASSWORD = os.environ["GMAIL_APP_PASSWORD"]
 TO_EMAIL = os.environ.get("TO_EMAIL", GMAIL_ADDRESS)
 
 GRAPH = "https://graph.instagram.com/v21.0"
+POSTED_LOG_PATH = "posted_log.json"
+
+
 def check_response(resp, context):
     """Raise a detailed error including Instagram's actual response body,
     instead of the generic message requests.raise_for_status() gives."""
     if not resp.ok:
         raise RuntimeError(f"{context} failed ({resp.status_code}): {resp.text}")
+
+
 SECONDS_BETWEEN_POSTS = 90
 
 
@@ -102,7 +115,23 @@ def send_failure_alert(carousel_index, error_text):
         smtp.send_message(msg)
 
 
-def post_carousel(carousel):
+def load_posted_log():
+    if not os.path.exists(POSTED_LOG_PATH):
+        return {"posts": []}
+    try:
+        with open(POSTED_LOG_PATH) as f:
+            return json.load(f)
+    except Exception as e:
+        print(f"Could not read {POSTED_LOG_PATH}, starting fresh ({e})")
+        return {"posts": []}
+
+
+def save_posted_log(log):
+    with open(POSTED_LOG_PATH, "w") as f:
+        json.dump(log, f, indent=2)
+
+
+def post_carousel(carousel, posted_log, batch_date):
     child_ids = []
     for path in carousel["image_paths"]:
         rel = path.replace(os.sep, "/")
@@ -115,7 +144,19 @@ def post_carousel(carousel):
         raise RuntimeError(f"Container {container_id} never reached FINISHED status")
 
     result = publish(container_id)
-    print(f"Posted carousel {carousel['index']} -> media id {result.get('id')}")
+    media_id = result.get("id")
+    print(f"Posted carousel {carousel['index']} -> media id {media_id}")
+
+    posted_log["posts"].append({
+        "media_id": media_id,
+        "date": batch_date,
+        "index": carousel["index"],
+        "niche": carousel.get("niche", ""),
+        "angle": carousel.get("angle", ""),
+        "format": carousel.get("format", ""),
+        "hook": carousel.get("hook", ""),
+        "scored": False,
+    })
 
 
 def main():
@@ -150,14 +191,20 @@ def main():
 
     print(f"Posting {len(to_post)} carousel(s) to Instagram...")
 
+    posted_log = load_posted_log()
+    batch_date = manifest.get("batch_date", "")
+
     for i, carousel in enumerate(to_post):
         try:
-            post_carousel(carousel)
+            post_carousel(carousel, posted_log, batch_date)
         except Exception as e:
             print(f"FAILED to post carousel {carousel['index']}: {e}")
             send_failure_alert(carousel["index"], str(e))
         if i < len(to_post) - 1:
             time.sleep(SECONDS_BETWEEN_POSTS)
+
+    # Save whatever succeeded even if a later carousel in the loop failed.
+    save_posted_log(posted_log)
 
 
 if __name__ == "__main__":
