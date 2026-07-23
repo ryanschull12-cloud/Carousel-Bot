@@ -2,9 +2,9 @@ name: Midday Instagram Post
 
 # Posts carousel 3 using content already generated and committed by the
 # morning "Daily Carousels" workflow — no new content is generated here.
-# Together with daily.yml (carousel 1, ~8:30am) and the existing
-# evening-post.yml (carousel 2, ~8pm), this spreads all 3 auto-posts
-# across the day instead of firing them all at once.
+# Together with daily.yml (carousel 1, ~8:30am) and evening-post.yml
+# (carousel 2, ~8pm), this spreads all 3 auto-posts across the day
+# instead of firing them all at once.
 
 on:
   schedule:
@@ -14,6 +14,9 @@ on:
     - cron: "30 12 * * *"
     - cron: "30 13 * * *"
   workflow_dispatch: {}
+
+permissions:
+  contents: write   # needed so this workflow can commit posted_log.json
 
 jobs:
   post-third-carousel:
@@ -43,6 +46,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          cache: "pip"
 
       - name: Install dependencies
         if: steps.check_time.outputs.should_run == 'true'
@@ -63,7 +67,7 @@ jobs:
         run: |
           git config user.name "carousel-bot"
           git config user.email "actions@github.com"
-          git add posted_log.json
+          git add posted_log.json 2>/dev/null || true
           git commit -m "Log Instagram post $(date +'%Y-%m-%d %H:%M')" || echo "Nothing to commit"
           git push
 

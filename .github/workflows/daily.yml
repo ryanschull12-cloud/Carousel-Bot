@@ -44,6 +44,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          cache: "pip"
 
       - name: Install dependencies
         if: steps.check_time.outputs.should_run == 'true'
@@ -60,7 +61,8 @@ jobs:
         run: |
           git config user.name "carousel-bot"
           git config user.email "actions@github.com"
-          git add posted_log.json performance_history.json
+          git add posted_log.json 2>/dev/null || true
+          git add performance_history.json 2>/dev/null || true
           git commit -m "Update performance data $(date +'%Y-%m-%d')" || echo "Nothing to commit"
           git push
 
@@ -102,7 +104,7 @@ jobs:
         run: |
           git config user.name "carousel-bot"
           git config user.email "actions@github.com"
-          git add posted_log.json
+          git add posted_log.json 2>/dev/null || true
           git commit -m "Log Instagram post $(date +'%Y-%m-%d')" || echo "Nothing to commit"
           git push
 
