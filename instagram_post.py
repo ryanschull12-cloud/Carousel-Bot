@@ -10,17 +10,19 @@ generation), posts_later.yml for the ~1pm slot, and evening-post.yml for
 the ~8pm slot — the latter two just re-read that same morning's
 already-committed manifest.
 
-WHICH CAROUSEL EACH RUN POSTS (changed): runner.py now picks the 3
-auto-post winners by virality score, not by fixed position — so "the
-carousel this run should post" is no longer a fixed index tied to time of
-day. By default (no --only-index passed) this script posts whichever
-post_to_instagram=true carousel from today's manifest hasn't already been
-logged as posted in posted_log.json, lowest index first. That makes every
-scheduled run — including a late-running retry, or a duplicate trigger
-from GitHub's dual cron slots covering BST/GMT — naturally safe to call
-more than once a day: once all of today's winners are posted, it just
-finds nothing left to do and exits quietly. --only-index is kept as a
-manual override for testing a specific carousel.
+WHICH CAROUSEL EACH RUN POSTS: runner.py picks the 3 auto-post winners
+by virality score, not by fixed position. Each workflow passes
+--target-count (1, 2, or 3) so that, by the end of its run, exactly that
+many of today's winners have been posted in total. This is what keeps
+the three posts genuinely spread across the day: GitHub fires TWO cron
+triggers per workflow every day (one for BST, one for GMT) to cover
+daylight saving, and without a target count each firing would just post
+"the next unposted winner" — meaning a single workflow's two triggers,
+half an hour to an hour apart, could each post a DIFFERENT carousel back
+to back, collapsing what should be a morning/midday/evening spread into
+a burst. With --target-count, the second firing sees the target already
+met and does nothing. --only-index is kept as a manual override for
+testing a specific carousel, bypassing target-count logic entirely.
 
 PERFORMANCE LOGGING: every carousel that actually gets published gets
 appended to posted_log.json with its media_id, date, niche, angle,
@@ -199,7 +201,20 @@ def main():
     parser.add_argument(
         "--only-index", type=int,
         help="Manual override: force-post this specific carousel index (e.g. 1, 2, or 3), "
-             "ignoring the normal 'next unposted winner' selection. Mainly for manual testing.",
+             "ignoring the normal target-count selection. Mainly for manual testing.",
+    )
+    parser.add_argument(
+        "--target-count", type=int, default=None,
+        help="This workflow's slot target: by the end of this run, this many of "
+             "today's winning carousels should be posted IN TOTAL. daily.yml passes "
+             "1, posts_later.yml passes 2, evening-post.yml passes 3. This is what "
+             "actually keeps the three posts spread across the day -- without it, "
+             "GitHub's dual BST/GMT cron entries for a single slot (e.g. midday's "
+             "12:30 AND 13:30 UTC triggers, which both fire every day) would each "
+             "independently post 'the next unposted winner', so one workflow could "
+             "post two DIFFERENT carousels back to back within the hour instead of "
+             "just one. With a target count, the second firing sees the target "
+             "already met and does nothing.",
     )
     args = parser.parse_args()
 
@@ -257,12 +272,21 @@ def main():
         # Manual override — post this exact index regardless of whether
         # it's a "winner" or already logged as posted today.
         to_post = [c for c in manifest["carousels"] if c["index"] == args.only_index]
+    elif args.target_count is not None:
+        # Normal scheduled behavior: this workflow's slot should result in
+        # exactly `target_count` of today's winners being posted in total
+        # by the time it's done. If that many (or more) are already
+        # posted -- whether by an earlier slot today, or by this same
+        # slot's OTHER BST/GMT cron trigger already firing once -- there's
+        # nothing to do. Otherwise post just enough winners to reach the
+        # target (normally exactly one, since slots step by 1).
+        already_posted_count = len(already_posted_indices)
+        need = max(0, args.target_count - already_posted_count)
+        remaining = [c for c in winners if c["index"] not in already_posted_indices]
+        to_post = remaining[:need]
     else:
-        # Normal scheduled behavior: post exactly the next winning
-        # carousel that hasn't been logged as posted today. If all of
-        # today's winners are already posted (e.g. this is a late-running
-        # duplicate trigger from the BST/GMT dual cron), this is an empty
-        # list and the run quietly does nothing.
+        # Fallback (no --target-count passed): post exactly the next
+        # winning carousel that hasn't been logged as posted today.
         remaining = [c for c in winners if c["index"] not in already_posted_indices]
         to_post = remaining[:1]
 
