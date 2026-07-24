@@ -3,17 +3,27 @@ Publishes carousels marked post_to_instagram=true in today's manifest
 to Instagram, using images already committed and pushed to the repo
 (so they're reachable at a public raw.githubusercontent.com URL).
 
-Now runs up to THREE times a day at different scheduled times, fully
+Runs up to THREE times a day at different scheduled times, fully
 automatic — nothing in this script can hold a post back. See
-.github/workflows/daily.yml for the ~8:30am slot (carousel 1, right after
-generation), posts_later.yml for the ~1pm slot (carousel 3), and
-evening-post.yml for the ~8pm slot (carousel 2) — the latter two just
-re-read that same morning's already-committed manifest. Each run is
-invoked with --only-index N so this script only ever handles one carousel
-per run.
+.github/workflows/daily.yml for the ~8:30am slot (right after
+generation), posts_later.yml for the ~1pm slot, and evening-post.yml for
+the ~8pm slot — the latter two just re-read that same morning's
+already-committed manifest.
 
-PERFORMANCE LOGGING (new): every carousel that actually gets published now
-gets appended to posted_log.json with its media_id, date, niche, angle,
+WHICH CAROUSEL EACH RUN POSTS (changed): runner.py now picks the 3
+auto-post winners by virality score, not by fixed position — so "the
+carousel this run should post" is no longer a fixed index tied to time of
+day. By default (no --only-index passed) this script posts whichever
+post_to_instagram=true carousel from today's manifest hasn't already been
+logged as posted in posted_log.json, lowest index first. That makes every
+scheduled run — including a late-running retry, or a duplicate trigger
+from GitHub's dual cron slots covering BST/GMT — naturally safe to call
+more than once a day: once all of today's winners are posted, it just
+finds nothing left to do and exits quietly. --only-index is kept as a
+manual override for testing a specific carousel.
+
+PERFORMANCE LOGGING: every carousel that actually gets published gets
+appended to posted_log.json with its media_id, date, niche, angle,
 format, and hook. fetch_performance.py reads this file a few days later to
 pull real Instagram engagement numbers and tie them back to what was
 actually written, and the weekly self-review email (performance_report.py)
@@ -186,7 +196,11 @@ def post_carousel(carousel, posted_log, batch_date):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--manifest", help="Path to a specific manifest.json (defaults to today's/most recent)")
-    parser.add_argument("--only-index", type=int, help="Only post the carousel with this index (e.g. 1, 2, or 3)")
+    parser.add_argument(
+        "--only-index", type=int,
+        help="Manual override: force-post this specific carousel index (e.g. 1, 2, or 3), "
+             "ignoring the normal 'next unposted winner' selection. Mainly for manual testing.",
+    )
     args = parser.parse_args()
 
     # Defense in depth: the workflows already skip this whole script when
@@ -210,7 +224,7 @@ def main():
         manifest = json.load(f)
 
     # This script runs from three separate scheduled workflows across the
-    # day (see daily.yml, evening-post.yml, posts_later.yml). The 1pm/8pm
+    # day (see daily.yml, posts_later.yml, evening-post.yml). The later
     # runs don't generate anything themselves — they just re-read whatever
     # manifest is newest on disk. If the morning generation run ever fails
     # or doesn't fire (Mistral outage, a bad Actions run, a clock edge
@@ -230,14 +244,34 @@ def main():
             send_stale_manifest_alert(manifest.get("batch_date"), today_str)
             return
 
-    to_post = [c for c in manifest["carousels"] if c.get("post_to_instagram")]
-    if args.only_index is not None:
-        to_post = [c for c in to_post if c["index"] == args.only_index]
-
-    print(f"Posting {len(to_post)} carousel(s) to Instagram...")
-
     posted_log = load_posted_log()
     batch_date = manifest.get("batch_date", "")
+    already_posted_indices = {
+        p["index"] for p in posted_log.get("posts", []) if p.get("date") == batch_date
+    }
+
+    winners = [c for c in manifest["carousels"] if c.get("post_to_instagram")]
+    winners.sort(key=lambda c: c["index"])
+
+    if args.only_index is not None:
+        # Manual override — post this exact index regardless of whether
+        # it's a "winner" or already logged as posted today.
+        to_post = [c for c in manifest["carousels"] if c["index"] == args.only_index]
+    else:
+        # Normal scheduled behavior: post exactly the next winning
+        # carousel that hasn't been logged as posted today. If all of
+        # today's winners are already posted (e.g. this is a late-running
+        # duplicate trigger from the BST/GMT dual cron), this is an empty
+        # list and the run quietly does nothing.
+        remaining = [c for c in winners if c["index"] not in already_posted_indices]
+        to_post = remaining[:1]
+
+    if not to_post:
+        print("Nothing new to post right now — either today's winning carousels are "
+              "already posted, or none are marked post_to_instagram yet.")
+        return
+
+    print(f"Posting {len(to_post)} carousel(s) to Instagram...")
 
     for i, carousel in enumerate(to_post):
         try:
