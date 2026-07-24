@@ -77,12 +77,41 @@ FORMAT_TAG_STYLES = {
 }
 
 TOPIC_COLORS = {
-    "google ads": {"accent": (196, 84, 42), "accent_light": (238, 219, 205)},
-    "meta": {"accent": (179, 43, 58), "accent_light": (240, 209, 210)},
-    "instagram": {"accent": (179, 43, 58), "accent_light": (240, 209, 210)},
-    "email": {"accent": (99, 59, 130), "accent_light": (222, 210, 232)},
+    "google ads": {"accent": (43, 122, 68), "accent_light": (206, 230, 211)},   # green
+    "meta": {"accent": (32, 91, 168), "accent_light": (205, 220, 241)},          # blue
+    "instagram": {"accent": (32, 91, 168), "accent_light": (205, 220, 241)},     # blue
+    "email": {"accent": (181, 44, 44), "accent_light": (241, 206, 206)},        # red
 }
-DEFAULT_COLORS = {"accent": (196, 84, 42), "accent_light": (238, 219, 205)}
+DEFAULT_COLORS = {"accent": (43, 122, 68), "accent_light": (206, 230, 211)}
+
+# Known ways the platform name for each niche might actually appear inside
+# generated hook/bridge text, used to find and color-highlight it. Ordered
+# longest-phrase-first within each niche so "Google Ads" matches before a
+# bare "Google" would.
+PLATFORM_KEYWORDS = {
+    "google ads": ["Google Ads", "Google ads", "google ads"],
+    "meta": ["Meta Ads", "Meta ads", "meta ads", "Meta"],
+    "instagram": ["Instagram Ads", "Instagram ads", "instagram ads", "Instagram", "Meta Ads", "Meta"],
+    "email": ["Email marketing", "email marketing", "Email"],
+}
+
+
+def find_platform_keyword(text, niche):
+    """Find the actual substring (preserving its original casing) in text
+    that names this carousel's platform, if the copy included one — used
+    to highlight it in the niche's theme color so a slide reads with
+    immediate context instead of relying only on the small header badge."""
+    n = (niche or "").lower()
+    candidates = []
+    for key, words in PLATFORM_KEYWORDS.items():
+        if key in n:
+            candidates = words
+            break
+    for word in candidates:
+        idx = text.lower().find(word.lower())
+        if idx != -1:
+            return text[idx:idx + len(word)]
+    return None
 
 ICON_KINDS = {
     "google ads": "google",
@@ -159,6 +188,56 @@ def draw_centered_block(draw, lines, font, start_y, line_h, fill):
         draw_centered_line(draw, y, line, font, fill)
         y += line_h
     return y
+
+
+def draw_centered_block_highlighted(draw, lines, font, start_y, line_h, fill, keyword, accent_fill):
+    """Same as draw_centered_block, but if `keyword` appears (case-
+    insensitively) inside a wrapped line, that exact substring is drawn in
+    accent_fill instead of the base fill — the rest of the line keeps its
+    normal color. The line as a whole still centers correctly since the
+    three segments (before/keyword/after) are positioned off the line's
+    total measured width, not off each segment independently. If the
+    keyword doesn't appear as a whole inside any single wrapped line (e.g.
+    it happened to fall across a line break), that line is just drawn
+    plain — a missed highlight is a much smaller problem than broken
+    layout math."""
+    y = start_y
+    kw = (keyword or "").strip()
+    kw_lower = kw.lower()
+    for line in lines:
+        idx = line.lower().find(kw_lower) if kw_lower else -1
+        if idx == -1:
+            draw_centered_line(draw, y, line, font, fill)
+        else:
+            before, match, after = line[:idx], line[idx:idx + len(kw)], line[idx + len(kw):]
+            total_w = draw.textlength(line, font=font)
+            x = (W - total_w) / 2
+            if before:
+                draw.text((x, y), before, font=font, fill=fill)
+                x += draw.textlength(before, font=font)
+            draw.text((x, y), match, font=font, fill=accent_fill)
+            x += draw.textlength(match, font=font)
+            if after:
+                draw.text((x, y), after, font=font, fill=fill)
+        y += line_h
+    return y
+
+
+def slide_text(item):
+    """Body slide items are now {"text": ..., "keyword": ...} dicts, but
+    stay tolerant of a plain string too — a fallback path (e.g. recap
+    falling back to body_slides, or a critic response that dropped the
+    keyword field) should degrade gracefully instead of crashing the
+    render step."""
+    if isinstance(item, dict):
+        return item.get("text", "")
+    return item or ""
+
+
+def slide_keyword(item):
+    if isinstance(item, dict):
+        return item.get("keyword", "")
+    return ""
 
 
 STAT_RE = re.compile(r"(?:[€$£]\s?\d[\d,]*(?:\.\d+)?[kKmM]?|\d[\d,]*(?:\.\d+)?\s?%)")
@@ -309,7 +388,8 @@ def render_hook_slide_fixed(headline, niche, slide_num, total_slides, out_path):
 
     draw.line([((W - 140) / 2, y), ((W + 140) / 2, y)], fill=colors["accent"], width=5)
     y += rule_gap
-    draw_centered_block(draw, lines, font, y, line_h, INK)
+    keyword = find_platform_keyword(headline, niche)
+    draw_centered_block_highlighted(draw, lines, font, y, line_h, INK, keyword, colors["accent"])
     y += text_h + (rule_gap - 4)
     draw.line([((W - 140) / 2, y), ((W + 140) / 2, y)], fill=colors["accent"], width=5)
 
@@ -358,7 +438,8 @@ def render_bridge_slide_fixed(headline, niche, slide_num, total_slides, out_path
         draw_centered_line(draw, y, "KEEP READING", f_label, colors["accent"])
         y += label_h
 
-    draw_centered_block(draw, lines, font, y, line_h, INK)
+    keyword = find_platform_keyword(headline, niche)
+    draw_centered_block_highlighted(draw, lines, font, y, line_h, INK, keyword, colors["accent"])
 
     draw_footer_rule_and_progress(draw, slide_num, total_slides, colors)
     img.save(out_path, "JPEG", quality=92)
@@ -370,7 +451,8 @@ def render_bridge_slide_fixed(headline, niche, slide_num, total_slides, out_path
 # ============================================================
 
 def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slides, out_path,
-                                checklist_mode=False, show_swipe=False, format_type="", body_position=0):
+                                checklist_mode=False, show_swipe=False, format_type="", body_position=0,
+                                keyword=""):
     colors = colors_for(niche)
     img = Image.new("RGB", (W, H), BG)
     draw = ImageDraw.Draw(img)
@@ -418,7 +500,7 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
     draw.text((badge_cx - nw / 2, badge_cy - 18), num_text, font=f_num, fill=WHITE)
     y = badge_cy + badge_size / 2 + 40
 
-    draw_centered_block(draw, lines, font, y, line_h, INK)
+    draw_centered_block_highlighted(draw, lines, font, y, line_h, INK, keyword, colors["accent"])
     y += text_h + 20
 
     draw.line([((W - 90) / 2, y), ((W + 90) / 2, y)], fill=colors["accent"], width=4)
@@ -584,10 +666,14 @@ def render_carousel(carousel, batch_date, out_dir, carousel_index=0):
     for i, body in enumerate(body_slides, start=1):
         slide_num = i + 2
         show_swipe = (i == 1) or (i == 4) or (i == len(body_slides) - 1)
-        p = render_numbered_slide_fixed(i, body, niche, slide_num, total_slides,
+        # body_slides items are {"text": ..., "keyword": ...} dicts under
+        # the current schema, but slide_text/slide_keyword also accept a
+        # plain string so older/fallback data doesn't crash the render.
+        p = render_numbered_slide_fixed(i, slide_text(body), niche, slide_num, total_slides,
                                          os.path.join(out_dir, f"slide_{slide_num:02d}.jpg"),
                                          checklist_mode=checklist_mode, show_swipe=show_swipe,
-                                         format_type=format_type, body_position=i - 1)
+                                         format_type=format_type, body_position=i - 1,
+                                         keyword=slide_keyword(body))
         paths.append(p)
 
     recap_lines = carousel.get("recap_slide", body_slides)
@@ -595,6 +681,7 @@ def render_carousel(carousel, batch_date, out_dir, carousel_index=0):
         recap_lines = [line.strip() for line in recap_lines.split("\n") if line.strip()]
     if not recap_lines:
         recap_lines = body_slides
+    recap_lines = [slide_text(item) for item in recap_lines]
     last_body = total_slides - 1
     p = render_recap_slide_aesthetic(recap_lines, niche, last_body, total_slides,
                                        os.path.join(out_dir, f"slide_{last_body:02d}.jpg"))
@@ -616,15 +703,15 @@ if __name__ == "__main__":
         "niche": "Google Ads",
         "angle": "Mistake/myth-busting",
         "format": "checklist",
-        "hook_slide": "72% of ad budget is spent on searches that never convert",
-        "bridge_slide": "One setting decides whether an ad reaches buyers or browsers",
+        "hook_slide": "Google Ads spends 72% of budget on searches that never convert",
+        "bridge_slide": "One setting decides whether a Google Ads campaign reaches buyers or browsers",
         "body_slides": [
-            "Broad match shows ads for any loosely related search. Phrase match only fires when someone means it — that's usually where the wasted budget was going.",
-            "The dashboard shows what you're spending. The search terms report shows what people actually typed — most accounts never open it.",
-            "Negative keywords block searches like 'free' or 'jobs' from triggering an ad at all — a two-minute fix most accounts skip.",
-            "Most people guess cost-per-lead should sit near €50. A healthy account usually lands closer to €10-30 — the gap is targeting, not budget.",
-            "A keyword with zero conversions after 30 days is rarely a timing problem. It's usually the wrong keyword.",
-            "'People in' a location targets who's actually there. 'Interested in' targets anyone who ever searched it — a very different audience.",
+            {"text": "Broad match shows ads for any loosely related search. Phrase match only fires when someone means it — that's usually where the wasted budget was going.", "keyword": "Phrase match"},
+            {"text": "The dashboard shows what you're spending. The search terms report shows what people actually typed — most accounts never open it.", "keyword": "search terms report"},
+            {"text": "Negative keywords block searches like 'free' or 'jobs' from triggering an ad at all — a two-minute fix most accounts skip.", "keyword": "Negative keywords"},
+            {"text": "Most people guess cost-per-lead should sit near €50. A healthy account usually lands closer to €10-30 — the gap is targeting, not budget.", "keyword": "€10-30"},
+            {"text": "A keyword with zero conversions after 30 days is rarely a timing problem. It's usually the wrong keyword.", "keyword": "30 days"},
+            {"text": "'People in' a location targets who's actually there. 'Interested in' targets anyone who ever searched it — a very different audience.", "keyword": "People in"},
         ],
         "recap_slide": [
             "Switch broad match to phrase match",

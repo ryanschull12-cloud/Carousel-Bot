@@ -87,6 +87,7 @@ Every hook must contain:
 1. A clear subject — the mechanic, platform, or outcome this is about, stated plainly (not a vague tease)
 2. A real tension or gap — something surprising, counterintuitive, or unresolved that the reader needs the next slide to understand
 3. Specificity — a number, a named mechanic, or a concrete claim. Generic outperforms nothing; specific outperforms generic every time.
+4. The platform name, stated in the hook line itself: "Google Ads", "Meta Ads" (or "Instagram Ads"/"Instagram"), or "email"/"Email marketing". Don't rely on the small topic badge above the headline to carry this — a reader scrolling past needs to know what this is about from the hook line alone, in the same glance as the claim itself. This still has to fit inside the 10-word ceiling and read like a sentence, not a label bolted onto the front ("Google Ads is quietly charging you twice" works; "Google Ads: you're being charged twice" doesn't). If the platform name genuinely can't fit inside 10 words without mangling the sentence, put it in the bridge instead — but that should be rare, not the default.
 
 Before you finalize each hook, run it through this gut-check: read it as if you're a marketer mid-scroll, thinking about something else entirely. If your honest reaction to your own line would be "okay, and?" — it's not done. Push one more draft past your first instinct; the first phrasing that comes to mind is usually the same shape as the last five hooks you wrote.
 
@@ -103,9 +104,9 @@ Lead with the fact, mechanic, or mistake itself — not with a "you are losing m
 
 Examples of the frame (illustrations only — do not reuse these or anything shaped like them):
 - "Most Google Ads accounts never check this one report"
-- "One unchecked setting quietly burns 30% of ad budgets"
-- "Retailers who message past buyers see the cheapest sales"
-- "Search ads and browsing ads get judged the same. They shouldn't be."
+- "One unchecked Google Ads setting quietly burns 30% of budget"
+- "Email lists that message past buyers see the cheapest sales"
+- "Google Ads judges search and browsing clicks the same. It shouldn't."
 
 === 7 HOOK ANGLES (rotate across all 7, never repeat the same angle two days running) ===
 1. Curiosity — a gap the reader needs closed ("The setting that decides Quality Score")
@@ -122,14 +123,14 @@ Hard rules:
 - Avoid formulaic templates repeated across carousels — do NOT default to the same sentence shape every time. Each hook should read like a different person wrote it.
 - When citing a number, name the specific figure (amount, percentage, time period) — never vague "a lot of money."
 
-Examples of the right length/sharpness/specificity (write NEW ones each time — never reuse these or their shape):
-- "Search ads and browsing ads shouldn't cost the same"
+Examples of the right length/sharpness/specificity (write NEW ones each time — never reuse these or their shape). Notice every one names its platform:
+- "Google Ads charges search and browsing clicks the same"
 - "Meta quietly stops showing an ad nobody's clicked in days"
-- "40% of clicks on some accounts never convert once"
-- "The setting that decides Quality Score takes 2 minutes to fix"
-- "More budget won't fix an audience that isn't ready to buy"
-- "Retargeting works because of timing, not because it exists"
-- "One line in an email decides if it gets opened at all"
+- "40% of Google Ads clicks never convert once, on some accounts"
+- "The Google Ads setting that decides Quality Score takes 2 minutes to fix"
+- "More Meta budget won't fix an audience that isn't ready to buy"
+- "Meta retargeting works because of timing, not because it exists"
+- "One line decides if your email gets opened at all"
 
 === BRIDGE SLIDE RULES (slide 2 — critical for algorithm) ===
 Instagram literally re-shows carousels starting from slide 2 to people who scrolled past without swiping the first time. This means slide 2 needs almost the same hook strength as slide 1 — it is a RE-HOOK, not a transition.
@@ -169,6 +170,11 @@ Every slide must still contain either:
 - A specific number (percentage, amount, timeframe)
 - A named setting or mechanic ("broad match", "phrase match", "the pixel", "list segmentation")
 - A concrete, correct piece of information a reader could act on or repeat to someone else
+
+Each body slide is now an object, not a plain string: {"text": "...", "keyword": "..."}. The "keyword" is the single most important term in that slide — almost always the same specific number, named setting, or mechanic required above — and it gets highlighted in the platform's theme color when rendered, so picking it well matters. Rules for keyword:
+- It must be an exact, verbatim substring of "text" (same casing, same punctuation) — the renderer does a literal string match, so "keyword": "search terms report" only works if "text" contains that exact phrase.
+- Keep it short: 1-4 words. Highlighting a whole sentence defeats the point of highlighting.
+- Prefer the number or named setting over a generic word. In "Broad match shows ads for any loosely related search. Phrase match only fires when someone means it," the keyword is "Phrase match" (the thing being introduced), not "loosely related search."
 
 Every slide (except the first body slide) should read as a continuation of the one before it, in service of the THROUGHLINE — not a fresh, interchangeable fact that happens to share a topic. A light connective opener is often the easiest way to do this ("That's the mechanism — here's what it actually costs," "Which is exactly where most accounts stop looking," "The fix isn't what you'd expect") but isn't mandatory on every slide; what's mandatory is that the sequence has a direction. Run the shuffle-test from the THROUGHLINE section above on every batch before finalizing.
 
@@ -264,9 +270,12 @@ Use exactly 6 body slides (10 slides total per carousel: hook + bridge + 6 body 
       "angle": "string — one of the 7 hook angles: curiosity, mistake-fear, contrarian, proof-numbers, relief-permission, behind-the-curtain, or realization",
       "format": "string — steal-this, myth-buster, step-by-step, before-after, comparison, or checklist",
       "throughline": "string — one sentence naming the single connected argument/system every slide in this carousel serves. Decide this FIRST, before writing hook_slide or any other field.",
-      "hook_slide": "string — under 10 words, the scroll-stopper, a specific counterintuitive fact or claim that previews the throughline's payoff",
+      "hook_slide": "string — under 10 words, the scroll-stopper, a specific counterintuitive fact or claim that previews the throughline's payoff, and names the platform (Google Ads / Meta Ads / email)",
       "bridge_slide": "string — re-hook, under 10 words, works standalone for re-served carousels",
-      "body_slides": ["string", "string", "string", "string", "string", "string"],
+      "body_slides": [
+        {"text": "string — 12-28 words, a complete standalone lesson", "keyword": "string — 1-4 words, an exact verbatim substring of text, the single most important term or number in this slide"},
+        "... 6 of these objects total"
+      ],
       "recap_slide": ["string", "string", "string", "string", "string", "string"],
       "cta_slide": "string — final slide context line (optional, can be empty)",
       "cta_word": "string — memorable keyword, 4-9 letters, e.g. AUDIT, TEMPLATE, CHECKLIST, GUIDE, TIPS",
