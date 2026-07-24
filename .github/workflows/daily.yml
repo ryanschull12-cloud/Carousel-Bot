@@ -97,12 +97,13 @@ jobs:
           GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           TO_EMAIL: ${{ secrets.TO_EMAIL }}
-        # No --only-index here on purpose: which 3 carousels actually win an
-        # auto-post slot is decided by the virality score in runner.py, not
-        # by fixed position, so this just posts whichever winning carousel
-        # hasn't gone out yet today (there won't be any yet this early in
-        # the day, so this always posts the first of today's 3 winners).
-        run: python instagram_post.py
+        # --target-count 1: by the end of the morning slot, exactly 1 of
+        # today's winners should be posted. This also protects against
+        # GitHub firing BOTH the 7:30 and 8:30 UTC triggers for this same
+        # workflow on a given day -- the second firing sees 1 already
+        # posted and does nothing, instead of posting a second, different
+        # carousel an hour later.
+        run: python instagram_post.py --target-count 1
 
       - name: Commit posting log
         if: steps.check_time.outputs.should_run == 'true' && vars.IG_POSTING_PAUSED != 'true'
