@@ -19,6 +19,16 @@
       "format": "step-by-step",
       "hook": "Email questions lift opens 22%\u2014most brands default to statements",
       "scored": false
+    },
+    {
+      "media_id": "18110439139771045",
+      "date": "2026-07-24",
+      "index": 2,
+      "niche": "Meta/Instagram Ads",
+      "angle": "proof-numbers",
+      "format": "before-after",
+      "hook": "Meta retargeting wastes 50% of budget after day 3",
+      "scored": false
     }
   ]
 }
