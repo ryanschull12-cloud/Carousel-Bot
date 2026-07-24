@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carousel Bot — Admin</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --card: #171a21;
+    --border: #262b36;
+    --text: #eef1f6;
+    --muted: #9aa4b2;
+    --accent: #fe2c55;
+    --accent2: #25f4ee;
+    --ok: #22c55e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding: 32px 20px 80px;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  h1 {
+    font-size: 22px;
+    margin: 0 0 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  h1 .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); display: inline-block; }
+  .sub { color: var(--muted); font-size: 14px; margin: 0 0 28px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .card h2 {
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    margin: 0 0 14px;
+  }
+  .carousel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .carousel-grid img {
+    width: 100%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: #1f232c;
+  }
+  .caption {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+    white-space: pre-wrap;
+  }
+  .meta-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .pill {
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: #1f232c;
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+  button {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 18px;
+    cursor: pointer;
+    color: #0f1115;
+    background: linear-gradient(90deg, var(--accent2), var(--accent));
+    transition: opacity 0.15s;
+  }
+  button:hover { opacity: 0.9; }
+  button:disabled { opacity: 0.4; cursor: not-allowed; }
+  button.secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  input[type=text], input[type=password] {
+    width: 100%;
+    background: #10131a;
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 10px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  label { font-size: 12px; color: var(--muted); display: block; margin-bottom: 6px; }
+  .status {
+    margin-top: 12px;
+    font-size: 13px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    display: none;
+  }
+  .status.show { display: block; }
+  .status.ok { background: rgba(34,197,94,0.1); color: var(--ok); border: 1px solid rgba(34,197,94,0.3); }
+  .status.err { background: rgba(254,44,85,0.1); color: #ff6b8a; border: 1px solid rgba(254,44,85,0.3); }
+  .status.pending { background: rgba(154,164,178,0.1); color: var(--muted); border: 1px solid var(--border); }
+  .connected-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--ok);
+  }
+  .connected-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); }
+  a { color: var(--accent2); }
+  .small { font-size: 12px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1><span class="dot"></span>Carousel Bot — Admin</h1>
+  <p class="sub">Internal panel for the agency's TikTok posting integration. Connect the TikTok account once, then this account is used going forward by the automated daily posting job.</p>
+
+  <div class="card">
+    <h2>Today's Carousel</h2>
+    <div id="carouselStatus" class="status pending show">Loading latest carousel from the repo…</div>
+    <div id="carouselBody" style="display:none;">
+      <div class="meta-row" id="metaRow"></div>
+      <div class="carousel-grid" id="carouselGrid"></div>
+      <div class="caption" id="captionText"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Step 1 — Connect TikTok Account</h2>
+    <p class="small">Authorizes this app (Login Kit) to post on behalf of the agency TikTok account. Only needs to be done once — the resulting token is stored and refreshed automatically by the scheduled job.</p>
+    <div id="connectSection">
+      <button id="connectBtn">Connect TikTok Account</button>
+    </div>
+    <div id="connectStatus" class="status"></div>
+  </div>
+
+  <div class="card">
+    <h2>Step 2 — Post Today's Carousel (Sandbox)</h2>
+    <p class="small">Uses the Content Posting API with Direct Post to publish the images above straight to the connected account.</p>
+    <label for="tokenInput">Access token (from Step 1)</label>
+    <input type="password" id="tokenInput" placeholder="Paste access token here">
+    <button id="postBtn" disabled>Post to TikTok</button>
+    <div id="postStatus" class="status"></div>
+  </div>
+</div>
+
+<script>
+const REPO = "ryanschull12-cloud/Carousel-Bot";
+const CLIENT_KEY = "sbaw6dj6ij7ukfbeo2"; // Sandbox client key — public, not a secret
+const REDIRECT_URI = "https://ryanschull12-cloud.github.io/Carousel-Bot/oauth-callback.html";
+
+function setStatus(el, type, msg) {
+  el.className = "status show " + type;
+  el.textContent = msg;
+}
+
+async function loadLatestCarousel() {
+  const statusEl = document.getElementById("carouselStatus");
+  try {
+    const today = new Date();
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(today);
+      d.setDate(d.getDate() - i);
+      const dateStr = d.toISOString().slice(0, 10);
+      const url = `https://raw.githubusercontent.com/${REPO}/main/posts/${dateStr}/manifest.json`;
+      const resp = await fetch(url, { cache: "no-store" });
+      if (resp.ok) {
+        const manifest = await resp.json();
+        renderCarousel(manifest, dateStr);
+        statusEl.classList.remove("show");
+        document.getElementById("carouselBody").style.display = "block";
+        return;
+      }
+    }
+    setStatus(statusEl, "err", "No recent carousel manifest found in the repo.");
+  } catch (e) {
+    setStatus(statusEl, "err", "Failed to load carousel: " + e.message);
+  }
+}
+
+function renderCarousel(manifest, dateStr) {
+  const winner = (manifest.carousels || []).find(c => c.post_to_instagram) || manifest.carousels[0];
+  if (!winner) return;
+  const grid = document.getElementById("carouselGrid");
+  const meta = document.getElementById("metaRow");
+  const caption = document.getElementById("captionText");
+  meta.innerHTML = `
+    <span class="pill">${dateStr}</span>
+    <span class="pill">${winner.niche || ""}</span>
+    <span class="pill">${winner.format || ""}</span>
+  `;
+  grid.innerHTML = "";
+  (winner.image_paths || []).forEach(p => {
+    const img = document.createElement("img");
+    img.src = `https://raw.githubusercontent.com/${REPO}/main/${p}`;
+    grid.appendChild(img);
+  });
+  caption.textContent = winner.caption || winner.hook || "";
+  window.__latestWinner = winner;
+}
+
+document.getElementById("connectBtn").addEventListener("click", () => {
+  const state = Math.random().toString(36).slice(2);
+  const authUrl = "https://www.tiktok.com/v2/auth/authorize/" +
+    "?client_key=" + encodeURIComponent(CLIENT_KEY) +
+    "&scope=" + encodeURIComponent("user.info.basic,video.publish") +
+    "&response_type=code" +
+    "&redirect_uri=" + encodeURIComponent(REDIRECT_URI) +
+    "&state=" + state;
+  window.location.href = authUrl;
+});
+
+const tokenInput = document.getElementById("tokenInput");
+const postBtn = document.getElementById("postBtn");
+tokenInput.addEventListener("input", () => {
+  postBtn.disabled = tokenInput.value.trim().length === 0;
+});
+
+postBtn.addEventListener("click", async () => {
+  const statusEl = document.getElementById("postStatus");
+  const token = tokenInput.value.trim();
+  const winner = window.__latestWinner;
+  if (!winner) {
+    setStatus(statusEl, "err", "No carousel loaded yet.");
+    return;
+  }
+  setStatus(statusEl, "pending", "Publishing to TikTok (Sandbox)…");
+  postBtn.disabled = true;
+  try {
+    const photoUrls = (winner.image_paths || []).map(
+      p => `https://raw.githubusercontent.com/${REPO}/main/${p}`
+    );
+    const resp = await fetch("https://open.tiktokapis.com/v2/post/publish/content/init/", {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer " + token,
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      body: JSON.stringify({
+        post_info: {
+          title: (winner.caption || winner.hook || "").slice(0, 150),
+          privacy_level: "SELF_ONLY",
+          auto_add_music: true
+        },
+        source_info: {
+          source: "PULL_FROM_URL",
+          photo_cover_index: 0,
+          photo_images: photoUrls
+        },
+        post_mode: "DIRECT_POST",
+        media_type: "PHOTO"
+      })
+    });
+    const data = await resp.json();
+    if (resp.ok && data.error && data.error.code === "ok") {
+      setStatus(statusEl, "ok", "Published! publish_id: " + data.data.publish_id);
+    } else {
+      setStatus(statusEl, "err", "TikTok API error: " + JSON.stringify(data.error || data));
+    }
+  } catch (e) {
+    setStatus(statusEl, "err", "Request failed: " + e.message);
+  } finally {
+    postBtn.disabled = false;
+  }
+});
+
+loadLatestCarousel();
+</script>
+</body>
+</html>
