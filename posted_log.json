@@ -29,6 +29,16 @@
       "format": "before-after",
       "hook": "Meta retargeting wastes 50% of budget after day 3",
       "scored": false
+    },
+    {
+      "media_id": "18138334228572103",
+      "date": "2026-07-24",
+      "index": 3,
+      "niche": "Meta/Instagram Ads",
+      "angle": "behind-the-curtain",
+      "format": "comparison",
+      "hook": "Meta\u2019s algorithm hits a wall at 50 conversions",
+      "scored": false
     }
   ]
 }
