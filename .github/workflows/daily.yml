@@ -2,11 +2,13 @@ name: Daily Carousels
 
 on:
   schedule:
-    # Fires at both 7:30 UTC and 8:30 UTC. The "Check schedule window" step
-    # below works out which one of those is actually 8:30am in Ireland right
-    # now (Ireland is UTC+1 during BST/summer, UTC+0 during GMT/winter) and
-    # skips the other one automatically — this file no longer needs manual
-    # edits when the clocks change.
+    # Fires at both 7:30 and 8:30 UTC to loosely target 8am Irish time
+    # across both BST (summer) and GMT (winter). Which one of the two
+    # actually generates content is decided by the "already generated
+    # today?" check below, not by time-of-day — so a late-running GitHub
+    # Actions schedule (this happens more than you'd think, sometimes by
+    # hours) no longer causes a missed day. Whichever trigger fires first
+    # each day wins; the other sees today's batch already exists and skips.
     - cron: "30 7 * * *"
     - cron: "30 8 * * *"
   workflow_dispatch: {}   # lets you trigger it manually to test
@@ -18,7 +20,10 @@ jobs:
   generate:
     runs-on: ubuntu-latest
     steps:
-      - name: Check schedule window (handles Irish BST/GMT automatically)
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Check whether today's batch was already generated
         id: check_time
         run: |
           python3 - <<'EOF'
@@ -26,18 +31,13 @@ jobs:
           from datetime import datetime
           from zoneinfo import ZoneInfo
           event_name = os.environ.get("GITHUB_EVENT_NAME", "")
-          now = datetime.now(ZoneInfo("Europe/Dublin"))
-          # Manual runs always go through, no matter the time.
-          # Scheduled (cron) runs only go through at the 8am Irish hour.
-          should_run = "true" if (event_name == "workflow_dispatch" or now.hour == 8) else "false"
-          print(f"Irish local time right now: {now.isoformat()} (trigger: {event_name}) -> should_run={should_run}")
+          today = datetime.now(ZoneInfo("Europe/Dublin")).date().isoformat()
+          already_generated = os.path.exists(f"posts/{today}/manifest.json")
+          should_run = "true" if (event_name == "workflow_dispatch" or not already_generated) else "false"
+          print(f"Irish date: {today} (trigger: {event_name}, already_generated={already_generated}) -> should_run={should_run}")
           with open(os.environ["GITHUB_OUTPUT"], "a") as f:
               f.write(f"should_run={should_run}\n")
           EOF
-
-      - name: Check out repo
-        if: steps.check_time.outputs.should_run == 'true'
-        uses: actions/checkout@v4
 
       - name: Set up Python
         if: steps.check_time.outputs.should_run == 'true'
@@ -89,7 +89,7 @@ jobs:
         if: steps.check_time.outputs.should_run == 'true' && vars.IG_POSTING_PAUSED != 'true'
         run: sleep 15
 
-      - name: Post carousel 1 to Instagram
+      - name: Post next Instagram carousel
         if: steps.check_time.outputs.should_run == 'true' && vars.IG_POSTING_PAUSED != 'true'
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
@@ -97,7 +97,12 @@ jobs:
           GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           TO_EMAIL: ${{ secrets.TO_EMAIL }}
-        run: python instagram_post.py --only-index 1
+        # No --only-index here on purpose: which 3 carousels actually win an
+        # auto-post slot is decided by the virality score in runner.py, not
+        # by fixed position, so this just posts whichever winning carousel
+        # hasn't gone out yet today (there won't be any yet this early in
+        # the day, so this always posts the first of today's 3 winners).
+        run: python instagram_post.py
 
       - name: Commit posting log
         if: steps.check_time.outputs.should_run == 'true' && vars.IG_POSTING_PAUSED != 'true'
