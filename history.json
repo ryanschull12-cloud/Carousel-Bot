@@ -34,6 +34,41 @@
           "hook": "Your lookalike audience needs 10 days\u2014you gave it 3"
         }
       ]
+    },
+    {
+      "date": "2026-07-24",
+      "carousels": [
+        {
+          "niche": "Email Marketing",
+          "angle": "realization",
+          "format": "step-by-step",
+          "hook": "Email questions lift opens 22%\u2014most brands default to statements"
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "proof-numbers",
+          "format": "before-after",
+          "hook": "Meta retargeting wastes 50% of budget after day 3"
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "behind-the-curtain",
+          "format": "comparison",
+          "hook": "Meta\u2019s algorithm hits a wall at 50 conversions"
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "behind-the-curtain",
+          "format": "step-by-step",
+          "hook": "Google Ads burns 30% of budget on irrelevant searches"
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "mistake-fear",
+          "format": "checklist",
+          "hook": "Google Ads\u2019 \u2018close variants\u2019 burn 25% of budget"
+        }
+      ]
     }
   ]
 }
