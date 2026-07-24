@@ -1,0 +1,70 @@
+name: TikTok Post
+
+# Posts carousel 1 to TikTok (photo mode, Direct Post) using content
+# already generated and committed by the morning "Daily Carousels"
+# workflow -- no new content is generated here. Mirrors daily.yml's
+# Instagram post timing, just a bit later to make sure the images have
+# had time to propagate to raw.githubusercontent.com.
+#
+# While the TikTok app is unaudited, posts land as private ("Only me")
+# on the connected account -- see tiktok_post.py's docstring for how to
+# switch that to public once the Content Posting API audit is approved.
+
+on:
+  schedule:
+    # Fires at both 8:00 UTC and 9:00 UTC -- same auto BST/GMT handling
+    # as the Instagram workflows, so this never needs manual seasonal
+    # edits either.
+    - cron: "0 8 * * *"
+    - cron: "0 9 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  post-to-tiktok:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check schedule window (handles Irish BST/GMT automatically)
+        id: check_time
+        run: |
+          python3 - <<'EOF'
+          import os
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          event_name = os.environ.get("GITHUB_EVENT_NAME", "")
+          now = datetime.now(ZoneInfo("Europe/Dublin"))
+          should_run = "true" if (event_name == "workflow_dispatch" or now.hour == 9) else "false"
+          print(f"Irish local time right now: {now.isoformat()} (trigger: {event_name}) -> should_run={should_run}")
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+              f.write(f"should_run={should_run}\n")
+          EOF
+
+      - name: Check out repo
+        if: steps.check_time.outputs.should_run == 'true'
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        if: steps.check_time.outputs.should_run == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        if: steps.check_time.outputs.should_run == 'true'
+        run: pip install -r requirements.txt
+
+      - name: Post carousel 1 to TikTok
+        if: steps.check_time.outputs.should_run == 'true' && vars.TIKTOK_POSTING_PAUSED != 'true'
+        env:
+          TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
+          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+          TIKTOK_REFRESH_TOKEN: ${{ secrets.TIKTOK_REFRESH_TOKEN }}
+          TIKTOK_PRIVACY_LEVEL: ${{ vars.TIKTOK_PRIVACY_LEVEL }}
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          TO_EMAIL: ${{ secrets.TO_EMAIL }}
+        run: python tiktok_post.py --only-index 1
+
+      - name: Note that TikTok posting is paused
+        if: steps.check_time.outputs.should_run == 'true' && vars.TIKTOK_POSTING_PAUSED == 'true'
+        run: echo "TIKTOK_POSTING_PAUSED is set to true in repo variables — skipping TikTok auto-post."
