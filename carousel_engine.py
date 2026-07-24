@@ -149,12 +149,30 @@ def display_niche(niche):
 # TEXT HELPERS — centered wrap + shrink-only fit
 # ============================================================
 
-def wrap_text(draw, text, font, max_width):
-    words = text.split()
+def wrap_text(draw, text, font, max_width, keep_together=None):
+    """Word-wrap text to max_width. If keep_together is given (a keyword
+    that will later be highlighted), its internal spaces are temporarily
+    swapped for a placeholder so the wrapper treats it as one atomic token
+    — otherwise a keyword that happens to land on a line-wrap boundary
+    (e.g. "90 days" wrapping as "...in 90" / "days is...") splits across
+    two lines and the highlight pass below silently can't find it whole
+    on either line, quietly dropping the highlight. The placeholder is
+    restored to a normal space in the returned lines, so this is invisible
+    to every other caller."""
+    PLACEHOLDER = "\x00"
+    protected_text = text
+    if keep_together:
+        kw = keep_together.strip()
+        idx = text.lower().find(kw.lower())
+        if idx != -1:
+            actual = text[idx:idx + len(kw)]
+            protected_text = text[:idx] + actual.replace(" ", PLACEHOLDER) + text[idx + len(kw):]
+
+    words = protected_text.split()
     lines, cur = [], ""
     for w in words:
         test = (cur + " " + w).strip()
-        if draw.textlength(test, font=font) <= max_width:
+        if draw.textlength(test.replace(PLACEHOLDER, " "), font=font) <= max_width:
             cur = test
         else:
             if cur:
@@ -162,18 +180,18 @@ def wrap_text(draw, text, font, max_width):
             cur = w
     if cur:
         lines.append(cur)
-    return lines
+    return [l.replace(PLACEHOLDER, " ") for l in lines]
 
 
-def fit_text_shrink_only(draw, text, max_width, max_lines, target_size, min_size, font_path):
+def fit_text_shrink_only(draw, text, max_width, max_lines, target_size, min_size, font_path, keep_together=None):
     for size in range(target_size, min_size - 1, -2):
         font = ImageFont.truetype(font_path, size)
-        lines = wrap_text(draw, text, font, max_width)
+        lines = wrap_text(draw, text, font, max_width, keep_together=keep_together)
         if len(lines) <= max_lines and all(draw.textlength(l, font=font) <= max_width for l in lines):
             return font, lines, size
     size = min_size
     font = ImageFont.truetype(font_path, size)
-    return font, wrap_text(draw, text, font, max_width), size
+    return font, wrap_text(draw, text, font, max_width, keep_together=keep_together), size
 
 
 def draw_centered_line(draw, y, text, font, fill):
@@ -363,8 +381,9 @@ def render_hook_slide_fixed(headline, niche, slide_num, total_slides, out_path):
 
     max_w = W - 2 * MARGIN - 20
     stat = find_stat(headline)
+    keyword = find_platform_keyword(headline, niche)
 
-    font, lines, size = fit_text_shrink_only(draw, headline, max_w, 4, HOOK_FONT_SIZE, 52, F_SERIF_BOLD)
+    font, lines, size = fit_text_shrink_only(draw, headline, max_w, 4, HOOK_FONT_SIZE, 52, F_SERIF_BOLD, keep_together=keyword)
     line_h = int(size * 1.18)
     text_h = line_h * len(lines)
 
@@ -388,7 +407,6 @@ def render_hook_slide_fixed(headline, niche, slide_num, total_slides, out_path):
 
     draw.line([((W - 140) / 2, y), ((W + 140) / 2, y)], fill=colors["accent"], width=5)
     y += rule_gap
-    keyword = find_platform_keyword(headline, niche)
     draw_centered_block_highlighted(draw, lines, font, y, line_h, INK, keyword, colors["accent"])
     y += text_h + (rule_gap - 4)
     draw.line([((W - 140) / 2, y), ((W + 140) / 2, y)], fill=colors["accent"], width=5)
@@ -411,8 +429,9 @@ def render_bridge_slide_fixed(headline, niche, slide_num, total_slides, out_path
 
     max_w = W - 2 * MARGIN - 20
     stat = find_stat(headline)
+    keyword = find_platform_keyword(headline, niche)
 
-    font, lines, size = fit_text_shrink_only(draw, headline, max_w, 4, BRIDGE_FONT_SIZE, 48, F_SERIF_BOLD)
+    font, lines, size = fit_text_shrink_only(draw, headline, max_w, 4, BRIDGE_FONT_SIZE, 48, F_SERIF_BOLD, keep_together=keyword)
     line_h = int(size * 1.18)
     text_h = line_h * len(lines)
 
@@ -438,7 +457,6 @@ def render_bridge_slide_fixed(headline, niche, slide_num, total_slides, out_path
         draw_centered_line(draw, y, "KEEP READING", f_label, colors["accent"])
         y += label_h
 
-    keyword = find_platform_keyword(headline, niche)
     draw_centered_block_highlighted(draw, lines, font, y, line_h, INK, keyword, colors["accent"])
 
     draw_footer_rule_and_progress(draw, slide_num, total_slides, colors)
@@ -460,7 +478,7 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
     draw_folio_header(draw, niche, slide_num, total_slides, colors)
 
     max_w = W - 2 * MARGIN - 40
-    font, lines, size = fit_text_shrink_only(draw, full_text, max_w, 7, BODY_FONT_SIZE, BODY_FONT_SIZE_MIN, F_SANS_BOLD)
+    font, lines, size = fit_text_shrink_only(draw, full_text, max_w, 7, BODY_FONT_SIZE, BODY_FONT_SIZE_MIN, F_SANS_BOLD, keep_together=keyword)
     line_h = int(size * 1.34)
     text_h = line_h * len(lines)
 
