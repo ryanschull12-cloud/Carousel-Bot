@@ -52,7 +52,12 @@ jobs:
           GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           TO_EMAIL: ${{ secrets.TO_EMAIL }}
-        run: python instagram_post.py
+        # --target-count 3: by the end of the evening slot, all 3 of
+        # today's winners should be posted in total (1 morning + 1 midday
+        # + 1 here). This also protects against GitHub firing BOTH the
+        # 19:30 and 20:30 UTC triggers for this workflow on a given day --
+        # the second firing sees 3 already posted and does nothing.
+        run: python instagram_post.py --target-count 3
 
       - name: Commit posting log
         if: vars.IG_POSTING_PAUSED != 'true'
