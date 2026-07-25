@@ -47,6 +47,7 @@ import time
 import smtplib
 import requests
 from email.message import EmailMessage
+import carousel_engine
 from carousel_engine import render_carousel
 
 MISTRAL_API_KEY = os.environ["MISTRAL_API_KEY"]
@@ -80,6 +81,14 @@ HISTORY_DAYS_TO_KEEP = 10
 # Real engagement data, written by fetch_performance.py.
 PERFORMANCE_PATH = "performance_history.json"
 MIN_SCORED_FOR_BRIEFING = 4  # don't draw conclusions from a tiny sample
+
+# Design/copy feedback loop. experiment_loop.py (a separate weekly job) owns
+# writing this file — proposing new experiments and promoting/rejecting them
+# once enough real data comes in. This script only READS it, to apply
+# whichever experiment is currently active to ONE of today's carousels and
+# tag the manifest so fetch_performance.py can later attribute engagement
+# back to the right arm.
+EXPERIMENTS_PATH = "experiments.json"
 
 # Virality checker tuning. Concepts (not full carousels) are cheap to
 # generate, so the pool can comfortably be bigger than the 5 we actually
@@ -213,6 +222,46 @@ def build_performance_briefing(performance):
             lines.append(f"  • [{p['engagement_rate']:.2f}] \"{p['hook']}\" ({p['angle']}/{p['format']})")
 
     return "\n".join(lines)
+
+
+def load_experiments():
+    """Read experiments.json. Missing/corrupt file = no active experiment today."""
+    if not os.path.exists(EXPERIMENTS_PATH):
+        return {"active": None, "history": []}
+    try:
+        with open(EXPERIMENTS_PATH, "r") as f:
+            return json.load(f)
+    except Exception as e:
+        print(f"Could not read {EXPERIMENTS_PATH}, ignoring ({e})")
+        return {"active": None, "history": []}
+
+
+def pick_experiment_target_hook(active_exp, winning_concepts):
+    """
+    Decide which ONE of today's carousels carries the active experiment's
+    variant, and return its hook_slide text (the stable identifier used
+    everywhere else in this file to match a concept back to its finished
+    carousel). Only concepts that already cleared the virality checker AND
+    are among the AUTO_POST_COUNT highest-scoring today are eligible —
+    tagging a carousel that never gets posted would mean it can never be
+    scored, so the experiment would never accumulate data.
+
+    Rotates which of the top AUTO_POST_COUNT slots gets tagged, day by day
+    (via day-of-year), so the variant isn't always slot #1 — that would
+    confound "the experiment worked" with "the virality checker's top pick
+    always wins," since the top-scored concept usually outperforms
+    regardless of any copy/design tweak.
+    """
+    if not active_exp or not winning_concepts:
+        return None
+    ranked = sorted(winning_concepts, key=lambda c: c.get("score", 0.0), reverse=True)
+    top_slots = ranked[:AUTO_POST_COUNT]
+    if not top_slots:
+        return None
+    import datetime
+    day_index = datetime.date.today().timetuple().tm_yday
+    target = top_slots[day_index % len(top_slots)]
+    return target.get("hook_slide", "").strip()
 
 
 def call_tavily():
@@ -445,7 +494,8 @@ def select_winning_concepts(history_briefing, performance_briefing, briefing):
     return winners[:WINNERS_NEEDED]
 
 
-def generate_batch(briefing, history_briefing, performance_briefing, winning_concepts=None):
+def generate_batch(briefing, history_briefing, performance_briefing, winning_concepts=None,
+                    active_experiment=None, experiment_target_hook=None):
     """
     Draft pass, then a critic pass that rewrites weak hooks before anything
     renders. If winning_concepts is given (the virality checker's picks),
@@ -453,6 +503,14 @@ def generate_batch(briefing, history_briefing, performance_briefing, winning_con
     concepts instead of inventing new ones from scratch — the concept
     already earned its spot, so niche/angle/format/hook/bridge are locked
     in and only the body/recap/CTA/caption get generated fresh.
+
+    If active_experiment is a "copy_rule" type experiment (see
+    experiments.json, owned by experiment_loop.py) and experiment_target_hook
+    identifies which of today's concepts should carry it, the extra rule is
+    appended as an instruction scoped to that ONE carousel only — hook_slide
+    and bridge_slide are already locked by the concept stage, so a copy_rule
+    experiment can only affect body_slides/recap_slide/cta_slide/cta_word/
+    cta_promise/caption, never the hook or bridge.
     """
     if winning_concepts:
         concepts_json = json.dumps([
@@ -477,6 +535,19 @@ def generate_batch(briefing, history_briefing, performance_briefing, winning_con
     else:
         user_content = "Generate today's batch."
     user_content += _briefing_block(history_briefing, performance_briefing, briefing)
+
+    if active_experiment and active_experiment.get("type") == "copy_rule" and experiment_target_hook:
+        rule = active_experiment.get("copy_rule", {}).get("instruction", "")
+        if rule:
+            user_content += (
+                f"\n\nEXPERIMENT — apply to EXACTLY ONE carousel: the one whose "
+                f"hook_slide is \"{experiment_target_hook}\", and no other. For that "
+                f"carousel only, additionally follow this rule when writing its "
+                f"body_slides/recap_slide/cta_slide/cta_word/cta_promise/caption "
+                f"(never change its hook_slide or bridge_slide, those are locked): "
+                f"{rule}\nEvery other carousel in today's batch must follow the "
+                "normal rules unchanged — this is a controlled single-variable test."
+            )
 
     draft = call_mistral(SYSTEM_PROMPT, user_content, temperature=0.9)
 
@@ -537,6 +608,14 @@ def main():
     if briefing:
         print(f"Tavily briefing pulled ({len(briefing)} chars) — passing to Mistral.")
 
+    # Design/copy feedback loop: pick up whatever experiment_loop.py has
+    # currently running (if any) and decide which of today's carousels will
+    # carry it. Never lets a bad/missing experiments.json block generation.
+    experiments = load_experiments()
+    active_exp = experiments.get("active")
+    if active_exp:
+        print(f"Active experiment: {active_exp.get('id')} ({active_exp.get('type')}) — {active_exp.get('hypothesis', '')}")
+
     # Virality checker: screen a pool of cheap concepts before spending
     # tokens writing out full carousels. Falls back to the old
     # direct-generation path if the pool/scoring step errors out for any
@@ -549,7 +628,15 @@ def main():
     except Exception as e:
         print(f"Virality checker failed, falling back to direct generation ({e})")
 
-    batch = generate_batch(briefing, history_briefing, performance_briefing, winning_concepts=winning_concepts)
+    experiment_target_hook = pick_experiment_target_hook(active_exp, winning_concepts)
+    if active_exp and not experiment_target_hook:
+        print("Active experiment could not be assigned to a carousel today (no scored winning "
+              "concepts) — skipping it for today's batch, no other effect.")
+    elif experiment_target_hook:
+        print(f"Experiment {active_exp.get('id')} will target carousel with hook: \"{experiment_target_hook}\"")
+
+    batch = generate_batch(briefing, history_briefing, performance_briefing, winning_concepts=winning_concepts,
+                            active_experiment=active_exp, experiment_target_hook=experiment_target_hook)
     batch_date = batch.get("batch_date", "today")
     # Use the actual system date rather than trusting the model's
     # self-reported date, which can drift or be wrong.
@@ -576,9 +663,38 @@ def main():
     all_images = []
     carousel_entries = []
 
+    target_hook_key = experiment_target_hook.strip().lower() if experiment_target_hook else None
+
     for i, carousel in enumerate(batch["carousels"], start=1):
         out_dir = os.path.join(base_dir, f"carousel_{i}")
-        images = render_carousel(carousel, batch_date, out_dir, carousel_index=i - 1)
+        is_variant = bool(target_hook_key) and carousel.get("hook_slide", "").strip().lower() == target_hook_key
+
+        # Design-constant experiments apply at render time only, and only to
+        # this one carousel: temporarily override the module-level constant
+        # in carousel_engine, render just this carousel, then restore it
+        # immediately — every other carousel today (and every carousel on
+        # every other day) renders with the normal value.
+        overridden_constant = None
+        original_value = None
+        if is_variant and active_exp and active_exp.get("type") == "design_constant":
+            dc = active_exp.get("design_constant", {})
+            const_name = dc.get("constant")
+            variant_value = dc.get("variant_value")
+            bounds = carousel_engine.EXPERIMENTABLE_CONSTANTS.get(const_name)
+            if const_name and bounds and variant_value is not None and bounds["min"] <= variant_value <= bounds["max"]:
+                overridden_constant = const_name
+                original_value = getattr(carousel_engine, const_name)
+                setattr(carousel_engine, const_name, variant_value)
+            else:
+                print(f"Experiment {active_exp.get('id')} named an unsafe/unknown constant "
+                      f"({const_name}={variant_value}) — skipping the override, rendering normally.")
+
+        try:
+            images = render_carousel(carousel, batch_date, out_dir, carousel_index=i - 1)
+        finally:
+            if overridden_constant:
+                setattr(carousel_engine, overridden_constant, original_value)
+
         all_images.extend(images)
         score = scores_by_hook.get(carousel.get("hook_slide", "").strip().lower())
         carousel_entries.append({
@@ -599,6 +715,11 @@ def main():
             "throughline": carousel.get("throughline", ""),
             "image_paths": images,
             "virality_score": score,
+            # Design/copy feedback loop tagging — fetch_performance.py reads
+            # this back off the manifest once the post is scored, so
+            # experiment_loop.py can compare variant vs. control engagement.
+            "experiment_id": active_exp.get("id") if active_exp else None,
+            "experiment_arm": ("variant" if is_variant else "control") if active_exp else None,
         })
 
     # Which carousels actually get auto-posted: the AUTO_POST_COUNT

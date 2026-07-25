@@ -38,6 +38,26 @@ CTA_SAVE_SIZE = 36        # CTA save ask
 CTA_COMMENT_SIZE = 52     # CTA comment keyword
 CTA_PROMISE_SIZE = 30     # CTA promise line
 
+# Design constants the automated design-feedback-loop (experiment_loop.py) is
+# allowed to test, with safe min/max bounds. This is the single source of
+# truth for "safe design constants" — runner.py checks a constant name is a
+# key here before applying an experimental override at render time, and
+# experiment_loop.py checks a proposed variant_value falls within its bounds
+# before ever proposing or promoting a change. Nothing outside this dict
+# (no new slide types, no layout/rendering logic) is ever touched
+# automatically. Bounds keep every font at or above the "never auto-grow,
+# minimum X" floors documented for each slide type.
+EXPERIMENTABLE_CONSTANTS = {
+    "HOOK_FONT_SIZE": {"min": 72, "max": 104},
+    "BRIDGE_FONT_SIZE": {"min": 64, "max": 96},
+    "BODY_FONT_SIZE": {"min": 48, "max": 72},
+    "RECAP_HEADER_SIZE": {"min": 36, "max": 56},
+    "RECAP_CARD_TEXT_SIZE": {"min": 20, "max": 32},
+    "CTA_SAVE_SIZE": {"min": 28, "max": 44},
+    "CTA_COMMENT_SIZE": {"min": 40, "max": 60},
+    "CTA_PROMISE_SIZE": {"min": 24, "max": 36},
+}
+
 TOPIC_COLORS = {
     "google ads": {"accent": (161, 214, 191), "dark": (30, 90, 65), "light": (200, 240, 220)},
     "meta": {"accent": (240, 172, 168), "dark": (140, 45, 45), "light": (255, 220, 215)},

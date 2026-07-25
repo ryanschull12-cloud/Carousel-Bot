@@ -83,6 +83,31 @@ def fetch_metrics(media_id):
         return None
 
 
+def load_manifest_entry(date, index):
+    """
+    Look up a specific carousel's manifest entry by date+index, so its
+    experiment_id/experiment_arm tags (written by runner.py, see
+    experiments.json / experiment_loop.py) can be carried over onto the
+    scored_posts entry. posts/{date}/manifest.json stays committed in the
+    repo permanently, so this works no matter how long ago the post went
+    out. Missing manifest or missing tags (older posts, pre-dating this
+    feature) just means experiment_id/experiment_arm come back None —
+    exactly like any other untagged post.
+    """
+    path = os.path.join("posts", date, "manifest.json")
+    if not os.path.exists(path):
+        return None
+    try:
+        with open(path) as f:
+            manifest = json.load(f)
+    except Exception:
+        return None
+    for c in manifest.get("carousels", []):
+        if c.get("index") == index:
+            return c
+    return None
+
+
 def score(metrics):
     reach = max(metrics["reach"], 1)
     weighted = (
@@ -134,6 +159,7 @@ def main():
             continue  # try again on the next run
 
         engagement_rate = score(metrics)
+        manifest_entry = load_manifest_entry(post["date"], post.get("index")) or {}
         performance["scored_posts"].append({
             "date": post["date"],
             "media_id": post["media_id"],
@@ -143,6 +169,10 @@ def main():
             "hook": post.get("hook", ""),
             "metrics": metrics,
             "engagement_rate": engagement_rate,
+            # Design/copy feedback loop tags, if this post was part of an
+            # experiment (see experiments.json / experiment_loop.py).
+            "experiment_id": manifest_entry.get("experiment_id"),
+            "experiment_arm": manifest_entry.get("experiment_arm"),
         })
         post["scored"] = True
         log_updated = True
