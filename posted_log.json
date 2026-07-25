@@ -39,6 +39,16 @@
       "format": "comparison",
       "hook": "Meta\u2019s algorithm hits a wall at 50 conversions",
       "scored": false
+    },
+    {
+      "media_id": "17957941884172064",
+      "date": "2026-07-25",
+      "index": 1,
+      "niche": "Google Ads",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Google Ads hides 30% of sales in its lag report",
+      "scored": false
     }
   ]
 }
