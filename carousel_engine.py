@@ -1,27 +1,9 @@
 """
-Carousel image engine — EDITORIAL BOLD EDITION (v3, full redesign).
-
-Design language: cream "press" background, near-black ink type, a single
-bold accent ink color per niche (no pastel blocks), thin rules instead of
-heavy colored panels, and everything center-aligned. The goal is to look
-like a genuinely well-produced marketing publication, not a template.
-
-Fixed font sizes, shrink-only fitting (never grows past target), and only
-the three system fonts this project is allowed to use: LiberationSerif-Bold
-(headlines, stat numbers, big serif moments), LiberationSans-Bold (badges,
-tags, CTAs, anything that needs to shout at small size), and
-LiberationSans-Regular (body copy, support text, handle — body slides now
-carry real explanations, and regular weight reads better than bold at
-paragraph length).
-
-No trademarked platform logos are drawn anywhere — draw_topic_icon() draws
-simple, original geometric marks (a ringed "G" glyph, a speech-bubble, an
-envelope) that gesture at the topic without reproducing anyone's brand mark.
-
-All primary content blocks (hook, bridge, body) are vertically centered in
-the same CONTENT_TOP..CONTENT_BOTTOM zone between the header rule and the
-footer rule, so short and long text both look intentionally composed
-instead of stranded near the top with dead space below.
+Carousel image engine — FIXED SIZE EDITION:
+- Fixed font sizes per slide type (no auto-growing)
+- Smart shrink-only fitting (if text is too long, shrink; never grow beyond target)
+- Visual fill elements: accent bars, decorative spacing, centered layouts
+- Every slide looks designed and full regardless of text length
 """
 
 from PIL import Image, ImageDraw, ImageFont
@@ -29,9 +11,7 @@ import os
 import re
 
 W, H = 1080, 1350
-MARGIN = 84
-CONTENT_TOP = 156
-CONTENT_BOTTOM = H - 132
+MARGIN = 76
 
 SYS_DIR = "/usr/share/fonts/truetype/liberation"
 F_SERIF_BOLD = os.path.join(SYS_DIR, "LiberationSerif-Bold.ttf")
@@ -40,85 +20,31 @@ F_SANS_REG = os.path.join(SYS_DIR, "LiberationSans-Regular.ttf")
 
 AGENCY_HANDLE = "@rd.marketing0"
 
-BG = (245, 243, 238)
-INK = (23, 22, 20)
-MUTED = (128, 124, 116)
+BG = (240, 239, 234)
+DOT_COLOR = (225, 223, 216)
+TEXT = (20, 20, 20)
+GRAY = (130, 130, 130)
 WHITE = (255, 255, 255)
-CARD_BG = (255, 255, 254)
+BLACK = (0, 0, 0)
+SHADOW = (205, 202, 194)  # soft depth shade for badges, one tone below BG
 
-HOOK_FONT_SIZE = 92
-BRIDGE_FONT_SIZE = 84
-# Body copy is bold, not regular weight. Regular weight reads fine at full
-# resolution but most people encounter a carousel as a small feed
-# thumbnail first — thin strokes lose contrast and legibility fast at that
-# size, which is exactly the wrong place to lose it. Bold at a slightly
-# smaller size than the old v2 (56px) still fits the longer standalone-value
-# body slides without sacrificing thumbnail-scale readability.
-BODY_FONT_SIZE = 38
-BODY_FONT_SIZE_MIN = 26
-RECAP_HEADER_SIZE = 46
-RECAP_CARD_TEXT_SIZE = 25
-CTA_SAVE_SIZE = 34
-CTA_COMMENT_SIZE = 50
-CTA_PROMISE_SIZE = 28
-
-FORMAT_TAG_STYLES = {
-    "before-after": [("BEFORE", "muted"), ("AFTER", "accent")],
-    "comparison": [("THIS", "muted"), ("THAT", "accent")],
-    "myth-buster": [("MYTH", "muted"), ("FACT", "accent")],
-    "step-by-step": [("STEP", "accent")],
-    "steal-this": [("TEMPLATE", "accent")],
-    # Previously missing entirely, which meant checklist-format carousels —
-    # the format most prone to feeling like six disconnected facts — were
-    # also the only format with zero visual identity tying its slides
-    # together. Same tag every slide is intentional: it's a checklist, the
-    # visual repetition IS the signal that these all belong to one list.
-    "checklist": [("CHECKLIST", "accent")],
-}
+# FIXED FONT SIZES — never auto-grow beyond these
+HOOK_FONT_SIZE = 96       # Hook slides: big, dramatic, consistent
+BRIDGE_FONT_SIZE = 88     # Bridge slides: slightly smaller than hook
+BODY_FONT_SIZE = 64       # Body slides: readable, punchy, consistent (bumped up from 56 for readability)
+RECAP_HEADER_SIZE = 48    # Recap "Save This" header
+RECAP_CARD_TEXT_SIZE = 26 # Recap card text
+CTA_SAVE_SIZE = 36        # CTA save ask
+CTA_COMMENT_SIZE = 52     # CTA comment keyword
+CTA_PROMISE_SIZE = 30     # CTA promise line
 
 TOPIC_COLORS = {
-    "google ads": {"accent": (43, 122, 68), "accent_light": (206, 230, 211)},   # green
-    "meta": {"accent": (32, 91, 168), "accent_light": (205, 220, 241)},          # blue
-    "instagram": {"accent": (32, 91, 168), "accent_light": (205, 220, 241)},     # blue
-    "email": {"accent": (181, 44, 44), "accent_light": (241, 206, 206)},        # red
+    "google ads": {"accent": (161, 214, 191), "dark": (30, 90, 65), "light": (200, 240, 220)},
+    "meta": {"accent": (240, 172, 168), "dark": (140, 45, 45), "light": (255, 220, 215)},
+    "instagram": {"accent": (240, 172, 168), "dark": (140, 45, 45), "light": (255, 220, 215)},
+    "email": {"accent": (196, 176, 226), "dark": (80, 55, 120), "light": (225, 210, 245)},
 }
-DEFAULT_COLORS = {"accent": (43, 122, 68), "accent_light": (206, 230, 211)}
-
-# Known ways the platform name for each niche might actually appear inside
-# generated hook/bridge text, used to find and color-highlight it. Ordered
-# longest-phrase-first within each niche so "Google Ads" matches before a
-# bare "Google" would.
-PLATFORM_KEYWORDS = {
-    "google ads": ["Google Ads", "Google ads", "google ads"],
-    "meta": ["Meta Ads", "Meta ads", "meta ads", "Meta"],
-    "instagram": ["Instagram Ads", "Instagram ads", "instagram ads", "Instagram", "Meta Ads", "Meta"],
-    "email": ["Email marketing", "email marketing", "Email"],
-}
-
-
-def find_platform_keyword(text, niche):
-    """Find the actual substring (preserving its original casing) in text
-    that names this carousel's platform, if the copy included one — used
-    to highlight it in the niche's theme color so a slide reads with
-    immediate context instead of relying only on the small header badge."""
-    n = (niche or "").lower()
-    candidates = []
-    for key, words in PLATFORM_KEYWORDS.items():
-        if key in n:
-            candidates = words
-            break
-    for word in candidates:
-        idx = text.lower().find(word.lower())
-        if idx != -1:
-            return text[idx:idx + len(word)]
-    return None
-
-ICON_KINDS = {
-    "google ads": "google",
-    "email": "email",
-    "meta": "chat",
-    "instagram": "chat",
-}
+DEFAULT_COLORS = {"accent": (161, 214, 191), "dark": (30, 90, 65), "light": (200, 240, 220)}
 
 
 def colors_for(niche):
@@ -129,50 +55,12 @@ def colors_for(niche):
     return DEFAULT_COLORS
 
 
-def icon_kind_for(niche):
-    n = (niche or "").lower()
-    for key, kind in ICON_KINDS.items():
-        if key in n:
-            return kind
-    return "spark"
-
-
-def display_niche(niche):
-    """Preserve the content brain's own casing ('Google Ads', 'Email
-    Marketing') instead of forcing .lower() everywhere it's interpolated
-    into a sentence — lowercasing a proper noun mid-sentence reads as a
-    typo, not a style choice."""
-    return niche or "Marketing"
-
-
-# ============================================================
-# TEXT HELPERS — centered wrap + shrink-only fit
-# ============================================================
-
-def wrap_text(draw, text, font, max_width, keep_together=None):
-    """Word-wrap text to max_width. If keep_together is given (a keyword
-    that will later be highlighted), its internal spaces are temporarily
-    swapped for a placeholder so the wrapper treats it as one atomic token
-    — otherwise a keyword that happens to land on a line-wrap boundary
-    (e.g. "90 days" wrapping as "...in 90" / "days is...") splits across
-    two lines and the highlight pass below silently can't find it whole
-    on either line, quietly dropping the highlight. The placeholder is
-    restored to a normal space in the returned lines, so this is invisible
-    to every other caller."""
-    PLACEHOLDER = "\x00"
-    protected_text = text
-    if keep_together:
-        kw = keep_together.strip()
-        idx = text.lower().find(kw.lower())
-        if idx != -1:
-            actual = text[idx:idx + len(kw)]
-            protected_text = text[:idx] + actual.replace(" ", PLACEHOLDER) + text[idx + len(kw):]
-
-    words = protected_text.split()
+def wrap_text(draw, text, font, max_width):
+    words = text.split()
     lines, cur = [], ""
     for w in words:
         test = (cur + " " + w).strip()
-        if draw.textlength(test.replace(PLACEHOLDER, " "), font=font) <= max_width:
+        if draw.textlength(test, font=font) <= max_width:
             cur = test
         else:
             if cur:
@@ -180,382 +68,412 @@ def wrap_text(draw, text, font, max_width, keep_together=None):
             cur = w
     if cur:
         lines.append(cur)
-    return [l.replace(PLACEHOLDER, " ") for l in lines]
+    return lines
 
 
-def fit_text_shrink_only(draw, text, max_width, max_lines, target_size, min_size, font_path, keep_together=None):
-    for size in range(target_size, min_size - 1, -2):
+def fit_text_shrink_only(draw, text, max_width, max_lines, target_size, min_size, font_path):
+    """
+    SHRINK-ONLY fitting: start at target_size, only go DOWN if text doesn't fit.
+    Never grows beyond target_size. This ensures consistent sizing.
+    """
+    for size in range(target_size, min_size - 1, -4):
         font = ImageFont.truetype(font_path, size)
-        lines = wrap_text(draw, text, font, max_width, keep_together=keep_together)
+        lines = wrap_text(draw, text, font, max_width)
         if len(lines) <= max_lines and all(draw.textlength(l, font=font) <= max_width for l in lines):
             return font, lines, size
+    # Emergency fallback
     size = min_size
     font = ImageFont.truetype(font_path, size)
-    return font, wrap_text(draw, text, font, max_width, keep_together=keep_together), size
+    return font, wrap_text(draw, text, font, max_width), size
 
 
-def draw_centered_line(draw, y, text, font, fill):
-    tw = draw.textlength(text, font=font)
-    draw.text(((W - tw) / 2, y), text, font=font, fill=fill)
-    return tw
+def draw_dot_grid(draw, spacing=48, radius=2):
+    for y in range(60, H - 40, spacing):
+        for x in range(60, W - 40, spacing):
+            draw.ellipse([x - radius, y - radius, x + radius, y + radius], fill=DOT_COLOR)
 
 
-def draw_centered_block(draw, lines, font, start_y, line_h, fill):
-    y = start_y
-    for line in lines:
-        draw_centered_line(draw, y, line, font, fill)
-        y += line_h
-    return y
-
-
-def draw_centered_block_highlighted(draw, lines, font, start_y, line_h, fill, keyword, accent_fill):
-    """Same as draw_centered_block, but if `keyword` appears (case-
-    insensitively) inside a wrapped line, that exact substring is drawn in
-    accent_fill instead of the base fill — the rest of the line keeps its
-    normal color. The line as a whole still centers correctly since the
-    three segments (before/keyword/after) are positioned off the line's
-    total measured width, not off each segment independently. If the
-    keyword doesn't appear as a whole inside any single wrapped line (e.g.
-    it happened to fall across a line break), that line is just drawn
-    plain — a missed highlight is a much smaller problem than broken
-    layout math."""
-    y = start_y
-    kw = (keyword or "").strip()
-    kw_lower = kw.lower()
-    for line in lines:
-        idx = line.lower().find(kw_lower) if kw_lower else -1
-        if idx == -1:
-            draw_centered_line(draw, y, line, font, fill)
+def draw_progress_bar(draw, slide_num, total_slides, accent_color, dark_color):
+    bar_y = H - 24
+    bar_h = 8
+    full_w = W - 2 * MARGIN
+    segment_w = full_w / total_slides
+    for i in range(total_slides):
+        x0 = MARGIN + i * segment_w
+        x1 = MARGIN + (i + 1) * segment_w - 4
+        if i < slide_num:
+            fill = dark_color
         else:
-            before, match, after = line[:idx], line[idx:idx + len(kw)], line[idx + len(kw):]
-            total_w = draw.textlength(line, font=font)
-            x = (W - total_w) / 2
-            if before:
-                draw.text((x, y), before, font=font, fill=fill)
-                x += draw.textlength(before, font=font)
-            draw.text((x, y), match, font=font, fill=accent_fill)
-            x += draw.textlength(match, font=font)
-            if after:
-                draw.text((x, y), after, font=font, fill=fill)
-        y += line_h
-    return y
+            fill = (220, 220, 220)
+        draw.rounded_rectangle([x0, bar_y, x1, bar_y + bar_h], radius=4, fill=fill)
 
 
-def slide_text(item):
-    """Body slide items are now {"text": ..., "keyword": ...} dicts, but
-    stay tolerant of a plain string too — a fallback path (e.g. recap
-    falling back to body_slides, or a critic response that dropped the
-    keyword field) should degrade gracefully instead of crashing the
-    render step."""
-    if isinstance(item, dict):
-        return item.get("text", "")
-    return item or ""
+def draw_topic_badge(draw, niche, colors):
+    topic = niche.upper() if niche else "MARKETING"
+    f_badge = ImageFont.truetype(F_SANS_BOLD, 22)
+    tw = draw.textlength(topic, font=f_badge)
+    pad_x = 20
+    badge_w = tw + pad_x * 2
+    badge_h = 40
+    draw.rounded_rectangle([MARGIN, 48, MARGIN + badge_w, 48 + badge_h],
+                            radius=badge_h // 2, fill=colors["accent"])
+    draw.text((MARGIN + pad_x, 48 + 8), topic, font=f_badge, fill=colors["dark"])
 
 
-def slide_keyword(item):
-    if isinstance(item, dict):
-        return item.get("keyword", "")
-    return ""
+def draw_slide_counter(draw, slide_num, total_slides, dark_color):
+    f_counter = ImageFont.truetype(F_SANS_BOLD, 22)
+    counter = f"{slide_num}/{total_slides}"
+    cw = draw.textlength(counter, font=f_counter)
+    circle_size = 44
+    cx = W - MARGIN - circle_size
+    cy = 46
+    draw.ellipse([cx, cy, cx + circle_size, cy + circle_size], fill=dark_color)
+    draw.text((cx + (circle_size - cw) / 2, cy + 10), counter, font=f_counter, fill=WHITE)
+
+
+def draw_header_v2(draw, niche, slide_num, total_slides, colors):
+    draw_topic_badge(draw, niche, colors)
+    f_handle = ImageFont.truetype(F_SANS_REG, 20)
+    hw = draw.textlength(AGENCY_HANDLE, font=f_handle)
+    draw.text(((W - hw) / 2, 58), AGENCY_HANDLE, font=f_handle, fill=GRAY)
+    draw_slide_counter(draw, slide_num, total_slides, colors["dark"])
 
 
 STAT_RE = re.compile(r"(?:[€$£]\s?\d[\d,]*(?:\.\d+)?[kKmM]?|\d[\d,]*(?:\.\d+)?\s?%)")
 
 
 def find_stat(text):
+    """Pull a currency amount or percentage out of a line, if one exists."""
     m = STAT_RE.search(text)
     return m.group(0) if m else None
 
 
-# ============================================================
-# ORIGINAL ICONS — no trademarked logos, just simple original marks
-# ============================================================
-
-def draw_topic_icon(draw, cx, cy, kind, color, size=34):
-    r = size / 2
-    if kind == "google":
-        draw.ellipse([cx - r, cy - r, cx + r, cy + r], outline=color, width=4)
-        f = ImageFont.truetype(F_SERIF_BOLD, int(size * 1.05))
-        gw = draw.textlength("G", font=f)
-        draw.text((cx - gw / 2, cy - size * 0.62), "G", font=f, fill=color)
-    elif kind == "chat":
-        draw.rounded_rectangle([cx - r, cy - r * 0.8, cx + r, cy + r * 0.6], radius=r * 0.5, outline=color, width=4)
-        draw.polygon([(cx - r * 0.35, cy + r * 0.5), (cx - r * 0.05, cy + r * 0.5), (cx - r * 0.35, cy + r * 1.1)], fill=color)
-    elif kind == "email":
-        draw.rounded_rectangle([cx - r, cy - r * 0.7, cx + r, cy + r * 0.7], radius=6, outline=color, width=4)
-        draw.line([(cx - r, cy - r * 0.6), (cx, cy + r * 0.1), (cx + r, cy - r * 0.6)], fill=color, width=4, joint="curve")
-    else:
-        draw.line([(cx - r, cy), (cx + r, cy)], fill=color, width=4)
-        draw.line([(cx, cy - r), (cx, cy + r)], fill=color, width=4)
-        draw.line([(cx - r * 0.7, cy - r * 0.7), (cx + r * 0.7, cy + r * 0.7)], fill=color, width=4)
-        draw.line([(cx - r * 0.7, cy + r * 0.7), (cx + r * 0.7, cy - r * 0.7)], fill=color, width=4)
+def find_highlight_word(text):
+    stat = find_stat(text)
+    if stat:
+        return stat
+    words = text.split()
+    if len(words) >= 3:
+        return " ".join(words[-2:]).rstrip(".")
+    return None
 
 
-def draw_bg_accent(draw, colors):
+def draw_marker_bold(draw, x, y, w, h, color):
+    r, g, b = color
+    marker_color = (r, g, b, 200)
+    pts = [(x - 8, y + h * 0.12), (x + w + 10, y - h * 0.10),
+           (x + w + 8, y + h * 0.98), (x - 10, y + h * 1.08)]
+    draw.polygon(pts, fill=marker_color)
+
+
+def draw_text_highlighted_v2(draw, x, y, line, font, highlight, text_color, marker_color):
+    if not highlight or highlight not in line:
+        draw.text((x, y), line, font=font, fill=text_color)
+        return
+    before, _, after = line.partition(highlight)
+    cx = x
+    if before:
+        cx += draw.textlength(before, font=font)
+    hw = draw.textlength(highlight, font=font)
+    ascent, _ = font.getmetrics()
+    draw_marker_bold(draw, cx, y + ascent * 0.06, hw, ascent * 0.88, marker_color)
+    draw.text((x, y), line, font=font, fill=text_color)
+
+
+def draw_corner_flag(draw, colors):
     """
-    A single, very pale ring arcing in from the bottom-left corner on
-    every slide — mostly off-canvas, thin, in accent_light. Purely a
-    texture/cohesion device: a flat cream field on every single slide
-    read as sparse once slides got more whitespace-forward, and a
-    repeated quiet mark in the same spot on every slide (hook through
-    CTA) is what makes a 10-slide carousel feel like one designed object
-    instead of ten separate cards that happen to share a font.
+    UPGRADE 2 — bold diagonal accent wedge in the top-right corner.
+    A consistent, non-photo, no-extra-font brand mark on every single slide.
+    Sits under the slide counter, which is drawn on top of it afterward.
     """
-    r = 330
-    cx, cy = -60, H + 60
-    draw.ellipse([cx - r, cy - r, cx + r, cy + r], outline=colors["accent_light"], width=3)
+    size = 130
+    draw.polygon([(W, 0), (W, size), (W - size, 0)], fill=colors["accent"])
 
 
-# ============================================================
-# SHARED CHROME — folio header, footer, progress bar
-# ============================================================
-
-def draw_folio_header(draw, niche, slide_num, total_slides, colors):
-    topic = display_niche(niche).upper()
-    f_badge = ImageFont.truetype(F_SANS_BOLD, 21)
-    counter = f"{slide_num:02d} / {total_slides}"
-    label = f"{topic}   ·   {counter}"
-    tw = draw.textlength(label, font=f_badge)
-    icon_gap = 34
-    icon_size = 30
-    total_w = icon_size + icon_gap + tw
-    start_x = (W - total_w) / 2
-    icon_cx = start_x + icon_size / 2
-    icon_cy = 66
-    draw_topic_icon(draw, icon_cx, icon_cy, icon_kind_for(niche), colors["accent"], size=icon_size)
-    draw.text((start_x + icon_size + icon_gap, icon_cy - 12), label, font=f_badge, fill=INK)
-
-    f_handle = ImageFont.truetype(F_SANS_REG, 19)
-    draw_centered_line(draw, 100, AGENCY_HANDLE, f_handle, MUTED)
-
-    draw.line([(MARGIN, 138), (W - MARGIN, 138)], fill=INK, width=2)
+def draw_mega_stat(draw, text, y, colors, max_width, font_path=F_SERIF_BOLD, target=170, min_size=110):
+    """
+    UPGRADE 1 — render a pulled-out number/€/% stat at oversized scale above the
+    headline. Only fires when the hook/bridge line actually contains a stat, so
+    every loss-aversion-framed hook (the format the content brain is told to
+    prioritize) gets a genuine pattern-interrupt instead of just bigger body text.
+    """
+    font, lines, size = fit_text_shrink_only(draw, text, max_width, 1, target, min_size, font_path)
+    line = lines[0] if lines else text
+    x = MARGIN + 20
+    draw.text((x, y), line, font=font, fill=colors["dark"])
+    ascent, descent = font.getmetrics()
+    return y + int((ascent + descent) * 0.92), size
 
 
-def draw_footer_rule_and_progress(draw, slide_num, total_slides, colors):
-    draw.line([(MARGIN, H - 118), (W - MARGIN, H - 118)], fill=(210, 207, 199), width=2)
-    f_follow = ImageFont.truetype(F_SANS_REG, 19)
-    draw_centered_line(draw, H - 100, "Follow for more", f_follow, MUTED)
-
-    bar_y = H - 30
+def draw_accent_bar(draw, y, colors, width=None):
     bar_h = 6
-    full_w = W - 2 * MARGIN
-    seg_w = full_w / total_slides
-    for i in range(total_slides):
-        x0 = MARGIN + i * seg_w
-        x1 = MARGIN + (i + 1) * seg_w - 4
-        fill = INK if i < slide_num else (222, 219, 211)
-        draw.rounded_rectangle([x0, bar_y, x1, bar_y + bar_h], radius=3, fill=fill)
+    w = width if width else (W - 2 * MARGIN)
+    draw.rectangle([MARGIN, y, MARGIN + w, y + bar_h], fill=colors["accent"])
 
 
-def draw_format_tag_centered(draw, y, text, style, colors):
-    f_tag = ImageFont.truetype(F_SANS_BOLD, 19)
-    tw = draw.textlength(text, font=f_tag)
-    pad_x = 16
-    tag_w = tw + pad_x * 2
-    tag_h = 34
-    x = (W - tag_w) / 2
-    if style == "accent":
-        draw.rounded_rectangle([x, y, x + tag_w, y + tag_h], radius=tag_h // 2, fill=colors["accent"])
-        fg = WHITE
-    else:
-        draw.rounded_rectangle([x, y, x + tag_w, y + tag_h], radius=tag_h // 2, outline=INK, width=2)
-        fg = INK
-    draw.text((x + pad_x, y + 7), text, font=f_tag, fill=fg)
-    return tag_h
+def draw_swipe_arrow(draw, colors):
+    f_arrow = ImageFont.truetype(F_SANS_BOLD, 30)
+    arrow_text = "Swipe →"
+    tw = draw.textlength(arrow_text, font=f_arrow)
+    pad = 16
+    pill_w = tw + pad * 2
+    pill_h = 44
+    px = W - MARGIN - pill_w
+    py = H - 140
+    draw.rounded_rectangle([px, py, px + pill_w, py + pill_h], radius=pill_h // 2, fill=colors["accent"])
+    draw.text((px + pad, py + 6), arrow_text, font=f_arrow, fill=colors["dark"])
 
 
-def draw_swipe_cue_centered(draw, y, colors):
-    f = ImageFont.truetype(F_SANS_BOLD, 24)
-    draw_centered_line(draw, y, "Keep swiping →", f, colors["accent"])
+def draw_follow_pill(draw, colors):
+    f_follow = ImageFont.truetype(F_SANS_REG, 18)
+    follow_text = "Follow for more"
+    tw = draw.textlength(follow_text, font=f_follow)
+    pad = 12
+    pill_w = tw + pad * 2
+    pill_h = 32
+    px = (W - pill_w) / 2
+    py = H - 60
+    draw.rounded_rectangle([px, py, px + pill_w, py + pill_h], radius=pill_h // 2,
+                            outline=colors["dark"], width=1)
+    draw.text((px + pad, py + 5), follow_text, font=f_follow, fill=colors["dark"])
 
 
 # ============================================================
-# HOOK SLIDE
+# DECORATIVE FILL ELEMENTS — make short text look designed
+# ============================================================
+
+def draw_decorative_quote_marks(draw, y, colors):
+    """Large decorative quote marks to fill space on short hook slides."""
+    f_quote = ImageFont.truetype(F_SERIF_BOLD, 120)
+    draw.text((MARGIN - 10, y), "“", font=f_quote, fill=colors["light"])
+    draw.text((W - MARGIN - 50, y + 200), "”", font=f_quote, fill=colors["light"])
+
+
+def draw_vertical_accent_line(draw, x, y0, y1, colors):
+    """Vertical accent line for visual interest."""
+    draw.rectangle([x, y0, x + 4, y1], fill=colors["accent"])
+
+
+def draw_bottom_accent_block(draw, y, height, colors):
+    """Large accent color block at bottom to fill space."""
+    draw.rectangle([0, y, W, y + height], fill=colors["light"])
+
+
+# ============================================================
+# HOOK SLIDE — fixed size, designed fill
 # ============================================================
 
 def render_hook_slide_fixed(headline, niche, slide_num, total_slides, out_path):
     colors = colors_for(niche)
     img = Image.new("RGB", (W, H), BG)
     draw = ImageDraw.Draw(img)
-    draw_bg_accent(draw, colors)
-    draw_folio_header(draw, niche, slide_num, total_slides, colors)
+    draw_dot_grid(draw)
+    draw_corner_flag(draw, colors)
+    draw_header_v2(draw, niche, slide_num, total_slides, colors)
 
-    max_w = W - 2 * MARGIN - 20
+    max_w = W - 2 * MARGIN - 40  # slightly narrower for better line breaks
+
+    # UPGRADE 1: pull a stat out and render it oversized before the headline
     stat = find_stat(headline)
-    keyword = find_platform_keyword(headline, niche)
-
-    font, lines, size = fit_text_shrink_only(draw, headline, max_w, 4, HOOK_FONT_SIZE, 52, F_SERIF_BOLD, keep_together=keyword)
-    line_h = int(size * 1.18)
-    text_h = line_h * len(lines)
-
-    stat_h = 0
-    stat_font = None
-    stat_line = None
+    top_y = 260
     if stat:
-        stat_font, stat_lines, _ = fit_text_shrink_only(draw, stat, max_w, 1, 150, 100, F_SERIF_BOLD)
-        stat_line = stat_lines[0]
-        ascent, descent = stat_font.getmetrics()
-        stat_h = int((ascent + descent) * 0.92) + 24
+        top_y, _ = draw_mega_stat(draw, stat, top_y, colors, max_w)
+        top_y += 24
 
-    rule_gap = 30
-    block_h = stat_h + rule_gap + text_h + rule_gap + 6
+    # FIXED SIZE: 96px, shrink only if needed
+    font, lines, size = fit_text_shrink_only(draw, headline, max_w, 4, HOOK_FONT_SIZE, 52, F_SERIF_BOLD)
+    line_h = int(size * 1.2)
+    highlight = find_highlight_word(headline)
 
-    top = CONTENT_TOP + max(0, ((CONTENT_BOTTOM - CONTENT_TOP) - block_h) // 2)
-    y = top
-    if stat:
-        draw_centered_line(draw, y, stat_line, stat_font, colors["accent"])
-        y += stat_h
+    total_h = line_h * len(lines)
 
-    draw.line([((W - 140) / 2, y), ((W + 140) / 2, y)], fill=colors["accent"], width=5)
-    y += rule_gap
-    draw_centered_block_highlighted(draw, lines, font, y, line_h, INK, keyword, colors["accent"])
-    y += text_h + (rule_gap - 4)
-    draw.line([((W - 140) / 2, y), ((W + 140) / 2, y)], fill=colors["accent"], width=5)
+    # CENTER the remaining text block in whatever space is left below the stat
+    available_h = H - top_y - 180  # header/stat to progress bar
+    ty = top_y + max(0, (available_h - total_h) // 2)
 
-    draw_footer_rule_and_progress(draw, slide_num, total_slides, colors)
+    # If text is very short (1-2 lines) and there's no mega-stat already
+    # doing the attention-grabbing work, add decorative elements
+    if len(lines) <= 2 and not stat:
+        draw_decorative_quote_marks(draw, ty - 40, colors)
+        draw_accent_bar(draw, ty - 60, colors, width=200)
+        draw_accent_bar(draw, ty + total_h + 40, colors, width=200)
+    else:
+        draw_accent_bar(draw, ty - 30, colors)
+        draw_accent_bar(draw, ty + total_h + 20, colors)
+
+    for line in lines:
+        draw_text_highlighted_v2(draw, MARGIN + 20, ty, line, font, highlight, TEXT, colors["accent"])
+        ty += line_h
+
+    draw_follow_pill(draw, colors)
+    draw_progress_bar(draw, slide_num, total_slides, colors["accent"], colors["dark"])
+
     img.save(out_path, "JPEG", quality=92)
     return out_path
 
 
 # ============================================================
-# BRIDGE SLIDE
+# BRIDGE SLIDE — fixed size, designed fill
 # ============================================================
 
 def render_bridge_slide_fixed(headline, niche, slide_num, total_slides, out_path):
     colors = colors_for(niche)
     img = Image.new("RGB", (W, H), BG)
     draw = ImageDraw.Draw(img)
-    draw_bg_accent(draw, colors)
-    draw_folio_header(draw, niche, slide_num, total_slides, colors)
+    draw_dot_grid(draw)
+    draw_corner_flag(draw, colors)
+    draw_header_v2(draw, niche, slide_num, total_slides, colors)
 
-    max_w = W - 2 * MARGIN - 20
+    max_w = W - 2 * MARGIN - 40
+
+    # UPGRADE 1, scaled down: bridge should carry the same weight as the hook
+    # without literally duplicating it, so the mega-stat here targets a smaller size
     stat = find_stat(headline)
-    keyword = find_platform_keyword(headline, niche)
-
-    font, lines, size = fit_text_shrink_only(draw, headline, max_w, 4, BRIDGE_FONT_SIZE, 48, F_SERIF_BOLD, keep_together=keyword)
-    line_h = int(size * 1.18)
-    text_h = line_h * len(lines)
-
-    label_h = 52
-    stat_h = 0
-    stat_font = None
-    stat_line = None
+    top_y = 260
     if stat:
-        stat_font, stat_lines, _ = fit_text_shrink_only(draw, stat, max_w, 1, 130, 90, F_SERIF_BOLD)
-        stat_line = stat_lines[0]
-        ascent, descent = stat_font.getmetrics()
-        stat_h = int((ascent + descent) * 0.92) + 18
+        top_y, _ = draw_mega_stat(draw, stat, top_y, colors, max_w, target=140, min_size=90)
+        top_y += 20
 
-    block_h = (0 if stat else label_h) + stat_h + text_h
-    top = CONTENT_TOP + max(0, ((CONTENT_BOTTOM - CONTENT_TOP) - block_h) // 2)
-    y = top
+    font, lines, size = fit_text_shrink_only(draw, headline, max_w, 4, BRIDGE_FONT_SIZE, 48, F_SERIF_BOLD)
+    line_h = int(size * 1.2)
+    highlight = find_highlight_word(headline)
 
-    if stat:
-        draw_centered_line(draw, y, stat_line, stat_font, colors["accent"])
-        y += stat_h
+    total_h = line_h * len(lines)
+    available_h = H - top_y - 180
+    ty = top_y + max(0, (available_h - total_h) // 2)
+
+    # Bridge gets a vertical accent line on the left for visual distinction
+    if len(lines) <= 2:
+        draw_vertical_accent_line(draw, MARGIN, ty - 20, ty + total_h + 20, colors)
+        if not stat:
+            draw_decorative_quote_marks(draw, ty - 30, colors)
     else:
-        f_label = ImageFont.truetype(F_SANS_BOLD, 20)
-        draw_centered_line(draw, y, "KEEP READING", f_label, colors["accent"])
-        y += label_h
+        draw_vertical_accent_line(draw, MARGIN, ty - 10, ty + total_h + 10, colors)
 
-    draw_centered_block_highlighted(draw, lines, font, y, line_h, INK, keyword, colors["accent"])
+    for line in lines:
+        draw_text_highlighted_v2(draw, MARGIN + 30, ty, line, font, highlight, TEXT, colors["accent"])
+        ty += line_h
 
-    draw_footer_rule_and_progress(draw, slide_num, total_slides, colors)
+    draw_follow_pill(draw, colors)
+    draw_progress_bar(draw, slide_num, total_slides, colors["accent"], colors["dark"])
+
     img.save(out_path, "JPEG", quality=92)
     return out_path
 
 
 # ============================================================
-# BODY SLIDE
+# BODY SLIDE — fixed size, designed fill
 # ============================================================
 
 def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slides, out_path,
-                                checklist_mode=False, show_swipe=False, format_type="", body_position=0,
-                                keyword=""):
+                                checklist_mode=False, show_swipe=False):
     colors = colors_for(niche)
     img = Image.new("RGB", (W, H), BG)
     draw = ImageDraw.Draw(img)
-    draw_bg_accent(draw, colors)
-    draw_folio_header(draw, niche, slide_num, total_slides, colors)
+    draw_dot_grid(draw)
+    draw_corner_flag(draw, colors)
+    draw_header_v2(draw, niche, slide_num, total_slides, colors)
 
-    max_w = W - 2 * MARGIN - 40
-    font, lines, size = fit_text_shrink_only(draw, full_text, max_w, 7, BODY_FONT_SIZE, BODY_FONT_SIZE_MIN, F_SANS_BOLD, keep_together=keyword)
-    line_h = int(size * 1.34)
-    text_h = line_h * len(lines)
+    badge_size = 80
+    badge_x = MARGIN
+    text_x = badge_x + badge_size + 32
+    max_w = W - MARGIN - text_x - 20
 
-    tag_options = FORMAT_TAG_STYLES.get((format_type or "").lower())
-    tag_h = 34 + 30 if tag_options else 0
-    badge_size = 64
-    badge_block_h = badge_size + 40
-    rule_gap = 20 + 4
-    swipe_h = 56 if show_swipe else 0
+    # FIXED SIZE: 64px (bumped up from 56 for readability), shrink only if
+    # needed. Floor raised from 36 to 44 too, so a long body line shrinks
+    # less aggressively before it stops looking like the same slide type.
+    font, lines, size = fit_text_shrink_only(draw, full_text, max_w, 4, BODY_FONT_SIZE, 44, F_SANS_BOLD)
+    line_h = int(size * 1.3)  # slightly more breathing room between lines than other slide types
 
-    block_h = tag_h + badge_block_h + text_h + rule_gap + swipe_h
-    y = CONTENT_TOP + max(0, ((CONTENT_BOTTOM - CONTENT_TOP) - block_h) // 2)
+    total_h = line_h * len(lines)
+    available_h = H - 280 - 200
+    badge_y = 280 + (available_h - total_h) // 2
 
-    if tag_options:
-        text, style = tag_options[body_position % len(tag_options)]
-        th = draw_format_tag_centered(draw, y, text, style, colors)
-        y += th + 30
+    # UPGRADE 3: accent block now renders behind EVERY body slide, not just
+    # short-text ones — this is what was making some slides look designed
+    # and others look plain within the same carousel.
+    block_y = badge_y - 24
+    block_h = total_h + 64
+    draw.rounded_rectangle([text_x - 24, block_y, W - MARGIN, block_y + block_h],
+                          radius=14, fill=colors["light"])
 
-    badge_cx = W / 2
-    badge_cy = y + badge_size / 2
-    shadow_off = 4
-    # One consistent badge shape across every format — a numbered ink
-    # circle. The checkbox variant (square outline + checkmark) tested
-    # weaker: it read as clutter next to the format tag pill above it, and
-    # two different "this is item N" signals stacked on one slide was
-    # doing more harm than good. The CHECKLIST/STEAL-THIS/etc. tag pill
-    # already carries the format identity; the circle just needs to say
-    # "you're on step N of the sequence," which a plain number does better
-    # than an icon.
-    draw.ellipse([badge_cx - badge_size / 2 + shadow_off, badge_cy - badge_size / 2 + shadow_off,
-                  badge_cx + badge_size / 2 + shadow_off, badge_cy + badge_size / 2 + shadow_off], fill=(222, 219, 211))
-    draw.ellipse([badge_cx - badge_size / 2, badge_cy - badge_size / 2,
-                  badge_cx + badge_size / 2, badge_cy + badge_size / 2], fill=INK)
-    f_num = ImageFont.truetype(F_SANS_BOLD, 28)
-    num_text = str(number)
-    nw = draw.textlength(num_text, font=f_num)
-    draw.text((badge_cx - nw / 2, badge_cy - 18), num_text, font=f_num, fill=WHITE)
-    y = badge_cy + badge_size / 2 + 40
+    # Number badge or checkbox, now with a soft drop shadow for depth
+    shadow_off = 5
+    if number is not None:
+        if checklist_mode:
+            draw.rounded_rectangle([badge_x + shadow_off, badge_y + shadow_off,
+                                     badge_x + badge_size + shadow_off, badge_y + badge_size + shadow_off],
+                                  radius=8, fill=SHADOW)
+            draw.rounded_rectangle([badge_x, badge_y, badge_x + badge_size, badge_y + badge_size],
+                                  radius=8, outline=colors["dark"], width=4, fill=BG)
+            # Drawn as strokes rather than the "✓" glyph -- Liberation Sans
+            # Bold doesn't reliably include that character, which was
+            # rendering as a tofu/notdef box instead of a checkmark.
+            draw.line([
+                (badge_x + 18, badge_y + 42),
+                (badge_x + 32, badge_y + 56),
+                (badge_x + 62, badge_y + 22),
+            ], fill=colors["dark"], width=7, joint="curve")
+        else:
+            draw.ellipse([badge_x + shadow_off, badge_y + shadow_off,
+                          badge_x + badge_size + shadow_off, badge_y + badge_size + shadow_off],
+                         fill=SHADOW)
+            draw.ellipse([badge_x, badge_y, badge_x + badge_size, badge_y + badge_size],
+                         fill=colors["dark"])
+            f_num = ImageFont.truetype(F_SANS_BOLD, int(badge_size * 0.45))
+            num_text = str(number)
+            tw = draw.textlength(num_text, font=f_num)
+            draw.text((badge_x + (badge_size - tw) / 2, badge_y + badge_size * 0.24),
+                     num_text, font=f_num, fill=WHITE)
 
-    draw_centered_block_highlighted(draw, lines, font, y, line_h, INK, keyword, colors["accent"])
-    y += text_h + 20
-
-    draw.line([((W - 90) / 2, y), ((W + 90) / 2, y)], fill=colors["accent"], width=4)
-    y += rule_gap
+    ty = badge_y + 4
+    for line in lines:
+        draw_text_highlighted_v2(draw, text_x, ty, line, font, find_highlight_word(full_text), TEXT, colors["accent"])
+        ty += line_h
 
     if show_swipe:
-        draw_swipe_cue_centered(draw, y, colors)
+        draw_swipe_arrow(draw, colors)
 
-    draw_footer_rule_and_progress(draw, slide_num, total_slides, colors)
+    draw_follow_pill(draw, colors)
+    draw_progress_bar(draw, slide_num, total_slides, colors["accent"], colors["dark"])
+
     img.save(out_path, "JPEG", quality=92)
     return out_path
 
 
 # ============================================================
-# RECAP SLIDE — card grid, re-skinned
+# AESTHETIC RECAP SLIDE — card based (already good, keep it)
 # ============================================================
 
 def render_recap_slide_aesthetic(recap_lines, niche, slide_num, total_slides, out_path):
     colors = colors_for(niche)
     img = Image.new("RGB", (W, H), BG)
     draw = ImageDraw.Draw(img)
-    draw_bg_accent(draw, colors)
-    draw_folio_header(draw, niche, slide_num, total_slides, colors)
+    draw_dot_grid(draw)
+    draw_header_v2(draw, niche, slide_num, total_slides, colors)
 
+    # "Save This" badge
     f_save_big = ImageFont.truetype(F_SERIF_BOLD, RECAP_HEADER_SIZE)
-    bar_y = 172
-    draw_centered_line(draw, bar_y, "Save This", f_save_big, INK)
-    draw.line([((W - 120) / 2, bar_y + 66), ((W + 120) / 2, bar_y + 66)], fill=colors["accent"], width=4)
+    save_text = "Save This"
+    stw = draw.textlength(save_text, font=f_save_big)
+    bar_pad = 30
+    bar_y = 155
+    bar_h = 70
+    draw.rounded_rectangle([ (W - stw)/2 - bar_pad, bar_y, (W + stw)/2 + bar_pad, bar_y + bar_h ],
+                            radius=bar_h // 2, fill=colors["accent"])
+    draw.text(((W - stw) / 2, bar_y + 10), save_text, font=f_save_big, fill=colors["dark"])
 
-    f_sub = ImageFont.truetype(F_SANS_REG, 21)
-    draw_centered_line(draw, bar_y + 82, f"The {display_niche(niche)} cheat sheet", f_sub, MUTED)
+    f_sub = ImageFont.truetype(F_SANS_REG, 22)
+    sub_text = f"Your {niche.lower()} cheat sheet"
+    sub_w = draw.textlength(sub_text, font=f_sub)
+    draw.text(((W - sub_w) / 2, bar_y + 80), sub_text, font=f_sub, fill=GRAY)
 
+    # Card grid: 2 columns x 3 rows
     card_w = (W - 2 * MARGIN - 20) // 2
-    card_h = 268
+    card_h = 280
     gap_x = 20
     gap_y = 16
-    start_y = 300
+    start_y = 280
 
     for i, item in enumerate(recap_lines[:6]):
         col = i % 2
@@ -563,96 +481,110 @@ def render_recap_slide_aesthetic(recap_lines, niche, slide_num, total_slides, ou
         cx = MARGIN + col * (card_w + gap_x)
         cy = start_y + row * (card_h + gap_y)
 
-        draw.rounded_rectangle([cx, cy, cx + card_w, cy + card_h], radius=14, fill=CARD_BG, outline=(222, 219, 211), width=2)
-        draw.rectangle([cx, cy, cx + 5, cy + card_h], fill=colors["accent"])
+        draw.rounded_rectangle([cx, cy, cx + card_w, cy + card_h], radius=16, fill=colors["light"])
+        draw.rounded_rectangle([cx, cy, cx + card_w, cy + card_h], radius=16, outline=colors["accent"], width=2)
 
-        badge_size = 40
-        badge_cx = cx + card_w / 2
-        badge_y = cy + 18
-        draw.ellipse([badge_cx - badge_size / 2, badge_y, badge_cx + badge_size / 2, badge_y + badge_size], fill=INK)
-        f_num = ImageFont.truetype(F_SANS_BOLD, 20)
+        badge_size = 48
+        badge_x = cx + 16
+        badge_y = cy + 16
+        draw.ellipse([badge_x, badge_y, badge_x + badge_size, badge_y + badge_size], fill=colors["dark"])
+        f_num = ImageFont.truetype(F_SANS_BOLD, 24)
         num_text = str(i + 1)
         nw = draw.textlength(num_text, font=f_num)
-        draw.text((badge_cx - nw / 2, badge_y + 9), num_text, font=f_num, fill=WHITE)
+        draw.text((badge_x + (badge_size - nw) / 2, badge_y + 10), num_text, font=f_num, fill=WHITE)
 
-        text_y = badge_y + badge_size + 18
-        text_max_w = card_w - 36
-        f_card = ImageFont.truetype(F_SANS_REG, RECAP_CARD_TEXT_SIZE)
-        wrapped = wrap_text(draw, item, f_card, text_max_w)[:5]
+        text_x = cx + 20
+        text_y = cy + badge_size + 28
+        text_max_w = card_w - 40
+        f_card = ImageFont.truetype(F_SANS_BOLD, RECAP_CARD_TEXT_SIZE)
+
+        wrapped = wrap_text(draw, item, f_card, text_max_w)
         for line in wrapped:
-            lw = draw.textlength(line, font=f_card)
-            draw.text((cx + (card_w - lw) / 2, text_y), line, font=f_card, fill=INK)
-            text_y += 32
+            draw.text((text_x, text_y), line, font=f_card, fill=TEXT)
+            text_y += 38
 
-    f_note = ImageFont.truetype(F_SANS_REG, 19)
-    draw_centered_line(draw, H - 150, "Screenshot this page and use it as your checklist", f_note, MUTED)
+    f_note = ImageFont.truetype(F_SANS_REG, 20)
+    note_text = "Screenshot this page and use it as your checklist"
+    note_w = draw.textlength(note_text, font=f_note)
+    draw.text(((W - note_w) / 2, H - 130), note_text, font=f_note, fill=GRAY)
 
-    draw_footer_rule_and_progress(draw, slide_num, total_slides, colors)
+    draw_follow_pill(draw, colors)
+    draw_progress_bar(draw, slide_num, total_slides, colors["accent"], colors["dark"])
+
     img.save(out_path, "JPEG", quality=92)
     return out_path
 
 
 # ============================================================
-# CTA SLIDE
+# CTA SLIDE — fixed size, designed fill
 # ============================================================
 
 def render_cta_slide_fixed(headline, cta_word, cta_promise, support_text, niche, slide_num, total_slides, out_path):
     colors = colors_for(niche)
-    img = Image.new("RGB", (W, H), BG)
+    bg_bottom = tuple(min(255, int(c * 0.6 + 255 * 0.4)) for c in colors["accent"])
+    img = Image.new("RGB", (W, H), WHITE)
     draw = ImageDraw.Draw(img)
-    draw_bg_accent(draw, colors)
-    draw_folio_header(draw, niche, slide_num, total_slides, colors)
+    for row in range(H):
+        t = row / H
+        color = tuple(int(255 + (bg_bottom[i] - 255) * t) for i in range(3))
+        draw.line([(0, row), (W, row)], fill=color)
+    draw_dot_grid(draw)
+    draw_header_v2(draw, niche, slide_num, total_slides, colors)
 
     max_w = W - 2 * MARGIN
-    ty = 210
+    ty = 240
 
+    # SAVE ask
     f_save = ImageFont.truetype(F_SANS_BOLD, CTA_SAVE_SIZE)
-    save_text = f"Save this for your next {display_niche(niche)} review"
-    save_lines = wrap_text(draw, save_text, f_save, max_w - 60)
-    pad_x = 26
-    pill_w = max(draw.textlength(l, font=f_save) for l in save_lines) + pad_x * 2
-    pill_h = 56 * len(save_lines) + 20
+    save_text = f"Save this for your next {niche.lower()} audit"
+    tw = draw.textlength(save_text, font=f_save)
+    pad_x = 24
+    pill_w = tw + pad_x * 2
+    pill_h = 64
     px = (W - pill_w) / 2
-    draw.rounded_rectangle([px, ty, px + pill_w, ty + pill_h], radius=pill_h // 2 if len(save_lines) == 1 else 22, fill=INK)
-    ly = ty + 14
-    for line in save_lines:
-        lw = draw.textlength(line, font=f_save)
-        draw.text(((W - lw) / 2, ly), line, font=f_save, fill=WHITE)
-        ly += 48
-    ty += pill_h + 50
+    draw.rounded_rectangle([px, ty, px + pill_w, ty + pill_h], radius=pill_h // 2, fill=colors["dark"])
+    draw.text((px + pad_x, ty + 12), save_text, font=f_save, fill=WHITE)
+    ty += 100
 
+    # Headline
     if headline:
-        f_head = ImageFont.truetype(F_SANS_REG, 30)
-        head_lines = wrap_text(draw, headline, f_head, max_w - 40)
+        f_head = ImageFont.truetype(F_SANS_REG, 32)
+        head_lines = wrap_text(draw, headline, f_head, max_w)
         for line in head_lines:
-            draw_centered_line(draw, ty, line, f_head, INK)
-            ty += 44
-        ty += 30
-    else:
+            tw = draw.textlength(line, font=f_head)
+            draw.text(((W - tw) / 2, ty), line, font=f_head, fill=TEXT)
+            ty += 48
         ty += 20
 
+    # COMMENT ask — FIXED SIZE, never grows
     f_cta = ImageFont.truetype(F_SANS_BOLD, CTA_COMMENT_SIZE)
-    cta_text = f"Comment '{cta_word}'"
-    cta_w = draw_centered_line(draw, ty, cta_text, f_cta, INK)
-    draw.line([((W - cta_w) / 2, ty + 72), ((W + cta_w) / 2, ty + 72)], fill=colors["accent"], width=5)
-    ty += 108
+    cta_text = f"Comment ‘{cta_word}’"
+    tw = draw.textlength(cta_text, font=f_cta)
+    cta_x = (W - tw) / 2
+    draw.text((cta_x, ty), cta_text, font=f_cta, fill=BLACK)
+    draw.line([(cta_x, ty + 76), (cta_x + tw, ty + 76)], fill=colors["dark"], width=6)
+    ty += 110
 
+    # Promise
     if cta_promise:
-        f_promise = ImageFont.truetype(F_SANS_REG, CTA_PROMISE_SIZE)
-        promise_lines = wrap_text(draw, f"and you'll get {cta_promise}", f_promise, max_w - 80)
-        for line in promise_lines:
-            draw_centered_line(draw, ty, line, f_promise, colors["accent"])
-            ty += 40
-        ty += 24
+        f_promise = ImageFont.truetype(F_SANS_BOLD, CTA_PROMISE_SIZE)
+        promise_text = f"and I’ll DM you {cta_promise}"
+        tw = draw.textlength(promise_text, font=f_promise)
+        draw.text(((W - tw) / 2, ty), promise_text, font=f_promise, fill=colors["dark"])
+        ty += 70
 
+    # Support
     if support_text:
-        f_support = ImageFont.truetype(F_SANS_REG, 26)
-        support_lines = wrap_text(draw, support_text, f_support, max_w - 120)[:3]
+        f_support = ImageFont.truetype(F_SANS_REG, 30)
+        support_lines = wrap_text(draw, support_text, f_support, max_w - 80)
         for line in support_lines:
-            draw_centered_line(draw, ty, line, f_support, MUTED)
-            ty += 38
+            tw = draw.textlength(line, font=f_support)
+            draw.text(((W - tw) / 2, ty), line, font=f_support, fill=(80, 80, 80))
+            ty += 48
 
-    draw_footer_rule_and_progress(draw, slide_num, total_slides, colors)
+    draw_follow_pill(draw, colors)
+    draw_progress_bar(draw, slide_num, total_slides, colors["accent"], colors["dark"])
+
     img.save(out_path, "JPEG", quality=92)
     return out_path
 
@@ -674,24 +606,18 @@ def render_carousel(carousel, batch_date, out_dir, carousel_index=0):
 
     bridge = carousel.get("bridge_slide") or carousel.get("hook_slide_2") or ""
     if not bridge:
-        bridge = f"The mechanic most {display_niche(niche)} accounts miss"
+        bridge = f"The {carousel.get('angle', 'mistake')} most {niche.lower()} owners miss"
     p = render_bridge_slide_fixed(bridge, niche, 2, total_slides,
                                    os.path.join(out_dir, "slide_02.jpg"))
     paths.append(p)
 
-    format_type = carousel.get("format", "")
-    checklist_mode = format_type.lower() in ("checklist", "quick-win checklist", "steal-this")
+    checklist_mode = carousel.get("format", "").lower() in ("checklist", "quick-win checklist", "steal-this")
     for i, body in enumerate(body_slides, start=1):
         slide_num = i + 2
         show_swipe = (i == 1) or (i == 4) or (i == len(body_slides) - 1)
-        # body_slides items are {"text": ..., "keyword": ...} dicts under
-        # the current schema, but slide_text/slide_keyword also accept a
-        # plain string so older/fallback data doesn't crash the render.
-        p = render_numbered_slide_fixed(i, slide_text(body), niche, slide_num, total_slides,
+        p = render_numbered_slide_fixed(i, body, niche, slide_num, total_slides,
                                          os.path.join(out_dir, f"slide_{slide_num:02d}.jpg"),
-                                         checklist_mode=checklist_mode, show_swipe=show_swipe,
-                                         format_type=format_type, body_position=i - 1,
-                                         keyword=slide_keyword(body))
+                                         checklist_mode=checklist_mode, show_swipe=show_swipe)
         paths.append(p)
 
     recap_lines = carousel.get("recap_slide", body_slides)
@@ -699,7 +625,6 @@ def render_carousel(carousel, batch_date, out_dir, carousel_index=0):
         recap_lines = [line.strip() for line in recap_lines.split("\n") if line.strip()]
     if not recap_lines:
         recap_lines = body_slides
-    recap_lines = [slide_text(item) for item in recap_lines]
     last_body = total_slides - 1
     p = render_recap_slide_aesthetic(recap_lines, niche, last_body, total_slides,
                                        os.path.join(out_dir, f"slide_{last_body:02d}.jpg"))
@@ -721,28 +646,28 @@ if __name__ == "__main__":
         "niche": "Google Ads",
         "angle": "Mistake/myth-busting",
         "format": "checklist",
-        "hook_slide": "Google Ads spends 72% of budget on searches that never convert",
-        "bridge_slide": "One setting decides whether a Google Ads campaign reaches buyers or browsers",
+        "hook_slide": "Your Google Ads are burning 30% of budget on browsers",
+        "bridge_slide": "The setting most clinics miss costs them €400/week",
         "body_slides": [
-            {"text": "Broad match shows ads for any loosely related search. Phrase match only fires when someone means it — that's usually where the wasted budget was going.", "keyword": "Phrase match"},
-            {"text": "The dashboard shows what you're spending. The search terms report shows what people actually typed — most accounts never open it.", "keyword": "search terms report"},
-            {"text": "Negative keywords block searches like 'free' or 'jobs' from triggering an ad at all — a two-minute fix most accounts skip.", "keyword": "Negative keywords"},
-            {"text": "Most people guess cost-per-lead should sit near €50. A healthy account usually lands closer to €10-30 — the gap is targeting, not budget.", "keyword": "€10-30"},
-            {"text": "A keyword with zero conversions after 30 days is rarely a timing problem. It's usually the wrong keyword.", "keyword": "30 days"},
-            {"text": "'People in' a location targets who's actually there. 'Interested in' targets anyone who ever searched it — a very different audience.", "keyword": "People in"},
+            "Switch broad match to phrase match. Cuts waste 30%",
+            "Check search terms weekly, not just the dashboard",
+            "Add negative keywords for ‘free’ and ‘jobs’",
+            "A good cost-per-lead sits lower than most assume",
+            "Pause keywords with zero conversions after 30 days",
+            "Set location targeting to ‘people in’ not ‘interested in’"
         ],
         "recap_slide": [
             "Switch broad match to phrase match",
-            "Check the search terms report weekly",
-            "Add negatives for 'free' and 'jobs'",
-            "Healthy cost-per-lead: €10-30, not €50",
+            "Check search terms weekly",
+            "Add negative keywords for ‘free’ and ‘jobs’",
+            "Good cost-per-lead is lower than you think",
             "Pause zero-conversion keywords after 30 days",
-            "Set location to 'people in' only",
+            "Set location to ‘people in’ only"
         ],
-        "cta_slide": "A healthy account checks all six of these weekly.",
+        "cta_slide": "Stop wasting budget. Start booking calls.",
         "cta_word": "AUDIT",
-        "cta_promise": "the 7-point Google Ads audit checklist",
-        "caption": "Save this 7-point Google Ads audit checklist. Most accounts leak budget on searches that were never going to convert. #googleads #digitalmarketing #ppc"
+        "cta_promise": "my 7-point Google Ads audit checklist",
+        "caption": "Save this 7-point Google Ads audit checklist ↓ Most business owners don’t know their ads are burning budget on the wrong searches. #googleads #smallbusiness #marketingtips #ppc #businessowner"
     }
-    out = render_carousel(sample, "2026-07-23", "/tmp/sample_carousel_v3b")
+    out = render_carousel(sample, "2026-07-19", "/tmp/sample_carousel")
     print(out)
