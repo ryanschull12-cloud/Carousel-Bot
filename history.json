@@ -69,6 +69,41 @@
           "hook": "Google Ads\u2019 \u2018close variants\u2019 burn 25% of budget"
         }
       ]
+    },
+    {
+      "date": "2026-07-25",
+      "carousels": [
+        {
+          "niche": "Google Ads",
+          "angle": "behind-the-curtain",
+          "format": "steal-this",
+          "hook": "Google Ads hides 30% of sales in its lag report"
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "proof-numbers",
+          "format": "before-after",
+          "hook": "2 PM emails get 18% fewer replies\u2014here\u2019s when to send"
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "proof-numbers",
+          "format": "before-after",
+          "hook": "Meta ads burn out after 3 days\u2014unless you rotate"
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "curiosity",
+          "format": "steal-this",
+          "hook": "Meta\u2019s algorithm kills ads after the learning phase"
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "curiosity",
+          "format": "step-by-step",
+          "hook": "Google Ads\u2019 lost IS report blames bids\u2014it\u2019s lying"
+        }
+      ]
     }
   ]
 }

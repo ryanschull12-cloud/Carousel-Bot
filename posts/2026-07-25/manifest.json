@@ -1,0 +1,120 @@
+{
+  "batch_date": "2026-07-25",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Google Ads hides 30% of sales in its lag report\u2014most accounts never adjust the 7-day window that hides them. Save this to audit your attribution and stop undervaluing your best campaigns. #googleads #ppc #digitalmarketing #attribution #marketingtips",
+      "niche": "Google Ads",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Google Ads hides 30% of sales in its lag report",
+      "throughline": "Google Ads' conversion lag report reveals sales that are counted days\u2014or weeks\u2014after the click, hiding the true performance of your campaigns until you adjust attribution windows.",
+      "image_paths": [
+        "posts/2026-07-25/carousel_1/slide_01.jpg",
+        "posts/2026-07-25/carousel_1/slide_02.jpg",
+        "posts/2026-07-25/carousel_1/slide_03.jpg",
+        "posts/2026-07-25/carousel_1/slide_04.jpg",
+        "posts/2026-07-25/carousel_1/slide_05.jpg",
+        "posts/2026-07-25/carousel_1/slide_06.jpg",
+        "posts/2026-07-25/carousel_1/slide_07.jpg",
+        "posts/2026-07-25/carousel_1/slide_08.jpg",
+        "posts/2026-07-25/carousel_1/slide_09.jpg",
+        "posts/2026-07-25/carousel_1/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "2 PM emails get 18% fewer replies\u201410 AM and 4 PM outperform it by double digits. Save this to test your send times and get more replies without changing a word. #emailmarketing #marketingtips #digitalmarketing #emailtiming #growthhacking",
+      "niche": "Email Marketing",
+      "angle": "proof-numbers",
+      "format": "before-after",
+      "hook": "2 PM emails get 18% fewer replies\u2014here\u2019s when to send",
+      "throughline": "Sending emails at the wrong time doesn\u2019t just hurt opens\u2014it kills replies, and the data shows a clear pattern: mid-morning and late afternoon outperform the default 2 PM slot by double digits.",
+      "image_paths": [
+        "posts/2026-07-25/carousel_2/slide_01.jpg",
+        "posts/2026-07-25/carousel_2/slide_02.jpg",
+        "posts/2026-07-25/carousel_2/slide_03.jpg",
+        "posts/2026-07-25/carousel_2/slide_04.jpg",
+        "posts/2026-07-25/carousel_2/slide_05.jpg",
+        "posts/2026-07-25/carousel_2/slide_06.jpg",
+        "posts/2026-07-25/carousel_2/slide_07.jpg",
+        "posts/2026-07-25/carousel_2/slide_08.jpg",
+        "posts/2026-07-25/carousel_2/slide_09.jpg",
+        "posts/2026-07-25/carousel_2/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Meta ads burn out after 3 days\u2014unless you rotate 3+ creatives. Save this to test creative rotation and get 40% more from your budget. #metaads #instagramads #digitalmarketing #adcreatives #marketingtips",
+      "niche": "Meta/Instagram Ads",
+      "angle": "proof-numbers",
+      "format": "before-after",
+      "hook": "Meta ads burn out after 3 days\u2014unless you rotate",
+      "throughline": "Meta\u2019s algorithm penalizes ads that show the same creative too often\u2014rotating 3+ creatives keeps CTR high and extends the lifespan of your campaigns by 40%.",
+      "image_paths": [
+        "posts/2026-07-25/carousel_3/slide_01.jpg",
+        "posts/2026-07-25/carousel_3/slide_02.jpg",
+        "posts/2026-07-25/carousel_3/slide_03.jpg",
+        "posts/2026-07-25/carousel_3/slide_04.jpg",
+        "posts/2026-07-25/carousel_3/slide_05.jpg",
+        "posts/2026-07-25/carousel_3/slide_06.jpg",
+        "posts/2026-07-25/carousel_3/slide_07.jpg",
+        "posts/2026-07-25/carousel_3/slide_08.jpg",
+        "posts/2026-07-25/carousel_3/slide_09.jpg",
+        "posts/2026-07-25/carousel_3/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "post_to_instagram": true
+    },
+    {
+      "index": 4,
+      "caption": "Meta\u2019s algorithm kills ads after the learning phase\u2014unless you monitor the 3 signals that decide if it lives or dies. Save this to keep your ads running. #metaads #instagramads #digitalmarketing #adoptimization #marketingtips",
+      "niche": "Meta/Instagram Ads",
+      "angle": "curiosity",
+      "format": "steal-this",
+      "hook": "Meta\u2019s algorithm kills ads after the learning phase",
+      "throughline": "Meta\u2019s \u2018learning phase\u2019 is just the start\u2014your ad\u2019s long-term performance depends on 3 hidden signals that keep it alive (or kill it) long after the initial phase ends.",
+      "image_paths": [
+        "posts/2026-07-25/carousel_4/slide_01.jpg",
+        "posts/2026-07-25/carousel_4/slide_02.jpg",
+        "posts/2026-07-25/carousel_4/slide_03.jpg",
+        "posts/2026-07-25/carousel_4/slide_04.jpg",
+        "posts/2026-07-25/carousel_4/slide_05.jpg",
+        "posts/2026-07-25/carousel_4/slide_06.jpg",
+        "posts/2026-07-25/carousel_4/slide_07.jpg",
+        "posts/2026-07-25/carousel_4/slide_08.jpg",
+        "posts/2026-07-25/carousel_4/slide_09.jpg",
+        "posts/2026-07-25/carousel_4/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Google Ads\u2019 lost IS report blames bids\u2014it\u2019s lying. The real reason your ads aren\u2019t showing is Quality Score. Save this to audit yours and cut CPC by 30%. #googleads #ppc #digitalmarketing #qualityscore #marketingtips",
+      "niche": "Google Ads",
+      "angle": "curiosity",
+      "format": "step-by-step",
+      "hook": "Google Ads\u2019 lost IS report blames bids\u2014it\u2019s lying",
+      "throughline": "Google Ads\u2019 \u2018search lost IS\u2019 report claims to show missed opportunities\u2014but it\u2019s actually hiding the real reason your ads aren\u2019t showing: poor Quality Score, not just low bids.",
+      "image_paths": [
+        "posts/2026-07-25/carousel_5/slide_01.jpg",
+        "posts/2026-07-25/carousel_5/slide_02.jpg",
+        "posts/2026-07-25/carousel_5/slide_03.jpg",
+        "posts/2026-07-25/carousel_5/slide_04.jpg",
+        "posts/2026-07-25/carousel_5/slide_05.jpg",
+        "posts/2026-07-25/carousel_5/slide_06.jpg",
+        "posts/2026-07-25/carousel_5/slide_07.jpg",
+        "posts/2026-07-25/carousel_5/slide_08.jpg",
+        "posts/2026-07-25/carousel_5/slide_09.jpg",
+        "posts/2026-07-25/carousel_5/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "post_to_instagram": false
+    }
+  ]
+}
