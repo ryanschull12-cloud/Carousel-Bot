@@ -158,6 +158,23 @@ def find_highlight_word(text):
     return None
 
 
+def slide_text_and_keyword(body):
+    """body_slides entries may be either a plain string, or a
+    {"text": ..., "keyword": ...} object -- critic_system_prompt.txt's
+    schema, used so the critic pass can point at an exact substring to
+    highlight instead of leaving it to the find_highlight_word() guess.
+    Normalize both shapes here so rendering works regardless of which one
+    the content pipeline handed us for a given slide. This is what broke
+    daily generation on 2026-07-25: the critic pass started emitting the
+    dict shape and this file only ever handled plain strings, so
+    full_text.split() crashed on a dict every time a slide came back
+    critic-rewritten.
+    """
+    if isinstance(body, dict):
+        return (body.get("text") or ""), (body.get("keyword") or None)
+    return body, None
+
+
 def draw_marker_bold(draw, x, y, w, h, color):
     r, g, b = color
     marker_color = (r, g, b, 200)
@@ -367,6 +384,7 @@ def render_bridge_slide_fixed(headline, niche, slide_num, total_slides, out_path
 
 def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slides, out_path,
                                 checklist_mode=False, show_swipe=False):
+    full_text, explicit_keyword = slide_text_and_keyword(full_text)
     colors = colors_for(niche)
     img = Image.new("RGB", (W, H), BG)
     draw = ImageDraw.Draw(img)
@@ -426,9 +444,10 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
             draw.text((badge_x + (badge_size - tw) / 2, badge_y + badge_size * 0.24),
                      num_text, font=f_num, fill=WHITE)
 
+    highlight = explicit_keyword or find_highlight_word(full_text)
     ty = badge_y + 4
     for line in lines:
-        draw_text_highlighted_v2(draw, text_x, ty, line, font, find_highlight_word(full_text), TEXT, colors["accent"])
+        draw_text_highlighted_v2(draw, text_x, ty, line, font, highlight, TEXT, colors["accent"])
         ty += line_h
 
     if show_swipe:
@@ -476,6 +495,11 @@ def render_recap_slide_aesthetic(recap_lines, niche, slide_num, total_slides, ou
     start_y = 280
 
     for i, item in enumerate(recap_lines[:6]):
+        # recap_lines falls back to body_slides in render_carousel() below
+        # when a carousel has no recap_slide of its own -- and body_slides
+        # entries can be {"text":..., "keyword":...} objects now, so this
+        # needs the same normalization render_numbered_slide_fixed uses.
+        item, _ = slide_text_and_keyword(item)
         col = i % 2
         row = i // 2
         cx = MARGIN + col * (card_w + gap_x)
