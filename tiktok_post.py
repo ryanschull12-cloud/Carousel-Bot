@@ -42,8 +42,11 @@ TO_EMAIL = os.environ.get("TO_EMAIL", GMAIL_ADDRESS)
 
 # Defaults to SELF_ONLY because that's the only option TikTok allows for
 # an unaudited app -- see the module docstring. Override via repo variable
-# once the app is approved.
-TIKTOK_PRIVACY_LEVEL = os.environ.get("TIKTOK_PRIVACY_LEVEL", "SELF_ONLY")
+# once the app is approved. Using "or" rather than dict.get's default
+# because GitHub Actions passes unset repo variables through as an empty
+# string (not an absent key), which would otherwise silently defeat the
+# default and fall through to get_privacy_level()'s options[0] fallback.
+TIKTOK_PRIVACY_LEVEL = os.environ.get("TIKTOK_PRIVACY_LEVEL") or "SELF_ONLY"
 
 API = "https://open.tiktokapis.com/v2"
 
@@ -100,6 +103,16 @@ def get_privacy_level(access_token):
     options = data.get("data", {}).get("privacy_level_options", [])
     if TIKTOK_PRIVACY_LEVEL in options:
         return TIKTOK_PRIVACY_LEVEL
+    if "SELF_ONLY" in options:
+        # SELF_ONLY is the one privacy_level unaudited apps are always
+        # allowed to post as, so prefer it over an arbitrary options[0]
+        # (which could be e.g. FOLLOWER_OF_CREATOR and get rejected with
+        # unaudited_client_can_only_post_to_private_accounts).
+        print(
+            f"Requested privacy_level '{TIKTOK_PRIVACY_LEVEL}' isn't in the "
+            f"options TikTok returned ({options}) -- using 'SELF_ONLY' instead."
+        )
+        return "SELF_ONLY"
     if options:
         print(
             f"Requested privacy_level '{TIKTOK_PRIVACY_LEVEL}' isn't in the "
