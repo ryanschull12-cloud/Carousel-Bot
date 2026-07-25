@@ -15,7 +15,9 @@ approval step:
      step above just closed one out), research and start exactly ONE new
      one — combining real internal performance data (performance_history.json)
      with external web research (Tavily) on what's currently working for
-     other accounts, fed to Claude to propose a single testable tweak.
+     other accounts, fed to Mistral (the same free-tier model already
+     driving the rest of this bot — no separate paid API dependency) to
+     propose a single testable tweak.
 
 SCOPE, ENFORCED IN CODE, NOT JUST IN THE PROMPT:
   - copy_rule experiments may only touch content_brain_system_prompt.txt or
@@ -46,6 +48,7 @@ enough data yet, it just logs that and exits without emailing.
 import os
 import re
 import json
+import time
 import datetime
 import smtplib
 import requests
@@ -53,14 +56,17 @@ from email.message import EmailMessage
 
 import carousel_engine
 
-ANTHROPIC_API_KEY = os.environ["ANTHROPIC_API_KEY"]
+MISTRAL_API_KEY = os.environ["MISTRAL_API_KEY"]
 GMAIL_ADDRESS = os.environ["GMAIL_ADDRESS"]
 GMAIL_APP_PASSWORD = os.environ["GMAIL_APP_PASSWORD"]
 TO_EMAIL = os.environ.get("TO_EMAIL", GMAIL_ADDRESS)
 TAVILY_API_KEY = os.environ.get("TAVILY_API_KEY")
 
-ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages"
-ANTHROPIC_MODEL = "claude-sonnet-4-5-20250929"
+# Proposing a new experiment runs on the same free-tier Mistral model that
+# already writes every carousel, critiques it, and scores it for virality —
+# no separate paid API dependency for this script to keep working.
+MISTRAL_URL = "https://api.mistral.ai/v1/chat/completions"
+MISTRAL_MODEL = "mistral-large-latest"
 TAVILY_URL = "https://api.tavily.com/search"
 
 EXPERIMENTS_PATH = "experiments.json"
@@ -361,7 +367,7 @@ Include ONLY the "copy_rule" key if type is copy_rule, or ONLY the "design_const
 is design_constant -- never both."""
 
 
-def call_claude_propose(internal_summary, external_summary, tried_summary):
+def call_mistral_propose(internal_summary, external_summary, tried_summary):
     constants_block = "\n".join(
         f"{name}: current={getattr(carousel_engine, name)}, min={bounds['min']}, max={bounds['max']}"
         for name, bounds in carousel_engine.EXPERIMENTABLE_CONSTANTS.items()
@@ -372,26 +378,31 @@ def call_claude_propose(internal_summary, external_summary, tried_summary):
         f"DESIGN CONSTANTS YOU MAY PROPOSE CHANGING:\n{constants_block}\n\n"
         f"EXPERIMENTS ALREADY TRIED (do not repeat):\n{tried_summary}\n"
     )
-    resp = requests.post(
-        ANTHROPIC_API_URL,
-        headers={
-            "x-api-key": ANTHROPIC_API_KEY,
-            "anthropic-version": "2023-06-01",
-            "content-type": "application/json",
-        },
-        json={
-            "model": ANTHROPIC_MODEL,
-            "max_tokens": 700,
-            "system": PROPOSAL_SYSTEM_PROMPT,
-            "messages": [{"role": "user", "content": user_content}],
-        },
-        timeout=120,
-    )
-    if not resp.ok:
-        raise RuntimeError(f"Anthropic API call failed ({resp.status_code}): {resp.text}")
-    data = resp.json()
-    text = "".join(block.get("text", "") for block in data.get("content", []))
-    return json.loads(text)
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {MISTRAL_API_KEY}",
+    }
+    body = {
+        "model": MISTRAL_MODEL,
+        "messages": [
+            {"role": "system", "content": PROPOSAL_SYSTEM_PROMPT},
+            {"role": "user", "content": user_content},
+        ],
+        "temperature": 0.4,
+        "response_format": {"type": "json_object"},
+    }
+    last_error = None
+    for attempt in range(3):
+        resp = requests.post(MISTRAL_URL, headers=headers, json=body, timeout=90)
+        if resp.status_code in (503, 429, 500):
+            last_error = resp
+            time.sleep(min(30, 2 ** attempt) + 1)
+            continue
+        resp.raise_for_status()
+        data = resp.json()
+        text = data["choices"][0]["message"]["content"]
+        return json.loads(text)
+    last_error.raise_for_status()
 
 
 def validate_and_normalize_proposal(proposal, next_id):
@@ -472,7 +483,7 @@ def research_new_experiment(experiments, performance):
     tried_summary = already_tried_summary(experiments)
 
     try:
-        proposal = call_claude_propose(internal_summary, external_summary, tried_summary)
+        proposal = call_mistral_propose(internal_summary, external_summary, tried_summary)
     except Exception as e:
         print(f"Proposal call failed, no new experiment this cycle ({e})")
         return None
