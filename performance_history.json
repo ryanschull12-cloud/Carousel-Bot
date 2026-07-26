@@ -1,3 +1,22 @@
 {
-  "scored_posts": []
+  "scored_posts": [
+    {
+      "date": "2026-07-23",
+      "media_id": "17879998035617004",
+      "niche": "Google Ads",
+      "angle": "realization",
+      "format": "checklist",
+      "hook": "Monday morning, my spend was normal\u2014my pipeline wasn\u2019t",
+      "metrics": {
+        "reach": 2,
+        "saved": 0,
+        "shares": 0,
+        "likes": 3,
+        "comments": 0
+      },
+      "engagement_rate": 150.0,
+      "experiment_id": null,
+      "experiment_arm": null
+    }
+  ]
 }
