@@ -79,6 +79,16 @@
       "format": "comparison",
       "hook": "Meta\u2019s auction spikes CPMs 200% after 8 PM",
       "scored": false
+    },
+    {
+      "media_id": "17874699999625362",
+      "date": "2026-07-26",
+      "index": 2,
+      "niche": "Email Marketing",
+      "angle": "proof-numbers",
+      "format": "checklist",
+      "hook": "Single-CTA emails get 40% more clicks",
+      "scored": false
     }
   ]
 }
