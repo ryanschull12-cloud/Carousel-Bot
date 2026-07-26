@@ -69,6 +69,16 @@
       "format": "before-after",
       "hook": "Meta ads burn out after 3 days\u2014unless you rotate",
       "scored": false
+    },
+    {
+      "media_id": "18362095246214885",
+      "date": "2026-07-26",
+      "index": 1,
+      "niche": "Meta/Instagram Ads",
+      "angle": "realization",
+      "format": "comparison",
+      "hook": "Meta\u2019s auction spikes CPMs 200% after 8 PM",
+      "scored": false
     }
   ]
 }
