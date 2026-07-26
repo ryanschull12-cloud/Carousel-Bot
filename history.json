@@ -104,6 +104,41 @@
           "hook": "Google Ads\u2019 lost IS report blames bids\u2014it\u2019s lying"
         }
       ]
+    },
+    {
+      "date": "2026-07-26",
+      "carousels": [
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "realization",
+          "format": "comparison",
+          "hook": "Meta\u2019s auction spikes CPMs 200% after 8 PM"
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "proof-numbers",
+          "format": "checklist",
+          "hook": "Single-CTA emails get 40% more clicks"
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "mistake-fear",
+          "format": "step-by-step",
+          "hook": "Google\u2019s Search Partners waste 15% of your budget"
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "behind-the-curtain",
+          "format": "before-after",
+          "hook": "Google Ads hides 20% of your sales in default reports"
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "realization",
+          "format": "comparison",
+          "hook": "Phrase match wins 70% of Google Ads tests"
+        }
+      ]
     }
   ]
 }

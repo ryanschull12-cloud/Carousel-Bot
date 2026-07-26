@@ -1,0 +1,130 @@
+{
+  "batch_date": "2026-07-26",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Meta\u2019s auction spikes CPMs 200% after 8 PM\u2014not because demand is higher, but because its auction is crowded. Shift 10% of budget to off-peak and watch CPMs drop 40%. Save this for your next bid review. #metaads #digitalmarketing #ppc #advertising #marketingtips",
+      "niche": "Meta/Instagram Ads",
+      "angle": "realization",
+      "format": "comparison",
+      "hook": "Meta\u2019s auction spikes CPMs 200% after 8 PM",
+      "throughline": "Meta\u2019s auction system quietly inflates costs during peak hours, turning dayparting from a targeting tool into a budget protection strategy.",
+      "image_paths": [
+        "posts/2026-07-26/carousel_1/slide_01.jpg",
+        "posts/2026-07-26/carousel_1/slide_02.jpg",
+        "posts/2026-07-26/carousel_1/slide_03.jpg",
+        "posts/2026-07-26/carousel_1/slide_04.jpg",
+        "posts/2026-07-26/carousel_1/slide_05.jpg",
+        "posts/2026-07-26/carousel_1/slide_06.jpg",
+        "posts/2026-07-26/carousel_1/slide_07.jpg",
+        "posts/2026-07-26/carousel_1/slide_08.jpg",
+        "posts/2026-07-26/carousel_1/slide_09.jpg",
+        "posts/2026-07-26/carousel_1/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Single-CTA emails get 40% more clicks because readers freeze when given too many options. Stick to one clear CTA and watch your click-through rates climb. Save this for your next email audit. #emailmarketing #digitalmarketing #marketingtips #emailtips",
+      "niche": "Email Marketing",
+      "angle": "proof-numbers",
+      "format": "checklist",
+      "hook": "Single-CTA emails get 40% more clicks",
+      "throughline": "Emails with a single, focused call-to-action outperform cluttered designs by forcing clarity and reducing decision fatigue for readers.",
+      "image_paths": [
+        "posts/2026-07-26/carousel_2/slide_01.jpg",
+        "posts/2026-07-26/carousel_2/slide_02.jpg",
+        "posts/2026-07-26/carousel_2/slide_03.jpg",
+        "posts/2026-07-26/carousel_2/slide_04.jpg",
+        "posts/2026-07-26/carousel_2/slide_05.jpg",
+        "posts/2026-07-26/carousel_2/slide_06.jpg",
+        "posts/2026-07-26/carousel_2/slide_07.jpg",
+        "posts/2026-07-26/carousel_2/slide_08.jpg",
+        "posts/2026-07-26/carousel_2/slide_09.jpg",
+        "posts/2026-07-26/carousel_2/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Google\u2019s Search Partners waste 15% of your budget on low-quality clicks. Disable it in 60 seconds and reallocate the savings to high-performing keywords. Save this for your next account audit. #googleads #ppc #digitalmarketing #advertising",
+      "niche": "Google Ads",
+      "angle": "mistake-fear",
+      "format": "step-by-step",
+      "hook": "Google\u2019s Search Partners waste 15% of your budget",
+      "throughline": "Google\u2019s \u2018Search Partners\u2019 network burns budget on low-quality clicks, and disabling it is a 60-second fix that protects 15% of spend.",
+      "image_paths": [
+        "posts/2026-07-26/carousel_3/slide_01.jpg",
+        "posts/2026-07-26/carousel_3/slide_02.jpg",
+        "posts/2026-07-26/carousel_3/slide_03.jpg",
+        "posts/2026-07-26/carousel_3/slide_04.jpg",
+        "posts/2026-07-26/carousel_3/slide_05.jpg",
+        "posts/2026-07-26/carousel_3/slide_06.jpg",
+        "posts/2026-07-26/carousel_3/slide_07.jpg",
+        "posts/2026-07-26/carousel_3/slide_08.jpg",
+        "posts/2026-07-26/carousel_3/slide_09.jpg",
+        "posts/2026-07-26/carousel_3/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 4,
+      "caption": "Google Ads hides 20% of your sales in default reports because they only count the first 30 days. Extend to 90 days and watch your \u2018underperforming\u2019 keywords suddenly look 24% more efficient. Save this for your next attribution audit. #googleads #ppc #digitalmarketing #attribution",
+      "niche": "Google Ads",
+      "angle": "behind-the-curtain",
+      "format": "before-after",
+      "hook": "Google Ads hides 20% of your sales in default reports",
+      "throughline": "Google Ads\u2019 \u2018conversion lag\u2019 hides 20% of sales in its default reports, but the \u2018Attribution\u2019 tab reveals the full picture\u2014and the keywords that truly drive revenue.",
+      "image_paths": [
+        "posts/2026-07-26/carousel_4/slide_01.jpg",
+        "posts/2026-07-26/carousel_4/slide_02.jpg",
+        "posts/2026-07-26/carousel_4/slide_03.jpg",
+        "posts/2026-07-26/carousel_4/slide_04.jpg",
+        "posts/2026-07-26/carousel_4/slide_05.jpg",
+        "posts/2026-07-26/carousel_4/slide_06.jpg",
+        "posts/2026-07-26/carousel_4/slide_07.jpg",
+        "posts/2026-07-26/carousel_4/slide_08.jpg",
+        "posts/2026-07-26/carousel_4/slide_09.jpg",
+        "posts/2026-07-26/carousel_4/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Phrase match wins 70% of Google Ads tests because it captures intent, not just keywords. Use exact match only for high-volume, high-intent keywords\u2014everything else belongs in phrase match. Save this for your next keyword audit. #googleads #ppc #digitalmarketing #advertising",
+      "niche": "Google Ads",
+      "angle": "realization",
+      "format": "comparison",
+      "hook": "Phrase match wins 70% of Google Ads tests",
+      "throughline": "Google Ads\u2019 \u2018phrase match\u2019 outperforms \u2018exact match\u2019 70% of the time because it captures intent, not just keywords\u2014here\u2019s when to use each.",
+      "image_paths": [
+        "posts/2026-07-26/carousel_5/slide_01.jpg",
+        "posts/2026-07-26/carousel_5/slide_02.jpg",
+        "posts/2026-07-26/carousel_5/slide_03.jpg",
+        "posts/2026-07-26/carousel_5/slide_04.jpg",
+        "posts/2026-07-26/carousel_5/slide_05.jpg",
+        "posts/2026-07-26/carousel_5/slide_06.jpg",
+        "posts/2026-07-26/carousel_5/slide_07.jpg",
+        "posts/2026-07-26/carousel_5/slide_08.jpg",
+        "posts/2026-07-26/carousel_5/slide_09.jpg",
+        "posts/2026-07-26/carousel_5/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    }
+  ]
+}
