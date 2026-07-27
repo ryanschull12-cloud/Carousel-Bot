@@ -217,6 +217,15 @@ def draw_text_highlighted_v2(draw, x, y, line, font, highlight, text_color, mark
     draw.text((x, y), line, font=font, fill=text_color)
 
 
+def draw_text_highlighted_centered(draw, y, line, font, highlight, text_color, marker_color):
+    """Same as draw_text_highlighted_v2, but centers this line horizontally
+    on the page instead of drawing from a fixed left x. Used everywhere the
+    design should read as centered rather than left-aligned."""
+    lw = draw.textlength(line, font=font)
+    x = (W - lw) / 2
+    draw_text_highlighted_v2(draw, x, y, line, font, highlight, text_color, marker_color)
+
+
 def draw_corner_flag(draw, colors):
     """
     UPGRADE 2 — bold diagonal accent wedge in the top-right corner.
@@ -233,19 +242,43 @@ def draw_mega_stat(draw, text, y, colors, max_width, font_path=F_SERIF_BOLD, tar
     headline. Only fires when the hook/bridge line actually contains a stat, so
     every loss-aversion-framed hook (the format the content brain is told to
     prioritize) gets a genuine pattern-interrupt instead of just bigger body text.
+    Centered horizontally to match the centered headline below it.
     """
     font, lines, size = fit_text_shrink_only(draw, text, max_width, 1, target, min_size, font_path)
     line = lines[0] if lines else text
-    x = MARGIN + 20
+    lw = draw.textlength(line, font=font)
+    x = (W - lw) / 2
     draw.text((x, y), line, font=font, fill=colors["dark"])
     ascent, descent = font.getmetrics()
     return y + int((ascent + descent) * 0.92), size
 
 
+def draw_mega_phrase(draw, text, y, colors, max_width, font_path=F_SERIF_BOLD, target=130, min_size=76):
+    """
+    Same pattern-interrupt role as draw_mega_stat, for hooks/bridges that
+    don't contain a €/$/% figure (which, per the content brain's BENEFIT
+    OVER RAW STAT rule, is most of them now). Renders the content brain's
+    hook_pop_phrase/bridge_pop_phrase — a short, punchy consequence phrase —
+    at oversized scale, centered, so every hook gets the same visual
+    pattern-interrupt a number-led hook gets, not just the minority that
+    happen to cite a stat. Allows up to 2 lines since phrases run longer
+    than a bare number.
+    """
+    font, lines, size = fit_text_shrink_only(draw, text, max_width, 2, target, min_size, font_path)
+    line_h = int(size * 1.05)
+    for line in lines:
+        lw = draw.textlength(line, font=font)
+        x = (W - lw) / 2
+        draw.text((x, y), line, font=font, fill=colors["dark"])
+        y += line_h
+    return y + 14, size
+
+
 def draw_accent_bar(draw, y, colors, width=None):
     bar_h = 6
     w = width if width else (W - 2 * MARGIN)
-    draw.rectangle([MARGIN, y, MARGIN + w, y + bar_h], fill=colors["accent"])
+    x0 = (W - w) / 2
+    draw.rectangle([x0, y, x0 + w, y + bar_h], fill=colors["accent"])
 
 
 def draw_swipe_arrow(draw, colors):
@@ -300,7 +333,7 @@ def draw_bottom_accent_block(draw, y, height, colors):
 # HOOK SLIDE — fixed size, designed fill
 # ============================================================
 
-def render_hook_slide_fixed(headline, niche, slide_num, total_slides, out_path):
+def render_hook_slide_fixed(headline, niche, slide_num, total_slides, out_path, pop_phrase=None):
     colors = colors_for(niche)
     img = Image.new("RGB", (W, H), BG)
     draw = ImageDraw.Draw(img)
@@ -310,17 +343,25 @@ def render_hook_slide_fixed(headline, niche, slide_num, total_slides, out_path):
 
     max_w = W - 2 * MARGIN - 40  # slightly narrower for better line breaks
 
-    # UPGRADE 1: pull a stat out and render it oversized before the headline
+    # UPGRADE 1: pull a stat out and render it oversized before the headline.
+    # Most hooks won't have one now (BENEFIT OVER RAW STAT pushed the content
+    # brain toward outcome-led hooks) — when there's no stat, fall back to
+    # the content brain's hook_pop_phrase so every hook still gets the same
+    # giant-text pattern-interrupt, not just the number-led minority.
     stat = find_stat(headline)
     top_y = 260
     if stat:
         top_y, _ = draw_mega_stat(draw, stat, top_y, colors, max_w)
         top_y += 24
+    elif pop_phrase and pop_phrase in headline:
+        top_y, _ = draw_mega_phrase(draw, pop_phrase, top_y, colors, max_w)
+        top_y += 24
 
     # FIXED SIZE: 96px, shrink only if needed
     font, lines, size = fit_text_shrink_only(draw, headline, max_w, 4, HOOK_FONT_SIZE, 52, F_SERIF_BOLD)
     line_h = int(size * 1.2)
-    highlight = find_highlight_word(headline)
+    have_pop = bool(pop_phrase and pop_phrase in headline)
+    highlight = pop_phrase if have_pop else find_highlight_word(headline)
 
     total_h = line_h * len(lines)
 
@@ -328,9 +369,9 @@ def render_hook_slide_fixed(headline, niche, slide_num, total_slides, out_path):
     available_h = H - top_y - 180  # header/stat to progress bar
     ty = top_y + max(0, (available_h - total_h) // 2)
 
-    # If text is very short (1-2 lines) and there's no mega-stat already
+    # If text is very short (1-2 lines) and there's no mega element already
     # doing the attention-grabbing work, add decorative elements
-    if len(lines) <= 2 and not stat:
+    if len(lines) <= 2 and not stat and not have_pop:
         draw_decorative_quote_marks(draw, ty - 40, colors)
         draw_accent_bar(draw, ty - 60, colors, width=200)
         draw_accent_bar(draw, ty + total_h + 40, colors, width=200)
@@ -339,7 +380,7 @@ def render_hook_slide_fixed(headline, niche, slide_num, total_slides, out_path):
         draw_accent_bar(draw, ty + total_h + 20, colors)
 
     for line in lines:
-        draw_text_highlighted_v2(draw, MARGIN + 20, ty, line, font, highlight, TEXT, colors["accent"])
+        draw_text_highlighted_centered(draw, ty, line, font, highlight, TEXT, colors["accent"])
         ty += line_h
 
     draw_follow_pill(draw, colors)
@@ -353,7 +394,7 @@ def render_hook_slide_fixed(headline, niche, slide_num, total_slides, out_path):
 # BRIDGE SLIDE — fixed size, designed fill
 # ============================================================
 
-def render_bridge_slide_fixed(headline, niche, slide_num, total_slides, out_path):
+def render_bridge_slide_fixed(headline, niche, slide_num, total_slides, out_path, pop_phrase=None):
     colors = colors_for(niche)
     img = Image.new("RGB", (W, H), BG)
     draw = ImageDraw.Draw(img)
@@ -364,31 +405,39 @@ def render_bridge_slide_fixed(headline, niche, slide_num, total_slides, out_path
     max_w = W - 2 * MARGIN - 40
 
     # UPGRADE 1, scaled down: bridge should carry the same weight as the hook
-    # without literally duplicating it, so the mega-stat here targets a smaller size
+    # without literally duplicating it, so the mega-stat/phrase here targets
+    # a smaller size. Same stat-first, pop_phrase-fallback logic as the hook.
     stat = find_stat(headline)
     top_y = 260
     if stat:
         top_y, _ = draw_mega_stat(draw, stat, top_y, colors, max_w, target=140, min_size=90)
         top_y += 20
+    elif pop_phrase and pop_phrase in headline:
+        top_y, _ = draw_mega_phrase(draw, pop_phrase, top_y, colors, max_w, target=110, min_size=68)
+        top_y += 20
 
     font, lines, size = fit_text_shrink_only(draw, headline, max_w, 4, BRIDGE_FONT_SIZE, 48, F_SERIF_BOLD)
     line_h = int(size * 1.2)
-    highlight = find_highlight_word(headline)
+    have_pop = bool(pop_phrase and pop_phrase in headline)
+    highlight = pop_phrase if have_pop else find_highlight_word(headline)
 
     total_h = line_h * len(lines)
     available_h = H - top_y - 180
     ty = top_y + max(0, (available_h - total_h) // 2)
 
-    # Bridge gets a vertical accent line on the left for visual distinction
-    if len(lines) <= 2:
-        draw_vertical_accent_line(draw, MARGIN, ty - 20, ty + total_h + 20, colors)
-        if not stat:
-            draw_decorative_quote_marks(draw, ty - 30, colors)
+    # Bridge mirrors the hook's centered framing (top/bottom accent bars,
+    # plus decorative quote marks on short lines) so slides 1 and 2 carry
+    # the same visual weight, per the re-hook rule.
+    if len(lines) <= 2 and not stat and not have_pop:
+        draw_decorative_quote_marks(draw, ty - 30, colors)
+        draw_accent_bar(draw, ty - 50, colors, width=200)
+        draw_accent_bar(draw, ty + total_h + 30, colors, width=200)
     else:
-        draw_vertical_accent_line(draw, MARGIN, ty - 10, ty + total_h + 10, colors)
+        draw_accent_bar(draw, ty - 25, colors)
+        draw_accent_bar(draw, ty + total_h + 15, colors)
 
     for line in lines:
-        draw_text_highlighted_v2(draw, MARGIN + 30, ty, line, font, highlight, TEXT, colors["accent"])
+        draw_text_highlighted_centered(draw, ty, line, font, highlight, TEXT, colors["accent"])
         ty += line_h
 
     draw_follow_pill(draw, colors)
@@ -413,9 +462,10 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
     draw_header_v2(draw, niche, slide_num, total_slides, colors)
 
     badge_size = 80
-    badge_x = MARGIN
-    text_x = badge_x + badge_size + 32
-    max_w = W - MARGIN - text_x - 20
+    gap_below_badge = 28
+    card_pad_x = 44
+    card_pad_y = 36
+    max_w = W - 2 * MARGIN - 2 * card_pad_x
 
     # FIXED SIZE: 64px (bumped up from 56 for readability), shrink only if
     # needed. Floor raised from 36 to 44 too, so a long body line shrinks
@@ -424,15 +474,24 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
     line_h = int(size * 1.3)  # slightly more breathing room between lines than other slide types
 
     total_h = line_h * len(lines)
-    available_h = H - 280 - 200
-    badge_y = 280 + (available_h - total_h) // 2
 
-    # UPGRADE 3: accent block now renders behind EVERY body slide, not just
+    # Centered stack: number badge on top, card of text centered below it —
+    # both centered horizontally on the page instead of left-aligned.
+    content_h = badge_size + gap_below_badge + card_pad_y * 2 + total_h
+    available_h = H - 280 - 200
+    top_y = 280 + max(0, (available_h - content_h) // 2)
+
+    badge_x = (W - badge_size) / 2
+    badge_y = top_y
+    block_y = badge_y + badge_size + gap_below_badge
+    block_h = card_pad_y * 2 + total_h
+    block_x0 = MARGIN
+    block_x1 = W - MARGIN
+
+    # UPGRADE 3: accent block renders behind EVERY body slide, not just
     # short-text ones — this is what was making some slides look designed
     # and others look plain within the same carousel.
-    block_y = badge_y - 24
-    block_h = total_h + 64
-    draw.rounded_rectangle([text_x - 24, block_y, W - MARGIN, block_y + block_h],
+    draw.rounded_rectangle([block_x0, block_y, block_x1, block_y + block_h],
                           radius=14, fill=colors["light"])
 
     # Number badge or checkbox, now with a soft drop shadow for depth
@@ -465,9 +524,9 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
                      num_text, font=f_num, fill=WHITE)
 
     highlight = explicit_keyword or find_highlight_word(full_text)
-    ty = badge_y + 4
+    ty = block_y + card_pad_y
     for line in lines:
-        draw_text_highlighted_v2(draw, text_x, ty, line, font, highlight, TEXT, colors["accent"])
+        draw_text_highlighted_centered(draw, ty, line, font, highlight, TEXT, colors["accent"])
         ty += line_h
 
     if show_swipe:
@@ -645,14 +704,16 @@ def render_carousel(carousel, batch_date, out_dir, carousel_index=0):
     total_slides = 4 + len(body_slides)
 
     p = render_hook_slide_fixed(carousel["hook_slide"], niche, 1, total_slides,
-                                 os.path.join(out_dir, "slide_01.jpg"))
+                                 os.path.join(out_dir, "slide_01.jpg"),
+                                 pop_phrase=carousel.get("hook_pop_phrase"))
     paths.append(p)
 
     bridge = carousel.get("bridge_slide") or carousel.get("hook_slide_2") or ""
     if not bridge:
         bridge = f"The {carousel.get('angle', 'mistake')} most {niche.lower()} owners miss"
     p = render_bridge_slide_fixed(bridge, niche, 2, total_slides,
-                                   os.path.join(out_dir, "slide_02.jpg"))
+                                   os.path.join(out_dir, "slide_02.jpg"),
+                                   pop_phrase=carousel.get("bridge_pop_phrase"))
     paths.append(p)
 
     checklist_mode = carousel.get("format", "").lower() in ("checklist", "quick-win checklist", "steal-this")

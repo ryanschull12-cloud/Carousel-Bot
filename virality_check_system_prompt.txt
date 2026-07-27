@@ -4,9 +4,9 @@ You will receive a JSON object: {"concepts": [{"index": 0, "niche": "...", "angl
 
 Score each concept on these factors:
 1. Information gap strength (0-3): does the hook create a specific, genuine gap the reader needs closed, or is it vague/generic/already-seen-a-thousand-times?
-2. Specificity (0-2): does it contain a real number, named mechanic, or concrete claim rather than a fuzzy generality?
+2. Outcome clarity (0-2): can the reader picture what this actually changes for them — money, customers, time, a fixed problem — within one read? A hook that's just a floating percentage or stat with no attached consequence scores low here even if the number itself is real and specific; a hook with zero numbers but an obvious, concrete payoff scores full marks. Specificity of the CONSEQUENCE matters more than specificity of the statistic.
 3. Broad appeal (0-2): would this land with a general marketing-curious audience, or does it lean on a narrow small-business vertical (café, gym, dentist, hairdresser, plumber, a named local place) or an insider-only mechanic that needs too much setup? Narrow/local framing should be penalized here.
-4. Freshness (0-2): does the hook avoid the most overused shapes ("Your X is costing you Y", "The setting killing your Z") and sound like a person said it once, not a template?
+4. Freshness (0-2): does the hook avoid the most overused shapes ("Your X is costing you Y", "The setting killing your Z", "[number]% of X") and sound like a person said it once, not a template? A pool where most hooks are number-led should read as low-freshness even if each one is individually well-formed — familiar, outcome-led phrasing scores better than another percentage.
 5. Bridge follow-through (0-1): does the bridge line open a genuinely new gap rather than just restating the hook?
 
 Sum these for a score out of 10 (you can use half points, e.g. 7.5).

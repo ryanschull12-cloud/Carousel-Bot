@@ -387,13 +387,14 @@ def generate_concept_pool(pool_size, history_briefing, performance_briefing, bri
     user_content = (
         f"Generate a POOL of {pool_size} candidate carousel CONCEPTS — not full "
         "carousels. For each concept, give only: niche, angle, format, "
-        "hook_slide, and bridge_slide, following every rule in your system "
-        "prompt that applies to those fields (word limits, originality "
-        "rules, the GENERAL NOT HYPER-LOCAL rule, topic-focus weighting, "
-        "hook-angle variety, etc). Since this pool is larger than a normal "
-        "batch, push for real variety across niches, angles, and formats "
-        "rather than converging on the same few ideas — a pool where half "
-        "the concepts feel interchangeable defeats the point of having a pool."
+        "hook_slide, hook_pop_phrase, bridge_slide, and bridge_pop_phrase, "
+        "following every rule in your system prompt that applies to those "
+        "fields (word limits, originality rules, the GENERAL NOT HYPER-LOCAL "
+        "rule, topic-focus weighting, hook-angle variety, BENEFIT OVER RAW "
+        "STAT, etc). Since this pool is larger than a normal batch, push for "
+        "real variety across niches, angles, and formats rather than "
+        "converging on the same few ideas — a pool where half the concepts "
+        "feel interchangeable defeats the point of having a pool."
     )
     if exclude_concepts:
         prior = "\n".join(f"- {c['hook_slide']}" for c in exclude_concepts)
@@ -406,7 +407,8 @@ def generate_concept_pool(pool_size, history_briefing, performance_briefing, bri
     user_content += (
         "\n\nReturn ONLY valid JSON matching this schema, nothing else: "
         '{"concepts": [{"niche": "...", "angle": "...", "format": "...", '
-        '"hook_slide": "...", "bridge_slide": "..."}]}'
+        '"hook_slide": "...", "hook_pop_phrase": "...", "bridge_slide": "...", '
+        '"bridge_pop_phrase": "..."}]}'
     )
 
     result = call_mistral(SYSTEM_PROMPT, user_content, temperature=0.95)
@@ -519,15 +521,21 @@ def generate_batch(briefing, history_briefing, performance_briefing, winning_con
                 "angle": c.get("angle", ""),
                 "format": c.get("format", ""),
                 "hook_slide": c.get("hook_slide", ""),
+                "hook_pop_phrase": c.get("hook_pop_phrase", ""),
                 "bridge_slide": c.get("bridge_slide", ""),
+                "bridge_pop_phrase": c.get("bridge_pop_phrase", ""),
             }
             for c in winning_concepts
         ])
         user_content = (
             "Write full carousels for EXACTLY these 5 pre-approved concepts — "
             "they already passed a virality screen, so keep niche, angle, "
-            "format, hook_slide, and bridge_slide exactly as given for each "
-            "one (do not alter or improve them). Your job is to write the "
+            "format, hook_slide, hook_pop_phrase, bridge_slide, and "
+            "bridge_pop_phrase exactly as given for each one (do not alter or "
+            "improve them — if a concept's hook_pop_phrase or "
+            "bridge_pop_phrase is empty, fill it in following the rules in "
+            "your system prompt, but never touch the hook_slide or "
+            "bridge_slide text itself). Your job is to write the "
             "body_slides (6, following the standalone-value rules), "
             "recap_slide, cta_slide, cta_word, cta_promise, caption, and "
             "suggested_audio_style for each:\n\n" + concepts_json
