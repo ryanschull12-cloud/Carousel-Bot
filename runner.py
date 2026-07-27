@@ -330,12 +330,34 @@ def call_mistral(system_prompt, user_content, temperature=0.9):
         "temperature": temperature,
         "response_format": {"type": "json_object"},
     }
+    # Timeout raised from 90s to 180s: the system prompt this gets called
+    # with has grown substantially (hook/design rewrites added several KB
+    # of extra rules), and mistral-large-latest generating a full JSON
+    # batch against a bigger prompt routinely needs more headroom than 90s
+    # gave it — that's what caused two back-to-back full-job failures on
+    # 2026-07-27 (see below, this is also why timeouts are now retried
+    # instead of being fatal on the first hit).
     last_error = None
+    last_exception = None
     for attempt in range(5):
-        resp = requests.post(MISTRAL_URL, headers=headers, json=body, timeout=90)
+        wait = min(60, 2 ** attempt) + 1
+        try:
+            resp = requests.post(MISTRAL_URL, headers=headers, json=body, timeout=180)
+        except (requests.exceptions.Timeout, requests.exceptions.ConnectionError) as e:
+            # Previously uncaught — a single slow response (Mistral's API
+            # having a rough moment, or just a big prompt taking a while)
+            # crashed the whole run on attempt 1 with no retry at all. This
+            # is exactly what took down both of today's scheduled runs
+            # (2026-07-27 #72 and #73): "ReadTimeout ... read timeout=90",
+            # uncaught, job failed, zero carousels generated that day.
+            # Network hiccups and slow responses should be retried like any
+            # other transient failure, not treated as fatal.
+            last_exception = e
+            print(f"Mistral request timed out/failed to connect ({e}), retrying in {wait}s (attempt {attempt + 1}/5)...")
+            time.sleep(wait)
+            continue
         if resp.status_code in (503, 429, 500):
             last_error = resp
-            wait = min(60, 2 ** attempt) + 1
             print(f"Mistral returned {resp.status_code}, retrying in {wait}s (attempt {attempt + 1}/5)...")
             time.sleep(wait)
             continue
@@ -343,7 +365,9 @@ def call_mistral(system_prompt, user_content, temperature=0.9):
         data = resp.json()
         text = data["choices"][0]["message"]["content"]
         return json.loads(text)
-    last_error.raise_for_status()
+    if last_error is not None:
+        last_error.raise_for_status()
+    raise last_exception
 
 
 def _briefing_block(history_briefing, performance_briefing, briefing):
