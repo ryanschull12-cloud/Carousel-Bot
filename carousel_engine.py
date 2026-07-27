@@ -263,13 +263,23 @@ def draw_mega_phrase(draw, text, y, colors, max_width, font_path=F_SERIF_BOLD, t
     pattern-interrupt a number-led hook gets, not just the minority that
     happen to cite a stat. Allows up to 2 lines since phrases run longer
     than a bare number.
+
+    hook_pop_phrase/bridge_pop_phrase are pulled as an exact mid-sentence
+    substring (required so the inline highlight marker can find them in
+    the headline below), so they usually arrive lowercase — e.g. "beat 10k
+    cold ones" or "charges you double". That reads as a typo once it's
+    blown up to 130px and standing alone as its own heading, so the first
+    character is capitalized for THIS display only; the original `text`
+    string (and therefore the highlight match against the headline) is
+    left untouched.
     """
     font, lines, size = fit_text_shrink_only(draw, text, max_width, 2, target, min_size, font_path)
     line_h = int(size * 1.05)
-    for line in lines:
-        lw = draw.textlength(line, font=font)
+    for i, line in enumerate(lines):
+        display_line = line[0].upper() + line[1:] if i == 0 and line else line
+        lw = draw.textlength(display_line, font=font)
         x = (W - lw) / 2
-        draw.text((x, y), line, font=font, fill=colors["dark"])
+        draw.text((x, y), display_line, font=font, fill=colors["dark"])
         y += line_h
     return y + 14, size
 
@@ -562,7 +572,12 @@ def render_recap_slide_aesthetic(recap_lines, niche, slide_num, total_slides, ou
     draw.text(((W - stw) / 2, bar_y + 10), save_text, font=f_save_big, fill=colors["dark"])
 
     f_sub = ImageFont.truetype(F_SANS_REG, 22)
-    sub_text = f"Your {niche.lower()} cheat sheet"
+    # Was niche.lower() — broke proper-noun capitalization for "Google
+    # Ads" and "Meta/Instagram Ads" ("Your google ads cheat sheet",
+    # "Your meta/instagram ads cheat sheet"), found on every recap slide
+    # in the 2026-07-27 batch. niche already arrives correctly cased from
+    # the content brain, so use it as-is.
+    sub_text = f"Your {niche} cheat sheet"
     sub_w = draw.textlength(sub_text, font=f_sub)
     draw.text(((W - sub_w) / 2, bar_y + 80), sub_text, font=f_sub, fill=GRAY)
 
@@ -639,7 +654,10 @@ def render_cta_slide_fixed(headline, cta_word, cta_promise, support_text, niche,
 
     # SAVE ask
     f_save = ImageFont.truetype(F_SANS_BOLD, CTA_SAVE_SIZE)
-    save_text = f"Save this for your next {niche.lower()} audit"
+    # Same fix as the recap subtitle: niche.lower() turned "Google Ads"
+    # into "google ads" on every CTA slide too ("Save this for your next
+    # google ads audit"). niche is already correctly cased coming in.
+    save_text = f"Save this for your next {niche} audit"
     tw = draw.textlength(save_text, font=f_save)
     pad_x = 24
     pill_w = tw + pad_x * 2
@@ -710,7 +728,10 @@ def render_carousel(carousel, batch_date, out_dir, carousel_index=0):
 
     bridge = carousel.get("bridge_slide") or carousel.get("hook_slide_2") or ""
     if not bridge:
-        bridge = f"The {carousel.get('angle', 'mistake')} most {niche.lower()} owners miss"
+        # Fallback only — the content brain always supplies a bridge_slide
+        # now. niche.lower() here had the same "google ads"/"meta" bug as
+        # the recap and CTA slides; niche is already correctly cased.
+        bridge = f"The {carousel.get('angle', 'mistake')} most {niche} owners miss"
     p = render_bridge_slide_fixed(bridge, niche, 2, total_slides,
                                    os.path.join(out_dir, "slide_02.jpg"),
                                    pop_phrase=carousel.get("bridge_pop_phrase"))

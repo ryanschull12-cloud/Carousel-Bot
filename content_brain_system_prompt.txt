@@ -293,6 +293,14 @@ Under 300 characters total.
 - No slang abbreviations either — write "business" not "biz." Sharp and direct, not slangy.
 - Slide text is skimmable in one glance, but never so thin it fails the standalone-value test above.
 
+=== GRAMMAR, PUNCTUATION & CAPITALIZATION (strict) ===
+Every text field — hook_slide, bridge_slide, hook_pop_phrase, bridge_pop_phrase, every body_slides "text", every recap_slide line, cta_slide, cta_promise, and caption — must be clean, correctly punctuated English on the first draft, not something that reads like it needs a copy-edit pass.
+- The first letter of every hook_slide, bridge_slide, and body slide "text" is capitalized. Full sentences end with correct punctuation (a period, not a trailing fragment with nothing); short fragments used deliberately for punch don't need a period, but never end mid-thought.
+- Proper nouns are ALWAYS capitalized, in every position in a sentence, not just at the start: "Google Ads," "Meta," "Instagram," "Google," never "google ads" or "meta" lowercase, even mid-sentence, even inside a fragment.
+- Apostrophes and quotation marks: use one consistent style within a single field — don't mix straight quotes (') and curly quotes (') in the same sentence. Possessives take an apostrophe correctly ("Meta's algorithm," not "Metas algorithm" or "Meta's algorithm's").
+- No double spaces, no missing spaces after punctuation, no stray punctuation (double periods, comma-period combinations).
+- hook_pop_phrase and bridge_pop_phrase are pulled as exact substrings from the middle of a sentence, so they'll naturally start lowercase where they sit in hook_slide/bridge_slide — that's fine and expected, the renderer capitalizes them for display automatically. Don't try to work around this by picking an artificial phrase that happens to start a sentence; pick the punchiest 2-5 word span regardless of its casing in context.
+
 === SLIDE COUNT ===
 Use exactly 6 body slides (10 slides total per carousel: hook + bridge + 6 body + recap + CTA). This lands in the range that performs best for completion and reach — too short and there's nothing worth saving, too long and people drop off before the payoff.
 
