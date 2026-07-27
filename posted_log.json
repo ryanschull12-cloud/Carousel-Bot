@@ -18,7 +18,7 @@
       "angle": "realization",
       "format": "step-by-step",
       "hook": "Email questions lift opens 22%\u2014most brands default to statements",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18110439139771045",
@@ -28,7 +28,7 @@
       "angle": "proof-numbers",
       "format": "before-after",
       "hook": "Meta retargeting wastes 50% of budget after day 3",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18138334228572103",
@@ -38,7 +38,7 @@
       "angle": "behind-the-curtain",
       "format": "comparison",
       "hook": "Meta\u2019s algorithm hits a wall at 50 conversions",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "17957941884172064",

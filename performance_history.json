@@ -17,6 +17,60 @@
       "engagement_rate": 150.0,
       "experiment_id": null,
       "experiment_arm": null
+    },
+    {
+      "date": "2026-07-24",
+      "media_id": "18051154412795715",
+      "niche": "Email Marketing",
+      "angle": "realization",
+      "format": "step-by-step",
+      "hook": "Email questions lift opens 22%\u2014most brands default to statements",
+      "metrics": {
+        "reach": 1,
+        "saved": 0,
+        "shares": 0,
+        "likes": 1,
+        "comments": 0
+      },
+      "engagement_rate": 100.0,
+      "experiment_id": null,
+      "experiment_arm": null
+    },
+    {
+      "date": "2026-07-24",
+      "media_id": "18110439139771045",
+      "niche": "Meta/Instagram Ads",
+      "angle": "proof-numbers",
+      "format": "before-after",
+      "hook": "Meta retargeting wastes 50% of budget after day 3",
+      "metrics": {
+        "reach": 2,
+        "saved": 0,
+        "shares": 0,
+        "likes": 3,
+        "comments": 0
+      },
+      "engagement_rate": 150.0,
+      "experiment_id": null,
+      "experiment_arm": null
+    },
+    {
+      "date": "2026-07-24",
+      "media_id": "18138334228572103",
+      "niche": "Meta/Instagram Ads",
+      "angle": "behind-the-curtain",
+      "format": "comparison",
+      "hook": "Meta\u2019s algorithm hits a wall at 50 conversions",
+      "metrics": {
+        "reach": 2,
+        "saved": 0,
+        "shares": 0,
+        "likes": 2,
+        "comments": 0
+      },
+      "engagement_rate": 100.0,
+      "experiment_id": null,
+      "experiment_arm": null
     }
   ]
 }
