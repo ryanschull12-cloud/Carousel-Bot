@@ -18,12 +18,12 @@ name: Evening Instagram Post
 
 on:
   schedule:
-    # Fires at both 19:30 and 20:30 UTC to loosely target 8pm Irish time
-    # across BST/GMT. No time-of-day gate is needed anymore (see above) —
-    # instagram_post.py's own dedupe makes it safe for both of these, or a
-    # late-running retry of either, to fire without causing a duplicate.
-    - cron: "30 19 * * *"
-    - cron: "30 20 * * *"
+    # Fixed 7:00 PM GMT/UTC every day (not chasing Irish local clock time
+    # across BST/GMT — fixed UTC time year-round, per Ryan's request).
+    # GitHub Actions schedules are best-effort, not guaranteed to the
+    # minute — instagram_post.py's own dedupe (posted_log.json) still
+    # makes a delayed or manually re-run trigger safe.
+    - cron: "0 19 * * *"
   workflow_dispatch: {}
 
 permissions:
