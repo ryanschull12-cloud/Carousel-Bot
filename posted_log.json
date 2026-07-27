@@ -99,6 +99,16 @@
       "format": "step-by-step",
       "hook": "Google\u2019s Search Partners waste 15% of your budget",
       "scored": false
+    },
+    {
+      "media_id": "18080240663306516",
+      "date": "2026-07-27",
+      "index": 1,
+      "niche": "Google Ads",
+      "angle": "curiosity",
+      "format": "comparison",
+      "hook": "Google Ads counts clicks that never start sales",
+      "scored": false
     }
   ]
 }
