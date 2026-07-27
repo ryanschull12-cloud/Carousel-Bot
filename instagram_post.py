@@ -5,10 +5,12 @@ to Instagram, using images already committed and pushed to the repo
 
 Runs up to THREE times a day at different scheduled times, fully
 automatic — nothing in this script can hold a post back. See
-.github/workflows/daily.yml for the ~8:30am slot (right after
-generation), posts_later.yml for the ~1pm slot, and evening-post.yml for
-the ~8pm slot — the latter two just re-read that same morning's
-already-committed manifest.
+.github/workflows/daily.yml for the 7:30am GMT slot (right after
+generation), posts_later.yml for the 1pm GMT slot, and evening-post.yml
+for the 7pm GMT slot — the latter two just re-read that same morning's
+already-committed manifest. As of 2026-07-27 these are fixed GMT times
+(one cron trigger each), not chasing Irish local clock time across
+BST/GMT — see each workflow file for why.
 
 WHICH CAROUSEL EACH RUN POSTS: runner.py picks the 3 auto-post winners
 by virality score, not by fixed position. Each workflow passes
@@ -207,14 +209,12 @@ def main():
         "--target-count", type=int, default=None,
         help="This workflow's slot target: by the end of this run, this many of "
              "today's winning carousels should be posted IN TOTAL. daily.yml passes "
-             "1, posts_later.yml passes 2, evening-post.yml passes 3. This is what "
-             "actually keeps the three posts spread across the day -- without it, "
-             "GitHub's dual BST/GMT cron entries for a single slot (e.g. midday's "
-             "12:30 AND 13:30 UTC triggers, which both fire every day) would each "
-             "independently post 'the next unposted winner', so one workflow could "
-             "post two DIFFERENT carousels back to back within the hour instead of "
-             "just one. With a target count, the second firing sees the target "
-             "already met and does nothing.",
+             "1, posts_later.yml passes 2, evening-post.yml passes 3. Each slot is "
+             "now a single fixed-GMT cron trigger (7:30am/1pm/7pm), not a dual "
+             "BST/GMT pair, but --target-count is kept regardless: it's still what "
+             "makes a manual re-run or a GitHub-side retry of the same slot safe --"
+             "the second firing sees the target already met and does nothing, "
+             "rather than posting a second, different carousel.",
     )
     args = parser.parse_args()
 

@@ -204,7 +204,20 @@ def main():
     critic = load_text(CRITIC_PATH)
     design_constants = extract_design_constants(load_text(CAROUSEL_ENGINE_PATH))
 
-    suggestions = call_claude(performance_summary, content_brain, critic, design_constants)
+    # call_claude had no error handling at all -- a single timeout or 5xx
+    # from Anthropic crashed the whole script with nothing caught, so the
+    # weekly step just showed a red X in Actions and Ryan got NO email
+    # that week (not even a "skipped" notice, unlike the low-data path
+    # above). Same silent-failure shape as the Mistral timeout bug found
+    # in runner.py on 2026-07-27, just lower-stakes since this only feeds
+    # the weekly suggestions email, not daily posting.
+    try:
+        suggestions = call_claude(performance_summary, content_brain, critic, design_constants)
+    except Exception as e:
+        reason = f"Self-improvement suggestions failed this week due to an API error: {e}"
+        print(reason)
+        send_email(None, skipped_reason=reason)
+        return
     print(suggestions)
     send_email(suggestions)
 

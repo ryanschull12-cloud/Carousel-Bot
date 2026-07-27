@@ -28,6 +28,7 @@ import sys
 import json
 import time
 import glob
+import datetime
 import smtplib
 import requests
 from email.message import EmailMessage
@@ -185,6 +186,29 @@ def send_failure_alert(carousel_index, error_text):
         smtp.send_message(msg)
 
 
+def send_stale_manifest_alert(found_date, expected_date):
+    """Mirrors instagram_post.py's guard of the same name. This script
+    didn't have one at all until 2026-07-27's audit -- normally the
+    tiktok-post.yml Irish-hour==9 gate keeps a scheduled run from firing
+    before that day's manifest exists, but a manual workflow_dispatch (or
+    a future change to that gate) bypasses it entirely, and this script
+    would then silently repost YESTERDAY's carousel 1 with no warning."""
+    msg = EmailMessage()
+    msg["Subject"] = "TikTok auto-post SKIPPED — today's carousels weren't found"
+    msg["From"] = GMAIL_ADDRESS
+    msg["To"] = TO_EMAIL
+    msg.set_content(
+        f"A TikTok post was skipped because the newest carousel batch on file is "
+        f"dated {found_date!r}, not today ({expected_date}).\n\n"
+        "This almost always means today's morning generation run hasn't completed "
+        "yet, or failed — check the Actions tab for a failed 'Daily Carousels' run. "
+        "Nothing was re-posted from a previous day."
+    )
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
+        smtp.login(GMAIL_ADDRESS, GMAIL_APP_PASSWORD)
+        smtp.send_message(msg)
+
+
 def post_carousel(access_token, privacy_level, carousel):
     photo_urls = [public_url(p) for p in carousel["image_paths"]]
     title = carousel.get("hook") or carousel.get("caption", "")
@@ -220,6 +244,23 @@ def main():
 
     with open(manifest_path) as f:
         manifest = json.load(f)
+
+    # Added 2026-07-27, mirroring instagram_post.py's existing guard: the
+    # scheduled workflow's Irish-hour==9 check normally keeps this from
+    # firing before today's manifest exists, but a manual workflow_dispatch
+    # bypasses that gate entirely. Without this check a manual run on a day
+    # generation is still running/broken would silently repost yesterday's
+    # carousel 1 with no warning.
+    if not args.manifest:
+        today_str = datetime.date.today().isoformat()
+        if manifest.get("batch_date") != today_str:
+            print(
+                f"Newest manifest on disk is dated {manifest.get('batch_date')!r}, "
+                f"not today ({today_str}) — today's generation likely hasn't finished. "
+                "Skipping rather than reposting stale content."
+            )
+            send_stale_manifest_alert(manifest.get("batch_date"), today_str)
+            return
 
     to_post = [c for c in manifest["carousels"] if c.get("post_to_instagram")]
     if args.only_index is not None:

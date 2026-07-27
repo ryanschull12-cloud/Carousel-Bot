@@ -391,18 +391,34 @@ def call_mistral_propose(internal_summary, external_summary, tried_summary):
         "temperature": 0.4,
         "response_format": {"type": "json_object"},
     }
+    # Same bug and same fix as runner.py's call_mistral (see its comments,
+    # 2026-07-27): a raw requests.post with no try/except around a
+    # ReadTimeout was crashing the whole call on the first slow response,
+    # with zero retry. This is a separate copy of that logic (not a shared
+    # helper), so it needed the identical fix: 180s instead of 90s, and
+    # timeouts/connection errors now retry instead of propagating raw.
     last_error = None
+    last_exception = None
     for attempt in range(3):
-        resp = requests.post(MISTRAL_URL, headers=headers, json=body, timeout=90)
+        wait = min(30, 2 ** attempt) + 1
+        try:
+            resp = requests.post(MISTRAL_URL, headers=headers, json=body, timeout=180)
+        except (requests.exceptions.Timeout, requests.exceptions.ConnectionError) as e:
+            last_exception = e
+            print(f"Mistral request timed out/failed to connect ({e}), retrying in {wait}s (attempt {attempt + 1}/3)...")
+            time.sleep(wait)
+            continue
         if resp.status_code in (503, 429, 500):
             last_error = resp
-            time.sleep(min(30, 2 ** attempt) + 1)
+            time.sleep(wait)
             continue
         resp.raise_for_status()
         data = resp.json()
         text = data["choices"][0]["message"]["content"]
         return json.loads(text)
-    last_error.raise_for_status()
+    if last_error is not None:
+        last_error.raise_for_status()
+    raise last_exception
 
 
 def validate_and_normalize_proposal(proposal, next_id):
