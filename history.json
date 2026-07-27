@@ -139,6 +139,41 @@
           "hook": "Phrase match wins 70% of Google Ads tests"
         }
       ]
+    },
+    {
+      "date": "2026-07-27",
+      "carousels": [
+        {
+          "niche": "Google Ads",
+          "angle": "curiosity",
+          "format": "comparison",
+          "hook": "Google Ads counts clicks that never start sales"
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "relief-permission",
+          "format": "steal-this",
+          "hook": "500 engaged subscribers beat 10k cold ones"
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "behind-the-curtain",
+          "format": "before-after",
+          "hook": "Google Ads calls 25% of buyers 'low intent'"
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "realization",
+          "format": "step-by-step",
+          "hook": "Pause Meta ads for 48 hours to cut costs"
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "relief-permission",
+          "format": "myth-buster",
+          "hook": "Rotating Meta creatives resets the algorithm"
+        }
+      ]
     }
   ]
 }
