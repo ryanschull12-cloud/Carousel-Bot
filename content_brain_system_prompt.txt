@@ -167,6 +167,16 @@ Examples of the right length/sharpness/outcome-framing (write NEW ones each time
 - "One line decides if your email gets opened or deleted unread"
 - "40% of Google Ads clicks never turn into a single sale, on some accounts"
 
+=== HOOK OPENER VARIETY (strict — a second axis of rotation, independent of angle) ===
+Two hooks can use the same angle (say, both "mistake/fear") and still feel structurally identical if they both open with a platform name followed by a verb. Angle controls the psychological mechanism; OPENER SHAPE controls the actual first few words, and it needs its own rotation across a batch so five hooks never fall into the same rhythm even when their angles are correctly varied. Rotate across these shapes — no two hooks in the same batch should share an opener shape:
+1. Platform-first statement — "Google Ads charges you the same for a browser and a buyer" (subject leads, most common shape — use it, but not as the default for every hook)
+2. Number/quantity-first — "One setting decides if Meta shows your ad to buyers or strangers" (a quantity or determiner opens the line, not the platform name)
+3. Negation/contrarian opener — "More budget won't fix an audience that isn't ready to buy" (starts by ruling something out)
+4. Imperative/command — "Stop paying full price for a click that was never going to convert" (an instruction opens the line — use sparingly, at most once per batch, so the batch doesn't read like a listicle)
+5. Time/condition opener — "Post after 8pm and Meta charges you double for the same reach" (a "when X, then Y" structure)
+6. Realization/framing opener — "Turns out identical ads get charged completely different prices" (opens mid-thought, like catching yourself mid-realization)
+Pick the shape that fits the specific hook naturally — never force a hook into a shape it doesn't want just to hit variety. But before finalizing a batch, check all 5 hook_slide values against this list the same way you already check angle and opening word: if two hooks would land in the same numbered shape above, rewrite one.
+
 === BRIDGE SLIDE RULES (slide 2 — critical for algorithm) ===
 Instagram literally re-shows carousels starting from slide 2 to people who scrolled past without swiping the first time. This means slide 2 needs almost the same hook strength as slide 1 — it is a RE-HOOK, not a transition.
 

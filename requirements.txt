@@ -1,2 +1,11 @@
-requests
-Pillow
+# Pinned to compatible-release ranges (allows patch/minor updates, blocks
+# major version jumps) rather than left unpinned. Before this, every
+# scheduled run did a fresh `pip install -r requirements.txt` with no
+# floor or ceiling at all -- an unannounced breaking change in a new
+# requests or Pillow major release would have silently broken the whole
+# pipeline with no warning, the same failure shape as the Mistral timeout
+# bug (something upstream changes, nothing here catches it). Bump the
+# version floor here deliberately when there's a reason to, rather than
+# discovering a break in production.
+requests~=2.34
+Pillow~=12.2

@@ -243,11 +243,19 @@ def draw_mega_stat(draw, text, y, colors, max_width, font_path=F_SERIF_BOLD, tar
     every loss-aversion-framed hook (the format the content brain is told to
     prioritize) gets a genuine pattern-interrupt instead of just bigger body text.
     Centered horizontally to match the centered headline below it.
+
+    Carries a flat drop-shadow duplicate behind the main glyphs — same
+    depth technique already used for the number badges elsewhere in this
+    file (SHADOW color, a few px offset), not a blur/glow, so the giant
+    stat gets more visual pop without breaking the flat, sharp, editorial
+    look the rest of the design commits to.
     """
     font, lines, size = fit_text_shrink_only(draw, text, max_width, 1, target, min_size, font_path)
     line = lines[0] if lines else text
     lw = draw.textlength(line, font=font)
     x = (W - lw) / 2
+    shadow_off = max(4, size // 28)
+    draw.text((x + shadow_off, y + shadow_off), line, font=font, fill=SHADOW)
     draw.text((x, y), line, font=font, fill=colors["dark"])
     ascent, descent = font.getmetrics()
     return y + int((ascent + descent) * 0.92), size
@@ -275,10 +283,17 @@ def draw_mega_phrase(draw, text, y, colors, max_width, font_path=F_SERIF_BOLD, t
     """
     font, lines, size = fit_text_shrink_only(draw, text, max_width, 2, target, min_size, font_path)
     line_h = int(size * 1.05)
+    shadow_off = max(4, size // 28)
     for i, line in enumerate(lines):
         display_line = line[0].upper() + line[1:] if i == 0 and line else line
         lw = draw.textlength(display_line, font=font)
         x = (W - lw) / 2
+        # Same flat drop-shadow depth treatment as draw_mega_stat, so a
+        # benefit-led hook's giant phrase pops exactly as hard as a
+        # number-led hook's giant stat does — no visual tier difference
+        # between the two hook styles now that BENEFIT OVER RAW STAT means
+        # most hooks take this path instead of draw_mega_stat's.
+        draw.text((x + shadow_off, y + shadow_off), display_line, font=font, fill=SHADOW)
         draw.text((x, y), display_line, font=font, fill=colors["dark"])
         y += line_h
     return y + 14, size
@@ -677,11 +692,17 @@ def render_cta_slide_fixed(headline, cta_word, cta_promise, support_text, niche,
             ty += 48
         ty += 20
 
-    # COMMENT ask — FIXED SIZE, never grows
+    # COMMENT ask — FIXED SIZE, never grows. Same flat drop-shadow depth
+    # treatment as the hook/bridge mega-stat and mega-phrase, so the CTA's
+    # hero moment (the one line that drives the comment action) gets the
+    # same visual weight as the carousel's other two hero moments instead
+    # of being the one big-text slide that looks flat by comparison.
     f_cta = ImageFont.truetype(F_SANS_BOLD, CTA_COMMENT_SIZE)
     cta_text = f"Comment ‘{cta_word}’"
     tw = draw.textlength(cta_text, font=f_cta)
     cta_x = (W - tw) / 2
+    cta_shadow_off = max(3, CTA_COMMENT_SIZE // 14)
+    draw.text((cta_x + cta_shadow_off, ty + cta_shadow_off), cta_text, font=f_cta, fill=colors["accent"])
     draw.text((cta_x, ty), cta_text, font=f_cta, fill=BLACK)
     draw.line([(cta_x, ty + 76), (cta_x + tw, ty + 76)], fill=colors["dark"], width=6)
     ty += 110
