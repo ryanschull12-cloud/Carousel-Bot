@@ -109,6 +109,26 @@
       "format": "comparison",
       "hook": "Google Ads counts clicks that never start sales",
       "scored": false
+    },
+    {
+      "media_id": "18327300208260757",
+      "date": "2026-07-27",
+      "index": 2,
+      "niche": "Email Marketing",
+      "angle": "relief-permission",
+      "format": "steal-this",
+      "hook": "500 engaged subscribers beat 10k cold ones",
+      "scored": false
+    },
+    {
+      "media_id": "17878727910504300",
+      "date": "2026-07-27",
+      "index": 3,
+      "niche": "Google Ads",
+      "angle": "behind-the-curtain",
+      "format": "before-after",
+      "hook": "Google Ads calls 25% of buyers 'low intent'",
+      "scored": false
     }
   ]
 }
