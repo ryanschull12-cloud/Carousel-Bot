@@ -111,6 +111,14 @@ EXPERIMENTS_PATH = "experiments.json"
 TREND_PATH = "trend_briefing.json"
 TREND_MAX_AGE_DAYS = 14
 
+# Manually-curated inspiration, edited directly by Ryan (see inspiration.md
+# for the format). The human complement to trend_research.py: an automated
+# web search can only find what marketing writers say ABOUT trends, not
+# the specific reel/post Ryan actually scrolled past and liked. This file
+# is entirely optional and this script only READS it.
+INSPIRATION_PATH = "inspiration.md"
+INSPIRATION_MAX_CHARS = 2000
+
 # Virality checker tuning. Concepts (not full carousels) are cheap to
 # generate, so the pool can comfortably be bigger than the 5 we actually
 # need — that's what gives the scorer something real to discriminate
@@ -314,6 +322,33 @@ def load_trend_briefing():
     return data.get("briefing") or None
 
 
+def load_inspiration():
+    """Read Ryan's manually-curated inspiration.md, if he's added anything
+    to it. Strips the leading HTML-comment instructions block (everything
+    up to and including the first "-->") so only his actual entries get
+    sent to Mistral, then caps the result to INSPIRATION_MAX_CHARS -- he's
+    told to add newest entries at the top, so a simple head-truncation
+    always keeps the freshest ones without needing him to prune on a
+    schedule. Missing file, empty file, or a file with only the
+    instructions block and no real entries yet = no briefing, same
+    fail-open pattern as every other optional context source here."""
+    if not os.path.exists(INSPIRATION_PATH):
+        return None
+    try:
+        with open(INSPIRATION_PATH, "r", encoding="utf-8") as f:
+            text = f.read()
+    except Exception as e:
+        print(f"Could not read {INSPIRATION_PATH}, ignoring ({e})")
+        return None
+
+    if "-->" in text:
+        text = text.split("-->", 1)[1]
+    text = text.replace("## New entries", "").strip()
+    if not text:
+        return None
+    return text[:INSPIRATION_MAX_CHARS]
+
+
 def pick_experiment_target_hook(active_exp, winning_concepts):
     """
     Decide which ONE of today's carousels carries the active experiment's
@@ -448,7 +483,7 @@ def call_mistral(system_prompt, user_content, temperature=0.9):
     raise last_exception
 
 
-def _briefing_block(history_briefing, performance_briefing, briefing, trend_briefing=None):
+def _briefing_block(history_briefing, performance_briefing, briefing, trend_briefing=None, inspiration_briefing=None):
     """Shared block of optional context appended to both the concept-pool
     call and the direct-generation fallback, so the two paths stay in
     sync instead of drifting apart over time."""
@@ -487,10 +522,19 @@ def _briefing_block(history_briefing, performance_briefing, briefing, trend_brie
             "paraphrase, or otherwise reproduce any specific line described "
             "in this research — extract the mechanic, not the wording:\n" + trend_briefing
         )
+    if inspiration_briefing:
+        block += (
+            "\n\nRyan's own notes on posts/reels he's personally seen and liked recently "
+            "(manually curated, optional context). Same rule as the trend research above — "
+            "use these as inspiration for the underlying idea or mechanic, in your own words. "
+            "Never quote or closely reproduce any specific wording, even if these notes "
+            "include one — describe the mechanic freshly:\n" + inspiration_briefing
+        )
     return block
 
 
-def generate_concept_pool(pool_size, history_briefing, performance_briefing, briefing, trend_briefing=None, exclude_concepts=None):
+def generate_concept_pool(pool_size, history_briefing, performance_briefing, briefing, trend_briefing=None,
+                           inspiration_briefing=None, exclude_concepts=None):
     """
     Cheap first pass: ask for a pool of CONCEPTS only (niche/angle/format/
     hook/bridge), not full carousels. This is what makes a pool of 10+
@@ -517,7 +561,7 @@ def generate_concept_pool(pool_size, history_briefing, performance_briefing, bri
             "in an earlier round — do not repeat these or anything shaped "
             "like them:\n" + prior
         )
-    user_content += _briefing_block(history_briefing, performance_briefing, briefing, trend_briefing)
+    user_content += _briefing_block(history_briefing, performance_briefing, briefing, trend_briefing, inspiration_briefing)
     user_content += (
         "\n\nReturn ONLY valid JSON matching this schema, nothing else: "
         '{"concepts": [{"niche": "...", "angle": "...", "format": "...", '
@@ -557,7 +601,8 @@ def score_concepts(concepts):
     return concepts
 
 
-def select_winning_concepts(history_briefing, performance_briefing, briefing, trend_briefing=None):
+def select_winning_concepts(history_briefing, performance_briefing, briefing, trend_briefing=None,
+                             inspiration_briefing=None):
     """
     The virality checker loop: generate a pool, score it, keep anything
     scoring >= VIRALITY_THRESHOLD, and regenerate a fresh pool for whatever
@@ -573,7 +618,8 @@ def select_winning_concepts(history_briefing, performance_briefing, briefing, tr
     for attempt in range(1, MAX_POOL_ATTEMPTS + 1):
         print(f"Concept pool attempt {attempt}/{MAX_POOL_ATTEMPTS}: requesting {pool_size} concepts...")
         pool = generate_concept_pool(pool_size, history_briefing, performance_briefing, briefing,
-                                      trend_briefing=trend_briefing, exclude_concepts=seen)
+                                      trend_briefing=trend_briefing, inspiration_briefing=inspiration_briefing,
+                                      exclude_concepts=seen)
         pool = score_concepts(pool)
         for c in pool:
             print(f"  [{c['score']:.1f}] ({c.get('niche','?')}/{c.get('angle','?')}) \"{c.get('hook_slide','')}\" — {c.get('reason','')}")
@@ -612,7 +658,8 @@ def select_winning_concepts(history_briefing, performance_briefing, briefing, tr
 
 
 def generate_batch(briefing, history_briefing, performance_briefing, winning_concepts=None,
-                    active_experiment=None, experiment_target_hook=None, trend_briefing=None):
+                    active_experiment=None, experiment_target_hook=None, trend_briefing=None,
+                    inspiration_briefing=None):
     """
     Draft pass, then a critic pass that rewrites weak hooks before anything
     renders. If winning_concepts is given (the virality checker's picks),
@@ -657,7 +704,7 @@ def generate_batch(briefing, history_briefing, performance_briefing, winning_con
         )
     else:
         user_content = "Generate today's batch."
-    user_content += _briefing_block(history_briefing, performance_briefing, briefing, trend_briefing)
+    user_content += _briefing_block(history_briefing, performance_briefing, briefing, trend_briefing, inspiration_briefing)
 
     if active_experiment and active_experiment.get("type") == "copy_rule" and experiment_target_hook:
         rule = active_experiment.get("copy_rule", {}).get("instruction", "")
@@ -739,6 +786,10 @@ def main():
     else:
         print("No fresh trend research on file — generating on style rules alone (see trend_research.py).")
 
+    inspiration_briefing = load_inspiration()
+    if inspiration_briefing:
+        print(f"Loaded {len(inspiration_briefing)} chars from inspiration.md — passing to Mistral.")
+
     # Design/copy feedback loop: pick up whatever experiment_loop.py has
     # currently running (if any) and decide which of today's carousels will
     # carry it. Never lets a bad/missing experiments.json block generation.
@@ -755,7 +806,8 @@ def main():
     winning_concepts = None
     try:
         winning_concepts = select_winning_concepts(history_briefing, performance_briefing, briefing,
-                                                     trend_briefing=trend_briefing)
+                                                     trend_briefing=trend_briefing,
+                                                     inspiration_briefing=inspiration_briefing)
         print(f"Virality checker selected {len(winning_concepts)} concepts to write up in full.")
     except Exception as e:
         print(f"Virality checker failed, falling back to direct generation ({e})")
@@ -769,7 +821,7 @@ def main():
 
     batch = generate_batch(briefing, history_briefing, performance_briefing, winning_concepts=winning_concepts,
                             active_experiment=active_exp, experiment_target_hook=experiment_target_hook,
-                            trend_briefing=trend_briefing)
+                            trend_briefing=trend_briefing, inspiration_briefing=inspiration_briefing)
     batch_date = batch.get("batch_date", "today")
     # Use the actual system date rather than trusting the model's
     # self-reported date, which can drift or be wrong.
