@@ -144,11 +144,20 @@ def draw_slide_counter(draw, slide_num, total_slides, dark_color):
     f_counter = ImageFont.truetype(F_SANS_BOLD, 22)
     counter = f"{slide_num}/{total_slides}"
     cw = draw.textlength(counter, font=f_counter)
-    circle_size = 44
+    # Circle was a fixed 44px, sized for a single-digit numerator like
+    # "1/10". Every carousel's final slide is "10/10" -- a 2-digit
+    # numerator that measures wider than the circle, so the leading "1"
+    # got drawn mostly outside the dark circle, on the light background,
+    # in white text -- effectively invisible, reading as "0/10" on every
+    # single post's last slide. Size the circle to the actual text width
+    # (with a floor at the old 44px so single-digit counters look
+    # unchanged) instead of assuming a fixed width.
+    pad = 14
+    circle_size = max(44, int(cw) + pad)
     cx = W - MARGIN - circle_size
     cy = 46
     draw.ellipse([cx, cy, cx + circle_size, cy + circle_size], fill=dark_color)
-    draw.text((cx + (circle_size - cw) / 2, cy + 10), counter, font=f_counter, fill=WHITE)
+    draw.text((cx + (circle_size - cw) / 2, cy + (circle_size - 22) / 2 - 2), counter, font=f_counter, fill=WHITE)
 
 
 def draw_header_v2(draw, niche, slide_num, total_slides, colors):
@@ -629,12 +638,26 @@ def render_recap_slide_aesthetic(recap_lines, niche, slide_num, total_slides, ou
         text_x = cx + 20
         text_y = cy + badge_size + 28
         text_max_w = card_w - 40
-        f_card = ImageFont.truetype(F_SANS_BOLD, RECAP_CARD_TEXT_SIZE)
-
-        wrapped = wrap_text(draw, item, f_card, text_max_w)
-        for line in wrapped:
+        # Card has a fixed 280px height, and this text was drawn at a fixed
+        # 26px with no shrink logic — a recap item longer than ~5-6 short
+        # lines runs past the bottom of its card and overlaps the row
+        # below it. recap_slide has no enforced word count in the content
+        # brain schema, so a defensive shrink-to-fit here (same pattern
+        # fit_text_shrink_only already uses for hook/bridge/body text)
+        # protects the render even if a future batch sends a long item.
+        text_bottom_pad = 20
+        available_text_h = (cy + card_h) - text_y - text_bottom_pad
+        f_card, wrapped, card_size = fit_text_shrink_only(
+            draw, item, text_max_w, max(1, available_text_h // 30),
+            RECAP_CARD_TEXT_SIZE, 16, F_SANS_BOLD
+        )
+        line_h = int(card_size * 1.35)
+        # If even the min size still overflows (pathologically long item),
+        # clip lines rather than let them spill into the next card.
+        max_lines_fit = max(1, available_text_h // line_h)
+        for line in wrapped[:max_lines_fit]:
             draw.text((text_x, text_y), line, font=f_card, fill=TEXT)
-            text_y += 38
+            text_y += line_h
 
     f_note = ImageFont.truetype(F_SANS_REG, 20)
     note_text = "Screenshot this page and use it as your checklist"
@@ -652,7 +675,38 @@ def render_recap_slide_aesthetic(recap_lines, niche, slide_num, total_slides, ou
 # CTA SLIDE — fixed size, designed fill
 # ============================================================
 
-def render_cta_slide_fixed(headline, cta_word, cta_promise, support_text, niche, slide_num, total_slides, out_path):
+def render_cta_slide_fixed(headline, cta_word, cta_promise, cta_support, save_line, niche, slide_num, total_slides, out_path):
+    """
+    Rebuilt from the ground up (2026-07-28) to fix two real problems Ryan
+    flagged after looking at actual posted output:
+
+    1. The full Instagram caption -- including its hashtag block -- was
+       being rendered as pixels onto this slide (the old `support_text`
+       param was wired to carousel["caption"]). That's pure duplication:
+       instagram_post.py already sends the same caption as the post's
+       actual caption field. On screen it just meant a wall of gray
+       hashtag text dumped under the CTA, with a few hundred px of dead
+       empty space below it since nothing filled the rest of the frame --
+       the single biggest reason this slide read as a cluttered plug
+       instead of a clean sign-off. `cta_support` now takes a short,
+       genuine, optional line of its own (urgency/context, per the
+       content brain's CTA RULES) instead of the caption.
+    2. The save-ask line was hardcoded to always say "...audit" on every
+       single carousel regardless of format -- a checklist carousel, a
+       before/after, a comparison, all got the identical word every day.
+       That repetition is exactly what makes a CTA read as templated
+       rather than considered. `save_line` is now written per-carousel by
+       the content brain (varying the closing noun with the format) and
+       rendered as-is instead of a fixed phrase.
+
+    Layout is also fully vertically centered now (the whole block's
+    height is measured first, same pattern render_numbered_slide_fixed
+    uses) instead of top-anchored at a fixed y with whatever's left over
+    just sitting empty -- and the giant "Comment" moment gets the same
+    top/bottom accent-bar framing the hook and bridge slides use, so this
+    slide finally reads as part of the same design system instead of a
+    bolted-on ad at the end.
+    """
     colors = colors_for(niche)
     bg_bottom = tuple(min(255, int(c * 0.6 + 255 * 0.4)) for c in colors["accent"])
     img = Image.new("RGB", (W, H), WHITE)
@@ -665,64 +719,90 @@ def render_cta_slide_fixed(headline, cta_word, cta_promise, support_text, niche,
     draw_header_v2(draw, niche, slide_num, total_slides, colors)
 
     max_w = W - 2 * MARGIN
-    ty = 240
+
+    f_save = ImageFont.truetype(F_SANS_BOLD, CTA_SAVE_SIZE)
+    save_text = save_line or f"Save this for your next {niche} review"
+    f_head = ImageFont.truetype(F_SANS_REG, 32)
+    head_lines = wrap_text(draw, headline, f_head, max_w) if headline else []
+    f_cta = ImageFont.truetype(F_SANS_BOLD, CTA_COMMENT_SIZE)
+    cta_text = f"Comment ‘{cta_word}’"
+    cta_shadow_off = max(3, CTA_COMMENT_SIZE // 14)
+    f_promise = ImageFont.truetype(F_SANS_BOLD, CTA_PROMISE_SIZE)
+    promise_text = f"and I’ll DM you {cta_promise}" if cta_promise else ""
+    f_support = ImageFont.truetype(F_SANS_REG, 26)
+    support_lines = wrap_text(draw, cta_support, f_support, max_w - 80) if cta_support else []
+
+    # Measure the whole block before drawing anything, so it can be
+    # centered in the space below the header instead of anchored at a
+    # fixed y with leftover space just left blank underneath.
+    pill_h = 64
+    save_gap = 56
+    head_line_h = 48
+    head_gap = 40
+    bar_gap = 28
+    cta_h = int(CTA_COMMENT_SIZE * 1.05)
+    cta_gap = 36
+    promise_gap = 46 if promise_text else 0
+    support_line_h = 38
+
+    total_h = pill_h + save_gap
+    total_h += len(head_lines) * head_line_h + (head_gap if head_lines else 0)
+    total_h += bar_gap + cta_h + bar_gap  # accent bars above + below the comment moment
+    total_h += cta_gap
+    total_h += (CTA_PROMISE_SIZE + promise_gap) if promise_text else 0
+    total_h += len(support_lines) * support_line_h + (30 if support_lines else 0)
+
+    header_bottom = 170
+    footer_reserve = 170
+    available_h = H - header_bottom - footer_reserve
+    ty = header_bottom + max(0, (available_h - total_h) // 2)
 
     # SAVE ask
-    f_save = ImageFont.truetype(F_SANS_BOLD, CTA_SAVE_SIZE)
-    # Same fix as the recap subtitle: niche.lower() turned "Google Ads"
-    # into "google ads" on every CTA slide too ("Save this for your next
-    # google ads audit"). niche is already correctly cased coming in.
-    save_text = f"Save this for your next {niche} audit"
     tw = draw.textlength(save_text, font=f_save)
     pad_x = 24
     pill_w = tw + pad_x * 2
-    pill_h = 64
     px = (W - pill_w) / 2
     draw.rounded_rectangle([px, ty, px + pill_w, ty + pill_h], radius=pill_h // 2, fill=colors["dark"])
     draw.text((px + pad_x, ty + 12), save_text, font=f_save, fill=WHITE)
-    ty += 100
+    ty += pill_h + save_gap
 
-    # Headline
-    if headline:
-        f_head = ImageFont.truetype(F_SANS_REG, 32)
-        head_lines = wrap_text(draw, headline, f_head, max_w)
-        for line in head_lines:
-            tw = draw.textlength(line, font=f_head)
-            draw.text(((W - tw) / 2, ty), line, font=f_head, fill=TEXT)
-            ty += 48
-        ty += 20
+    # Headline (short context line from the content brain, optional)
+    for line in head_lines:
+        tw = draw.textlength(line, font=f_head)
+        draw.text(((W - tw) / 2, ty), line, font=f_head, fill=TEXT)
+        ty += head_line_h
+    if head_lines:
+        ty += head_gap
 
     # COMMENT ask — FIXED SIZE, never grows. Same flat drop-shadow depth
-    # treatment as the hook/bridge mega-stat and mega-phrase, so the CTA's
-    # hero moment (the one line that drives the comment action) gets the
-    # same visual weight as the carousel's other two hero moments instead
-    # of being the one big-text slide that looks flat by comparison.
-    f_cta = ImageFont.truetype(F_SANS_BOLD, CTA_COMMENT_SIZE)
-    cta_text = f"Comment ‘{cta_word}’"
+    # treatment as the hook/bridge mega-stat and mega-phrase, now framed
+    # with the same top/bottom accent bars the hook/bridge give their own
+    # hero text, so this is visibly the same design system, not a
+    # different slide type that showed up late.
+    draw_accent_bar(draw, ty, colors, width=180)
+    ty += bar_gap
     tw = draw.textlength(cta_text, font=f_cta)
     cta_x = (W - tw) / 2
-    cta_shadow_off = max(3, CTA_COMMENT_SIZE // 14)
     draw.text((cta_x + cta_shadow_off, ty + cta_shadow_off), cta_text, font=f_cta, fill=colors["accent"])
     draw.text((cta_x, ty), cta_text, font=f_cta, fill=BLACK)
-    draw.line([(cta_x, ty + 76), (cta_x + tw, ty + 76)], fill=colors["dark"], width=6)
-    ty += 110
+    ty += cta_h
+    draw_accent_bar(draw, ty, colors, width=180)
+    ty += bar_gap + cta_gap
 
     # Promise
-    if cta_promise:
-        f_promise = ImageFont.truetype(F_SANS_BOLD, CTA_PROMISE_SIZE)
-        promise_text = f"and I’ll DM you {cta_promise}"
+    if promise_text:
         tw = draw.textlength(promise_text, font=f_promise)
         draw.text(((W - tw) / 2, ty), promise_text, font=f_promise, fill=colors["dark"])
-        ty += 70
+        ty += CTA_PROMISE_SIZE + promise_gap
 
-    # Support
-    if support_text:
-        f_support = ImageFont.truetype(F_SANS_REG, 30)
-        support_lines = wrap_text(draw, support_text, f_support, max_w - 80)
+    # Support — short urgency/context line from the content brain, e.g.
+    # "No cost, just the checklist" — never the raw caption anymore.
+    if support_lines:
+        ty += 30
         for line in support_lines:
             tw = draw.textlength(line, font=f_support)
-            draw.text(((W - tw) / 2, ty), line, font=f_support, fill=(80, 80, 80))
-            ty += 48
+            draw.text(((W - tw) / 2, ty), line, font=f_support, fill=(90, 90, 90))
+            ty += support_line_h
 
     draw_follow_pill(draw, colors)
     draw_progress_bar(draw, slide_num, total_slides, colors["accent"], colors["dark"])
@@ -761,7 +841,14 @@ def render_carousel(carousel, batch_date, out_dir, carousel_index=0):
     checklist_mode = carousel.get("format", "").lower() in ("checklist", "quick-win checklist", "steal-this")
     for i, body in enumerate(body_slides, start=1):
         slide_num = i + 2
-        show_swipe = (i == 1) or (i == 4) or (i == len(body_slides) - 1)
+        # Used to only show on slides 1, 4, 5 — an arbitrary subset that
+        # didn't line up with the content brain's own swipe-cue rule
+        # (which now expects forward motion on every body slide except
+        # the last, see SWIPE COPY CUES). Every slide but the final one
+        # now gets the visual nudge too, so the design reinforces the
+        # same "keep going" signal the copy is writing into every slide,
+        # instead of the two disagreeing about which slides matter.
+        show_swipe = i != len(body_slides)
         p = render_numbered_slide_fixed(i, body, niche, slide_num, total_slides,
                                          os.path.join(out_dir, f"slide_{slide_num:02d}.jpg"),
                                          checklist_mode=checklist_mode, show_swipe=show_swipe)
@@ -780,8 +867,13 @@ def render_carousel(carousel, batch_date, out_dir, carousel_index=0):
     last = total_slides
     cta_word = carousel.get("cta_word", "TIPS")
     cta_promise = carousel.get("cta_promise", "the checklist")
+    # cta_support/cta_save_line are new fields (see content brain OUTPUT
+    # FORMAT) — .get() with a safe fallback so a batch generated by an
+    # older prompt version (before these existed) still renders instead
+    # of KeyError-ing the whole run.
     p = render_cta_slide_fixed(carousel.get("cta_slide", ""), cta_word, cta_promise,
-                                carousel.get("caption", ""), niche, last, total_slides,
+                                carousel.get("cta_support", ""), carousel.get("cta_save_line", ""),
+                                niche, last, total_slides,
                                 os.path.join(out_dir, f"slide_{last:02d}.jpg"))
     paths.append(p)
 
@@ -814,6 +906,8 @@ if __name__ == "__main__":
         "cta_slide": "Stop wasting budget. Start booking calls.",
         "cta_word": "AUDIT",
         "cta_promise": "my 7-point Google Ads audit checklist",
+        "cta_save_line": "Save this for your next Google Ads checklist run",
+        "cta_support": "No cost, just the checklist",
         "caption": "Save this 7-point Google Ads audit checklist ↓ Most business owners don’t know their ads are burning budget on the wrong searches. #googleads #smallbusiness #marketingtips #ppc #businessowner"
     }
     out = render_carousel(sample, "2026-07-19", "/tmp/sample_carousel")

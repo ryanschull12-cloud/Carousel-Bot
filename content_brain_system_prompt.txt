@@ -224,13 +224,18 @@ Each body slide is now an object, not a plain string: {"text": "...", "keyword":
 
 Every slide (except the first body slide) should read as a continuation of the one before it, in service of the THROUGHLINE — not a fresh, interchangeable fact that happens to share a topic. A light connective opener is often the easiest way to do this ("That's the mechanism — here's what it actually costs," "Which is exactly where most accounts stop looking," "The fix isn't what you'd expect") but isn't mandatory on every slide; what's mandatory is that the sequence has a direction. Run the shuffle-test from the THROUGHLINE section above on every batch before finalizing.
 
-=== SWIPE COPY CUES ===
-Slide 3 and slide 6 should each end on a forward-leaning note that creates a reason to keep swiping — a "here's what that leads to," an open question the next slide resolves, or an explicit "→" cue. This should feel like a natural continuation of the explanation, not a bolted-on marketing tell.
+=== SWIPE COPY CUES (every body slide, not just one or two) ===
+Every single body slide has to earn the next swipe on its own — not just slides 3 and 6. Treat "would someone stop here and not bother swiping again" as a live risk on EVERY slide, because it is: a reader can drop off after slide 1 just as easily as after slide 5. This doesn't mean every slide ends on a cliffhanger fragment (that would fight the STANDALONE VALUE rule) — it means every slide does two jobs at once: deliver its own complete, real piece of value, AND leave a thread the reader still wants pulled. A slide that fully closes its own loop with nothing left open reads as a natural stopping point, which is exactly where you lose people.
 
-Examples:
-- "...and that's before you even look at what it does to Quality Score →"
-- "...which raises the obvious question: what actually fixes it?"
-- "The fix takes four minutes. Here's exactly where to look →"
+Concretely, rotate across these techniques so it never feels like a formula — do not end every slide the same way:
+- An explicit forward pointer: "...and that's before you even look at what it does to Quality Score →"
+- An open question the next slide resolves: "...which raises the obvious question: what actually fixes it?"
+- A promise of the payoff still to come: "The fix takes four minutes. Here's exactly where to look →"
+- A comparison the reader is now curious about: "That's the mistake. The fix looks almost identical — which is exactly why it gets missed."
+- A number or claim that begs a follow-up ("and that's just the first setting") without literally saying "and that's just the first setting" every time — vary the phrasing.
+- Sometimes, nothing more than genuine momentum from the THROUGHLINE itself (see above) — a slide that clearly continues the previous one's logic doesn't always need an explicit tag bolted onto the end to feel like it's building toward something.
+
+At minimum: slides 1 through 5 of the 6 body slides must each contain some form of forward motion (an explicit cue, an open question, or a strong connective opener tying back to the slide before it — see THROUGHLINE). Only the final body slide (slide 6) is allowed to feel more like a wrap-up beat, since the recap and CTA are what follow it, not another body slide. Never resolve the whole throughline before slide 6 — see the "open loops carried the WHOLE way" rule under VIRALITY MECHANICS.
 
 === FORMAT ROTATION (rotate across all 6 formats, never repeat within a batch) ===
 Alongside the 7 hook angles above, also rotate FORMAT. Each format changes how the content is structured and visualized:
@@ -252,19 +257,21 @@ That means:
 - Write body slides as if the reader will come back to this post in a month looking for the exact detail — concrete and reference-able, not just motivational.
 - The recap slide (second-to-last) is specifically designed for screenshotting — all 6 body points in a compact list with a "Save this ↓" header.
 
+Each recap_slide entry renders inside a small fixed card (roughly the size of a business card), not a full slide — keep every entry to 6-10 words, a compact standalone phrase distilled from its body slide, not the full sentence copied over. "Phrase match only fires when someone means it — that's usually where 30% of wasted budget was going" (a body slide) becomes "Phrase match instead of broad match: ~30% less wasted budget" (its recap line) — same fact, card-sized. If a recap line can't be trimmed to that length without losing the number or named setting that makes it useful, keep the number/setting and cut everything else.
+
 === CTA RULES (SAVE + COMMENT stack) ===
-The CTA must be a SAVE + COMMENT stack:
+The CTA must be a SAVE + COMMENT stack, written as three separate fields (see OUTPUT FORMAT: cta_save_line, cta_word/cta_promise, cta_support):
 
-1. SAVE ask (first line): "Save this for your next [topic] review" — this is 3x weighted by algorithm
-2. COMMENT ask (second line): "Comment [KEYWORD] and I'll DM you [SPECIFIC THING]" — the keyword must be memorable and 4-9 letters (AUDIT, CHECKLIST, TEMPLATE, GUIDE, TIPS, PLAYBOOK). The promise must be concrete ("the 7-point checklist", "the exact template", "the settings list", "the audit framework"). Never "Comment for more info."
-3. Support text (optional, bottom): Add urgency or context — "Limited to next 24 hours" or "No cost, just the checklist"
+1. SAVE ask (cta_save_line): "Save this for your next [topic] [noun]" — this is 3x weighted by algorithm. The closing noun must fit the carousel's actual format, not default to the same word every time — "review" for myth-buster/comparison, "checklist" or "audit" for checklist/steal-this, "cleanup" or "audit" for before-after, "framework" for comparison. Across a batch of 5, vary this noun — never let all 5 carousels end their save line with the same word, and never let it default to "audit" as a reflex; that exact repetition across days is what makes an account's CTA slide start reading as a template instead of a considered line.
+2. COMMENT ask (cta_word + cta_promise): "Comment [KEYWORD] and I'll DM you [SPECIFIC THING]" — the keyword must be memorable and 4-9 letters (AUDIT, CHECKLIST, TEMPLATE, GUIDE, TIPS, PLAYBOOK). The promise must be concrete ("the 7-point checklist", "the exact template", "the settings list", "the audit framework"). Never "Comment for more info."
+3. Support text (cta_support, optional): a SHORT line (under 6 words) of urgency or context — "Limited to next 24 hours" or "No cost, just the checklist" or "47 marketers used this last month". This renders directly on the image in small type, so keep it short — it is NOT the caption and must never duplicate or restate the caption text.
 
-Examples of good CTA stacks:
-- Save this for your next Google Ads review
+Examples of good CTA stacks (cta_save_line / cta_word+cta_promise / cta_support):
+- Save this checklist for your next Google Ads cleanup
 - Comment AUDIT and I'll DM you the 7-point checklist
 - Limited to next 24 hours
 
-- Save this for your next Meta Ads review
+- Save this comparison for your next Meta Ads review
 - Comment TEMPLATE and I'll DM you the exact ad copy framework
 - 47 marketers used this last month
 
@@ -282,6 +289,13 @@ Most accounts leak budget on searches that were never going to convert. This is 
 #googleads #digitalmarketing #marketingtips #ppc #advertising"
 
 Under 300 characters total.
+
+HASHTAG ROTATION (strict): never reuse the exact same 3-5 hashtag set two batches running — a caption whose hashtags are identical to yesterday's reads as templated and Instagram's own guidance treats repetitive identical tag sets across posts as a weak spam signal, so vary the mix even when the niche repeats. Draw from a wider pool per niche rather than defaulting to the same handful:
+- Google Ads: #googleads #ppc #digitalmarketing #sem #paidsearch #googleadsexpert #adwords #performancemarketing
+- Meta/Instagram Ads: #metaads #instagramads #facebookads #paidsocial #socialmediamarketing #adsmanager #digitalmarketing
+- Email marketing: #emailmarketing #emaildeliverability #marketingtips #crm #digitalmarketing #ecommercemarketing
+- General/cross-niche (use sparingly, at most 1 per caption): #smallbusiness #marketingtips #businessowner #digitalmarketing
+Pick 3-5 tags that fit the specific carousel's niche and topic, mixing in at least one less-common tag from the list rather than always leaning on the same 3 most-obvious ones.
 
 === ORIGINALITY RULES (strict — check every batch against this before output) ===
 - No two hooks in this batch may start with the same word. Scan all 5 hook_slide values before finalizing; if two share an opener, rewrite one.
@@ -336,6 +350,8 @@ Use exactly 6 body slides (10 slides total per carousel: hook + bridge + 6 body 
       "cta_slide": "string — final slide context line (optional, can be empty)",
       "cta_word": "string — memorable keyword, 4-9 letters, e.g. AUDIT, TEMPLATE, CHECKLIST, GUIDE, TIPS",
       "cta_promise": "string — concrete thing being DM'd, e.g. 'the 7-point audit checklist'",
+      "cta_save_line": "string — the SAVE ask, 'Save this for your next [topic] [noun]', noun varies by format (see CTA RULES) — never defaults to the same word across a batch",
+      "cta_support": "string — optional, under 6 words, urgency/context rendered on the CTA image itself (e.g. 'No cost, just the checklist'). Never the caption or a restatement of it. Can be empty.",
       "caption": "string — starts with save-worthy line, under 300 characters, includes 3-5 relevant hashtags",
       "suggested_audio_style": "string — e.g. 'trending upbeat', 'calm voiceover', 'suspenseful build'"
     }

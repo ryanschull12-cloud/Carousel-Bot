@@ -122,6 +122,12 @@ def load_history():
         return {"recent_batches": []}
 
 
+def extract_hashtags(caption):
+    """Pull #tags out of a caption string, lowercased, for repetition tracking."""
+    import re
+    return re.findall(r"#\w+", (caption or "").lower())
+
+
 def build_history_briefing(history):
     """
     Flatten recent batches into a compact exclusion list Mistral can read
@@ -137,6 +143,25 @@ def build_history_briefing(history):
                 f"{c.get('angle', '?')} / {c.get('format', '?')}: "
                 f"\"{c.get('hook', '')}\""
             )
+
+    # Hashtag rotation: the content brain prompt tells Mistral not to reuse
+    # yesterday's exact hashtag set, but it has no memory between calls to
+    # actually know what that set was — so surface the last 2 batches'
+    # hashtag sets explicitly, same fix pattern as the hook exclusion list
+    # above. Only the most recent 2 entries matter here (older repeats are
+    # fine); the full HISTORY_DAYS_TO_KEEP window would just be noise.
+    recent = history.get("recent_batches", [])[-2:]
+    tag_lines = []
+    for entry in recent:
+        for c in entry.get("carousels", []):
+            tags = c.get("hashtags") or []
+            if tags:
+                tag_lines.append(f"- [{entry.get('date', '?')}] {' '.join(tags)}")
+    if tag_lines:
+        lines.append("")
+        lines.append("Hashtag sets used in the last 2 batches (don't repeat any of these sets verbatim today):")
+        lines.extend(tag_lines)
+
     return "\n".join(lines) if lines else None
 
 
@@ -150,6 +175,7 @@ def update_history(history, batch, batch_date):
                 "angle": c.get("angle", ""),
                 "format": c.get("format", ""),
                 "hook": c.get("hook_slide", ""),
+                "hashtags": extract_hashtags(c.get("caption", "")),
             }
             for c in batch.get("carousels", [])
         ],
@@ -536,7 +562,7 @@ def generate_batch(briefing, history_briefing, performance_briefing, winning_con
     appended as an instruction scoped to that ONE carousel only — hook_slide
     and bridge_slide are already locked by the concept stage, so a copy_rule
     experiment can only affect body_slides/recap_slide/cta_slide/cta_word/
-    cta_promise/caption, never the hook or bridge.
+    cta_promise/cta_save_line/cta_support/caption, never the hook or bridge.
     """
     if winning_concepts:
         concepts_json = json.dumps([
@@ -561,8 +587,8 @@ def generate_batch(briefing, history_briefing, performance_briefing, winning_con
             "your system prompt, but never touch the hook_slide or "
             "bridge_slide text itself). Your job is to write the "
             "body_slides (6, following the standalone-value rules), "
-            "recap_slide, cta_slide, cta_word, cta_promise, caption, and "
-            "suggested_audio_style for each:\n\n" + concepts_json
+            "recap_slide, cta_slide, cta_word, cta_promise, cta_save_line, "
+            "cta_support, caption, and suggested_audio_style for each:\n\n" + concepts_json
         )
     else:
         user_content = "Generate today's batch."
@@ -575,7 +601,8 @@ def generate_batch(briefing, history_briefing, performance_briefing, winning_con
                 f"\n\nEXPERIMENT — apply to EXACTLY ONE carousel: the one whose "
                 f"hook_slide is \"{experiment_target_hook}\", and no other. For that "
                 f"carousel only, additionally follow this rule when writing its "
-                f"body_slides/recap_slide/cta_slide/cta_word/cta_promise/caption "
+                f"body_slides/recap_slide/cta_slide/cta_word/cta_promise/"
+                f"cta_save_line/cta_support/caption "
                 f"(never change its hook_slide or bridge_slide, those are locked): "
                 f"{rule}\nEvery other carousel in today's batch must follow the "
                 "normal rules unchanged — this is a controlled single-variable test."
