@@ -1,0 +1,56 @@
+name: Weekly Trend Research
+
+# Researches what's currently working in short-form social content (hook
+# shapes, formats, design trends) and writes trend_briefing.json, which
+# the daily generation run (runner.py, via load_trend_briefing()) reads
+# and weaves into new carousels. See trend_research.py for why this
+# searches marketing publications rather than trying to scrape Instagram
+# or TikTok directly -- there's no free, ToS-compliant way to do that.
+#
+# Runs weekly, not daily: content-format trends don't meaningfully shift
+# day to day, and this keeps Tavily usage a small fraction of its
+# free-tier monthly quota. Entirely optional/best-effort -- if this job
+# fails or Tavily/Mistral are unavailable, trend_briefing.json just stays
+# as whatever it already was and the daily pipeline runs exactly as it
+# does today, unaffected.
+
+on:
+  schedule:
+    # ~9:15 AM GMT/UTC every Sunday. Off a round number on purpose, same
+    # peak-queue-avoidance reasoning as the posting workflows (see
+    # daily.yml's comment on this).
+    - cron: "15 9 * * 0"
+  workflow_dispatch: {}   # lets you trigger it manually to test
+
+permissions:
+  contents: write   # needed so the workflow can commit trend_briefing.json
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run trend research
+        env:
+          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+        run: python trend_research.py
+
+      - name: Commit trend briefing
+        run: |
+          git config user.name "carousel-bot"
+          git config user.email "actions@github.com"
+          git add trend_briefing.json 2>/dev/null || true
+          git commit -m "Update trend research $(date +'%Y-%m-%d')" || echo "Nothing to commit"
+          git push
