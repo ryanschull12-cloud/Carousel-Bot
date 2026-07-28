@@ -18,12 +18,16 @@ name: Evening Instagram Post
 
 on:
   schedule:
-    # Fixed 7:00 PM GMT/UTC every day (not chasing Irish local clock time
-    # across BST/GMT — fixed UTC time year-round, per Ryan's request).
-    # GitHub Actions schedules are best-effort, not guaranteed to the
-    # minute — instagram_post.py's own dedupe (posted_log.json) still
-    # makes a delayed or manually re-run trigger safe.
-    - cron: "0 19 * * *"
+    # ~7:00 PM GMT/UTC every day (not chasing Irish local clock time across
+    # BST/GMT — fixed UTC time year-round, per Ryan's request). Same
+    # off-peak-minute reasoning as the other two workflows: "0 19 * * *"
+    # is the exact top-of-hour mark every "7pm" cron job on GitHub asks
+    # for, so it queues behind the most jobs. A few minutes off that mark
+    # runs closer to on-time. GitHub Actions schedules remain best-effort
+    # either way, not guaranteed to the minute — instagram_post.py's own
+    # dedupe (posted_log.json) still makes a delayed or manually re-run
+    # trigger safe.
+    - cron: "2 19 * * *"
   workflow_dispatch: {}
 
 permissions:
