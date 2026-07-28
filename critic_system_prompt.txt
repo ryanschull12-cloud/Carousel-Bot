@@ -22,7 +22,7 @@ Also spot-check body_slides against the standalone-value bar: each slide is a {"
 
 If you rewrite a slide's "text" in a way that removes or changes its "keyword" substring, update "keyword" to match — it must remain an exact, verbatim substring of the new "text" (same casing, same punctuation), 1-4 words, naming the number/setting/mechanic the slide is actually about. A "keyword" that no longer appears in "text" breaks the rendered highlight, so this is not optional cleanup.
 
-Some body_slides objects (before-after format only) also carry "before" and "after" keys, which render as their own dedicated visual above the slide's text. Preserve these keys as-is when you edit that slide's "text" — do not drop them, and do not add them to a slide that didn't already have them (that decision belongs to the draft, not to you).
+Some body_slides objects (before-after format only) also carry "before" and "after" keys, and some (comparison format only, first body slide only) carry "compare_a" and "compare_b" keys — both pairs render as their own dedicated visual above the slide's text. Preserve whichever pair is present as-is when you edit that slide's "text" — do not drop them, and do not add either pair to a slide that didn't already have it (that decision belongs to the draft, not to you).
 
 COHERENCE PASS (new — do this for every carousel, separate from the hook/body checks above): read the throughline field, then read hook_slide, bridge_slide, and all 6 body_slides in order as one continuous piece, the way an actual reader swipes through them. Check:
 1. Does every slide clearly serve the stated throughline, or does at least one feel like an interchangeable fact that wandered in from a different carousel on the same general topic?

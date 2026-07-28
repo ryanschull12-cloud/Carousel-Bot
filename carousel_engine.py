@@ -281,6 +281,76 @@ def draw_before_after_strip(draw, before_val, after_val, colors, y, max_width):
     return int(size * 1.5)  # height this strip occupied, for the caller to reserve
 
 
+def slide_comparison(body):
+    """Optional side-by-side pair for the comparison format's split visual
+    (see draw_comparison_strip). Distinct from slide_before_after: a
+    comparison is two options being weighed against each other (broad
+    match vs phrase match), not a temporal old-value-to-new-value
+    transformation, so it gets its own key names and its own visual
+    treatment (a VS badge, not a struck-through arrow) rather than
+    overloading before/after semantics onto something that isn't a
+    before/after. Returns (None, None) unless both are present, same
+    purely-additive fail-safe pattern as slide_before_after."""
+    if isinstance(body, dict):
+        a = (body.get("compare_a") or "").strip()
+        b = (body.get("compare_b") or "").strip()
+        if a and b:
+            return a, b
+    return None, None
+
+
+def draw_comparison_strip(draw, side_a, side_b, colors, y, max_width):
+    """
+    The comparison format's signature visual: two short labels with a bold
+    'VS' badge between them, both sides equally weighted (unlike
+    before/after, neither side is struck through or muted -- a comparison
+    format is choosing between two live options, not showing one replace
+    the other). Shrinks both labels together if they're too wide for the
+    card, same shrink-only pattern as draw_before_after_strip.
+    """
+    target, min_size = 52, 30
+    size = target
+    f_val = ImageFont.truetype(F_SERIF_BOLD, size)
+    badge_gap = 90  # space reserved for the VS badge between the two sides
+    while size > min_size:
+        a_w = draw.textlength(side_a, font=f_val)
+        b_w = draw.textlength(side_b, font=f_val)
+        total_w = a_w + badge_gap + b_w
+        if total_w <= max_width:
+            break
+        size -= 4
+        f_val = ImageFont.truetype(F_SERIF_BOLD, size)
+    a_w = draw.textlength(side_a, font=f_val)
+    b_w = draw.textlength(side_b, font=f_val)
+    total_w = a_w + badge_gap + b_w
+    x = (W - total_w) / 2
+    text_h = int(size * 1.05)
+
+    # Side A — dark, flat shadow-pop, same treatment every hero moment in
+    # this design gets.
+    shadow_off = max(3, size // 16)
+    draw.text((x + shadow_off, y + shadow_off), side_a, font=f_val, fill=colors["accent"])
+    draw.text((x, y), side_a, font=f_val, fill=colors["dark"])
+    x += a_w
+
+    # VS badge, centered in the gap
+    badge_d = 56
+    badge_cx = x + badge_gap / 2
+    badge_cy = y + text_h / 2
+    draw.ellipse([badge_cx - badge_d / 2, badge_cy - badge_d / 2,
+                  badge_cx + badge_d / 2, badge_cy + badge_d / 2], fill=colors["dark"])
+    f_vs = ImageFont.truetype(F_SANS_BOLD, 22)
+    vs_w = draw.textlength("VS", font=f_vs)
+    draw.text((badge_cx - vs_w / 2, badge_cy - 13), "VS", font=f_vs, fill=WHITE)
+    x += badge_gap
+
+    # Side B — same treatment as side A, no visual hierarchy between them.
+    draw.text((x + shadow_off, y + shadow_off), side_b, font=f_val, fill=colors["accent"])
+    draw.text((x, y), side_b, font=f_val, fill=colors["dark"])
+
+    return int(size * 1.5)
+
+
 def draw_marker_bold(draw, x, y, w, h, color):
     r, g, b = color
     marker_color = (r, g, b, 200)
@@ -565,6 +635,7 @@ def render_bridge_slide_fixed(headline, niche, slide_num, total_slides, out_path
 def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slides, out_path,
                                 checklist_mode=False, show_swipe=False):
     before_val, after_val = slide_before_after(full_text)
+    side_a, side_b = slide_comparison(full_text)
     full_text, explicit_keyword = slide_text_and_keyword(full_text)
     colors = colors_for(niche)
     img = Image.new("RGB", (W, H), BG)
@@ -587,12 +658,17 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
 
     total_h = line_h * len(lines)
 
-    # Before-after format's signature strip (see draw_before_after_strip)
+    # Before-after and comparison formats each get their own signature
+    # strip (see draw_before_after_strip / draw_comparison_strip), which
     # reserves extra room at the top of the card. strip_h is 0 whenever a
-    # slide doesn't supply explicit before/after values, which makes every
-    # formula below identical to the old behavior for every other format.
+    # slide supplies neither, which makes every formula below identical to
+    # the old behavior for every other format. A slide should only ever
+    # carry one of the two (each is scoped to a different format), but if
+    # both were somehow present, before/after wins rather than stacking
+    # two strips on one card.
     has_before_after = bool(before_val and after_val)
-    strip_h = 108 if has_before_after else 0
+    has_comparison = bool(side_a and side_b) and not has_before_after
+    strip_h = 108 if (has_before_after or has_comparison) else 0
 
     # Centered stack: number badge on top, card of text centered below it —
     # both centered horizontally on the page instead of left-aligned.
@@ -646,6 +722,9 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
     ty = block_y + card_pad_y
     if has_before_after:
         strip_used = draw_before_after_strip(draw, before_val, after_val, colors, ty, max_w)
+        ty += max(strip_used, strip_h)
+    elif has_comparison:
+        strip_used = draw_comparison_strip(draw, side_a, side_b, colors, ty, max_w)
         ty += max(strip_used, strip_h)
     for line in lines:
         draw_text_highlighted_centered(draw, ty, line, font, highlight, TEXT, colors["accent"])
