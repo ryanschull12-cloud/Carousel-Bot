@@ -204,6 +204,83 @@ def slide_text_and_keyword(body):
     return body, None
 
 
+def slide_before_after(body):
+    """Optional before/after pair for the before-after format's split
+    visual (see draw_before_after_strip / render_numbered_slide_fixed).
+    Every format currently renders its body slides with the exact same
+    card+badge layout regardless of format -- the only visual difference
+    between "checklist" and "before-after" was a checkbox vs a circle.
+    This gives the before-after format its own signature moment when the
+    content brain supplies explicit before/after values on a slide.
+    Returns (None, None) for a plain string or a dict missing either key,
+    so every other format's rendering is completely unaffected -- purely
+    additive, same defensive pattern as slide_text_and_keyword above.
+    """
+    if isinstance(body, dict):
+        before = (body.get("before") or "").strip()
+        after = (body.get("after") or "").strip()
+        if before and after:
+            return before, after
+    return None, None
+
+
+def draw_right_arrow(draw, x, y, length, color, thickness=6):
+    """A drawn arrow, not a unicode glyph -- Liberation Sans Bold doesn't
+    reliably include arrow glyphs (same reason the recap checkmark is
+    drawn as strokes instead of a '✓' character elsewhere in this file)."""
+    draw.line([(x, y), (x + length, y)], fill=color, width=thickness)
+    head = 14
+    draw.polygon([(x + length - 2, y - head), (x + length + head, y), (x + length - 2, y + head)], fill=color)
+
+
+def draw_before_after_strip(draw, before_val, after_val, colors, y, max_width):
+    """
+    The before-after format's signature visual: a muted, struck-through
+    old value, an arrow, and the new value bold in the niche accent color
+    -- distinct from every other format's plain text card, so a
+    before/after carousel finally looks like a transformation instead of
+    just another list of facts. Shrinks both values together if the pair
+    is too wide for the card at full size, same shrink-only pattern used
+    everywhere else in this file.
+    """
+    target, min_size = 60, 34
+    size = target
+    f_val = ImageFont.truetype(F_SERIF_BOLD, size)
+    f_arrow_gap = 70
+    while size > min_size:
+        before_w = draw.textlength(before_val, font=f_val)
+        after_w = draw.textlength(after_val, font=f_val)
+        total_w = before_w + f_arrow_gap + after_w
+        if total_w <= max_width:
+            break
+        size -= 4
+        f_val = ImageFont.truetype(F_SERIF_BOLD, size)
+    before_w = draw.textlength(before_val, font=f_val)
+    after_w = draw.textlength(after_val, font=f_val)
+    total_w = before_w + f_arrow_gap + after_w
+    x = (W - total_w) / 2
+
+    # BEFORE — muted gray, struck through
+    draw.text((x, y), before_val, font=f_val, fill=GRAY)
+    strike_y = y + size * 0.5
+    draw.line([(x - 4, strike_y), (x + before_w + 4, strike_y)], fill=GRAY, width=4)
+    x += before_w
+
+    # arrow, centered in the gap between the two values
+    arrow_len = f_arrow_gap - 36
+    draw_right_arrow(draw, x + 14, y + size * 0.45, arrow_len, colors["dark"], thickness=6)
+    x += f_arrow_gap
+
+    # AFTER — bold, accent-colored, same flat shadow-pop treatment as the
+    # hook/bridge mega-stat so this reads as the carousel's other hero
+    # moments do.
+    shadow_off = max(3, size // 16)
+    draw.text((x + shadow_off, y + shadow_off), after_val, font=f_val, fill=colors["accent"])
+    draw.text((x, y), after_val, font=f_val, fill=colors["dark"])
+
+    return int(size * 1.5)  # height this strip occupied, for the caller to reserve
+
+
 def draw_marker_bold(draw, x, y, w, h, color):
     r, g, b = color
     marker_color = (r, g, b, 200)
@@ -487,6 +564,7 @@ def render_bridge_slide_fixed(headline, niche, slide_num, total_slides, out_path
 
 def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slides, out_path,
                                 checklist_mode=False, show_swipe=False):
+    before_val, after_val = slide_before_after(full_text)
     full_text, explicit_keyword = slide_text_and_keyword(full_text)
     colors = colors_for(niche)
     img = Image.new("RGB", (W, H), BG)
@@ -509,16 +587,23 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
 
     total_h = line_h * len(lines)
 
+    # Before-after format's signature strip (see draw_before_after_strip)
+    # reserves extra room at the top of the card. strip_h is 0 whenever a
+    # slide doesn't supply explicit before/after values, which makes every
+    # formula below identical to the old behavior for every other format.
+    has_before_after = bool(before_val and after_val)
+    strip_h = 108 if has_before_after else 0
+
     # Centered stack: number badge on top, card of text centered below it —
     # both centered horizontally on the page instead of left-aligned.
-    content_h = badge_size + gap_below_badge + card_pad_y * 2 + total_h
+    content_h = badge_size + gap_below_badge + card_pad_y * 2 + strip_h + total_h
     available_h = H - 280 - 200
     top_y = 280 + max(0, (available_h - content_h) // 2)
 
     badge_x = (W - badge_size) / 2
     badge_y = top_y
     block_y = badge_y + badge_size + gap_below_badge
-    block_h = card_pad_y * 2 + total_h
+    block_h = card_pad_y * 2 + strip_h + total_h
     block_x0 = MARGIN
     block_x1 = W - MARGIN
 
@@ -559,6 +644,9 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
 
     highlight = explicit_keyword or find_highlight_word(full_text)
     ty = block_y + card_pad_y
+    if has_before_after:
+        strip_used = draw_before_after_strip(draw, before_val, after_val, colors, ty, max_w)
+        ty += max(strip_used, strip_h)
     for line in lines:
         draw_text_highlighted_centered(draw, ty, line, font, highlight, TEXT, colors["accent"])
         ty += line_h

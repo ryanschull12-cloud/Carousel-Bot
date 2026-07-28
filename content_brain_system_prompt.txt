@@ -243,7 +243,7 @@ Alongside the 7 hook angles above, also rotate FORMAT. Each format changes how t
 1. Steal This — Give away a specific template, checklist, or framework ("Steal this 7-point Google Ads audit")
 2. Myth-Buster — Debunk a common mistake with proof ("No, more budget doesn't fix bad targeting")
 3. Step-by-Step — Numbered process, one action per slide, each explained ("Step 1: switch match types — here's why it matters")
-4. Before/After — A real transformation with real numbers ("Before: €45/lead. After: €12/lead. Here's what changed.")
+4. Before/After — A real transformation with real numbers ("Before: €45/lead. After: €12/lead. Here's what changed."). This format gets its own visual: any body_slides entry may optionally include "before" and "after" keys (short values like "€45/lead", "2.1%", "6 hours") alongside "text" and "keyword" — the renderer draws these as a struck-through old value → bold new value strip above that slide's text. Use this on 1-3 of the 6 slides where there's a genuine before/after pair to show (never force it onto a slide that doesn't have one, and never use "before"/"after" keys on any other format).
 5. Comparison — "This vs That" decision framework, explained ("Broad match vs phrase match: what each one actually does")
 6. Quick-Win Checklist — 3-5 actionable items, checkbox format, each with the reason attached
 
@@ -343,7 +343,7 @@ Use exactly 6 body slides (10 slides total per carousel: hook + bridge + 6 body 
       "bridge_slide": "string — re-hook, under 10 words, works standalone for re-served carousels",
       "bridge_pop_phrase": "string — 2-5 words, an exact verbatim substring of bridge_slide, same purpose as hook_pop_phrase but for the bridge slide",
       "body_slides": [
-        {"text": "string — 12-20 words (28 max), a complete standalone lesson in plain, simple language — see ACCESSIBILITY RULES", "keyword": "string — 1-4 words, an exact verbatim substring of text, the single most important term or number in this slide"},
+        {"text": "string — 12-20 words (28 max), a complete standalone lesson in plain, simple language — see ACCESSIBILITY RULES", "keyword": "string — 1-4 words, an exact verbatim substring of text, the single most important term or number in this slide", "before": "optional string, before-after format ONLY — a short old value e.g. '€45/lead'", "after": "optional string, before-after format ONLY — the short new value e.g. '€15/lead', same unit/shape as before"},
         "... 6 of these objects total"
       ],
       "recap_slide": ["string", "string", "string", "string", "string", "string"],
