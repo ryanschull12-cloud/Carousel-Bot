@@ -68,10 +68,13 @@ TO_EMAIL = os.environ.get("TO_EMAIL", GMAIL_ADDRESS)
 # How many of the day's carousels get auto-posted to Instagram. The rest
 # are still generated and emailed, just not auto-posted. These 3 go out at
 # different times of day, not all at once — whichever carousel lands the
-# top score posts right after generation here (see daily.yml, ~8:30am),
-# the next posts from posts_later.yml (~1pm), and the third from
-# evening-post.yml (~8pm), each reading this same morning's
-# already-committed manifest. All three post fully automatically —
+# top score posts right after generation here (see daily.yml, ~7:37am
+# GMT), the next posts from posts_later.yml (~1:06pm GMT), and the third
+# from evening-post.yml (~7:02pm GMT — NOT 8pm; that was the old
+# BST-chasing schedule before it was fixed to flat GMT times offset a few
+# minutes off the round number to dodge GitHub's peak cron-queue minutes,
+# see the comments in each workflow file), each reading this same
+# morning's already-committed manifest. All three post fully automatically —
 # nothing holds a post back; the virality checker and critic pass earlier
 # in this file are what raise the bar on the copy itself, and pick which
 # 3 of the 5 are the ones worth the auto-post slots, before any of this
@@ -695,8 +698,9 @@ def send_email(image_paths, batch_date):
     msg["To"] = TO_EMAIL
     msg.set_content(
         f"Today's batch of {len(image_paths)} slide images is attached.\n"
-        f"Carousels 1-{AUTO_POST_COUNT} are also being auto-posted to Instagram today, spread "
-        "across the day (carousel 1 shortly, 3 around 1pm, 2 around 8pm).\n"
+        f"The {AUTO_POST_COUNT} highest-scoring carousels are also being auto-posted to "
+        "Instagram today, spread across the day (~7:30am, ~1pm, ~7pm GMT) — not necessarily "
+        "in slide order, whichever scored best goes out first.\n"
         "Save the rest to your camera roll for TikTok / manual posting."
     )
     for path in image_paths:
