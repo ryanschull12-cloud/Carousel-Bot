@@ -39,6 +39,16 @@ post_to_instagram=true, so the auto-posted picks are the ones most likely
 to actually perform, not just whichever came out of the model first. If the
 pool/scoring step fails outright for any reason, this falls back to the
 simpler direct-generation path rather than blocking the whole run.
+
+TREND-AWARE GENERATION (new): a separate weekly job (trend_research.py,
+see .github/workflows/trend_research.yml) researches what's currently
+working in short-form social content -- hook shapes, format ideas, design
+trends -- via web search over marketing publications (not a scrape of
+Instagram/TikTok itself, see that file for why), and writes
+trend_briefing.json. If present and not stale, load_trend_briefing() below
+surfaces it to the content brain the same way the news/performance
+briefings are surfaced: optional context to draw structural inspiration
+from, never specific wording to copy.
 """
 
 import os
@@ -89,6 +99,14 @@ MIN_SCORED_FOR_BRIEFING = 4  # don't draw conclusions from a tiny sample
 # tag the manifest so fetch_performance.py can later attribute engagement
 # back to the right arm.
 EXPERIMENTS_PATH = "experiments.json"
+
+# Content-trend research, written weekly by trend_research.py (see that
+# file and trend_research.yml). This script only READS it. TREND_MAX_AGE_DAYS
+# guards against a stalled/broken weekly job silently feeding an
+# increasingly outdated "current trend" briefing forever -- past that age
+# it's treated the same as if the file didn't exist.
+TREND_PATH = "trend_briefing.json"
+TREND_MAX_AGE_DAYS = 14
 
 # Virality checker tuning. Concepts (not full carousels) are cheap to
 # generate, so the pool can comfortably be bigger than the 5 we actually
@@ -262,6 +280,37 @@ def load_experiments():
         return {"active": None, "history": []}
 
 
+def load_trend_briefing():
+    """Read the weekly content-trend research briefing written by
+    trend_research.py. Missing, corrupt, or stale (older than
+    TREND_MAX_AGE_DAYS -- guards against a silently broken weekly job
+    feeding an increasingly outdated briefing forever) = no briefing
+    today, same fail-open pattern as load_performance/load_experiments.
+    This entire feature is optional context; nothing here can block or
+    change the rest of generation if it's absent."""
+    if not os.path.exists(TREND_PATH):
+        return None
+    try:
+        with open(TREND_PATH, "r") as f:
+            data = json.load(f)
+    except Exception as e:
+        print(f"Could not read {TREND_PATH}, ignoring ({e})")
+        return None
+
+    updated = data.get("updated")
+    if updated:
+        try:
+            import datetime
+            age_days = (datetime.date.today() - datetime.date.fromisoformat(updated)).days
+            if age_days > TREND_MAX_AGE_DAYS:
+                print(f"Trend briefing is {age_days} days old (>{TREND_MAX_AGE_DAYS}), treating as stale, ignoring.")
+                return None
+        except Exception:
+            pass  # malformed date -- fall through and use it anyway rather than discard good data over a formatting quirk
+
+    return data.get("briefing") or None
+
+
 def pick_experiment_target_hook(active_exp, winning_concepts):
     """
     Decide which ONE of today's carousels carries the active experiment's
@@ -396,7 +445,7 @@ def call_mistral(system_prompt, user_content, temperature=0.9):
     raise last_exception
 
 
-def _briefing_block(history_briefing, performance_briefing, briefing):
+def _briefing_block(history_briefing, performance_briefing, briefing, trend_briefing=None):
     """Shared block of optional context appended to both the concept-pool
     call and the direct-generation fallback, so the two paths stay in
     sync instead of drifting apart over time."""
@@ -423,10 +472,22 @@ def _briefing_block(history_briefing, performance_briefing, briefing):
             "weave in only where it's genuinely useful, never force it, "
             "never quote it verbatim):\n" + briefing
         )
+    if trend_briefing:
+        block += (
+            "\n\nThis week's content-trend research (from a weekly web-research "
+            "pass on what's structurally working in short-form marketing "
+            "content right now — hook shapes, formats, pacing, design "
+            "patterns; this is NOT anyone's specific ad copy or caption). "
+            "Use it the same way you use the news briefing above: absorb the "
+            "underlying pattern and apply it to a brand-new hook, format, or "
+            "pop-phrase idea in your own words. Never quote, closely "
+            "paraphrase, or otherwise reproduce any specific line described "
+            "in this research — extract the mechanic, not the wording:\n" + trend_briefing
+        )
     return block
 
 
-def generate_concept_pool(pool_size, history_briefing, performance_briefing, briefing, exclude_concepts=None):
+def generate_concept_pool(pool_size, history_briefing, performance_briefing, briefing, trend_briefing=None, exclude_concepts=None):
     """
     Cheap first pass: ask for a pool of CONCEPTS only (niche/angle/format/
     hook/bridge), not full carousels. This is what makes a pool of 10+
@@ -453,7 +514,7 @@ def generate_concept_pool(pool_size, history_briefing, performance_briefing, bri
             "in an earlier round — do not repeat these or anything shaped "
             "like them:\n" + prior
         )
-    user_content += _briefing_block(history_briefing, performance_briefing, briefing)
+    user_content += _briefing_block(history_briefing, performance_briefing, briefing, trend_briefing)
     user_content += (
         "\n\nReturn ONLY valid JSON matching this schema, nothing else: "
         '{"concepts": [{"niche": "...", "angle": "...", "format": "...", '
@@ -493,7 +554,7 @@ def score_concepts(concepts):
     return concepts
 
 
-def select_winning_concepts(history_briefing, performance_briefing, briefing):
+def select_winning_concepts(history_briefing, performance_briefing, briefing, trend_briefing=None):
     """
     The virality checker loop: generate a pool, score it, keep anything
     scoring >= VIRALITY_THRESHOLD, and regenerate a fresh pool for whatever
@@ -508,7 +569,8 @@ def select_winning_concepts(history_briefing, performance_briefing, briefing):
     pool_size = CONCEPT_POOL_SIZE
     for attempt in range(1, MAX_POOL_ATTEMPTS + 1):
         print(f"Concept pool attempt {attempt}/{MAX_POOL_ATTEMPTS}: requesting {pool_size} concepts...")
-        pool = generate_concept_pool(pool_size, history_briefing, performance_briefing, briefing, exclude_concepts=seen)
+        pool = generate_concept_pool(pool_size, history_briefing, performance_briefing, briefing,
+                                      trend_briefing=trend_briefing, exclude_concepts=seen)
         pool = score_concepts(pool)
         for c in pool:
             print(f"  [{c['score']:.1f}] ({c.get('niche','?')}/{c.get('angle','?')}) \"{c.get('hook_slide','')}\" — {c.get('reason','')}")
@@ -547,7 +609,7 @@ def select_winning_concepts(history_briefing, performance_briefing, briefing):
 
 
 def generate_batch(briefing, history_briefing, performance_briefing, winning_concepts=None,
-                    active_experiment=None, experiment_target_hook=None):
+                    active_experiment=None, experiment_target_hook=None, trend_briefing=None):
     """
     Draft pass, then a critic pass that rewrites weak hooks before anything
     renders. If winning_concepts is given (the virality checker's picks),
@@ -592,7 +654,7 @@ def generate_batch(briefing, history_briefing, performance_briefing, winning_con
         )
     else:
         user_content = "Generate today's batch."
-    user_content += _briefing_block(history_briefing, performance_briefing, briefing)
+    user_content += _briefing_block(history_briefing, performance_briefing, briefing, trend_briefing)
 
     if active_experiment and active_experiment.get("type") == "copy_rule" and experiment_target_hook:
         rule = active_experiment.get("copy_rule", {}).get("instruction", "")
@@ -667,6 +729,12 @@ def main():
     if briefing:
         print(f"Tavily briefing pulled ({len(briefing)} chars) — passing to Mistral.")
 
+    trend_briefing = load_trend_briefing()
+    if trend_briefing:
+        print(f"Loaded content-trend research ({len(trend_briefing)} chars) — passing to Mistral.")
+    else:
+        print("No fresh trend research on file — generating on style rules alone (see trend_research.py).")
+
     # Design/copy feedback loop: pick up whatever experiment_loop.py has
     # currently running (if any) and decide which of today's carousels will
     # carry it. Never lets a bad/missing experiments.json block generation.
@@ -682,7 +750,8 @@ def main():
     # the virality checker should never be able to block the whole run.
     winning_concepts = None
     try:
-        winning_concepts = select_winning_concepts(history_briefing, performance_briefing, briefing)
+        winning_concepts = select_winning_concepts(history_briefing, performance_briefing, briefing,
+                                                     trend_briefing=trend_briefing)
         print(f"Virality checker selected {len(winning_concepts)} concepts to write up in full.")
     except Exception as e:
         print(f"Virality checker failed, falling back to direct generation ({e})")
@@ -695,7 +764,8 @@ def main():
         print(f"Experiment {active_exp.get('id')} will target carousel with hook: \"{experiment_target_hook}\"")
 
     batch = generate_batch(briefing, history_briefing, performance_briefing, winning_concepts=winning_concepts,
-                            active_experiment=active_exp, experiment_target_hook=experiment_target_hook)
+                            active_experiment=active_exp, experiment_target_hook=experiment_target_hook,
+                            trend_briefing=trend_briefing)
     batch_date = batch.get("batch_date", "today")
     # Use the actual system date rather than trusting the model's
     # self-reported date, which can drift or be wrong.
