@@ -1,0 +1,36 @@
+name: Render Smoke Test
+
+# Safety net for GitHub-web edits to the render engine. Runs on every push
+# to main that touches carousel_engine.py (or is triggered manually), and
+# renders one synthetic carousel per format (checklist, steal-this,
+# myth-buster, comparison, before-after) with fake copy. If any format
+# raises an exception or produces the wrong slide count, this job fails
+# and shows a red X on the commit -- catching a broken edit within a
+# couple minutes instead of waiting for the 7:37am daily run to hit it
+# for real. No API keys needed and nothing gets committed or posted --
+# this only checks that the engine still runs.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "carousel_engine.py"
+  workflow_dispatch: {}
+
+jobs:
+  smoke_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Render one carousel per format
+        run: python smoke_test_render.py
