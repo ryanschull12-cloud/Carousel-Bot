@@ -129,6 +129,16 @@
       "format": "before-after",
       "hook": "Google Ads calls 25% of buyers 'low intent'",
       "scored": false
+    },
+    {
+      "media_id": "18205832833359944",
+      "date": "2026-07-29",
+      "index": 1,
+      "niche": "Meta/Instagram Ads",
+      "angle": "contrarian",
+      "format": "comparison",
+      "hook": "Meta\u2019s \u2018suggested audiences\u2019 cost you 3x more per sale",
+      "scored": false
     }
   ]
 }
