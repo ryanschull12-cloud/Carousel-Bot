@@ -1,0 +1,130 @@
+{
+  "batch_date": "2026-07-29",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Meta\u2019s recommended audiences are built for reach, not conversions. Past-buyer lookalikes consistently outperform them 3x\u2014cutting costs without increasing spend. Save this for your next campaign.\n\n#metaads #paidsocial #digitalmarketing #advertising #marketingtips",
+      "niche": "Meta/Instagram Ads",
+      "angle": "contrarian",
+      "format": "comparison",
+      "hook": "Meta\u2019s \u2018suggested audiences\u2019 cost you 3x more per sale",
+      "throughline": "Meta\u2019s recommended audiences are optimized for reach, not conversions\u2014smaller, high-intent audiences built from past buyers consistently outperform them.",
+      "image_paths": [
+        "posts/2026-07-29/carousel_1/slide_01.jpg",
+        "posts/2026-07-29/carousel_1/slide_02.jpg",
+        "posts/2026-07-29/carousel_1/slide_03.jpg",
+        "posts/2026-07-29/carousel_1/slide_04.jpg",
+        "posts/2026-07-29/carousel_1/slide_05.jpg",
+        "posts/2026-07-29/carousel_1/slide_06.jpg",
+        "posts/2026-07-29/carousel_1/slide_07.jpg",
+        "posts/2026-07-29/carousel_1/slide_08.jpg",
+        "posts/2026-07-29/carousel_1/slide_09.jpg",
+        "posts/2026-07-29/carousel_1/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Google Ads\u2019 \u2018lost IS\u2019 report blames bids, but the real issue is Quality Score. Fix it to cut costs by 50% or more. Save this checklist.\n\n#googleads #ppc #digitalmarketing #sem #advertising",
+      "niche": "Google Ads",
+      "angle": "behind-the-curtain",
+      "format": "checklist",
+      "hook": "Google Ads hides your ads\u2014not because of bids, but this",
+      "throughline": "Google Ads\u2019 \u2018lost IS\u2019 report blames bids, but the real issue is often Quality Score\u2014here\u2019s how to diagnose and fix it.",
+      "image_paths": [
+        "posts/2026-07-29/carousel_2/slide_01.jpg",
+        "posts/2026-07-29/carousel_2/slide_02.jpg",
+        "posts/2026-07-29/carousel_2/slide_03.jpg",
+        "posts/2026-07-29/carousel_2/slide_04.jpg",
+        "posts/2026-07-29/carousel_2/slide_05.jpg",
+        "posts/2026-07-29/carousel_2/slide_06.jpg",
+        "posts/2026-07-29/carousel_2/slide_07.jpg",
+        "posts/2026-07-29/carousel_2/slide_08.jpg",
+        "posts/2026-07-29/carousel_2/slide_09.jpg",
+        "posts/2026-07-29/carousel_2/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Most emails land in promotions because of three key lines. Rewrite them to escape the tab and boost opens by 22%. Save this checklist.\n\n#emailmarketing #digitalmarketing #marketingtips #crm #ecommercemarketing",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "checklist",
+      "hook": "Gmail buries your emails\u2014here\u2019s the 3-line fix",
+      "throughline": "Most emails land in the promotions tab because of three key lines\u2014here\u2019s how to rewrite them to escape it.",
+      "image_paths": [
+        "posts/2026-07-29/carousel_3/slide_01.jpg",
+        "posts/2026-07-29/carousel_3/slide_02.jpg",
+        "posts/2026-07-29/carousel_3/slide_03.jpg",
+        "posts/2026-07-29/carousel_3/slide_04.jpg",
+        "posts/2026-07-29/carousel_3/slide_05.jpg",
+        "posts/2026-07-29/carousel_3/slide_06.jpg",
+        "posts/2026-07-29/carousel_3/slide_07.jpg",
+        "posts/2026-07-29/carousel_3/slide_08.jpg",
+        "posts/2026-07-29/carousel_3/slide_09.jpg",
+        "posts/2026-07-29/carousel_3/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 4,
+      "caption": "You don\u2019t need 10k followers to scale Meta ads. A small, engaged audience can outspend a large, cold one\u2014delivering 3x higher ROAS. Save this for your next campaign.\n\n#metaads #paidsocial #digitalmarketing #advertising #marketingtips",
+      "niche": "Meta/Instagram Ads",
+      "angle": "relief-permission",
+      "format": "myth-buster",
+      "hook": "A 500-person audience can outspend a 50k one",
+      "throughline": "Scaling Meta ads isn\u2019t about audience size\u2014it\u2019s about audience quality. A small, engaged group can outperform a large, cold one.",
+      "image_paths": [
+        "posts/2026-07-29/carousel_4/slide_01.jpg",
+        "posts/2026-07-29/carousel_4/slide_02.jpg",
+        "posts/2026-07-29/carousel_4/slide_03.jpg",
+        "posts/2026-07-29/carousel_4/slide_04.jpg",
+        "posts/2026-07-29/carousel_4/slide_05.jpg",
+        "posts/2026-07-29/carousel_4/slide_06.jpg",
+        "posts/2026-07-29/carousel_4/slide_07.jpg",
+        "posts/2026-07-29/carousel_4/slide_08.jpg",
+        "posts/2026-07-29/carousel_4/slide_09.jpg",
+        "posts/2026-07-29/carousel_4/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Meta\u2019s algorithm stops learning after 50 conversions. Here\u2019s how to restart it without losing momentum or wasting budget. Save this step-by-step.\n\n#metaads #paidsocial #digitalmarketing #advertising #marketingtips",
+      "niche": "Meta/Instagram Ads",
+      "angle": "realization",
+      "format": "step-by-step",
+      "hook": "Meta\u2019s algorithm quits learning after 50 conversions",
+      "throughline": "Meta\u2019s algorithm stops learning after 50 conversions\u2014here\u2019s how to restart it without losing momentum or wasting budget.",
+      "image_paths": [
+        "posts/2026-07-29/carousel_5/slide_01.jpg",
+        "posts/2026-07-29/carousel_5/slide_02.jpg",
+        "posts/2026-07-29/carousel_5/slide_03.jpg",
+        "posts/2026-07-29/carousel_5/slide_04.jpg",
+        "posts/2026-07-29/carousel_5/slide_05.jpg",
+        "posts/2026-07-29/carousel_5/slide_06.jpg",
+        "posts/2026-07-29/carousel_5/slide_07.jpg",
+        "posts/2026-07-29/carousel_5/slide_08.jpg",
+        "posts/2026-07-29/carousel_5/slide_09.jpg",
+        "posts/2026-07-29/carousel_5/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    }
+  ]
+}

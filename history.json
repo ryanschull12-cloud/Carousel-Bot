@@ -174,6 +174,76 @@
           "hook": "Rotating Meta creatives resets the algorithm"
         }
       ]
+    },
+    {
+      "date": "2026-07-29",
+      "carousels": [
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "contrarian",
+          "format": "comparison",
+          "hook": "Meta\u2019s \u2018suggested audiences\u2019 cost you 3x more per sale",
+          "hashtags": [
+            "#metaads",
+            "#paidsocial",
+            "#digitalmarketing",
+            "#advertising",
+            "#marketingtips"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "behind-the-curtain",
+          "format": "checklist",
+          "hook": "Google Ads hides your ads\u2014not because of bids, but this",
+          "hashtags": [
+            "#googleads",
+            "#ppc",
+            "#digitalmarketing",
+            "#sem",
+            "#advertising"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "behind-the-curtain",
+          "format": "checklist",
+          "hook": "Gmail buries your emails\u2014here\u2019s the 3-line fix",
+          "hashtags": [
+            "#emailmarketing",
+            "#digitalmarketing",
+            "#marketingtips",
+            "#crm",
+            "#ecommercemarketing"
+          ]
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "relief-permission",
+          "format": "myth-buster",
+          "hook": "A 500-person audience can outspend a 50k one",
+          "hashtags": [
+            "#metaads",
+            "#paidsocial",
+            "#digitalmarketing",
+            "#advertising",
+            "#marketingtips"
+          ]
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "realization",
+          "format": "step-by-step",
+          "hook": "Meta\u2019s algorithm quits learning after 50 conversions",
+          "hashtags": [
+            "#metaads",
+            "#paidsocial",
+            "#digitalmarketing",
+            "#advertising",
+            "#marketingtips"
+          ]
+        }
+      ]
     }
   ]
 }
