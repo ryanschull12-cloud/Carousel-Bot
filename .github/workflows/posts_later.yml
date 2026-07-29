@@ -17,19 +17,16 @@ name: Midday Instagram Post
 
 on:
   schedule:
-    # ~1:00 PM GMT/UTC every day (not chasing Irish local clock time across
-    # BST/GMT — fixed UTC time year-round, per Ryan's request). Offset a
-    # few minutes off the exact top-of-hour mark on purpose — "0 13 * * *"
-    # is one of the most oversubscribed minutes on GitHub's shared cron
-    # queue (every repo wanting "1pm" asks for exactly that), so it's
-    # consistently the slowest to actually fire. A few minutes off the
-    # round number avoids that peak and runs closer to on-time, while
-    # still landing right around 1pm for Ryan's purposes. GitHub Actions
-    # schedules remain best-effort either way, not guaranteed to the
-    # minute — instagram_post.py's own dedupe (posted_log.json) still
-    # makes a delayed or manually re-run trigger safe, it just won't post
-    # a duplicate.
-    - cron: "6 13 * * *"
+    # Runs every 15 minutes across a 1:00-4:45 PM GMT/UTC window instead of
+    # a single 1pm shot, for the same reason as daily.yml: GitHub's
+    # scheduled-workflow queue for this repo has been observed to delay a
+    # single daily trigger by hours, or skip it entirely, and shifting which
+    # minute it's set to doesn't fix that. instagram_post.py's own dedupe
+    # (posted_log.json / --target-count) makes every extra tick here a
+    # near-instant no-op once today's midday post has already gone out, so
+    # this just gives ~16 chances for one to get through near the intended
+    # time instead of one all-or-nothing shot.
+    - cron: "*/15 13-16 * * *"
   workflow_dispatch: {}
 
 permissions:
