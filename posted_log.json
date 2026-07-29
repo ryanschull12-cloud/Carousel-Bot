@@ -139,6 +139,16 @@
       "format": "comparison",
       "hook": "Meta\u2019s \u2018suggested audiences\u2019 cost you 3x more per sale",
       "scored": false
+    },
+    {
+      "media_id": "18110946083094344",
+      "date": "2026-07-29",
+      "index": 2,
+      "niche": "Google Ads",
+      "angle": "behind-the-curtain",
+      "format": "checklist",
+      "hook": "Google Ads hides your ads\u2014not because of bids, but this",
+      "scored": false
     }
   ]
 }
