@@ -71,6 +71,114 @@
       "engagement_rate": 100.0,
       "experiment_id": null,
       "experiment_arm": null
+    },
+    {
+      "date": "2026-07-25",
+      "media_id": "17957941884172064",
+      "niche": "Google Ads",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Google Ads hides 30% of sales in its lag report",
+      "metrics": {
+        "reach": 3,
+        "saved": 0,
+        "shares": 0,
+        "likes": 2,
+        "comments": 0
+      },
+      "engagement_rate": 66.667,
+      "experiment_id": null,
+      "experiment_arm": null
+    },
+    {
+      "date": "2026-07-25",
+      "media_id": "17913012369433225",
+      "niche": "Email Marketing",
+      "angle": "proof-numbers",
+      "format": "before-after",
+      "hook": "2 PM emails get 18% fewer replies\u2014here\u2019s when to send",
+      "metrics": {
+        "reach": 3,
+        "saved": 0,
+        "shares": 0,
+        "likes": 1,
+        "comments": 0
+      },
+      "engagement_rate": 33.333,
+      "experiment_id": null,
+      "experiment_arm": null
+    },
+    {
+      "date": "2026-07-25",
+      "media_id": "18066814523543488",
+      "niche": "Meta/Instagram Ads",
+      "angle": "proof-numbers",
+      "format": "before-after",
+      "hook": "Meta ads burn out after 3 days\u2014unless you rotate",
+      "metrics": {
+        "reach": 3,
+        "saved": 0,
+        "shares": 0,
+        "likes": 3,
+        "comments": 0
+      },
+      "engagement_rate": 100.0,
+      "experiment_id": null,
+      "experiment_arm": null
+    },
+    {
+      "date": "2026-07-26",
+      "media_id": "18362095246214885",
+      "niche": "Meta/Instagram Ads",
+      "angle": "realization",
+      "format": "comparison",
+      "hook": "Meta\u2019s auction spikes CPMs 200% after 8 PM",
+      "metrics": {
+        "reach": 3,
+        "saved": 0,
+        "shares": 0,
+        "likes": 2,
+        "comments": 0
+      },
+      "engagement_rate": 66.667,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
+    },
+    {
+      "date": "2026-07-26",
+      "media_id": "17874699999625362",
+      "niche": "Email Marketing",
+      "angle": "proof-numbers",
+      "format": "checklist",
+      "hook": "Single-CTA emails get 40% more clicks",
+      "metrics": {
+        "reach": 3,
+        "saved": 0,
+        "shares": 0,
+        "likes": 2,
+        "comments": 0
+      },
+      "engagement_rate": 66.667,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
+    },
+    {
+      "date": "2026-07-26",
+      "media_id": "17938054686083569",
+      "niche": "Google Ads",
+      "angle": "mistake-fear",
+      "format": "step-by-step",
+      "hook": "Google\u2019s Search Partners waste 15% of your budget",
+      "metrics": {
+        "reach": 3,
+        "saved": 0,
+        "shares": 0,
+        "likes": 3,
+        "comments": 0
+      },
+      "engagement_rate": 100.0,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
     }
   ]
 }

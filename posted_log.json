@@ -48,7 +48,7 @@
       "angle": "behind-the-curtain",
       "format": "steal-this",
       "hook": "Google Ads hides 30% of sales in its lag report",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "17913012369433225",
@@ -58,7 +58,7 @@
       "angle": "proof-numbers",
       "format": "before-after",
       "hook": "2 PM emails get 18% fewer replies\u2014here\u2019s when to send",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18066814523543488",
@@ -68,7 +68,7 @@
       "angle": "proof-numbers",
       "format": "before-after",
       "hook": "Meta ads burn out after 3 days\u2014unless you rotate",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18362095246214885",
@@ -78,7 +78,7 @@
       "angle": "realization",
       "format": "comparison",
       "hook": "Meta\u2019s auction spikes CPMs 200% after 8 PM",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "17874699999625362",
@@ -88,7 +88,7 @@
       "angle": "proof-numbers",
       "format": "checklist",
       "hook": "Single-CTA emails get 40% more clicks",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "17938054686083569",
@@ -98,7 +98,7 @@
       "angle": "mistake-fear",
       "format": "step-by-step",
       "hook": "Google\u2019s Search Partners waste 15% of your budget",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18080240663306516",
