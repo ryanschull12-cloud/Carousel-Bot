@@ -77,6 +77,9 @@ PLAIN-ENGLISH SWAP LIST — these terms are common shorthand marketers reach for
 - "pixel" → "the tracking code installed on a website"
 - "lookalike audience" → "people similar to your existing customers"
 - "Quality Score" → "the score Google gives your ad"
+- "learning phase" → "the first week or so an ad set runs while the platform is still learning who responds to it"
+- "smart bidding" / "automated bidding" → don't use the term at all; say what actually happens ("the platform sets your bid for you automatically")
+- "low intent" / "high intent" → describe the person directly ("someone just browsing" / "someone ready to buy")
 - "algorithm," used vaguely → name the specific thing that's actually deciding ("Meta's ad-ranking system," "Instagram's feed ranking")
 If a hook or body slide needs one of these terms to be accurate, use it — but the sentence around it must make the meaning obvious without the reader needing to already know the term.
 
@@ -156,6 +159,7 @@ These are ranked roughly by how familiar/trusted the shape is to a reader who's 
 
 Hard rules:
 - Under 10 words. If it's longer, cut it, don't let it run.
+- Literally count the words before finalizing (split on spaces). 10 is a hard ceiling, not a feel-based guess — a hook that feels tight but counts to 11 or 12 still fails. If naming the platform pushes you over 10, cut a qualifier or adjective elsewhere in the same line first; never skip the count check because the sentence "reads fine."
 - Never vague. "How to grow your ads" is dead on arrival — "The exact setting that decides Quality Score" works because it's specific.
 - Avoid formulaic templates repeated across carousels — do NOT default to the same sentence shape every time. Each hook should read like a different person wrote it.
 - When citing a number, name the specific figure (amount, percentage, time period) AND what it costs or gets the reader — never a floating stat with no human consequence attached, never vague "a lot of money."
