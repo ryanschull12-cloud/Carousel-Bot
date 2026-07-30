@@ -108,7 +108,7 @@
       "angle": "curiosity",
       "format": "comparison",
       "hook": "Google Ads counts clicks that never start sales",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18327300208260757",
@@ -118,7 +118,7 @@
       "angle": "relief-permission",
       "format": "steal-this",
       "hook": "500 engaged subscribers beat 10k cold ones",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "17878727910504300",
@@ -128,7 +128,7 @@
       "angle": "behind-the-curtain",
       "format": "before-after",
       "hook": "Google Ads calls 25% of buyers 'low intent'",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18205832833359944",

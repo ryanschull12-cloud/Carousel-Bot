@@ -179,6 +179,60 @@
       "engagement_rate": 100.0,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control"
+    },
+    {
+      "date": "2026-07-27",
+      "media_id": "18080240663306516",
+      "niche": "Google Ads",
+      "angle": "curiosity",
+      "format": "comparison",
+      "hook": "Google Ads counts clicks that never start sales",
+      "metrics": {
+        "reach": 3,
+        "saved": 0,
+        "shares": 0,
+        "likes": 2,
+        "comments": 0
+      },
+      "engagement_rate": 66.667,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
+    },
+    {
+      "date": "2026-07-27",
+      "media_id": "18327300208260757",
+      "niche": "Email Marketing",
+      "angle": "relief-permission",
+      "format": "steal-this",
+      "hook": "500 engaged subscribers beat 10k cold ones",
+      "metrics": {
+        "reach": 3,
+        "saved": 0,
+        "shares": 0,
+        "likes": 2,
+        "comments": 0
+      },
+      "engagement_rate": 66.667,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
+    },
+    {
+      "date": "2026-07-27",
+      "media_id": "17878727910504300",
+      "niche": "Google Ads",
+      "angle": "behind-the-curtain",
+      "format": "before-after",
+      "hook": "Google Ads calls 25% of buyers 'low intent'",
+      "metrics": {
+        "reach": 3,
+        "saved": 0,
+        "shares": 0,
+        "likes": 3,
+        "comments": 0
+      },
+      "engagement_rate": 100.0,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
     }
   ]
 }
