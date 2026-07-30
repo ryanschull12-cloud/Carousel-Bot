@@ -1,0 +1,130 @@
+{
+  "batch_date": "2026-07-30",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Save this Meta Ads efficiency hack \u2193\nMost ad sets hit peak efficiency at day 7\u2014after that, CPM climbs while conversions stall. Pausing and restarting resets the algorithm, cutting costs without losing momentum.\n#metaads #paidsocial #digitalmarketing #advertisingtips #marketinghacks",
+      "niche": "Meta/Instagram Ads",
+      "angle": "realization",
+      "format": "before-after",
+      "hook": "Meta Ads\u2019 learning phase hides a 40% CPM spike after day 7",
+      "throughline": "Meta\u2019s learning phase doesn\u2019t end at 7 days\u2014it just shifts into a hidden cost phase, and pausing ad sets strategically resets efficiency without losing momentum.",
+      "image_paths": [
+        "posts/2026-07-30/carousel_1/slide_01.jpg",
+        "posts/2026-07-30/carousel_1/slide_02.jpg",
+        "posts/2026-07-30/carousel_1/slide_03.jpg",
+        "posts/2026-07-30/carousel_1/slide_04.jpg",
+        "posts/2026-07-30/carousel_1/slide_05.jpg",
+        "posts/2026-07-30/carousel_1/slide_06.jpg",
+        "posts/2026-07-30/carousel_1/slide_07.jpg",
+        "posts/2026-07-30/carousel_1/slide_08.jpg",
+        "posts/2026-07-30/carousel_1/slide_09.jpg",
+        "posts/2026-07-30/carousel_1/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Save this Google Ads bidding hack \u2193\nSmart bidding punishes small budgets\u2014it needs thousands of conversions to work. Manual bidding gives you control, wins 60% of tests under \u20ac500/day, and keeps costs predictable.\n#googleads #ppc #digitalmarketing #sem #advertisingtips",
+      "niche": "Google Ads",
+      "angle": "contrarian",
+      "format": "comparison",
+      "hook": "Google Ads\u2019 \u2018smart\u2019 bidding bleeds small budgets\u2014manual bids win 60% of tests",
+      "throughline": "Google Ads\u2019 automated bidding strategies favor large budgets, but manual bidding gives small advertisers the control they need to compete without overspending.",
+      "image_paths": [
+        "posts/2026-07-30/carousel_2/slide_01.jpg",
+        "posts/2026-07-30/carousel_2/slide_02.jpg",
+        "posts/2026-07-30/carousel_2/slide_03.jpg",
+        "posts/2026-07-30/carousel_2/slide_04.jpg",
+        "posts/2026-07-30/carousel_2/slide_05.jpg",
+        "posts/2026-07-30/carousel_2/slide_06.jpg",
+        "posts/2026-07-30/carousel_2/slide_07.jpg",
+        "posts/2026-07-30/carousel_2/slide_08.jpg",
+        "posts/2026-07-30/carousel_2/slide_09.jpg",
+        "posts/2026-07-30/carousel_2/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Save this Meta Ads myth-buster \u2193\nYou don\u2019t need 1,000 conversions to train Meta\u2019s algorithm\u201450 is enough. The first 50 teach it who to target; the rest refine it. Hit 50 fast, then narrow your audience.\n#metaads #paidsocial #digitalmarketing #advertising #marketingmyths",
+      "niche": "Meta/Instagram Ads",
+      "angle": "relief-permission",
+      "format": "myth-buster",
+      "hook": "Meta Ads only needs 50 conversions to start optimizing\u2014here\u2019s proof",
+      "throughline": "Meta\u2019s algorithm doesn\u2019t need 1,000 conversions to learn\u201450 conversions are enough to start optimizing effectively, and this changes how you structure your campaigns.",
+      "image_paths": [
+        "posts/2026-07-30/carousel_3/slide_01.jpg",
+        "posts/2026-07-30/carousel_3/slide_02.jpg",
+        "posts/2026-07-30/carousel_3/slide_03.jpg",
+        "posts/2026-07-30/carousel_3/slide_04.jpg",
+        "posts/2026-07-30/carousel_3/slide_05.jpg",
+        "posts/2026-07-30/carousel_3/slide_06.jpg",
+        "posts/2026-07-30/carousel_3/slide_07.jpg",
+        "posts/2026-07-30/carousel_3/slide_08.jpg",
+        "posts/2026-07-30/carousel_3/slide_09.jpg",
+        "posts/2026-07-30/carousel_3/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 4,
+      "caption": "Save this Google Ads truth \u2193\nGoogle Ads mislabels 30% of buyers as \u2018low intent.\u2019 The Search Terms Report reveals who they really are\u2014add them as exact match keywords to bypass the algorithm\u2019s mistakes.\n#googleads #ppc #digitalmarketing #sem #advertisinghacks",
+      "niche": "Google Ads",
+      "angle": "behind-the-curtain",
+      "format": "before-after",
+      "hook": "Google Ads mislabels 30% of buyers as \u2018low intent\u2019\u2014here\u2019s how to find them",
+      "throughline": "Google Ads\u2019 \u2018low intent\u2019 label is misleading\u201430% of buyers are misclassified, and the Search Terms Report reveals who they really are.",
+      "image_paths": [
+        "posts/2026-07-30/carousel_4/slide_01.jpg",
+        "posts/2026-07-30/carousel_4/slide_02.jpg",
+        "posts/2026-07-30/carousel_4/slide_03.jpg",
+        "posts/2026-07-30/carousel_4/slide_04.jpg",
+        "posts/2026-07-30/carousel_4/slide_05.jpg",
+        "posts/2026-07-30/carousel_4/slide_06.jpg",
+        "posts/2026-07-30/carousel_4/slide_07.jpg",
+        "posts/2026-07-30/carousel_4/slide_08.jpg",
+        "posts/2026-07-30/carousel_4/slide_09.jpg",
+        "posts/2026-07-30/carousel_4/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Save this email deliverability hack \u2193\nGmail\u2019s Promotions tab buries your emails\u2014unless you use transactional language. Three lines in the subject line lift inbox placement 30%: an action, an identifier, and a time-sensitive word.\n#emailmarketing #digitalmarketing #marketingtips #crm #deliverability",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "checklist",
+      "hook": "Gmail\u2019s Promotions tab kills open rates\u2014unless your subject line does this",
+      "throughline": "Gmail\u2019s Promotions tab buries emails, but three specific lines in the subject line can lift inbox placement by 30%\u2014here\u2019s exactly what to write.",
+      "image_paths": [
+        "posts/2026-07-30/carousel_5/slide_01.jpg",
+        "posts/2026-07-30/carousel_5/slide_02.jpg",
+        "posts/2026-07-30/carousel_5/slide_03.jpg",
+        "posts/2026-07-30/carousel_5/slide_04.jpg",
+        "posts/2026-07-30/carousel_5/slide_05.jpg",
+        "posts/2026-07-30/carousel_5/slide_06.jpg",
+        "posts/2026-07-30/carousel_5/slide_07.jpg",
+        "posts/2026-07-30/carousel_5/slide_08.jpg",
+        "posts/2026-07-30/carousel_5/slide_09.jpg",
+        "posts/2026-07-30/carousel_5/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    }
+  ]
+}

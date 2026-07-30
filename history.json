@@ -244,6 +244,76 @@
           ]
         }
       ]
+    },
+    {
+      "date": "2026-07-30",
+      "carousels": [
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "realization",
+          "format": "before-after",
+          "hook": "Meta Ads\u2019 learning phase hides a 40% CPM spike after day 7",
+          "hashtags": [
+            "#metaads",
+            "#paidsocial",
+            "#digitalmarketing",
+            "#advertisingtips",
+            "#marketinghacks"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "contrarian",
+          "format": "comparison",
+          "hook": "Google Ads\u2019 \u2018smart\u2019 bidding bleeds small budgets\u2014manual bids win 60% of tests",
+          "hashtags": [
+            "#googleads",
+            "#ppc",
+            "#digitalmarketing",
+            "#sem",
+            "#advertisingtips"
+          ]
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "relief-permission",
+          "format": "myth-buster",
+          "hook": "Meta Ads only needs 50 conversions to start optimizing\u2014here\u2019s proof",
+          "hashtags": [
+            "#metaads",
+            "#paidsocial",
+            "#digitalmarketing",
+            "#advertising",
+            "#marketingmyths"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "behind-the-curtain",
+          "format": "before-after",
+          "hook": "Google Ads mislabels 30% of buyers as \u2018low intent\u2019\u2014here\u2019s how to find them",
+          "hashtags": [
+            "#googleads",
+            "#ppc",
+            "#digitalmarketing",
+            "#sem",
+            "#advertisinghacks"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "behind-the-curtain",
+          "format": "checklist",
+          "hook": "Gmail\u2019s Promotions tab kills open rates\u2014unless your subject line does this",
+          "hashtags": [
+            "#emailmarketing",
+            "#digitalmarketing",
+            "#marketingtips",
+            "#crm",
+            "#deliverability"
+          ]
+        }
+      ]
     }
   ]
 }
