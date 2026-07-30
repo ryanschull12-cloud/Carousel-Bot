@@ -169,6 +169,16 @@
       "format": "before-after",
       "hook": "Meta Ads\u2019 learning phase hides a 40% CPM spike after day 7",
       "scored": false
+    },
+    {
+      "media_id": "18104207825162156",
+      "date": "2026-07-30",
+      "index": 2,
+      "niche": "Google Ads",
+      "angle": "contrarian",
+      "format": "comparison",
+      "hook": "Google Ads\u2019 \u2018smart\u2019 bidding bleeds small budgets\u2014manual bids win 60% of tests",
+      "scored": false
     }
   ]
 }
