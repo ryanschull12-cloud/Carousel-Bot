@@ -382,6 +382,120 @@ def draw_text_highlighted_centered(draw, y, line, font, highlight, text_color, m
     draw_text_highlighted_v2(draw, x, y, line, font, highlight, text_color, marker_color)
 
 
+# ============================================================
+# VECTOR ICONS — hand-drawn with PIL primitives only (no photos, no
+# custom fonts/images needed, works on the GitHub Actions free tier).
+# These give every hook/bridge/CTA slide a real graphic element beyond
+# text + geometric accent bars, without touching any external asset.
+# Each icon function draws centered at (cx, cy) at roughly `size` px
+# tall/wide, in the given fill color(s) — callers handle badge/background.
+# ============================================================
+
+def draw_icon_bullseye(draw, cx, cy, size, ring_color, dot_color):
+    """Google Ads — precision targeting."""
+    r = size / 2
+    draw.ellipse([cx - r, cy - r, cx + r, cy + r], fill=ring_color)
+    r2 = r * 0.66
+    draw.ellipse([cx - r2, cy - r2, cx + r2, cy + r2], fill=dot_color)
+    r3 = r * 0.32
+    draw.ellipse([cx - r3, cy - r3, cx + r3, cy + r3], fill=ring_color)
+
+
+def draw_icon_megaphone(draw, cx, cy, size, color):
+    """Meta/Instagram Ads — broadcasting to an audience."""
+    w, h = size, size * 0.72
+    x0 = cx - w / 2
+    # cone body (widening trapezoid pointing right)
+    draw.polygon([
+        (x0, cy - h * 0.22), (x0, cy + h * 0.22),
+        (x0 + w * 0.55, cy + h * 0.5), (x0 + w * 0.55, cy - h * 0.5),
+    ], fill=color)
+    # handle
+    draw.rectangle([x0 - w * 0.12, cy - h * 0.14, x0, cy + h * 0.14], fill=color)
+    # bell/opening
+    draw.polygon([
+        (x0 + w * 0.55, cy - h * 0.5), (x0 + w * 0.55, cy + h * 0.5),
+        (x0 + w * 0.78, cy + h * 0.62), (x0 + w * 0.78, cy - h * 0.62),
+    ], fill=color)
+    # sound lines
+    lw = max(3, int(size * 0.05))
+    for i, dy in enumerate((-0.28, 0, 0.28)):
+        yy = cy + h * dy
+        draw.line([(x0 + w * 0.9, yy), (x0 + w * 1.05, yy)], fill=color, width=lw)
+
+
+def draw_icon_envelope(draw, cx, cy, size, color, bg):
+    """Email marketing."""
+    w, h = size, size * 0.68
+    x0, y0 = cx - w / 2, cy - h / 2
+    x1, y1 = cx + w / 2, cy + h / 2
+    draw.rounded_rectangle([x0, y0, x1, y1], radius=size * 0.08, fill=color)
+    lw = max(3, int(size * 0.06))
+    draw.line([(x0 + lw, y0 + lw), (cx, cy + h * 0.12), (x1 - lw, y0 + lw)], fill=bg, width=lw, joint="curve")
+
+
+def draw_icon_bookmark(draw, cx, cy, size, color):
+    """Save action — used right next to the save CTA line."""
+    w, h = size * 0.66, size
+    x0, y0 = cx - w / 2, cy - h / 2
+    x1, y1 = cx + w / 2, cy + h / 2
+    notch = h * 0.28
+    draw.polygon([
+        (x0, y0), (x1, y0), (x1, y1),
+        (cx, y1 - notch), (x0, y1),
+    ], fill=color)
+
+
+def draw_icon_chat_bubble(draw, cx, cy, size, color):
+    """Comment action — used right next to the comment CTA line."""
+    w, h = size, size * 0.78
+    x0, y0 = cx - w / 2, cy - h / 2
+    x1, y1 = cx + w / 2, cy + h / 2
+    draw.rounded_rectangle([x0, y0, x1, y1], radius=h * 0.28, fill=color)
+    draw.polygon([
+        (cx - w * 0.18, y1 - 2), (cx + w * 0.02, y1 - 2), (cx - w * 0.12, y1 + h * 0.24),
+    ], fill=color)
+
+
+def draw_icon_lightbulb(draw, cx, cy, size, color):
+    """Realization / idea angle."""
+    r = size * 0.42
+    draw.ellipse([cx - r, cy - r * 1.1, cx + r, cy + r * 0.9], fill=color)
+    base_w = r * 0.9
+    draw.rectangle([cx - base_w / 2, cy + r * 0.55, cx + base_w / 2, cy + r * 1.05], fill=color)
+    lw = max(3, int(size * 0.05))
+    for i in range(2):
+        yy = cy + r * 1.15 + i * (lw + 3)
+        draw.line([(cx - base_w * 0.4, yy), (cx + base_w * 0.4, yy)], fill=color, width=lw)
+
+
+NICHE_ICON_BUILDERS = {}
+
+
+def draw_niche_icon(draw, cx, cy, size, niche, colors, bg=BG):
+    """Dispatch to the right icon for this niche's badge, so every hook
+    and bridge slide gets a real graphic mark, not just colored text."""
+    n = (niche or "").lower()
+    if "google" in n:
+        draw_icon_bullseye(draw, cx, cy, size, colors["accent"], colors["dark"])
+    elif "meta" in n or "instagram" in n:
+        draw_icon_megaphone(draw, cx, cy, size, colors["dark"])
+    elif "email" in n:
+        draw_icon_envelope(draw, cx, cy, size, colors["dark"], bg)
+    else:
+        draw_icon_lightbulb(draw, cx, cy, size, colors["dark"])
+
+
+def draw_icon_badge(draw, cx, cy, r, niche, colors, bg=BG):
+    """Circular badge behind the niche icon, with the same flat drop-shadow
+    depth treatment used everywhere else in this file (number badges,
+    mega-stat text) so it reads as part of the same design system."""
+    shadow_off = max(3, r // 14)
+    draw.ellipse([cx - r + shadow_off, cy - r + shadow_off, cx + r + shadow_off, cy + r + shadow_off], fill=SHADOW)
+    draw.ellipse([cx - r, cy - r, cx + r, cy + r], fill=colors["light"])
+    draw_niche_icon(draw, cx, cy, r * 1.05, niche, colors, bg=colors["light"])
+
+
 def draw_corner_flag(draw, colors):
     """
     UPGRADE 2 — bold diagonal accent wedge in the top-right corner.
@@ -524,6 +638,11 @@ def render_hook_slide_fixed(headline, niche, slide_num, total_slides, out_path, 
 
     max_w = W - 2 * MARGIN - 40  # slightly narrower for better line breaks
 
+    # Real graphic element in the gap between header and the mega text —
+    # this used to just be empty dot-grid space. A niche icon here gives
+    # every hook slide an actual visual mark, not just text on shapes.
+    draw_icon_badge(draw, W / 2, 205, 46, niche, colors)
+
     # Render the content brain's authored pop_phrase — a hand-picked,
     # in-context punchy consequence phrase — oversized above the headline.
     # This now takes priority over a bare regex-matched stat: a lone "30%"
@@ -589,6 +708,11 @@ def render_bridge_slide_fixed(headline, niche, slide_num, total_slides, out_path
     draw_header_v2(draw, niche, slide_num, total_slides, colors)
 
     max_w = W - 2 * MARGIN - 40
+
+    # Same real graphic mark as the hook slide, slightly smaller — the
+    # bridge is a re-hook and should carry the same visual weight, per the
+    # bridge design rules, so it gets the same icon treatment too.
+    draw_icon_badge(draw, W / 2, 200, 38, niche, colors)
 
     # Same priority flip as the hook slide: the content brain's authored
     # bridge_pop_phrase carries actual in-context meaning, so it now wins
@@ -930,13 +1054,18 @@ def render_cta_slide_fixed(headline, cta_word, cta_promise, cta_support, save_li
     available_h = H - header_bottom - footer_reserve
     ty = header_bottom + max(0, (available_h - total_h) // 2)
 
-    # SAVE ask
+    # SAVE ask — a bookmark icon sits right in the pill next to the word
+    # "Save," visually reinforcing the exact action being asked for instead
+    # of relying on the word alone.
     tw = draw.textlength(save_text, font=f_save)
     pad_x = 24
-    pill_w = tw + pad_x * 2
+    icon_w = 34
+    icon_gap = 14
+    pill_w = tw + pad_x * 2 + icon_w + icon_gap
     px = (W - pill_w) / 2
     draw.rounded_rectangle([px, ty, px + pill_w, ty + pill_h], radius=pill_h // 2, fill=colors["dark"])
-    draw.text((px + pad_x, ty + 12), save_text, font=f_save, fill=WHITE)
+    draw_icon_bookmark(draw, px + pad_x + icon_w / 2, ty + pill_h / 2, icon_w, WHITE)
+    draw.text((px + pad_x + icon_w + icon_gap, ty + 12), save_text, font=f_save, fill=WHITE)
     ty += pill_h + save_gap
 
     # Headline (short context line from the content brain, optional)
@@ -955,7 +1084,14 @@ def render_cta_slide_fixed(headline, cta_word, cta_promise, cta_support, save_li
     draw_accent_bar(draw, ty, colors, width=180)
     ty += bar_gap
     tw = draw.textlength(cta_text, font=f_cta)
-    cta_x = (W - tw) / 2
+    chat_icon_w = 46
+    chat_gap = 16
+    total_cta_w = chat_icon_w + chat_gap + tw
+    cta_x = (W - total_cta_w) / 2 + chat_icon_w + chat_gap
+    # Chat-bubble icon next to "Comment", same purpose as the bookmark next
+    # to "Save" above — the icon visually names the action, the giant text
+    # still carries the actual keyword.
+    draw_icon_chat_bubble(draw, (W - total_cta_w) / 2 + chat_icon_w / 2, ty + cta_h * 0.42, chat_icon_w, colors["dark"])
     draw.text((cta_x + cta_shadow_off, ty + cta_shadow_off), cta_text, font=f_cta, fill=colors["accent"])
     draw.text((cta_x, ty), cta_text, font=f_cta, fill=BLACK)
     ty += cta_h
