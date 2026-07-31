@@ -524,24 +524,29 @@ def render_hook_slide_fixed(headline, niche, slide_num, total_slides, out_path, 
 
     max_w = W - 2 * MARGIN - 40  # slightly narrower for better line breaks
 
-    # UPGRADE 1: pull a stat out and render it oversized before the headline.
-    # Most hooks won't have one now (BENEFIT OVER RAW STAT pushed the content
-    # brain toward outcome-led hooks) — when there's no stat, fall back to
-    # the content brain's hook_pop_phrase so every hook still gets the same
-    # giant-text pattern-interrupt, not just the number-led minority.
-    stat = find_stat(headline)
+    # Render the content brain's authored pop_phrase — a hand-picked,
+    # in-context punchy consequence phrase — oversized above the headline.
+    # This now takes priority over a bare regex-matched stat: a lone "30%"
+    # ripped out of its sentence reads as an arbitrary, disconnected number
+    # ("30% of what?"), whereas hook_pop_phrase is chosen specifically to
+    # carry meaning on its own, so it IS the hook, not just a number pulled
+    # from it. The content brain always fills this in, even on hooks that
+    # contain a stat (see content_brain_system_prompt.txt), precisely so
+    # it can be preferred here. A bare stat is now only used as a fallback
+    # for older manifests generated before hook_pop_phrase existed.
+    have_pop = bool(pop_phrase and pop_phrase in headline)
+    stat = None if have_pop else find_stat(headline)
     top_y = 260
-    if stat:
-        top_y, _ = draw_mega_stat(draw, stat, top_y, colors, max_w)
-        top_y += 24
-    elif pop_phrase and pop_phrase in headline:
+    if have_pop:
         top_y, _ = draw_mega_phrase(draw, pop_phrase, top_y, colors, max_w)
+        top_y += 24
+    elif stat:
+        top_y, _ = draw_mega_stat(draw, stat, top_y, colors, max_w)
         top_y += 24
 
     # FIXED SIZE: 96px, shrink only if needed
     font, lines, size = fit_text_shrink_only(draw, headline, max_w, 4, HOOK_FONT_SIZE, 52, F_SERIF_BOLD)
     line_h = int(size * 1.2)
-    have_pop = bool(pop_phrase and pop_phrase in headline)
     highlight = pop_phrase if have_pop else find_highlight_word(headline)
 
     total_h = line_h * len(lines)
@@ -585,21 +590,22 @@ def render_bridge_slide_fixed(headline, niche, slide_num, total_slides, out_path
 
     max_w = W - 2 * MARGIN - 40
 
-    # UPGRADE 1, scaled down: bridge should carry the same weight as the hook
-    # without literally duplicating it, so the mega-stat/phrase here targets
-    # a smaller size. Same stat-first, pop_phrase-fallback logic as the hook.
-    stat = find_stat(headline)
+    # Same priority flip as the hook slide: the content brain's authored
+    # bridge_pop_phrase carries actual in-context meaning, so it now wins
+    # over a bare regex-matched stat, which is only used as a fallback for
+    # older manifests that predate bridge_pop_phrase.
+    have_pop = bool(pop_phrase and pop_phrase in headline)
+    stat = None if have_pop else find_stat(headline)
     top_y = 260
-    if stat:
-        top_y, _ = draw_mega_stat(draw, stat, top_y, colors, max_w, target=140, min_size=90)
-        top_y += 20
-    elif pop_phrase and pop_phrase in headline:
+    if have_pop:
         top_y, _ = draw_mega_phrase(draw, pop_phrase, top_y, colors, max_w, target=110, min_size=68)
+        top_y += 20
+    elif stat:
+        top_y, _ = draw_mega_stat(draw, stat, top_y, colors, max_w, target=140, min_size=90)
         top_y += 20
 
     font, lines, size = fit_text_shrink_only(draw, headline, max_w, 4, BRIDGE_FONT_SIZE, 48, F_SERIF_BOLD)
     line_h = int(size * 1.2)
-    have_pop = bool(pop_phrase and pop_phrase in headline)
     highlight = pop_phrase if have_pop else find_highlight_word(headline)
 
     total_h = line_h * len(lines)
