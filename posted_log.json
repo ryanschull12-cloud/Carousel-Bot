@@ -209,6 +209,16 @@
       "format": "before-after",
       "hook": "Meta Ads\u2019 learning phase isn\u2019t a warm-up\u2014it\u2019s a 40% CPM trap on day 7.",
       "scored": false
+    },
+    {
+      "media_id": "18144404140557439",
+      "date": "2026-07-31",
+      "index": 3,
+      "niche": "Google Ads",
+      "angle": "contrarian",
+      "format": "comparison",
+      "hook": "Google Ads\u2019 \u2018smart\u2019 bidding wastes small budgets on the wrong clicks\u2014manual bids win 60% of tests.",
+      "scored": false
     }
   ]
 }
