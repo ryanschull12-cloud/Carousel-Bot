@@ -1,0 +1,130 @@
+{
+  "batch_date": "2026-07-31",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Save this Meta Ads trick \u2193\nMeta\u2019s algorithm forgets everything after 48 hours of silence\u2014pause ads for two days and CPMs drop 30%. Most advertisers never do this\u2014here\u2019s how to test it.\n#metaads #paidsocial #digitalmarketing #advertisinghacks #marketingtips",
+      "niche": "Meta/Instagram Ads",
+      "angle": "realization",
+      "format": "before-after",
+      "hook": "Meta Ads forget everything after 48 hours of silence\u2014pause for two days and CPMs drop 30%.",
+      "throughline": "Meta\u2019s algorithm resets its learning after 48 hours of inactivity, creating a hidden window to cut costs by pausing and restarting ads strategically.",
+      "image_paths": [
+        "posts/2026-07-31/carousel_1/slide_01.jpg",
+        "posts/2026-07-31/carousel_1/slide_02.jpg",
+        "posts/2026-07-31/carousel_1/slide_03.jpg",
+        "posts/2026-07-31/carousel_1/slide_04.jpg",
+        "posts/2026-07-31/carousel_1/slide_05.jpg",
+        "posts/2026-07-31/carousel_1/slide_06.jpg",
+        "posts/2026-07-31/carousel_1/slide_07.jpg",
+        "posts/2026-07-31/carousel_1/slide_08.jpg",
+        "posts/2026-07-31/carousel_1/slide_09.jpg",
+        "posts/2026-07-31/carousel_1/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Save this Meta Ads insight \u2193\nMeta\u2019s learning phase isn\u2019t a warm-up\u2014it\u2019s a 40% CPM trap on day 7. Most advertisers miss it\u2014here\u2019s how to avoid it and keep costs low.\n#metaads #paidsocial #digitalmarketing #advertisingtips #marketinghacks",
+      "niche": "Meta/Instagram Ads",
+      "angle": "behind-the-curtain",
+      "format": "before-after",
+      "hook": "Meta Ads\u2019 learning phase isn\u2019t a warm-up\u2014it\u2019s a 40% CPM trap on day 7.",
+      "throughline": "Meta\u2019s \u2018learning phase\u2019 isn\u2019t just a warm-up\u2014it hides a 40% CPM spike on day 7, and advertisers can avoid it by adjusting bids or budgets before it hits.",
+      "image_paths": [
+        "posts/2026-07-31/carousel_2/slide_01.jpg",
+        "posts/2026-07-31/carousel_2/slide_02.jpg",
+        "posts/2026-07-31/carousel_2/slide_03.jpg",
+        "posts/2026-07-31/carousel_2/slide_04.jpg",
+        "posts/2026-07-31/carousel_2/slide_05.jpg",
+        "posts/2026-07-31/carousel_2/slide_06.jpg",
+        "posts/2026-07-31/carousel_2/slide_07.jpg",
+        "posts/2026-07-31/carousel_2/slide_08.jpg",
+        "posts/2026-07-31/carousel_2/slide_09.jpg",
+        "posts/2026-07-31/carousel_2/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Save this Google Ads insight \u2193\nGoogle Ads\u2019 \u2018smart\u2019 bidding wastes small budgets on the wrong clicks. Manual bids win 60% of tests\u2014here\u2019s how to set them up and cut CPC by 40%.\n#googleads #ppc #digitalmarketing #sem #advertisingtips",
+      "niche": "Google Ads",
+      "angle": "contrarian",
+      "format": "comparison",
+      "hook": "Google Ads\u2019 \u2018smart\u2019 bidding wastes small budgets on the wrong clicks\u2014manual bids win 60% of tests.",
+      "throughline": "Google Ads\u2019 \u2018smart\u2019 bidding burns small budgets by prioritizing volume over efficiency, but manual bids give advertisers control to target high-intent users and win 60% of tests.",
+      "image_paths": [
+        "posts/2026-07-31/carousel_3/slide_01.jpg",
+        "posts/2026-07-31/carousel_3/slide_02.jpg",
+        "posts/2026-07-31/carousel_3/slide_03.jpg",
+        "posts/2026-07-31/carousel_3/slide_04.jpg",
+        "posts/2026-07-31/carousel_3/slide_05.jpg",
+        "posts/2026-07-31/carousel_3/slide_06.jpg",
+        "posts/2026-07-31/carousel_3/slide_07.jpg",
+        "posts/2026-07-31/carousel_3/slide_08.jpg",
+        "posts/2026-07-31/carousel_3/slide_09.jpg",
+        "posts/2026-07-31/carousel_3/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 4,
+      "caption": "Save this Google Ads trick \u2193\nGoogle Ads calls 30% of your buyers \u2018low intent.\u2019 Here\u2019s how to find and retarget them in 2 minutes\u2014most advertisers never do this.\n#googleads #ppc #digitalmarketing #sem #advertisinghacks",
+      "niche": "Google Ads",
+      "angle": "realization",
+      "format": "step-by-step",
+      "hook": "Google Ads calls 30% of your buyers \u2018low intent\u2019\u2014here\u2019s how to get them back.",
+      "throughline": "Google Ads mislabels 30% of high-intent buyers as \u2018low intent\u2019 because it judges clicks, not conversions\u2014here\u2019s how to find and retarget them in 2 minutes.",
+      "image_paths": [
+        "posts/2026-07-31/carousel_4/slide_01.jpg",
+        "posts/2026-07-31/carousel_4/slide_02.jpg",
+        "posts/2026-07-31/carousel_4/slide_03.jpg",
+        "posts/2026-07-31/carousel_4/slide_04.jpg",
+        "posts/2026-07-31/carousel_4/slide_05.jpg",
+        "posts/2026-07-31/carousel_4/slide_06.jpg",
+        "posts/2026-07-31/carousel_4/slide_07.jpg",
+        "posts/2026-07-31/carousel_4/slide_08.jpg",
+        "posts/2026-07-31/carousel_4/slide_09.jpg",
+        "posts/2026-07-31/carousel_4/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Save this email marketing trick \u2193\nGmail buries 70% of your emails in \u2018Promotions.\u2019 One subject line trick lifts inbox placement by 40%\u2014here\u2019s how to use it.\n#emailmarketing #digitalmarketing #marketingtips #crm #deliverability",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Gmail buries 70% of your emails in \u2018Promotions\u2019\u2014here\u2019s how to land in the inbox instead.",
+      "throughline": "Gmail\u2019s \u2018Promotions\u2019 tab buries 70% of marketing emails, but one subject line trick\u2014using urgency and personalization\u2014can lift inbox placement by 40%.",
+      "image_paths": [
+        "posts/2026-07-31/carousel_5/slide_01.jpg",
+        "posts/2026-07-31/carousel_5/slide_02.jpg",
+        "posts/2026-07-31/carousel_5/slide_03.jpg",
+        "posts/2026-07-31/carousel_5/slide_04.jpg",
+        "posts/2026-07-31/carousel_5/slide_05.jpg",
+        "posts/2026-07-31/carousel_5/slide_06.jpg",
+        "posts/2026-07-31/carousel_5/slide_07.jpg",
+        "posts/2026-07-31/carousel_5/slide_08.jpg",
+        "posts/2026-07-31/carousel_5/slide_09.jpg",
+        "posts/2026-07-31/carousel_5/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    }
+  ]
+}

@@ -314,6 +314,76 @@
           ]
         }
       ]
+    },
+    {
+      "date": "2026-07-31",
+      "carousels": [
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "realization",
+          "format": "before-after",
+          "hook": "Meta Ads forget everything after 48 hours of silence\u2014pause for two days and CPMs drop 30%.",
+          "hashtags": [
+            "#metaads",
+            "#paidsocial",
+            "#digitalmarketing",
+            "#advertisinghacks",
+            "#marketingtips"
+          ]
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "behind-the-curtain",
+          "format": "before-after",
+          "hook": "Meta Ads\u2019 learning phase isn\u2019t a warm-up\u2014it\u2019s a 40% CPM trap on day 7.",
+          "hashtags": [
+            "#metaads",
+            "#paidsocial",
+            "#digitalmarketing",
+            "#advertisingtips",
+            "#marketinghacks"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "contrarian",
+          "format": "comparison",
+          "hook": "Google Ads\u2019 \u2018smart\u2019 bidding wastes small budgets on the wrong clicks\u2014manual bids win 60% of tests.",
+          "hashtags": [
+            "#googleads",
+            "#ppc",
+            "#digitalmarketing",
+            "#sem",
+            "#advertisingtips"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "realization",
+          "format": "step-by-step",
+          "hook": "Google Ads calls 30% of your buyers \u2018low intent\u2019\u2014here\u2019s how to get them back.",
+          "hashtags": [
+            "#googleads",
+            "#ppc",
+            "#digitalmarketing",
+            "#sem",
+            "#advertisinghacks"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "behind-the-curtain",
+          "format": "steal-this",
+          "hook": "Gmail buries 70% of your emails in \u2018Promotions\u2019\u2014here\u2019s how to land in the inbox instead.",
+          "hashtags": [
+            "#emailmarketing",
+            "#digitalmarketing",
+            "#marketingtips",
+            "#crm",
+            "#deliverability"
+          ]
+        }
+      ]
     }
   ]
 }
