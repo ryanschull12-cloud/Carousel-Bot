@@ -233,6 +233,60 @@
       "engagement_rate": 100.0,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control"
+    },
+    {
+      "date": "2026-07-29",
+      "media_id": "18205832833359944",
+      "niche": "Meta/Instagram Ads",
+      "angle": "contrarian",
+      "format": "comparison",
+      "hook": "Meta\u2019s \u2018suggested audiences\u2019 cost you 3x more per sale",
+      "metrics": {
+        "reach": 2,
+        "saved": 0,
+        "shares": 0,
+        "likes": 3,
+        "comments": 0
+      },
+      "engagement_rate": 150.0,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
+    },
+    {
+      "date": "2026-07-29",
+      "media_id": "18110946083094344",
+      "niche": "Google Ads",
+      "angle": "behind-the-curtain",
+      "format": "checklist",
+      "hook": "Google Ads hides your ads\u2014not because of bids, but this",
+      "metrics": {
+        "reach": 2,
+        "saved": 0,
+        "shares": 0,
+        "likes": 2,
+        "comments": 0
+      },
+      "engagement_rate": 100.0,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
+    },
+    {
+      "date": "2026-07-29",
+      "media_id": "18112183918978766",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "checklist",
+      "hook": "Gmail buries your emails\u2014here\u2019s the 3-line fix",
+      "metrics": {
+        "reach": 2,
+        "saved": 0,
+        "shares": 0,
+        "likes": 1,
+        "comments": 0
+      },
+      "engagement_rate": 50.0,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
     }
   ]
 }
