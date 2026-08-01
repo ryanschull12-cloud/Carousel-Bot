@@ -1,0 +1,130 @@
+{
+  "batch_date": "2026-08-01",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Save this checklist for Gmail\u2019s inbox filter \u2193\nOne word in your subject line decides if your email lands in the inbox or Promotions tab. Most brands never test it\u2014here\u2019s how to fix it in 5 minutes.\n#emailmarketing #digitalmarketing #deliverability #marketingtips #crm",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Gmail\u2019s inbox filter flags one word in your subject line",
+      "throughline": "Gmail\u2019s inbox filter uses one word in your subject line to decide where your email lands\u2014and changing it can move you from Promotions to the inbox.",
+      "image_paths": [
+        "posts/2026-08-01/carousel_1/slide_01.jpg",
+        "posts/2026-08-01/carousel_1/slide_02.jpg",
+        "posts/2026-08-01/carousel_1/slide_03.jpg",
+        "posts/2026-08-01/carousel_1/slide_04.jpg",
+        "posts/2026-08-01/carousel_1/slide_05.jpg",
+        "posts/2026-08-01/carousel_1/slide_06.jpg",
+        "posts/2026-08-01/carousel_1/slide_07.jpg",
+        "posts/2026-08-01/carousel_1/slide_08.jpg",
+        "posts/2026-08-01/carousel_1/slide_09.jpg",
+        "posts/2026-08-01/carousel_1/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Save this 3-step Meta Ads reset trick \u2193\nMeta\u2019s algorithm forgets your ad after 48 hours\u2014pausing and restarting can cut your CPMs by 30%. Most accounts never test it.\n#metaads #paidsocial #digitalmarketing #advertisingtips #marketinghacks",
+      "niche": "Meta/Instagram Ads",
+      "angle": "realization",
+      "format": "step-by-step",
+      "hook": "Meta\u2019s algorithm forgets your ad after 48 hours of silence",
+      "throughline": "Meta\u2019s algorithm resets its memory of your ad after 48 hours of silence\u2014pausing and restarting can cut your CPMs by 30%.",
+      "image_paths": [
+        "posts/2026-08-01/carousel_2/slide_01.jpg",
+        "posts/2026-08-01/carousel_2/slide_02.jpg",
+        "posts/2026-08-01/carousel_2/slide_03.jpg",
+        "posts/2026-08-01/carousel_2/slide_04.jpg",
+        "posts/2026-08-01/carousel_2/slide_05.jpg",
+        "posts/2026-08-01/carousel_2/slide_06.jpg",
+        "posts/2026-08-01/carousel_2/slide_07.jpg",
+        "posts/2026-08-01/carousel_2/slide_08.jpg",
+        "posts/2026-08-01/carousel_2/slide_09.jpg",
+        "posts/2026-08-01/carousel_2/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Save this lookalike audience comparison \u2193\nA smaller, hyper-engaged list of 500 can outperform Meta\u2019s 50,000-person lookalike. Here\u2019s how to pick the right seed.\n#metaads #paidsocial #digitalmarketing #advertisingtips #marketingstrategy",
+      "niche": "Meta/Instagram Ads",
+      "angle": "curiosity",
+      "format": "comparison",
+      "hook": "A 500-person list can beat Meta\u2019s 50,000-person lookalike",
+      "throughline": "Meta\u2019s lookalike audiences perform best with a seed list of 1,000 people\u2014but a smaller, hyper-engaged list of 500 can outperform a generic 50,000 list.",
+      "image_paths": [
+        "posts/2026-08-01/carousel_3/slide_01.jpg",
+        "posts/2026-08-01/carousel_3/slide_02.jpg",
+        "posts/2026-08-01/carousel_3/slide_03.jpg",
+        "posts/2026-08-01/carousel_3/slide_04.jpg",
+        "posts/2026-08-01/carousel_3/slide_05.jpg",
+        "posts/2026-08-01/carousel_3/slide_06.jpg",
+        "posts/2026-08-01/carousel_3/slide_07.jpg",
+        "posts/2026-08-01/carousel_3/slide_08.jpg",
+        "posts/2026-08-01/carousel_3/slide_09.jpg",
+        "posts/2026-08-01/carousel_3/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 4,
+      "caption": "Save this Google Ads bidding comparison \u2193\nGoogle Ads\u2019 \u2018smart\u2019 budgeting spreads your money too thin\u2014manual bids win 60% of small-budget tests by focusing on clicks that actually convert. Here\u2019s how to test it.\n#googleads #ppc #digitalmarketing #sem #advertisingtips",
+      "niche": "Google Ads",
+      "angle": "contrarian",
+      "format": "comparison",
+      "hook": "Google Ads\u2019 \u2018smart\u2019 budgeting spreads your money too thin",
+      "throughline": "Google Ads\u2019 \u2018smart\u2019 budgeting ignores your real goal\u2014manual bids win 60% of small-budget tests by focusing on clicks that actually convert.",
+      "image_paths": [
+        "posts/2026-08-01/carousel_4/slide_01.jpg",
+        "posts/2026-08-01/carousel_4/slide_02.jpg",
+        "posts/2026-08-01/carousel_4/slide_03.jpg",
+        "posts/2026-08-01/carousel_4/slide_04.jpg",
+        "posts/2026-08-01/carousel_4/slide_05.jpg",
+        "posts/2026-08-01/carousel_4/slide_06.jpg",
+        "posts/2026-08-01/carousel_4/slide_07.jpg",
+        "posts/2026-08-01/carousel_4/slide_08.jpg",
+        "posts/2026-08-01/carousel_4/slide_09.jpg",
+        "posts/2026-08-01/carousel_4/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Save this Google Ads lag report checklist \u2193\nGoogle Ads hides 25% of your sales in lag reports\u2014here\u2019s how to find them and see your real ROI. Most brands never check.\n#googleads #ppc #digitalmarketing #sem #marketingtips",
+      "niche": "Google Ads",
+      "angle": "behind-the-curtain",
+      "format": "checklist",
+      "hook": "Google Ads hides 25% of your sales in lag reports",
+      "throughline": "Google Ads hides 25% of your sales in lag reports\u2014here\u2019s how to find and count them to see your real ROI.",
+      "image_paths": [
+        "posts/2026-08-01/carousel_5/slide_01.jpg",
+        "posts/2026-08-01/carousel_5/slide_02.jpg",
+        "posts/2026-08-01/carousel_5/slide_03.jpg",
+        "posts/2026-08-01/carousel_5/slide_04.jpg",
+        "posts/2026-08-01/carousel_5/slide_05.jpg",
+        "posts/2026-08-01/carousel_5/slide_06.jpg",
+        "posts/2026-08-01/carousel_5/slide_07.jpg",
+        "posts/2026-08-01/carousel_5/slide_08.jpg",
+        "posts/2026-08-01/carousel_5/slide_09.jpg",
+        "posts/2026-08-01/carousel_5/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    }
+  ]
+}
