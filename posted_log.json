@@ -229,6 +229,16 @@
       "format": "steal-this",
       "hook": "Gmail\u2019s inbox filter flags one word in your subject line",
       "scored": false
+    },
+    {
+      "media_id": "18009816449937886",
+      "date": "2026-08-01",
+      "index": 2,
+      "niche": "Meta/Instagram Ads",
+      "angle": "realization",
+      "format": "step-by-step",
+      "hook": "Meta\u2019s algorithm forgets your ad after 48 hours of silence",
+      "scored": false
     }
   ]
 }
