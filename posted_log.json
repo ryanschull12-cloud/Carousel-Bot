@@ -249,6 +249,16 @@
       "format": "comparison",
       "hook": "A 500-person list can beat Meta\u2019s 50,000-person lookalike",
       "scored": false
+    },
+    {
+      "media_id": "18451013320186081",
+      "date": "2026-08-02",
+      "index": 1,
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Gmail flags one word in subject lines\u2014skip it and land in the inbox",
+      "scored": false
     }
   ]
 }
