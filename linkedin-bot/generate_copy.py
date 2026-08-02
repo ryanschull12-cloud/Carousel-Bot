@@ -288,6 +288,91 @@ def generate_post() -> dict:
         if not data.get(key):
             print(f"Filling missing optional key with default: {key}")
             data[key] = default
+
+    # Second pass: skeptical review + rewrite. Non-fatal by design.
+    print("Running critic pass...")
+    data = critique_and_revise(data)
+    return data
+
+
+CRITIC_PROMPT = """You are a media buyer with fifteen years running Google and Meta accounts for \
+small businesses. You are reviewing a draft LinkedIn graphic before it is published to an audience \
+that includes other marketers and business owners who buy ads. Your job is to catch anything that \
+would embarrass the author or mislead a reader. You are blunt and you do not praise.
+
+Review the five weak/strong pairs against these tests, in priority order:
+
+1. FACTUAL: does any line state something untrue, or assert a platform behaviour that doesn't \
+exist? Does any line quote an industry benchmark ("good ROAS is 3.0", "aim for 2% CTR") as if it \
+were a standard? Benchmarks vary by sector and margin - asserting one is an error.
+2. FABRICATION: is any statistic invented, or any causal promise made that can't be supported \
+("do X and get Y% more leads")?
+3. USEFULNESS: would the answer to this question actually change a hiring or budget decision? \
+Platform-metric trivia ("what's your benchmark CPM?") is noise. Money-and-outcome questions \
+("what did we pay per booked job?") are signal. Cut the noise.
+4. CONTRAST: is the "weak" line genuinely naive or vague - something said by someone who doesn't \
+know what to measure? If the weak line is actually a sensible question, the pair is broken.
+5. DISTINCTNESS: do any two pairs attack the same underlying problem? If so, replace one.
+6. AUDIENCE: is it consistent? These are small business owners in Ireland. Flag drift into \
+"ecommerce" or enterprise assumptions unless the topic calls for it.
+7. LENGTH: every weak and every strong line must be 62 characters or fewer, including spaces. \
+Count them.
+
+Then rewrite. Return the full set of five pairs, keeping any that pass untouched and replacing \
+any that fail. Every replacement must obey all seven rules, especially the 62-character limit.
+
+Output ONLY valid JSON, nothing else:
+{
+  "issues": ["short description of each problem you found, or empty list if none"],
+  "pairs": [{"weak": "string", "strong": "string"}]
+}
+Return exactly 5 pairs."""
+
+
+def critique_and_revise(data: dict) -> dict:
+    """Second pass: a skeptical media buyer reviews the draft and rewrites
+    weak or wrong lines. Best-effort - any failure leaves the draft untouched,
+    because a slightly weaker post beats a failed run."""
+    try:
+        payload = {
+            "model": MISTRAL_MODEL,
+            "messages": [
+                {"role": "system", "content": CRITIC_PROMPT},
+                {"role": "user", "content": json.dumps({
+                    "topic": data.get("topic", ""),
+                    "subtitle": data.get("subtitle", ""),
+                    "pairs": data["pairs"],
+                }, ensure_ascii=False)},
+            ],
+            "temperature": 0.4,   # lower than drafting: this is judgement, not ideation
+            "max_tokens": 2048,
+            "response_format": {"type": "json_object"},
+        }
+        headers = {
+            "Authorization": f"Bearer {MISTRAL_API_KEY}",
+            "Content-Type": "application/json",
+        }
+        resp = requests.post(MISTRAL_URL, headers=headers, json=payload, timeout=60)
+        resp.raise_for_status()
+        result = json.loads(resp.json()["choices"][0]["message"]["content"])
+
+        for issue in result.get("issues", []):
+            print(f"  critic: {issue}")
+
+        revised = []
+        for p in result.get("pairs", []):
+            weak = str(p.get("weak", "")).strip()
+            strong = str(p.get("strong", "")).strip()
+            if weak and strong and len(weak) <= MAX_LINE_CHARS and len(strong) <= MAX_LINE_CHARS:
+                revised.append({"weak": weak, "strong": strong})
+
+        if len(revised) >= MIN_USABLE_PAIRS:
+            print(f"  critic revision accepted ({len(revised)} pairs)")
+            data["pairs"] = revised
+        else:
+            print(f"  critic revision rejected ({len(revised)} usable pairs) - keeping draft")
+    except Exception as e:
+        print(f"  critic pass failed, keeping draft (non-fatal): {e}")
     return data
 
 
