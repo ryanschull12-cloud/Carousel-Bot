@@ -1,0 +1,130 @@
+{
+  "batch_date": "2026-08-02",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Save this checklist \u2193\nGmail\u2019s filter flags specific words in subject lines\u2014here\u2019s how to avoid the spam folder and land in the inbox instead. #emailmarketing #deliverability #marketingtips #crm #digitalmarketing",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Gmail flags one word in subject lines\u2014skip it and land in the inbox",
+      "throughline": "Gmail\u2019s inbox filter flags specific words in subject lines, but a simple 3-line tweak can keep your emails out of spam.",
+      "image_paths": [
+        "posts/2026-08-02/carousel_1/slide_01.jpg",
+        "posts/2026-08-02/carousel_1/slide_02.jpg",
+        "posts/2026-08-02/carousel_1/slide_03.jpg",
+        "posts/2026-08-02/carousel_1/slide_04.jpg",
+        "posts/2026-08-02/carousel_1/slide_05.jpg",
+        "posts/2026-08-02/carousel_1/slide_06.jpg",
+        "posts/2026-08-02/carousel_1/slide_07.jpg",
+        "posts/2026-08-02/carousel_1/slide_08.jpg",
+        "posts/2026-08-02/carousel_1/slide_09.jpg",
+        "posts/2026-08-02/carousel_1/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Save this template \u2193\nGmail buries emails that hide their hook\u2014move it to the first line to boost opens by 30%. #emailmarketing #deliverability #marketingtips #crm #ecommercemarketing",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Gmail buries emails that hide their hook in the second line",
+      "throughline": "Gmail\u2019s inbox filter prioritizes the first 100 characters of your email\u2014move your hook up to avoid being buried.",
+      "image_paths": [
+        "posts/2026-08-02/carousel_2/slide_01.jpg",
+        "posts/2026-08-02/carousel_2/slide_02.jpg",
+        "posts/2026-08-02/carousel_2/slide_03.jpg",
+        "posts/2026-08-02/carousel_2/slide_04.jpg",
+        "posts/2026-08-02/carousel_2/slide_05.jpg",
+        "posts/2026-08-02/carousel_2/slide_06.jpg",
+        "posts/2026-08-02/carousel_2/slide_07.jpg",
+        "posts/2026-08-02/carousel_2/slide_08.jpg",
+        "posts/2026-08-02/carousel_2/slide_09.jpg",
+        "posts/2026-08-02/carousel_2/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Save this comparison \u2193\nGoogle Ads\u2019 'smart' budgeting burns small accounts faster\u2014manual bids win 60% of tests because they give you control over which clicks matter. #googleads #ppc #digitalmarketing #sem #advertisingtips",
+      "niche": "Google Ads",
+      "angle": "contrarian",
+      "format": "comparison",
+      "hook": "Google Ads\u2019 'smart' budgeting burns small accounts first\u2014manual bids win instead",
+      "throughline": "Google Ads\u2019 'smart' budgeting burns small accounts faster\u2014manual bids win 60% of tests because they give you control.",
+      "image_paths": [
+        "posts/2026-08-02/carousel_3/slide_01.jpg",
+        "posts/2026-08-02/carousel_3/slide_02.jpg",
+        "posts/2026-08-02/carousel_3/slide_03.jpg",
+        "posts/2026-08-02/carousel_3/slide_04.jpg",
+        "posts/2026-08-02/carousel_3/slide_05.jpg",
+        "posts/2026-08-02/carousel_3/slide_06.jpg",
+        "posts/2026-08-02/carousel_3/slide_07.jpg",
+        "posts/2026-08-02/carousel_3/slide_08.jpg",
+        "posts/2026-08-02/carousel_3/slide_09.jpg",
+        "posts/2026-08-02/carousel_3/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 4,
+      "caption": "Save this checklist \u2193\nGoogle Ads hides 20% of your sales\u2014here\u2019s how to find them in two clicks and recover lost revenue. #googleads #ppc #digitalmarketing #sem #marketingtips",
+      "niche": "Google Ads",
+      "angle": "curiosity",
+      "format": "steal-this",
+      "hook": "Google Ads hides 20% of your sales\u2014here\u2019s where to find them",
+      "throughline": "Google Ads hides 20% of your sales in its lag report\u2014here\u2019s how to find them in two clicks and recover lost revenue.",
+      "image_paths": [
+        "posts/2026-08-02/carousel_4/slide_01.jpg",
+        "posts/2026-08-02/carousel_4/slide_02.jpg",
+        "posts/2026-08-02/carousel_4/slide_03.jpg",
+        "posts/2026-08-02/carousel_4/slide_04.jpg",
+        "posts/2026-08-02/carousel_4/slide_05.jpg",
+        "posts/2026-08-02/carousel_4/slide_06.jpg",
+        "posts/2026-08-02/carousel_4/slide_07.jpg",
+        "posts/2026-08-02/carousel_4/slide_08.jpg",
+        "posts/2026-08-02/carousel_4/slide_09.jpg",
+        "posts/2026-08-02/carousel_4/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Save these steps \u2193\nGoogle Ads hides 15% of your sales\u2014here\u2019s how to find them and recover lost revenue. #googleads #ppc #digitalmarketing #sem #advertisinghacks",
+      "niche": "Google Ads",
+      "angle": "curiosity",
+      "format": "step-by-step",
+      "hook": "Google Ads hides 15% of your sales\u2014here\u2019s how to find them",
+      "throughline": "Google Ads hides 15% of your sales in plain sight\u2014the lag report reveals what default dashboards miss, and here\u2019s how to fix it.",
+      "image_paths": [
+        "posts/2026-08-02/carousel_5/slide_01.jpg",
+        "posts/2026-08-02/carousel_5/slide_02.jpg",
+        "posts/2026-08-02/carousel_5/slide_03.jpg",
+        "posts/2026-08-02/carousel_5/slide_04.jpg",
+        "posts/2026-08-02/carousel_5/slide_05.jpg",
+        "posts/2026-08-02/carousel_5/slide_06.jpg",
+        "posts/2026-08-02/carousel_5/slide_07.jpg",
+        "posts/2026-08-02/carousel_5/slide_08.jpg",
+        "posts/2026-08-02/carousel_5/slide_09.jpg",
+        "posts/2026-08-02/carousel_5/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    }
+  ]
+}
