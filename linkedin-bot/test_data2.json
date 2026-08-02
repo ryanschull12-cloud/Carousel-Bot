@@ -1,0 +1,53 @@
+{
+  "topic": "Google Ads discovery calls",
+  "title_main": "TALK ADS LIKE",
+  "title_highlight": "A PRO",
+  "subtitle": "8 Questions To Ask Before You Hire An Ads Agency",
+  "hook_line": "Most owners hire an ads agency the same way they pick a coffee shop.",
+  "intro": "You wouldn't judge a coffee shop by its logo. But most owners judge an agency by their pitch deck, not their numbers.",
+  "pairs": [
+    {
+      "weak": "Can you get us more leads?",
+      "strong": "What's our current cost per qualified lead?"
+    },
+    {
+      "weak": "How much should we spend?",
+      "strong": "What's the break-even ROAS for our margins?"
+    },
+    {
+      "weak": "Are we ranking on Google?",
+      "strong": "What's our Quality Score on core keywords?"
+    },
+    {
+      "weak": "Just run some ads for us",
+      "strong": "Show me the account structure before we start"
+    },
+    {
+      "weak": "Why aren't we getting sales?",
+      "strong": "Where in the funnel are we losing people?"
+    },
+    {
+      "weak": "Boost the post that did well",
+      "strong": "What audience segment drove that result?"
+    },
+    {
+      "weak": "We need more impressions",
+      "strong": "We need more qualified conversions"
+    },
+    {
+      "weak": "Send me a report",
+      "strong": "Walk me through what changed this month"
+    }
+  ],
+  "closing": "The right questions cost nothing and save you thousands in wasted spend.",
+  "cta_save": "Save this before your next agency call.",
+  "cta_question": "Which question are you not currently asking?",
+  "hashtags": [
+    "#GoogleAds",
+    "#SmallBusiness",
+    "#DigitalMarketing",
+    "#PPC",
+    "#MarketingTips"
+  ],
+  "image_prompt": "deep teal and warm cream, calm and confident, precise"
+}
