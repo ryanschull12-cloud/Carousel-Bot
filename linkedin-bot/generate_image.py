@@ -209,95 +209,150 @@ def add_soft_shadow(img, box, radius, offset=(0, 5), blur=9, opacity=60):
     img.paste(Image.alpha_composite(img.convert("RGBA"), shadow_layer).convert("RGB"), (0, 0))
 
 
-def render_graphic(data: dict, seed: int = 0) -> Image.Image:
-    img = Image.new("RGB", (CANVAS_W, CANVAS_H), COLOR_BG)
 
-    # Feed legibility beats completeness. At real LinkedIn size (~400px wide
-    # on mobile) eight rows shrink the type into an unreadable block, so we
-    # render the best five and let the caption carry the rest. The subtitle
-    # count is auto-corrected to match, so "8 Questions" becomes "5 Questions".
-    pairs = data["pairs"][:MAX_ROWS]
-    n = len(pairs)
-
-    # ---------- HERO: image + scrim + eyebrow + serif title + subtitle ----------
-    hero = _drawn_hero(CANVAS_W, HERO_H, seed)
-    img.paste(hero, (0, 0))
-
-    draw = ImageDraw.Draw(img)
-
-    # eyebrow — tracked caps, topic-derived
-    eyebrow = clean_phrase(data.get("topic", "the agency playbook")).upper()
-    eyebrow_font = _fit_font_to_width(draw, eyebrow, FONT_SANS_BOLD,
-                                      CANVAS_W - 2 * PAD - 120,
-                                      start_size=30, min_size=20)
-    _tracked_text(draw, (0, 54), eyebrow, eyebrow_font, COLOR_HERO_EYEBROW,
-                  tracking=5, anchor_center_x=CANVAS_W // 2)
-    # short rule under eyebrow
-    draw.rectangle([CANVAS_W // 2 - 30, 100, CANVAS_W // 2 + 30, 104], fill=COLOR_ACCENT)
-
-    main = data["title_main"].upper().strip()
-    highlight = data["title_highlight"].upper().strip()
-    max_title_w = CANVAS_W - 2 * PAD
-
-    chip_pad_x, chip_pad_y = 18, 10
-    gap_word = 16
-
-    title_font = _fit_font_to_width(
-        draw, f"{main} {highlight}", FONT_SERIF_BOLD,
-        max_title_w - chip_pad_x * 2 - gap_word, start_size=92, min_size=48,
-    )
-    mb = draw.textbbox((0, 0), main, font=title_font)
-    hb = draw.textbbox((0, 0), highlight, font=title_font)
-    main_w = mb[2] - mb[0]
-    hi_w = hb[2] - hb[0]
-    # shared vertical metrics so main text and chip text sit on one baseline
-    asc, desc = title_font.getmetrics()
-    cap_top = min(mb[1], hb[1])
-    cap_bot = max(mb[3], hb[3])
-    cap_h = cap_bot - cap_top
-
-    total_w = main_w + gap_word + hi_w + chip_pad_x * 2
-    one_line = total_w <= max_title_w
-
-    title_y = 128  # cap-top y for the title line
-    if one_line:
-        start_x = (CANVAS_W - total_w) // 2
-        draw.text((start_x, title_y - cap_top), main, font=title_font, fill=(255, 255, 255))
-        chip_x0 = start_x + main_w + gap_word
-        chip_box = [chip_x0, title_y - chip_pad_y,
-                    chip_x0 + hi_w + chip_pad_x * 2, title_y + cap_h + chip_pad_y]
-        add_soft_shadow(img, chip_box, radius=12, offset=(0, 5), blur=9, opacity=110)
-        draw = ImageDraw.Draw(img)
-        draw.rounded_rectangle(chip_box, radius=12, fill=COLOR_ACCENT)
-        draw.text((chip_x0 + chip_pad_x - hb[0], title_y - cap_top), highlight,
-                  font=title_font, fill=(255, 255, 255))
-        sub_y = title_y + cap_h + chip_pad_y + 34
+def _draw_marker(draw, cx, cy, r, kind):
+    """Row marker for the single-column layouts. The shape carries the
+    format's meaning: tick = do this, warning = watch for this,
+    filled disc = ordered step."""
+    if kind == "warn":
+        draw.ellipse([cx - r, cy - r, cx + r, cy + r], fill=COLOR_WEAK_EDGE)
+        draw.rectangle([cx - 2, cy - r * 0.45, cx + 2, cy + r * 0.18], fill=(255, 255, 255))
+        draw.ellipse([cx - 2.5, cy + r * 0.32, cx + 2.5, cy + r * 0.32 + 5], fill=(255, 255, 255))
+    elif kind == "step":
+        draw.ellipse([cx - r, cy - r, cx + r, cy + r], fill=COLOR_ACCENT_DARK)
     else:
-        draw.text(((CANVAS_W - main_w) // 2, title_y - cap_top), main,
-                  font=title_font, fill=(255, 255, 255))
-        chip_y = title_y + cap_h + 26
-        chip_x0 = (CANVAS_W - hi_w - chip_pad_x * 2) // 2
-        chip_box = [chip_x0, chip_y - chip_pad_y,
-                    chip_x0 + hi_w + chip_pad_x * 2, chip_y + cap_h + chip_pad_y]
-        add_soft_shadow(img, chip_box, radius=12, offset=(0, 5), blur=9, opacity=110)
-        draw = ImageDraw.Draw(img)
-        draw.rounded_rectangle(chip_box, radius=12, fill=COLOR_ACCENT)
-        draw.text((chip_x0 + chip_pad_x - hb[0], chip_y - cap_top), highlight,
-                  font=title_font, fill=(255, 255, 255))
-        sub_y = chip_y + cap_h + chip_pad_y + 30
+        draw_icon_badge(draw, cx, cy, r, COLOR_ACCENT, "check")
 
-    # subtitle inside hero
-    subtitle = fix_subtitle_count(data["subtitle"], n)
-    sub_font = _fit_font_to_width(draw, subtitle, FONT_SANS_REG, CANVAS_W - 2 * PAD,
-                                  start_size=40, min_size=26)
-    sb = draw.textbbox((0, 0), subtitle, font=sub_font)
-    draw.text(((CANVAS_W - (sb[2] - sb[0])) // 2, sub_y - sb[1]), subtitle,
-              font=sub_font, fill=COLOR_HERO_SUB)
 
-    # ---------- CHART ----------
-    chart_top = HERO_H + 34
-    footer_h = 56
-    chart_bottom = CANVAS_H - footer_h
+def _render_marked_list(img, draw, data, chart_top, chart_bottom):
+    """Single-column layout used by the checklist, red-flags and teardown
+    formats. Each row: a marker, a bold headline line, and a lighter
+    supporting line. Full width means the headline can breathe at a size
+    that survives the mobile feed."""
+    items = data.get("items", [])[:MAX_ROWS]
+    n = len(items)
+    if not n:
+        return
+    marker_kind = data.get("marker", "check")
+    x0 = PAD
+    x1 = CANVAS_W - PAD
+    marker_r = 24
+    text_x = x0 + 34 + marker_r * 2 + 20   # clear gap so text never kisses the marker
+    text_w = x1 - text_x - 30
+
+    available = chart_bottom - chart_top
+    for head_size in (46, 43, 40, 37, 34, 31):
+        detail_size = max(24, int(head_size * 0.62))
+        head_font = _font(FONT_SANS_BOLD, head_size)
+        detail_font = _font(FONT_SANS_REG, detail_size)
+        head_lh = int(head_size * 1.2)
+        detail_lh = int(detail_size * 1.3)
+        wrapped, heights = [], []
+        for it in items:
+            hl = _wrap_text(draw, clean_phrase(it.get("action", "")), head_font, text_w)
+            dl = _wrap_text(draw, clean_phrase(it.get("detail", "")), detail_font, text_w)
+            wrapped.append((hl, dl))
+            heights.append(len(hl) * head_lh + 8 + len(dl) * detail_lh + 40)
+        if sum(heights) + 18 * (n - 1) <= available:
+            break
+
+    # Spend leftover height on the cards themselves rather than leaving a
+    # dead band above and below the block.
+    gap = 18
+    leftover = max(0, available - (sum(heights) + gap * (n - 1)))
+    extra = min(30.0, leftover / n)
+    heights = [h + extra for h in heights]
+    leftover -= extra * n
+    gap += min(14.0, leftover / max(1, n - 1))
+    total = sum(heights) + gap * (n - 1)
+    top = chart_top + max(0, (available - total) / 2)
+
+    for i, (hl, dl) in enumerate(wrapped):
+        row_h = heights[i]
+        box = [x0, top, x1, top + row_h]
+        draw.rounded_rectangle(box, radius=14, fill=COLOR_WEAK_CARD,
+                               outline=COLOR_WEAK_BORDER, width=1)
+        # left accent edge, tinted by marker meaning
+        edge_col = COLOR_WEAK_EDGE if marker_kind == "warn" else COLOR_ACCENT
+        draw.rounded_rectangle([x0, top, x0 + 12, top + row_h], radius=14, fill=edge_col)
+        draw.rectangle([x0 + 6, top, x0 + 12, top + row_h], fill=COLOR_WEAK_CARD)
+
+        cy = top + 20 + head_lh / 2
+        _draw_marker(draw, x0 + 34 + marker_r, cy, marker_r, marker_kind)
+        if marker_kind == "step":
+            num_font = _font(FONT_SANS_BOLD, 26)
+            nb = draw.textbbox((0, 0), str(i + 1), font=num_font)
+            draw.text((x0 + 34 + marker_r - (nb[2] - nb[0]) / 2 - nb[0],
+                       cy - (nb[3] - nb[1]) / 2 - nb[1]),
+                      str(i + 1), font=num_font, fill=(255, 255, 255))
+
+        y = top + 20
+        y = _draw_multiline(draw, hl, head_font, (text_x, y), COLOR_INK, head_lh)
+        _draw_multiline(draw, dl, detail_font, (text_x, y + 8), COLOR_WEAK_TEXT, detail_lh)
+        top += row_h + gap
+
+
+def _render_ledger(img, draw, data, chart_top, chart_bottom):
+    """Worked-calculation layout: label on the left, value right-aligned and
+    large, with the final row emphasised as the result. Used by the-math,
+    where the arithmetic is definitional and therefore safe to show."""
+    steps = data.get("steps", [])[:4]
+    n = len(steps)
+    if not n:
+        return
+    x0, x1 = PAD, CANVAS_W - PAD
+    available = chart_bottom - chart_top
+    takeaway = clean_phrase(str(data.get("takeaway", "")))
+
+    gap = 16
+    take_font = _font(FONT_SANS_BOLD, 30)
+    take_lines = _wrap_text(draw, takeaway, take_font, x1 - x0 - 56) if takeaway else []
+    take_h = (len(take_lines) * 40 + 44) if take_lines else 0
+
+    # Grow the rows to fill the panel instead of centring a short block.
+    room = available - (take_h + 26 if take_h else 0) - gap * (n - 1)
+    row_h = max(110.0, min(190.0, room / n))
+    total = row_h * n + gap * (n - 1) + (take_h + 26 if take_h else 0)
+    top = chart_top + max(0, (available - total) / 2)
+
+    for i, st in enumerate(steps):
+        last = (i == n - 1)
+        box = [x0, top, x1, top + row_h]
+        if last:
+            add_soft_shadow(img, box, radius=14, offset=(0, 4), blur=8, opacity=50)
+            draw = ImageDraw.Draw(img)
+            draw.rounded_rectangle(box, radius=14, fill=COLOR_ACCENT_DARK)
+            lab_col, val_col = (206, 226, 222), (255, 255, 255)
+        else:
+            draw.rounded_rectangle(box, radius=14, fill=COLOR_WEAK_CARD,
+                                   outline=COLOR_WEAK_BORDER, width=1)
+            lab_col, val_col = COLOR_WEAK_TEXT, COLOR_INK
+
+        label = clean_phrase(str(st.get("label", "")))
+        value = clean_phrase(str(st.get("value", "")))
+        lf = _fit_font_to_width(draw, label, FONT_SANS_REG, (x1 - x0) * 0.55, 38, 24)
+        vf = _fit_font_to_width(draw, value, FONT_SANS_BOLD, (x1 - x0) * 0.36, 54, 30)
+        lb = draw.textbbox((0, 0), label, font=lf)
+        vb = draw.textbbox((0, 0), value, font=vf)
+        cy = top + row_h / 2
+        draw.text((x0 + 30, cy - (lb[3] + lb[1]) / 2), label, font=lf, fill=lab_col)
+        draw.text((x1 - 30 - (vb[2] - vb[0]) - vb[0], cy - (vb[3] + vb[1]) / 2),
+                  value, font=vf, fill=val_col)
+        top += row_h + gap
+
+    if take_lines:
+        top += 10
+        box = [x0, top, x1, top + take_h]
+        draw.rounded_rectangle(box, radius=14, fill=(238, 244, 242))
+        y = top + 22
+        for line in take_lines:
+            tb = draw.textbbox((0, 0), line, font=take_font)
+            draw.text(((CANVAS_W - (tb[2] - tb[0])) / 2, y), line,
+                      font=take_font, fill=COLOR_ACCENT_DARK)
+            y += 40
+
+
+def _render_two_column(img, draw, pairs, n, chart_top, chart_bottom):
 
     gutter_w = 72
     col_w = (CANVAS_W - gutter_w - 2 * PAD) // 2
@@ -422,6 +477,114 @@ def render_graphic(data: dict, seed: int = 0) -> Image.Image:
                       fill=(255, 255, 255), width=4, joint="curve")
 
         row_top += row_h + gap
+
+
+
+def render_graphic(data: dict, seed: int = 0) -> Image.Image:
+    img = Image.new("RGB", (CANVAS_W, CANVAS_H), COLOR_BG)
+
+    # Feed legibility beats completeness. At real LinkedIn size (~400px wide
+    # on mobile) eight rows shrink the type into an unreadable block, so we
+    # render the best five and let the caption carry the rest. The subtitle
+    # count is auto-corrected to match, so "8 Questions" becomes "5 Questions".
+    #
+    # The body field differs per format (pairs / items / steps); whichever is
+    # present drives the row count used for the subtitle.
+    body_key = next((k for k in ("pairs", "items", "steps") if isinstance(data.get(k), list)), None)
+    if body_key is None:
+        raise ValueError("no recognised body field (pairs/items/steps) in data")
+    if body_key != "steps":
+        data[body_key] = data[body_key][:MAX_ROWS]
+    pairs = data[body_key]
+    n = len(pairs)
+
+    # ---------- HERO: image + scrim + eyebrow + serif title + subtitle ----------
+    hero = _drawn_hero(CANVAS_W, HERO_H, seed)
+    img.paste(hero, (0, 0))
+
+    draw = ImageDraw.Draw(img)
+
+    # eyebrow — tracked caps, topic-derived
+    eyebrow = clean_phrase(data.get("topic", "the agency playbook")).upper()
+    eyebrow_font = _fit_font_to_width(draw, eyebrow, FONT_SANS_BOLD,
+                                      CANVAS_W - 2 * PAD - 120,
+                                      start_size=30, min_size=20)
+    _tracked_text(draw, (0, 54), eyebrow, eyebrow_font, COLOR_HERO_EYEBROW,
+                  tracking=5, anchor_center_x=CANVAS_W // 2)
+    # short rule under eyebrow
+    draw.rectangle([CANVAS_W // 2 - 30, 100, CANVAS_W // 2 + 30, 104], fill=COLOR_ACCENT)
+
+    main = data["title_main"].upper().strip()
+    highlight = data["title_highlight"].upper().strip()
+    max_title_w = CANVAS_W - 2 * PAD
+
+    chip_pad_x, chip_pad_y = 18, 10
+    gap_word = 16
+
+    title_font = _fit_font_to_width(
+        draw, f"{main} {highlight}", FONT_SERIF_BOLD,
+        max_title_w - chip_pad_x * 2 - gap_word, start_size=92, min_size=48,
+    )
+    mb = draw.textbbox((0, 0), main, font=title_font)
+    hb = draw.textbbox((0, 0), highlight, font=title_font)
+    main_w = mb[2] - mb[0]
+    hi_w = hb[2] - hb[0]
+    # shared vertical metrics so main text and chip text sit on one baseline
+    asc, desc = title_font.getmetrics()
+    cap_top = min(mb[1], hb[1])
+    cap_bot = max(mb[3], hb[3])
+    cap_h = cap_bot - cap_top
+
+    total_w = main_w + gap_word + hi_w + chip_pad_x * 2
+    one_line = total_w <= max_title_w
+
+    title_y = 128  # cap-top y for the title line
+    if one_line:
+        start_x = (CANVAS_W - total_w) // 2
+        draw.text((start_x, title_y - cap_top), main, font=title_font, fill=(255, 255, 255))
+        chip_x0 = start_x + main_w + gap_word
+        chip_box = [chip_x0, title_y - chip_pad_y,
+                    chip_x0 + hi_w + chip_pad_x * 2, title_y + cap_h + chip_pad_y]
+        add_soft_shadow(img, chip_box, radius=12, offset=(0, 5), blur=9, opacity=110)
+        draw = ImageDraw.Draw(img)
+        draw.rounded_rectangle(chip_box, radius=12, fill=COLOR_ACCENT)
+        draw.text((chip_x0 + chip_pad_x - hb[0], title_y - cap_top), highlight,
+                  font=title_font, fill=(255, 255, 255))
+        sub_y = title_y + cap_h + chip_pad_y + 34
+    else:
+        draw.text(((CANVAS_W - main_w) // 2, title_y - cap_top), main,
+                  font=title_font, fill=(255, 255, 255))
+        chip_y = title_y + cap_h + 26
+        chip_x0 = (CANVAS_W - hi_w - chip_pad_x * 2) // 2
+        chip_box = [chip_x0, chip_y - chip_pad_y,
+                    chip_x0 + hi_w + chip_pad_x * 2, chip_y + cap_h + chip_pad_y]
+        add_soft_shadow(img, chip_box, radius=12, offset=(0, 5), blur=9, opacity=110)
+        draw = ImageDraw.Draw(img)
+        draw.rounded_rectangle(chip_box, radius=12, fill=COLOR_ACCENT)
+        draw.text((chip_x0 + chip_pad_x - hb[0], chip_y - cap_top), highlight,
+                  font=title_font, fill=(255, 255, 255))
+        sub_y = chip_y + cap_h + chip_pad_y + 30
+
+    # subtitle inside hero
+    subtitle = fix_subtitle_count(data["subtitle"], n)
+    sub_font = _fit_font_to_width(draw, subtitle, FONT_SANS_REG, CANVAS_W - 2 * PAD,
+                                  start_size=40, min_size=26)
+    sb = draw.textbbox((0, 0), subtitle, font=sub_font)
+    draw.text(((CANVAS_W - (sb[2] - sb[0])) // 2, sub_y - sb[1]), subtitle,
+              font=sub_font, fill=COLOR_HERO_SUB)
+
+    # ---------- CHART ----------
+    chart_top = HERO_H + 34
+    footer_h = 56
+    chart_bottom = CANVAS_H - footer_h
+
+    layout = data.get("layout", "two_column")
+    if layout == "marked_list":
+        _render_marked_list(img, draw, data, chart_top, chart_bottom)
+    elif layout == "ledger":
+        _render_ledger(img, draw, data, chart_top, chart_bottom)
+    else:
+        _render_two_column(img, draw, pairs, n, chart_top, chart_bottom)
 
     # ---------- FOOTER ----------
     if FOOTER_TEXT:

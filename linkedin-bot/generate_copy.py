@@ -45,7 +45,9 @@ MISTRAL_URL = "https://api.mistral.ai/v1/chat/completions"
 # font down, which is what kills legibility in the mobile feed.
 MAX_LINE_CHARS = 62
 MAX_HIGHLIGHT_CHARS = 13
-# Below this many compliant pairs the graphic looks thin, so retry instead.
+# Secondary lines ("detail", "value") render smaller so they get more room.
+MAX_DETAIL_CHARS = 90
+# Below this many compliant items the graphic looks thin, so retry instead.
 MIN_USABLE_PAIRS = 4
 
 # Same three niches as the Instagram Carousel Bot, for consistency.
@@ -73,41 +75,29 @@ Direct, no fluff, sharp operator who manages ad accounts daily. Specific numbers
 claims. Speaks to ONE business owner, not a crowd. Leads with a real pain point, not a listicle \
 intro. Never apologises for being direct. Text-message casual, never corporate, never slang.
 
-FORMAT - always a "swap chart" post. This is the only format that has actually worked on this \
-account, so do not invent a new structure:
+SHARED FIELDS - every post has these regardless of format:
 - title_main: 2-3 words, all caps, e.g. "RUN ADS LIKE"
 - title_highlight: ONE short word or two-word phrase, HARD MAXIMUM 13 CHARACTERS INCLUDING SPACES, \
 all caps, e.g. "A PRO" or "AN EXPERT". It renders very large inside a coloured chip; anything \
 longer breaks the layout and the response will be rejected. Count the characters before you answer.
-- subtitle: one line under the title stating what the graphic delivers, e.g. "9 Questions Every Business Owner Should Ask Their Ad Agency". If the subtitle contains a count ("9 Questions", "7 Mistakes"), that number MUST equal the exact number of objects in "pairs"
+- subtitle: one line under the title stating what the graphic delivers, e.g. "5 Questions Every Business Owner Should Ask Their Ad Agency". If the subtitle contains a count ("5 Questions", "4 Mistakes"), that number MUST equal the exact number of body items you produce
 - hook_line: the opening line of the LinkedIn caption - a real tension, under 20 words
 - intro: 2-3 short sentences setting up why this matters, written to a business owner not a marketer
-- pairs: EXACTLY 5 objects, each with "weak" (what owners typically say/think/do - the naive \
-version) and "strong" (what actually works / what a sharp operator would say instead). Only five \
-are rendered, so these must be your five STRONGEST, most distinct points - not a long list padded \
-out. If you have a weak sixth idea, drop it rather than dilute.
+- (body field): defined by the FORMAT BRIEF appended at the end of this prompt. Produce exactly \
+the field it names, with exactly the number of items it specifies.
 
-  LENGTH IS A HARD CONSTRAINT: every "weak" and every "strong" must be 62 CHARACTERS OR FEWER, \
-including spaces. This is not a style preference - longer lines shrink the type until the graphic \
-is unreadable on a phone, and any response breaking this limit is rejected and regenerated. Count \
-characters. Aim for 40-55. Cut every word that isn't load-bearing: "What's our cost per qualified \
-lead?" not "What is the average cost per qualified lead across all of our campaigns?"
+  LENGTH IS A HARD CONSTRAINT: every body item string must be 62 CHARACTERS OR FEWER, including \
+spaces (the "detail" line may run to 90). This is not a style preference - longer lines shrink the \
+type until the graphic is unreadable on a phone, and any response breaking this limit is rejected \
+and regenerated. Count characters. Cut every word that isn't load-bearing: "What's our cost per \
+qualified lead?" not "What is the average cost per qualified lead across all of our campaigns?"
 
-  The "weak" side must be genuinely NAIVE or VAGUE - the kind of thing someone says when they \
-don't yet know what to measure ("Can you get us more leads?", "Just run some ads"). If the weak \
-line is actually a reasonable question, the contrast collapses and the graphic has no point.
+  Keep the audience consistent across every item. These are small business owners in Ireland. Do \
+not switch between "ecommerce accounts" and "service industry" within one post, and don't assume \
+the reader runs a shop unless the topic says so.
 
-  The "strong" side must be a specific, answerable question or a concrete check - something that \
-would genuinely expose whether an agency knows its numbers.
+  Body items populate the graphic, so each line must work standalone with zero other context.
 
-  Each pair must attack a DIFFERENT problem from the other four (no two about budget, no two \
-about tracking, no two about creative).
-
-  Keep the audience consistent across all five pairs. These are small business owners in Ireland. \
-Do not switch between "ecommerce accounts" and "service industry" within one post, and don't \
-assume the reader runs a shop unless the topic says so.
-
-  These populate the swap chart image, so each line must work standalone with zero other context.
 - closing: 1-2 sentences that land the point
 - cta_save: a save-this-post line
 - cta_question: a comment-bait question tied to the topic
@@ -157,7 +147,9 @@ post. There is a large penalty for being wrong in public.
 Never mention Ryan's agency name or pitch services directly in the post - the credibility has to \
 be implicit, earned by the content being genuinely useful, not a pitch.
 
-Output ONLY valid JSON matching this exact schema, nothing else:
+The body of the graphic changes by format - the format brief below tells you which body field to \
+produce. Output ONLY valid JSON, nothing else, with these shared keys plus the body key named in \
+the format brief:
 {
   "topic": "string",
   "title_main": "string",
@@ -165,7 +157,6 @@ Output ONLY valid JSON matching this exact schema, nothing else:
   "subtitle": "string",
   "hook_line": "string",
   "intro": "string",
-  "pairs": [{"weak": "string", "strong": "string"}],
   "closing": "string",
   "cta_save": "string",
   "cta_question": "string",
@@ -175,19 +166,122 @@ Output ONLY valid JSON matching this exact schema, nothing else:
 """
 
 
-def build_user_prompt() -> str:
+# ---------------------------------------------------------------------------
+# FORMAT REGISTRY
+#
+# One archetype per day, rotated by date so consecutive posts never share a
+# shape. Each entry defines the body field, its per-item character budget, and
+# the brief appended to the system prompt. "layout" tells generate_image which
+# body renderer to use.
+# ---------------------------------------------------------------------------
+
+FORMATS = {
+    "swap": {
+        "layout": "two_column",
+        "body_key": "pairs",
+        "item_fields": ("weak", "strong"),
+        "count": 5,
+        "brief": """FORMAT: SWAP CHART. Two columns - what owners say vs what actually works.
+- pairs: EXACTLY 5 objects with "weak" and "strong".
+  "weak" = genuinely naive or vague, the kind of thing someone says when they don't yet know what \
+to measure ("Can you get us more leads?"). If the weak line is actually a sensible question the \
+contrast collapses and the graphic has no point.
+  "strong" = a specific, answerable question or concrete check that would expose whether an agency \
+knows its numbers.
+  Each pair must attack a DIFFERENT problem (no two about budget, no two about tracking).""",
+    },
+    "checklist": {
+        "layout": "marked_list",
+        "body_key": "items",
+        "item_fields": ("action", "detail"),
+        "count": 5,
+        "brief": """FORMAT: AUDIT CHECKLIST. A list of checks the reader can actually run this week.
+- items: EXACTLY 5 objects with "action" and "detail".
+  "action" = an imperative instruction, specific enough to do today ("Open your search terms \
+report"). Start with a verb.
+  "detail" = one line on what they're looking for or why it matters. Not a promise of results - \
+a description of the signal.
+  Order them so someone could work top to bottom. Each check must target a different part of the \
+account. This format earns saves, so every line must be genuinely actionable rather than advice.""",
+    },
+    "red_flags": {
+        "layout": "marked_list",
+        "marker": "warn",
+        "body_key": "items",
+        "item_fields": ("action", "detail"),
+        "count": 5,
+        "brief": """FORMAT: RED FLAGS. Warning signs the reader can spot in their own account or \
+in an agency's reporting.
+- items: EXACTLY 5 objects with "action" and "detail".
+  "action" = the red flag itself, stated as a short observable symptom ("Your report leads with \
+impressions"). Not a verb instruction - a thing they'd notice.
+  "detail" = what it usually indicates, stated carefully. Use hedged language ("usually means", \
+"often indicates") because a symptom is evidence, not proof. Never claim certainty about someone \
+else's account.
+  Five different symptoms, no overlap.""",
+    },
+    "the_math": {
+        "layout": "ledger",
+        "body_key": "steps",
+        "item_fields": ("label", "value"),
+        "count": 4,
+        "brief": """FORMAT: THE MATH. A short worked calculation the reader can redo with their \
+own numbers. This is the safest format for numbers because the arithmetic is true by definition - \
+but ONLY use relationships that genuinely are definitional (break-even ROAS = 1 / gross margin; \
+max cost per lead = order value x margin x close rate). Never present a benchmark as the answer.
+- steps: EXACTLY 4 objects with "label" and "value".
+  "label" = what this line of the calculation is ("Average order value", "Gross margin").
+  "value" = the illustrative figure or expression ("EUR 400", "40%", "= EUR 160"). Keep it very \
+short - it renders large on the right.
+  State clearly via the subtitle that the figures are an example. The final step should be the \
+result the reader actually needs.
+- takeaway: one sentence, under 90 characters, on what to do with the result.""",
+    },
+    "teardown": {
+        "layout": "marked_list",
+        "marker": "step",
+        "body_key": "items",
+        "item_fields": ("action", "detail"),
+        "count": 4,
+        "brief": """FORMAT: TEARDOWN. Walk through a generic, anonymised situation the way you'd \
+diagnose it in an account review. This format demonstrates judgement, which is what actually \
+builds credibility.
+- items: EXACTLY 4 objects with "action" and "detail", in this fixed order:
+  1. action = "The setup" - detail describes a common, generic situation (no real client, no \
+invented specifics presented as fact).
+  2. action = "What's actually wrong" - detail names the diagnosis.
+  3. action = "The fix" - detail gives the concrete change.
+  4. action = "The principle" - detail states the general rule worth remembering.
+  Keep it generic and illustrative. Do NOT invent a client, a company name, or specific results \
+that sound like a case study - that would be fabrication.""",
+    },
+}
+
+# Rotation order. Date-driven so the same format never lands twice in a row and
+# the week has a predictable rhythm.
+FORMAT_ORDER = ["swap", "checklist", "the_math", "red_flags", "teardown"]
+
+
+def pick_format(today: date | None = None) -> str:
+    today = today or date.today()
+    return FORMAT_ORDER[today.toordinal() % len(FORMAT_ORDER)]
+
+
+def build_user_prompt(fmt_name: str) -> str:
+    spec = FORMATS[fmt_name]
     niche = random.choice(NICHES)
     angle = random.choice(ANGLES)
     today = date.today().isoformat()
     return (
         f"Date: {today}\n"
         f"Niche for this post: {niche}\n"
-        f"Angle: {angle}\n\n"
-        "Write one swap-chart LinkedIn post for this niche and angle. "
-        "EXACTLY 5 pairs - your five strongest and most distinct, each attacking a different "
-        "problem. Name real settings, real metrics, and real scenarios, but obey the accuracy "
-        "gate: no invented platform mechanics and no fabricated statistics. "
-        "Before you output, re-read each 'strong' line and delete any that an experienced media "
+        f"Theme to explore: {angle}\n\n"
+        f"{spec['brief']}\n\n"
+        f"Write one LinkedIn post in the format above for this niche and theme. "
+        f"Produce the '{spec['body_key']}' field with EXACTLY {spec['count']} items. "
+        "Name real settings and real metrics, but obey the accuracy gate: no invented platform "
+        "mechanics, no fabricated statistics, no benchmarks asserted as standards. "
+        "Before you output, re-read every body line and delete any that an experienced media "
         "buyer would call wrong, hand-wavy, or growth-hacky. No generic marketing filler."
     )
 
@@ -207,12 +301,16 @@ OPTIONAL_DEFAULTS = {
 }
 
 
-def _call_mistral_once() -> dict:
+def _call_mistral_once(fmt_name: str) -> dict:
+    spec = FORMATS[fmt_name]
+    body_key = spec["body_key"]
+    fields = spec["item_fields"]
+
     payload = {
         "model": MISTRAL_MODEL,
         "messages": [
             {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": build_user_prompt()},
+            {"role": "user", "content": build_user_prompt(fmt_name)},
         ],
         "temperature": 0.9,
         "max_tokens": 4096,
@@ -224,48 +322,58 @@ def _call_mistral_once() -> dict:
     }
     resp = requests.post(MISTRAL_URL, headers=headers, json=payload, timeout=60)
     resp.raise_for_status()
-    content = resp.json()["choices"][0]["message"]["content"]
-    data = json.loads(content)
+    data = json.loads(resp.json()["choices"][0]["message"]["content"])
 
     missing = [k for k in CRITICAL_KEYS if k not in data]
     if missing:
         raise ValueError(f"Mistral response missing keys: {missing}")
-    # Prompt asks for exactly 5 (only 5 render); accept 4-12 so a slightly
-    # over- or under-shooting response isn't thrown away. Extras are trimmed
-    # at render time by MAX_ROWS.
-    if not (4 <= len(data["pairs"]) <= 12):
-        raise ValueError(f"Expected 4-12 pairs, got {len(data['pairs'])}")
+    if body_key not in data or not isinstance(data[body_key], list):
+        raise ValueError(f"missing or malformed body field '{body_key}'")
 
-    # Length gate. Asking the model nicely for "under 12 words" does not hold -
-    # run 4 produced a 90-character line, which forced the renderer to shrink
-    # type and destroyed mobile legibility. Rather than fail the whole run, drop
-    # the offending pairs and keep the compliant ones; only retry if too few
+    # Length gate, enforced in code because prompt instructions alone don't
+    # hold. Drop non-compliant items and keep the rest; only retry if too few
     # survive. An unattended daily bot should degrade, not die.
     kept, dropped = [], []
-    for p in data["pairs"]:
-        weak = str(p.get("weak", "")).strip()
-        strong = str(p.get("strong", "")).strip()
-        if not weak or not strong:
-            dropped.append("empty side")
-        elif len(weak) > MAX_LINE_CHARS or len(strong) > MAX_LINE_CHARS:
-            dropped.append(f"{max(len(weak), len(strong))} chars: {strong[:50]}")
-        else:
-            kept.append({"weak": weak, "strong": strong})
+    for item in data[body_key]:
+        if not isinstance(item, dict):
+            dropped.append("not an object")
+            continue
+        vals = {f: str(item.get(f, "")).strip() for f in fields}
+        if not all(vals.values()):
+            dropped.append("empty field")
+            continue
+        # The secondary field ("detail"/"value") gets a looser budget than the
+        # primary headline field, which renders larger.
+        over = False
+        for i, f in enumerate(fields):
+            limit = MAX_LINE_CHARS if i == 0 else MAX_DETAIL_CHARS
+            if len(vals[f]) > limit:
+                dropped.append(f"{f} {len(vals[f])} chars: {vals[f][:45]}")
+                over = True
+        if not over:
+            kept.append(vals)
 
     for d in dropped:
-        print(f"  dropped pair ({d})")
-    if len(kept) < MIN_USABLE_PAIRS:
+        print(f"  dropped item ({d})")
+
+    need = min(MIN_USABLE_PAIRS, spec["count"])
+    if len(kept) < need:
         raise ValueError(
-            f"only {len(kept)} of {len(data['pairs'])} pairs met the "
-            f"{MAX_LINE_CHARS}-char limit (need {MIN_USABLE_PAIRS})"
+            f"only {len(kept)} of {len(data[body_key])} {body_key} met the "
+            f"length limits (need {need})"
         )
-    data["pairs"] = kept
+    data[body_key] = kept[:spec["count"]]
 
     if len(data["title_highlight"].strip()) > MAX_HIGHLIGHT_CHARS:
         raise ValueError(
             f"title_highlight is {len(data['title_highlight'])} chars "
             f"(max {MAX_HIGHLIGHT_CHARS}): {data['title_highlight']}"
         )
+
+    data["format"] = fmt_name
+    data["layout"] = spec["layout"]
+    if "marker" in spec:
+        data["marker"] = spec["marker"]
     return data
 
 
@@ -273,10 +381,13 @@ def generate_post() -> dict:
     if not MISTRAL_API_KEY:
         raise RuntimeError("MISTRAL_API_KEY is not set - add it as a GitHub Actions secret.")
 
+    fmt_name = pick_format()
+    print(f"Format for today: {fmt_name}")
+
     last_error: Exception | None = None
     for attempt in range(1, 4):
         try:
-            data = _call_mistral_once()
+            data = _call_mistral_once(fmt_name)
             break
         except Exception as e:  # bad JSON, missing keys, transient API errors
             last_error = e
@@ -291,7 +402,7 @@ def generate_post() -> dict:
 
     # Second pass: skeptical review + rewrite. Non-fatal by design.
     print("Running critic pass...")
-    data = critique_and_revise(data)
+    data = critique_and_revise(data, fmt_name)
     return data
 
 
@@ -300,7 +411,8 @@ small businesses. You are reviewing a draft LinkedIn graphic before it is publis
 that includes other marketers and business owners who buy ads. Your job is to catch anything that \
 would embarrass the author or mislead a reader. You are blunt and you do not praise.
 
-Review the five weak/strong pairs against these tests, in priority order:
+You are given the format brief, the item field names, and the items. Review every item against \
+these tests, in priority order:
 
 1. FACTUAL: does any line state something untrue, or assert a platform behaviour that doesn't \
 exist? Does any line quote an industry benchmark ("good ROAS is 3.0", "aim for 2% CTR") as if it \
@@ -310,38 +422,46 @@ were a standard? Benchmarks vary by sector and margin - asserting one is an erro
 3. USEFULNESS: would the answer to this question actually change a hiring or budget decision? \
 Platform-metric trivia ("what's your benchmark CPM?") is noise. Money-and-outcome questions \
 ("what did we pay per booked job?") are signal. Cut the noise.
-4. CONTRAST: is the "weak" line genuinely naive or vague - something said by someone who doesn't \
-know what to measure? If the weak line is actually a sensible question, the pair is broken.
-5. DISTINCTNESS: do any two pairs attack the same underlying problem? If so, replace one.
+4. FORMAT FIT: does every item do the job the format brief describes? For a swap chart the "weak" \
+side must be genuinely naive - if it's a sensible question the contrast collapses. For a checklist \
+every action must be something the reader can actually do this week. For red flags every line must \
+be an observable symptom, hedged rather than asserted as proof. For a teardown the four steps must \
+actually diagnose, not just describe. For the math every relationship must be true by definition.
+5. DISTINCTNESS: do any two items attack the same underlying problem? If so, replace one.
 6. AUDIENCE: is it consistent? These are small business owners in Ireland. Flag drift into \
 "ecommerce" or enterprise assumptions unless the topic calls for it.
-7. LENGTH: every weak and every strong line must be 62 characters or fewer, including spaces. \
-Count them.
+7. LENGTH: the FIRST field of each item must be 62 characters or fewer; the second field 90 or \
+fewer. Count them.
 
-Then rewrite. Return the full set of five pairs, keeping any that pass untouched and replacing \
-any that fail. Every replacement must obey all seven rules, especially the 62-character limit.
+Then rewrite. Return the full set of items, keeping any that pass untouched and replacing any that \
+fail, using EXACTLY the same field names you were given and the same number of items.
 
 Output ONLY valid JSON, nothing else:
 {
   "issues": ["short description of each problem you found, or empty list if none"],
-  "pairs": [{"weak": "string", "strong": "string"}]
-}
-Return exactly 5 pairs."""
+  "items": [{"<field1>": "string", "<field2>": "string"}]
+}"""
 
 
-def critique_and_revise(data: dict) -> dict:
+def critique_and_revise(data: dict, fmt_name: str = "swap") -> dict:
     """Second pass: a skeptical media buyer reviews the draft and rewrites
     weak or wrong lines. Best-effort - any failure leaves the draft untouched,
     because a slightly weaker post beats a failed run."""
+    spec = FORMATS.get(fmt_name, FORMATS["swap"])
+    body_key = spec["body_key"]
+    fields = spec["item_fields"]
     try:
         payload = {
             "model": MISTRAL_MODEL,
             "messages": [
                 {"role": "system", "content": CRITIC_PROMPT},
                 {"role": "user", "content": json.dumps({
+                    "format": fmt_name,
+                    "format_brief": spec["brief"],
                     "topic": data.get("topic", ""),
                     "subtitle": data.get("subtitle", ""),
-                    "pairs": data["pairs"],
+                    "item_fields": list(fields),
+                    "items": data[body_key],
                 }, ensure_ascii=False)},
             ],
             "temperature": 0.4,   # lower than drafting: this is judgement, not ideation
@@ -360,17 +480,23 @@ def critique_and_revise(data: dict) -> dict:
             print(f"  critic: {issue}")
 
         revised = []
-        for p in result.get("pairs", []):
-            weak = str(p.get("weak", "")).strip()
-            strong = str(p.get("strong", "")).strip()
-            if weak and strong and len(weak) <= MAX_LINE_CHARS and len(strong) <= MAX_LINE_CHARS:
-                revised.append({"weak": weak, "strong": strong})
+        for p in result.get("items", result.get("pairs", [])):
+            if not isinstance(p, dict):
+                continue
+            vals = {f: str(p.get(f, "")).strip() for f in fields}
+            if not all(vals.values()):
+                continue
+            if any(len(vals[f]) > (MAX_LINE_CHARS if i == 0 else MAX_DETAIL_CHARS)
+                   for i, f in enumerate(fields)):
+                continue
+            revised.append(vals)
 
-        if len(revised) >= MIN_USABLE_PAIRS:
-            print(f"  critic revision accepted ({len(revised)} pairs)")
-            data["pairs"] = revised
+        need = min(MIN_USABLE_PAIRS, spec["count"])
+        if len(revised) >= need:
+            print(f"  critic revision accepted ({len(revised)} items)")
+            data[body_key] = revised[:spec["count"]]
         else:
-            print(f"  critic revision rejected ({len(revised)} usable pairs) - keeping draft")
+            print(f"  critic revision rejected ({len(revised)} usable items) - keeping draft")
     except Exception as e:
         print(f"  critic pass failed, keeping draft (non-fatal): {e}")
     return data
