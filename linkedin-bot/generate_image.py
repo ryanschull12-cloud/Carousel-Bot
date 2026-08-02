@@ -58,7 +58,10 @@ COLOR_HEADER_TEXT = (24, 28, 33)
 COLOR_RULE = (216, 212, 205)
 COLOR_FOOTER_TEXT = (112, 108, 100)
 
-HERO_H = 336
+HERO_H = 360
+# Max comparison rows rendered. Five is the ceiling at which body type stays
+# readable in the mobile feed; more rows than this get dropped, not shrunk.
+MAX_ROWS = 5
 POLLINATIONS_BASE = "https://image.pollinations.ai/prompt/"
 
 FONT_DIR = "/usr/share/fonts/truetype/liberation"
@@ -209,7 +212,11 @@ def add_soft_shadow(img, box, radius, offset=(0, 5), blur=9, opacity=60):
 def render_graphic(data: dict, seed: int = 0) -> Image.Image:
     img = Image.new("RGB", (CANVAS_W, CANVAS_H), COLOR_BG)
 
-    pairs = data["pairs"]
+    # Feed legibility beats completeness. At real LinkedIn size (~400px wide
+    # on mobile) eight rows shrink the type into an unreadable block, so we
+    # render the best five and let the caption carry the rest. The subtitle
+    # count is auto-corrected to match, so "8 Questions" becomes "5 Questions".
+    pairs = data["pairs"][:MAX_ROWS]
     n = len(pairs)
 
     # ---------- HERO: image + scrim + eyebrow + serif title + subtitle ----------
@@ -220,11 +227,13 @@ def render_graphic(data: dict, seed: int = 0) -> Image.Image:
 
     # eyebrow — tracked caps, topic-derived
     eyebrow = clean_phrase(data.get("topic", "the agency playbook")).upper()
-    eyebrow_font = _font(FONT_SANS_BOLD, 21)
-    _tracked_text(draw, (0, 58), eyebrow, eyebrow_font, COLOR_HERO_EYEBROW,
-                  tracking=6, anchor_center_x=CANVAS_W // 2)
+    eyebrow_font = _fit_font_to_width(draw, eyebrow, FONT_SANS_BOLD,
+                                      CANVAS_W - 2 * PAD - 120,
+                                      start_size=30, min_size=20)
+    _tracked_text(draw, (0, 54), eyebrow, eyebrow_font, COLOR_HERO_EYEBROW,
+                  tracking=5, anchor_center_x=CANVAS_W // 2)
     # short rule under eyebrow
-    draw.rectangle([CANVAS_W // 2 - 26, 96, CANVAS_W // 2 + 26, 99], fill=COLOR_ACCENT)
+    draw.rectangle([CANVAS_W // 2 - 30, 100, CANVAS_W // 2 + 30, 104], fill=COLOR_ACCENT)
 
     main = data["title_main"].upper().strip()
     highlight = data["title_highlight"].upper().strip()
@@ -280,7 +289,7 @@ def render_graphic(data: dict, seed: int = 0) -> Image.Image:
     # subtitle inside hero
     subtitle = fix_subtitle_count(data["subtitle"], n)
     sub_font = _fit_font_to_width(draw, subtitle, FONT_SANS_REG, CANVAS_W - 2 * PAD,
-                                  start_size=30, min_size=20)
+                                  start_size=40, min_size=26)
     sb = draw.textbbox((0, 0), subtitle, font=sub_font)
     draw.text(((CANVAS_W - (sb[2] - sb[0])) // 2, sub_y - sb[1]), subtitle,
               font=sub_font, fill=COLOR_HERO_SUB)
@@ -299,8 +308,8 @@ def render_graphic(data: dict, seed: int = 0) -> Image.Image:
     right_x0 = right_x1 - col_w
 
     # column headers: icon badge + tracked caps + hairline rule
-    header_font = _font(FONT_SANS_BOLD, 22)
-    icon_r = 15
+    header_font = _font(FONT_SANS_BOLD, 30)
+    icon_r = 19
     head_cy = chart_top + 18
     draw_icon_badge(draw, left_x0 + icon_r, head_cy, icon_r, COLOR_WEAK_EDGE, "cross")
     _tracked_text(draw, (left_x0 + icon_r * 2 + 14, head_cy - 12),
@@ -323,7 +332,7 @@ def render_graphic(data: dict, seed: int = 0) -> Image.Image:
 
     # Bolder body type for feed legibility (27px), stepping down only if
     # the full set of rows genuinely won't fit at that size.
-    for body_size in (27, 25, 24, 22):
+    for body_size in (42, 39, 36, 33, 30, 27):
         weak_font = _font(FONT_SANS_REG, body_size)
         strong_font = _font(FONT_SANS_BOLD, body_size)
         line_h = int(body_size * 1.28)

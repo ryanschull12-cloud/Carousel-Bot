@@ -72,9 +72,13 @@ account, so do not invent a new structure:
 - subtitle: one line under the title stating what the graphic delivers, e.g. "9 Questions Every Business Owner Should Ask Their Ad Agency". If the subtitle contains a count ("9 Questions", "7 Mistakes"), that number MUST equal the exact number of objects in "pairs"
 - hook_line: the opening line of the LinkedIn caption - a real tension, under 20 words
 - intro: 2-3 short sentences setting up why this matters, written to a business owner not a marketer
-- pairs: 8-10 objects, each with "weak" (what owners typically say/think/do - the naive version) \
-and "strong" (what actually works / what a sharp operator would say instead). Each side under 14 \
-words. These populate the red/green swap chart image, so they must work standalone with zero other context.
+- pairs: EXACTLY 5 objects, each with "weak" (what owners typically say/think/do - the naive \
+version) and "strong" (what actually works / what a sharp operator would say instead). Only five \
+are rendered, so these must be your five STRONGEST, most distinct points - not a long list padded \
+out. If you have a weak sixth idea, drop it rather than dilute. Each side under 12 words. Each \
+pair must attack a DIFFERENT problem from the other four (no two about budget, no two about \
+tracking). These populate the swap chart image, so each line must work standalone with zero other \
+context.
 - closing: 1-2 sentences that land the point
 - cta_save: a save-this-post line
 - cta_question: a comment-bait question tied to the topic
@@ -85,6 +89,34 @@ precise and analytical"). Never describe a person, object, scene, or literal sub
 renderer explicitly strips those out and asks for pure abstract gradients/geometry, so a \
 character description here only fights the renderer. Vary the palette/mood to loosely match the \
 topic's energy each time.
+
+ACCURACY GATE - THIS OVERRIDES EVERYTHING ELSE, INCLUDING PUNCHINESS
+
+This account is read by people who buy and run ads. One wrong claim destroys the exact \
+credibility these posts exist to build. A boring-but-correct line always beats a punchy-but-wrong \
+one. Apply every rule below before you consider phrasing:
+
+1. NEVER invent platform mechanics. Do not claim a platform does something unless it is \
+well-established, documented behaviour. Specifically banned: made-up algorithm rules, invented \
+"tricks" (e.g. pausing campaigns to reset costs, magic bid numbers that unlock reach), fake \
+thresholds, or anything phrased as a hidden lever the platform doesn't actually have.
+2. NEVER fabricate statistics. Do not produce invented percentages, euro amounts, or "X% of \
+businesses..." claims presented as fact. If you have no real figure, do not invent one - write the \
+line without a number, or frame it explicitly as an example ("if your margin is 40%, ...") or as a \
+question the owner should ask ("what's our actual cost per qualified lead?").
+3. NEVER assert a causal claim you cannot support. "Do X and you'll get Y% more leads" is banned \
+unless it is a definitional relationship. Prefer diagnostic framing: what to check, what to ask, \
+what the number should be measured against.
+4. Numbers that ARE allowed: arithmetic that is true by definition (break-even ROAS is 1 divided \
+by margin), the user's own metrics referred to generically, and clearly-labelled illustrative \
+examples.
+5. Every "strong" line must be something a competent practitioner would actually say in an account \
+review. If it sounds like a growth-hack tweet, it's wrong. Read each line back and ask: "would a \
+media buyer with ten years of experience nod, or wince?" If wince, rewrite.
+6. Prefer questions and checks over promises. The strongest content here makes an owner realise \
+they don't know a number they should know.
+7. If uncertain whether a claim is true, leave it out. There is no penalty for a shorter, safer \
+post. There is a large penalty for being wrong in public.
 
 Never mention Ryan's agency name or pitch services directly in the post - the credibility has to \
 be implicit, earned by the content being genuinely useful, not a pitch.
@@ -116,8 +148,11 @@ def build_user_prompt() -> str:
         f"Niche for this post: {niche}\n"
         f"Angle: {angle}\n\n"
         "Write one swap-chart LinkedIn post for this niche and angle. "
-        "8 to 10 pairs. Make every pair specific - real numbers, real settings, real scenarios. "
-        "No generic marketing filler."
+        "EXACTLY 5 pairs - your five strongest and most distinct, each attacking a different "
+        "problem. Name real settings, real metrics, and real scenarios, but obey the accuracy "
+        "gate: no invented platform mechanics and no fabricated statistics. "
+        "Before you output, re-read each 'strong' line and delete any that an experienced media "
+        "buyer would call wrong, hand-wavy, or growth-hacky. No generic marketing filler."
     )
 
 

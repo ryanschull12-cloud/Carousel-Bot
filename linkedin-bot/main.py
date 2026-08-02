@@ -69,6 +69,11 @@ def main() -> None:
     data = generate_post()
     caption = build_caption(data)
     print(f"Topic: {data['topic']}")
+    # Full content echoed to the run log so copy quality can be reviewed
+    # from the Actions output without downloading the artifact.
+    print("----- GENERATED CONTENT -----")
+    print(json.dumps(data, indent=2, ensure_ascii=False))
+    print("----- END CONTENT -----")
 
     print("Building graphic...")
     image = build_image(data)
