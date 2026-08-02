@@ -287,6 +287,60 @@
       "engagement_rate": 50.0,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control"
+    },
+    {
+      "date": "2026-07-30",
+      "media_id": "18133513126613086",
+      "niche": "Meta/Instagram Ads",
+      "angle": "realization",
+      "format": "before-after",
+      "hook": "Meta Ads\u2019 learning phase hides a 40% CPM spike after day 7",
+      "metrics": {
+        "reach": 2,
+        "saved": 0,
+        "shares": 0,
+        "likes": 2,
+        "comments": 0
+      },
+      "engagement_rate": 100.0,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
+    },
+    {
+      "date": "2026-07-30",
+      "media_id": "18104207825162156",
+      "niche": "Google Ads",
+      "angle": "contrarian",
+      "format": "comparison",
+      "hook": "Google Ads\u2019 \u2018smart\u2019 bidding bleeds small budgets\u2014manual bids win 60% of tests",
+      "metrics": {
+        "reach": 2,
+        "saved": 0,
+        "shares": 0,
+        "likes": 3,
+        "comments": 0
+      },
+      "engagement_rate": 150.0,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
+    },
+    {
+      "date": "2026-07-30",
+      "media_id": "18133528627616091",
+      "niche": "Meta/Instagram Ads",
+      "angle": "relief-permission",
+      "format": "myth-buster",
+      "hook": "Meta Ads only needs 50 conversions to start optimizing\u2014here\u2019s proof",
+      "metrics": {
+        "reach": 2,
+        "saved": 0,
+        "shares": 0,
+        "likes": 1,
+        "comments": 0
+      },
+      "engagement_rate": 50.0,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
     }
   ]
 }

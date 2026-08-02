@@ -168,7 +168,7 @@
       "angle": "realization",
       "format": "before-after",
       "hook": "Meta Ads\u2019 learning phase hides a 40% CPM spike after day 7",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18104207825162156",
@@ -178,7 +178,7 @@
       "angle": "contrarian",
       "format": "comparison",
       "hook": "Google Ads\u2019 \u2018smart\u2019 bidding bleeds small budgets\u2014manual bids win 60% of tests",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18133528627616091",
@@ -188,7 +188,7 @@
       "angle": "relief-permission",
       "format": "myth-buster",
       "hook": "Meta Ads only needs 50 conversions to start optimizing\u2014here\u2019s proof",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18143973820542171",
