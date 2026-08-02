@@ -40,6 +40,14 @@ MISTRAL_API_KEY = os.environ.get("MISTRAL_API_KEY", "")  # checked in generate_p
 MISTRAL_MODEL = os.environ.get("MISTRAL_MODEL", "mistral-small-latest")
 MISTRAL_URL = "https://api.mistral.ai/v1/chat/completions"
 
+# Rendering constraints, enforced in code because prompt instructions alone
+# don't hold. A card line longer than this forces the renderer to step the
+# font down, which is what kills legibility in the mobile feed.
+MAX_LINE_CHARS = 62
+MAX_HIGHLIGHT_CHARS = 13
+# Below this many compliant pairs the graphic looks thin, so retry instead.
+MIN_USABLE_PAIRS = 4
+
 # Same three niches as the Instagram Carousel Bot, for consistency.
 NICHES = ["Google Ads", "Meta/Instagram Ads", "Email Marketing"]
 
@@ -68,17 +76,38 @@ intro. Never apologises for being direct. Text-message casual, never corporate, 
 FORMAT - always a "swap chart" post. This is the only format that has actually worked on this \
 account, so do not invent a new structure:
 - title_main: 2-3 words, all caps, e.g. "RUN ADS LIKE"
-- title_highlight: ONE short word or two-word phrase only (max ~10 characters), all caps, e.g. "A PRO" or "AN EXPERT" - this must be short, it renders large and bold, so title_main + title_highlight combined must be 5 words or fewer total
+- title_highlight: ONE short word or two-word phrase, HARD MAXIMUM 13 CHARACTERS INCLUDING SPACES, \
+all caps, e.g. "A PRO" or "AN EXPERT". It renders very large inside a coloured chip; anything \
+longer breaks the layout and the response will be rejected. Count the characters before you answer.
 - subtitle: one line under the title stating what the graphic delivers, e.g. "9 Questions Every Business Owner Should Ask Their Ad Agency". If the subtitle contains a count ("9 Questions", "7 Mistakes"), that number MUST equal the exact number of objects in "pairs"
 - hook_line: the opening line of the LinkedIn caption - a real tension, under 20 words
 - intro: 2-3 short sentences setting up why this matters, written to a business owner not a marketer
 - pairs: EXACTLY 5 objects, each with "weak" (what owners typically say/think/do - the naive \
 version) and "strong" (what actually works / what a sharp operator would say instead). Only five \
 are rendered, so these must be your five STRONGEST, most distinct points - not a long list padded \
-out. If you have a weak sixth idea, drop it rather than dilute. Each side under 12 words. Each \
-pair must attack a DIFFERENT problem from the other four (no two about budget, no two about \
-tracking). These populate the swap chart image, so each line must work standalone with zero other \
-context.
+out. If you have a weak sixth idea, drop it rather than dilute.
+
+  LENGTH IS A HARD CONSTRAINT: every "weak" and every "strong" must be 62 CHARACTERS OR FEWER, \
+including spaces. This is not a style preference - longer lines shrink the type until the graphic \
+is unreadable on a phone, and any response breaking this limit is rejected and regenerated. Count \
+characters. Aim for 40-55. Cut every word that isn't load-bearing: "What's our cost per qualified \
+lead?" not "What is the average cost per qualified lead across all of our campaigns?"
+
+  The "weak" side must be genuinely NAIVE or VAGUE - the kind of thing someone says when they \
+don't yet know what to measure ("Can you get us more leads?", "Just run some ads"). If the weak \
+line is actually a reasonable question, the contrast collapses and the graphic has no point.
+
+  The "strong" side must be a specific, answerable question or a concrete check - something that \
+would genuinely expose whether an agency knows its numbers.
+
+  Each pair must attack a DIFFERENT problem from the other four (no two about budget, no two \
+about tracking, no two about creative).
+
+  Keep the audience consistent across all five pairs. These are small business owners in Ireland. \
+Do not switch between "ecommerce accounts" and "service industry" within one post, and don't \
+assume the reader runs a shop unless the topic says so.
+
+  These populate the swap chart image, so each line must work standalone with zero other context.
 - closing: 1-2 sentences that land the point
 - cta_save: a save-this-post line
 - cta_question: a comment-bait question tied to the topic
@@ -110,6 +139,13 @@ what the number should be measured against.
 4. Numbers that ARE allowed: arithmetic that is true by definition (break-even ROAS is 1 divided \
 by margin), the user's own metrics referred to generically, and clearly-labelled illustrative \
 examples.
+4b. NEVER state an industry benchmark as if it were a standard. "Show me accounts above 3.0 ROAS", \
+"good CPA is under EUR 40", "aim for a 2% CTR" are all banned - those numbers vary enormously by \
+sector, margin and offer, and quoting them marks you as someone who doesn't run accounts. Ask what \
+the number IS and what it's measured against, never assert what it SHOULD be.
+4c. Avoid jargon-flexing. A question is only good if the answer would actually change a hiring or \
+budget decision. "What's your benchmark CPM for reach campaigns?" is noise; "What did we pay per \
+booked job last month?" is signal. Favour money-and-outcome questions over platform-metric trivia.
 5. Every "strong" line must be something a competent practitioner would actually say in an account \
 review. If it sounds like a growth-hack tweet, it's wrong. Read each line back and ask: "would a \
 media buyer with ten years of experience nod, or wince?" If wince, rewrite.
@@ -199,6 +235,37 @@ def _call_mistral_once() -> dict:
     # at render time by MAX_ROWS.
     if not (4 <= len(data["pairs"]) <= 12):
         raise ValueError(f"Expected 4-12 pairs, got {len(data['pairs'])}")
+
+    # Length gate. Asking the model nicely for "under 12 words" does not hold -
+    # run 4 produced a 90-character line, which forced the renderer to shrink
+    # type and destroyed mobile legibility. Rather than fail the whole run, drop
+    # the offending pairs and keep the compliant ones; only retry if too few
+    # survive. An unattended daily bot should degrade, not die.
+    kept, dropped = [], []
+    for p in data["pairs"]:
+        weak = str(p.get("weak", "")).strip()
+        strong = str(p.get("strong", "")).strip()
+        if not weak or not strong:
+            dropped.append("empty side")
+        elif len(weak) > MAX_LINE_CHARS or len(strong) > MAX_LINE_CHARS:
+            dropped.append(f"{max(len(weak), len(strong))} chars: {strong[:50]}")
+        else:
+            kept.append({"weak": weak, "strong": strong})
+
+    for d in dropped:
+        print(f"  dropped pair ({d})")
+    if len(kept) < MIN_USABLE_PAIRS:
+        raise ValueError(
+            f"only {len(kept)} of {len(data['pairs'])} pairs met the "
+            f"{MAX_LINE_CHARS}-char limit (need {MIN_USABLE_PAIRS})"
+        )
+    data["pairs"] = kept
+
+    if len(data["title_highlight"].strip()) > MAX_HIGHLIGHT_CHARS:
+        raise ValueError(
+            f"title_highlight is {len(data['title_highlight'])} chars "
+            f"(max {MAX_HIGHLIGHT_CHARS}): {data['title_highlight']}"
+        )
     return data
 
 
