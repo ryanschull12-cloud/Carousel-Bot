@@ -50,7 +50,9 @@ COLOR_HERO_SUB = (222, 230, 228)     # near-white subtitle on dark hero
 COLOR_WEAK_CARD = (255, 255, 255)
 COLOR_WEAK_BORDER = (226, 222, 215)
 COLOR_WEAK_EDGE = (185, 56, 56)      # red strip on weak cards
-COLOR_WEAK_TEXT = (122, 38, 38)
+COLOR_WEAK_TEXT = (74, 78, 84)       # neutral slate: the red EDGE carries the
+                                     # "wrong" signal, so red text was redundant
+                                     # and made the quiet column look cheap
 COLOR_STRONG_TEXT = (255, 255, 255)
 COLOR_HEADER_TEXT = (24, 28, 33)
 COLOR_RULE = (216, 212, 205)
@@ -164,12 +166,8 @@ def _drawn_hero(width: int, height: int, seed: int) -> Image.Image:
     # soft diagonal light band
     bx = rng.randint(-200, 0)
     od.polygon([(bx, height), (bx + 340, 0), (bx + 480, 0), (bx + 140, height)], fill=(200, 240, 234, 12))
-    # small dot cluster bottom-left
-    ox, oy = rng.randint(50, 90), height - rng.randint(70, 100)
-    for r_i in range(3):
-        for c_i in range(7):
-            od.ellipse([ox + c_i * 22 - 2, oy + r_i * 22 - 2, ox + c_i * 22 + 2, oy + r_i * 22 + 2],
-                       fill=(140, 205, 196, 46))
+    # (The old bottom-left dot cluster was removed: it floated free of any
+    # other element and read as decoration rather than structure.)
     img = Image.alpha_composite(img.convert("RGBA"), overlay).convert("RGB")
     return img
 
@@ -399,16 +397,20 @@ def render_graphic(data: dict, seed: int = 0) -> Image.Image:
         # swap badge: white fill, teal ring, weak→strong chevron. The rows
         # aren't a sequence, so numbers implied an order that doesn't
         # exist; the chevron encodes the actual story — swap this for that.
-        badge_r = 23
+        badge_r = 22
+        # paper halo so the disc reads as sitting ON the spine, not behind it
+        draw.ellipse([gutter_cx - badge_r - 5, row_center - badge_r - 5,
+                      gutter_cx + badge_r + 5, row_center + badge_r + 5],
+                     fill=COLOR_BG)
         draw.ellipse([gutter_cx - badge_r, row_center - badge_r,
                       gutter_cx + badge_r, row_center + badge_r],
-                     fill=COLOR_BG, outline=COLOR_ACCENT, width=3)
-        ch_h, ch_w, ch_gap = 9, 7, 9
+                     fill=COLOR_ACCENT)
+        ch_h, ch_w, ch_gap = 8, 6, 8
         for k in (-1, 0):
             x0 = gutter_cx + k * ch_gap - ch_w / 2 + 2
             draw.line([(x0, row_center - ch_h), (x0 + ch_w, row_center),
                        (x0, row_center + ch_h)],
-                      fill=COLOR_ACCENT, width=4, joint="curve")
+                      fill=(255, 255, 255), width=4, joint="curve")
 
         row_top += row_h + gap
 
