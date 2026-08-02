@@ -47,22 +47,76 @@ MAX_LINE_CHARS = 62
 MAX_HIGHLIGHT_CHARS = 13
 # Secondary lines ("detail", "value") render smaller so they get more room.
 MAX_DETAIL_CHARS = 90
+# Column headers are letter-spaced caps in a narrow column.
+MAX_HEADER_CHARS = 22
 # Below this many compliant items the graphic looks thin, so retry instead.
 MIN_USABLE_PAIRS = 4
 
 # Same three niches as the Instagram Carousel Bot, for consistency.
 NICHES = ["Google Ads", "Meta/Instagram Ads", "Email Marketing"]
 
-# Rotate the "shape" of the swap chart so five posts in a row don't all
-# read the same way even though they use the same template.
-ANGLES = [
-    "what small business owners say to their ad agency vs what they should say",
-    "questions to ask before hiring a Google/Meta ads agency vs the vague version most owners ask",
-    "weak excuses owners give for bad ad performance vs the real diagnosis",
-    "what a bad email marketing setup looks like vs what a good one says",
-    "phrases that reveal an agency is coasting on your budget vs what a good agency actually says",
-    "what owners think ad success looks like vs what it actually looks like in the numbers",
+# ---------------------------------------------------------------------------
+# VARIABILITY
+#
+# The swap chart is the proven layout, so variety has to come from what the two
+# columns MEAN. Each axis rewrites both column headers and the relationship
+# between the sides, so two posts a week apart don't read as the same post with
+# different words.
+# ---------------------------------------------------------------------------
+
+AXES = [
+    {"left": "WHAT OWNERS SAY", "right": "WHAT WORKS",
+     "framing": "the vague thing an owner says to their agency vs the specific version that gets a real answer"},
+    {"left": "WHAT YOU'RE TOLD", "right": "WHAT'S TRUE",
+     "framing": "a common piece of received wisdom vs the more accurate picture; be careful to only correct things that are genuinely wrong"},
+    {"left": "WHAT YOU MEASURE", "right": "WHAT MATTERS",
+     "framing": "the surface metric people report vs the number that actually reflects money"},
+    {"left": "THE SYMPTOM", "right": "THE REAL CAUSE",
+     "framing": "the visible problem an owner notices vs the underlying cause worth investigating; hedge appropriately, a symptom rarely proves one cause"},
+    {"left": "SOUNDS SMART", "right": "ACTUALLY WORKS",
+     "framing": "marketing-speak that sounds sophisticated vs the plain, boring thing that moves the number"},
+    {"left": "THE CHEAP FIX", "right": "THE REAL FIX",
+     "framing": "the shortcut people reach for vs the less glamorous change that actually holds"},
+    {"left": "WHAT THE REPORT SAYS", "right": "WHAT TO ASK",
+     "framing": "a line item in a typical monthly report vs the follow-up question that exposes whether it means anything"},
+    {"left": "BEFORE", "right": "AFTER",
+     "framing": "how a specific setting or process typically looks when neglected vs how it looks when set up properly; describe states, not promised results"},
+    {"left": "WHAT YOU CONTROL", "right": "WHAT YOU DON'T",
+     "framing": "levers an owner can actually pull vs forces they can only respond to - the strong side here is about response, not control"},
+    {"left": "GOOD ENOUGH", "right": "WORTH PAYING FOR",
+     "framing": "the baseline any competent setup has vs the work that justifies an agency retainer"},
 ]
+
+# Wide topic pool so the subject changes even when the axis repeats.
+TOPICS = [
+    "search terms and negative keywords",
+    "conversion tracking accuracy",
+    "landing page and offer match",
+    "campaign structure and budget split",
+    "location and radius targeting",
+    "bidding strategy choices",
+    "lead quality vs lead volume",
+    "speed of follow-up on new leads",
+    "creative testing and ad fatigue",
+    "audience exclusions and retargeting",
+    "attribution and where credit goes",
+    "seasonality and budget pacing",
+    "email list hygiene and deliverability",
+    "welcome and win-back email flows",
+    "cold outreach targeting and relevance",
+    "monthly reporting and what's in it",
+    "agency onboarding and account access",
+    "account ownership and data portability",
+    "what to do when performance drops",
+    "knowing your margin and break-even",
+    "the first 90 days of a new account",
+    "when to increase or cut spend",
+]
+
+
+def _rotate(seq, offset):
+    return seq[offset % len(seq)]
+
 
 SYSTEM_PROMPT = """You are writing LinkedIn posts for Ryan O'Driscoll, who runs a Google Ads / \
 Meta Ads / email marketing agency for small businesses in Ireland. These posts exist for ONE \
@@ -188,7 +242,9 @@ to measure ("Can you get us more leads?"). If the weak line is actually a sensib
 contrast collapses and the graphic has no point.
   "strong" = a specific, answerable question or concrete check that would expose whether an agency \
 knows its numbers.
-  Each pair must attack a DIFFERENT problem (no two about budget, no two about tracking).""",
+  Each pair must attack a DIFFERENT problem (no two about budget, no two about tracking).
+- col_left / col_right: the two column headers, returned EXACTLY as given in the axis instruction.
+  Do not invent your own headers and do not reword them.""",
     },
     "checklist": {
         "layout": "marked_list",
@@ -259,7 +315,10 @@ that sound like a case study - that would be fabrication.""",
 
 # Rotation order. Date-driven so the same format never lands twice in a row and
 # the week has a predictable rhythm.
-FORMAT_ORDER = ["swap", "checklist", "the_math", "red_flags", "teardown"]
+# Swap chart only - the other archetypes are kept in FORMATS but are not in
+# rotation. Variety now comes from the AXES and TOPICS below rather than from
+# changing the layout.
+FORMAT_ORDER = ["swap"]
 
 
 def pick_format(today: date | None = None) -> str:
@@ -269,18 +328,28 @@ def pick_format(today: date | None = None) -> str:
 
 def build_user_prompt(fmt_name: str) -> str:
     spec = FORMATS[fmt_name]
-    niche = random.choice(NICHES)
-    angle = random.choice(ANGLES)
-    today = date.today().isoformat()
+    today = date.today()
+    o = today.toordinal()
+    # Different strides mean the axis/topic/niche combination takes a long time
+    # to repeat, while staying deterministic for a given day.
+    niche = _rotate(NICHES, o)
+    axis = _rotate(AXES, o)
+    topic = _rotate(TOPICS, o * 3)
     return (
-        f"Date: {today}\n"
-        f"Niche for this post: {niche}\n"
-        f"Theme to explore: {angle}\n\n"
+        f"Date: {today.isoformat()}\n"
+        f"Channel for this post: {niche}\n"
+        f"Subject: {topic}\n"
+        f"COLUMN AXIS for this post - left column header: \"{axis['left']}\", "
+        f"right column header: \"{axis['right']}\"\n"
+        f"The relationship between the two columns: {axis['framing']}\n"
+        f"Return these exact strings as \"col_left\" and \"col_right\" in your JSON.\n\n"
         f"{spec['brief']}\n\n"
         f"Write one LinkedIn post in the format above for this niche and theme. "
         f"Produce the '{spec['body_key']}' field with EXACTLY {spec['count']} items. "
         "Name real settings and real metrics, but obey the accuracy gate: no invented platform "
         "mechanics, no fabricated statistics, no benchmarks asserted as standards. "
+        "Every pair must fit the column axis given above - the left column items must all "
+        "genuinely belong under the left header, and the right under the right header. "
         "Before you output, re-read every body line and delete any that an experienced media "
         "buyer would call wrong, hand-wavy, or growth-hacky. No generic marketing filler."
     )
@@ -369,6 +438,16 @@ def _call_mistral_once(fmt_name: str) -> dict:
             f"title_highlight is {len(data['title_highlight'])} chars "
             f"(max {MAX_HIGHLIGHT_CHARS}): {data['title_highlight']}"
         )
+
+    # Column headers drive the axis of the whole graphic. Fall back to the
+    # classic pair if the model omits or mangles them.
+    for key, fallback in (("col_left", "WHAT OWNERS SAY"), ("col_right", "WHAT WORKS")):
+        val = str(data.get(key, "")).strip().upper()
+        if not val or len(val) > MAX_HEADER_CHARS:
+            if val:
+                print(f"  {key} unusable ({len(val)} chars) - using default")
+            val = fallback
+        data[key] = val
 
     data["format"] = fmt_name
     data["layout"] = spec["layout"]

@@ -352,7 +352,7 @@ def _render_ledger(img, draw, data, chart_top, chart_bottom):
             y += 40
 
 
-def _render_two_column(img, draw, pairs, n, chart_top, chart_bottom):
+def _render_two_column(img, draw, data, pairs, n, chart_top, chart_bottom):
 
     gutter_w = 72
     col_w = (CANVAS_W - gutter_w - 2 * PAD) // 2
@@ -367,11 +367,19 @@ def _render_two_column(img, draw, pairs, n, chart_top, chart_bottom):
     icon_r = 19
     head_cy = chart_top + 18
     draw_icon_badge(draw, left_x0 + icon_r, head_cy, icon_r, COLOR_WEAK_EDGE, "cross")
+    left_label = str(data.get("col_left", "WHAT OWNERS SAY")).upper()
+    right_label = str(data.get("col_right", "WHAT WORKS")).upper()
+    # Headers are letter-spaced caps in a fixed column, so shrink to fit rather
+    # than letting a longer axis label collide with the other column.
+    label_w = col_w - icon_r * 2 - 20
+    lf = _fit_font_to_width(draw, left_label, FONT_SANS_BOLD, label_w, 30, 19)
+    rf = _fit_font_to_width(draw, right_label, FONT_SANS_BOLD, label_w, 30, 19)
+    header_font = lf if lf.size <= rf.size else rf   # one size for both columns
     _tracked_text(draw, (left_x0 + icon_r * 2 + 14, head_cy - 12),
-                  "WHAT OWNERS SAY", header_font, COLOR_HEADER_TEXT, tracking=2)
+                  left_label, header_font, COLOR_HEADER_TEXT, tracking=2)
     draw_icon_badge(draw, right_x0 + icon_r, head_cy, icon_r, COLOR_ACCENT, "check")
     _tracked_text(draw, (right_x0 + icon_r * 2 + 14, head_cy - 12),
-                  "WHAT WORKS", header_font, COLOR_HEADER_TEXT, tracking=2)
+                  right_label, header_font, COLOR_HEADER_TEXT, tracking=2)
     rule_y = head_cy + icon_r + 12
     draw.rectangle([left_x0, rule_y, left_x1, rule_y + 2], fill=COLOR_RULE)
     draw.rectangle([right_x0, rule_y, right_x1, rule_y + 2], fill=COLOR_RULE)
@@ -584,7 +592,7 @@ def render_graphic(data: dict, seed: int = 0) -> Image.Image:
     elif layout == "ledger":
         _render_ledger(img, draw, data, chart_top, chart_bottom)
     else:
-        _render_two_column(img, draw, pairs, n, chart_top, chart_bottom)
+        _render_two_column(img, draw, data, pairs, n, chart_top, chart_bottom)
 
     # ---------- FOOTER ----------
     if FOOTER_TEXT:
