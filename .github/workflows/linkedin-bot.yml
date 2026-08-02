@@ -1,0 +1,48 @@
+name: LinkedIn Bot
+
+on:
+  schedule:
+    # 08:00 UTC daily. Adjust the cron value if you want a different time
+    # or fewer days per week (e.g. weekdays only: "0 8 * * 1-5").
+    - cron: "0 8 * * *"
+  workflow_dispatch: {}   # lets you trigger a run manually from the Actions tab
+
+jobs:
+  post-to-linkedin:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+        working-directory: linkedin-bot
+
+      - name: Run bot
+        working-directory: linkedin-bot
+        env:
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+          LINKEDIN_CLIENT_ID: ${{ secrets.LINKEDIN_CLIENT_ID }}
+          LINKEDIN_CLIENT_SECRET: ${{ secrets.LINKEDIN_CLIENT_SECRET }}
+          LINKEDIN_REFRESH_TOKEN: ${{ secrets.LINKEDIN_REFRESH_TOKEN }}
+          LINKEDIN_ORG_URN: ${{ secrets.LINKEDIN_ORG_URN }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+        run: python main.py
+
+      - name: Upload generated image as artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: linkedin-post-${{ github.run_id }}
+          path: |
+            linkedin-bot/linkedin_post.png
+            linkedin-bot/linkedin_post_data.json
+          retention-days: 30
