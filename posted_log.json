@@ -269,6 +269,16 @@
       "format": "steal-this",
       "hook": "Gmail buries emails that hide their hook in the second line",
       "scored": false
+    },
+    {
+      "media_id": "18112973632756223",
+      "date": "2026-08-02",
+      "index": 3,
+      "niche": "Google Ads",
+      "angle": "contrarian",
+      "format": "comparison",
+      "hook": "Google Ads\u2019 'smart' budgeting burns small accounts first\u2014manual bids win instead",
+      "scored": false
     }
   ]
 }
