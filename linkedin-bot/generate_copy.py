@@ -194,8 +194,11 @@ def _call_mistral_once() -> dict:
     missing = [k for k in CRITICAL_KEYS if k not in data]
     if missing:
         raise ValueError(f"Mistral response missing keys: {missing}")
-    if not (6 <= len(data["pairs"]) <= 12):
-        raise ValueError(f"Expected 6-12 pairs, got {len(data['pairs'])}")
+    # Prompt asks for exactly 5 (only 5 render); accept 4-12 so a slightly
+    # over- or under-shooting response isn't thrown away. Extras are trimmed
+    # at render time by MAX_ROWS.
+    if not (4 <= len(data["pairs"]) <= 12):
+        raise ValueError(f"Expected 4-12 pairs, got {len(data['pairs'])}")
     return data
 
 
