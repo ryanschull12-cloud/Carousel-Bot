@@ -121,9 +121,22 @@ def build_user_prompt() -> str:
     )
 
 
-def generate_post() -> dict:
-    if not MISTRAL_API_KEY:
-        raise RuntimeError("MISTRAL_API_KEY is not set - add it as a GitHub Actions secret.")
+# Keys the image renderer genuinely needs - a response without these is unusable.
+CRITICAL_KEYS = ["topic", "title_main", "title_highlight", "subtitle",
+                 "hook_line", "intro", "pairs"]
+
+# Caption-only keys - if the model drops one, fall back rather than fail the run.
+OPTIONAL_DEFAULTS = {
+    "closing": "",
+    "cta_save": "Save this for your next ad account review.",
+    "cta_question": "Which side of this chart sounds more like you?",
+    "hashtags": ["#GoogleAds", "#MetaAds", "#EmailMarketing",
+                 "#SmallBusiness", "#DigitalMarketingIreland"],
+    "image_prompt": "",
+}
+
+
+def _call_mistral_once() -> dict:
     payload = {
         "model": MISTRAL_MODEL,
         "messages": [
@@ -131,6 +144,7 @@ def generate_post() -> dict:
             {"role": "user", "content": build_user_prompt()},
         ],
         "temperature": 0.9,
+        "max_tokens": 4096,
         "response_format": {"type": "json_object"},
     }
     headers = {
@@ -142,36 +156,47 @@ def generate_post() -> dict:
     content = resp.json()["choices"][0]["message"]["content"]
     data = json.loads(content)
 
-    required = [
-        "topic", "title_main", "title_highlight", "subtitle", "hook_line",
-        "intro", "pairs", "closing", "cta_save", "cta_question", "hashtags",
-        "image_prompt",
-    ]
-    missing = [k for k in required if k not in data]
+    missing = [k for k in CRITICAL_KEYS if k not in data]
     if missing:
         raise ValueError(f"Mistral response missing keys: {missing}")
     if not (6 <= len(data["pairs"]) <= 12):
         raise ValueError(f"Expected 6-12 pairs, got {len(data['pairs'])}")
+    return data
 
+
+def generate_post() -> dict:
+    if not MISTRAL_API_KEY:
+        raise RuntimeError("MISTRAL_API_KEY is not set - add it as a GitHub Actions secret.")
+
+    last_error: Exception | None = None
+    for attempt in range(1, 4):
+        try:
+            data = _call_mistral_once()
+            break
+        except Exception as e:  # bad JSON, missing keys, transient API errors
+            last_error = e
+            print(f"Mistral attempt {attempt}/3 failed: {e}")
+    else:
+        raise RuntimeError(f"Mistral failed after 3 attempts: {last_error}")
+
+    for key, default in OPTIONAL_DEFAULTS.items():
+        if not data.get(key):
+            print(f"Filling missing optional key with default: {key}")
+            data[key] = default
     return data
 
 
 def build_caption(data: dict) -> str:
     """Assembles the actual LinkedIn post text (the 'commentary' field)."""
-    lines = [
+    parts = [
         data["hook_line"],
-        "",
         data["intro"],
-        "",
-        data["closing"],
-        "",
-        data["cta_save"],
-        "",
-        data["cta_question"],
-        "",
-        " ".join(data["hashtags"]),
+        data.get("closing", ""),
+        data.get("cta_save", ""),
+        data.get("cta_question", ""),
+        " ".join(data.get("hashtags", [])),
     ]
-    return "\n".join(lines)
+    return "\n\n".join(p for p in parts if p)
 
 
 if __name__ == "__main__":
