@@ -259,6 +259,16 @@
       "format": "steal-this",
       "hook": "Gmail flags one word in subject lines\u2014skip it and land in the inbox",
       "scored": false
+    },
+    {
+      "media_id": "17868188961650851",
+      "date": "2026-08-02",
+      "index": 2,
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Gmail buries emails that hide their hook in the second line",
+      "scored": false
     }
   ]
 }
