@@ -1,41 +1,6 @@
 {
   "recent_batches": [
     {
-      "date": "2026-07-23",
-      "carousels": [
-        {
-          "niche": "Google Ads",
-          "angle": "realization",
-          "format": "checklist",
-          "hook": "Monday morning, my spend was normal\u2014my pipeline wasn\u2019t"
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "curiosity",
-          "format": "before-after",
-          "hook": "Your ad\u2019s CTR drops 40% by day 7\u2014Meta won\u2019t tell you"
-        },
-        {
-          "niche": "Email Marketing",
-          "angle": "behind-the-curtain",
-          "format": "steal-this",
-          "hook": "The email that books 20% more tables\u2014most restaurants skip it"
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "proof-numbers",
-          "format": "comparison",
-          "hook": "30% of your budget burns on broad match\u2014here\u2019s the fix"
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "relief-permission",
-          "format": "myth-buster",
-          "hook": "Your lookalike audience needs 10 days\u2014you gave it 3"
-        }
-      ]
-    },
-    {
       "date": "2026-07-24",
       "carousels": [
         {
@@ -521,6 +486,76 @@
             "#digitalmarketing",
             "#sem",
             "#advertisinghacks"
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-08-03",
+      "carousels": [
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "realization",
+          "format": "before-after",
+          "hook": "Meta Ads CPMs triple after 9 PM\u2014here\u2019s why small accounts pay more",
+          "hashtags": [
+            "#metaads",
+            "#paidsocial",
+            "#digitalmarketing",
+            "#advertisingtips",
+            "#marketinghacks"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "contrarian",
+          "format": "comparison",
+          "hook": "Google Ads\u2019 \u2018smart\u2019 budgeting wastes 30% of small accounts\u2019 spend",
+          "hashtags": [
+            "#googleads",
+            "#ppc",
+            "#digitalmarketing",
+            "#sem",
+            "#advertisinghacks"
+          ]
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "mistake-fear",
+          "format": "checklist",
+          "hook": "Meta\u2019s algorithm stops learning after 50 conversions\u2014here\u2019s how to fix it",
+          "hashtags": [
+            "#metaads",
+            "#paidsocial",
+            "#digitalmarketing",
+            "#marketingtips",
+            "#advertisinghacks"
+          ]
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "curiosity",
+          "format": "comparison",
+          "hook": "A 500-person audience can outperform a 50k lookalike\u2014here\u2019s why",
+          "hashtags": [
+            "#metaads",
+            "#paidsocial",
+            "#digitalmarketing",
+            "#marketingtips",
+            "#advertisingstrategy"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "behind-the-curtain",
+          "format": "steal-this",
+          "hook": "Gmail flags the first 40 characters of your subject line as spam",
+          "hashtags": [
+            "#emailmarketing",
+            "#deliverability",
+            "#marketingtips",
+            "#crm",
+            "#ecommercemarketing"
           ]
         }
       ]

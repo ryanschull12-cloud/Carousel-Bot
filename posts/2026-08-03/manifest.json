@@ -1,0 +1,130 @@
+{
+  "batch_date": "2026-08-03",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Save this \u2193 Meta Ads CPMs triple after 9 PM\u2014but a 2-hour pause cuts costs in half. Most accounts never check the hourly report to spot the pattern. #metaads #paidsocial #digitalmarketing #advertisingtips #marketinghacks",
+      "niche": "Meta/Instagram Ads",
+      "angle": "realization",
+      "format": "before-after",
+      "hook": "Meta Ads CPMs triple after 9 PM\u2014here\u2019s why small accounts pay more",
+      "throughline": "Meta Ads\u2019 CPM spikes after 9 PM aren\u2019t random\u2014they follow predictable auction pressure that small budgets can avoid.",
+      "image_paths": [
+        "posts/2026-08-03/carousel_1/slide_01.jpg",
+        "posts/2026-08-03/carousel_1/slide_02.jpg",
+        "posts/2026-08-03/carousel_1/slide_03.jpg",
+        "posts/2026-08-03/carousel_1/slide_04.jpg",
+        "posts/2026-08-03/carousel_1/slide_05.jpg",
+        "posts/2026-08-03/carousel_1/slide_06.jpg",
+        "posts/2026-08-03/carousel_1/slide_07.jpg",
+        "posts/2026-08-03/carousel_1/slide_08.jpg",
+        "posts/2026-08-03/carousel_1/slide_09.jpg",
+        "posts/2026-08-03/carousel_1/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Save this \u2193 Google Ads\u2019 automated budgeting wastes 30% of small accounts\u2019 spend\u2014manual bids win 60% of tests. Switch for 1 week and most see cost-per-lead drop by 20%. #googleads #ppc #digitalmarketing #sem #advertisinghacks",
+      "niche": "Google Ads",
+      "angle": "contrarian",
+      "format": "comparison",
+      "hook": "Google Ads\u2019 \u2018smart\u2019 budgeting wastes 30% of small accounts\u2019 spend",
+      "throughline": "Google Ads\u2019 automated budgeting spreads small budgets too thin\u2014manual bids let you control where every euro goes.",
+      "image_paths": [
+        "posts/2026-08-03/carousel_2/slide_01.jpg",
+        "posts/2026-08-03/carousel_2/slide_02.jpg",
+        "posts/2026-08-03/carousel_2/slide_03.jpg",
+        "posts/2026-08-03/carousel_2/slide_04.jpg",
+        "posts/2026-08-03/carousel_2/slide_05.jpg",
+        "posts/2026-08-03/carousel_2/slide_06.jpg",
+        "posts/2026-08-03/carousel_2/slide_07.jpg",
+        "posts/2026-08-03/carousel_2/slide_08.jpg",
+        "posts/2026-08-03/carousel_2/slide_09.jpg",
+        "posts/2026-08-03/carousel_2/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Save this \u2193 Meta\u2019s algorithm stops learning after 50 conversions\u2014but a 30-second reset cuts cost-per-lead by 15%. Most accounts never check. #metaads #paidsocial #digitalmarketing #marketingtips #advertisinghacks",
+      "niche": "Meta/Instagram Ads",
+      "angle": "mistake-fear",
+      "format": "checklist",
+      "hook": "Meta\u2019s algorithm stops learning after 50 conversions\u2014here\u2019s how to fix it",
+      "throughline": "Meta\u2019s algorithm stops optimizing after 50 conversions\u2014resetting it keeps costs low and performance high.",
+      "image_paths": [
+        "posts/2026-08-03/carousel_3/slide_01.jpg",
+        "posts/2026-08-03/carousel_3/slide_02.jpg",
+        "posts/2026-08-03/carousel_3/slide_03.jpg",
+        "posts/2026-08-03/carousel_3/slide_04.jpg",
+        "posts/2026-08-03/carousel_3/slide_05.jpg",
+        "posts/2026-08-03/carousel_3/slide_06.jpg",
+        "posts/2026-08-03/carousel_3/slide_07.jpg",
+        "posts/2026-08-03/carousel_3/slide_08.jpg",
+        "posts/2026-08-03/carousel_3/slide_09.jpg",
+        "posts/2026-08-03/carousel_3/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 4,
+      "caption": "Save this \u2193 A 500-person warm audience can outperform a 50k lookalike\u2014because Meta\u2019s algorithm prioritizes engagement over size. Most accounts never test this. #metaads #paidsocial #digitalmarketing #marketingtips #advertisingstrategy",
+      "niche": "Meta/Instagram Ads",
+      "angle": "curiosity",
+      "format": "comparison",
+      "hook": "A 500-person audience can outperform a 50k lookalike\u2014here\u2019s why",
+      "throughline": "A small, warm audience often outperforms a large, cold lookalike\u2014because Meta\u2019s algorithm prioritizes engagement over size.",
+      "image_paths": [
+        "posts/2026-08-03/carousel_4/slide_01.jpg",
+        "posts/2026-08-03/carousel_4/slide_02.jpg",
+        "posts/2026-08-03/carousel_4/slide_03.jpg",
+        "posts/2026-08-03/carousel_4/slide_04.jpg",
+        "posts/2026-08-03/carousel_4/slide_05.jpg",
+        "posts/2026-08-03/carousel_4/slide_06.jpg",
+        "posts/2026-08-03/carousel_4/slide_07.jpg",
+        "posts/2026-08-03/carousel_4/slide_08.jpg",
+        "posts/2026-08-03/carousel_4/slide_09.jpg",
+        "posts/2026-08-03/carousel_4/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Save this \u2193 Gmail flags the first 40 characters of your subject line\u2014move the hook up and land in the inbox 2x more often. Most brands never test this. #emailmarketing #deliverability #marketingtips #crm #ecommercemarketing",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Gmail flags the first 40 characters of your subject line as spam",
+      "throughline": "Gmail\u2019s spam filter flags the first line of your subject line\u2014moving the hook up can double inbox placement.",
+      "image_paths": [
+        "posts/2026-08-03/carousel_5/slide_01.jpg",
+        "posts/2026-08-03/carousel_5/slide_02.jpg",
+        "posts/2026-08-03/carousel_5/slide_03.jpg",
+        "posts/2026-08-03/carousel_5/slide_04.jpg",
+        "posts/2026-08-03/carousel_5/slide_05.jpg",
+        "posts/2026-08-03/carousel_5/slide_06.jpg",
+        "posts/2026-08-03/carousel_5/slide_07.jpg",
+        "posts/2026-08-03/carousel_5/slide_08.jpg",
+        "posts/2026-08-03/carousel_5/slide_09.jpg",
+        "posts/2026-08-03/carousel_5/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    }
+  ]
+}
