@@ -198,7 +198,7 @@
       "angle": "realization",
       "format": "before-after",
       "hook": "Meta Ads forget everything after 48 hours of silence\u2014pause for two days and CPMs drop 30%.",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18463461196115657",
@@ -208,7 +208,7 @@
       "angle": "behind-the-curtain",
       "format": "before-after",
       "hook": "Meta Ads\u2019 learning phase isn\u2019t a warm-up\u2014it\u2019s a 40% CPM trap on day 7.",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18144404140557439",
@@ -218,7 +218,7 @@
       "angle": "contrarian",
       "format": "comparison",
       "hook": "Google Ads\u2019 \u2018smart\u2019 bidding wastes small budgets on the wrong clicks\u2014manual bids win 60% of tests.",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18040382507812987",
