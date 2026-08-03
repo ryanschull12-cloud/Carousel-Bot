@@ -299,6 +299,16 @@
       "format": "comparison",
       "hook": "Google Ads\u2019 \u2018smart\u2019 budgeting wastes 30% of small accounts\u2019 spend",
       "scored": false
+    },
+    {
+      "media_id": "18106861355035718",
+      "date": "2026-08-03",
+      "index": 3,
+      "niche": "Meta/Instagram Ads",
+      "angle": "mistake-fear",
+      "format": "checklist",
+      "hook": "Meta\u2019s algorithm stops learning after 50 conversions\u2014here\u2019s how to fix it",
+      "scored": false
     }
   ]
 }
