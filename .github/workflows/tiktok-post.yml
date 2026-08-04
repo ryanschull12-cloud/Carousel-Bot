@@ -2,59 +2,53 @@ name: TikTok Post
 
 # Posts carousel 1 to TikTok (photo mode, Direct Post) using content
 # already generated and committed by the morning "Daily Carousels"
-# workflow -- no new content is generated here. Mirrors daily.yml's
-# Instagram post timing, just a bit later to make sure the images have
-# had time to propagate to raw.githubusercontent.com.
+# workflow -- no new content is generated here.
 #
-# While the TikTok app is unaudited, posts land as private ("Only me")
-# on the connected account -- see tiktok_post.py's docstring for how to
+# While the TikTok app is unaudited, posts land as private ("Only me") on
+# the connected account -- see tiktok_post.py's docstring for how to
 # switch that to public once the Content Posting API audit is approved.
+#
+# Runs every 15 minutes across an 8:00-11:45 AM UTC window instead of a
+# single 8am/9am shot, for the same reason as daily.yml and
+# posts_later.yml on the Instagram side: GitHub's scheduled-workflow queue
+# for this repo has been observed to delay a single daily trigger by
+# hours (checked 2026-08-04: the last 10 scheduled runs fired between
+# 11:45 and 17:17 UTC, never at 8:00/9:00), or skip it entirely, and
+# shifting which minute it's set to doesn't fix that. This workflow used
+# to gate the actual post step on "is Irish local time == 9am right now?"
+# which meant every one of those late-firing runs saw a false result and
+# silently skipped posting -- nothing was ever failing, it just never
+# tried. tiktok_post.py's own dedupe (tiktok_posted_log.json) makes every
+# extra tick here a near-instant no-op once today's post has already gone
+# out, so this just gives ~16 chances for one to get through instead of
+# one all-or-nothing shot.
 
 on:
   schedule:
-    # Fires at both 8:00 UTC and 9:00 UTC -- same auto BST/GMT handling
-    # as the Instagram workflows, so this never needs manual seasonal
-    # edits either.
-    - cron: "0 8 * * *"
-    - cron: "0 9 * * *"
+    - cron: "*/15 8-11 * * *"
   workflow_dispatch: {}
+
+permissions:
+  contents: write   # needed so this workflow can commit tiktok_posted_log.json
 
 jobs:
   post-to-tiktok:
     runs-on: ubuntu-latest
     steps:
-      - name: Check schedule window (handles Irish BST/GMT automatically)
-        id: check_time
-        run: |
-          python3 - <<'EOF'
-          import os
-          from datetime import datetime
-          from zoneinfo import ZoneInfo
-          event_name = os.environ.get("GITHUB_EVENT_NAME", "")
-          now = datetime.now(ZoneInfo("Europe/Dublin"))
-          should_run = "true" if (event_name == "workflow_dispatch" or now.hour == 9) else "false"
-          print(f"Irish local time right now: {now.isoformat()} (trigger: {event_name}) -> should_run={should_run}")
-          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
-              f.write(f"should_run={should_run}\n")
-          EOF
-
       - name: Check out repo
-        if: steps.check_time.outputs.should_run == 'true'
         uses: actions/checkout@v4
 
       - name: Set up Python
-        if: steps.check_time.outputs.should_run == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
           cache: "pip"
 
       - name: Install dependencies
-        if: steps.check_time.outputs.should_run == 'true'
         run: pip install -r requirements.txt
 
       - name: Post carousel 1 to TikTok
-        if: steps.check_time.outputs.should_run == 'true' && vars.TIKTOK_POSTING_PAUSED != 'true'
+        if: vars.TIKTOK_POSTING_PAUSED != 'true'
         env:
           TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
           TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
@@ -65,6 +59,15 @@ jobs:
           TO_EMAIL: ${{ secrets.TO_EMAIL }}
         run: python tiktok_post.py --only-index 1
 
+      - name: Commit posted log
+        if: vars.TIKTOK_POSTING_PAUSED != 'true'
+        run: |
+          git config user.name "carousel-bot"
+          git config user.email "actions@github.com"
+          git add tiktok_posted_log.json 2>/dev/null || true
+          git commit -m "Log TikTok post $(date +'%Y-%m-%d %H:%M')" || echo "Nothing to commit"
+          git push
+
       - name: Note that TikTok posting is paused
-        if: steps.check_time.outputs.should_run == 'true' && vars.TIKTOK_POSTING_PAUSED == 'true'
+        if: vars.TIKTOK_POSTING_PAUSED == 'true'
         run: echo "TIKTOK_POSTING_PAUSED is set to true in repo variables — skipping TikTok auto-post."
