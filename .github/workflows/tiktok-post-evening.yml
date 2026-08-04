@@ -1,0 +1,67 @@
+name: TikTok Evening Post
+
+# Posts the last of today's auto-post-winning carousels to TikTok (photo
+# mode, Direct Post), mirroring evening-post.yml on the Instagram side --
+# same 3 winning carousels, same cadence, just tracked separately in
+# tiktok_posted_log.json. No new content is generated here.
+#
+# While the TikTok app is unaudited, posts land as private ("Only me") on
+# the connected account -- see tiktok_post.py's docstring for how to
+# switch that to public once the Content Posting API audit is approved.
+
+on:
+  schedule:
+    # Same 19:00-22:45 UTC window as evening-post.yml, for the same
+    # reason: GitHub's scheduled-workflow queue for this repo has been
+    # observed to delay a single daily trigger by hours (confirmed on the
+    # Instagram side landing ~3.5-4 hours late), so this fires every 15
+    # minutes across the window instead. tiktok_post.py's own dedupe
+    # (tiktok_posted_log.json / --target-count) makes every extra tick a
+    # near-instant no-op once today's evening post has already gone out.
+    - cron: "*/15 19-22 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write   # needed so this workflow can commit tiktok_posted_log.json
+
+jobs:
+  post-evening-carousel:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Post next TikTok carousel
+        if: vars.TIKTOK_POSTING_PAUSED != 'true'
+        env:
+          TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
+          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+          TIKTOK_REFRESH_TOKEN: ${{ secrets.TIKTOK_REFRESH_TOKEN }}
+          TIKTOK_PRIVACY_LEVEL: ${{ vars.TIKTOK_PRIVACY_LEVEL }}
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          TO_EMAIL: ${{ secrets.TO_EMAIL }}
+        # --target-count 3: by the end of the evening slot, all 3 of
+        # today's winners should be posted to TikTok in total.
+        run: python tiktok_post.py --target-count 3
+
+      - name: Commit posted log
+        if: vars.TIKTOK_POSTING_PAUSED != 'true'
+        run: |
+          git config user.name "carousel-bot"
+          git config user.email "actions@github.com"
+          git add tiktok_posted_log.json 2>/dev/null || true
+          git commit -m "Log TikTok post $(date +'%Y-%m-%d %H:%M')" || echo "Nothing to commit"
+          git push
+
+      - name: Note that TikTok posting is paused
+        if: vars.TIKTOK_POSTING_PAUSED == 'true'
+        run: echo "TIKTOK_POSTING_PAUSED is set to true in repo variables — skipping this scheduled post."
