@@ -395,6 +395,60 @@
       "engagement_rate": 100.0,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control"
+    },
+    {
+      "date": "2026-08-01",
+      "media_id": "18040382507812987",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Gmail\u2019s inbox filter flags one word in your subject line",
+      "metrics": {
+        "reach": 3,
+        "saved": 0,
+        "shares": 0,
+        "likes": 2,
+        "comments": 0
+      },
+      "engagement_rate": 66.667,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
+    },
+    {
+      "date": "2026-08-01",
+      "media_id": "18009816449937886",
+      "niche": "Meta/Instagram Ads",
+      "angle": "realization",
+      "format": "step-by-step",
+      "hook": "Meta\u2019s algorithm forgets your ad after 48 hours of silence",
+      "metrics": {
+        "reach": 2,
+        "saved": 0,
+        "shares": 0,
+        "likes": 3,
+        "comments": 0
+      },
+      "engagement_rate": 150.0,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
+    },
+    {
+      "date": "2026-08-01",
+      "media_id": "18096925451204637",
+      "niche": "Meta/Instagram Ads",
+      "angle": "curiosity",
+      "format": "comparison",
+      "hook": "A 500-person list can beat Meta\u2019s 50,000-person lookalike",
+      "metrics": {
+        "reach": 2,
+        "saved": 0,
+        "shares": 0,
+        "likes": 1,
+        "comments": 0
+      },
+      "engagement_rate": 50.0,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
     }
   ]
 }

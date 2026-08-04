@@ -228,7 +228,7 @@
       "angle": "behind-the-curtain",
       "format": "steal-this",
       "hook": "Gmail\u2019s inbox filter flags one word in your subject line",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18009816449937886",
@@ -238,7 +238,7 @@
       "angle": "realization",
       "format": "step-by-step",
       "hook": "Meta\u2019s algorithm forgets your ad after 48 hours of silence",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18096925451204637",
@@ -248,7 +248,7 @@
       "angle": "curiosity",
       "format": "comparison",
       "hook": "A 500-person list can beat Meta\u2019s 50,000-person lookalike",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18451013320186081",
