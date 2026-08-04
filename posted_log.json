@@ -309,6 +309,26 @@
       "format": "checklist",
       "hook": "Meta\u2019s algorithm stops learning after 50 conversions\u2014here\u2019s how to fix it",
       "scored": false
+    },
+    {
+      "media_id": "18089638604561935",
+      "date": "2026-08-04",
+      "index": 1,
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Gmail\u2019s first 10 subject words decide: spam or inbox",
+      "scored": false
+    },
+    {
+      "media_id": "18062008892773834",
+      "date": "2026-08-04",
+      "index": 2,
+      "niche": "Google Ads",
+      "angle": "contrarian",
+      "format": "comparison",
+      "hook": "Google Ads burns small budgets on useless clicks",
+      "scored": false
     }
   ]
 }
