@@ -34,6 +34,13 @@ actually written, and the weekly self-review email (performance_report.py)
 reads it too. This is the "review itself" half of the pipeline — it's all
 retrospective (informs what gets written next, and what you see in the
 weekly report), never a gate on whether something posts.
+
+PUBLISH RETRY (added 2026-08-04): carousel 1 failed today with Instagram
+Graph API error_subcode 2207027 ("Media ID is not available", "please
+wait for a moment") immediately after wait_until_ready() reported the
+container as FINISHED. See publish()'s retry loop below -- this is a
+known Graph API timing quirk, not a real failure, and a short retry
+clears it.
 """
 
 import argparse
@@ -111,13 +118,44 @@ def wait_until_ready(container_id, timeout=120):
     return False
 
 
+# Added 2026-08-04: today's carousel 1 failed with error_subcode 2207027
+# ("Media ID is not available" / "please wait for a moment") even though
+# wait_until_ready() had just reported the container as FINISHED. This is
+# a known Instagram Graph API race -- FINISHED doesn't always mean the
+# publish endpoint is ready yet -- and Meta marks it is_transient: false
+# despite the message telling you to retry shortly. Retrying a few times
+# with a short delay clears it reliably instead of failing the whole post
+# (and emailing a failure alert) on the first hit.
+PUBLISH_NOT_READY_SUBCODE = 2207027
+PUBLISH_RETRY_ATTEMPTS = 4
+PUBLISH_RETRY_DELAY_SECONDS = 15
+
+
 def publish(container_id):
-    resp = requests.post(f"{GRAPH}/{IG_BUSINESS_ACCOUNT_ID}/media_publish", data={
-        "creation_id": container_id,
-        "access_token": IG_ACCESS_TOKEN,
-    }, timeout=60)
-    check_response(resp, f"publish({container_id})")
-    return resp.json()
+    last_resp = None
+    for attempt in range(1, PUBLISH_RETRY_ATTEMPTS + 1):
+        resp = requests.post(f"{GRAPH}/{IG_BUSINESS_ACCOUNT_ID}/media_publish", data={
+            "creation_id": container_id,
+            "access_token": IG_ACCESS_TOKEN,
+        }, timeout=60)
+        if resp.ok:
+            return resp.json()
+        last_resp = resp
+        try:
+            error_subcode = resp.json().get("error", {}).get("error_subcode")
+        except ValueError:
+            error_subcode = None
+        if error_subcode == PUBLISH_NOT_READY_SUBCODE and attempt < PUBLISH_RETRY_ATTEMPTS:
+            print(
+                f"publish({container_id}) attempt {attempt}/{PUBLISH_RETRY_ATTEMPTS}: "
+                f"Instagram says the media isn't ready yet, retrying in "
+                f"{PUBLISH_RETRY_DELAY_SECONDS}s..."
+            )
+            time.sleep(PUBLISH_RETRY_DELAY_SECONDS)
+            continue
+        break
+    check_response(last_resp, f"publish({container_id})")
+    return last_resp.json()
 
 
 def send_failure_alert(carousel_index, error_text):
@@ -218,10 +256,6 @@ def main():
     )
     args = parser.parse_args()
 
-    # Defense in depth: the workflows already skip this whole script when
-    # the IG_POSTING_PAUSED repo variable is "true", but this check means a
-    # manual run (or a workflow edited without noticing the guard) still
-    # can't post while you're paused for Meta verification.
     if os.environ.get("IG_POSTING_PAUSED", "false").lower() == "true":
         print("IG_POSTING_PAUSED is set to true — skipping Instagram posting entirely.")
         return
@@ -238,16 +272,6 @@ def main():
     with open(manifest_path) as f:
         manifest = json.load(f)
 
-    # This script runs from three separate scheduled workflows across the
-    # day (see daily.yml, posts_later.yml, evening-post.yml). The later
-    # runs don't generate anything themselves — they just re-read whatever
-    # manifest is newest on disk. If the morning generation run ever fails
-    # or doesn't fire (Mistral outage, a bad Actions run, a clock edge
-    # case), that "newest" manifest silently becomes YESTERDAY's, and
-    # without this check the later runs would re-post already-posted
-    # carousels from the wrong day. Not manifest.json's fault — it's
-    # correct for the day it was written — this just refuses to act on a
-    # manifest that isn't today's.
     if not args.manifest:
         today_str = datetime.date.today().isoformat()
         if manifest.get("batch_date") != today_str:
@@ -269,24 +293,13 @@ def main():
     winners.sort(key=lambda c: c["index"])
 
     if args.only_index is not None:
-        # Manual override — post this exact index regardless of whether
-        # it's a "winner" or already logged as posted today.
         to_post = [c for c in manifest["carousels"] if c["index"] == args.only_index]
     elif args.target_count is not None:
-        # Normal scheduled behavior: this workflow's slot should result in
-        # exactly `target_count` of today's winners being posted in total
-        # by the time it's done. If that many (or more) are already
-        # posted -- whether by an earlier slot today, or by this same
-        # slot's OTHER BST/GMT cron trigger already firing once -- there's
-        # nothing to do. Otherwise post just enough winners to reach the
-        # target (normally exactly one, since slots step by 1).
         already_posted_count = len(already_posted_indices)
         need = max(0, args.target_count - already_posted_count)
         remaining = [c for c in winners if c["index"] not in already_posted_indices]
         to_post = remaining[:need]
     else:
-        # Fallback (no --target-count passed): post exactly the next
-        # winning carousel that hasn't been logged as posted today.
         remaining = [c for c in winners if c["index"] not in already_posted_indices]
         to_post = remaining[:1]
 
@@ -306,7 +319,6 @@ def main():
         if i < len(to_post) - 1:
             time.sleep(SECONDS_BETWEEN_POSTS)
 
-    # Save whatever succeeded even if a later carousel in the loop failed.
     save_posted_log(posted_log)
 
 
