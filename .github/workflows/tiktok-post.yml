@@ -57,7 +57,12 @@ jobs:
           GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           TO_EMAIL: ${{ secrets.TO_EMAIL }}
-        run: python tiktok_post.py --only-index 1
+        # --target-count 1: by the end of the morning slot, exactly 1 of
+        # today's winners should be posted to TikTok in total. Same
+        # --target-count pattern as tiktok-post-midday.yml (2) and
+        # tiktok-post-evening.yml (3) -- added 2026-08-04 so TikTok posts
+        # 3x/day on the same cadence as Instagram instead of just once.
+        run: python tiktok_post.py --target-count 1
 
       - name: Commit posted log
         if: vars.TIKTOK_POSTING_PAUSED != 'true'
