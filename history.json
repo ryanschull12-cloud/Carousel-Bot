@@ -1,41 +1,6 @@
 {
   "recent_batches": [
     {
-      "date": "2026-07-24",
-      "carousels": [
-        {
-          "niche": "Email Marketing",
-          "angle": "realization",
-          "format": "step-by-step",
-          "hook": "Email questions lift opens 22%\u2014most brands default to statements"
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "proof-numbers",
-          "format": "before-after",
-          "hook": "Meta retargeting wastes 50% of budget after day 3"
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "behind-the-curtain",
-          "format": "comparison",
-          "hook": "Meta\u2019s algorithm hits a wall at 50 conversions"
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "behind-the-curtain",
-          "format": "step-by-step",
-          "hook": "Google Ads burns 30% of budget on irrelevant searches"
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "mistake-fear",
-          "format": "checklist",
-          "hook": "Google Ads\u2019 \u2018close variants\u2019 burn 25% of budget"
-        }
-      ]
-    },
-    {
       "date": "2026-07-25",
       "carousels": [
         {
@@ -556,6 +521,76 @@
             "#marketingtips",
             "#crm",
             "#ecommercemarketing"
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-08-04",
+      "carousels": [
+        {
+          "niche": "Email Marketing",
+          "angle": "behind-the-curtain",
+          "format": "steal-this",
+          "hook": "Gmail\u2019s first 10 subject words decide: spam or inbox",
+          "hashtags": [
+            "#emailmarketing",
+            "#deliverability",
+            "#marketinghacks",
+            "#crm",
+            "#ecommercetips"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "contrarian",
+          "format": "comparison",
+          "hook": "Google Ads burns small budgets on useless clicks",
+          "hashtags": [
+            "#googleads",
+            "#ppc",
+            "#digitalmarketing",
+            "#sem",
+            "#advertisingstrategy"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "realization",
+          "format": "step-by-step",
+          "hook": "Gmail\u2019s 40-character preview kills open rates",
+          "hashtags": [
+            "#emailmarketing",
+            "#deliverability",
+            "#marketingtips",
+            "#crm",
+            "#ecommercemarketing"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "curiosity",
+          "format": "step-by-step",
+          "hook": "Google Ads hides 20% of your sales in plain sight",
+          "hashtags": [
+            "#googleads",
+            "#ppc",
+            "#digitalmarketing",
+            "#sem",
+            "#advertisingtips"
+          ]
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "contrarian",
+          "format": "comparison",
+          "hook": "Meta\u2019s lookalike audiences waste 40% of your budget",
+          "hashtags": [
+            "#metaads",
+            "#paidsocial",
+            "#digitalmarketing",
+            "#advertisinghacks",
+            "#marketingstrategy"
           ]
         }
       ]

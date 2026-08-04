@@ -1,0 +1,130 @@
+{
+  "batch_date": "2026-08-04",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Save this 6-step checklist \u2193\nGmail scans the first 10 words of your subject line to decide where your email lands. One tweak can move 40% of emails from Promotions to Primary\u2014here\u2019s how.\n#emailmarketing #deliverability #marketinghacks #crm #ecommercetips",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Gmail\u2019s first 10 subject words decide: spam or inbox",
+      "throughline": "Gmail\u2019s spam filter scans the first 10 words of your subject line to decide where your email lands\u2014and one tweak can move 40% of emails from Promotions to Primary.",
+      "image_paths": [
+        "posts/2026-08-04/carousel_1/slide_01.jpg",
+        "posts/2026-08-04/carousel_1/slide_02.jpg",
+        "posts/2026-08-04/carousel_1/slide_03.jpg",
+        "posts/2026-08-04/carousel_1/slide_04.jpg",
+        "posts/2026-08-04/carousel_1/slide_05.jpg",
+        "posts/2026-08-04/carousel_1/slide_06.jpg",
+        "posts/2026-08-04/carousel_1/slide_07.jpg",
+        "posts/2026-08-04/carousel_1/slide_08.jpg",
+        "posts/2026-08-04/carousel_1/slide_09.jpg",
+        "posts/2026-08-04/carousel_1/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Save this comparison \u2193\nGoogle Ads\u2019 \u2018smart\u2019 budgeting spreads small budgets too thin, while manual bids win 60% of tests for accounts under \u20ac500/day. Here\u2019s how to set them up.\n#googleads #ppc #digitalmarketing #sem #advertisingstrategy",
+      "niche": "Google Ads",
+      "angle": "contrarian",
+      "format": "comparison",
+      "hook": "Google Ads burns small budgets on useless clicks",
+      "throughline": "Google Ads\u2019 \u2018smart\u2019 budgeting spreads small budgets too thin, while manual bids win 60% of tests for accounts under \u20ac500/day by focusing spend on the right clicks.",
+      "image_paths": [
+        "posts/2026-08-04/carousel_2/slide_01.jpg",
+        "posts/2026-08-04/carousel_2/slide_02.jpg",
+        "posts/2026-08-04/carousel_2/slide_03.jpg",
+        "posts/2026-08-04/carousel_2/slide_04.jpg",
+        "posts/2026-08-04/carousel_2/slide_05.jpg",
+        "posts/2026-08-04/carousel_2/slide_06.jpg",
+        "posts/2026-08-04/carousel_2/slide_07.jpg",
+        "posts/2026-08-04/carousel_2/slide_08.jpg",
+        "posts/2026-08-04/carousel_2/slide_09.jpg",
+        "posts/2026-08-04/carousel_2/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Save this step-by-step guide \u2193\nEmail open rates drop 30% when the hook is buried in line 2. Gmail\u2019s preview cuts off after 40 characters\u2014here\u2019s how to fix it.\n#emailmarketing #deliverability #marketingtips #crm #ecommercemarketing",
+      "niche": "Email Marketing",
+      "angle": "realization",
+      "format": "step-by-step",
+      "hook": "Gmail\u2019s 40-character preview kills open rates",
+      "throughline": "Email open rates drop 30% when the hook is buried in line 2\u2014Gmail\u2019s preview cuts off after 40 characters, so the first line must grab attention immediately.",
+      "image_paths": [
+        "posts/2026-08-04/carousel_3/slide_01.jpg",
+        "posts/2026-08-04/carousel_3/slide_02.jpg",
+        "posts/2026-08-04/carousel_3/slide_03.jpg",
+        "posts/2026-08-04/carousel_3/slide_04.jpg",
+        "posts/2026-08-04/carousel_3/slide_05.jpg",
+        "posts/2026-08-04/carousel_3/slide_06.jpg",
+        "posts/2026-08-04/carousel_3/slide_07.jpg",
+        "posts/2026-08-04/carousel_3/slide_08.jpg",
+        "posts/2026-08-04/carousel_3/slide_09.jpg",
+        "posts/2026-08-04/carousel_3/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 4,
+      "caption": "Save this step-by-step guide \u2193\nGoogle Ads hides 20% of your sales in the \u2018lag report\u2019\u2014most advertisers never check it. Here\u2019s how to find them.\n#googleads #ppc #digitalmarketing #sem #advertisingtips",
+      "niche": "Google Ads",
+      "angle": "curiosity",
+      "format": "step-by-step",
+      "hook": "Google Ads hides 20% of your sales in plain sight",
+      "throughline": "Google Ads hides 20% of your sales in the \u2018lag report\u2019\u2014most advertisers never check it, but it shows which clicks took days to convert.",
+      "image_paths": [
+        "posts/2026-08-04/carousel_4/slide_01.jpg",
+        "posts/2026-08-04/carousel_4/slide_02.jpg",
+        "posts/2026-08-04/carousel_4/slide_03.jpg",
+        "posts/2026-08-04/carousel_4/slide_04.jpg",
+        "posts/2026-08-04/carousel_4/slide_05.jpg",
+        "posts/2026-08-04/carousel_4/slide_06.jpg",
+        "posts/2026-08-04/carousel_4/slide_07.jpg",
+        "posts/2026-08-04/carousel_4/slide_08.jpg",
+        "posts/2026-08-04/carousel_4/slide_09.jpg",
+        "posts/2026-08-04/carousel_4/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Save this comparison \u2193\nMeta\u2019s \u2018lookalike\u2019 audiences cost 40% more per sale than custom lists. A 500-person list can outperform a 50,000-person lookalike\u2014here\u2019s why.\n#metaads #paidsocial #digitalmarketing #advertisinghacks #marketingstrategy",
+      "niche": "Meta/Instagram Ads",
+      "angle": "contrarian",
+      "format": "comparison",
+      "hook": "Meta\u2019s lookalike audiences waste 40% of your budget",
+      "throughline": "Meta\u2019s \u2018lookalike\u2019 audiences cost 40% more per sale than custom lists\u2014small, high-quality lists often outperform large, generic ones.",
+      "image_paths": [
+        "posts/2026-08-04/carousel_5/slide_01.jpg",
+        "posts/2026-08-04/carousel_5/slide_02.jpg",
+        "posts/2026-08-04/carousel_5/slide_03.jpg",
+        "posts/2026-08-04/carousel_5/slide_04.jpg",
+        "posts/2026-08-04/carousel_5/slide_05.jpg",
+        "posts/2026-08-04/carousel_5/slide_06.jpg",
+        "posts/2026-08-04/carousel_5/slide_07.jpg",
+        "posts/2026-08-04/carousel_5/slide_08.jpg",
+        "posts/2026-08-04/carousel_5/slide_09.jpg",
+        "posts/2026-08-04/carousel_5/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    }
+  ]
+}
