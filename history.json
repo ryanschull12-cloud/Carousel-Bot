@@ -1,41 +1,6 @@
 {
   "recent_batches": [
     {
-      "date": "2026-07-27",
-      "carousels": [
-        {
-          "niche": "Google Ads",
-          "angle": "curiosity",
-          "format": "comparison",
-          "hook": "Google Ads counts clicks that never start sales"
-        },
-        {
-          "niche": "Email Marketing",
-          "angle": "relief-permission",
-          "format": "steal-this",
-          "hook": "500 engaged subscribers beat 10k cold ones"
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "behind-the-curtain",
-          "format": "before-after",
-          "hook": "Google Ads calls 25% of buyers 'low intent'"
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "realization",
-          "format": "step-by-step",
-          "hook": "Pause Meta ads for 48 hours to cut costs"
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "relief-permission",
-          "format": "myth-buster",
-          "hook": "Rotating Meta creatives resets the algorithm"
-        }
-      ]
-    },
-    {
       "date": "2026-07-29",
       "carousels": [
         {
@@ -661,6 +626,76 @@
             "#digitalmarketing",
             "#advertisinghacks",
             "#marketingstrategy"
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-08-07",
+      "carousels": [
+        {
+          "niche": "Email Marketing",
+          "angle": "behind-the-curtain",
+          "format": "steal-this",
+          "hook": "Gmail only reads the first 12 words of your subject line",
+          "hashtags": [
+            "#emailmarketing",
+            "#deliverability",
+            "#marketingtips",
+            "#crm",
+            "#ecommercestrategy"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "relief-permission",
+          "format": "myth-buster",
+          "hook": "500 engaged subscribers beat 10,000 cold ones in Gmail\u2019s inbox",
+          "hashtags": [
+            "#emailmarketing",
+            "#deliverability",
+            "#marketingtips",
+            "#crm",
+            "#smallbusinessmarketing"
+          ]
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "mistake-fear",
+          "format": "checklist",
+          "hook": "Meta resets your audience after 3 days\u2014here\u2019s how to stop it",
+          "hashtags": [
+            "#metaads",
+            "#paidsocial",
+            "#digitalmarketing",
+            "#advertisingtips",
+            "#marketingstrategy"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "behind-the-curtain",
+          "format": "steal-this",
+          "hook": "Google Ads wrongly labels 20% of buyers as \u2018low intent\u2019",
+          "hashtags": [
+            "#googleads",
+            "#ppc",
+            "#digitalmarketing",
+            "#sem",
+            "#advertisinghacks"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "mistake-fear",
+          "format": "checklist",
+          "hook": "Gmail buries subject lines with \u2018free,\u2019 \u2018discount,\u2019 or \u2018urgent\u2019",
+          "hashtags": [
+            "#emailmarketing",
+            "#deliverability",
+            "#marketingtips",
+            "#crm",
+            "#ecommercemarketing"
           ]
         }
       ]
