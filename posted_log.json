@@ -258,7 +258,7 @@
       "angle": "behind-the-curtain",
       "format": "steal-this",
       "hook": "Gmail flags one word in subject lines\u2014skip it and land in the inbox",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "17868188961650851",
@@ -268,7 +268,7 @@
       "angle": "behind-the-curtain",
       "format": "steal-this",
       "hook": "Gmail buries emails that hide their hook in the second line",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18112973632756223",
@@ -278,7 +278,7 @@
       "angle": "contrarian",
       "format": "comparison",
       "hook": "Google Ads\u2019 'smart' budgeting burns small accounts first\u2014manual bids win instead",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18064601111749693",
