@@ -1,0 +1,130 @@
+{
+  "batch_date": "2026-08-09",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Gmail\u2019s inbox filter scans only the first 12 words of your subject line\u2014here\u2019s how to optimize them for the primary tab. Most emails get buried because the first line doesn\u2019t pass Gmail\u2019s scan. This checklist keeps your emails out of spam. #emailmarketing #deliverability #marketingtips #crm #digitalmarketing",
+      "niche": "Email Marketing",
+      "angle": "realization",
+      "format": "step-by-step",
+      "hook": "Gmail cuts you off after 12 words\u2014here\u2019s what it sees first",
+      "throughline": "Gmail\u2019s inbox filter scans only the first 12 words of your subject line\u2014here\u2019s how to optimize them for the primary tab.",
+      "image_paths": [
+        "posts/2026-08-09/carousel_1/slide_01.jpg",
+        "posts/2026-08-09/carousel_1/slide_02.jpg",
+        "posts/2026-08-09/carousel_1/slide_03.jpg",
+        "posts/2026-08-09/carousel_1/slide_04.jpg",
+        "posts/2026-08-09/carousel_1/slide_05.jpg",
+        "posts/2026-08-09/carousel_1/slide_06.jpg",
+        "posts/2026-08-09/carousel_1/slide_07.jpg",
+        "posts/2026-08-09/carousel_1/slide_08.jpg",
+        "posts/2026-08-09/carousel_1/slide_09.jpg",
+        "posts/2026-08-09/carousel_1/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Google Ads charges full price for clicks that bounce in 3 seconds\u2014here\u2019s how to stop paying for dead traffic. Most accounts waste budget on visitors who leave instantly. This checklist saves you money by focusing on engaged users. #googleads #ppc #digitalmarketing #sem #advertisingtips",
+      "niche": "Google Ads",
+      "angle": "mistake-fear",
+      "format": "before-after",
+      "hook": "Google Ads charges you for 3-second bounces\u2014here\u2019s how to stop it",
+      "throughline": "Google Ads charges full price for clicks that bounce in 3 seconds\u2014here\u2019s how to stop paying for dead traffic.",
+      "image_paths": [
+        "posts/2026-08-09/carousel_2/slide_01.jpg",
+        "posts/2026-08-09/carousel_2/slide_02.jpg",
+        "posts/2026-08-09/carousel_2/slide_03.jpg",
+        "posts/2026-08-09/carousel_2/slide_04.jpg",
+        "posts/2026-08-09/carousel_2/slide_05.jpg",
+        "posts/2026-08-09/carousel_2/slide_06.jpg",
+        "posts/2026-08-09/carousel_2/slide_07.jpg",
+        "posts/2026-08-09/carousel_2/slide_08.jpg",
+        "posts/2026-08-09/carousel_2/slide_09.jpg",
+        "posts/2026-08-09/carousel_2/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "500 warm subscribers outperform 10,000 cold ones in Gmail\u2019s inbox\u2014quality over quantity wins every time. Most lists waste effort on inactive subscribers. This playbook keeps your emails landing where they matter. #emailmarketing #deliverability #marketingtips #crm #ecommercemarketing",
+      "niche": "Email Marketing",
+      "angle": "contrarian",
+      "format": "myth-buster",
+      "hook": "500 warm subscribers get better inbox placement than 10,000 cold ones",
+      "throughline": "500 warm subscribers outperform 10,000 cold ones in Gmail\u2019s inbox\u2014quality over quantity wins.",
+      "image_paths": [
+        "posts/2026-08-09/carousel_3/slide_01.jpg",
+        "posts/2026-08-09/carousel_3/slide_02.jpg",
+        "posts/2026-08-09/carousel_3/slide_03.jpg",
+        "posts/2026-08-09/carousel_3/slide_04.jpg",
+        "posts/2026-08-09/carousel_3/slide_05.jpg",
+        "posts/2026-08-09/carousel_3/slide_06.jpg",
+        "posts/2026-08-09/carousel_3/slide_07.jpg",
+        "posts/2026-08-09/carousel_3/slide_08.jpg",
+        "posts/2026-08-09/carousel_3/slide_09.jpg",
+        "posts/2026-08-09/carousel_3/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 4,
+      "caption": "Google Ads hides 25% of your sales in \u2018Other\u2019 reports\u2014here\u2019s where to find them and why they matter. Most accounts ignore these hidden conversions. This tracker helps you uncover them. #googleads #ppc #digitalmarketing #sem #advertisinghacks",
+      "niche": "Google Ads",
+      "angle": "curiosity",
+      "format": "comparison",
+      "hook": "Google Ads buries 25% of your sales in a report you\u2019ve never checked",
+      "throughline": "Google Ads hides 25% of your sales in \u2018Other\u2019 reports\u2014here\u2019s where to find them and why they matter.",
+      "image_paths": [
+        "posts/2026-08-09/carousel_4/slide_01.jpg",
+        "posts/2026-08-09/carousel_4/slide_02.jpg",
+        "posts/2026-08-09/carousel_4/slide_03.jpg",
+        "posts/2026-08-09/carousel_4/slide_04.jpg",
+        "posts/2026-08-09/carousel_4/slide_05.jpg",
+        "posts/2026-08-09/carousel_4/slide_06.jpg",
+        "posts/2026-08-09/carousel_4/slide_07.jpg",
+        "posts/2026-08-09/carousel_4/slide_08.jpg",
+        "posts/2026-08-09/carousel_4/slide_09.jpg",
+        "posts/2026-08-09/carousel_4/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Gmail flags subject lines with \u2018free,\u2019 \u2018discount,\u2019 or \u2018urgent\u2019 as spam\u2014here\u2019s what to use instead. Most emails get buried because of a few trigger words. This checklist keeps your emails landing in the inbox. #emailmarketing #deliverability #marketingtips #crm #ecommercetips",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "checklist",
+      "hook": "Gmail sends \u2018free\u2019 and \u2018discount\u2019 straight to spam\u2014here\u2019s what works instead",
+      "throughline": "Gmail flags subject lines with \u2018free,\u2019 \u2018discount,\u2019 or \u2018urgent\u2019 as spam\u2014here\u2019s what to use instead.",
+      "image_paths": [
+        "posts/2026-08-09/carousel_5/slide_01.jpg",
+        "posts/2026-08-09/carousel_5/slide_02.jpg",
+        "posts/2026-08-09/carousel_5/slide_03.jpg",
+        "posts/2026-08-09/carousel_5/slide_04.jpg",
+        "posts/2026-08-09/carousel_5/slide_05.jpg",
+        "posts/2026-08-09/carousel_5/slide_06.jpg",
+        "posts/2026-08-09/carousel_5/slide_07.jpg",
+        "posts/2026-08-09/carousel_5/slide_08.jpg",
+        "posts/2026-08-09/carousel_5/slide_09.jpg",
+        "posts/2026-08-09/carousel_5/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    }
+  ]
+}
