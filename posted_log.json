@@ -349,6 +349,16 @@
       "format": "steal-this",
       "hook": "Gmail\u2019s filter reads only the first 10 words\u2014here\u2019s what it hates",
       "scored": false
+    },
+    {
+      "media_id": "18118130332928432",
+      "date": "2026-08-05",
+      "index": 2,
+      "niche": "Meta/Instagram Ads",
+      "angle": "realization",
+      "format": "step-by-step",
+      "hook": "Meta\u2019s algorithm forgets your ad after 48 hours of silence",
+      "scored": false
     }
   ]
 }
