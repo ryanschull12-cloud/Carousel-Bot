@@ -1,76 +1,6 @@
 {
   "recent_batches": [
     {
-      "date": "2026-07-29",
-      "carousels": [
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "contrarian",
-          "format": "comparison",
-          "hook": "Meta\u2019s \u2018suggested audiences\u2019 cost you 3x more per sale",
-          "hashtags": [
-            "#metaads",
-            "#paidsocial",
-            "#digitalmarketing",
-            "#advertising",
-            "#marketingtips"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "behind-the-curtain",
-          "format": "checklist",
-          "hook": "Google Ads hides your ads\u2014not because of bids, but this",
-          "hashtags": [
-            "#googleads",
-            "#ppc",
-            "#digitalmarketing",
-            "#sem",
-            "#advertising"
-          ]
-        },
-        {
-          "niche": "Email Marketing",
-          "angle": "behind-the-curtain",
-          "format": "checklist",
-          "hook": "Gmail buries your emails\u2014here\u2019s the 3-line fix",
-          "hashtags": [
-            "#emailmarketing",
-            "#digitalmarketing",
-            "#marketingtips",
-            "#crm",
-            "#ecommercemarketing"
-          ]
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "relief-permission",
-          "format": "myth-buster",
-          "hook": "A 500-person audience can outspend a 50k one",
-          "hashtags": [
-            "#metaads",
-            "#paidsocial",
-            "#digitalmarketing",
-            "#advertising",
-            "#marketingtips"
-          ]
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "realization",
-          "format": "step-by-step",
-          "hook": "Meta\u2019s algorithm quits learning after 50 conversions",
-          "hashtags": [
-            "#metaads",
-            "#paidsocial",
-            "#digitalmarketing",
-            "#advertising",
-            "#marketingtips"
-          ]
-        }
-      ]
-    },
-    {
       "date": "2026-07-30",
       "carousels": [
         {
@@ -690,6 +620,76 @@
           "angle": "mistake-fear",
           "format": "checklist",
           "hook": "Gmail buries subject lines with \u2018free,\u2019 \u2018discount,\u2019 or \u2018urgent\u2019",
+          "hashtags": [
+            "#emailmarketing",
+            "#deliverability",
+            "#marketingtips",
+            "#crm",
+            "#ecommercemarketing"
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-08-08",
+      "carousels": [
+        {
+          "niche": "Google Ads",
+          "angle": "behind-the-curtain",
+          "format": "steal-this",
+          "hook": "Google Ads calls 15% of buyers \u2018low intent\u2019\u2014they\u2019re not",
+          "hashtags": [
+            "#googleads",
+            "#ppc",
+            "#digitalmarketing",
+            "#sem",
+            "#advertisingtips"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "realization",
+          "format": "step-by-step",
+          "hook": "Google Ads buries your best clicks in \u2018Other searches\u2019",
+          "hashtags": [
+            "#googleads",
+            "#ppc",
+            "#digitalmarketing",
+            "#sem",
+            "#advertisinghacks"
+          ]
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "curiosity",
+          "format": "comparison",
+          "hook": "Meta\u2019s 30k lookalike loses to a 300-person list\u2014here\u2019s why",
+          "hashtags": [
+            "#metaads",
+            "#paidsocial",
+            "#digitalmarketing",
+            "#advertisingtips",
+            "#marketinghacks"
+          ]
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "contrarian",
+          "format": "comparison",
+          "hook": "Meta\u2019s \u2018engaged\u2019 audiences cost 40% more\u2014here\u2019s the cheaper alternative",
+          "hashtags": [
+            "#metaads",
+            "#paidsocial",
+            "#digitalmarketing",
+            "#advertisinghacks",
+            "#marketingstrategy"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "behind-the-curtain",
+          "format": "checklist",
+          "hook": "Gmail buries emails with these three words in the subject",
           "hashtags": [
             "#emailmarketing",
             "#deliverability",
