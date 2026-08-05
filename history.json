@@ -1,76 +1,6 @@
 {
   "recent_batches": [
     {
-      "date": "2026-07-31",
-      "carousels": [
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "realization",
-          "format": "before-after",
-          "hook": "Meta Ads forget everything after 48 hours of silence\u2014pause for two days and CPMs drop 30%.",
-          "hashtags": [
-            "#metaads",
-            "#paidsocial",
-            "#digitalmarketing",
-            "#advertisinghacks",
-            "#marketingtips"
-          ]
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "behind-the-curtain",
-          "format": "before-after",
-          "hook": "Meta Ads\u2019 learning phase isn\u2019t a warm-up\u2014it\u2019s a 40% CPM trap on day 7.",
-          "hashtags": [
-            "#metaads",
-            "#paidsocial",
-            "#digitalmarketing",
-            "#advertisingtips",
-            "#marketinghacks"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "contrarian",
-          "format": "comparison",
-          "hook": "Google Ads\u2019 \u2018smart\u2019 bidding wastes small budgets on the wrong clicks\u2014manual bids win 60% of tests.",
-          "hashtags": [
-            "#googleads",
-            "#ppc",
-            "#digitalmarketing",
-            "#sem",
-            "#advertisingtips"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "realization",
-          "format": "step-by-step",
-          "hook": "Google Ads calls 30% of your buyers \u2018low intent\u2019\u2014here\u2019s how to get them back.",
-          "hashtags": [
-            "#googleads",
-            "#ppc",
-            "#digitalmarketing",
-            "#sem",
-            "#advertisinghacks"
-          ]
-        },
-        {
-          "niche": "Email Marketing",
-          "angle": "behind-the-curtain",
-          "format": "steal-this",
-          "hook": "Gmail buries 70% of your emails in \u2018Promotions\u2019\u2014here\u2019s how to land in the inbox instead.",
-          "hashtags": [
-            "#emailmarketing",
-            "#digitalmarketing",
-            "#marketingtips",
-            "#crm",
-            "#deliverability"
-          ]
-        }
-      ]
-    },
-    {
       "date": "2026-08-01",
       "carousels": [
         {
@@ -690,6 +620,76 @@
           "angle": "behind-the-curtain",
           "format": "checklist",
           "hook": "Gmail sends \u2018free\u2019 and \u2018discount\u2019 straight to spam\u2014here\u2019s what works instead",
+          "hashtags": [
+            "#emailmarketing",
+            "#deliverability",
+            "#marketingtips",
+            "#crm",
+            "#ecommercetips"
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-08-10",
+      "carousels": [
+        {
+          "niche": "Google Ads",
+          "angle": "behind-the-curtain",
+          "format": "steal-this",
+          "hook": "Google Ads buries 1 in 5 sales in a report you\u2019ve never opened",
+          "hashtags": [
+            "#googleads",
+            "#ppc",
+            "#digitalmarketing",
+            "#sem",
+            "#advertisinghacks"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "contrarian",
+          "format": "comparison",
+          "hook": "Gmail\u2019s inbox rewards engagement, not list size",
+          "hashtags": [
+            "#emailmarketing",
+            "#deliverability",
+            "#marketingtips",
+            "#crm",
+            "#ecommercemarketing"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "curiosity",
+          "format": "steal-this",
+          "hook": "Google Ads wrongly flags 15% of buyers as 'low intent'",
+          "hashtags": [
+            "#googleads",
+            "#ppc",
+            "#digitalmarketing",
+            "#sem",
+            "#advertisingtips"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "curiosity",
+          "format": "step-by-step",
+          "hook": "Gmail only reads the first 12 words of your subject line",
+          "hashtags": [
+            "#emailmarketing",
+            "#deliverability",
+            "#marketingtips",
+            "#crm",
+            "#digitalmarketing"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "realization",
+          "format": "before-after",
+          "hook": "Gmail\u2019s 'Promotions' tab kills 60% of your opens",
           "hashtags": [
             "#emailmarketing",
             "#deliverability",
