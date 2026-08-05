@@ -1,0 +1,130 @@
+{
+  "batch_date": "2026-08-11",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Gmail buries emails that get opens but no replies. One subject line tweak can triple your reply rate\u2014and move you to the top of the inbox. Save this before your next send. #emailmarketing #deliverability #marketingtips #crm #ecommerce",
+      "niche": "Email Marketing",
+      "angle": "contrarian",
+      "format": "before-after",
+      "hook": "Gmail buries emails that get opens but no replies",
+      "throughline": "Gmail\u2019s inbox algorithm prioritizes replies over opens, so optimizing for conversation beats chasing open rates.",
+      "image_paths": [
+        "posts/2026-08-11/carousel_1/slide_01.jpg",
+        "posts/2026-08-11/carousel_1/slide_02.jpg",
+        "posts/2026-08-11/carousel_1/slide_03.jpg",
+        "posts/2026-08-11/carousel_1/slide_04.jpg",
+        "posts/2026-08-11/carousel_1/slide_05.jpg",
+        "posts/2026-08-11/carousel_1/slide_06.jpg",
+        "posts/2026-08-11/carousel_1/slide_07.jpg",
+        "posts/2026-08-11/carousel_1/slide_08.jpg",
+        "posts/2026-08-11/carousel_1/slide_09.jpg",
+        "posts/2026-08-11/carousel_1/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Your Google Ads budget is leaking on searches you never see. The search terms report shows every search triggering your ads\u2014most accounts miss the ones that convert. Save this checklist. #googleads #ppc #digitalmarketing #sem #advertising",
+      "niche": "Google Ads",
+      "angle": "realization",
+      "format": "step-by-step",
+      "hook": "Your Google Ads budget is leaking on searches you never see",
+      "throughline": "Google Ads\u2019 search terms report shows the exact searches triggering your ads\u2014most accounts miss the best clicks buried there.",
+      "image_paths": [
+        "posts/2026-08-11/carousel_2/slide_01.jpg",
+        "posts/2026-08-11/carousel_2/slide_02.jpg",
+        "posts/2026-08-11/carousel_2/slide_03.jpg",
+        "posts/2026-08-11/carousel_2/slide_04.jpg",
+        "posts/2026-08-11/carousel_2/slide_05.jpg",
+        "posts/2026-08-11/carousel_2/slide_06.jpg",
+        "posts/2026-08-11/carousel_2/slide_07.jpg",
+        "posts/2026-08-11/carousel_2/slide_08.jpg",
+        "posts/2026-08-11/carousel_2/slide_09.jpg",
+        "posts/2026-08-11/carousel_2/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Smart bidding wastes small budgets on the wrong clicks. Manual bidding lets you pick which clicks get your money\u2014no AI guesswork. Save this before your next bid review. #googleads #ppc #digitalmarketing #sem #advertisinghacks",
+      "niche": "Google Ads",
+      "angle": "contrarian",
+      "format": "comparison",
+      "hook": "Smart bidding wastes small budgets on the wrong clicks",
+      "throughline": "Manual bidding gives small budgets control over where every euro goes, while \u2018smart\u2019 bidding often spreads money too thin.",
+      "image_paths": [
+        "posts/2026-08-11/carousel_3/slide_01.jpg",
+        "posts/2026-08-11/carousel_3/slide_02.jpg",
+        "posts/2026-08-11/carousel_3/slide_03.jpg",
+        "posts/2026-08-11/carousel_3/slide_04.jpg",
+        "posts/2026-08-11/carousel_3/slide_05.jpg",
+        "posts/2026-08-11/carousel_3/slide_06.jpg",
+        "posts/2026-08-11/carousel_3/slide_07.jpg",
+        "posts/2026-08-11/carousel_3/slide_08.jpg",
+        "posts/2026-08-11/carousel_3/slide_09.jpg",
+        "posts/2026-08-11/carousel_3/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 4,
+      "caption": "Gmail\u2019s spam filter skips your subject line entirely. It checks the first 100 characters of your email instead. Save this before your next draft. #emailmarketing #deliverability #marketingtips #crm #ecommercemarketing",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "step-by-step",
+      "hook": "Gmail\u2019s spam filter skips your subject line entirely",
+      "throughline": "Gmail\u2019s spam filter checks the first few lines of your email, not just the subject line\u2014so the hook has to land fast.",
+      "image_paths": [
+        "posts/2026-08-11/carousel_4/slide_01.jpg",
+        "posts/2026-08-11/carousel_4/slide_02.jpg",
+        "posts/2026-08-11/carousel_4/slide_03.jpg",
+        "posts/2026-08-11/carousel_4/slide_04.jpg",
+        "posts/2026-08-11/carousel_4/slide_05.jpg",
+        "posts/2026-08-11/carousel_4/slide_06.jpg",
+        "posts/2026-08-11/carousel_4/slide_07.jpg",
+        "posts/2026-08-11/carousel_4/slide_08.jpg",
+        "posts/2026-08-11/carousel_4/slide_09.jpg",
+        "posts/2026-08-11/carousel_4/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Meta\u2019s algorithm rewards ads that follow this exact script: problem, solution, social proof. Copy this structure to cut your CPM by 20-30%. Save this before your next draft. #metaads #instagramads #paidsocial #digitalmarketing #advertisingtips",
+      "niche": "Meta/Instagram Ads",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Meta\u2019s algorithm rewards ads that follow this exact script",
+      "throughline": "Meta\u2019s algorithm favors ads that follow a specific three-part structure\u2014problem, solution, social proof\u2014which lowers CPM and boosts conversions.",
+      "image_paths": [
+        "posts/2026-08-11/carousel_5/slide_01.jpg",
+        "posts/2026-08-11/carousel_5/slide_02.jpg",
+        "posts/2026-08-11/carousel_5/slide_03.jpg",
+        "posts/2026-08-11/carousel_5/slide_04.jpg",
+        "posts/2026-08-11/carousel_5/slide_05.jpg",
+        "posts/2026-08-11/carousel_5/slide_06.jpg",
+        "posts/2026-08-11/carousel_5/slide_07.jpg",
+        "posts/2026-08-11/carousel_5/slide_08.jpg",
+        "posts/2026-08-11/carousel_5/slide_09.jpg",
+        "posts/2026-08-11/carousel_5/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    }
+  ]
+}
