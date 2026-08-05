@@ -1,0 +1,98 @@
+name: TikTok Batch Post (Private)
+
+# One-off/manual: posts the top 3 carousels from each of several
+# already-generated days straight to TikTok right now, instead of waiting
+# for each day's normal scheduled tiktok-post*.yml workflows to fire on
+# their actual calendar date. Every post lands in TikTok's private/"Only
+# me" section (SELF_ONLY -- the only privacy_level TikTok allows for an
+# unaudited app, see tiktok_post.py's docstring), so Ryan can go into the
+# TikTok app afterward and manually re-post each one publicly himself.
+#
+# This does NOT touch Instagram at all -- instagram_post.py is never
+# invoked here, and the normal Instagram posting schedule (daily.yml,
+# posts_later.yml, evening-post.yml) is completely unaffected.
+#
+# Uses tiktok_post.py's existing --manifest flag to point directly at a
+# specific day's posts/<date>/manifest.json, which bypasses the
+# "manifest must be dated today" guard that the normal scheduled runs
+# rely on -- that guard exists to stop a scheduled run from accidentally
+# reposting a stale day, but here we're deliberately posting several
+# specific already-generated days on purpose. --target-count 3 (mirroring
+# the normal evening-post cadence) posts that day's top 3
+# post_to_instagram=true carousels, tracked in tiktok_posted_log.json
+# exactly like every other tiktok_post.py run, so re-running this
+# workflow is a safe no-op for any day that's already fully posted.
+
+on:
+  workflow_dispatch:
+    inputs:
+      start_date:
+        description: "First date to post (YYYY-MM-DD). Leave blank to start tomorrow."
+        required: false
+      days:
+        description: "How many days to post."
+        required: false
+        default: "7"
+      count_per_day:
+        description: "How many carousels to post per day (top N, matches post_to_instagram picks)."
+        required: false
+        default: "3"
+
+jobs:
+  batch-post-tiktok:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Configure git
+        run: |
+          git config user.name "carousel-bot"
+          git config user.email "actions@github.com"
+
+      - name: Post each day to TikTok
+        env:
+          TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
+          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+          TIKTOK_REFRESH_TOKEN: ${{ secrets.TIKTOK_REFRESH_TOKEN }}
+          TIKTOK_PRIVACY_LEVEL: ${{ vars.TIKTOK_PRIVACY_LEVEL }}
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          TO_EMAIL: ${{ secrets.TO_EMAIL }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          START="${{ inputs.start_date }}"
+          if [ -z "$START" ]; then
+            START=$(date -u -d "tomorrow" +%Y-%m-%d)
+          fi
+          DAYS="${{ inputs.days }}"
+          if [ -z "$DAYS" ]; then
+            DAYS=7
+          fi
+          COUNT="${{ inputs.count_per_day }}"
+          if [ -z "$COUNT" ]; then
+            COUNT=3
+          fi
+          for i in $(seq 0 $((DAYS - 1))); do
+            D=$(date -u -d "$START + $i days" +%Y-%m-%d)
+            if [ ! -f "posts/$D/manifest.json" ]; then
+              echo "Skipping $D -- no manifest.json found for that day."
+              continue
+            fi
+            echo "Posting $D to TikTok (target $COUNT)..."
+            python tiktok_post.py --manifest "posts/$D/manifest.json" --target-count "$COUNT"
+            git add tiktok_posted_log.json 2>/dev/null || true
+            git commit -m "Log TikTok batch post for $D" || echo "Nothing to commit for $D"
+            git push
+          done
