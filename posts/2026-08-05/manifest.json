@@ -1,0 +1,132 @@
+{
+  "batch_date": "2026-08-05",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Save this checklist \u2193\nGmail\u2019s filter reads only the first 10 words of your subject line\u2014here\u2019s what it hates and how to land in Primary instead. Most senders never check.\n#emailmarketing #deliverability #marketinghacks #crm #ecommercetips",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Gmail\u2019s filter reads only the first 10 words\u2014here\u2019s what it hates",
+      "throughline": "Gmail\u2019s inbox filter decides your email\u2019s fate in the first 10 words\u2014here\u2019s how to write them so it lands in Primary, not spam.",
+      "image_paths": [
+        "posts/2026-08-05/carousel_1/slide_01.jpg",
+        "posts/2026-08-05/carousel_1/slide_02.jpg",
+        "posts/2026-08-05/carousel_1/slide_03.jpg",
+        "posts/2026-08-05/carousel_1/slide_04.jpg",
+        "posts/2026-08-05/carousel_1/slide_05.jpg",
+        "posts/2026-08-05/carousel_1/slide_06.jpg",
+        "posts/2026-08-05/carousel_1/slide_07.jpg",
+        "posts/2026-08-05/carousel_1/slide_08.jpg",
+        "posts/2026-08-05/carousel_1/slide_09.jpg",
+        "posts/2026-08-05/carousel_1/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Save this schedule \u2193\nMeta\u2019s algorithm forgets your ad after 48 hours of silence\u2014pause it for two days and watch CPMs drop 30%. Here\u2019s the exact timing most advertisers miss.\n#metaads #paidsocial #digitalmarketing #advertisingtips #marketingstrategy",
+      "niche": "Meta/Instagram Ads",
+      "angle": "realization",
+      "format": "step-by-step",
+      "hook": "Meta\u2019s algorithm forgets your ad after 48 hours of silence",
+      "throughline": "Meta\u2019s algorithm resets after 48 hours of silence\u2014here\u2019s how to use that to cut costs and keep performance high.",
+      "image_paths": [
+        "posts/2026-08-05/carousel_2/slide_01.jpg",
+        "posts/2026-08-05/carousel_2/slide_02.jpg",
+        "posts/2026-08-05/carousel_2/slide_03.jpg",
+        "posts/2026-08-05/carousel_2/slide_04.jpg",
+        "posts/2026-08-05/carousel_2/slide_05.jpg",
+        "posts/2026-08-05/carousel_2/slide_06.jpg",
+        "posts/2026-08-05/carousel_2/slide_07.jpg",
+        "posts/2026-08-05/carousel_2/slide_08.jpg",
+        "posts/2026-08-05/carousel_2/slide_09.jpg",
+        "posts/2026-08-05/carousel_2/slide_10.jpg"
+      ],
+      "virality_score": 9.0,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "variant",
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Save this comparison \u2193\nGoogle Ads\u2019 \u2018smart\u2019 budgeting burns small accounts first\u2014manual bids win 70% of tests under \u20ac1k. Here\u2019s how to take control of your spend.\n#googleads #ppc #digitalmarketing #sem #advertisinghacks",
+      "niche": "Google Ads",
+      "angle": "contrarian",
+      "format": "comparison",
+      "hook": "Google Ads\u2019 \u2018smart\u2019 budgeting burns small accounts first",
+      "throughline": "Google Ads\u2019 \u2018smart\u2019 budgeting spreads small accounts too thin\u2014manual bids give you control and better results under \u20ac1k.",
+      "image_paths": [
+        "posts/2026-08-05/carousel_3/slide_01.jpg",
+        "posts/2026-08-05/carousel_3/slide_02.jpg",
+        "posts/2026-08-05/carousel_3/slide_03.jpg",
+        "posts/2026-08-05/carousel_3/slide_04.jpg",
+        "posts/2026-08-05/carousel_3/slide_05.jpg",
+        "posts/2026-08-05/carousel_3/slide_06.jpg",
+        "posts/2026-08-05/carousel_3/slide_07.jpg",
+        "posts/2026-08-05/carousel_3/slide_08.jpg",
+        "posts/2026-08-05/carousel_3/slide_09.jpg",
+        "posts/2026-08-05/carousel_3/slide_10.jpg",
+        "posts/2026-08-05/carousel_3/slide_11.jpg"
+      ],
+      "virality_score": 8.5,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 4,
+      "caption": "Save this myth-buster \u2193\nYou don\u2019t need 50k people for Meta\u2019s lookalikes to work\u2014a 500-person list of engaged buyers can outperform them. Here\u2019s the proof most advertisers miss.\n#metaads #paidsocial #digitalmarketing #marketingtips #advertisingstrategy",
+      "niche": "Meta/Instagram Ads",
+      "angle": "relief-permission",
+      "format": "myth-buster",
+      "hook": "You don\u2019t need 50k people for Meta\u2019s lookalikes to work",
+      "throughline": "Meta\u2019s lookalike audiences don\u2019t need 50k people to work\u2014a small, engaged list can outperform them for less money.",
+      "image_paths": [
+        "posts/2026-08-05/carousel_4/slide_01.jpg",
+        "posts/2026-08-05/carousel_4/slide_02.jpg",
+        "posts/2026-08-05/carousel_4/slide_03.jpg",
+        "posts/2026-08-05/carousel_4/slide_04.jpg",
+        "posts/2026-08-05/carousel_4/slide_05.jpg",
+        "posts/2026-08-05/carousel_4/slide_06.jpg",
+        "posts/2026-08-05/carousel_4/slide_07.jpg",
+        "posts/2026-08-05/carousel_4/slide_08.jpg",
+        "posts/2026-08-05/carousel_4/slide_09.jpg",
+        "posts/2026-08-05/carousel_4/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Save this comparison \u2193\nMeta\u2019s \u2018suggested audiences\u2019 cost 40% more per lead than custom ones\u2014here\u2019s what to use instead for cheaper, better results. Most advertisers never check the numbers.\n#metaads #paidsocial #digitalmarketing #advertisinghacks #marketingtips",
+      "niche": "Meta/Instagram Ads",
+      "angle": "contrarian",
+      "format": "comparison",
+      "hook": "Meta\u2019s \u2018suggested audiences\u2019 cost 40% more per lead than custom ones",
+      "throughline": "Meta\u2019s \u2018suggested audiences\u2019 cost 40% more per lead\u2014here\u2019s what to use instead for cheaper, better results.",
+      "image_paths": [
+        "posts/2026-08-05/carousel_5/slide_01.jpg",
+        "posts/2026-08-05/carousel_5/slide_02.jpg",
+        "posts/2026-08-05/carousel_5/slide_03.jpg",
+        "posts/2026-08-05/carousel_5/slide_04.jpg",
+        "posts/2026-08-05/carousel_5/slide_05.jpg",
+        "posts/2026-08-05/carousel_5/slide_06.jpg",
+        "posts/2026-08-05/carousel_5/slide_07.jpg",
+        "posts/2026-08-05/carousel_5/slide_08.jpg",
+        "posts/2026-08-05/carousel_5/slide_09.jpg",
+        "posts/2026-08-05/carousel_5/slide_10.jpg",
+        "posts/2026-08-05/carousel_5/slide_11.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    }
+  ]
+}

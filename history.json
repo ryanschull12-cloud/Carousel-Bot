@@ -1,41 +1,6 @@
 {
   "recent_batches": [
     {
-      "date": "2026-07-25",
-      "carousels": [
-        {
-          "niche": "Google Ads",
-          "angle": "behind-the-curtain",
-          "format": "steal-this",
-          "hook": "Google Ads hides 30% of sales in its lag report"
-        },
-        {
-          "niche": "Email Marketing",
-          "angle": "proof-numbers",
-          "format": "before-after",
-          "hook": "2 PM emails get 18% fewer replies\u2014here\u2019s when to send"
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "proof-numbers",
-          "format": "before-after",
-          "hook": "Meta ads burn out after 3 days\u2014unless you rotate"
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "curiosity",
-          "format": "steal-this",
-          "hook": "Meta\u2019s algorithm kills ads after the learning phase"
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "curiosity",
-          "format": "step-by-step",
-          "hook": "Google Ads\u2019 lost IS report blames bids\u2014it\u2019s lying"
-        }
-      ]
-    },
-    {
       "date": "2026-07-26",
       "carousels": [
         {
@@ -591,6 +556,76 @@
             "#digitalmarketing",
             "#advertisinghacks",
             "#marketingstrategy"
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-08-05",
+      "carousels": [
+        {
+          "niche": "Email Marketing",
+          "angle": "behind-the-curtain",
+          "format": "steal-this",
+          "hook": "Gmail\u2019s filter reads only the first 10 words\u2014here\u2019s what it hates",
+          "hashtags": [
+            "#emailmarketing",
+            "#deliverability",
+            "#marketinghacks",
+            "#crm",
+            "#ecommercetips"
+          ]
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "realization",
+          "format": "step-by-step",
+          "hook": "Meta\u2019s algorithm forgets your ad after 48 hours of silence",
+          "hashtags": [
+            "#metaads",
+            "#paidsocial",
+            "#digitalmarketing",
+            "#advertisingtips",
+            "#marketingstrategy"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "contrarian",
+          "format": "comparison",
+          "hook": "Google Ads\u2019 \u2018smart\u2019 budgeting burns small accounts first",
+          "hashtags": [
+            "#googleads",
+            "#ppc",
+            "#digitalmarketing",
+            "#sem",
+            "#advertisinghacks"
+          ]
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "relief-permission",
+          "format": "myth-buster",
+          "hook": "You don\u2019t need 50k people for Meta\u2019s lookalikes to work",
+          "hashtags": [
+            "#metaads",
+            "#paidsocial",
+            "#digitalmarketing",
+            "#marketingtips",
+            "#advertisingstrategy"
+          ]
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "contrarian",
+          "format": "comparison",
+          "hook": "Meta\u2019s \u2018suggested audiences\u2019 cost 40% more per lead than custom ones",
+          "hashtags": [
+            "#metaads",
+            "#paidsocial",
+            "#digitalmarketing",
+            "#advertisinghacks",
+            "#marketingtips"
           ]
         }
       ]
