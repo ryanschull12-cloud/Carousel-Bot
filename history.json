@@ -1,76 +1,6 @@
 {
   "recent_batches": [
     {
-      "date": "2026-08-02",
-      "carousels": [
-        {
-          "niche": "Email Marketing",
-          "angle": "behind-the-curtain",
-          "format": "steal-this",
-          "hook": "Gmail flags one word in subject lines\u2014skip it and land in the inbox",
-          "hashtags": [
-            "#emailmarketing",
-            "#deliverability",
-            "#marketingtips",
-            "#crm",
-            "#digitalmarketing"
-          ]
-        },
-        {
-          "niche": "Email Marketing",
-          "angle": "behind-the-curtain",
-          "format": "steal-this",
-          "hook": "Gmail buries emails that hide their hook in the second line",
-          "hashtags": [
-            "#emailmarketing",
-            "#deliverability",
-            "#marketingtips",
-            "#crm",
-            "#ecommercemarketing"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "contrarian",
-          "format": "comparison",
-          "hook": "Google Ads\u2019 'smart' budgeting burns small accounts first\u2014manual bids win instead",
-          "hashtags": [
-            "#googleads",
-            "#ppc",
-            "#digitalmarketing",
-            "#sem",
-            "#advertisingtips"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "curiosity",
-          "format": "steal-this",
-          "hook": "Google Ads hides 20% of your sales\u2014here\u2019s where to find them",
-          "hashtags": [
-            "#googleads",
-            "#ppc",
-            "#digitalmarketing",
-            "#sem",
-            "#marketingtips"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "curiosity",
-          "format": "step-by-step",
-          "hook": "Google Ads hides 15% of your sales\u2014here\u2019s how to find them",
-          "hashtags": [
-            "#googleads",
-            "#ppc",
-            "#digitalmarketing",
-            "#sem",
-            "#advertisinghacks"
-          ]
-        }
-      ]
-    },
-    {
       "date": "2026-08-03",
       "carousels": [
         {
@@ -696,6 +626,76 @@
             "#paidsocial",
             "#digitalmarketing",
             "#advertisingtips"
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-08-12",
+      "carousels": [
+        {
+          "niche": "Email Marketing",
+          "angle": "relief-permission",
+          "format": "myth-buster",
+          "hook": "Gmail ignores list size\u2014only this matters",
+          "hashtags": [
+            "#emailmarketing",
+            "#deliverability",
+            "#marketingtips",
+            "#crm",
+            "#smallbusiness"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "realization",
+          "format": "step-by-step",
+          "hook": "Google Ads burns 30% of your budget on clicks that never buy",
+          "hashtags": [
+            "#googleads",
+            "#ppc",
+            "#digitalmarketing",
+            "#sem",
+            "#advertising"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "behind-the-curtain",
+          "format": "steal-this",
+          "hook": "Google Ads charges you for 3-second bounces\u2014here\u2019s how to stop it",
+          "hashtags": [
+            "#googleads",
+            "#ppc",
+            "#digitalmarketing",
+            "#sem",
+            "#advertisingtips"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "curiosity",
+          "format": "step-by-step",
+          "hook": "Gmail\u2019s spam filter ignores your subject line\u2014this decides inbox or spam",
+          "hashtags": [
+            "#emailmarketing",
+            "#deliverability",
+            "#marketingtips",
+            "#crm",
+            "#ecommercemarketing"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "relief-permission",
+          "format": "myth-buster",
+          "hook": "Smart bidding works with just 20 conversions\u2014no need to wait",
+          "hashtags": [
+            "#googleads",
+            "#ppc",
+            "#digitalmarketing",
+            "#sem",
+            "#advertisinghacks"
           ]
         }
       ]

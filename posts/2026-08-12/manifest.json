@@ -1,0 +1,130 @@
+{
+  "batch_date": "2026-08-12",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Save this \u2193 Gmail ignores list size\u2014only opens, replies, and \u2018important\u2019 flags matter. A tiny engaged list lands in the inbox every time. #emailmarketing #deliverability #marketingtips #crm #smallbusiness",
+      "niche": "Email Marketing",
+      "angle": "relief-permission",
+      "format": "myth-buster",
+      "hook": "Gmail ignores list size\u2014only this matters",
+      "throughline": "Gmail prioritizes engagement over list size, so even small but active lists land in the inbox.",
+      "image_paths": [
+        "posts/2026-08-12/carousel_1/slide_01.jpg",
+        "posts/2026-08-12/carousel_1/slide_02.jpg",
+        "posts/2026-08-12/carousel_1/slide_03.jpg",
+        "posts/2026-08-12/carousel_1/slide_04.jpg",
+        "posts/2026-08-12/carousel_1/slide_05.jpg",
+        "posts/2026-08-12/carousel_1/slide_06.jpg",
+        "posts/2026-08-12/carousel_1/slide_07.jpg",
+        "posts/2026-08-12/carousel_1/slide_08.jpg",
+        "posts/2026-08-12/carousel_1/slide_09.jpg",
+        "posts/2026-08-12/carousel_1/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Save this \u2193 Google Ads burns 30% of your budget on clicks that never buy. One report shows exactly where the waste is hiding. Fix it in 10 minutes. #googleads #ppc #digitalmarketing #sem #advertising",
+      "niche": "Google Ads",
+      "angle": "realization",
+      "format": "step-by-step",
+      "hook": "Google Ads burns 30% of your budget on clicks that never buy",
+      "throughline": "The 'Search terms' report reveals wasted spend on irrelevant clicks, and fixing it saves 30% of budget.",
+      "image_paths": [
+        "posts/2026-08-12/carousel_2/slide_01.jpg",
+        "posts/2026-08-12/carousel_2/slide_02.jpg",
+        "posts/2026-08-12/carousel_2/slide_03.jpg",
+        "posts/2026-08-12/carousel_2/slide_04.jpg",
+        "posts/2026-08-12/carousel_2/slide_05.jpg",
+        "posts/2026-08-12/carousel_2/slide_06.jpg",
+        "posts/2026-08-12/carousel_2/slide_07.jpg",
+        "posts/2026-08-12/carousel_2/slide_08.jpg",
+        "posts/2026-08-12/carousel_2/slide_09.jpg",
+        "posts/2026-08-12/carousel_2/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Save this \u2193 Google Ads charges you for 3-second bounces\u2014unless you turn off \u2018Engaged-view conversions.\u2019 This one setting can save 10-15% of your budget. #googleads #ppc #digitalmarketing #sem #advertisingtips",
+      "niche": "Google Ads",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Google Ads charges you for 3-second bounces\u2014here\u2019s how to stop it",
+      "throughline": "Google Ads charges for 3-second bounces, but a simple setting stops it and saves budget.",
+      "image_paths": [
+        "posts/2026-08-12/carousel_3/slide_01.jpg",
+        "posts/2026-08-12/carousel_3/slide_02.jpg",
+        "posts/2026-08-12/carousel_3/slide_03.jpg",
+        "posts/2026-08-12/carousel_3/slide_04.jpg",
+        "posts/2026-08-12/carousel_3/slide_05.jpg",
+        "posts/2026-08-12/carousel_3/slide_06.jpg",
+        "posts/2026-08-12/carousel_3/slide_07.jpg",
+        "posts/2026-08-12/carousel_3/slide_08.jpg",
+        "posts/2026-08-12/carousel_3/slide_09.jpg",
+        "posts/2026-08-12/carousel_3/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 4,
+      "caption": "Save this \u2193 Gmail\u2019s spam filter ignores your subject line\u2014the first 10 words of your email decide inbox or spam. A strong opening line can double your open rates. #emailmarketing #deliverability #marketingtips #crm #ecommercemarketing",
+      "niche": "Email Marketing",
+      "angle": "curiosity",
+      "format": "step-by-step",
+      "hook": "Gmail\u2019s spam filter ignores your subject line\u2014this decides inbox or spam",
+      "throughline": "Gmail\u2019s spam filter ignores subject lines and scans the first 10 words of your email to decide placement.",
+      "image_paths": [
+        "posts/2026-08-12/carousel_4/slide_01.jpg",
+        "posts/2026-08-12/carousel_4/slide_02.jpg",
+        "posts/2026-08-12/carousel_4/slide_03.jpg",
+        "posts/2026-08-12/carousel_4/slide_04.jpg",
+        "posts/2026-08-12/carousel_4/slide_05.jpg",
+        "posts/2026-08-12/carousel_4/slide_06.jpg",
+        "posts/2026-08-12/carousel_4/slide_07.jpg",
+        "posts/2026-08-12/carousel_4/slide_08.jpg",
+        "posts/2026-08-12/carousel_4/slide_09.jpg",
+        "posts/2026-08-12/carousel_4/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Save this \u2193 Smart bidding works with just 20 conversions\u2014no need to wait for 100. Small accounts can start sooner and save time. #googleads #ppc #digitalmarketing #sem #advertisinghacks",
+      "niche": "Google Ads",
+      "angle": "relief-permission",
+      "format": "myth-buster",
+      "hook": "Smart bidding works with just 20 conversions\u2014no need to wait",
+      "throughline": "Smart bidding works with as few as 20 conversions, so small accounts don\u2019t need to wait for 100.",
+      "image_paths": [
+        "posts/2026-08-12/carousel_5/slide_01.jpg",
+        "posts/2026-08-12/carousel_5/slide_02.jpg",
+        "posts/2026-08-12/carousel_5/slide_03.jpg",
+        "posts/2026-08-12/carousel_5/slide_04.jpg",
+        "posts/2026-08-12/carousel_5/slide_05.jpg",
+        "posts/2026-08-12/carousel_5/slide_06.jpg",
+        "posts/2026-08-12/carousel_5/slide_07.jpg",
+        "posts/2026-08-12/carousel_5/slide_08.jpg",
+        "posts/2026-08-12/carousel_5/slide_09.jpg",
+        "posts/2026-08-12/carousel_5/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    }
+  ]
+}
