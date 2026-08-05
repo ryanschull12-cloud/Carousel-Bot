@@ -1,0 +1,95 @@
+name: Batch Generate Week
+
+# Manual, on-demand pre-generation of several future days' carousels in one
+# run. Normally runner.py only ever generates for "today" (the daily.yml
+# schedule runs it once each morning); this workflow instead loops
+# runner.py --date over a run of upcoming calendar dates, so a whole
+# week's worth of content can be produced right now instead of waiting for
+# each morning to arrive.
+#
+# Each day still gets written to posts/<that-date>/manifest.json exactly
+# like a normal daily run would -- so the existing scheduled posting
+# workflows (instagram_post.py / tiktok_post.py via daily.yml,
+# posts_later.yml, evening-post.yml, tiktok-post.yml, etc.), which always
+# just look for the manifest matching TODAY'S real calendar date, will
+# pick each pre-generated day up automatically on its actual day with no
+# further action needed.
+#
+# Note: daily.yml's own generation step is skipped on any day that
+# already has a posts/<date>/manifest.json committed (see its "Skipping"
+# check), so this doesn't create a conflict or double-generate a day that
+# was pre-built here.
+
+on:
+  workflow_dispatch:
+    inputs:
+      start_date:
+        description: "First date to generate for (YYYY-MM-DD). Leave blank to start tomorrow."
+        required: false
+      days:
+        description: "How many days to generate."
+        required: false
+        default: "7"
+
+jobs:
+  batch-generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Configure git
+        run: |
+          git config user.name "carousel-bot"
+          git config user.email "actions@github.com"
+
+      - name: Fetch latest performance data
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+        run: python fetch_performance.py || echo "fetch_performance.py failed or found nothing new -- continuing anyway"
+
+      - name: Commit performance/posted log updates
+        run: |
+          git add performance_history.json posted_log.json 2>/dev/null || true
+          git commit -m "Update performance data before batch generation" || echo "Nothing to commit"
+          git push
+
+      - name: Generate each day
+        env:
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          TO_EMAIL: ${{ secrets.TO_EMAIL }}
+          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+        run: |
+          START="${{ inputs.start_date }}"
+          if [ -z "$START" ]; then
+            START=$(date -u -d "tomorrow" +%Y-%m-%d)
+          fi
+          DAYS="${{ inputs.days }}"
+          if [ -z "$DAYS" ]; then
+            DAYS=7
+          fi
+          for i in $(seq 0 $((DAYS - 1))); do
+            D=$(date -u -d "$START + $i days" +%Y-%m-%d)
+            if [ -f "posts/$D/manifest.json" ]; then
+              echo "Skipping $D -- already generated."
+              continue
+            fi
+            echo "Generating $D..."
+            python runner.py --date "$D"
+            git add posts/ history.json
+            git commit -m "Add carousels for $D" || echo "Nothing to commit for $D"
+            git push
+          done
