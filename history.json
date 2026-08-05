@@ -1,41 +1,6 @@
 {
   "recent_batches": [
     {
-      "date": "2026-07-26",
-      "carousels": [
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "realization",
-          "format": "comparison",
-          "hook": "Meta\u2019s auction spikes CPMs 200% after 8 PM"
-        },
-        {
-          "niche": "Email Marketing",
-          "angle": "proof-numbers",
-          "format": "checklist",
-          "hook": "Single-CTA emails get 40% more clicks"
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "mistake-fear",
-          "format": "step-by-step",
-          "hook": "Google\u2019s Search Partners waste 15% of your budget"
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "behind-the-curtain",
-          "format": "before-after",
-          "hook": "Google Ads hides 20% of your sales in default reports"
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "realization",
-          "format": "comparison",
-          "hook": "Phrase match wins 70% of Google Ads tests"
-        }
-      ]
-    },
-    {
       "date": "2026-07-27",
       "carousels": [
         {
@@ -626,6 +591,76 @@
             "#digitalmarketing",
             "#advertisinghacks",
             "#marketingtips"
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-08-06",
+      "carousels": [
+        {
+          "niche": "Email Marketing",
+          "angle": "behind-the-curtain",
+          "format": "steal-this",
+          "hook": "Gmail cuts you off after 12 words\u2014here\u2019s what it hates",
+          "hashtags": [
+            "#emailmarketing",
+            "#deliverability",
+            "#marketingtips",
+            "#crm",
+            "#ecommercemarketing"
+          ]
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "mistake-fear",
+          "format": "checklist",
+          "hook": "Meta freezes your ads after 30 conversions\u2014here\u2019s how to wake it up",
+          "hashtags": [
+            "#metaads",
+            "#paidsocial",
+            "#digitalmarketing",
+            "#advertisingtips",
+            "#marketinghacks"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "behind-the-curtain",
+          "format": "comparison",
+          "hook": "Google\u2019s \u2018smart\u2019 bidding burns small budgets in 3 hours",
+          "hashtags": [
+            "#googleads",
+            "#ppc",
+            "#digitalmarketing",
+            "#sem",
+            "#advertisingstrategy"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "curiosity",
+          "format": "step-by-step",
+          "hook": "Gmail\u2019s 40-character preview is your open-rate secret weapon",
+          "hashtags": [
+            "#emailmarketing",
+            "#deliverability",
+            "#marketingtips",
+            "#crm",
+            "#ecommercetips"
+          ]
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "contrarian",
+          "format": "comparison",
+          "hook": "Meta\u2019s lookalike audiences waste 40% of your budget on strangers",
+          "hashtags": [
+            "#metaads",
+            "#paidsocial",
+            "#digitalmarketing",
+            "#advertisinghacks",
+            "#marketingstrategy"
           ]
         }
       ]

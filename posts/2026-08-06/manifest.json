@@ -1,0 +1,130 @@
+{
+  "batch_date": "2026-08-06",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Save this subject line template \u2193\nGmail cuts you off after 12 words\u2014here\u2019s what it hates and how to land in the inbox instead. \n#emailmarketing #deliverability #marketingtips #crm #ecommercemarketing",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Gmail cuts you off after 12 words\u2014here\u2019s what it hates",
+      "throughline": "Gmail\u2019s inbox filter scans only the first 12 words of your subject line to decide if your email lands in spam or the primary inbox.",
+      "image_paths": [
+        "posts/2026-08-06/carousel_1/slide_01.jpg",
+        "posts/2026-08-06/carousel_1/slide_02.jpg",
+        "posts/2026-08-06/carousel_1/slide_03.jpg",
+        "posts/2026-08-06/carousel_1/slide_04.jpg",
+        "posts/2026-08-06/carousel_1/slide_05.jpg",
+        "posts/2026-08-06/carousel_1/slide_06.jpg",
+        "posts/2026-08-06/carousel_1/slide_07.jpg",
+        "posts/2026-08-06/carousel_1/slide_08.jpg",
+        "posts/2026-08-06/carousel_1/slide_09.jpg",
+        "posts/2026-08-06/carousel_1/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Save this Meta Ads checklist \u2193\nMeta freezes your ads after 30 conversions\u2014here\u2019s how to wake it up and avoid wasted spend. \n#metaads #paidsocial #digitalmarketing #advertisingtips #marketinghacks",
+      "niche": "Meta/Instagram Ads",
+      "angle": "mistake-fear",
+      "format": "checklist",
+      "hook": "Meta freezes your ads after 30 conversions\u2014here\u2019s how to wake it up",
+      "throughline": "Meta\u2019s algorithm stops optimizing after 30 conversions, forcing you to manually restart the learning phase to avoid wasted spend.",
+      "image_paths": [
+        "posts/2026-08-06/carousel_2/slide_01.jpg",
+        "posts/2026-08-06/carousel_2/slide_02.jpg",
+        "posts/2026-08-06/carousel_2/slide_03.jpg",
+        "posts/2026-08-06/carousel_2/slide_04.jpg",
+        "posts/2026-08-06/carousel_2/slide_05.jpg",
+        "posts/2026-08-06/carousel_2/slide_06.jpg",
+        "posts/2026-08-06/carousel_2/slide_07.jpg",
+        "posts/2026-08-06/carousel_2/slide_08.jpg",
+        "posts/2026-08-06/carousel_2/slide_09.jpg",
+        "posts/2026-08-06/carousel_2/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Save this Google Ads comparison \u2193\nGoogle\u2019s \u2018smart\u2019 bidding burns small budgets in 3 hours\u2014manual bids win 60% of tests. Here\u2019s how to choose. \n#googleads #ppc #digitalmarketing #sem #advertisingstrategy",
+      "niche": "Google Ads",
+      "angle": "behind-the-curtain",
+      "format": "comparison",
+      "hook": "Google\u2019s \u2018smart\u2019 bidding burns small budgets in 3 hours",
+      "throughline": "Google Ads\u2019 \u2018smart\u2019 bidding prioritizes spending small budgets quickly, while manual bids give you control over which clicks get your money.",
+      "image_paths": [
+        "posts/2026-08-06/carousel_3/slide_01.jpg",
+        "posts/2026-08-06/carousel_3/slide_02.jpg",
+        "posts/2026-08-06/carousel_3/slide_03.jpg",
+        "posts/2026-08-06/carousel_3/slide_04.jpg",
+        "posts/2026-08-06/carousel_3/slide_05.jpg",
+        "posts/2026-08-06/carousel_3/slide_06.jpg",
+        "posts/2026-08-06/carousel_3/slide_07.jpg",
+        "posts/2026-08-06/carousel_3/slide_08.jpg",
+        "posts/2026-08-06/carousel_3/slide_09.jpg",
+        "posts/2026-08-06/carousel_3/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 4,
+      "caption": "Save this preview text template \u2193\nGmail\u2019s 40-character preview is your open-rate secret weapon\u2014here\u2019s how to write it in 30 seconds. \n#emailmarketing #deliverability #marketingtips #crm #ecommercetips",
+      "niche": "Email Marketing",
+      "angle": "curiosity",
+      "format": "step-by-step",
+      "hook": "Gmail\u2019s 40-character preview is your open-rate secret weapon",
+      "throughline": "Gmail\u2019s 40-character preview text is the first thing subscribers see\u2014crafting it well can double your open rates.",
+      "image_paths": [
+        "posts/2026-08-06/carousel_4/slide_01.jpg",
+        "posts/2026-08-06/carousel_4/slide_02.jpg",
+        "posts/2026-08-06/carousel_4/slide_03.jpg",
+        "posts/2026-08-06/carousel_4/slide_04.jpg",
+        "posts/2026-08-06/carousel_4/slide_05.jpg",
+        "posts/2026-08-06/carousel_4/slide_06.jpg",
+        "posts/2026-08-06/carousel_4/slide_07.jpg",
+        "posts/2026-08-06/carousel_4/slide_08.jpg",
+        "posts/2026-08-06/carousel_4/slide_09.jpg",
+        "posts/2026-08-06/carousel_4/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Save this Meta Ads comparison \u2193\nMeta\u2019s lookalike audiences waste 40% of your budget on strangers\u2014a 500-person list beats 50k lookalikes. Here\u2019s the proof. \n#metaads #paidsocial #digitalmarketing #advertisinghacks #marketingstrategy",
+      "niche": "Meta/Instagram Ads",
+      "angle": "contrarian",
+      "format": "comparison",
+      "hook": "Meta\u2019s lookalike audiences waste 40% of your budget on strangers",
+      "throughline": "Meta\u2019s lookalike audiences often waste budget on low-quality matches, while small custom audiences convert better and cost less.",
+      "image_paths": [
+        "posts/2026-08-06/carousel_5/slide_01.jpg",
+        "posts/2026-08-06/carousel_5/slide_02.jpg",
+        "posts/2026-08-06/carousel_5/slide_03.jpg",
+        "posts/2026-08-06/carousel_5/slide_04.jpg",
+        "posts/2026-08-06/carousel_5/slide_05.jpg",
+        "posts/2026-08-06/carousel_5/slide_06.jpg",
+        "posts/2026-08-06/carousel_5/slide_07.jpg",
+        "posts/2026-08-06/carousel_5/slide_08.jpg",
+        "posts/2026-08-06/carousel_5/slide_09.jpg",
+        "posts/2026-08-06/carousel_5/slide_10.jpg"
+      ],
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    }
+  ]
+}
