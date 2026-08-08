@@ -359,6 +359,26 @@
       "format": "step-by-step",
       "hook": "Meta\u2019s algorithm forgets your ad after 48 hours of silence",
       "scored": false
+    },
+    {
+      "media_id": "17895786414590704",
+      "date": "2026-08-08",
+      "index": 1,
+      "niche": "Google Ads",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Google Ads calls 15% of buyers \u2018low intent\u2019\u2014they\u2019re not",
+      "scored": false
+    },
+    {
+      "media_id": "18080108075694355",
+      "date": "2026-08-08",
+      "index": 2,
+      "niche": "Google Ads",
+      "angle": "realization",
+      "format": "step-by-step",
+      "hook": "Google Ads buries your best clicks in \u2018Other searches\u2019",
+      "scored": false
     }
   ]
 }
