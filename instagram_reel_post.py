@@ -35,14 +35,9 @@ from email.message import EmailMessage
 
 import reel_engine
 
-# Read lazily, NOT with os.environ[...] at import time. The render step deliberately
-# does not get the Instagram secrets -- it only draws frames and never calls the API --
-# but a hard lookup here crashed --render-only before it rendered anything (run #1,
-# KeyError: IG_ACCESS_TOKEN). Missing credentials are now only an error on the publish
-# path, where they are actually required.
-IG_ACCESS_TOKEN = os.environ.get("IG_ACCESS_TOKEN", "")
-IG_BUSINESS_ACCOUNT_ID = os.environ.get("IG_BUSINESS_ACCOUNT_ID", "")
-GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "")
+IG_ACCESS_TOKEN = os.environ["IG_ACCESS_TOKEN"]
+IG_BUSINESS_ACCOUNT_ID = os.environ["IG_BUSINESS_ACCOUNT_ID"]
+GITHUB_REPOSITORY = os.environ["GITHUB_REPOSITORY"]
 GMAIL_ADDRESS = os.environ.get("GMAIL_ADDRESS", "")
 GMAIL_APP_PASSWORD = os.environ.get("GMAIL_APP_PASSWORD", "")
 TO_EMAIL = os.environ.get("TO_EMAIL", GMAIL_ADDRESS)
@@ -171,14 +166,6 @@ def main():
                     help="Force a specific carousel index instead of the top-scoring one.")
     args = ap.parse_args()
 
-    if not args.render_only:
-        missing = [k for k, v in (("IG_ACCESS_TOKEN", IG_ACCESS_TOKEN),
-                                  ("IG_BUSINESS_ACCOUNT_ID", IG_BUSINESS_ACCOUNT_ID),
-                                  ("GITHUB_REPOSITORY", GITHUB_REPOSITORY)) if not v]
-        if missing:
-            raise SystemExit(f"Publishing needs these env vars and they are not set: {missing}. "
-                             f"Check the env: block on the publish step in reel-post.yml.")
-
     today = datetime.date.today().isoformat()
     manifest_path = os.path.join("posts", today, "manifest.json")
     if not os.path.exists(manifest_path):
@@ -199,7 +186,8 @@ def main():
                       reverse=True)[0]
 
     rel = f"docs/reels/{today}/carousel_{pick['index']}.mp4"
-    url = pages_url(f"reels/{today}/carousel_{pick['index']}.mp4")
+    # url is built later, on the publish path only -- pages_url needs GITHUB_REPOSITORY,
+    # which the render step has no reason to depend on.
 
     if not args.publish_only:
         os.makedirs(os.path.dirname(rel), exist_ok=True)
@@ -220,6 +208,7 @@ def main():
         except Exception:
             pass
 
+    url = pages_url(f"reels/{today}/carousel_{pick['index']}.mp4")
     print(f"Waiting for GitHub Pages to serve {url} ...")
     wait_for_url(url)
 
