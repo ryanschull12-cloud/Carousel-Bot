@@ -919,6 +919,14 @@ def main():
             # the content brain's output schema.
             "throughline": carousel.get("throughline", ""),
             "image_paths": images,
+            # Persisted for reel_engine.py. Before 2026-08-08 the manifest kept only
+            # image_paths, and history.json kept only hooks/hashtags -- once the slides
+            # were rendered to JPEG the body copy was gone, so nothing downstream could
+            # rebuild the text. The reel renderer needs the words, not the pictures.
+            "reel_beats": carousel.get("reel_beats"),
+            "body_slides": carousel.get("body_slides", []),
+            "cta_word": carousel.get("cta_word", ""),
+            "cta_promise": carousel.get("cta_promise", ""),
             "virality_score": score,
             # Design/copy feedback loop tagging — fetch_performance.py reads
             # this back off the manifest once the post is scored, so
