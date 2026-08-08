@@ -169,6 +169,12 @@ def main():
                     help="Publish as a trial reel (non-followers only).")
     ap.add_argument("--index", type=int, default=None,
                     help="Force a specific carousel index instead of the top-scoring one.")
+    ap.add_argument("--target-count", type=int, default=1,
+                    help="By the end of this slot, exactly this many reels should have "
+                         "gone out today. Mirrors instagram_post.py: GitHub fires each "
+                         "cron window many times, so a slot that just posted the next "
+                         "unposted winner would fire twice in one window and collapse "
+                         "the spread. With a target, later ticks see it met and no-op.")
     args = ap.parse_args()
 
     if not args.render_only:
@@ -190,13 +196,36 @@ def main():
         return
 
     carousels = manifest["carousels"]
+
+    # Which carousels already became reels today. Two reels a day means the second slot
+    # must pick a DIFFERENT carousel, so selection is by "next unposted winner" rather
+    # than "highest score" -- the latter would re-render the same one twice.
+    posted_today = []
+    if os.path.exists(REEL_LOG_PATH):
+        try:
+            posted_today = [e for e in json.load(open(REEL_LOG_PATH)) if e.get("date") == today]
+        except Exception:
+            posted_today = []
+    posted_indices = {e.get("index") for e in posted_today}
+
     if args.index:
         pick = next(c for c in carousels if c["index"] == args.index)
     else:
-        # Highest virality score wins the reel slot, same selection logic as posting.
-        pick = sorted(carousels,
-                      key=lambda c: c["virality_score"] if c.get("virality_score") is not None else -1,
-                      reverse=True)[0]
+        winners = [c for c in carousels if c.get("post_to_instagram")] or carousels
+        ranked = sorted(winners,
+                        key=lambda c: c["virality_score"] if c.get("virality_score") is not None else -1,
+                        reverse=True)
+        need = max(0, args.target_count - len(posted_today))
+        if need == 0:
+            print(f"{len(posted_today)} reel(s) already posted for {today}, target is "
+                  f"{args.target_count}. Nothing to do.")
+            return
+        remaining = [c for c in ranked if c["index"] not in posted_indices]
+        if not remaining:
+            print(f"All {len(ranked)} winning carousels for {today} have already been "
+                  f"posted as reels. Nothing left.")
+            return
+        pick = remaining[0]
 
     rel = f"docs/reels/{today}/carousel_{pick['index']}.mp4"
     # url is built later, on the publish path only -- pages_url needs GITHUB_REPOSITORY,
@@ -212,14 +241,6 @@ def main():
         print(f"Rendered {rel} ({dur:.1f}s, {os.path.getsize(rel)/1048576:.2f} MB)")
         if args.render_only:
             return
-
-    if os.path.exists(REEL_LOG_PATH):
-        try:
-            if any(e.get("date") == today for e in json.load(open(REEL_LOG_PATH))):
-                print(f"A reel already went out for {today}. Nothing to do.")
-                return
-        except Exception:
-            pass
 
     url = pages_url(f"reels/{today}/carousel_{pick['index']}.mp4")
     print(f"Waiting for GitHub Pages to serve {url} ...")
