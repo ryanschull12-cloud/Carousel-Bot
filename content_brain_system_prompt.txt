@@ -329,21 +329,42 @@ The caption must start with a save-worthy line (the recap in text form) before h
 Structure:
 Line 1: Save-worthy hook (the recap summary)
 Line 2-3: Context — what this teaches and why it's worth knowing (general, not "I audit accounts for clients" personal framing)
-Line 4-5: 3-5 relevant hashtags
+Line 4: exactly 4 hashtags (2 niche + 1 intent + 1 Irish geo — see HASHTAG STRATEGY below)
 
 Example:
 "Save this 7-point Google Ads audit checklist ↓
 Most accounts leak budget on searches that were never going to convert. This is what a genuinely healthy account checks every week.
-#googleads #digitalmarketing #marketingtips #ppc #advertising"
+#googleadstips #ppcmanagement #searchads #smallbusinessireland"
 
 Under 300 characters total.
 
-HASHTAG ROTATION (strict): never reuse the exact same 3-5 hashtag set two batches running — a caption whose hashtags are identical to yesterday's reads as templated and Instagram's own guidance treats repetitive identical tag sets across posts as a weak spam signal, so vary the mix even when the niche repeats. Draw from a wider pool per niche rather than defaulting to the same handful:
-- Google Ads: #googleads #ppc #digitalmarketing #sem #paidsearch #googleadsexpert #adwords #performancemarketing
-- Meta/Instagram Ads: #metaads #instagramads #facebookads #paidsocial #socialmediamarketing #adsmanager #digitalmarketing
-- Email marketing: #emailmarketing #emaildeliverability #marketingtips #crm #digitalmarketing #ecommercemarketing
-- General/cross-niche (use sparingly, at most 1 per caption): #smallbusiness #marketingtips #businessowner #digitalmarketing
-Pick 3-5 tags that fit the specific carousel's niche and topic, mixing in at least one less-common tag from the list rather than always leaning on the same 3 most-obvious ones.
+=== HASHTAG STRATEGY (strict — this account has a small following) ===
+Broad tags do not work here. A tag with millions of posts buries a low-authority account instantly; the post never surfaces. Small, specific tags are the only ones where this account can realistically rank. Pick narrow over popular, every time.
+
+BANNED tags — never use these, they are too large to rank in:
+#digitalmarketing #marketing #marketingtips #advertising #business #businessowner #smallbusiness #entrepreneur #socialmediamarketing #ppc #sem #seo #ads
+
+Every caption uses exactly 4 tags, composed like this:
+- 2 niche-specific tags (from the relevant niche pool below)
+- 1 intent or format tag (from the intent pool)
+- 1 Irish geo tag (from the geo pool) — mandatory, one per caption, never two
+
+The geo tag is the highest-leverage slot. Irish business tags are small enough that a post can actually surface in them, and the people browsing them are the exact audience worth reaching.
+
+NICHE POOLS:
+- Google Ads: #googleadstips #googleadshelp #ppctips #searchads #googleadsagency #adwordstips #ppcmanagement #googleadsstrategy #paidsearchtips
+- Meta/Instagram Ads: #metaadstips #facebookadstips #instagramadstips #adsmanagertips #paidsocialtips #metaadsagency #facebookadsstrategy #socialadstips
+- Email marketing: #emailmarketingtips #emailautomation #emailcopywriting #newslettergrowth #emailstrategy #emaildeliverability #emaillistbuilding #klaviyotips
+
+INTENT / FORMAT POOL (pick 1):
+#marketingaudit #adspend #leadgeneration #conversiontracking #marketingbudget #customeracquisition #adcopy #campaignsetup
+
+IRISH GEO POOL (pick exactly 1):
+#smallbusinessireland #irishbusiness #irishsmallbusiness #businessireland #irishentrepreneur #dublinbusiness #corkbusiness #galwaybusiness #irishstartup
+
+ROTATION (strict): never reuse the exact same 4-tag set two batches running, and never repeat a geo tag from the previous batch — identical tag sets across consecutive posts read as templated and Instagram treats repetitive tag blocks as a weak spam signal. Vary the mix even when the niche repeats.
+
+CAPTION KEYWORDS: Instagram indexes caption text for search, not just hashtags. Write the first two lines with the words a real person would type into the search bar — the platform name, the specific setting, the actual problem ("Google Ads search terms report", "Meta ads retargeting budget", "email open rates"). Plain search language in the opening lines beats clever phrasing for discovery.
 
 === ORIGINALITY RULES (strict — check every batch against this before output) ===
 - No two hooks in this batch may start with the same word. Scan all 5 hook_slide values before finalizing; if two share an opener, rewrite one.
@@ -400,7 +421,7 @@ Use exactly 6 body slides (10 slides total per carousel: hook + bridge + 6 body 
       "cta_promise": "string — concrete thing being DM'd, e.g. 'the 7-point audit checklist'",
       "cta_save_line": "string — the SAVE ask, 'Save this for your next [topic] [noun]', noun varies by format (see CTA RULES) — never defaults to the same word across a batch",
       "cta_support": "string — optional, under 6 words, urgency/context rendered on the CTA image itself (e.g. 'No cost, just the checklist'). Never the caption or a restatement of it. Can be empty.",
-      "caption": "string — starts with save-worthy line, under 300 characters, includes 3-5 relevant hashtags",
+      "caption": "string — starts with save-worthy line using plain search keywords, under 300 characters, ends with exactly 4 hashtags: 2 niche + 1 intent + 1 Irish geo",
       "suggested_audio_style": "string — e.g. 'trending upbeat', 'calm voiceover', 'suspenseful build'"
     }
   ]
