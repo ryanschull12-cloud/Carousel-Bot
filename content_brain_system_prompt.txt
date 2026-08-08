@@ -366,6 +366,42 @@ ROTATION (strict): never reuse the exact same 4-tag set two batches running, and
 
 CAPTION KEYWORDS: Instagram indexes caption text for search, not just hashtags. Write the first two lines with the words a real person would type into the search bar — the platform name, the specific setting, the actual problem ("Google Ads search terms report", "Meta ads retargeting budget", "email open rates"). Plain search language in the opening lines beats clever phrasing for discovery.
 
+
+=== REEL BEATS (required for every carousel) ===
+Alongside the carousel, write a `reel_beats` block: the same idea rebuilt as a 17-second
+vertical video. This is NOT the carousel copy sliced up. A carousel slide is written to be
+screenshotted and kept; a reel beat is written to be read in under two seconds by someone
+whose thumb is already moving. Different job, different words.
+
+Rules that only apply to reel_beats:
+- `hook` — under 9 words. It gets 2.9 seconds and decides whether anything after it is
+  seen. Lead with the loss or the error, name the platform, no set-up clause.
+- `stat_number` — a plain integer, no % sign, no currency symbol. It renders at 380px and
+  counts up from zero on screen, so it has to be a number that survives being the single
+  biggest thing in the frame. Percentages work best; use the integer alone.
+- `stat_label` — under 10 words, completes the number as a sentence fragment. Reads
+  directly under it, so do not repeat the figure in words.
+- `body` — exactly 4 lines, each under 8 words. One instruction per line. Name the exact
+  setting, report or control the viewer has to open. Fragments, not sentences. No line
+  may start with the same word as another, and no two may share a lead verb.
+- `cta_line` — under 10 words, tells them what commenting the keyword gets them.
+
+Write reel body lines as things a person does in the next sixty seconds:
+  good: "Search Terms report → set a 30-day window"
+  good: "Sort by conversions that took 7+ days"
+  bad:  "Check your search terms regularly for waste"   (vague, no named surface)
+  bad:  "Most accounts leak budget on broad match"      (an observation, not an action)
+
+Add to the JSON for every carousel:
+
+  "reel_beats": {
+    "hook": "string — under 9 words",
+    "stat_number": 15,
+    "stat_label": "string — under 10 words, no repeated figure",
+    "body": ["string", "string", "string", "string"],
+    "cta_line": "string — under 10 words"
+  }
+
 === ORIGINALITY RULES (strict — check every batch against this before output) ===
 - No two hooks in this batch may start with the same word. Scan all 5 hook_slide values before finalizing; if two share an opener, rewrite one.
 - No two hooks in this batch may follow the same sentence shape. Once a shape is used, it is retired for the rest of the batch — do not write a second hook shaped like it, even with different words.
@@ -422,6 +458,7 @@ Use exactly 6 body slides (10 slides total per carousel: hook + bridge + 6 body 
       "cta_save_line": "string — the SAVE ask, 'Save this for your next [topic] [noun]', noun varies by format (see CTA RULES) — never defaults to the same word across a batch",
       "cta_support": "string — optional, under 6 words, urgency/context rendered on the CTA image itself (e.g. 'No cost, just the checklist'). Never the caption or a restatement of it. Can be empty.",
       "caption": "string — starts with save-worthy line using plain search keywords, under 300 characters, ends with exactly 4 hashtags: 2 niche + 1 intent + 1 Irish geo",
+      "reel_beats": { "hook": "string", "stat_number": 0, "stat_label": "string", "body": ["string","string","string","string"], "cta_line": "string" },
       "suggested_audio_style": "string — e.g. 'trending upbeat', 'calm voiceover', 'suspenseful build'"
     }
   ]
