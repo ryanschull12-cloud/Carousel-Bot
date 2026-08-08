@@ -1,6 +1,11 @@
 name: Evening Instagram Reel
 
-# Renders the day's top-scoring carousel as a 1080x1920 Reel and publishes it.
+# SECOND of two reels a day. reel-post-midday.yml posts the first one around midday;
+# this one takes the next unposted winner in the evening.
+#
+# --target-count 2 means "by the end of this window, 2 reels should have gone out today".
+# reel_posted_log.json tracks which carousels already became reels, so this slot picks a
+# DIFFERENT one from the midday slot rather than re-rendering the same top-scorer.
 #
 # WHY: 17 days of carousel data (see performance_history.json) showed reach pinned at
 # 2-3 per post and never above 3. Carousels only reach followers + hashtag search;
@@ -51,7 +56,7 @@ jobs:
 
       - name: Render reel
         if: vars.IG_POSTING_PAUSED != 'true'
-        run: python instagram_reel_post.py --render-only
+        run: python instagram_reel_post.py --render-only --target-count 2
 
       - name: Commit reel to docs/ for Pages
         if: vars.IG_POSTING_PAUSED != 'true'
@@ -71,7 +76,7 @@ jobs:
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           TO_EMAIL: ${{ secrets.TO_EMAIL }}
         run: |
-          python instagram_reel_post.py --publish-only \
+          python instagram_reel_post.py --publish-only --target-count 2 \
             ${{ github.event.inputs.trial == 'true' && '--trial' || '' }}
 
       - name: Commit reel log
