@@ -1,0 +1,89 @@
+name: Midday Instagram Reel
+
+# FIRST of two reels a day. This slot takes the highest-scoring carousel; reel-post.yml
+# takes the next one down in the evening. Spacing is roughly seven hours.
+#
+# --target-count 1 means "by the end of this window, 2 reels should have gone out today".
+# reel_posted_log.json tracks which carousels already became reels, so this slot picks a
+# DIFFERENT one from the midday slot rather than re-rendering the same top-scorer.
+#
+# WHY: 17 days of carousel data (see performance_history.json) showed reach pinned at
+# 2-3 per post and never above 3. Carousels only reach followers + hashtag search;
+# Reels are the only format Instagram pushes into cold Explore/Reels feeds.
+#
+# TWO PHASES, DELIBERATELY. Render and commit first, publish second. Meta cURLs the
+# video URL, and GitHub Pages only serves the file after its build finishes -- so the
+# publish step polls the URL until it returns 200 (and checks the content-type is
+# video/*) rather than sleeping and hoping.
+#
+# ffmpeg is NOT preinstalled on the GitHub runners -- checked the ubuntu-22.04 and
+# ubuntu-24.04 image manifests, ImageMagick is there and ffmpeg is not. Hence the apt step.
+
+on:
+  schedule:
+    # Same spread-window approach as the other workflows: GitHub's scheduled queue for
+    # this repo runs hours late or skips entirely, so this fires every 15 minutes across
+    # the evening window and the reel_posted_log.json dedupe makes every extra tick a
+    # near-instant no-op once the day's reel has gone out.
+    - cron: "*/15 11-14 * * *"
+  workflow_dispatch:
+    inputs:
+      trial:
+        description: "Publish as a trial reel (shown only to non-followers)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  post-reel:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install ffmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+
+      - name: Install Python deps
+        run: pip install -r requirements.txt
+
+      - name: Render reel
+        if: vars.IG_POSTING_PAUSED != 'true'
+        run: python instagram_reel_post.py --render-only --target-count 1
+
+      - name: Commit reel to docs/ for Pages
+        if: vars.IG_POSTING_PAUSED != 'true'
+        run: |
+          git config user.name "carousel-bot"
+          git config user.email "actions@github.com"
+          git add docs/reels 2>/dev/null || true
+          git diff --staged --quiet || git commit -m "Render reel $(date +'%Y-%m-%d')"
+          git push
+
+      - name: Publish reel to Instagram
+        if: vars.IG_POSTING_PAUSED != 'true'
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_BUSINESS_ACCOUNT_ID: ${{ secrets.IG_BUSINESS_ACCOUNT_ID }}
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          TO_EMAIL: ${{ secrets.TO_EMAIL }}
+        run: |
+          python instagram_reel_post.py --publish-only --target-count 1 \
+            ${{ github.event.inputs.trial == 'true' && '--trial' || '' }}
+
+      - name: Commit reel log
+        if: vars.IG_POSTING_PAUSED != 'true'
+        run: |
+          git config user.name "carousel-bot"
+          git config user.email "actions@github.com"
+          git add reel_posted_log.json 2>/dev/null || true
+          git diff --staged --quiet || git commit -m "Log reel $(date +'%Y-%m-%d')"
+          git push
