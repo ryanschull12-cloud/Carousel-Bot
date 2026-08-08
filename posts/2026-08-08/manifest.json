@@ -3,12 +3,12 @@
   "carousels": [
     {
       "index": 1,
-      "caption": "Save this Google Ads fix \u2193\nGoogle mislabels 15% of buyers as \u2018low intent\u2019\u2014here\u2019s how to find and fix them in two minutes. Most accounts never check this report.\n#googleads #ppc #digitalmarketing #sem #advertisingtips",
+      "caption": "Save this Google Ads fix ↓\nGoogle mislabels 15% of buyers as ‘low intent’—here’s how to find and fix them in two minutes. Most accounts never check this report.\n#googleads #ppc #digitalmarketing #sem #advertisingtips",
       "niche": "Google Ads",
       "angle": "behind-the-curtain",
       "format": "steal-this",
-      "hook": "Google Ads calls 15% of buyers \u2018low intent\u2019\u2014they\u2019re not",
-      "throughline": "Google Ads mislabels some buyers as \u2018low intent\u2019\u2014here\u2019s how to find and fix them in two minutes.",
+      "hook": "Google Ads calls 15% of buyers ‘low intent’—they’re not",
+      "throughline": "Google Ads mislabels some buyers as ‘low intent’—here’s how to find and fix them in two minutes.",
       "image_paths": [
         "posts/2026-08-08/carousel_1/slide_01.jpg",
         "posts/2026-08-08/carousel_1/slide_02.jpg",
@@ -24,16 +24,29 @@
       "virality_score": null,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control",
-      "post_to_instagram": true
+      "post_to_instagram": true,
+      "reel_beats": {
+        "hook": "Google Ads is mislabelling your best buyers",
+        "stat_number": 15,
+        "stat_label": "of clicks it calls ‘low intent’ convert later",
+        "body": [
+          "Search Terms report → set a 30-day window",
+          "Sort by conversions that took 7+ days",
+          "Those are the buyers Google wrote off",
+          "Bid them up 20%. Watch CPA drop."
+        ],
+        "cta_line": "Comment it and I’ll DM the 7-point checklist"
+      },
+      "cta_word": "AUDIT"
     },
     {
       "index": 2,
-      "caption": "Save this Google Ads trick \u2193\nGoogle hides your best clicks in \u2018Other\u2019 searches\u2014here\u2019s how to find and save 20% of your budget. Most accounts never check this report.\n#googleads #ppc #digitalmarketing #sem #advertisinghacks",
+      "caption": "Save this Google Ads trick ↓\nGoogle hides your best clicks in ‘Other’ searches—here’s how to find and save 20% of your budget. Most accounts never check this report.\n#googleads #ppc #digitalmarketing #sem #advertisinghacks",
       "niche": "Google Ads",
       "angle": "realization",
       "format": "step-by-step",
-      "hook": "Google Ads buries your best clicks in \u2018Other searches\u2019",
-      "throughline": "Google Ads hides your best clicks in \u2018Other searches\u2019\u2014here\u2019s how to find and save 20% of your budget.",
+      "hook": "Google Ads buries your best clicks in ‘Other searches’",
+      "throughline": "Google Ads hides your best clicks in ‘Other searches’—here’s how to find and save 20% of your budget.",
       "image_paths": [
         "posts/2026-08-08/carousel_2/slide_01.jpg",
         "posts/2026-08-08/carousel_2/slide_02.jpg",
@@ -53,12 +66,12 @@
     },
     {
       "index": 3,
-      "caption": "Save this Meta Ads trick \u2193\nA 300-person audience can outperform Meta\u2019s 30k lookalike\u2014here\u2019s the setting that decides who sees your ad. Small audiences win when they\u2019re engaged.\n#metaads #paidsocial #digitalmarketing #advertisingtips #marketinghacks",
+      "caption": "Save this Meta Ads trick ↓\nA 300-person audience can outperform Meta’s 30k lookalike—here’s the setting that decides who sees your ad. Small audiences win when they’re engaged.\n#metaads #paidsocial #digitalmarketing #advertisingtips #marketinghacks",
       "niche": "Meta/Instagram Ads",
       "angle": "curiosity",
       "format": "comparison",
-      "hook": "Meta\u2019s 30k lookalike loses to a 300-person list\u2014here\u2019s why",
-      "throughline": "A 300-person audience can outperform Meta\u2019s 30k lookalike\u2014here\u2019s the setting that decides who sees your ad.",
+      "hook": "Meta’s 30k lookalike loses to a 300-person list—here’s why",
+      "throughline": "A 300-person audience can outperform Meta’s 30k lookalike—here’s the setting that decides who sees your ad.",
       "image_paths": [
         "posts/2026-08-08/carousel_3/slide_01.jpg",
         "posts/2026-08-08/carousel_3/slide_02.jpg",
@@ -78,12 +91,12 @@
     },
     {
       "index": 4,
-      "caption": "Save this Meta Ads insight \u2193\nMeta\u2019s \u2018engaged\u2019 audiences cost 40% more per lead\u2014here\u2019s why cold audiences convert cheaper. Test a 1% lookalike for better results.\n#metaads #paidsocial #digitalmarketing #advertisinghacks #marketingstrategy",
+      "caption": "Save this Meta Ads insight ↓\nMeta’s ‘engaged’ audiences cost 40% more per lead—here’s why cold audiences convert cheaper. Test a 1% lookalike for better results.\n#metaads #paidsocial #digitalmarketing #advertisinghacks #marketingstrategy",
       "niche": "Meta/Instagram Ads",
       "angle": "contrarian",
       "format": "comparison",
-      "hook": "Meta\u2019s \u2018engaged\u2019 audiences cost 40% more\u2014here\u2019s the cheaper alternative",
-      "throughline": "Meta\u2019s \u2018engaged\u2019 audiences cost 40% more per lead\u2014here\u2019s why cold audiences convert cheaper.",
+      "hook": "Meta’s ‘engaged’ audiences cost 40% more—here’s the cheaper alternative",
+      "throughline": "Meta’s ‘engaged’ audiences cost 40% more per lead—here’s why cold audiences convert cheaper.",
       "image_paths": [
         "posts/2026-08-08/carousel_4/slide_01.jpg",
         "posts/2026-08-08/carousel_4/slide_02.jpg",
@@ -103,12 +116,12 @@
     },
     {
       "index": 5,
-      "caption": "Save this email trick \u2193\nGmail\u2019s inbox filter flags subject lines with \u2018free,\u2019 \u2018discount,\u2019 or \u2018urgent\u2019\u2014here\u2019s how to fix it instantly. Open rates drop by 50% in the Promotions tab.\n#emailmarketing #deliverability #marketingtips #crm #ecommercemarketing",
+      "caption": "Save this email trick ↓\nGmail’s inbox filter flags subject lines with ‘free,’ ‘discount,’ or ‘urgent’—here’s how to fix it instantly. Open rates drop by 50% in the Promotions tab.\n#emailmarketing #deliverability #marketingtips #crm #ecommercemarketing",
       "niche": "Email Marketing",
       "angle": "behind-the-curtain",
       "format": "checklist",
       "hook": "Gmail buries emails with these three words in the subject",
-      "throughline": "Gmail\u2019s inbox filter flags subject lines with these three words\u2014here\u2019s how to fix it instantly.",
+      "throughline": "Gmail’s inbox filter flags subject lines with these three words—here’s how to fix it instantly.",
       "image_paths": [
         "posts/2026-08-08/carousel_5/slide_01.jpg",
         "posts/2026-08-08/carousel_5/slide_02.jpg",
