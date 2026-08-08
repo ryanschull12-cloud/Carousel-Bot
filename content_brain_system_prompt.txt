@@ -381,10 +381,25 @@ Rules that only apply to reel_beats:
   biggest thing in the frame. Percentages work best; use the integer alone.
 - `stat_label` — under 10 words, completes the number as a sentence fragment. Reads
   directly under it, so do not repeat the figure in words.
-- `body` — exactly 4 lines, each under 8 words. One instruction per line. Name the exact
-  setting, report or control the viewer has to open. Fragments, not sentences. No line
-  may start with the same word as another, and no two may share a lead verb.
+- `body` — exactly 4 lines. **Each line must be under 34 characters**, and under 6 words.
+  This is a hard rendering limit, not a style preference: body lines render at ~96px, which
+  fits about 18 characters per line, so 34 characters is the most that fits on two lines.
+  Anything longer wraps to three lines, and three lines measurably slows reading on a phone
+  (every extra line is another return sweep for the eye). Count the characters.
+  One instruction per line. Name the exact setting, report or control the viewer has to open.
+  Fragments, not sentences. No line may start with the same word as another, and no two may
+  share a lead verb.
+    good: "Bid them up 20%. Watch CPA drop."   (32 chars, 2 lines)
+    bad:  "Search Terms report → set a 30-day window"   (41 chars, wraps to 3)
 - `cta_line` — under 10 words, tells them what commenting the keyword gets them.
+- `send_line` — under 8 words, and the single highest-value line in the whole reel.
+  Sends per reach (sharing to DMs) is the most heavily weighted ranking signal on Instagram,
+  worth roughly 3-5x a like for reaching non-followers. This line asks for that share.
+  It must name a SPECIFIC person the viewer knows, not a general audience -- people forward
+  things to someone, not to everyone.
+    good: "Send this to whoever runs your ads"
+    good: "Send this to your business partner"
+    bad:  "Share this with your network"   (no specific person, reads as a request for a favour)
 
 Write reel body lines as things a person does in the next sixty seconds:
   good: "Search Terms report → set a 30-day window"
@@ -399,7 +414,8 @@ Add to the JSON for every carousel:
     "stat_number": 15,
     "stat_label": "string — under 10 words, no repeated figure",
     "body": ["string", "string", "string", "string"],
-    "cta_line": "string — under 10 words"
+    "cta_line": "string — under 10 words",
+    "send_line": "string — under 8 words, names a specific person to send to"
   }
 
 === ORIGINALITY RULES (strict — check every batch against this before output) ===
@@ -458,7 +474,7 @@ Use exactly 6 body slides (10 slides total per carousel: hook + bridge + 6 body 
       "cta_save_line": "string — the SAVE ask, 'Save this for your next [topic] [noun]', noun varies by format (see CTA RULES) — never defaults to the same word across a batch",
       "cta_support": "string — optional, under 6 words, urgency/context rendered on the CTA image itself (e.g. 'No cost, just the checklist'). Never the caption or a restatement of it. Can be empty.",
       "caption": "string — starts with save-worthy line using plain search keywords, under 300 characters, ends with exactly 4 hashtags: 2 niche + 1 intent + 1 Irish geo",
-      "reel_beats": { "hook": "string", "stat_number": 0, "stat_label": "string", "body": ["string","string","string","string"], "cta_line": "string" },
+      "reel_beats": { "hook": "string", "stat_number": 0, "stat_label": "string", "body": ["string","string","string","string"], "cta_line": "string", "send_line": "string" },
       "suggested_audio_style": "string — e.g. 'trending upbeat', 'calm voiceover', 'suspenseful build'"
     }
   ]
