@@ -41,6 +41,18 @@ wait for a moment") immediately after wait_until_ready() reported the
 container as FINISHED. See publish()'s retry loop below -- this is a
 known Graph API timing quirk, not a real failure, and a short retry
 clears it.
+
+MANIFEST SELECTION FIX (added 2026-08-08): this used to pick
+sorted(glob.glob("posts/*/manifest.json"))[-1] -- the alphabetically
+LAST manifest on disk. That was fine until the "Batch Generate Week"
+workflow started pre-generating several days of manifests in advance:
+once posts/2026-08-09 .. posts/2026-08-12 existed, [-1] silently grabbed
+the FUTURE-most manifest instead of today's, which then always failed
+the batch_date-vs-today check below and made every scheduled post
+no-op (with just a misleading "today's generation didn't run" email) --
+that's why Instagram stopped posting even though content generation was
+working fine. Now the manifest path is built directly from today's date
+instead of globbed.
 """
 
 import argparse
@@ -179,9 +191,18 @@ def send_stale_manifest_alert(found_date, expected_date):
     msg["Subject"] = "Instagram auto-post SKIPPED — today's carousels weren't found"
     msg["From"] = GMAIL_ADDRESS
     msg["To"] = TO_EMAIL
+    if found_date:
+        detail = (
+            f"A scheduled Instagram post was skipped because today's manifest is "
+            f"dated {found_date!r}, not today ({expected_date})."
+        )
+    else:
+        detail = (
+            f"A scheduled Instagram post was skipped because no manifest exists yet "
+            f"for today ({expected_date})."
+        )
     msg.set_content(
-        f"A scheduled Instagram post was skipped because the newest carousel batch on "
-        f"file is dated {found_date!r}, not today ({expected_date}).\n\n"
+        f"{detail}\n\n"
         "This almost always means today's morning generation run didn't complete — "
         "check the Actions tab for a failed 'Daily Carousels' run. Nothing was "
         "re-posted from a previous day."
@@ -263,11 +284,23 @@ def main():
     if args.manifest:
         manifest_path = args.manifest
     else:
-        matches = sorted(glob.glob("posts/*/manifest.json"))
-        if not matches:
-            print("No manifest found, nothing to post.")
+        # Pick TODAY's manifest by path, not "the alphabetically-last
+        # manifest on disk" (glob.glob(...)[-1]). Once Batch Generate Week
+        # started pre-generating several days of manifests in advance, the
+        # old glob-based pick silently grabbed the FUTURE-most manifest
+        # (e.g. posts/2026-08-12) instead of today's, which then always
+        # failed the batch_date-vs-today check below and caused every
+        # scheduled post to silently no-op. Building the path directly
+        # from today's date removes that failure mode entirely.
+        today_str = datetime.date.today().isoformat()
+        manifest_path = f"posts/{today_str}/manifest.json"
+        if not os.path.exists(manifest_path):
+            print(
+                f"No manifest found for today ({today_str}) — today's generation "
+                "likely hasn't run yet. Skipping rather than posting a different day's content."
+            )
+            send_stale_manifest_alert(None, today_str)
             return
-        manifest_path = matches[-1]
 
     with open(manifest_path) as f:
         manifest = json.load(f)
@@ -276,7 +309,7 @@ def main():
         today_str = datetime.date.today().isoformat()
         if manifest.get("batch_date") != today_str:
             print(
-                f"Newest manifest on disk is dated {manifest.get('batch_date')!r}, "
+                f"Manifest at {manifest_path!r} is dated {manifest.get('batch_date')!r}, "
                 f"not today ({today_str}) — today's generation likely didn't run. "
                 "Skipping rather than re-posting stale content."
             )
