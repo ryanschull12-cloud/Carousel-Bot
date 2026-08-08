@@ -35,9 +35,24 @@ jobs:
           from zoneinfo import ZoneInfo
           event_name = os.environ.get("GITHUB_EVENT_NAME", "")
           today = datetime.now(ZoneInfo("Europe/Dublin")).date().isoformat()
-          already_generated = os.path.exists(f"posts/{today}/manifest.json")
-          should_run = "true" if (event_name == "workflow_dispatch" or not already_generated) else "false"
-          print(f"Irish date: {today} (trigger: {event_name}, already_generated={already_generated}) -> should_run={should_run}")
+          manifest_path = f"posts/{today}/manifest.json"
+          already_generated = os.path.exists(manifest_path)
+          # A manifest existing is NOT enough -- it also has to carry the fields the reel
+          # renderer needs. "Batch Generate Week" pre-generates several days ahead, so on
+          # 2026-08-08 manifests already existed for Aug 9-12, all written by the older
+          # prompt with no reel_beats. Generation would have been skipped on each of those
+          # days and the reel step would have found nothing to render: four days of silent
+          # no-ops. Treat a manifest without reel copy as stale and regenerate over it.
+          stale = False
+          if already_generated:
+              try:
+                  import json
+                  cs = json.load(open(manifest_path)).get("carousels", [])
+                  stale = not any(c.get("reel_beats") for c in cs)
+              except Exception:
+                  stale = True
+          should_run = "true" if (event_name == "workflow_dispatch" or not already_generated or stale) else "false"
+          print(f"Irish date: {today} (trigger: {event_name}, already_generated={already_generated}, stale={stale}) -> should_run={should_run}")
           with open(os.environ["GITHUB_OUTPUT"], "a") as f:
               f.write(f"should_run={should_run}\n")
           EOF
