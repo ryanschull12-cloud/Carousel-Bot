@@ -106,7 +106,11 @@ jobs:
         # workflow on a given day -- the second firing sees 1 already
         # posted and does nothing, instead of posting a second, different
         # carousel an hour later.
-        run: python instagram_post.py --target-count 1
+        # DISABLED 2026-08-08 -- cut to 1 Instagram post/day (evening only).
+        # Generation above still runs every morning; only the posting call
+        # is switched off here. Re-enable by replacing the echo below with:
+        #   run: python instagram_post.py --target-count 1
+        run: echo "Morning Instagram post disabled - evening-post.yml is now the only IG posting slot."
 
       - name: Commit posting log
         if: steps.check_time.outputs.should_run == 'true' && vars.IG_POSTING_PAUSED != 'true'

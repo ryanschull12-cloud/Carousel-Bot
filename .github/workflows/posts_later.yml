@@ -16,17 +16,27 @@ name: Midday Instagram Post
 # today, it just does nothing.
 
 on:
-  schedule:
-    # Runs every 15 minutes across a 1:00-4:45 PM GMT/UTC window instead of
-    # a single 1pm shot, for the same reason as daily.yml: GitHub's
-    # scheduled-workflow queue for this repo has been observed to delay a
-    # single daily trigger by hours, or skip it entirely, and shifting which
-    # minute it's set to doesn't fix that. instagram_post.py's own dedupe
-    # (posted_log.json / --target-count) makes every extra tick here a
-    # near-instant no-op once today's midday post has already gone out, so
-    # this just gives ~16 chances for one to get through near the intended
-    # time instead of one all-or-nothing shot.
-    - cron: "*/15 13-16 * * *"
+  # DISABLED 2026-08-08 -- Instagram posting cut from 3/day to 1/day.
+  # With a very small following, three posts a day split already-minimal
+  # distribution across three carousels for a combined reach in the single
+  # digits. evening-post.yml is now the only slot that posts to Instagram.
+  # The whole schedule block below is commented out; workflow_dispatch stays
+  # live so this can still be fired by hand from the Actions tab.
+  # Re-enable by uncommenting the schedule block.
+#  schedule:
+#    # Runs every 15 minutes across a 1:00-4:45 PM GMT/UTC window instead of
+#    # a single 1pm shot, for the same reason as daily.yml: GitHub's
+#    # scheduled-workflow queue for this repo has been observed to delay a
+#    # single daily trigger by hours, or skip it entirely, and shifting which
+#    # minute it's set to doesn't fix that. instagram_post.py's own dedupe
+#    # (posted_log.json / --target-count) makes every extra tick here a
+#    # near-instant no-op once today's midday post has already gone out, so
+#    # this just gives ~16 chances for one to get through near the intended
+#    # time instead of one all-or-nothing shot.
+#    # DISABLED 2026-08-08 -- cut to 1 Instagram post/day (evening only).
+#    # Re-enable by uncommenting the line below.
+#    # - cron: "*/15 13-16 * * *"
+#    - cron: "0 5 31 2 *"   # never fires (Feb 31); keeps the schedule block valid
   workflow_dispatch: {}
 
 permissions:
