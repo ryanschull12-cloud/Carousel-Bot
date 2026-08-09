@@ -290,6 +290,24 @@ def check_reel(name, carousel, out_dir, f, sheets, audio_dir):
                 f.warn(name, f"body line is {n_ch} chars, min 65 -- too short to carry "
                              f"a cause, which is the telegram failure the contract was "
                              f"rewritten to stop: {b.text!r}")
+    # The CTA is the frame the whole reel exists to reach, and it is composed as
+    # "COMMENT" / keyword / "and I'll send you <promise>". A promise carrying its own
+    # verb produces "and I'll send you I'll DM you the checklist", which is the kind
+    # of sentence that only ever gets caught by reading the rendered frame.
+    cb = next((b for b in beats if b.kind == "cta"), None)
+    if cb:
+        if not (cb.sub or "").strip():
+            f.fail(name, "CTA has no promise -- the frame asks for a comment and never "
+                         "says what the comment gets them")
+        else:
+            import re as _re
+            if _re.match(r"(?i)^(comment|save|i'?ll|dm|send)\b", cb.sub.strip()):
+                f.warn(name, f"cta_promise {cb.sub!r} starts with a verb -- it is slotted "
+                             f"into \"and I'll send you ...\" and will read as a doubled "
+                             f"instruction")
+        if not (cb.text or "").strip():
+            f.fail(name, "CTA has no keyword -- there is nothing to comment")
+
     # The hook's highlight. emphasis_token silently returned None for every hook
     # written to the current rules once the "must contain a figure" requirement was
     # dropped, and a hook with no highlight is the most expensive flat frame in the

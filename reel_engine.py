@@ -883,9 +883,28 @@ def render(niche,beats,outdir,badge):
             bar(y2+int(S_AFT*0.55),av/peak,ease(clamp((fi-9)/11.0)),c["accent"],58)
 
     def paint_cta(fr,b,fi):
+        """Comment / KEYWORD / what they get. Three tiers, in that order.
+
+        Rebuilt 2026-08-09. This frame previously showed the keyword set huge and
+        the promise under it -- "AUDIT" over "the 7-point checklist" -- and never
+        once said what to DO. No verb, no instruction, no mention of commenting
+        anywhere on screen. To a stranger, and a reel is served overwhelmingly to
+        strangers, it read as a word in capitals above a noun phrase. It was the
+        frame the entire reel exists to reach, and it asked for nothing.
+
+        The instruction is now composed by the RENDERER rather than trusted to the
+        copy, because it is structural: every reel wants the same three tiers and
+        the only variable is the keyword and the thing being sent. Leaving it to a
+        free-text field is how it went missing in the first place."""
+        lead="COMMENT"
+        lf=F(F_SANS,54)
         f,ls=fit(probe,b.text,F_SANS,200,110,mw,2); lh=int(f.size*1.16)
-        sf,sls=fit(probe,b.sub or "",F_SANS,60,42,mw,3); slh=int(sf.size*1.26)
-        ay=anchor(lh*len(ls)+slh*len(sls)+34)
+        tail=b.sub or ""
+        if tail and not re.match(r"(?i)^(and|i.ll|comment|save)\b", tail):
+            tail=f"and I'll send you {tail}"
+        sf,sls=fit(probe,tail,F_SANS,60,42,mw,3); slh=int(sf.size*1.26)
+        lead_h=int(lf.size*1.6)
+        ay=anchor(lead_h+lh*len(ls)+slh*len(sls)+34)
         p=ease(clamp(fi/16.0))
         cut=int(H*p)
         if cut>0:
@@ -898,14 +917,19 @@ def render(niche,beats,outdir,badge):
         # body copy rides in with its panel.
         if p>0.20:
             q=ease(clamp((fi-6)/12.0))
+            # The verb lands FIRST and above the keyword, so the frame reads as an
+            # instruction from its first line rather than resolving into one only
+            # if the viewer stays for the third tier.
+            llay=layer_tracked(lead,lf,DIM,LABEL_TRACK*lf.size*2.2)
+            fr.paste(fade(llay,int(255*q)),(MARGIN,ay+int(26*(1-q))),fade(llay,int(255*q)))
             for li,line in enumerate(ls):
                 lay=layer(line,f,c["accent"])
-                fr.paste(fade(lay,int(255*q)),(MARGIN,ay+li*lh+int(26*(1-q))),fade(lay,int(255*q)))
+                fr.paste(fade(lay,int(255*q)),(MARGIN,ay+lead_h+li*lh+int(26*(1-q))),fade(lay,int(255*q)))
             for li,line in enumerate(sls):
                 r=ease(clamp((fi-15-li*2)/11.0))
                 if r>0:
                     lay=layer_tracked(line,sf,INK,LABEL_TRACK*sf.size)
-                    fr.paste(fade(lay,int(255*r)),(MARGIN,ay+len(ls)*lh+34+li*slh),fade(lay,int(255*r)))
+                    fr.paste(fade(lay,int(255*r)),(MARGIN,ay+lead_h+len(ls)*lh+34+li*slh),fade(lay,int(255*r)))
 
     def paint_brand(fr, fi):
         """Typographic end-card (2026-08-09, Ryan's ask). No logo asset exists
@@ -1073,9 +1097,15 @@ def beats_from_carousel(carousel):
             out.append(Beat("proof", None,
                             read_time(pr[2], lo=2.4, hi=3.6, orient=1.60),
                             sub=pr[2], pair=(pr[0], pr[1])))
-        cta_sub = rb.get("cta_line") or carousel.get("cta_promise", "")
+        # cta_promise (a noun phrase) is preferred over cta_line (free text): the
+        # renderer composes the instruction around it, so a noun phrase is the only
+        # shape that reliably produces a sentence. read_time is measured on the
+        # COMPOSED line -- the frame now carries a verb, a keyword and a promise,
+        # and timing it on the promise alone under-ran the beat by about a second.
+        cta_sub = carousel.get("cta_promise") or rb.get("cta_line") or ""
         out.append(Beat("cta", carousel.get("cta_word", "AUDIT"),
-                        read_time(cta_sub, lo=2.0, hi=3.2, orient=1.20), sub=cta_sub))
+                        read_time(f"COMMENT and I'll send you {cta_sub}",
+                                  lo=2.4, hi=4.0, orient=1.20), sub=cta_sub))
         # Brand seal before the loop tail. 1.5s: enough for the lockup to land
         # and hold a beat, not enough to read as an outro card overstaying.
         out.append(Beat("brand", None, 1.5))

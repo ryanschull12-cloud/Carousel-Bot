@@ -603,7 +603,21 @@ Rules that only apply to reel_beats:
     - Use a realistic benchmark figure. Do NOT present it as a specific client's
       result, and do not invent a precise-looking number to seem credible -- "€45 to
       €15" is a benchmark, "€47.13 to €14.86" is a fabricated case study.
-- `cta_line` — under 10 words, tells them what commenting the keyword gets them.
+- `cta_line` — LARGELY SUPERSEDED, and safe to omit. The reel's CTA frame is now
+  composed by the renderer as three fixed tiers: the word COMMENT, then `cta_word`
+  set huge, then "and I'll send you " + `cta_promise`. It reads as an instruction by
+  construction, which is the point -- the previous frame showed the keyword above the
+  promise and never said what to do, so a stranger saw a word in capitals over a noun
+  phrase and had no idea a comment was being asked for.
+  THEREFORE: `cta_promise` must be a NOUN PHRASE with no verb and no leading article
+  problem, because it gets slotted straight into that sentence.
+    good: "my 7-point wasted-spend checklist"  -> "and I'll send you my 7-point..."
+    good: "the exact email template"
+    bad:  "Comment AUDIT for the checklist"    -> "and I'll send you Comment AUDIT..."
+    bad:  "I'll DM you the checklist"          -> doubles the verb
+  Read your promise back with "and I'll send you " in front of it. If that is not a
+  sentence, rewrite the promise.
+  `cta_line` is still read if `cta_promise` is missing, purely as a fallback.
 - `send_line` — under 8 words, and the single highest-value line in the whole reel.
   Sends per reach (sharing to DMs) is the most heavily weighted ranking signal on Instagram,
   worth roughly 3-5x a like for reaching non-followers. This line asks for that share.
