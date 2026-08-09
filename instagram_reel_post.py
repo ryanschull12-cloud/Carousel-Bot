@@ -230,6 +230,14 @@ def email(subject, body, attach=None):
     move to PNG intermediates and crf 18 for sharper type. Still far inside Gmail's
     25 MB limit, and the 20 MB guard below skips rather than failing the send."""
     if not (GMAIL_ADDRESS and GMAIL_APP_PASSWORD):
+        # LOUD, not silent. This returned quietly for as long as the attachment
+        # feature existed, and because the render step was missing its env block the
+        # MP4 email was never sent once -- with no error, no warning, and a green
+        # workflow every time. A missing credential is a configuration fault; it
+        # should look like one in the log.
+        print("WARNING: GMAIL_ADDRESS/GMAIL_APP_PASSWORD not set in this step's env — "
+              f"NOT sending {'the MP4 attachment' if attach else 'this email'}. "
+              f"Subject was: {subject!r}")
         return
     m = EmailMessage()
     m["Subject"], m["From"], m["To"] = subject, GMAIL_ADDRESS, TO_EMAIL
@@ -242,6 +250,9 @@ def email(subject, body, attach=None):
             with open(attach, "rb") as fh:
                 m.add_attachment(fh.read(), maintype="video", subtype="mp4",
                                  filename=os.path.basename(attach))
+            print(f"attached {attach} ({size/1048576:.2f} MB)")
+    elif attach:
+        print(f"WARNING: attachment {attach} does not exist — sending without it")
     try:
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as s:
             s.login(GMAIL_ADDRESS, GMAIL_APP_PASSWORD)

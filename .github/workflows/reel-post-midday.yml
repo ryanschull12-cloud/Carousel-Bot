@@ -60,6 +60,17 @@ jobs:
 
       - name: Render reel
         if: vars.IG_POSTING_PAUSED != 'true'
+        # These credentials are NOT optional here. The rendered MP4 is emailed
+        # at RENDER time on purpose -- publishing to Instagram can fail for
+        # reasons that have nothing to do with the video, and the YouTube and
+        # TikTok copies should not be hostage to that. But this step had no env
+        # block at all, and email() returns silently when the credentials are
+        # missing, so the attachment was never sent once. Ryan asked where the
+        # downloadable file was; the answer was that it had never been sent.
+        env:
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          TO_EMAIL: ${{ secrets.TO_EMAIL }}
         run: python instagram_reel_post.py --render-only --target-count 2
 
       - name: Commit reel to docs/ for Pages
