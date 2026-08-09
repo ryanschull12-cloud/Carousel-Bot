@@ -395,13 +395,13 @@ Rules that only apply to reel_beats:
        the thing the hook is about.
          bad:  "Google Ads broad match eats 30% of budget"   (about a setting)
          good: "You are paying Google for customers who will never call"
-       1a. NO JARGON IN THE HOOK. AT ALL. "Broad match", "lookalikes", "learning phase",
-       "DMARC", "Performance Max", "flows", "attribution" and "deliverability" are
-       invisible to someone who has not already used them — and a reel is served almost
-       entirely to people who have not. The hook is the one line shown to strangers, so
-       it must survive being read by a plumber who has never run an ad. Explain the
-       mechanism in plain words in the BODY, where the jargon is welcome and where you
-       now have room to define it.
+       1a. THE HOOK IS THE EXCEPTION: keep product jargon out of it. "Broad match",
+       "lookalikes", "learning phase", "DMARC", "Performance Max", "flows" and
+       "attribution" are invisible to someone who has not already used them, and the
+       hook is the one line served to strangers — most of whom never see a second
+       beat. This is a rule about REACH, not about reading level: the body is where
+       the trade's vocabulary belongs, and it is welcome there (see PLAIN WORDS
+       below). Say it plainly for one line, then talk normally.
        1b. REVERSED 2026-08-09, DELIBERATELY. This rule previously REQUIRED naming the
        platform or surface, on the reasoning that a named subject feels checkable rather
        than generic. That is true — for practitioners. It optimises for recognition by
@@ -514,33 +514,40 @@ Rules that only apply to reel_beats:
            invisible to most of your list."
     bad:  "First 3 words matter most"   (a telegram: no cause, no cost, no referent)
 
-  PLAIN WORDS ONLY. Ryan's instruction, 2026-08-09, after a reel used "truncate":
-  keep it simple. The reader is a plumber, a dentist, a salon owner. They are not
-  stupid and you must never write down to them — but they do not know your words,
-  and a single unfamiliar word stops the read dead on a moving frame, because there
-  is no time to work it out and no way to scroll back.
+  PLAIN WORDS — AND THE DISTINCTION THAT MATTERS. Ryan's instruction, 2026-08-09,
+  after a reel used "truncate". The problem word there was not a marketing term. It
+  was an ordinary idea dressed in an unnecessarily complicated word, and that is the
+  only category being banned here.
 
-  BANNED OUTRIGHT, everywhere in reel_beats. Use the replacement:
+  BANNED: fancy general English where a plain word exists. These stop the read dead
+  on a moving frame — there is no time to work them out and no way to scroll back.
     truncate/truncated -> cuts off, chops off
-    optimise/optimisation -> improve, tune, get more from
-    leverage -> use
     utilise -> use
+    facilitate -> help, let
+    mitigate -> reduce, limit
     granular -> detailed
+    myriad / plethora -> lots of, plenty of
+    subsequently -> then, after that
+    ascertain -> find out
+    commence -> start
+    endeavour -> try
+    aforementioned -> the one above, that
     robust -> reliable
     seamless -> smooth
-    mitigate -> reduce, limit
-    facilitate -> help, let
-    deliverability -> whether your email lands in the inbox
-    attribution -> working out which ad got the sale
-    impressions -> times your ad was shown
-    conversions -> sales, bookings, enquiries (say which one)
-    CPA/CPL/ROAS/CTR -> what you pay per customer / per lead / what you get back
-    audience segment -> group of customers
-    creative (as a noun) -> the ad, the image, the video
-    funnel -> the path from ad to sale
-  The list is examples, not the boundary. THE TEST: would this word appear in a text
-  message to a friend who has never run an ad? If not, replace it. If a concept truly
-  needs a term, spend the words to explain it in the same line — you have 95 now.
+  THE TEST for this category: is there a shorter, more common word that means the
+  same thing? Then the fancy one is wrong, always.
+
+  ALLOWED — and this was corrected by Ryan on 2026-08-09, having first been banned
+  here in error: the trade's own vocabulary. "Deliverability", "attribution",
+  "impressions", "ROAS", "optimise", "leverage", "creative" as a noun, "conversions",
+  "funnel", "segment". These are NOT the same category as "truncate". A plain
+  substitute does not exist for most of them, the audience meets these words the
+  moment they log into an ad account, and writing around them costs precision and
+  makes the account sound like it does not do this for a living. A certain level of
+  the trade's language is what makes it worth following.
+
+  The judgement, in one line: SIMPLE WORDS FOR ORDINARY THINGS, REAL WORDS FOR REAL
+  THINGS. Never "truncate" when "cuts off" exists. "Deliverability" is fine.
 
   SENTENCE SHAPE — write lines that BREAK well. Each body line is wrapped onto 5-6
   lines on screen, and the renderer breaks at commas and before "and"/"but"/"so"/

@@ -162,18 +162,32 @@ def line_layer(pairs,f_reg,f_bold,accent):
     so the cap has to hold upstream."""
     d0=ImageDraw.Draw(Image.new("RGB",(4,4)))
     sp=d0.textlength(" ",font=f_reg)
-    total=0.0; height=0
+
+    # Sized from FONT METRICS and drawn on a shared BASELINE. The first version of
+    # this measured each word's ink box and drew every word at a fixed distance
+    # from the top, which is wrong twice over:
+    #   1. A word with no descender has a shorter ink box than one with a "g" or a
+    #      "y", so the layer was sized to whatever happened to be tallest and the
+    #      tails were clipped off the bottom. Ryan screenshotted it: "guesses" read
+    #      as "auesses", "your" as "vour". Comically bad, and invisible in any test
+    #      that only checks whether copy is inside the margins.
+    #   2. Bold and Regular have different ink boxes at the same point size, so the
+    #      emphasised phrase sat on a slightly different line to the words around it.
+    # Ascent+descent is constant for a font at a size, so the box always has room for
+    # a descender whether or not this particular line uses one, and anchoring every
+    # word at "ls" (left, baseline) puts mixed weights on one line by construction.
+    a_r,d_r=f_reg.getmetrics(); a_b,d_b=f_bold.getmetrics()
+    asc,desc=max(a_r,a_b),max(d_r,d_b)
+    PAD=6
+    total=0.0
     for i,(w,b) in enumerate(pairs):
-        fnt=f_bold if b else f_reg
-        bb=d0.textbbox((0,0),w,font=fnt)
-        total+=bb[2]-bb[0]
-        height=max(height,bb[3]-bb[1])
+        total+=d0.textlength(w,font=f_bold if b else f_reg)
         if i: total+=sp
-    im=Image.new("RGBA",(int(total)+14,height+26),(0,0,0,0))
-    dd=ImageDraw.Draw(im); x=5.0
+    im=Image.new("RGBA",(int(total)+2*PAD, asc+desc+2*PAD),(0,0,0,0))
+    dd=ImageDraw.Draw(im); x=float(PAD); base=PAD+asc
     for i,(w,b) in enumerate(pairs):
         fnt=f_bold if b else f_reg
-        dd.text((x,4),w,font=fnt,fill=(accent if b else INK)+(255,))
+        dd.text((x,base),w,font=fnt,fill=(accent if b else INK)+(255,),anchor="ls")
         x+=dd.textlength(w,font=fnt)+(sp if i<len(pairs)-1 else 0)
     return im
 
@@ -670,7 +684,10 @@ def render(niche,beats,outdir,badge):
         # 5 lines around 80px, which is still far above the ~400px-phone legibility
         # floor that drove the original sizing.
         fr_,fb,ls=fit_body_mixed(probe,b.text,b.emph,mw-40,112,58,6)
-        f=fr_; lh=int(f.size*1.30)
+        # 1.36, not 1.30. The layer is ascent+descent+12 tall, which at 112px is
+        # 149 -- taller than a 1.30 line box, so consecutive lines overlapped and a
+        # descender could touch the ascender below it. Leading now clears the layer.
+        f=fr_; lh=int(f.size*1.36)
         # Each line is rendered as ONE layer so the fade/rise stays a single
         # composite -- per-word pastes would fade at slightly different rates
         # along a line and read as a shimmer.

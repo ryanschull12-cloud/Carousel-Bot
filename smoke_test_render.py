@@ -290,6 +290,33 @@ def check_reel(name, carousel, out_dir, f, sheets, audio_dir):
                 f.warn(name, f"body line is {n_ch} chars, min 65 -- too short to carry "
                              f"a cause, which is the telegram failure the contract was "
                              f"rewritten to stop: {b.text!r}")
+    # Descender clipping. Rendered body lines are composited as their own layers,
+    # and a layer sized off ink rather than font metrics silently chops the tails
+    # off g, j, p, q and y -- "guesses" renders as "auesses". Ryan caught it from a
+    # screenshot on 2026-08-09; every existing check passed, because clipped copy
+    # is still comfortably inside the margins. Probe the layer directly: ink on the
+    # bottom row means the glyph ran out of box.
+    try:
+        from PIL import ImageDraw as _ID, Image as _IM
+        _d = _ID.Draw(_IM.new("RGB", (4, 4)))
+        probe_text = "gypsy judging quality, propped by heavy typography"
+        fr_, fb_, ls_ = re_.fit_body_mixed(_d, probe_text, "judging quality",
+                                           1080 - 2 * re_.MARGIN - 40, 112, 58, 6)
+        for ln in ls_:
+            lay = re_.line_layer(ln, fr_, fb_, (110, 168, 255))
+            px = lay.load()
+            if any(px[x, lay.height - 1][3] > 0 for x in range(lay.width)):
+                f.fail(name, "body line layer has ink on its bottom row -- descenders "
+                             "are being clipped (g/y/p/j/q lose their tails)")
+                break
+        # Mixed weights must share a baseline, or the emphasis phrase floats.
+        a_r, d_r = fr_.getmetrics(); a_b, d_b = fb_.getmetrics()
+        if abs(a_r - a_b) > 2:
+            f.warn(name, f"regular and bold ascents differ by {abs(a_r-a_b)}px -- the "
+                         f"emphasis phrase will not sit on the same line as its sentence")
+    except Exception as e:
+        f.warn(name, f"descender probe could not run: {e}")
+
     f.note(name, f"{len(beats)} beats, {sum(b.dur for b in beats):.1f}s of copy, "
                  f"type: {getattr(re_, 'FONT_FAMILY', '?')}")
 
