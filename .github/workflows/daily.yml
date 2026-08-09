@@ -80,6 +80,7 @@ jobs:
           git config user.name "carousel-bot"
           git config user.email "actions@github.com"
           git add posted_log.json 2>/dev/null || true
+          git add reel_posted_log.json 2>/dev/null || true
           git add performance_history.json 2>/dev/null || true
           git commit -m "Update performance data $(date +'%Y-%m-%d')" || echo "Nothing to commit"
           git push
