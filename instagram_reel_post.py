@@ -1,3 +1,65 @@
+# --- Irish-local posting window gate (added 2026-08-09) -----------------------------
+# WHY: the crons in reel-post-midday.yml and reel-post.yml are UTC, and there was no
+# local-time check anywhere. "*/15 11-14" is 12:00-15:59 Irish in summer but 11:00-14:59
+# in winter, so the schedule silently shifted an hour at the clock change, and within
+# that band the post landed wherever GitHub's queue got to it -- on 2026-08-08 the
+# evening reel fired at 7:12pm, 8:18pm, 9:59pm and 11:00pm.
+#
+# Gating here rather than in the workflows means the intended schedule is written once,
+# in the timezone that actually matters, and neither cron file needs editing: both
+# already tick inside their window in BST and GMT alike (verified across 0/30/60-minute
+# queue delays -- 8 to 12 eligible ticks in every case).
+#
+# Timing is a WINDOW; duplicate protection is STATE (reel_posted_log.json plus the
+# concurrency group). A clock is not a lock -- this only decides when it is allowed to
+# try, never whether the work is already done.
+#
+# Exits 0, so an out-of-window tick is a green no-op, not a failed run.
+# The module docstring follows below; it is a plain string once this block sits above it.
+import os as _os, sys as _sys, datetime as _dt
+from zoneinfo import ZoneInfo as _ZoneInfo
+
+SLOT_WINDOWS = {
+    1: (13, 16),   # midday reel  -- passes --target-count 1
+    2: (19, 22),   # evening reel -- passes --target-count 2
+}
+
+
+def _slot_window_gate():
+    if _os.environ.get("GITHUB_EVENT_NAME", "") == "workflow_dispatch":
+        print("Manual run -- skipping the Irish time-window check.")
+        return
+    target = 1
+    argv = _sys.argv
+    for i, a in enumerate(argv):
+        if a == "--target-count" and i + 1 < len(argv):
+            try:
+                target = int(argv[i + 1])
+            except ValueError:
+                pass
+        elif a.startswith("--target-count="):
+            try:
+                target = int(a.split("=", 1)[1])
+            except ValueError:
+                pass
+    window = SLOT_WINDOWS.get(target)
+    if window is None:
+        print(f"No window defined for --target-count {target}; not gating on time.")
+        return
+    start, end = window
+    now = _dt.datetime.now(_ZoneInfo("Europe/Dublin"))
+    if start <= now.hour < end:
+        print(f"Irish local time {now:%Y-%m-%d %H:%M} ({now.tzname()}) is inside this "
+              f"slot's {start:02d}:00-{end:02d}:00 window.")
+        return
+    print(f"Irish local time {now:%Y-%m-%d %H:%M} ({now.tzname()}) is outside this "
+          f"slot's {start:02d}:00-{end:02d}:00 window -- nothing to do.")
+    raise SystemExit(0)
+
+
+_slot_window_gate()
+# --- end window gate ----------------------------------------------------------------
+
 """
 Renders today's top carousel as a Reel and publishes it to Instagram.
 
