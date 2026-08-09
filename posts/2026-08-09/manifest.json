@@ -3,12 +3,12 @@
   "carousels": [
     {
       "index": 1,
-      "caption": "Gmail\u2019s inbox filter scans only the first 12 words of your subject line\u2014here\u2019s how to optimize them for the primary tab. Most emails get buried because the first line doesn\u2019t pass Gmail\u2019s scan. This checklist keeps your emails out of spam. #emailmarketing #deliverability #marketingtips #crm #digitalmarketing",
+      "caption": "Gmail\u2019s filter cuts off your subject line after 12 words\u2014everything else is invisible. Here\u2019s how to optimize the first half for inbox placement, not spam. #emailmarketingtips #emaildeliverability #marketingaudit #irishbusiness",
       "niche": "Email Marketing",
-      "angle": "realization",
-      "format": "step-by-step",
-      "hook": "Gmail cuts you off after 12 words\u2014here\u2019s what it sees first",
-      "throughline": "Gmail\u2019s inbox filter scans only the first 12 words of your subject line\u2014here\u2019s how to optimize them for the primary tab.",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Gmail cuts off your subject line after 12 words\u2014everything else is invisible",
+      "throughline": "Gmail\u2019s filter prioritizes the first 12 words of your subject line\u2014here\u2019s how to optimize them for inbox placement.",
       "image_paths": [
         "posts/2026-08-09/carousel_1/slide_01.jpg",
         "posts/2026-08-09/carousel_1/slide_02.jpg",
@@ -21,6 +21,47 @@
         "posts/2026-08-09/carousel_1/slide_09.jpg",
         "posts/2026-08-09/carousel_1/slide_10.jpg"
       ],
+      "reel_beats": {
+        "hook": "Gmail cuts you off after 12 words",
+        "stat_number": 12,
+        "stat_label": "words decide inbox or spam",
+        "body": [
+          "First 3 words matter most",
+          "Avoid \u2018free\u2019 early",
+          "Personalize first half",
+          "Test in preview tool"
+        ],
+        "cta_line": "Comment CHECKLIST for the template",
+        "send_line": "Send this to your email team"
+      },
+      "body_slides": [
+        {
+          "text": "Gmail\u2019s filter reads left to right\u2014stop at 12 words or risk truncation.",
+          "keyword": "12 words"
+        },
+        {
+          "text": "The first 3 words carry the most weight\u2014lead with your strongest hook.",
+          "keyword": "first 3 words"
+        },
+        {
+          "text": "Avoid spam triggers like \u2018free,\u2019 \u2018discount,\u2019 or \u2018urgent\u2019 in the first half.",
+          "keyword": "spam triggers"
+        },
+        {
+          "text": "Personalization in the first 12 words boosts open rates by 22%.",
+          "keyword": "Personalization"
+        },
+        {
+          "text": "Test subject lines with Gmail\u2019s preview tool to see how they truncate.",
+          "keyword": "preview tool"
+        },
+        {
+          "text": "Emails with shorter subjects land in Primary 20% more often than long ones.",
+          "keyword": "20% more"
+        }
+      ],
+      "cta_word": "CHECKLIST",
+      "cta_promise": "the 6-point subject line checklist",
       "virality_score": null,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control",
@@ -28,12 +69,12 @@
     },
     {
       "index": 2,
-      "caption": "Google Ads charges full price for clicks that bounce in 3 seconds\u2014here\u2019s how to stop paying for dead traffic. Most accounts waste budget on visitors who leave instantly. This checklist saves you money by focusing on engaged users. #googleads #ppc #digitalmarketing #sem #advertisingtips",
+      "caption": "Google Ads bills you for 3-second bounces\u2014even if they leave immediately. Here\u2019s how to stop wasting budget on quick exits. #googleadstips #ppcmanagement #marketingaudit #smallbusinessireland",
       "niche": "Google Ads",
-      "angle": "mistake-fear",
-      "format": "before-after",
-      "hook": "Google Ads charges you for 3-second bounces\u2014here\u2019s how to stop it",
-      "throughline": "Google Ads charges full price for clicks that bounce in 3 seconds\u2014here\u2019s how to stop paying for dead traffic.",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Google Ads bills you for 3-second bounces\u2014even if they leave immediately",
+      "throughline": "Google Ads charges for 3-second bounces\u2014here\u2019s how to stop wasting budget on quick exits.",
       "image_paths": [
         "posts/2026-08-09/carousel_2/slide_01.jpg",
         "posts/2026-08-09/carousel_2/slide_02.jpg",
@@ -46,6 +87,47 @@
         "posts/2026-08-09/carousel_2/slide_09.jpg",
         "posts/2026-08-09/carousel_2/slide_10.jpg"
       ],
+      "reel_beats": {
+        "hook": "Google Ads burns budget on 3-second bounces",
+        "stat_number": 15,
+        "stat_label": "% of budget wasted on bounces",
+        "body": [
+          "Enable Engaged-view conversions",
+          "Set time-on-page threshold",
+          "Exclude high-bounce mobile",
+          "Use Smart Bidding"
+        ],
+        "cta_line": "Comment AUDIT for the checklist",
+        "send_line": "Send this to your ads manager"
+      },
+      "body_slides": [
+        {
+          "text": "Google counts a \u2018click\u2019 after 3 seconds\u2014even if the visitor bounces.",
+          "keyword": "3 seconds"
+        },
+        {
+          "text": "Enable \u2018Engaged-view conversions\u2019 to track only meaningful visits.",
+          "keyword": "Engaged-view conversions"
+        },
+        {
+          "text": "Set a minimum time-on-page threshold to exclude bounces.",
+          "keyword": "time-on-page"
+        },
+        {
+          "text": "Exclude mobile users with high bounce rates from targeting.",
+          "keyword": "exclude mobile"
+        },
+        {
+          "text": "Use \u2018Smart Bidding\u2019 with a focus on conversions, not clicks.",
+          "keyword": "Smart Bidding"
+        },
+        {
+          "text": "Accounts with this setting save up to 15% on wasted spend.",
+          "keyword": "15%"
+        }
+      ],
+      "cta_word": "AUDIT",
+      "cta_promise": "the 5-step bounce-fix checklist",
       "virality_score": null,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control",
@@ -53,12 +135,12 @@
     },
     {
       "index": 3,
-      "caption": "500 warm subscribers outperform 10,000 cold ones in Gmail\u2019s inbox\u2014quality over quantity wins every time. Most lists waste effort on inactive subscribers. This playbook keeps your emails landing where they matter. #emailmarketing #deliverability #marketingtips #crm #ecommercemarketing",
-      "niche": "Email Marketing",
-      "angle": "contrarian",
-      "format": "myth-buster",
-      "hook": "500 warm subscribers get better inbox placement than 10,000 cold ones",
-      "throughline": "500 warm subscribers outperform 10,000 cold ones in Gmail\u2019s inbox\u2014quality over quantity wins.",
+      "caption": "Google Ads buries 25% of your best clicks in a report you\u2019ve never opened. Here\u2019s how to find them and boost conversions by 25%. #googleadstips #ppc #leadgeneration #irishbusiness",
+      "niche": "Google Ads",
+      "angle": "realization",
+      "format": "step-by-step",
+      "hook": "Google Ads buries 25% of your best clicks in a report you\u2019ve never opened",
+      "throughline": "Google Ads hides your best-performing clicks in a report most advertisers never check\u2014here\u2019s how to find them.",
       "image_paths": [
         "posts/2026-08-09/carousel_3/slide_01.jpg",
         "posts/2026-08-09/carousel_3/slide_02.jpg",
@@ -71,6 +153,47 @@
         "posts/2026-08-09/carousel_3/slide_09.jpg",
         "posts/2026-08-09/carousel_3/slide_10.jpg"
       ],
+      "reel_beats": {
+        "hook": "Google Ads buries 25% of your best clicks",
+        "stat_number": 25,
+        "stat_label": "% of clicks hidden in plain sight",
+        "body": [
+          "Open Search terms report",
+          "Sort by conversions",
+          "Add exact match keywords",
+          "Exclude irrelevant searches"
+        ],
+        "cta_line": "Comment GUIDE for the steps",
+        "send_line": "Send this to your PPC team"
+      },
+      "body_slides": [
+        {
+          "text": "Open the \u2018Search terms\u2019 report to see what people actually typed.",
+          "keyword": "Search terms report"
+        },
+        {
+          "text": "Sort by conversions to find the searches that turn into sales.",
+          "keyword": "conversions"
+        },
+        {
+          "text": "Add high-performing terms as exact match keywords to lock in results.",
+          "keyword": "exact match"
+        },
+        {
+          "text": "Exclude irrelevant searches to stop wasting budget on dead ends.",
+          "keyword": "exclude"
+        },
+        {
+          "text": "Check this report weekly\u2014new trends appear fast.",
+          "keyword": "weekly"
+        },
+        {
+          "text": "Accounts that do this see 25% more conversions for the same budget.",
+          "keyword": "25%"
+        }
+      ],
+      "cta_word": "GUIDE",
+      "cta_promise": "the step-by-step report guide",
       "virality_score": null,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control",
@@ -78,12 +201,12 @@
     },
     {
       "index": 4,
-      "caption": "Google Ads hides 25% of your sales in \u2018Other\u2019 reports\u2014here\u2019s where to find them and why they matter. Most accounts ignore these hidden conversions. This tracker helps you uncover them. #googleads #ppc #digitalmarketing #sem #advertisinghacks",
-      "niche": "Google Ads",
-      "angle": "curiosity",
-      "format": "comparison",
-      "hook": "Google Ads buries 25% of your sales in a report you\u2019ve never checked",
-      "throughline": "Google Ads hides 25% of your sales in \u2018Other\u2019 reports\u2014here\u2019s where to find them and why they matter.",
+      "caption": "Gmail\u2019s filter favors emails that spark replies\u2014opens don\u2019t matter as much. Here\u2019s how to shift your strategy for better inbox placement. #emailmarketingtips #emaildeliverability #conversiontracking #smallbusinessireland",
+      "niche": "Email Marketing",
+      "angle": "contrarian",
+      "format": "before-after",
+      "hook": "Gmail\u2019s filter favors emails that spark replies\u2014opens don\u2019t matter as much",
+      "throughline": "Gmail prioritizes emails that get replies, not just opens\u2014here\u2019s how to shift your strategy.",
       "image_paths": [
         "posts/2026-08-09/carousel_4/slide_01.jpg",
         "posts/2026-08-09/carousel_4/slide_02.jpg",
@@ -96,6 +219,51 @@
         "posts/2026-08-09/carousel_4/slide_09.jpg",
         "posts/2026-08-09/carousel_4/slide_10.jpg"
       ],
+      "reel_beats": {
+        "hook": "Gmail buries emails with no replies",
+        "stat_number": 3,
+        "stat_label": "x more Primary placement with replies",
+        "body": [
+          "Ask questions in subject",
+          "Use real Reply-to",
+          "Follow up personally",
+          "Aim for 5% reply rate"
+        ],
+        "cta_line": "Comment TEMPLATE for the script",
+        "send_line": "Send this to your email writer"
+      },
+      "body_slides": [
+        {
+          "text": "Before: Emails with 50% open rates still land in Promotions.",
+          "keyword": "50% open rates",
+          "before": "Promotions",
+          "after": "Primary"
+        },
+        {
+          "text": "After: Emails with 10 replies get 3x more inbox placement.",
+          "keyword": "10 replies",
+          "before": "1x placement",
+          "after": "3x placement"
+        },
+        {
+          "text": "Ask a question in your subject line to encourage replies.",
+          "keyword": "Ask a question"
+        },
+        {
+          "text": "Use \u2018Reply to\u2019 addresses that go to a real person, not \u2018noreply.\u2019",
+          "keyword": "Reply to"
+        },
+        {
+          "text": "Follow up with a short, personal email to spark conversation.",
+          "keyword": "Follow up"
+        },
+        {
+          "text": "Lists with reply rates above 5% see 40% higher deliverability.",
+          "keyword": "5%"
+        }
+      ],
+      "cta_word": "TEMPLATE",
+      "cta_promise": "the reply-boosting email template",
       "virality_score": null,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control",
@@ -103,12 +271,12 @@
     },
     {
       "index": 5,
-      "caption": "Gmail flags subject lines with \u2018free,\u2019 \u2018discount,\u2019 or \u2018urgent\u2019 as spam\u2014here\u2019s what to use instead. Most emails get buried because of a few trigger words. This checklist keeps your emails landing in the inbox. #emailmarketing #deliverability #marketingtips #crm #ecommercetips",
-      "niche": "Email Marketing",
-      "angle": "behind-the-curtain",
+      "caption": "Meta Ads freeze after 50 conversions\u2014your campaigns stop getting smarter. Here\u2019s how to restart the learning phase and cut costs. #metaadstips #paidsocial #leadgeneration #irishbusiness",
+      "niche": "Meta/Instagram Ads",
+      "angle": "mistake-fear",
       "format": "checklist",
-      "hook": "Gmail sends \u2018free\u2019 and \u2018discount\u2019 straight to spam\u2014here\u2019s what works instead",
-      "throughline": "Gmail flags subject lines with \u2018free,\u2019 \u2018discount,\u2019 or \u2018urgent\u2019 as spam\u2014here\u2019s what to use instead.",
+      "hook": "Meta Ads freeze after 50 conversions\u2014your campaigns stop getting smarter",
+      "throughline": "Meta Ads stop learning after 50 conversions\u2014here\u2019s how to keep your campaigns improving.",
       "image_paths": [
         "posts/2026-08-09/carousel_5/slide_01.jpg",
         "posts/2026-08-09/carousel_5/slide_02.jpg",
@@ -121,6 +289,47 @@
         "posts/2026-08-09/carousel_5/slide_09.jpg",
         "posts/2026-08-09/carousel_5/slide_10.jpg"
       ],
+      "reel_beats": {
+        "hook": "Meta Ads freeze after 50 conversions",
+        "stat_number": 30,
+        "stat_label": "% lower cost per lead with these steps",
+        "body": [
+          "Check Learning Phase status",
+          "Increase budget 20%",
+          "Refresh audience weekly",
+          "Use Advantage+"
+        ],
+        "cta_line": "Comment CHECKLIST for the guide",
+        "send_line": "Send this to your ads team"
+      },
+      "body_slides": [
+        {
+          "text": "Check your \u2018Learning Phase\u2019 status\u2014it resets after 50 conversions.",
+          "keyword": "Learning Phase"
+        },
+        {
+          "text": "Increase your budget by 20% to push past the 50-conversion limit.",
+          "keyword": "20%"
+        },
+        {
+          "text": "Refresh your audience every 7 days to avoid fatigue.",
+          "keyword": "7 days"
+        },
+        {
+          "text": "Use \u2018Advantage+\u2019 audiences to expand reach without losing relevance.",
+          "keyword": "Advantage+"
+        },
+        {
+          "text": "Pause underperforming ads to focus spend on what\u2019s working.",
+          "keyword": "Pause ads"
+        },
+        {
+          "text": "Accounts that follow this see 30% lower cost per lead.",
+          "keyword": "30%"
+        }
+      ],
+      "cta_word": "CHECKLIST",
+      "cta_promise": "the 5-step Meta Ads checklist",
       "virality_score": null,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control",
