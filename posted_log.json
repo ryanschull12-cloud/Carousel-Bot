@@ -288,7 +288,7 @@
       "angle": "realization",
       "format": "before-after",
       "hook": "Meta Ads CPMs triple after 9 PM\u2014here\u2019s why small accounts pay more",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18090817109182992",
@@ -298,7 +298,7 @@
       "angle": "contrarian",
       "format": "comparison",
       "hook": "Google Ads\u2019 \u2018smart\u2019 budgeting wastes 30% of small accounts\u2019 spend",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18106861355035718",
@@ -308,7 +308,7 @@
       "angle": "mistake-fear",
       "format": "checklist",
       "hook": "Meta\u2019s algorithm stops learning after 50 conversions\u2014here\u2019s how to fix it",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18089638604561935",
@@ -318,7 +318,7 @@
       "angle": "behind-the-curtain",
       "format": "steal-this",
       "hook": "Gmail\u2019s first 10 subject words decide: spam or inbox",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18062008892773834",
@@ -328,7 +328,7 @@
       "angle": "contrarian",
       "format": "comparison",
       "hook": "Google Ads burns small budgets on useless clicks",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "17873928420548744",
@@ -338,7 +338,7 @@
       "angle": "realization",
       "format": "step-by-step",
       "hook": "Gmail\u2019s 40-character preview kills open rates",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18440854864123139",
@@ -348,7 +348,7 @@
       "angle": "behind-the-curtain",
       "format": "steal-this",
       "hook": "Gmail\u2019s filter reads only the first 10 words\u2014here\u2019s what it hates",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18118130332928432",
@@ -358,7 +358,7 @@
       "angle": "realization",
       "format": "step-by-step",
       "hook": "Meta\u2019s algorithm forgets your ad after 48 hours of silence",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "17895786414590704",

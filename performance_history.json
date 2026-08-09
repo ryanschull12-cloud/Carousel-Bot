@@ -503,6 +503,150 @@
       "engagement_rate": 100.0,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control"
+    },
+    {
+      "date": "2026-08-03",
+      "media_id": "18064601111749693",
+      "niche": "Meta/Instagram Ads",
+      "angle": "realization",
+      "format": "before-after",
+      "hook": "Meta Ads CPMs triple after 9 PM\u2014here\u2019s why small accounts pay more",
+      "metrics": {
+        "reach": 2,
+        "saved": 0,
+        "shares": 0,
+        "likes": 1,
+        "comments": 0
+      },
+      "engagement_rate": 50.0,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
+    },
+    {
+      "date": "2026-08-03",
+      "media_id": "18090817109182992",
+      "niche": "Google Ads",
+      "angle": "contrarian",
+      "format": "comparison",
+      "hook": "Google Ads\u2019 \u2018smart\u2019 budgeting wastes 30% of small accounts\u2019 spend",
+      "metrics": {
+        "reach": 1,
+        "saved": 0,
+        "shares": 0,
+        "likes": 0,
+        "comments": 0
+      },
+      "engagement_rate": 0.0,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
+    },
+    {
+      "date": "2026-08-03",
+      "media_id": "18106861355035718",
+      "niche": "Meta/Instagram Ads",
+      "angle": "mistake-fear",
+      "format": "checklist",
+      "hook": "Meta\u2019s algorithm stops learning after 50 conversions\u2014here\u2019s how to fix it",
+      "metrics": {
+        "reach": 1,
+        "saved": 0,
+        "shares": 0,
+        "likes": 1,
+        "comments": 0
+      },
+      "engagement_rate": 100.0,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
+    },
+    {
+      "date": "2026-08-04",
+      "media_id": "18089638604561935",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Gmail\u2019s first 10 subject words decide: spam or inbox",
+      "metrics": {
+        "reach": 2,
+        "saved": 0,
+        "shares": 0,
+        "likes": 1,
+        "comments": 0
+      },
+      "engagement_rate": 50.0,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
+    },
+    {
+      "date": "2026-08-04",
+      "media_id": "18062008892773834",
+      "niche": "Google Ads",
+      "angle": "contrarian",
+      "format": "comparison",
+      "hook": "Google Ads burns small budgets on useless clicks",
+      "metrics": {
+        "reach": 2,
+        "saved": 0,
+        "shares": 0,
+        "likes": 0,
+        "comments": 0
+      },
+      "engagement_rate": 0.0,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
+    },
+    {
+      "date": "2026-08-04",
+      "media_id": "17873928420548744",
+      "niche": "Email Marketing",
+      "angle": "realization",
+      "format": "step-by-step",
+      "hook": "Gmail\u2019s 40-character preview kills open rates",
+      "metrics": {
+        "reach": 1,
+        "saved": 0,
+        "shares": 0,
+        "likes": 1,
+        "comments": 0
+      },
+      "engagement_rate": 100.0,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
+    },
+    {
+      "date": "2026-08-05",
+      "media_id": "18440854864123139",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Gmail\u2019s filter reads only the first 10 words\u2014here\u2019s what it hates",
+      "metrics": {
+        "reach": 2,
+        "saved": 0,
+        "shares": 0,
+        "likes": 2,
+        "comments": 0
+      },
+      "engagement_rate": 100.0,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
+    },
+    {
+      "date": "2026-08-05",
+      "media_id": "18118130332928432",
+      "niche": "Meta/Instagram Ads",
+      "angle": "realization",
+      "format": "step-by-step",
+      "hook": "Meta\u2019s algorithm forgets your ad after 48 hours of silence",
+      "metrics": {
+        "reach": 2,
+        "saved": 0,
+        "shares": 0,
+        "likes": 2,
+        "comments": 0
+      },
+      "engagement_rate": 100.0,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "variant"
     }
   ]
 }
