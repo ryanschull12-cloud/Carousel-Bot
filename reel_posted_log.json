@@ -34,5 +34,17 @@
     "media_product_type": "REELS",
     "trial": false,
     "scored": false
+  },
+  {
+    "media_id": "18453354991185527",
+    "date": "2026-08-09",
+    "index": 3,
+    "niche": "Google Ads",
+    "angle": "realization",
+    "format": "step-by-step",
+    "hook": "Google Ads buries 25% of your best clicks in a report you\u2019ve never opened",
+    "media_product_type": "REELS",
+    "trial": false,
+    "scored": false
   }
 ]
