@@ -4,10 +4,10 @@ concurrency:
 
 name: Midday Instagram Reel
 
-# FIRST of two reels a day. This slot takes the highest-scoring carousel; reel-post.yml
-# takes the next one down in the evening. Spacing is roughly seven hours.
+# SECOND of three reels a day (morning slot is reel-post-morning.yml, evening is
+# reel-post.yml). reel_posted_log.json guarantees each slot picks a different carousel.
 #
-# --target-count 1 means "by the end of this window, 2 reels should have gone out today".
+# --target-count 2 means "by the end of this window, 2 reels should have gone out today".
 # reel_posted_log.json tracks which carousels already became reels, so this slot picks a
 # DIFFERENT one from the midday slot rather than re-rendering the same top-scorer.
 #
@@ -60,7 +60,7 @@ jobs:
 
       - name: Render reel
         if: vars.IG_POSTING_PAUSED != 'true'
-        run: python instagram_reel_post.py --render-only --target-count 1
+        run: python instagram_reel_post.py --render-only --target-count 2
 
       - name: Commit reel to docs/ for Pages
         if: vars.IG_POSTING_PAUSED != 'true'
@@ -80,7 +80,7 @@ jobs:
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           TO_EMAIL: ${{ secrets.TO_EMAIL }}
         run: |
-          python instagram_reel_post.py --publish-only --target-count 1 \
+          python instagram_reel_post.py --publish-only --target-count 2 \
             ${{ github.event.inputs.trial == 'true' && '--trial' || '' }}
 
       - name: Commit reel log

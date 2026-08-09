@@ -20,8 +20,14 @@ import os as _os, sys as _sys, datetime as _dt
 from zoneinfo import ZoneInfo as _ZoneInfo
 
 SLOT_WINDOWS = {
-    1: (13, 16),   # midday reel  -- passes --target-count 1
-    2: (19, 22),   # evening reel -- passes --target-count 2
+    # Three reels a day (2026-08-09, was two). Windows sit on the 2026
+    # engagement data for Reels: weekday mornings 7-9am local lead early
+    # reach, mid-morning holds it, and 7-9pm evenings are the strongest
+    # Reels block -- with a business audience skewing toward commute,
+    # lunch, and after-work checks.
+    1: (8, 11),    # morning reel -- passes --target-count 1
+    2: (13, 16),   # midday reel  -- passes --target-count 2
+    3: (19, 22),   # evening reel -- passes --target-count 3
 }
 
 

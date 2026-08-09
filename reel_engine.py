@@ -340,7 +340,12 @@ BAR_WAS = (92, 95, 108)
 
 # 0.55s to resolve the counting figure. Long enough to register as motion, short
 # enough to be finished well before the scroll decision lands.
-TICK_FRAMES = 13.0
+# 19 frames = 0.79s (was 13/0.55s, slowed 2026-08-09 at Ryan's call after
+# watching the renders: the resolves read as UI-snappy rather than as video
+# weight. Entrances across every beat moved from the 200-300ms Material band
+# to 330-420ms in the same pass. Hypothesis until reel scores land -- if
+# retention drops at the new pacing, this is the constant to walk back.
+TICK_FRAMES = 19.0
 
 TAIL_S = 0.6   # crossfade back to the hook so the loop closes
 
@@ -401,7 +406,7 @@ def render(niche,beats,outdir,badge):
     def bg(t):
         fr=grad.copy(); draw_constellation(fr,c,t,nodes); return fr
 
-    def paint_hook(fr, prog=1.0):
+    def paint_hook(fr, prog=1.0, fi=0):
         """Regular sentence, bold accent figure, no highlight block.
 
         The block was clean but it fenced the number off from the sentence; weight
@@ -423,6 +428,9 @@ def render(niche,beats,outdir,badge):
             y=y0+li*lh; x=MARGIN
             for w in line:
                 if emph and w.strip(".,!?:;")==emph:
+                    if "hook_emph_box" not in L:
+                        ww=d.textlength(w,font=f_bold)
+                        L["hook_emph_box"]=(x, x+ww, y+int(f_bold.size*1.06))
                     pre,dig,suf=number_parts(w)
                     if dig is not None:
                         wpre=d.textlength(pre,font=f_bold)
@@ -440,6 +448,16 @@ def render(niche,beats,outdir,badge):
                     d.text((x,y),w,font=f_reg,fill=INK)
                     x+=d.textlength(w,font=f_reg)
                 x+=d.textlength(" ",font=f_reg)
+        # Reinforcement, not reveal (2026-08-09): a rule sweeps under the accent
+        # token starting ~0.4s in, well after the whole hook is readable. Motion
+        # lands inside the 1.7s decision window without withholding a word --
+        # the faceless-reel research consistently ties retention to text motion
+        # that reinforces what is already on screen.
+        if fi > 10 and L.get("hook_emph_box"):
+            ex0, ex1, ey = L["hook_emph_box"]
+            sw = ease(clamp((fi - 10) / 14.0))
+            if sw > 0:
+                d.rectangle([ex0, ey, ex0 + (ex1 - ex0) * sw, ey + 7], fill=c["accent"])
 
     def hook_frame(t):
         fr=bg(t); paint_hook(fr,0.0); return chrome(fr,c,badge)
@@ -451,18 +469,18 @@ def render(niche,beats,outdir,badge):
         # Resolve in ~0.55s. A counting number is the cheapest genuine pattern
         # interrupt available, but only while it is still counting -- drag it out
         # and it stops being a hook and starts being a delay.
-        p=ease(clamp(fi/13.0))
+        p=ease(clamp(fi/19.0))
         s=f"{int(round(b.num*p))}%"
         nl=layer(s,fnum,c["accent"])
         y0=anchor(nl.height+180)
         fr.paste(nl,(MARGIN,y0-40),nl)
         yy=y0-40+nl.height+8
-        d.rectangle([MARGIN,yy,MARGIN+int(mw*ease(clamp((fi-9)/12.0))),yy+8],fill=c["accent"])
+        d.rectangle([MARGIN,yy,MARGIN+int(mw*ease(clamp((fi-13)/16.0))),yy+8],fill=c["accent"])
         for li,line in enumerate(labls):
             # 1 frame of stagger is ~42ms, inside the 40-60ms window where each
             # unit is legible before the next lands. It used to be 3 frames, slow
             # enough to register as an effect rather than as reading.
-            q=ease(clamp((fi-13-li)/8.0))
+            q=ease(clamp((fi-19-li*2)/11.0))
             if q>0:
                 lay=layer_tracked(line,labf,INK,LABEL_TRACK*labf.size)
                 fr.paste(fade(lay,int(255*q)),(MARGIN,yy+38+li*int(labf.size*1.24)+int(22*(1-q))),
@@ -479,13 +497,13 @@ def render(niche,beats,outdir,badge):
         # hug-the-longest-line panel ran within a few px of the right edge.
         blockw=min(max(l.width for l in lays)+72, W-MARGIN+34)
         y0=anchor(blockh)
-        grow=ease(clamp(fi/7.0))
+        grow=ease(clamp(fi/10.0))
         bw=int(blockw*grow)
         if bw>0:
             d.rounded_rectangle([MARGIN-34,y0-30,MARGIN-34+bw,y0+blockh+26],radius=10,fill=BG_RAISED)
             d.rectangle([MARGIN-34,y0-30,MARGIN-28,y0+blockh+26],fill=c["accent"])
         for li,lay in enumerate(lays):
-            p=ease(clamp((fi-li)/7.0))
+            p=ease(clamp((fi-li*2)/10.0))
             if p>0:
                 fr.paste(fade(lay,int(255*p)),(MARGIN+int(22*(1-p)),y0+li*lh),fade(lay,int(255*p)))
 
@@ -536,11 +554,11 @@ def render(niche,beats,outdir,badge):
             # The "before" bar has to recede without disappearing. At (52,54,64)
             # it measured 1.65:1 against the background -- the element carrying
             # half the comparison was almost invisible.
-            bar(y+int(S_BEF*0.55),bv/peak,ease(clamp(fi/6.0)),BAR_WAS,42)
+            bar(y+int(S_BEF*0.55),bv/peak,ease(clamp(fi/9.0)),BAR_WAS,42)
         y_arrow=y+int(S_BEF*1.10)
 
         # the arrow -- direction is the claim, so it is drawn rather than typed
-        q=ease(clamp((fi-8)/9.0))
+        q=ease(clamp((fi-11)/12.0))
         if q>0:
             down = (av is not None and bv is not None and av<bv)
             cx=MARGIN+40; top=y_arrow+8; span=GAP_ARROW-26
@@ -556,19 +574,19 @@ def render(niche,beats,outdir,badge):
 
         # after -- accent, larger, counting across from the old figure
         y2=y_arrow+GAP_ARROW
-        p=ease(clamp((fi-10)/13.0))
+        p=ease(clamp((fi-14)/18.0))
         shown=after
         if av is not None and bv is not None:
             shown=f"{ap}{int(round(bv+(av-bv)*p))}{asf}"
         d.text((MARGIN,y2),shown,font=f_aft,fill=c["accent"])
         if av is not None:
-            bar(y2+int(S_AFT*0.55),av/peak,ease(clamp((fi-6)/8.0)),c["accent"],58)
+            bar(y2+int(S_AFT*0.55),av/peak,ease(clamp((fi-9)/11.0)),c["accent"],58)
 
     def paint_cta(fr,b,fi):
         f,ls=fit(probe,b.text,F_SANS,200,110,mw,2); lh=int(f.size*1.16)
         sf,sls=fit(probe,b.sub or "",F_SANS,60,42,mw,3); slh=int(sf.size*1.26)
         ay=anchor(lh*len(ls)+slh*len(sls)+34)
-        p=ease(clamp(fi/12.0))
+        p=ease(clamp(fi/16.0))
         cut=int(H*p)
         if cut>0:
             veil=Image.new("RGB",(W,cut),c["deep"])
@@ -579,15 +597,50 @@ def render(niche,beats,outdir,badge):
         # is only fifteen seconds long. It now rides in with the wipe, the same way
         # body copy rides in with its panel.
         if p>0.20:
-            q=ease(clamp((fi-4)/9.0))
+            q=ease(clamp((fi-6)/12.0))
             for li,line in enumerate(ls):
                 lay=layer(line,f,c["accent"])
                 fr.paste(fade(lay,int(255*q)),(MARGIN,ay+li*lh+int(26*(1-q))),fade(lay,int(255*q)))
             for li,line in enumerate(sls):
-                r=ease(clamp((fi-11-li)/8.0))
+                r=ease(clamp((fi-15-li*2)/11.0))
                 if r>0:
                     lay=layer_tracked(line,sf,INK,LABEL_TRACK*sf.size)
                     fr.paste(fade(lay,int(255*r)),(MARGIN,ay+len(ls)*lh+34+li*slh),fade(lay,int(255*r)))
+
+    def paint_brand(fr, fi):
+        """Typographic end-card (2026-08-09, Ryan's ask). No logo asset exists
+        in the repo, so the wordmark is set live in the same type system as
+        everything else: R&D in bold accent, MARKETING tracked out in ink, the
+        site line in dim. Centered deliberately -- every other beat is
+        left-aligned copy, so the one centered lockup reads as a seal, not a
+        sentence. It matters most off-Instagram: the same MP4 goes to YouTube
+        Shorts and TikTok, where nothing else on screen says who made it.
+        Sits BEFORE the loop tail, so the crossfade back to the hook still
+        lands the final frame on the first."""
+        d=ImageDraw.Draw(fr)
+        f_rd=F(F_SANS,170); f_mk=F(F_SANSR,58); f_site=F(F_SANSR,34)
+        w_rd=d.textlength("R&D",font=f_rd)
+        blockh=int(170*1.02)+26+8+26+58+40+34
+        y0=anchor(blockh)
+        p1=ease(clamp(fi/10.0))
+        if p1>0:
+            lay=layer("R&D",f_rd,c["accent"])
+            fr.paste(fade(lay,int(255*p1)),(int((W-w_rd)/2),y0+int(20*(1-p1))),fade(lay,int(255*p1)))
+        y=y0+int(170*1.02)+26
+        sw=ease(clamp((fi-8)/12.0))
+        if sw>0:
+            half=int(150*sw)
+            d.rectangle([W//2-half,y,W//2+half,y+8],fill=c["accent"])
+        y+=8+26
+        p2=ease(clamp((fi-14)/11.0))
+        if p2>0:
+            lay=layer_tracked("MARKETING",f_mk,INK,0.32*58)
+            fr.paste(fade(lay,int(255*p2)),(int((W-lay.width)/2),y+int(16*(1-p2))),fade(lay,int(255*p2)))
+        y+=58+40
+        p3=ease(clamp((fi-22)/11.0))
+        if p3>0:
+            lay=layer("marketing-rd.com",f_site,DIM)
+            fr.paste(fade(lay,int(255*p3)),(int((W-lay.width)/2),y),fade(lay,int(255*p3)))
 
     # ---- frames ----
     n=0
@@ -596,10 +649,11 @@ def render(niche,beats,outdir,badge):
         for fi in range(counts[bi]):
             t=n/total
             fr=bg(t)
-            if b.kind=="hook":   paint_hook(fr,ease(clamp(fi/TICK_FRAMES)))
+            if b.kind=="hook":   paint_hook(fr,ease(clamp(fi/TICK_FRAMES)),fi)
             elif b.kind=="stat": paint_stat(fr,b,fi)
             elif b.kind=="proof":paint_proof(fr,b,fi)
             elif b.kind=="cta":  paint_cta(fr,b,fi)
+            elif b.kind=="brand":paint_brand(fr,fi)
             else:                paint_body(fr,b,fi)
             fr=push_in(fr, fi/max(counts[bi]-1,1))
             chrome(fr,c,badge)
@@ -688,6 +742,9 @@ def beats_from_carousel(carousel):
         cta_sub = rb.get("cta_line") or carousel.get("cta_promise", "")
         out.append(Beat("cta", carousel.get("cta_word", "AUDIT"),
                         read_time(cta_sub, lo=2.0, hi=3.2, orient=1.20), sub=cta_sub))
+        # Brand seal before the loop tail. 1.5s: enough for the lockup to land
+        # and hold a beat, not enough to read as an outro card overstaying.
+        out.append(Beat("brand", None, 1.5))
         return trim_to_budget(out)
 
     # --- fallback: no reel_beats on this manifest ---
@@ -708,6 +765,7 @@ def beats_from_carousel(carousel):
            + [Beat("body", b, read_time(b)) for b in body])
     out.append(Beat("cta", carousel.get("cta_word", "AUDIT"),
                     read_time(sub, lo=2.0, hi=3.2, orient=1.20), sub=sub))
+    out.append(Beat("brand", None, 1.5))
     return trim_to_budget(out)
 
 

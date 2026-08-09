@@ -2,12 +2,17 @@ concurrency:
   group: instagram-pipeline
   cancel-in-progress: false
 
-name: Evening Instagram Reel
+name: Morning Instagram Reel
 
-# SECOND of two reels a day. reel-post-midday.yml posts the first one around midday;
-# this one takes the next unposted winner in the evening.
+# FIRST of three reels a day (midday slot is reel-post-midday.yml, evening is
+# reel-post.yml). Takes the day's highest-scoring carousel; reel_posted_log.json
+# guarantees the later slots pick different ones.
 #
-# --target-count 3 means "by the end of this window, 3 reels should have gone out today".
+# Cron covers 07:00-10:45 UTC so the */15 ticks land inside the 08:00-11:00
+# Irish window in BST and GMT alike; the gate in instagram_reel_post.py
+# enforces the local window either way.
+#
+# --target-count 1 means "by the end of this window, 1 reel should have gone out today".
 # reel_posted_log.json tracks which carousels already became reels, so this slot picks a
 # DIFFERENT one from the midday slot rather than re-rendering the same top-scorer.
 #
@@ -29,7 +34,7 @@ on:
     # this repo runs hours late or skips entirely, so this fires every 15 minutes across
     # the evening window and the reel_posted_log.json dedupe makes every extra tick a
     # near-instant no-op once the day's reel has gone out.
-    - cron: "*/15 18-21 * * *"
+    - cron: "*/15 7-10 * * *"
   workflow_dispatch:
     inputs:
       trial:
@@ -60,7 +65,7 @@ jobs:
 
       - name: Render reel
         if: vars.IG_POSTING_PAUSED != 'true'
-        run: python instagram_reel_post.py --render-only --target-count 3
+        run: python instagram_reel_post.py --render-only --target-count 1
 
       - name: Commit reel to docs/ for Pages
         if: vars.IG_POSTING_PAUSED != 'true'
@@ -80,7 +85,7 @@ jobs:
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           TO_EMAIL: ${{ secrets.TO_EMAIL }}
         run: |
-          python instagram_reel_post.py --publish-only --target-count 3 \
+          python instagram_reel_post.py --publish-only --target-count 1 \
             ${{ github.event.inputs.trial == 'true' && '--trial' || '' }}
 
       - name: Commit reel log
