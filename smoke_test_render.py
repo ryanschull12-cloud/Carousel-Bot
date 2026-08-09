@@ -290,6 +290,26 @@ def check_reel(name, carousel, out_dir, f, sheets, audio_dir):
                 f.warn(name, f"body line is {n_ch} chars, min 65 -- too short to carry "
                              f"a cause, which is the telegram failure the contract was "
                              f"rewritten to stop: {b.text!r}")
+    # The hook's highlight. emphasis_token silently returned None for every hook
+    # written to the current rules once the "must contain a figure" requirement was
+    # dropped, and a hook with no highlight is the most expensive flat frame in the
+    # reel. Check the beat actually resolves one, and that it came from the brain
+    # rather than from the deliberately-poor fallback.
+    hb = next((b for b in beats if b.kind == "hook"), None)
+    if hb and hb.text:
+        if not hb.emph:
+            f.warn(name, "no hook_emphasis on this reel -- the renderer is guessing "
+                         "which words to highlight on the frame that matters most")
+        elif not re_.mark_phrase(hb.text.split(), hb.emph):
+            f.fail(name, f"hook_emphasis {hb.emph!r} does not appear in the hook, so "
+                         f"nothing is highlighted: {hb.text!r}")
+        elif len(hb.emph.split()) > 3:
+            f.warn(name, f"hook_emphasis {hb.emph!r} is {len(hb.emph.split())} words, "
+                         f"max 3 -- it stops being a highlight")
+        if re_.emphasis_token(hb.text, hb.emph) is None:
+            f.fail(name, f"hook resolves no emphasis at all and will render flat: "
+                         f"{hb.text!r}")
+
     # Descender clipping. Rendered body lines are composited as their own layers,
     # and a layer sized off ink rather than font metrics silently chops the tails
     # off g, j, p, q and y -- "guesses" renders as "auesses". Ryan caught it from a

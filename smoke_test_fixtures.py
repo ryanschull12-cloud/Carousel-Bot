@@ -55,6 +55,7 @@ GOOGLE = {
         # brain is actually allowed to produce, or the renderer is tested on
         # nothing real.
         "hook": "You are paying Google for customers who were never going to call",
+        "hook_emphasis": "never going",
         "body": [
             {"text": "Google shows your ad for searches you never picked, and charges you the same.",
              "emphasis": "never picked"},
@@ -102,6 +103,7 @@ META = {
     "caption": "You didn't have a bad ad. You had an itchy trigger finger. #metaads #facebookads #dtc",
     "reel_beats": {
         "hook": "Every edit you make throws away what your ads just learned",
+        "hook_emphasis": "throws away",
         "body": [
             {"text": "Facebook spends the first week working out who actually buys from you.",
              "emphasis": "first week"},
@@ -149,6 +151,7 @@ EMAIL = {
     "caption": "Three emails. Built once. Recovers 12% of carts forever. #emailmarketing #ecommerce #klaviyo",
     "reel_beats": {
         "hook": "Your abandoned cart email arrives a day after they stopped caring",
+        "hook_emphasis": "stopped caring",
         "body": [
             {"text": "Most shops send the first reminder next morning, on a setting nobody changed.",
              "emphasis": "next morning"},

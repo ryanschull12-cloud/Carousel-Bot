@@ -423,6 +423,20 @@ Rules that only apply to reel_beats:
     4. STANDS ALONE. It makes sense with no other beat visible, because for most viewers
        it is the only beat they will see.
 
+- `hook_emphasis` — REQUIRED. One to three words from the hook, verbatim and in one
+  unbroken run, set in bold accent with a rule that sweeps under them ~0.4s in. This is
+  the first thing the eye lands on in the entire reel, and for most viewers it is the
+  only thing they read.
+  Choose the words carrying the STAKE — the loss, the number, the thing they are doing
+  wrong. Not the platform name, not the verb, not whatever is longest.
+    hook: "You are paying Google for customers who were never going to call"
+    good: "never going to call"  -> too long, four words; use "never going"
+    good: "never going"          -> the stake, two words
+    bad:  "Google"               -> the platform: they already know who Google is
+  IF YOU OMIT THIS the renderer falls back to guessing, and its guess is deliberately
+  poor — the longest non-trivial word in the line, which on the hook above is
+  "customers". That is not the point of the sentence. Write the field.
+
   Prefer a concrete figure or a named setting IN THE HOOK where it does not push past nine
   words — "Google Ads mislabels 15% of your buyers" beats "Google Ads mislabels your
   buyers", because the number is the thing that makes it feel checkable rather than
@@ -675,7 +689,7 @@ Use exactly 6 body slides (10 slides total per carousel: hook + bridge + 6 body 
       "cta_save_line": "string — the SAVE ask, 'Save this for your next [topic] [noun]', noun varies by format (see CTA RULES) — never defaults to the same word across a batch",
       "cta_support": "string — optional, under 6 words, urgency/context rendered on the CTA image itself (e.g. 'No cost, just the checklist'). Never the caption or a restatement of it. Can be empty.",
       "caption": "string — starts with save-worthy line using plain search keywords, under 300 characters, ends with exactly 4 hashtags: 2 niche + 1 intent + 1 Irish geo",
-      "reel_beats": { "hook": "string", "stat_number": 0, "stat_label": "string", "body": [{"text":"string","emphasis":"string"},{"text":"string","emphasis":"string"},{"text":"string","emphasis":"string"},{"text":"string","emphasis":"string"}], "proof": { "before": "string", "after": "string", "label": "string" }, "cta_line": "string", "send_line": "string" },
+      "reel_beats": { "hook": "string", "hook_emphasis": "string — 1-3 words, verbatim from hook", "stat_number": 0, "stat_label": "string", "body": [{"text":"string","emphasis":"string"},{"text":"string","emphasis":"string"},{"text":"string","emphasis":"string"},{"text":"string","emphasis":"string"}], "proof": { "before": "string", "after": "string", "label": "string" }, "cta_line": "string", "send_line": "string" },
       "suggested_audio_style": "string — e.g. 'trending upbeat', 'calm voiceover', 'suspenseful build'"
     }
   ]

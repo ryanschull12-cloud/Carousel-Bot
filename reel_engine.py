@@ -364,25 +364,26 @@ def fit_hook(d,text,emph,maxw,start,mn,maxl):
     Bold is wider than Regular, so wrapping the whole line in one font and then
     setting the figure in Bold pushed the longest line past the margin. Returns
     (regular, bold, lines-as-word-lists)."""
+    words=text.split()
+    hot=mark_phrase(words,emph)
     size=start
     while True:
         fr_=F(F_SANSR,size); fb=F(F_SANS,size)
         sp=d.textlength(" ",font=fr_)
+        items=list(enumerate(words))
         def wid(ws):
             t=0.0
-            for i,x in enumerate(ws):
-                t+=d.textlength(x,font=fb if (emph and x.strip(".,!?:;")==emph) else fr_)
+            for i,(idx,x) in enumerate(ws):
+                t+=d.textlength(x,font=fb if idx in hot else fr_)
                 if i: t+=sp
             return t
-        lines,cur=[],[]
-        for w in text.split():
-            if cur and wid(cur+[w])>maxw:
-                lines.append(cur); cur=[w]
-            else:
-                cur.append(w)
-        if cur: lines.append(cur)
+        # Clause-wrapped, same as the body. The hook is the line most likely to be
+        # read alone, so a break that strands "for" or "the" at the end of a line
+        # costs more here than anywhere else in the reel.
+        lines=clause_wrap(wid,items,maxw,key=lambda it: it[1],
+                          atomic=lambda it: it[0] in hot)
         if (len(lines)<=maxl and all(wid(l)<=maxw for l in lines)) or size<=mn:
-            return fr_,fb,lines
+            return fr_,fb,[[(x, idx in hot) for idx,x in l] for l in lines]
         size-=4
 
 
@@ -406,7 +407,7 @@ GOOD_BREAK_BEFORE = {
 }
 
 
-def clause_wrap(measure, words, maxw, key=lambda w: w):
+def clause_wrap(measure, words, maxw, key=lambda w: w, atomic=lambda w: False):
     """Greedy wrap, then nudge each break toward the nearest clause boundary.
 
     Plain greedy wrapping breaks wherever the pixel budget runs out, which lands
@@ -448,6 +449,23 @@ def clause_wrap(measure, words, maxw, key=lambda w: w):
                 if prev.lower() in NO_TRAIL:
                     continue                            # never end here; keep looking
                 best = j; break
+            # Never break INSIDE the emphasised run. A highlight split across two
+            # lines gets its underline drawn on the first half only, so it reads as
+            # a rendering fault rather than as emphasis -- "never / going" with a
+            # rule under "never" alone. Walk the break back to the start of the run.
+            while best > 0:
+                # The word after the break is cur[best] only when the break falls
+                # inside the current line; when best == len(cur) the next word is w,
+                # the one that triggered the wrap. Missing that case made this guard
+                # a no-op in exactly the situation it exists for -- the run ending at
+                # the line edge, which is the common one.
+                nxt_it = cur[best] if best < len(cur) else w
+                if atomic(cur[best - 1]) and atomic(nxt_it):
+                    best -= 1
+                else:
+                    break
+            if best <= 0:                      # the run alone is wider than a line
+                best = len(cur)                # nothing to gain: take the full line
             lines.append(cur[:best])
             cur = cur[best:] + [w]
         else:
@@ -501,20 +519,72 @@ def fit_body_mixed(d, text, emph, maxw, start, mn, maxl):
                     t += sp
             return t
 
-        lines = clause_wrap(measure, items, maxw, key=lambda it: it[1])
+        lines = clause_wrap(measure, items, maxw, key=lambda it: it[1],
+                            atomic=lambda it: it[0] in hot)
         if (len(lines) <= maxl and all(measure(l) <= maxw for l in lines)) or size <= mn:
             return fr_, fb, [[(x, idx in hot) for idx, x in l] for l in lines]
         size -= 4
 
 
-def emphasis_token(text):
-    """The one word in the hook worth a highlight: a figure. The content rules
-    require a number, a named setting or a concrete claim in every hook, and the
-    number is the part the eye should land on first."""
-    for w in (text or "").split():
+def _norm(w):
+    return w.strip('.,!?:;"\'()').lower()
+
+
+def mark_phrase(words, phrase):
+    """Indices of the CONTIGUOUS run in `words` matching `phrase`, or empty set.
+
+    Shared by the hook and the body so the two cannot drift apart in how they
+    decide what is highlighted."""
+    seq = [_norm(w) for w in (phrase or "").split() if w.strip()]
+    if not seq:
+        return set()
+    n = len(seq)
+    for i in range(len(words) - n + 1):
+        if [_norm(x) for x in words[i:i + n]] == seq:
+            return set(range(i, i + n))
+    return set()
+
+
+STOP = {
+    "the","a","an","and","or","but","so","if","of","to","in","on","at","for","from",
+    "with","by","as","is","are","was","were","be","been","that","this","these","those",
+    "your","our","their","its","you","we","they","it","not","no","than","into","over",
+    "under","after","before","because","when","while","which","who","most","every",
+    "just","never","ever","still","then","them","what","how","why","are","being",
+}
+
+
+def emphasis_token(text, explicit=None):
+    """The phrase in the hook the eye should land on first.
+
+    THIS BROKE ITSELF ON 2026-08-09 AND THE BREAK WAS SILENT. It used to return the
+    first token containing a digit, which worked only because the hook rules then
+    REQUIRED a figure in every hook. Those rules were rewritten hours earlier to ask
+    for a plain-language stake instead of a named setting and a number -- so every
+    hook written to the new contract returned None here, and the most important frame
+    in the reel rendered with no highlight at all, no bold, and no underline sweep
+    (the sweep keys off this). Nothing failed; the frame just went flat.
+
+    The lesson is recorded because the shape recurs: a renderer heuristic that quietly
+    depends on a content rule dies the moment that rule is edited, and dies silently.
+    Hence `explicit` -- the content brain now NAMES the phrase, exactly as it does for
+    body beats, and the heuristics below are only a safety net.
+
+    Order: what the brain asked for, then a figure, then the longest content word.
+    """
+    words = (text or "").split()
+    if explicit and mark_phrase(words, explicit):
+        return explicit
+    if explicit:
+        print(f"WARNING: hook_emphasis {explicit!r} is not in the hook -- falling back")
+    for w in words:
         if any(ch.isdigit() for ch in w) or "%" in w or "€" in w:
             return w.strip(".,!?:;")
-    return None
+    # Last resort. Weak by design: it picks a word that is merely long rather than a
+    # phrase that is meaningful, so it should be read as a sign the brain omitted
+    # hook_emphasis, not as a feature. The smoke test warns when it fires.
+    cands = [w.strip('.,!?:;"\'') for w in words if _norm(w) not in STOP]
+    return max(cands, key=len) if cands else None
 
 
 # Letter-spacing as a fraction of size, so it scales with the type. Small copy
@@ -586,7 +656,7 @@ def render(niche,beats,outdir,badge):
     # ---- layout, computed once ----
     L={}
     if hook:
-        emph=emphasis_token(hook.text)
+        emph=emphasis_token(hook.text, getattr(hook,"emph",None))
         f_reg,f_bold,ls=fit_hook(probe,hook.text,emph,mw,150,84,4)
         L["hook"]=(f_reg,f_bold,ls,int(f_reg.size*1.20),emph)
         L["hook_y"]=anchor(int(f_reg.size*1.20)*len(ls))
@@ -612,13 +682,17 @@ def render(niche,beats,outdir,badge):
         f_reg,f_bold,ls,lh,emph=L["hook"]; y0=L["hook_y"]
         d=ImageDraw.Draw(fr)
         d.rectangle([MARGIN,y0-46,MARGIN+150,y0-38],fill=c["accent"])
+        # Lines are (word, is_emphasised) pairs now, so the emphasis can be a
+        # phrase rather than a single token. The underline is measured across the
+        # WHOLE emphasised run on its line -- the previous version recorded the box
+        # from the first matching word only, so a two-word emphasis would have been
+        # underlined halfway and looked like a rendering fault.
         for li,line in enumerate(ls):
             y=y0+li*lh; x=MARGIN
-            for w in line:
-                if emph and w.strip(".,!?:;")==emph:
-                    if "hook_emph_box" not in L:
-                        ww=d.textlength(w,font=f_bold)
-                        L["hook_emph_box"]=(x, x+ww, y+int(f_bold.size*1.06))
+            run_x0=None; run_x1=None
+            for w,is_e in line:
+                if is_e:
+                    if run_x0 is None: run_x0=x
                     pre,dig,suf=number_parts(w)
                     if dig is not None:
                         wpre=d.textlength(pre,font=f_bold)
@@ -632,10 +706,19 @@ def render(niche,beats,outdir,badge):
                     else:
                         d.text((x,y),w,font=f_bold,fill=c["accent"])
                         x+=d.textlength(w,font=f_bold)
+                    run_x1=x
                 else:
                     d.text((x,y),w,font=f_reg,fill=INK)
                     x+=d.textlength(w,font=f_reg)
                 x+=d.textlength(" ",font=f_reg)
+            if run_x0 is not None and "hook_emph_box" not in L:
+                # Sit the rule below the DESCENDER, not at a fixed multiple of the
+                # point size. size*1.06 was tuned on a phrase that happened to have
+                # no descender; the moment the emphasis was "never going" the rule
+                # cut straight through the tail of the g. ascent+descent is exact,
+                # and the 6px gap keeps the rule from touching the glyph.
+                _a,_d=f_bold.getmetrics()
+                L["hook_emph_box"]=(run_x0, run_x1, y+_a+_d+6)
         # Reinforcement, not reveal (2026-08-09): a rule sweeps under the accent
         # token starting ~0.4s in, well after the whole hook is readable. Motion
         # lands inside the 1.7s decision window without withholding a word --
@@ -960,7 +1043,8 @@ def beats_from_carousel(carousel):
         # what earns the replay, and the loop tail brings the hook back around for
         # a second look anyway. That trade is wrong for the body: a viewer who
         # cannot finish an instruction has not been teased, they have been failed.
-        out = [Beat("hook", rb["hook"], read_time(rb["hook"], cps=22.0, lo=2.0, hi=3.4))]
+        out = [Beat("hook", rb["hook"], read_time(rb["hook"], cps=22.0, lo=2.0, hi=3.4),
+                    emph=(rb.get("hook_emphasis") or "").strip() or None)]
         if rb.get("stat_number") is not None and rb.get("stat_label"):
             # 0.55s of that is the number counting up before the label matters.
             out.append(Beat("stat", None,
