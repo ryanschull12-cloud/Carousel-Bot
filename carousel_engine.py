@@ -1264,7 +1264,21 @@ def render_cta_slide_fixed(headline, cta_word, cta_promise, cta_support, save_li
     head_line_h = 48
     head_gap = 40
     bar_gap = 28
-    cta_h = int(CTA_COMMENT_SIZE * 1.05)
+    # From FONT METRICS, not a multiple of the point size. This was
+    # CTA_COMMENT_SIZE * 1.05, which at 52px reserves 54px for a line whose
+    # ink is 64px tall in Inter -- so the lower framing accent bar was drawn
+    # 10px INSIDE the glyphs (13 with the shadow offset), cutting straight
+    # through the descenders of "Comment" and reading as a botched underline
+    # rather than as the frame it is. It fit in Liberation, whose metrics are
+    # tighter; the 2026-08-09 switch to Inter broke it and nothing said so.
+    #
+    # This is the third instance of the same fault found in one session --
+    # size*1.05 here, size*1.06 for the reel hook underline, and an ink-bbox
+    # layer height in the reel body. A hardcoded fraction of the point size is
+    # never a substitute for ascent+descent, and every one of these survived
+    # because clipped or overdrawn type still sits inside the margins.
+    _a, _d = f_cta.getmetrics()
+    cta_h = _a + _d + cta_shadow_off + 8
     cta_gap = 36
     promise_gap = 46 if promise_text else 0
     support_line_h = 38

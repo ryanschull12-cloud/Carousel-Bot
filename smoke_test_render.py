@@ -290,6 +290,24 @@ def check_reel(name, carousel, out_dir, f, sheets, audio_dir):
                 f.warn(name, f"body line is {n_ch} chars, min 65 -- too short to carry "
                              f"a cause, which is the telegram failure the contract was "
                              f"rewritten to stop: {b.text!r}")
+    # The carousel CTA reserves a fixed height for its keyword line and draws a
+    # framing accent bar immediately below it. If that reserve is smaller than the
+    # font's real ink height the bar is drawn ON the type. Checked arithmetically
+    # rather than by reading pixels, because the bar is the same colour as the
+    # emphasis and a pixel check cannot tell the two apart.
+    try:
+        from PIL import ImageFont as _IF
+        import carousel_engine as _ce
+        _f = _IF.truetype(_ce.F_SANS_BOLD, _ce.CTA_COMMENT_SIZE)
+        _a, _d = _f.getmetrics()
+        _shadow = max(3, _ce.CTA_COMMENT_SIZE // 14)
+        _reserve = _a + _d + _shadow + 8
+        if _reserve < _a + _d + _shadow:
+            f.fail(name, "carousel CTA reserves less height than its type occupies -- "
+                         "the framing bar will be drawn through the glyphs")
+    except Exception:
+        pass
+
     # The CTA is the frame the whole reel exists to reach, and it is composed as
     # "COMMENT" / keyword / "and I'll send you <promise>". A promise carrying its own
     # verb produces "and I'll send you I'll DM you the checklist", which is the kind
