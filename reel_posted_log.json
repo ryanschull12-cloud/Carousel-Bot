@@ -10,5 +10,17 @@
     "media_product_type": "REELS",
     "trial": false,
     "scored": false
+  },
+  {
+    "media_id": "18092243750099143",
+    "date": "2026-08-09",
+    "index": 1,
+    "niche": "Email Marketing",
+    "angle": "behind-the-curtain",
+    "format": "steal-this",
+    "hook": "Gmail cuts off your subject line after 12 words\u2014everything else is invisible",
+    "media_product_type": "REELS",
+    "trial": false,
+    "scored": false
   }
 ]
