@@ -832,18 +832,35 @@ def _span_words(text, span):
 
 
 def layout_mixed(draw, text, span, f_reg, f_bold, max_w):
+    """Greedy wrap where each word is measured in the weight it will be set in.
+
+    Overlong tokens go through split_overlong first, in their OWN weight. The
+    restyle moved body slides off wrap_text (which had that protection) onto
+    this function to get the bold-accent span, and left the protection behind:
+    a token wider than the panel came back whole, widths_ok could never be true
+    at any size, and fit_mixed exhausted its shrink loop and returned the
+    min_size emergency layout -- which draws off the right edge. Exactly the
+    failure split_overlong was written to stop, reintroduced hours later by a
+    different code path. Caught 2026-08-09 by the unbreakable-strings fixture
+    (a DMARC record; tracking URLs and long compounds hit it identically).
+
+    Fragments inherit the bold flag of the token they came from, so breaking an
+    emphasised span keeps it emphasised across the line break.
+    """
     words = _span_words(text, span)
     sp = draw.textlength(" ", font=f_reg)
     lines, cur, cw = [], [], 0.0
     for w, b in words:
-        ww = draw.textlength(w, font=f_bold if b else f_reg)
-        add = ww if not cur else ww + sp
-        if cur and cw + add > max_w:
-            lines.append(cur)
-            cur, cw = [(w, b)], ww
-        else:
-            cur.append((w, b))
-            cw += add
+        f = f_bold if b else f_reg
+        for piece in split_overlong(draw, w, f, max_w):
+            ww = draw.textlength(piece, font=f)
+            add = ww if not cur else ww + sp
+            if cur and cw + add > max_w:
+                lines.append(cur)
+                cur, cw = [(piece, b)], ww
+            else:
+                cur.append((piece, b))
+                cw += add
     if cur:
         lines.append(cur)
     return lines
