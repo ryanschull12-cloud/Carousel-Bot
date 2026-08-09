@@ -31,7 +31,7 @@ do not share one. API-published reels CANNOT use Instagram's licensed trending a
 the MP4 itself. If assets/audio/ is empty the reel renders with a silent AAC track rather
 than failing -- silent is worse but shipping beats blocking.
 """
-import os, math, random
+import os, math, random, re
 from PIL import Image, ImageDraw, ImageFont
 
 W, H, FPS = 1080, 1920, 24
@@ -255,6 +255,40 @@ class Beat:
         self.kind,self.text,self.dur,self.sub,self.num=kind,text,dur,sub,num
 
 
+def number_parts(word):
+    """'30%' -> ('', '30', '%'); '€400' -> ('€', '400', ''); 'Gmail' -> (w, None, '')."""
+    m=re.match(r"^(\D*?)(\d+)(\D*)$", word)
+    return (m.group(1),m.group(2),m.group(3)) if m else (word,None,"")
+
+
+def fit_hook(d,text,emph,maxw,start,mn,maxl):
+    """Wrap the hook measuring each word in the weight it will actually be set in.
+
+    Bold is wider than Regular, so wrapping the whole line in one font and then
+    setting the figure in Bold pushed the longest line past the margin. Returns
+    (regular, bold, lines-as-word-lists)."""
+    size=start
+    while True:
+        fr_=F(F_SANSR,size); fb=F(F_SANS,size)
+        sp=d.textlength(" ",font=fr_)
+        def wid(ws):
+            t=0.0
+            for i,x in enumerate(ws):
+                t+=d.textlength(x,font=fb if (emph and x.strip(".,!?:;")==emph) else fr_)
+                if i: t+=sp
+            return t
+        lines,cur=[],[]
+        for w in text.split():
+            if cur and wid(cur+[w])>maxw:
+                lines.append(cur); cur=[w]
+            else:
+                cur.append(w)
+        if cur: lines.append(cur)
+        if (len(lines)<=maxl and all(wid(l)<=maxw for l in lines)) or size<=mn:
+            return fr_,fb,lines
+        size-=4
+
+
 def emphasis_token(text):
     """The one word in the hook worth a highlight: a figure. The content rules
     require a number, a named setting or a concrete claim in every hook, and the
@@ -269,6 +303,10 @@ def emphasis_token(text):
 # opens up; the display hook stays at zero, where added tracking just reads loose
 # and where losing kerning pairs would actually show.
 LABEL_TRACK = 0.02
+
+# 0.55s to resolve the counting figure. Long enough to register as motion, short
+# enough to be finished well before the scroll decision lands.
+TICK_FRAMES = 13.0
 
 TAIL_S = 0.6   # crossfade back to the hook so the loop closes
 
@@ -305,32 +343,56 @@ def render(niche,beats,outdir,badge):
     # ---- layout, computed once ----
     L={}
     if hook:
-        f,ls=fit(probe,hook.text,F_SANS,150,84,mw,4)
-        L["hook"]=(f,ls,int(f.size*1.20),emphasis_token(hook.text))
-        L["hook_y"]=anchor(L["hook"][2]*len(ls))
+        emph=emphasis_token(hook.text)
+        f_reg,f_bold,ls=fit_hook(probe,hook.text,emph,mw,150,84,4)
+        L["hook"]=(f_reg,f_bold,ls,int(f_reg.size*1.20),emph)
+        L["hook_y"]=anchor(int(f_reg.size*1.20)*len(ls))
 
     def bg(t):
         fr=grad.copy(); draw_constellation(fr,c,t,nodes); return fr
 
-    def paint_hook(fr):
-        f,ls,lh,emph=L["hook"]; y0=L["hook_y"]
+    def paint_hook(fr, prog=1.0):
+        """Regular sentence, bold accent figure, no highlight block.
+
+        The block was clean but it fenced the number off from the sentence; weight
+        and colour keep it inside the line while still being the first thing the
+        eye lands on. The figure also counts up over 0.55s -- a counting number is
+        the cheapest genuine pattern interrupt there is, and putting it in the hook
+        rather than only in the stat beat lands that interrupt inside the 1.7s
+        window where the scroll decision is actually made. The sentence around it
+        is fully set on frame 0 the whole time, so nothing is being withheld.
+
+        The digits are right-aligned into a slot sized for the FINAL value, so the
+        line never reflows and the suffix never shifts while it counts -- the way
+        an odometer reads rather than a jittering label.
+        """
+        f_reg,f_bold,ls,lh,emph=L["hook"]; y0=L["hook_y"]
         d=ImageDraw.Draw(fr)
         d.rectangle([MARGIN,y0-46,MARGIN+150,y0-38],fill=c["accent"])
         for li,line in enumerate(ls):
             y=y0+li*lh; x=MARGIN
-            for w in line.split():
-                adv=d.textlength(w+" ",font=f)
+            for w in line:
                 if emph and w.strip(".,!?:;")==emph:
-                    ww=d.textlength(w,font=f)
-                    d.rounded_rectangle([x-12,y+int(f.size*0.14),x+ww+12,y+int(f.size*1.04)],
-                                        radius=8,fill=c["accent"])
-                    d.text((x,y),w,font=f,fill=BG)
+                    pre,dig,suf=number_parts(w)
+                    if dig is not None:
+                        wpre=d.textlength(pre,font=f_bold)
+                        wdig=d.textlength(dig,font=f_bold)
+                        shown=str(int(round(int(dig)*prog)))
+                        d.text((x,y),pre,font=f_bold,fill=c["accent"])
+                        d.text((x+wpre+wdig-d.textlength(shown,font=f_bold),y),
+                               shown,font=f_bold,fill=c["accent"])
+                        d.text((x+wpre+wdig,y),suf,font=f_bold,fill=c["accent"])
+                        x+=wpre+wdig+d.textlength(suf,font=f_bold)
+                    else:
+                        d.text((x,y),w,font=f_bold,fill=c["accent"])
+                        x+=d.textlength(w,font=f_bold)
                 else:
-                    d.text((x,y),w,font=f,fill=INK)
-                x+=adv
+                    d.text((x,y),w,font=f_reg,fill=INK)
+                    x+=d.textlength(w,font=f_reg)
+                x+=d.textlength(" ",font=f_reg)
 
     def hook_frame(t):
-        fr=bg(t); paint_hook(fr); return chrome(fr,c,badge)
+        fr=bg(t); paint_hook(fr,0.0); return chrome(fr,c,badge)
 
     def paint_stat(fr,b,fi):
         d=ImageDraw.Draw(fr)
@@ -399,7 +461,7 @@ def render(niche,beats,outdir,badge):
         for fi in range(counts[bi]):
             t=n/total
             fr=bg(t)
-            if b.kind=="hook":   paint_hook(fr)
+            if b.kind=="hook":   paint_hook(fr,ease(clamp(fi/TICK_FRAMES)))
             elif b.kind=="stat": paint_stat(fr,b,fi)
             elif b.kind=="cta":  paint_cta(fr,b,fi)
             else:                paint_body(fr,b,fi)

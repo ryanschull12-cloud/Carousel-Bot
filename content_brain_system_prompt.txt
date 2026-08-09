@@ -388,6 +388,14 @@ Rules that only apply to reel_beats:
     1. NAMED SUBJECT. It names the platform or the exact surface: "Google Ads", "Search
        Terms report", "Meta's lookalikes", "Gmail". Never "your ads" or "your campaigns"
        alone — a generic subject reads as generic advice and is scrolled past.
+       1a. JARGON CARRIES ITS PLATFORM. A product term is not a named subject on its own.
+       "Broad match", "lookalikes", "learning phase", "DMARC", "Performance Max" and
+       "flows" are all invisible to a reader who has not already used them, and a reel
+       is served to people who have not. Attach the platform the first time the term
+       appears: "Google Ads broad match", "Meta lookalikes", "Klaviyo flows". If that
+       pushes the hook past nine words, cut an adjective — never the platform.
+         bad:  "Broad match is eating 30% of your budget"
+         good: "Google Ads broad match eats 30% of budget"
     2. SOMETHING AT STAKE. A loss, an error, or a claim the reader would argue with.
        "is mislabelling", "is burning", "loses to", "buries", "resets". Not "how to",
        not "tips for", not "the best way to".
@@ -420,6 +428,18 @@ Rules that only apply to reel_beats:
   share a lead verb.
     good: "Bid them up 20%. Watch CPA drop."   (32 chars, 2 lines)
     bad:  "Search Terms report → set a 30-day window"   (41 chars, wraps to 3)
+- SAY IT OUT LOUD — applies to every line in reel_beats. A reel is read at speaking
+  pace in the reader's head, so syntax that scans fine as printed slide copy can jam in
+  a video. Reject and rewrite any line where:
+    - the verb is missing and the fragment does not obviously imply one;
+    - two nouns collide with no preposition between them ("budget waste settings");
+    - a modifier could attach to either of two things and you have to re-read to tell;
+    - you cannot say it in one breath without stumbling.
+  A fragment is allowed. A fragment that does not parse is not.
+    bad:  "Broad match budget waste fix"      (three nouns, no verb, no preposition)
+    good: "Switch broad match to phrase"
+    bad:  "Judge day 14 results not 2"        (reads as two clauses fused)
+    good: "Judge on day 14, not day 2"
 - `cta_line` — under 10 words, tells them what commenting the keyword gets them.
 - `send_line` — under 8 words, and the single highest-value line in the whole reel.
   Sends per reach (sharing to DMs) is the most heavily weighted ranking signal on Instagram,

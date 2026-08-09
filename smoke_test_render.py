@@ -62,8 +62,15 @@ import smoke_test_fixtures as fx
 DEFAULT_OUT = "smoke_out"
 
 # Reel retention band. 7-15s holds 60-80%, 15-30s holds 40-60%, 45s+ rarely clears
-# 30%. Faceless text has no voice to carry length, so the target is ~20s.
-REEL_MIN_S, REEL_MAX_S = 15.0, 26.0
+# 30%, and 2026 benchmarks put a good view-through rate above 65% for reels under
+# 15s against above 50% for under 30s.
+#
+# The floor was 15s on the assumption that ~20s was the target. That was backwards.
+# Once beat durations came from reading speed the reels settled at 14-15s with every
+# line still fully readable, which is the better end of the trade in both directions:
+# shorter AND finishable. The floor now only catches a reel so short it cannot be
+# carrying four body beats -- i.e. something upstream dropped copy.
+REEL_MIN_S, REEL_MAX_S = 12.0, 26.0
 
 # Frame 0 must already carry the hook. If the first frame has less than this
 # fraction of the ink the hook ends on, the hook is animating in.
@@ -230,6 +237,16 @@ def check_reel(name, carousel, out_dir, f, sheets, audio_dir):
         if b.dur + 0.01 < need:
             f.warn(name, f"{b.kind} beat is {b.dur:.2f}s for {len(copy)} characters -- "
                          f"needs {need:.2f}s at 20 CPS. Nobody can finish reading it.")
+    # The content brain's own contract: body lines under 34 characters and under 6
+    # words. Not a style preference -- body copy sets at ~96px, so 34 characters is
+    # the most that fits on two lines, and a third line adds another return sweep
+    # for the eye. Mistral drifts off this, and nothing caught it before.
+    for b in beats:
+        if b.kind == "body" and b.text:
+            if len(b.text) > 34 or len(b.text.split()) > 6:
+                f.warn(name, f"body line breaks the copy contract "
+                             f"({len(b.text)} chars, {len(b.text.split())} words, "
+                             f"max 34/6): {b.text!r}")
     f.note(name, f"{len(beats)} beats, {sum(b.dur for b in beats):.1f}s of copy")
 
     # --- the hook must be readable at frame 0 -------------------------------
