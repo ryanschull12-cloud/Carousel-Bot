@@ -308,6 +308,17 @@ def check_reel(name, carousel, out_dir, f, sheets, audio_dir):
     except Exception:
         pass
 
+    # All four body beats must survive the budget. They are one argument -- what
+    # happens, why, what it costs, what to do -- so losing the tail leaves a reel
+    # that states a problem and stops. This is checked because it has already
+    # happened once, from a change to a completely different beat's duration.
+    n_body = sum(1 for b in beats if b.kind == "body")
+    src_body = len(((carousel.get("reel_beats") or {}).get("body")) or [])
+    if src_body and n_body < min(4, src_body):
+        f.fail(name, f"only {n_body} of {src_body} body beats survived the {re_.REEL_MAX_S}s "
+                     f"budget -- the argument is truncated, and the beat dropped is the "
+                     f"one that says what to do")
+
     # The CTA is the frame the whole reel exists to reach, and it is composed as
     # "COMMENT" / keyword / "and I'll send you <promise>". A promise carrying its own
     # verb produces "and I'll send you I'll DM you the checklist", which is the kind
@@ -406,10 +417,18 @@ def check_reel(name, carousel, out_dir, f, sheets, audio_dir):
             f.fail(name, f"frame {idx}: {r['size']}, expected {(re_.W, re_.H)}")
 
     # --- loop closure -------------------------------------------------------
+    # HARD, not soft, as of 2026-08-09. This was a warning, and warnings do not
+    # fail the build. Adding the top progress bar took RMS from 0.70 to 6.41 -- a
+    # visible seam on every replay -- because the bar was full on the last frame and
+    # empty on the first. That would have shipped green. The loop is not a nicety
+    # here: replays are the cheapest watch time this account has, and a seam is the
+    # one thing that stops them being invisible. Measured values sit under 1.0, so
+    # the 2.0 ceiling is generous rather than tight.
     rms = qa.frame_rms(frames[0], frames[-1])
     if rms > LOOP_RMS_MAX:
-        f.warn(name, f"loop does not close -- last frame differs from first by "
-                     f"RMS {rms:.1f}. A seamless loop compounds watch time.")
+        f.fail(name, f"loop does not close -- last frame differs from first by "
+                     f"RMS {rms:.1f} (max {LOOP_RMS_MAX}). A seam is visible on every "
+                     f"replay, and replays are the cheapest watch time available.")
     else:
         f.note(name, f"loop closes (RMS {rms:.2f})")
 

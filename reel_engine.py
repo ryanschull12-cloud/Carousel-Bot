@@ -276,11 +276,49 @@ def draw_constellation(im, c, t, nodes):
         r=3 if hot else 2
         d.ellipse([x-r,y-r,x+r,y+r],fill=c["accent"] if hot else (58,60,70))
 
-def chrome(im,c,badge):
-    """Badge, handle and follow pill. Drawn last on every frame so nothing can
-    cover them, and always in the same colours -- the old build swapped to a light
-    treatment on the CTA and the two versions never quite matched."""
+# Progress track. Visible, not decorative: at 1.4:1 against the background a UI
+# element is not quiet, it is absent. This sits around 3:1, which reads as a track
+# without competing with copy.
+TRACK = (64, 66, 80)
+
+
+def chrome(im,c,badge,prog=None):
+    """Badge, handle, follow pill, and the beat progress bar.
+
+    PROGRESS BAR added 2026-08-09. The reel had no indication of its own length
+    anywhere on screen, and it is now ~30s rather than ~17s -- long enough that a
+    viewer deciding whether to stay has no idea whether they are committing to five
+    more seconds or twenty-five. A segmented bar answers that in one glance, and the
+    segments also expose the structure: four body beats read as four steps rather
+    than as an indefinite wall of text, which is what the copy contract now says
+    they are.
+
+    Placed at the TOP, which is unusual for this account and deliberate. The
+    carousel's equivalent bar sits at the bottom, but on a Reel the bottom ~400px is
+    covered by Instagram's caption and action buttons, so a bar there is a bar
+    nobody sees. Top-edge segmented progress is also the Stories convention, so it
+    needs no explaining.
+
+    HYPOTHESIS, and the walk-back is deleting the prog block: it may equally tell a
+    bored viewer exactly how much they are about to skip. Judge it on skip_rate and
+    watch time against the reels posted before it, not on taste.
+
+    prog: (beat_index, fraction_through_that_beat, beat_count) or None.
+    """
     d=ImageDraw.Draw(im)
+    if prog:
+        bi, frac, nb = prog
+        if nb > 0:
+            gap = 8
+            total_w = W - 2*MARGIN
+            seg_w = (total_w - gap*(nb-1)) / nb
+            for i in range(nb):
+                x0 = MARGIN + i*(seg_w+gap)
+                d.rounded_rectangle([x0,44,x0+seg_w,50], radius=3, fill=TRACK)
+                fill = 1.0 if i < bi else (frac if i == bi else 0.0)
+                if fill > 0:
+                    d.rounded_rectangle([x0,44,x0+seg_w*fill,50], radius=3,
+                                        fill=c["accent"])
     fb=F(F_SANS,32); tw=d.textlength(badge,font=fb)
     d.rounded_rectangle([MARGIN,104,MARGIN+tw+56,104+66],radius=33,fill=c["accent"])
     d.text((MARGIN+28,104+17),badge,font=fb,fill=BG)
@@ -336,7 +374,17 @@ CPS        = 15.0   # characters per second, reading ceiling
 ORIENT     = 0.55   # seconds to find the new copy after a cut
 BEAT_MIN   = 2.2
 BEAT_MAX   = 5.6
-REEL_MAX_S = 30.0   # past this, drop a beat rather than speed any of them up
+# 32, not 30. Rebuilding the CTA as a real instruction took that beat from 2.6s to
+# 4.0s, which pushed a full reel 0.7s over a 30s ceiling -- and trim_to_budget did
+# exactly what it is told, dropping a body beat. The one it drops is the last, which
+# is body[3], the fix. So a change to the CTA silently cost the reel its answer, and
+# the only symptom was a reel that stopped after describing a problem.
+#
+# The lesson is the same one this file keeps learning: the budget is coupled to every
+# beat duration, and moving any of them without re-checking the total removes content
+# quietly. The smoke test now asserts all four body beats survive, so the next person
+# to retime a beat gets told rather than shipping a truncated argument.
+REEL_MAX_S = 32.0   # past this, drop a beat rather than speed any of them up
 
 def read_time(text, cps=CPS, lo=BEAT_MIN, hi=BEAT_MAX, orient=ORIENT):
     return round(clamp(orient + len(text or "")/cps, lo, hi), 2)
@@ -731,7 +779,15 @@ def render(niche,beats,outdir,badge):
                 d.rectangle([ex0, ey, ex0 + (ex1 - ex0) * sw, ey + 7], fill=c["accent"])
 
     def hook_frame(t):
-        fr=bg(t); paint_hook(fr,0.0); return chrome(fr,c,badge)
+        # The tail crossfades back to the hook, so it must match FRAME 0 exactly --
+        # including the progress bar. Drawing the bar full here (the intuitive
+        # choice, since the reel has just finished) put the last frame and the first
+        # frame in different states and the loop stopped closing: RMS went 0.70 to
+        # 6.41, a visible seam on every replay. The bar therefore shows frame 0's
+        # state, so the reset happens under the crossfade, which is what a Stories
+        # bar does on replay anyway.
+        fr=bg(t); paint_hook(fr,0.0)
+        return chrome(fr,c,badge,prog=(0, 1.0/max(counts[0],1), len(beats)))
 
     def paint_stat(fr,b,fi):
         d=ImageDraw.Draw(fr)
@@ -980,7 +1036,7 @@ def render(niche,beats,outdir,badge):
             elif b.kind=="brand":paint_brand(fr,fi)
             else:                paint_body(fr,b,fi)
             fr=push_in(fr, fi/max(counts[bi]-1,1))
-            chrome(fr,c,badge)
+            chrome(fr,c,badge,prog=(bi, (fi+1)/counts[bi], len(beats)))
             # PNG, not JPEG: these are intermediates for x264. Saving them at
             # JPEG q88 was a second lossy pass before the encoder's own -- the
             # frames arrived pre-softened. (2026-08-09)
