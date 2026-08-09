@@ -218,6 +218,20 @@ def check_reel(name, carousel, out_dir, f, sheets, audio_dir):
         f.fail(name, f"only {len(frames)} frames rendered")
         return
 
+    # --- every beat must be on screen long enough to read ---
+    # Netflix allows 20 CPS for adult content; add time to find the copy after the
+    # frame changes. The hook is exempt: it is deliberately set a touch tight, and
+    # the loop tail brings it back for a second pass.
+    for b in beats:
+        copy = b.text if b.kind != "stat" else (b.sub or "")
+        if not copy or b.kind == "hook":
+            continue
+        need = min(0.35 + len(copy) / 20.0, 4.0)
+        if b.dur + 0.01 < need:
+            f.warn(name, f"{b.kind} beat is {b.dur:.2f}s for {len(copy)} characters -- "
+                         f"needs {need:.2f}s at 20 CPS. Nobody can finish reading it.")
+    f.note(name, f"{len(beats)} beats, {sum(b.dur for b in beats):.1f}s of copy")
+
     # --- the hook must be readable at frame 0 -------------------------------
     hook_frames = int(beats[0].dur * re_.FPS)
     ink0 = qa.ink_mass(frames[0])

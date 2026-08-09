@@ -123,6 +123,22 @@ def layer(text,fnt,color):
     ImageDraw.Draw(im).text((5-bb[0],11-bb[1]),text,font=fnt,fill=color+(255,))
     return im
 
+def layer_tracked(text,fnt,color,track=0.0):
+    """layer() with letter-spacing. Pillow has no tracking, so it is set one
+    character at a time, which loses kerning pairs -- fine at label sizes, and the
+    reason the big hook is left at zero where kerning actually shows."""
+    if not track: return layer(text,fnt,color)
+    d0=ImageDraw.Draw(Image.new("RGB",(4,4)))
+    adv=[fnt.getlength(c) for c in text]
+    w=int(sum(adv)+track*max(0,len(text)-1))+12
+    bb=d0.textbbox((0,0),text or "x",font=fnt)
+    im=Image.new("RGBA",(max(w,4),bb[3]-bb[1]+22),(0,0,0,0)); d=ImageDraw.Draw(im)
+    x=5.0
+    for i,ch in enumerate(text):
+        d.text((x,11-bb[1]),ch,font=fnt,fill=color+(255,))
+        x+=adv[i]+track
+    return im
+
 def fade(lay,a):
     if a>=255: return lay
     l=lay.copy(); l.putalpha(l.getchannel("A").point(lambda v: v*a//255)); return l
@@ -205,6 +221,35 @@ def anchor(blockh):
     return int(SAFE_TOP + max(0,(SAFE_BOT - SAFE_TOP - blockh)) * 0.40)
 
 
+# --- timing -------------------------------------------------------------------
+# Beat durations used to be hardcoded: 2.9s hook, 2.8s stat, 2.2s per body line,
+# 3.2s CTA, regardless of how much copy was on screen. Measured against Netflix's
+# 20 characters-per-second reading ceiling, six of twenty-one beats across the
+# three niches were too short to physically finish -- the worst was a 58-character
+# stat label with 2.8s to read it, needing 3.25s -- while the CTA sat for 3.2
+# seconds displaying five characters. The reel was simultaneously too fast to read
+# and wasting two and a half seconds.
+#
+# Duration is now derived from the copy. Netflix allows 20 CPS for adult content
+# and 17 for children's; BBC uses ~15 because broadcast audiences include elderly
+# and low-literacy viewers. This audience is fluent adults choosing to watch on a
+# phone, so 20 is the right ceiling -- but it IS a ceiling, not a target, which is
+# why ORIENT is added on top: after the frame changes a viewer needs a moment to
+# find the new copy before reading starts.
+#
+# BEAT_MAX is not a stylistic choice. Static shots past about four seconds are
+# where viewers scroll. The drifting constellation buys some slack -- nothing here
+# is ever truly still -- but not unlimited slack.
+CPS        = 20.0   # characters per second, reading ceiling
+ORIENT     = 0.35   # seconds to find the new copy after a cut
+BEAT_MIN   = 1.6
+BEAT_MAX   = 4.0
+REEL_MAX_S = 24.0   # past this, drop a beat rather than speed any of them up
+
+def read_time(text, cps=CPS, lo=BEAT_MIN, hi=BEAT_MAX, orient=ORIENT):
+    return round(clamp(orient + len(text or "")/cps, lo, hi), 2)
+
+
 class Beat:
     def __init__(self,kind,text,dur,sub=None,num=None):
         self.kind,self.text,self.dur,self.sub,self.num=kind,text,dur,sub,num
@@ -219,6 +264,11 @@ def emphasis_token(text):
             return w.strip(".,!?:;")
     return None
 
+
+# Letter-spacing as a fraction of size, so it scales with the type. Small copy
+# opens up; the display hook stays at zero, where added tracking just reads loose
+# and where losing kerning pairs would actually show.
+LABEL_TRACK = 0.02
 
 TAIL_S = 0.6   # crossfade back to the hook so the loop closes
 
@@ -297,9 +347,12 @@ def render(niche,beats,outdir,badge):
         yy=y0-40+nl.height+8
         d.rectangle([MARGIN,yy,MARGIN+int(mw*ease(clamp((fi-9)/12.0))),yy+8],fill=c["accent"])
         for li,line in enumerate(labls):
-            q=ease(clamp((fi-13-li*3)/10.0))
+            # 1 frame of stagger is ~42ms, inside the 40-60ms window where each
+            # unit is legible before the next lands. It used to be 3 frames, slow
+            # enough to register as an effect rather than as reading.
+            q=ease(clamp((fi-13-li)/8.0))
             if q>0:
-                lay=layer(line,labf,INK)
+                lay=layer_tracked(line,labf,INK,LABEL_TRACK*labf.size)
                 fr.paste(fade(lay,int(255*q)),(MARGIN,yy+38+li*int(labf.size*1.24)+int(22*(1-q))),
                          fade(lay,int(255*q)))
 
@@ -315,7 +368,7 @@ def render(niche,beats,outdir,badge):
             d.rounded_rectangle([MARGIN-34,y0-30,MARGIN-34+bw,y0+blockh+26],radius=10,fill=BG_RAISED)
             d.rectangle([MARGIN-34,y0-30,MARGIN-28,y0+blockh+26],fill=c["accent"])
         for li,lay in enumerate(lays):
-            p=ease(clamp((fi-li*3)/9.0))
+            p=ease(clamp((fi-li)/7.0))
             if p>0:
                 fr.paste(fade(lay,int(255*p)),(MARGIN+int(22*(1-p)),y0+li*lh),fade(lay,int(255*p)))
 
@@ -334,9 +387,9 @@ def render(niche,beats,outdir,badge):
                 lay=layer(line,f,c["accent"])
                 fr.paste(fade(lay,int(255*q)),(MARGIN,ay+li*lh+int(26*(1-q))),fade(lay,int(255*q)))
             for li,line in enumerate(sls):
-                r=ease(clamp((fi-20-li*3)/10.0))
+                r=ease(clamp((fi-20-li)/8.0))
                 if r>0:
-                    lay=layer(line,sf,INK)
+                    lay=layer_tracked(line,sf,INK,LABEL_TRACK*sf.size)
                     fr.paste(fade(lay,int(255*r)),(MARGIN,ay+len(ls)*lh+34+li*slh),fade(lay,int(255*r)))
 
     # ---- frames ----
@@ -368,6 +421,21 @@ def render(niche,beats,outdir,badge):
 # Beat construction from the content brain's reel_beats block
 # ---------------------------------------------------------------------------
 
+def trim_to_budget(beats, budget=REEL_MAX_S):
+    """Keep the reel inside its budget by dropping beats, never by speeding them up.
+
+    Every duration here is already the minimum a person needs to read the copy, so
+    compressing to hit a target would just produce a reel nobody can follow --
+    which is the failure this whole model exists to remove. Body beats go first and
+    from the end, since the content brain front-loads the strongest action."""
+    while sum(b.dur for b in beats) > budget:
+        idx = max((i for i, b in enumerate(beats) if b.kind == "body"), default=None)
+        if idx is None:
+            break
+        beats.pop(idx)
+    return beats
+
+
 def beats_from_carousel(carousel):
     """Turn a carousel dict's reel_beats into Beat objects.
 
@@ -378,17 +446,26 @@ def beats_from_carousel(carousel):
     """
     rb = carousel.get("reel_beats") or {}
     if rb.get("hook") and rb.get("body"):
-        out = [Beat("hook", rb["hook"], 2.9)]
+        # The hook is read at a slightly higher rate and floored a little tighter
+        # than the body. Copy that is marginally too long to finish in one pass is
+        # what earns the replay, and the loop tail brings the hook back around for
+        # a second look anyway. That trade is wrong for the body: a viewer who
+        # cannot finish an instruction has not been teased, they have been failed.
+        out = [Beat("hook", rb["hook"], read_time(rb["hook"], cps=22.0, lo=2.0, hi=3.4))]
         if rb.get("stat_number") is not None and rb.get("stat_label"):
-            out.append(Beat("stat", None, 2.8, sub=rb["stat_label"], num=int(rb["stat_number"])))
+            # 0.55s of that is the number counting up before the label matters.
+            out.append(Beat("stat", None,
+                            read_time(rb["stat_label"], lo=2.2, hi=4.2, orient=0.90),
+                            sub=rb["stat_label"], num=int(rb["stat_number"])))
         for line in rb["body"][:4]:
             if isinstance(line, dict):
                 line = (line.get("text") or "").strip()
             if line:
-                out.append(Beat("body", line, 2.2))
-        out.append(Beat("cta", carousel.get("cta_word", "AUDIT"), 3.2,
-                        sub=rb.get("cta_line") or carousel.get("cta_promise", "")))
-        return out
+                out.append(Beat("body", line, read_time(line)))
+        cta_sub = rb.get("cta_line") or carousel.get("cta_promise", "")
+        out.append(Beat("cta", carousel.get("cta_word", "AUDIT"),
+                        read_time(cta_sub, lo=2.0, hi=3.2, orient=1.20), sub=cta_sub))
+        return trim_to_budget(out)
 
     # --- fallback: no reel_beats on this manifest ---
     # body_slides entries are dicts ({"text": ..., "keyword": ...}), not strings.
@@ -403,10 +480,12 @@ def beats_from_carousel(carousel):
     body = [t for t in (_line(b) for b in (carousel.get("body_slides") or [])) if t][:4]
     if not (hook and body):
         return []
-    out = [Beat("hook", hook, 2.9)] + [Beat("body", b, 2.2) for b in body]
-    out.append(Beat("cta", carousel.get("cta_word", "AUDIT"), 3.2,
-                    sub=carousel.get("cta_promise", "")))
-    return out
+    sub = carousel.get("cta_promise", "")
+    out = ([Beat("hook", hook, read_time(hook, cps=22.0, lo=2.0, hi=3.4))]
+           + [Beat("body", b, read_time(b)) for b in body])
+    out.append(Beat("cta", carousel.get("cta_word", "AUDIT"),
+                    read_time(sub, lo=2.0, hi=3.2, orient=1.20), sub=sub))
+    return trim_to_budget(out)
 
 
 # ---------------------------------------------------------------------------
