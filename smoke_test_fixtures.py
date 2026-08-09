@@ -46,18 +46,20 @@ GOOGLE = {
     "cta_support": "Free this week",
     "caption": "Broad match is the default and the default is a trap. #googleads #ppc #smallbusiness",
     "reel_beats": {
-        # Written to the prompt's own contract: platform attached to the jargon,
-        # every body line under 34 characters. The earlier fixtures broke both,
-        # which meant the renderer was only ever tested on copy the content brain
-        # is not allowed to produce.
-        "hook": "Google Ads broad match eats 30% of budget",
-        "stat_number": 30,
-        "stat_label": "of spend goes to searches you never approved",
+        # Rewritten 2026-08-09 to the CURRENT contract: a plain-language hook with
+        # no jargon and a stake the reader feels, then four body lines of 65-95
+        # characters that form one argument -- what happens, why, what it costs,
+        # what to do. The previous version was written to the old contract (named
+        # platform, sub-34-character fragments) and would now fail its own checks,
+        # which is the point of updating it: the fixture has to be copy the content
+        # brain is actually allowed to produce, or the renderer is tested on
+        # nothing real.
+        "hook": "You are paying Google for customers who were never going to call",
         "body": [
-            "Open the Search terms report",
-            "Sort by cost, highest first",
-            "Add 'free' and 'jobs' as negatives",
-            "Switch broad match to phrase",
+            "Google matches your ads to searches you never chose, and bills you the same either way.",
+            "It guesses at what you meant by a keyword, so it buys traffic close to it but not it.",
+            "About a third of the average budget goes to those near-misses every single month.",
+            "Open the search terms report, sort by cost, and block every search that never converted.",
         ],
         "cta_line": "the 7-point checklist",
     },
@@ -95,14 +97,12 @@ META = {
     "cta_support": "Two slots left",
     "caption": "You didn't have a bad ad. You had an itchy trigger finger. #metaads #facebookads #dtc",
     "reel_beats": {
-        "hook": "Meta resets learning every time you edit",
-        "stat_number": 50,
-        "stat_label": "conversions a week before Meta stops guessing",
+        "hook": "Every edit you make throws away what your ads just learned",
         "body": [
-            "No edits for 7 full days",
-            "Keep budget moves under 20%",
-            "Merge 11 ad sets into 3",
-            "Judge results at day 14",
+            "Facebook spends the first week of any campaign working out who actually buys from you.",
+            "Changing the budget or the creative wipes that progress and starts the week again.",
+            "Restless accounts stay in that expensive learning window permanently, and never leave.",
+            "Leave a new campaign untouched for seven days, then judge it on day fourteen.",
         ],
         "cta_line": "the 14-day template",
         "proof": {"before": "€45", "after": "€15", "label": "cost per lead, 14 days"},
@@ -140,14 +140,12 @@ EMAIL = {
     "cta_support": "Takes an hour to set up",
     "caption": "Three emails. Built once. Recovers 12% of carts forever. #emailmarketing #ecommerce #klaviyo",
     "reel_beats": {
-        "hook": "Klaviyo cart emails send 23 hours late",
-        "stat_number": 12,
-        "stat_label": "percent of carts a three-email flow wins back",
+        "hook": "Your abandoned cart email arrives a day after they stopped caring",
         "body": [
-            "Send email one at 60 minutes",
-            "No discount in email one",
-            "Email two kills the objection",
-            "Email three: 10% and a clock",
+            "Most shops send the first cart reminder the next morning, on a default nobody changed.",
+            "By then the customer has either bought elsewhere or forgotten the basket entirely.",
+            "That delay quietly costs about one in eight carts that were still winnable at the time.",
+            "Send the first reminder one hour after they leave, before the intent has cooled off.",
         ],
         "cta_line": "all three emails written",
     },

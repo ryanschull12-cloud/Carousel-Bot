@@ -236,14 +236,22 @@ def check_reel(name, carousel, out_dir, f, sheets, audio_dir):
         copy = b.text if b.kind not in ("stat", "proof") else (b.sub or "")
         if not copy or b.kind == "hook":
             continue
-        need = min(0.35 + len(copy) / 20.0, 4.0)
+        # Reads the engine's own constants rather than restating them. This check
+        # silently stopped meaning anything the moment CPS moved from 20 to 15
+        # (2026-08-09) -- it was still measuring against a ceiling the renderer no
+        # longer used, so every beat passed by definition.
+        need = min(re_.ORIENT + len(copy) / re_.CPS, re_.BEAT_MAX)
         if b.dur + 0.01 < need:
             f.warn(name, f"{b.kind} beat is {b.dur:.2f}s for {len(copy)} characters -- "
-                         f"needs {need:.2f}s at 20 CPS. Nobody can finish reading it.")
-    # The content brain's own contract: body lines under 34 characters and under 6
-    # words. Not a style preference -- body copy sets at ~96px, so 34 characters is
-    # the most that fits on two lines, and a third line adds another return sweep
-    # for the eye. Mistral drifts off this, and nothing caught it before.
+                         f"needs {need:.2f}s at {re_.CPS:.0f} CPS. Nobody can finish "
+                         f"reading it.")
+    # The content brain's own contract: body lines 65-95 characters, written as
+    # sentences. Rewritten 2026-08-09 when the contract inverted -- it used to cap
+    # lines at 34 characters and 6 words, which is what produced beats like
+    # "Personalize first half": too short to carry a cause, and unshufflable only
+    # by accident. Both bounds matter now. Under 65 is a telegram again; over 95
+    # does not fit the 5.6s a beat gets inside a 30s reel, so it renders at a rate
+    # nobody reads at.
     for b in beats:
         if b.kind == "proof" and b.pair:
             for v in b.pair:
@@ -254,10 +262,15 @@ def check_reel(name, carousel, out_dir, f, sheets, audio_dir):
                                  f"it sets very large and will shrink the frame's "
                                  f"dominant element")
         if b.kind == "body" and b.text:
-            if len(b.text) > 34 or len(b.text.split()) > 6:
-                f.warn(name, f"body line breaks the copy contract "
-                             f"({len(b.text)} chars, {len(b.text.split())} words, "
-                             f"max 34/6): {b.text!r}")
+            n_ch = len(b.text)
+            if n_ch > 95:
+                f.warn(name, f"body line is {n_ch} chars, max 95 -- at {re_.CPS:.0f} "
+                             f"CPS that needs {re_.ORIENT + n_ch/re_.CPS:.1f}s and the "
+                             f"beat caps at {re_.BEAT_MAX}s: {b.text!r}")
+            elif n_ch < 65:
+                f.warn(name, f"body line is {n_ch} chars, min 65 -- too short to carry "
+                             f"a cause, which is the telegram failure the contract was "
+                             f"rewritten to stop: {b.text!r}")
     f.note(name, f"{len(beats)} beats, {sum(b.dur for b in beats):.1f}s of copy, "
                  f"type: {getattr(re_, 'FONT_FAMILY', '?')}")
 

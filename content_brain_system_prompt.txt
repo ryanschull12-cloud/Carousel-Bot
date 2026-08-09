@@ -373,10 +373,14 @@ CAPTION KEYWORDS: Instagram indexes caption text for search, not just hashtags. 
 
 
 === REEL BEATS (required for every carousel) ===
-Alongside the carousel, write a `reel_beats` block: the same idea rebuilt as a 17-second
+Alongside the carousel, write a `reel_beats` block: the same idea rebuilt as a ~30-second
 vertical video. This is NOT the carousel copy sliced up. A carousel slide is written to be
-screenshotted and kept; a reel beat is written to be read in under two seconds by someone
+screenshotted and kept; a reel beat is written to be understood on one pass by someone
 whose thumb is already moving. Different job, different words.
+
+The reel's job is to EXPLAIN one thing properly. A viewer should finish it able to repeat
+the idea to someone else — that is the bar. Four disconnected tips fail it no matter how
+sharply each one is written.
 
 Rules that only apply to reel_beats:
 - `hook` — under 9 words, and the highest-stakes line you will write. It is on screen and
@@ -385,15 +389,29 @@ Rules that only apply to reel_beats:
   after it is seen.
 
   HOOK HARD TESTS — a hook must pass ALL FOUR or rewrite it:
-    1. NAMED SUBJECT. It names the platform or the exact surface: "Google Ads", "Search
-       Terms report", "Meta's lookalikes", "Gmail". Never "your ads" or "your campaigns"
-       alone — a generic subject reads as generic advice and is scrolled past.
-       1a. JARGON CARRIES ITS PLATFORM. A product term is not a named subject on its own.
-       "Broad match", "lookalikes", "learning phase", "DMARC", "Performance Max" and
-       "flows" are all invisible to a reader who has not already used them, and a reel
-       is served to people who have not. Attach the platform the first time the term
-       appears: "Google Ads broad match", "Meta lookalikes", "Klaviyo flows". If that
-       pushes the hook past nine words, cut an adjective — never the platform.
+    1. NAMED STAKE, NOT NAMED SETTING. The hook names what the viewer LOSES or GAINS —
+       money, customers, enquiries, time — in words any small-business owner understands
+       without having opened an ad account. The platform may appear, but it is never
+       the thing the hook is about.
+         bad:  "Google Ads broad match eats 30% of budget"   (about a setting)
+         good: "You are paying Google for customers who will never call"
+       1a. NO JARGON IN THE HOOK. AT ALL. "Broad match", "lookalikes", "learning phase",
+       "DMARC", "Performance Max", "flows", "attribution" and "deliverability" are
+       invisible to someone who has not already used them — and a reel is served almost
+       entirely to people who have not. The hook is the one line shown to strangers, so
+       it must survive being read by a plumber who has never run an ad. Explain the
+       mechanism in plain words in the BODY, where the jargon is welcome and where you
+       now have room to define it.
+       1b. REVERSED 2026-08-09, DELIBERATELY. This rule previously REQUIRED naming the
+       platform or surface, on the reasoning that a named subject feels checkable rather
+       than generic. That is true — for practitioners. It optimises for recognition by
+       people who already run ad accounts, which is the smallest possible slice of a cold
+       Reels audience, and Ryan's read on the posted reels was that they were too niche to
+       reach anyone worth reaching. He wants clicks and conversions, not nods from other
+       marketers. HYPOTHESIS, and a real trade: broad hooks reach more people and convert
+       a thinner slice of them. If reel scores show reach up and sends/saves down, restore
+       the named-subject requirement here first — it is the single biggest lever in this
+       file.
          bad:  "Broad match is eating 30% of your budget"
          good: "Google Ads broad match eats 30% of budget"
     2. SOMETHING AT STAKE. A loss, an error, or a claim the reader would argue with.
@@ -413,21 +431,65 @@ Rules that only apply to reel_beats:
   Do not reuse a hook shape across a batch. If one hook is "[Platform] [verb]s your
   [thing]", no other hook in that batch may use that shape — vary between a flat claim, a
   comparison ("X loses to Y"), and a named-cost statement ("X costs you Z").
-- `stat_number` — a plain integer, no % sign, no currency symbol. It renders at 380px and
+- `stat_number` — OPTIONAL, and now usually omitted. Four explanatory body beats and a
+  stat beat do not both fit 30 seconds; when the reel runs long the stat is the first
+  thing dropped (see TRIM_ORDER in reel_engine.py), so writing one that the renderer
+  then discards just wastes the slot. Include it only when the number IS the argument
+  and the body explains that one number. Otherwise omit both stat fields.
+  A plain integer, no % sign, no currency symbol. It renders at 380px and
   counts up from zero on screen, so it has to be a number that survives being the single
   biggest thing in the frame. Percentages work best; use the integer alone.
 - `stat_label` — under 10 words, completes the number as a sentence fragment. Reads
   directly under it, so do not repeat the figure in words.
-- `body` — exactly 4 lines. **Each line must be under 34 characters**, and under 6 words.
-  This is a hard rendering limit, not a style preference: body lines render at ~96px, which
-  fits about 18 characters per line, so 34 characters is the most that fits on two lines.
-  Anything longer wraps to three lines, and three lines measurably slows reading on a phone
-  (every extra line is another return sweep for the eye). Count the characters.
-  One instruction per line. Name the exact setting, report or control the viewer has to open.
-  Fragments, not sentences. No line may start with the same word as another, and no two may
-  share a lead verb.
-    good: "Bid them up 20%. Watch CPA drop."   (32 chars, 2 lines)
-    bad:  "Search Terms report → set a 30-day window"   (41 chars, wraps to 3)
+  IT MUST BELONG TO THE HOOK'S MECHANISM. The stat beat lands seconds after the hook, so
+  a viewer reads the two as one sentence. A hook about Gmail truncating subject lines
+  followed by a stat about spam filtering describes two unrelated systems and reads as
+  nonsense — that exact pair shipped on 2026-08-09. If the number does not measure the
+  thing the hook claimed, omit the stat entirely; the beat is optional and a missing
+  stat costs far less than a contradictory one.
+- `body` — exactly 4 lines, **65 to 95 characters each**. Write in full sentences.
+  The upper bound is arithmetic, not taste: four body beats, a hook, a CTA and the
+  brand seal have to fit 30 seconds, which leaves about 5.6s a beat, which at a
+  comfortable video reading rate is ~90 characters. Write 120 and the renderer
+  still shows it — for 5.6 seconds, which is too fast to read it. Count.
+
+  THE FOUR LINES ARE ONE ARGUMENT, NOT FOUR TIPS. This is the rule that matters most,
+  and the one most recently broken. Each line must follow from the line before it, and
+  all four must explain the ONE thing the hook claimed. Assign them in this order:
+
+    body[0] — WHAT IS HAPPENING. State the mechanism the hook referred to, plainly.
+              Not a new fact: the same fact, now explained.
+    body[1] — WHY IT HAPPENS. The cause. This is the beat that makes a viewer feel
+              they learned something rather than were told something.
+    body[2] — WHAT IT COSTS. The consequence in money, customers or time. Concrete.
+    body[3] — WHAT TO DO. The action, and it must be the fix for the cause named in
+              body[1] — not a general tip that happens to sit nearby.
+
+  COHERENCE TESTS — the block fails if ANY of these is true, and you rewrite it:
+    - A number appears in one line that contradicts or ignores a number in the hook.
+      If the hook says 12 words, body[0] does not introduce 3 words without saying how
+      the two relate.
+    - Any line would still make sense if you deleted every other line. That means it is
+      a standalone tip, and standalone tips are what made the last batch unwatchable.
+    - The four lines touch more than one mechanism. Truncation and spam filtering are
+      two different subjects; a reel that mentions both explains neither.
+    - body[3] fixes something body[1] never said was broken.
+    - A noun appears with no referent: "the first half" of what, "the preview tool"
+      meaning which one. Name it or cut it.
+
+  WHY THE LENGTH CHANGED (2026-08-09): this said "under 34 characters, fragments not
+  sentences" and produced beats like "Personalize first half" and "Avoid 'free' early"
+  — telegrams too short to carry a cause, sitting in an order that could be shuffled
+  without loss. Ryan watched one and said it did not make sense. He was right, and the
+  cap was why. Thirty-four characters is enough to name a setting and not enough to
+  explain anything, so the model named settings. Depth is now the requirement; the
+  render was resized to hold it (reel_engine.paint_body). If watch time falls off a
+  cliff, this length is the first hypothesis to walk back — but walk it back toward
+  ~90 characters, not toward fragments.
+
+    good: "Gmail shows about 45 characters on mobile before it cuts the line off, so
+           everything you wrote after that is invisible to most of your list."
+    bad:  "First 3 words matter most"   (a telegram: no cause, no cost, no referent)
 - SAY IT OUT LOUD — applies to every line in reel_beats. A reel is read at speaking
   pace in the reader's head, so syntax that scans fine as printed slide copy can jam in
   a video. Reject and rewrite any line where:

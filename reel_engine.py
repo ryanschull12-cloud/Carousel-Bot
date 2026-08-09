@@ -247,7 +247,7 @@ def chrome(im,c,badge):
 SAFE_TOP, SAFE_BOT = 250, 1430   # bottom ~320px is covered by IG caption/buttons
 def anchor(blockh):
     """Optically centre a block in the safe area, biased slightly high."""
-    return int(SAFE_TOP + max(0,(SAFE_BOT - SAFE_TOP - blockh)) * 0.40)
+    return int(SAFE_TOP + max(0,(SAFE_BOT - SAFE_TOP - blockh)) * 0.46)
 
 
 # --- timing -------------------------------------------------------------------
@@ -269,11 +269,27 @@ def anchor(blockh):
 # BEAT_MAX is not a stylistic choice. Static shots past about four seconds are
 # where viewers scroll. The drifting constellation buys some slack -- nothing here
 # is ever truly still -- but not unlimited slack.
-CPS        = 20.0   # characters per second, reading ceiling
-ORIENT     = 0.35   # seconds to find the new copy after a cut
-BEAT_MIN   = 1.6
-BEAT_MAX   = 4.0
-REEL_MAX_S = 24.0   # past this, drop a beat rather than speed any of them up
+# Retimed 2026-08-09 (second pass). Ryan watched a posted reel and called it fast
+# AND thin -- both at once, which is the combination these constants create: copy
+# short enough to clear a 4s ceiling is copy too short to say anything. The body
+# contract now asks for 65-130 characters a line, so a beat has roughly three times
+# the text to get through and needs the time to match.
+#
+# CPS drops from 20 to 15. Twenty chars/sec is a plausible ceiling for SILENT
+# reading of familiar words; it is too fast for a sentence carrying a cause the
+# viewer has not met before, which is exactly what the new body beats are.
+#
+# REEL_MAX_S MOVES IN THE SAME COMMIT, AND MUST. trim_to_budget enforces the budget
+# by DELETING body beats, never by compressing them. Slowing the beats while leaving
+# the ceiling at 24 would have silently dropped two of the four body lines -- making
+# "not enough said on each slide" strictly worse while appearing to address it. Any
+# future change to CPS/BEAT_MAX has to re-check this ceiling or it will quietly eat
+# the argument the body beats now carry.
+CPS        = 15.0   # characters per second, reading ceiling
+ORIENT     = 0.55   # seconds to find the new copy after a cut
+BEAT_MIN   = 2.2
+BEAT_MAX   = 5.6
+REEL_MAX_S = 30.0   # past this, drop a beat rather than speed any of them up
 
 def read_time(text, cps=CPS, lo=BEAT_MIN, hi=BEAT_MAX, orient=ORIENT):
     return round(clamp(orient + len(text or "")/cps, lo, hi), 2)
@@ -490,22 +506,44 @@ def render(niche,beats,outdir,badge):
         d=ImageDraw.Draw(fr)
         # SemiBold, not Bold. Inter Bold at 132px is heavier than Liberation Bold
         # and closes up the counters; SemiBold matches the old weight impression.
-        f,ls=fit(probe,b.text,F_SEMI,132,70,mw-72,4); lh=int(f.size*1.26)
+        # Retimed and resized 2026-08-09: the body contract went from <34 characters
+        # to 65-130, so 132px over 4 lines no longer fits. Target drops to 96 and the
+        # floor to 54, with 6 lines allowed -- a 130-char sentence sets at roughly
+        # 5 lines around 80px, which is still far above the ~400px-phone legibility
+        # floor that drove the original sizing.
+        f,ls=fit(probe,b.text,F_SEMI,112,58,mw-40,6); lh=int(f.size*1.30)
         lays=[layer(l,f,INK) for l in ls]
         blockh=lh*len(lays)
-        # Clamp the panel to the safe margin. Inter sets wider, and an unclamped
-        # hug-the-longest-line panel ran within a few px of the right edge.
-        blockw=min(max(l.width for l in lays)+72, W-MARGIN+34)
+        # Panel width is now FIXED and symmetric, not hugged to the longest line
+        # (2026-08-09). Hugging meant the right edge landed wherever the wrap
+        # happened to fall -- different on every beat, so the panel appeared to
+        # change size beat to beat and the frame read as under-used. A fixed panel
+        # inset equally from both edges gives the reel a spine, and uses the width
+        # the 9:16 frame actually has.
+        blockw=W - 2*(MARGIN-34)
         y0=anchor(blockh)
-        grow=ease(clamp(fi/10.0))
-        bw=int(blockw*grow)
-        if bw>0:
-            d.rounded_rectangle([MARGIN-34,y0-30,MARGIN-34+bw,y0+blockh+26],radius=10,fill=BG_RAISED)
-            d.rectangle([MARGIN-34,y0-30,MARGIN-28,y0+blockh+26],fill=c["accent"])
+        # Entrance rebuilt 2026-08-09: Ryan's note was that the text and the panel
+        # "come in from the left" too quickly. They did, twice over -- the panel
+        # wiped open horizontally while every line simultaneously slid 22px in from
+        # the left, so the eye was chasing two leftward moves before it could read.
+        #
+        # The panel now fades and settles in place instead of wiping (no horizontal
+        # travel at all), and the lines rise a few px rather than sliding sideways,
+        # which is the motion paint_stat and paint_cta already use -- so the beats
+        # finally share one language. Vertical entrances also do not fight the
+        # left-to-right path the eye takes to read the line.
+        grow=ease(clamp(fi/18.0))
+        if grow>0:
+            panel=Image.new("RGBA",(W,H),(0,0,0,0))
+            pd=ImageDraw.Draw(panel)
+            pd.rounded_rectangle([MARGIN-34,y0-30,MARGIN-34+blockw,y0+blockh+26],
+                                 radius=10,fill=BG_RAISED+(255,))
+            pd.rectangle([MARGIN-34,y0-30,MARGIN-28,y0+blockh+26],fill=c["accent"]+(255,))
+            fr.paste(fade(panel,int(255*grow)),(0,0),fade(panel,int(255*grow)))
         for li,lay in enumerate(lays):
-            p=ease(clamp((fi-li*2)/10.0))
+            p=ease(clamp((fi-li*3)/15.0))
             if p>0:
-                fr.paste(fade(lay,int(255*p)),(MARGIN+int(22*(1-p)),y0+li*lh),fade(lay,int(255*p)))
+                fr.paste(fade(lay,int(255*p)),(MARGIN,y0+li*lh+int(14*(1-p))),fade(lay,int(255*p)))
 
     def paint_proof(fr,b,fi):
         """Before and after, with a directional arrow and bars in proportion.
@@ -693,18 +731,38 @@ def proof_pair(carousel):
     return None
 
 
+# Drop order when the reel is over budget. Rewritten 2026-08-09 along with the body
+# contract, and the reversal is the point: body beats used to be sacrificed FIRST,
+# on the reasoning that the content brain front-loads the strongest action so the
+# tail was the cheapest thing to lose.
+#
+# That reasoning died with the new contract. The four body beats are now one argument
+# -- what is happening, why, what it costs, what to do -- and they are ordered, so the
+# beat at the end is body[3], the fix. Dropping it leaves a reel that describes a
+# problem and then stops. The old rule would have done exactly that on every reel long
+# enough to need trimming, which is most of them now.
+#
+# Stat and proof are decorative by comparison: both are optional in the prompt, both
+# restate something the body already says, and losing either costs a nice frame rather
+# than the meaning. So they go first, and the argument survives.
+TRIM_ORDER = ("stat", "proof", "body")
+
+
 def trim_to_budget(beats, budget=REEL_MAX_S):
     """Keep the reel inside its budget by dropping beats, never by speeding them up.
 
     Every duration here is already the minimum a person needs to read the copy, so
-    compressing to hit a target would just produce a reel nobody can follow --
-    which is the failure this whole model exists to remove. Body beats go first and
-    from the end, since the content brain front-loads the strongest action."""
-    while sum(b.dur for b in beats) > budget:
-        idx = max((i for i, b in enumerate(beats) if b.kind == "body"), default=None)
-        if idx is None:
+    compressing to hit a target would just produce a reel nobody can follow -- which
+    is the failure this whole model exists to remove. See TRIM_ORDER for what gets
+    sacrificed and why."""
+    for kind in TRIM_ORDER:
+        while sum(b.dur for b in beats) > budget:
+            idx = max((i for i, b in enumerate(beats) if b.kind == kind), default=None)
+            if idx is None:
+                break
+            beats.pop(idx)
+        if sum(b.dur for b in beats) <= budget:
             break
-        beats.pop(idx)
     return beats
 
 
