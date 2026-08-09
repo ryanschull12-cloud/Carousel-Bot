@@ -114,20 +114,27 @@ def create_carousel_container(child_ids, caption):
 
 
 def wait_until_ready(container_id, timeout=120):
+    # Returning a bare False on ERROR threw away Instagram's actual
+    # explanation, so every container failure surfaced as the same
+    # useless "never reached FINISHED" line. Raise with the real body.
     start = time.time()
     while time.time() - start < timeout:
         resp = requests.get(f"{GRAPH}/{container_id}", params={
-            "fields": "status_code",
+            "fields": "status_code,status",
             "access_token": IG_ACCESS_TOKEN,
         }, timeout=30)
         check_response(resp, f"wait_until_ready({container_id})")
-        status = resp.json().get("status_code")
+        payload = resp.json()
+        status = payload.get("status_code")
         if status == "FINISHED":
             return True
         if status == "ERROR":
-            return False
+            raise RuntimeError(
+                f"Container {container_id} reported ERROR: {payload.get('status')}")
         time.sleep(5)
-    return False
+    raise RuntimeError(
+        f"Container {container_id} still not FINISHED after {timeout}s "
+        "(Instagram never finished processing the media)")
 
 
 # Added 2026-08-04: today's carousel 1 failed with error_subcode 2207027
@@ -237,8 +244,7 @@ def post_carousel(carousel, posted_log, batch_date):
 
     container_id = create_carousel_container(child_ids, carousel.get("caption", ""))
 
-    if not wait_until_ready(container_id):
-        raise RuntimeError(f"Container {container_id} never reached FINISHED status")
+    wait_until_ready(container_id)
 
     result = publish(container_id)
     media_id = result.get("id")
@@ -343,16 +349,32 @@ def main():
 
     print(f"Posting {len(to_post)} carousel(s) to Instagram...")
 
+    failures = []
     for i, carousel in enumerate(to_post):
         try:
             post_carousel(carousel, posted_log, batch_date)
+            # Flush immediately. This used to happen once, after the whole
+            # loop -- so a crash or a step timeout mid-loop lost the record
+            # of posts that HAD succeeded, and the next */15 tick reposted
+            # them. Writing per-post closes that window.
+            save_posted_log(posted_log)
         except Exception as e:
             print(f"FAILED to post carousel {carousel['index']}: {e}")
-            send_failure_alert(carousel["index"], str(e))
+            failures.append((carousel["index"], str(e)))
+            try:
+                send_failure_alert(carousel["index"], str(e))
+            except Exception as mail_err:
+                print(f"Could not send failure alert email: {mail_err}")
         if i < len(to_post) - 1:
             time.sleep(SECONDS_BETWEEN_POSTS)
 
     save_posted_log(posted_log)
+
+    # Exit non-zero so the Actions run goes red. Swallowing the exception
+    # meant a day where nothing posted looked identical to a day that
+    # worked.
+    if failures:
+        raise SystemExit(f"{len(failures)} carousel(s) failed to post: {failures}")
 
 
 if __name__ == "__main__":
