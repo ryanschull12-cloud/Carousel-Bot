@@ -216,11 +216,19 @@ def email(subject, body, attach=None):
     """attach: path to a file to send along, or None.
 
     Added 2026-08-09 so the rendered MP4 reaches Ryan directly. The same file that
-    goes to Instagram is already YouTube Shorts eligible -- 1080x1920, under 60
-    seconds, H.264 -- and Shorts has no API route available on this setup, so the
-    upload is manual and the file has to arrive somewhere he can reach it from a
-    phone. Reels land around 1.5 MB, well inside Gmail's 25 MB limit; anything
-    unexpectedly large is skipped rather than failing the send."""
+    goes to Instagram is eligible for BOTH YouTube Shorts and TikTok as-is --
+    1080x1920, under 60 seconds, H.264 -- and neither has an API route available on
+    this setup for video, so both uploads are manual and the file has to arrive
+    somewhere reachable from a phone.
+
+    TikTok specifically: tiktok_post.py posts the CAROUSEL IMAGES as a photo-mode
+    Direct Post and has never touched these MP4s. So the automated TikTok presence
+    and the video are two separate things, and the video only gets there by hand,
+    from this email.
+
+    Size: reels were ~1.5 MB when this was written and are now 4.5-5 MB, after the
+    move to PNG intermediates and crf 18 for sharper type. Still far inside Gmail's
+    25 MB limit, and the 20 MB guard below skips rather than failing the send."""
     if not (GMAIL_ADDRESS and GMAIL_APP_PASSWORD):
         return
     m = EmailMessage()
@@ -331,22 +339,39 @@ def main():
         # read on a phone.
         hook = (pick.get("reel_beats") or {}).get("hook") or pick.get("hook_slide", "")
         credit = reel_engine.credit_for(reel_engine.pick_track(today, pick["index"]))
+        caption = pick.get("caption", "")
         body = [
-            "Reel ready to upload to YouTube Shorts.",
+            "Reel attached. Same file works on both, no re-export needed.",
             "",
-            f"Suggested title:  {hook}",
+            "── YOUTUBE SHORTS ─────────────────────────────",
+            f"Title:  {hook}",
             "",
             "Description:",
-            pick.get("caption", ""),
+            caption,
+            "",
+            "Shorts picks it up automatically: vertical and under 60s, so no #Shorts",
+            "tag is needed. Shorts is a SEARCH surface rather than a feed -- if the",
+            "hook above reads as a statement rather than something a person would",
+            "type into a search box, retitle it before uploading.",
+            "",
+            "── TIKTOK ─────────────────────────────────────",
+            "Caption:",
+            caption,
+            "",
+            "Note: the TikTok automation posts the carousel IMAGES in photo mode and",
+            "never sees this video. Posting it here is a genuinely separate channel,",
+            "not a duplicate of what already went out.",
+            "",
+            "───────────────────────────────────────────────",
         ]
         if credit:
-            body += ["", f"Music: {credit}"]
-        body += ["", f"{dur:.1f}s · 1080x1920 · {os.path.getsize(rel)/1048576:.2f} MB",
-                 f"{pick.get('niche','')} · carousel {pick['index']}",
-                 "",
-                 "Shorts picks it up automatically: it is vertical and under 60s, so "
-                 "no #Shorts tag is needed."]
-        email(f"Reel for YouTube — {today} — {pick.get('niche','')}",
+            body += [f"Music: {credit}",
+                     "Keep this credit in the description on both. The track is",
+                     "Creative Commons Attribution -- crediting is the licence",
+                     "condition, not a courtesy.", ""]
+        body += [f"{dur:.1f}s · 1080x1920 · {os.path.getsize(rel)/1048576:.2f} MB",
+                 f"{pick.get('niche','')} · carousel {pick['index']}"]
+        email(f"Reel for YouTube + TikTok — {today} — {pick.get('niche','')}",
               "\n".join(body), attach=rel)
 
         if args.render_only:
