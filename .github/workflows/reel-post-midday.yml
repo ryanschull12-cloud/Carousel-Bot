@@ -1,3 +1,7 @@
+concurrency:
+  group: instagram-pipeline
+  cancel-in-progress: false
+
 name: Midday Instagram Reel
 
 # FIRST of two reels a day. This slot takes the highest-scoring carousel; reel-post.yml
