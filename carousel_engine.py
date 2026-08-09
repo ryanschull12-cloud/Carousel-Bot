@@ -14,9 +14,30 @@ W, H = 1080, 1350
 MARGIN = 76
 
 SYS_DIR = "/usr/share/fonts/truetype/liberation"
-F_SERIF_BOLD = os.path.join(SYS_DIR, "LiberationSerif-Bold.ttf")
-F_SANS_BOLD = os.path.join(SYS_DIR, "LiberationSans-Bold.ttf")
-F_SANS_REG = os.path.join(SYS_DIR, "LiberationSans-Regular.ttf")
+# Typography aligned with reel_engine (2026-08-09): the reels moved to
+# all-sans Inter while carousel hooks stayed Liberation Serif, so the profile
+# grid read as two different accounts -- the mismatch the rebrand was meant to
+# close. Same mechanism as the reels: Inter arrives via `apt-get install
+# fonts-inter` in the workflows, Liberation Sans is the fallback if that step
+# ever fails, and INTER_FONT_DIR overrides for local testing without root.
+# Degrading is allowed; stopping is not.
+INTER_DIRS = [
+    os.environ.get("INTER_FONT_DIR", ""),
+    "/usr/share/fonts/opentype/inter",
+    "/usr/share/fonts/truetype/inter",
+]
+
+def _sans_family():
+    for d in INTER_DIRS:
+        if d and os.path.exists(os.path.join(d, "Inter-Regular.otf")):
+            return (os.path.join(d, "Inter-Bold.otf"), os.path.join(d, "Inter-Regular.otf"))
+    return (os.path.join(SYS_DIR, "LiberationSans-Bold.ttf"),
+            os.path.join(SYS_DIR, "LiberationSans-Regular.ttf"))
+
+F_SANS_BOLD, F_SANS_REG = _sans_family()
+# Display face for hooks, bridges, mega stats/phrases, recap headers and
+# before/after values. Was LiberationSerif-Bold until 2026-08-09.
+F_DISPLAY = F_SANS_BOLD
 
 AGENCY_HANDLE = "@rd.marketing0"
 
@@ -324,7 +345,7 @@ def draw_before_after_strip(draw, before_val, after_val, colors, y, max_width):
     """
     target, min_size = 60, 34
     size = target
-    f_val = ImageFont.truetype(F_SERIF_BOLD, size)
+    f_val = ImageFont.truetype(F_DISPLAY, size)
     f_arrow_gap = 70
     while size > min_size:
         before_w = draw.textlength(before_val, font=f_val)
@@ -333,7 +354,7 @@ def draw_before_after_strip(draw, before_val, after_val, colors, y, max_width):
         if total_w <= max_width:
             break
         size -= 4
-        f_val = ImageFont.truetype(F_SERIF_BOLD, size)
+        f_val = ImageFont.truetype(F_DISPLAY, size)
     before_w = draw.textlength(before_val, font=f_val)
     after_w = draw.textlength(after_val, font=f_val)
     total_w = before_w + f_arrow_gap + after_w
@@ -389,7 +410,7 @@ def draw_comparison_strip(draw, side_a, side_b, colors, y, max_width):
     """
     target, min_size = 52, 30
     size = target
-    f_val = ImageFont.truetype(F_SERIF_BOLD, size)
+    f_val = ImageFont.truetype(F_DISPLAY, size)
     badge_gap = 90  # space reserved for the VS badge between the two sides
     while size > min_size:
         a_w = draw.textlength(side_a, font=f_val)
@@ -398,7 +419,7 @@ def draw_comparison_strip(draw, side_a, side_b, colors, y, max_width):
         if total_w <= max_width:
             break
         size -= 4
-        f_val = ImageFont.truetype(F_SERIF_BOLD, size)
+        f_val = ImageFont.truetype(F_DISPLAY, size)
     a_w = draw.textlength(side_a, font=f_val)
     b_w = draw.textlength(side_b, font=f_val)
     total_w = a_w + badge_gap + b_w
@@ -430,15 +451,18 @@ def draw_comparison_strip(draw, side_a, side_b, colors, y, max_width):
     return int(size * 1.5)
 
 
-def draw_marker_bold(draw, x, y, w, h, color):
-    r, g, b = color
-    marker_color = (r, g, b, 200)
-    pts = [(x - 8, y + h * 0.12), (x + w + 10, y - h * 0.10),
-           (x + w + 8, y + h * 0.98), (x - 10, y + h * 1.08)]
-    draw.polygon(pts, fill=marker_color)
-
-
-def draw_text_highlighted_v2(draw, x, y, line, font, highlight, text_color, marker_color):
+def draw_text_highlighted_v2(draw, x, y, line, font, highlight, text_color, marker_color, deep_color=None):
+    """Highlight treatment reworked 2026-08-09. The marker used to be the raw
+    accent with the line's near-white ink running straight over it: 1.9-2.4:1
+    depending on topic -- the same class of bug as the navy mega-phrase, on the
+    keyword of nearly every slide. Tried flipping the span's ink dark first;
+    descenders poking below the marker vanished into the canvas and the span
+    went muddy. The reels already solved this: copy never sits ON the accent
+    there -- body text lives on a dark raised panel with a thin accent bar at
+    its edge. Same move here: the marker fills with the topic's deep tone
+    (near-white on it measures 8-12:1 on all three palettes), a slim accent
+    rule runs along its bottom edge to keep the bright signature, and the ink
+    never changes so descenders stay legible wherever they land."""
     if not highlight or highlight not in line:
         draw.text((x, y), line, font=font, fill=text_color)
         return
@@ -448,17 +472,27 @@ def draw_text_highlighted_v2(draw, x, y, line, font, highlight, text_color, mark
         cx += draw.textlength(before, font=font)
     hw = draw.textlength(highlight, font=font)
     ascent, _ = font.getmetrics()
-    draw_marker_bold(draw, cx, y + ascent * 0.06, hw, ascent * 0.88, marker_color)
+    hx, hy, hh = cx, y + ascent * 0.06, ascent * 0.88
+    fill = deep_color if deep_color is not None else marker_color
+    pts = [(hx - 8, hy + hh * 0.12), (hx + hw + 10, hy - hh * 0.10),
+           (hx + hw + 8, hy + hh * 0.98), (hx - 10, hy + hh * 1.08)]
+    draw.polygon(pts, fill=fill)
+    if deep_color is not None:
+        # Accent rule along the marker's skewed bottom edge.
+        bar = 7
+        draw.polygon([pts[3], pts[2],
+                      (pts[2][0], pts[2][1] + bar), (pts[3][0], pts[3][1] + bar)],
+                     fill=marker_color)
     draw.text((x, y), line, font=font, fill=text_color)
 
 
-def draw_text_highlighted_centered(draw, y, line, font, highlight, text_color, marker_color):
+def draw_text_highlighted_centered(draw, y, line, font, highlight, text_color, marker_color, deep_color=None):
     """Same as draw_text_highlighted_v2, but centers this line horizontally
     on the page instead of drawing from a fixed left x. Used everywhere the
     design should read as centered rather than left-aligned."""
     lw = draw.textlength(line, font=font)
     x = (W - lw) / 2
-    draw_text_highlighted_v2(draw, x, y, line, font, highlight, text_color, marker_color)
+    draw_text_highlighted_v2(draw, x, y, line, font, highlight, text_color, marker_color, deep_color)
 
 
 # ============================================================
@@ -585,7 +619,7 @@ def draw_corner_flag(draw, colors):
     draw.polygon([(W, 0), (W, size), (W - size, 0)], fill=colors["accent"])
 
 
-def draw_mega_stat(draw, text, y, colors, max_width, font_path=F_SERIF_BOLD, target=170, min_size=110):
+def draw_mega_stat(draw, text, y, colors, max_width, font_path=F_DISPLAY, target=170, min_size=110):
     """
     UPGRADE 1 — render a pulled-out number/€/% stat at oversized scale above the
     headline. Only fires when the hook/bridge line actually contains a stat, so
@@ -605,12 +639,16 @@ def draw_mega_stat(draw, text, y, colors, max_width, font_path=F_SERIF_BOLD, tar
     x = (W - lw) / 2
     shadow_off = max(4, size // 28)
     draw.text((x + shadow_off, y + shadow_off), line, font=font, fill=SHADOW)
-    draw.text((x, y), line, font=font, fill=colors["dark"])
+    # Accent, not "dark": on the old cream canvas "dark" was the ink, but after
+    # the 004ec02 rebrand it sat at 1.57-1.78:1 against the near-black bg --
+    # slide 1 of every carousel shipping with an invisible hero. Accent reads
+    # 7.8-8.2:1 here and matches the reel hook's accent figure. (2026-08-09)
+    draw.text((x, y), line, font=font, fill=colors["accent"])
     ascent, descent = font.getmetrics()
     return y + int((ascent + descent) * 0.92), size
 
 
-def draw_mega_phrase(draw, text, y, colors, max_width, font_path=F_SERIF_BOLD, target=130, min_size=76):
+def draw_mega_phrase(draw, text, y, colors, max_width, font_path=F_DISPLAY, target=130, min_size=76):
     """
     Same pattern-interrupt role as draw_mega_stat, for hooks/bridges that
     don't contain a €/$/% figure (which, per the content brain's BENEFIT
@@ -643,7 +681,9 @@ def draw_mega_phrase(draw, text, y, colors, max_width, font_path=F_SERIF_BOLD, t
         # between the two hook styles now that BENEFIT OVER RAW STAT means
         # most hooks take this path instead of draw_mega_stat's.
         draw.text((x + shadow_off, y + shadow_off), display_line, font=font, fill=SHADOW)
-        draw.text((x, y), display_line, font=font, fill=colors["dark"])
+        # Accent for the same reason as draw_mega_stat: "dark" ink died in the
+        # rebrand. See the comment there. (2026-08-09)
+        draw.text((x, y), display_line, font=font, fill=colors["accent"])
         y += line_h
     return y + 14, size
 
@@ -688,7 +728,7 @@ def draw_follow_pill(draw, colors):
 
 def draw_decorative_quote_marks(draw, y, colors):
     """Large decorative quote marks to fill space on short hook slides."""
-    f_quote = ImageFont.truetype(F_SERIF_BOLD, 120)
+    f_quote = ImageFont.truetype(F_DISPLAY, 120)
     draw.text((MARGIN - 10, y), "“", font=f_quote, fill=colors["light"])
     draw.text((W - MARGIN - 50, y + 200), "”", font=f_quote, fill=colors["light"])
 
@@ -743,7 +783,7 @@ def render_hook_slide_fixed(headline, niche, slide_num, total_slides, out_path, 
         top_y += 24
 
     # FIXED SIZE: 96px, shrink only if needed
-    font, lines, size = fit_text_shrink_only(draw, headline, max_w, 4, HOOK_FONT_SIZE, 52, F_SERIF_BOLD)
+    font, lines, size = fit_text_shrink_only(draw, headline, max_w, 4, HOOK_FONT_SIZE, 52, F_DISPLAY)
     line_h = int(size * 1.2)
     highlight = pop_phrase if have_pop else find_highlight_word(headline)
 
@@ -764,7 +804,7 @@ def render_hook_slide_fixed(headline, niche, slide_num, total_slides, out_path, 
         draw_accent_bar(draw, ty + total_h + 20, colors)
 
     for line in lines:
-        draw_text_highlighted_centered(draw, ty, line, font, highlight, TEXT, colors["accent"])
+        draw_text_highlighted_centered(draw, ty, line, font, highlight, TEXT, colors["accent"], deep_color=colors["dark"])
         ty += line_h
 
     draw_follow_pill(draw, colors)
@@ -807,7 +847,7 @@ def render_bridge_slide_fixed(headline, niche, slide_num, total_slides, out_path
         top_y, _ = draw_mega_stat(draw, stat, top_y, colors, max_w, target=140, min_size=90)
         top_y += 20
 
-    font, lines, size = fit_text_shrink_only(draw, headline, max_w, 4, BRIDGE_FONT_SIZE, 48, F_SERIF_BOLD)
+    font, lines, size = fit_text_shrink_only(draw, headline, max_w, 4, BRIDGE_FONT_SIZE, 48, F_DISPLAY)
     line_h = int(size * 1.2)
     highlight = pop_phrase if have_pop else find_highlight_word(headline)
 
@@ -827,7 +867,7 @@ def render_bridge_slide_fixed(headline, niche, slide_num, total_slides, out_path
         draw_accent_bar(draw, ty + total_h + 15, colors)
 
     for line in lines:
-        draw_text_highlighted_centered(draw, ty, line, font, highlight, TEXT, colors["accent"])
+        draw_text_highlighted_centered(draw, ty, line, font, highlight, TEXT, colors["accent"], deep_color=colors["dark"])
         ty += line_h
 
     draw_follow_pill(draw, colors)
@@ -936,7 +976,7 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
         strip_used = draw_comparison_strip(draw, side_a, side_b, colors, ty, max_w)
         ty += max(strip_used, strip_h)
     for line in lines:
-        draw_text_highlighted_centered(draw, ty, line, font, highlight, TEXT, colors["accent"])
+        draw_text_highlighted_centered(draw, ty, line, font, highlight, TEXT, colors["accent"], deep_color=colors["dark"])
         ty += line_h
 
     if show_swipe:
@@ -961,7 +1001,7 @@ def render_recap_slide_aesthetic(recap_lines, niche, slide_num, total_slides, ou
     draw_header_v2(draw, niche, slide_num, total_slides, colors)
 
     # "Save This" badge
-    f_save_big = ImageFont.truetype(F_SERIF_BOLD, RECAP_HEADER_SIZE)
+    f_save_big = ImageFont.truetype(F_DISPLAY, RECAP_HEADER_SIZE)
     save_text = "Save This"
     stw = draw.textlength(save_text, font=f_save_big)
     bar_pad = 30
@@ -1083,13 +1123,20 @@ def render_cta_slide_fixed(headline, cta_word, cta_promise, cta_support, save_li
     slide finally reads as part of the same design system instead of a
     bolted-on ad at the end.
     """
+    # Moved onto the dark canvas 2026-08-09. This slide was rebuilt on
+    # 2026-07-28, BEFORE the 004ec02 rebrand, and the rebrand missed it: it
+    # kept building its own white-to-light-blue gradient locally while every
+    # other slide went near-black -- one glowing light slide closing every
+    # otherwise-dark carousel on the grid. It even set its context line in
+    # the near-white TEXT token, i.e. white-on-white. The gradient now runs
+    # BG down into the topic veil tone, echoing how the reel CTA wipes to
+    # the topic colour without leaving the dark system.
     colors = colors_for(niche)
-    bg_bottom = tuple(min(255, int(c * 0.6 + 255 * 0.4)) for c in colors["accent"])
-    img = Image.new("RGB", (W, H), WHITE)
+    img = Image.new("RGB", (W, H), BG)
     draw = ImageDraw.Draw(img)
     for row in range(H):
         t = row / H
-        color = tuple(int(255 + (bg_bottom[i] - 255) * t) for i in range(3))
+        color = tuple(int(BG[i] + (colors["light"][i] - BG[i]) * t) for i in range(3))
         draw.line([(0, row), (W, row)], fill=color)
     draw_dot_grid(draw)
     draw_header_v2(draw, niche, slide_num, total_slides, colors)
@@ -1170,9 +1217,12 @@ def render_cta_slide_fixed(headline, cta_word, cta_promise, cta_support, save_li
     # Chat-bubble icon next to "Comment", same purpose as the bookmark next
     # to "Save" above — the icon visually names the action, the giant text
     # still carries the actual keyword.
-    draw_icon_chat_bubble(draw, (W - total_cta_w) / 2 + chat_icon_w / 2, ty + cta_h * 0.42, chat_icon_w, colors["dark"])
-    draw.text((cta_x + cta_shadow_off, ty + cta_shadow_off), cta_text, font=f_cta, fill=colors["accent"])
-    draw.text((cta_x, ty), cta_text, font=f_cta, fill=BLACK)
+    draw_icon_chat_bubble(draw, (W - total_cta_w) / 2 + chat_icon_w / 2, ty + cta_h * 0.42, chat_icon_w, colors["accent"])
+    # Shadow/ink flipped for the dark canvas: was accent shadow under BLACK
+    # text, which is the light-canvas treatment. Now the same SHADOW-offset +
+    # accent ink the hook and bridge mega text use. (2026-08-09)
+    draw.text((cta_x + cta_shadow_off, ty + cta_shadow_off), cta_text, font=f_cta, fill=SHADOW)
+    draw.text((cta_x, ty), cta_text, font=f_cta, fill=colors["accent"])
     ty += cta_h
     draw_accent_bar(draw, ty, colors, width=180)
     ty += bar_gap + cta_gap
@@ -1180,7 +1230,7 @@ def render_cta_slide_fixed(headline, cta_word, cta_promise, cta_support, save_li
     # Promise
     if promise_text:
         tw = draw.textlength(promise_text, font=f_promise)
-        draw.text(((W - tw) / 2, ty), promise_text, font=f_promise, fill=colors["dark"])
+        draw.text(((W - tw) / 2, ty), promise_text, font=f_promise, fill=TEXT)
         ty += CTA_PROMISE_SIZE + promise_gap
 
     # Support — short urgency/context line from the content brain, e.g.
@@ -1189,7 +1239,7 @@ def render_cta_slide_fixed(headline, cta_word, cta_promise, cta_support, save_li
         ty += 30
         for line in support_lines:
             tw = draw.textlength(line, font=f_support)
-            draw.text(((W - tw) / 2, ty), line, font=f_support, fill=(120, 122, 132))
+            draw.text(((W - tw) / 2, ty), line, font=f_support, fill=GRAY)
             ty += support_line_h
 
     draw_follow_pill(draw, colors)
