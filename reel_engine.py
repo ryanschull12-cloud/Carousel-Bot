@@ -31,7 +31,7 @@ do not share one. API-published reels CANNOT use Instagram's licensed trending a
 the MP4 itself. If assets/audio/ is empty the reel renders with a silent AAC track rather
 than failing -- silent is worse but shipping beats blocking.
 """
-import os, math
+import os, math, random
 from PIL import Image, ImageDraw, ImageFont
 
 W, H, FPS = 1080, 1920, 24
@@ -41,15 +41,29 @@ F_SERIF = f"{SYS}/LiberationSerif-Bold.ttf"
 F_SANS  = f"{SYS}/LiberationSans-Bold.ttf"
 F_SANSR = f"{SYS}/LiberationSans-Regular.ttf"
 
-BG, DOT, TEXT, GRAY = (240,239,234), (225,223,216), (20,20,20), (130,130,130)
+# --- theme -------------------------------------------------------------------
+# Rebranded 2026-08-09 to the site palette, matching carousel_engine.py.
+# Until now the reels rendered on cream (240,239,234) with mint/salmon/lilac topic
+# colours while the carousels had already moved to near-black with tonal blues.
+# On a profile grid the two formats read as two different accounts, which wastes
+# the only thing a small account has going for it: looking deliberate.
+BG        = (10, 10, 13)      # --bg
+BG_ALT    = (13, 14, 18)      # --bg-alt, bottom of the vertical gradient
+BG_RAISED = (21, 22, 28)      # --bg-raised, body panels
+INK       = (244, 245, 247)   # --ink
+DIM       = (154, 156, 166)   # --dim
+
 HANDLE = "@rd.marketing0"
+
+# Keys unchanged -- colors_for() matches on substring and the content brain's
+# niche strings have not moved.
 TOPIC = {
- "google ads": {"accent":(161,214,191),"dark":(30,90,65),"light":(200,240,220)},
- "meta":       {"accent":(240,172,168),"dark":(140,45,45),"light":(255,220,215)},
- "instagram":  {"accent":(240,172,168),"dark":(140,45,45),"light":(255,220,215)},
- "email":      {"accent":(196,176,226),"dark":(80,55,120),"light":(225,210,245)},
+ "google ads": {"accent": (110, 168, 255), "deep": (30, 52, 92), "veil": (22, 30, 46)},
+ "meta":       {"accent": (146, 154, 255), "deep": (44, 46, 96), "veil": (27, 28, 48)},
+ "instagram":  {"accent": (146, 154, 255), "deep": (44, 46, 96), "veil": (27, 28, 48)},
+ "email":      {"accent": (94, 199, 240),  "deep": (24, 62, 84), "veil": (19, 33, 43)},
 }
-DEF = {"accent":(161,214,191),"dark":(30,90,65),"light":(200,240,220)}
+DEF = {"accent": (110, 168, 255), "deep": (30, 52, 92), "veil": (22, 30, 46)}
 
 def colors_for(n):
     n=(n or "").lower()
@@ -113,124 +127,240 @@ def fade(lay,a):
     if a>=255: return lay
     l=lay.copy(); l.putalpha(l.getchannel("A").point(lambda v: v*a//255)); return l
 
-def make_bg(c,dark=False):
-    base=c["dark"] if dark else BG
-    im=Image.new("RGB",(W,H),base); d=ImageDraw.Draw(im)
-    if not dark:
-        for y in range(0,H,46):
-            for x in range(0,W,46): d.ellipse([x-2,y-2,x+2,y+2],fill=DOT)
-        d.polygon([(W-200,0),(W,0),(W,200)],fill=c["light"])
-    d.rectangle([0,0,W,12],fill=c["accent"]); d.rectangle([0,H-12,W,H],fill=c["accent"])
+
+# --- background --------------------------------------------------------------
+TAU = 2*math.pi
+
+def base_gradient():
+    """Vertical BG -> BG_ALT wash. Drawn once and copied per frame."""
+    im=Image.new("RGB",(W,H),BG); d=ImageDraw.Draw(im)
+    for y in range(H):
+        k=y/(H-1)
+        d.line([(0,y),(W,y)],fill=tuple(int(BG[i]+(BG_ALT[i]-BG[i])*k) for i in range(3)))
     return im
 
-def chrome(im,c,badge,dark=False):
+def node_field(seed=7, count=46):
+    """The constellation from the site's hero canvas, as drifting nodes.
+
+    Each node orbits its home position on a sine with a WHOLE number of cycles
+    across the clip. That is the whole trick behind the seamless loop: at t=1
+    every node is exactly where it was at t=0, so the last frame lands back on the
+    first and Instagram's replay is invisible. Loops compound watch time, which is
+    the single strongest ranking signal available to a faceless account.
+    """
+    rng=random.Random(seed)
+    out=[]
+    for _ in range(count):
+        out.append({
+            "x": rng.uniform(-40, W+40),
+            "y": rng.uniform(-40, H+40),
+            "ax": rng.uniform(8, 26), "ay": rng.uniform(8, 26),
+            "kx": rng.choice((1,1,2)), "ky": rng.choice((1,2,2)),
+            "px": rng.random(), "py": rng.random(),
+            "hot": rng.random() < 0.13,
+        })
+    return out
+
+LINK_DIST = 300
+
+def draw_constellation(im, c, t, nodes):
     d=ImageDraw.Draw(im)
-    fg = BG if dark else c["dark"]
-    pill = c["accent"] if not dark else c["light"]
+    pts=[(n["x"]+n["ax"]*math.sin(TAU*(n["kx"]*t+n["px"])),
+          n["y"]+n["ay"]*math.cos(TAU*(n["ky"]*t+n["py"])),
+          n["hot"]) for n in nodes]
+    edge=tuple(int(BG[i]+(c["accent"][i]-BG[i])*0.16) for i in range(3))
+    for i in range(len(pts)):
+        xi,yi,_=pts[i]
+        for j in range(i+1,len(pts)):
+            xj,yj,_=pts[j]
+            dx,dy=xi-xj,yi-yj
+            dsq=dx*dx+dy*dy
+            if dsq<LINK_DIST*LINK_DIST:
+                # fade the link out as the pair separates, so the field breathes
+                a=1.0-(dsq**0.5)/LINK_DIST
+                col=tuple(int(BG[k]+(edge[k]-BG[k])*a) for k in range(3))
+                d.line([(xi,yi),(xj,yj)],fill=col,width=1)
+    for x,y,hot in pts:
+        r=3 if hot else 2
+        d.ellipse([x-r,y-r,x+r,y+r],fill=c["accent"] if hot else (58,60,70))
+
+def chrome(im,c,badge):
+    """Badge, handle and follow pill. Drawn last on every frame so nothing can
+    cover them, and always in the same colours -- the old build swapped to a light
+    treatment on the CTA and the two versions never quite matched."""
+    d=ImageDraw.Draw(im)
     fb=F(F_SANS,32); tw=d.textlength(badge,font=fb)
-    d.rounded_rectangle([MARGIN,104,MARGIN+tw+56,104+66],radius=33,fill=pill)
-    d.text((MARGIN+28,104+17),badge,font=fb,fill=c["dark"])
-    fh=F(F_SANSR,30); d.text((W-MARGIN-40-d.textlength(HANDLE,font=fh),120),HANDLE,font=fh,
-                             fill=(200,215,205) if dark else GRAY)
+    d.rounded_rectangle([MARGIN,104,MARGIN+tw+56,104+66],radius=33,fill=c["accent"])
+    d.text((MARGIN+28,104+17),badge,font=fb,fill=BG)
+    fh=F(F_SANSR,30)
+    d.text((W-MARGIN-40-d.textlength(HANDLE,font=fh),120),HANDLE,font=fh,fill=DIM)
     fp=F(F_SANS,30); p="Follow for more"; pw=d.textlength(p,font=fp)
-    d.rounded_rectangle([MARGIN,1500,MARGIN+pw+68,1500+64],radius=32,outline=fg,width=3)
-    d.text((MARGIN+34,1518),p,font=fp,fill=fg)
+    d.rounded_rectangle([MARGIN,1500,MARGIN+pw+68,1500+64],radius=32,outline=DIM,width=3)
+    d.text((MARGIN+34,1518),p,font=fp,fill=INK)
     return im
 
-SAFE_TOP, SAFE_BOT = 250, 1430   # bottom ~320px is covered by IG caption/buttons          # between the badge row and the follow pill
+SAFE_TOP, SAFE_BOT = 250, 1430   # bottom ~320px is covered by IG caption/buttons
 def anchor(blockh):
     """Optically centre a block in the safe area, biased slightly high."""
     return int(SAFE_TOP + max(0,(SAFE_BOT - SAFE_TOP - blockh)) * 0.40)
-TOP = 600
+
 
 class Beat:
     def __init__(self,kind,text,dur,sub=None,num=None):
         self.kind,self.text,self.dur,self.sub,self.num=kind,text,dur,sub,num
 
+
+def emphasis_token(text):
+    """The one word in the hook worth a highlight: a figure. The content rules
+    require a number, a named setting or a concrete claim in every hook, and the
+    number is the part the eye should land on first."""
+    for w in (text or "").split():
+        if any(ch.isdigit() for ch in w) or "%" in w or "€" in w:
+            return w.strip(".,!?:;")
+    return None
+
+
+TAIL_S = 0.6   # crossfade back to the hook so the loop closes
+
 def render(niche,beats,outdir,badge):
+    """Frames for one reel.
+
+    TYPE (2026-08-09): all sans. The hook used to be set in Liberation Serif while
+    the site and every other surface are sans; on a 1080-wide frame at arm's length
+    the serif read as a different brand rather than as emphasis. Hierarchy now comes
+    from size, weight and the accent colour, which survive compression better than
+    stroke contrast does.
+
+    MOTION: the hook is FULLY SET ON FRAME 0. The old build cascaded it in word by
+    word over about 1.1s; measured, frame 0 carried 26% of the copy it ended on.
+    Roughly half of viewers leave inside 3s and the continue-or-scroll decision
+    lands around 1.7s, so an entrance animation spends the entire decision window
+    withholding the one thing that decision is based on. Movement now comes from
+    the drifting constellation behind the type, the counting stat, the body panels
+    and the CTA wipe -- none of which delay comprehension.
+
+    LOOP: every frame is a function of t = frame/total, and the node field runs a
+    whole number of cycles over that range, so t=1 reproduces t=0. A short tail
+    crossfades the CTA back to the hook, landing the final frame on the first.
+    """
     c=colors_for(niche); os.makedirs(outdir,exist_ok=True)
-    light=chrome(make_bg(c),c,badge); darkbg=chrome(make_bg(c,True),c,badge,True)
     probe=ImageDraw.Draw(Image.new("RGB",(4,4))); mw=W-2*MARGIN
+    grad=base_gradient(); nodes=node_field()
+
+    counts=[int(b.dur*FPS) for b in beats]
+    hook=next((b for b in beats if b.kind=="hook"), None)
+    tail=int(TAIL_S*FPS) if hook else 0
+    total=sum(counts)+tail
+
+    # ---- layout, computed once ----
+    L={}
+    if hook:
+        f,ls=fit(probe,hook.text,F_SANS,150,84,mw,4)
+        L["hook"]=(f,ls,int(f.size*1.20),emphasis_token(hook.text))
+        L["hook_y"]=anchor(L["hook"][2]*len(ls))
+
+    def bg(t):
+        fr=grad.copy(); draw_constellation(fr,c,t,nodes); return fr
+
+    def paint_hook(fr):
+        f,ls,lh,emph=L["hook"]; y0=L["hook_y"]
+        d=ImageDraw.Draw(fr)
+        d.rectangle([MARGIN,y0-46,MARGIN+150,y0-38],fill=c["accent"])
+        for li,line in enumerate(ls):
+            y=y0+li*lh; x=MARGIN
+            for w in line.split():
+                adv=d.textlength(w+" ",font=f)
+                if emph and w.strip(".,!?:;")==emph:
+                    ww=d.textlength(w,font=f)
+                    d.rounded_rectangle([x-12,y+int(f.size*0.14),x+ww+12,y+int(f.size*1.04)],
+                                        radius=8,fill=c["accent"])
+                    d.text((x,y),w,font=f,fill=BG)
+                else:
+                    d.text((x,y),w,font=f,fill=INK)
+                x+=adv
+
+    def hook_frame(t):
+        fr=bg(t); paint_hook(fr); return chrome(fr,c,badge)
+
+    def paint_stat(fr,b,fi):
+        d=ImageDraw.Draw(fr)
+        fnum=F(F_SANS,360)
+        labf,labls=fit(probe,b.sub,F_SANS,72,46,mw,3)
+        # Resolve in ~0.55s. A counting number is the cheapest genuine pattern
+        # interrupt available, but only while it is still counting -- drag it out
+        # and it stops being a hook and starts being a delay.
+        p=ease(clamp(fi/13.0))
+        s=f"{int(round(b.num*p))}%"
+        nl=layer(s,fnum,c["accent"])
+        y0=anchor(nl.height+180)
+        fr.paste(nl,(MARGIN,y0-40),nl)
+        yy=y0-40+nl.height+8
+        d.rectangle([MARGIN,yy,MARGIN+int(mw*ease(clamp((fi-9)/12.0))),yy+8],fill=c["accent"])
+        for li,line in enumerate(labls):
+            q=ease(clamp((fi-13-li*3)/10.0))
+            if q>0:
+                lay=layer(line,labf,INK)
+                fr.paste(fade(lay,int(255*q)),(MARGIN,yy+38+li*int(labf.size*1.24)+int(22*(1-q))),
+                         fade(lay,int(255*q)))
+
+    def paint_body(fr,b,fi):
+        d=ImageDraw.Draw(fr)
+        f,ls=fit(probe,b.text,F_SANS,132,70,mw-72,4); lh=int(f.size*1.26)
+        lays=[layer(l,f,INK) for l in ls]
+        blockh=lh*len(lays); blockw=max(l.width for l in lays)+72
+        y0=anchor(blockh)
+        grow=ease(clamp(fi/7.0))
+        bw=int(blockw*grow)
+        if bw>0:
+            d.rounded_rectangle([MARGIN-34,y0-30,MARGIN-34+bw,y0+blockh+26],radius=10,fill=BG_RAISED)
+            d.rectangle([MARGIN-34,y0-30,MARGIN-28,y0+blockh+26],fill=c["accent"])
+        for li,lay in enumerate(lays):
+            p=ease(clamp((fi-li*3)/9.0))
+            if p>0:
+                fr.paste(fade(lay,int(255*p)),(MARGIN+int(22*(1-p)),y0+li*lh),fade(lay,int(255*p)))
+
+    def paint_cta(fr,b,fi):
+        f,ls=fit(probe,b.text,F_SANS,200,110,mw,2); lh=int(f.size*1.16)
+        sf,sls=fit(probe,b.sub or "",F_SANS,60,42,mw,3); slh=int(sf.size*1.26)
+        ay=anchor(lh*len(ls)+slh*len(sls)+34)
+        p=ease(clamp(fi/12.0))
+        cut=int(H*p)
+        if cut>0:
+            veil=Image.new("RGB",(W,cut),c["deep"])
+            fr.paste(Image.blend(fr.crop((0,H-cut,W,H)),veil,0.90),(0,H-cut))
+        if p>0.55:
+            q=ease(clamp((fi-13)/10.0))
+            for li,line in enumerate(ls):
+                lay=layer(line,f,c["accent"])
+                fr.paste(fade(lay,int(255*q)),(MARGIN,ay+li*lh+int(26*(1-q))),fade(lay,int(255*q)))
+            for li,line in enumerate(sls):
+                r=ease(clamp((fi-20-li*3)/10.0))
+                if r>0:
+                    lay=layer(line,sf,INK)
+                    fr.paste(fade(lay,int(255*r)),(MARGIN,ay+len(ls)*lh+34+li*slh),fade(lay,int(255*r)))
+
+    # ---- frames ----
     n=0
-    for b in beats:
-        nf=int(b.dur*FPS)
-        if b.kind=="hook":
-            f,ls=fit(probe,b.text,F_SERIF,152,84,mw,4); lh=int(f.size*1.14)
-            words=[[layer(w,f,c["dark"]) for w in l.split()] for l in ls]
-            y0=anchor(lh*len(ls))
-            sp=probe.textlength(" ",font=f)
-            for fi in range(nf):
-                fr=light.copy(); k=0
-                for li,ws in enumerate(words):
-                    x=MARGIN
-                    for lay in ws:
-                        p=ease(clamp((fi-k*2)/9.0)); k+=1
-                        if p>0:
-                            fr.paste(fade(lay,int(255*p)),(x,y0+li*lh+int(38*(1-p))),fade(lay,int(255*p)))
-                        x+=lay.width+int(sp)-8
-                fr.save(f"{outdir}/f{n:05d}.jpg",quality=88); n+=1
+    body_i=0
+    for bi,b in enumerate(beats):
+        for fi in range(counts[bi]):
+            t=n/total
+            fr=bg(t)
+            if b.kind=="hook":   paint_hook(fr)
+            elif b.kind=="stat": paint_stat(fr,b,fi)
+            elif b.kind=="cta":  paint_cta(fr,b,fi)
+            else:                paint_body(fr,b,fi)
+            chrome(fr,c,badge)
+            fr.save(f"{outdir}/f{n:05d}.jpg",quality=88); n+=1
 
-        elif b.kind=="stat":
-            fnum=F(F_SERIF,380); flab=F(F_SANS,62)
-            labf,labls=fit(probe,b.sub,F_SANS,78,48,mw,3)
-            labl=[layer(l,labf,TEXT) for l in labls]
-            target=b.num
-            for fi in range(nf):
-                fr=light.copy(); d=ImageDraw.Draw(fr)
-                p=ease(clamp(fi/14.0))
-                val=int(round(target*p))
-                s=f"{val}%"
-                nl=layer(s,fnum,c["dark"])
-                sc=0.92+0.08*p
-                nl2=nl.resize((int(nl.width*sc),int(nl.height*sc)))
-                y0=anchor(nl2.height+150)
-                fr.paste(nl2,(MARGIN,y0-60),nl2)
-                yy=y0-60+nl2.height+18
-                d.rectangle([MARGIN,yy,MARGIN+int(mw*ease(clamp((fi-10)/12.0))),yy+9],fill=c["accent"])
-                for li,lay in enumerate(labl):
-                    q=ease(clamp((fi-14-li*3)/10.0))
-                    if q>0: fr.paste(fade(lay,int(255*q)),(MARGIN,yy+42+li*int(labf.size*1.22)+int(26*(1-q))),fade(lay,int(255*q)))
-                fr.save(f"{outdir}/f{n:05d}.jpg",quality=88); n+=1
+    # ---- tail: return to the hook so the loop closes ----
+    if tail:
+        last=Image.open(f"{outdir}/f{n-1:05d}.jpg").convert("RGB")
+        for i in range(tail):
+            t=n/total
+            fr=Image.blend(last,hook_frame(t),ease((i+1)/tail))
+            fr.save(f"{outdir}/f{n:05d}.jpg",quality=88); n+=1
 
-        elif b.kind=="cta":
-            f,ls=fit(probe,b.text,F_SANS,210,110,mw,2); lh=int(f.size*1.16)
-            keyl=[layer(l,f,BG) for l in ls]
-            sf,sls=fit(probe,b.sub,F_SANS,64,42,mw,3); slh=int(sf.size*1.26)
-            subl=[layer(l,sf,c["light"]) for l in sls]
-            ay=anchor(lh*len(keyl)+slh*len(subl)+34)
-            for fi in range(nf):
-                p=ease(clamp(fi/12.0))
-                fr=light.copy()
-                cut=int(H*p)
-                if cut>0: fr.paste(darkbg.crop((0,H-cut,W,H)),(0,H-cut))
-                if p>0.55:
-                    q=ease(clamp((fi-13)/10.0))
-                    for li,lay in enumerate(keyl):
-                        fr.paste(fade(lay,int(255*q)),(MARGIN,ay+li*lh+int(30*(1-q))),fade(lay,int(255*q)))
-                    for li,lay in enumerate(subl):
-                        r=ease(clamp((fi-20-li*3)/10.0))
-                        if r>0: fr.paste(fade(lay,int(255*r)),(MARGIN,ay+len(keyl)*lh+34+li*slh),fade(lay,int(255*r)))
-                fr.save(f"{outdir}/f{n:05d}.jpg",quality=88); n+=1
-
-        else:  # body
-            f,ls=fit(probe,b.text,F_SANS,138,72,mw-56,4); lh=int(f.size*1.24)
-            lays=[layer(l,f,TEXT) for l in ls]
-            blockh=lh*len(lays)
-            blockw=max(l.width for l in lays)+56          # bar hugs the longest line
-            y0=anchor(blockh)
-            for fi in range(nf):
-                fr=light.copy(); d=ImageDraw.Draw(fr)
-                grow=ease(clamp(fi/6.0))
-                bw=int(blockw*grow)
-                if bw>0:
-                    bar=Image.new("RGBA",(bw,blockh+52),c["light"]+(175,))
-                    fr.paste(bar,(MARGIN-28,y0-26),bar)
-                    d.rectangle([MARGIN-28,y0-26,MARGIN-28+10,y0-26+blockh+52],fill=c["dark"])
-                for li,lay in enumerate(lays):
-                    # text rides in with the bar, not after it
-                    p=ease(clamp((fi-li*3)/9.0))
-                    if p>0: fr.paste(fade(lay,int(255*p)),(MARGIN+int(26*(1-p)),y0+li*lh),fade(lay,int(255*p)))
-                fr.save(f"{outdir}/f{n:05d}.jpg",quality=88); n+=1
     return n,n/FPS
 
 

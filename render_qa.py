@@ -63,6 +63,39 @@ def ink_mask(im):
     return hp > INK_HIGHPASS
 
 
+def _otsu_split(vals):
+    """Split a cell's luminances into figure and ground.
+
+    Replaces an earlier approach that took the ink mask as the figure and
+    everything else as the ground. That works for text on a flat field and fails
+    completely on a filled shape: a badge pill fills most of its cell, the mask
+    saturates at 98%, and the leftover 2% "background" is unrepresentative, so a
+    perfectly legible dark-on-accent badge measured 1.77:1. Otsu makes no
+    assumption about which is which -- it just finds the threshold that best
+    separates two populations, which is the actual question being asked.
+    """
+    hist, edges = np.histogram(vals, bins=64, range=(0.0, 1.0))
+    total = hist.sum()
+    if total == 0:
+        return None
+    centres = (edges[:-1] + edges[1:]) / 2.0
+    w0 = np.cumsum(hist)
+    w1 = total - w0
+    valid = (w0 > 0) & (w1 > 0)
+    if not valid.any():
+        return None
+    csum = np.cumsum(hist * centres)
+    m0 = np.where(w0 > 0, csum / np.maximum(w0, 1), 0)
+    m1 = np.where(w1 > 0, (csum[-1] - csum) / np.maximum(w1, 1), 0)
+    between = w0 * w1 * (m0 - m1) ** 2
+    between[~valid] = -1
+    thr = centres[int(np.argmax(between))]
+    lo_px, hi_px = vals[vals <= thr], vals[vals > thr]
+    if lo_px.size < 20 or hi_px.size < 20:
+        return None
+    return float(np.percentile(hi_px, 85)), float(np.percentile(lo_px, 15))
+
+
 def contrast_findings(im, min_ink=INK_DECORATION):
     """Walk the image in cells and, in each one, separate what was drawn from what
     it was drawn on, then measure the WCAG ratio between them.
@@ -87,19 +120,11 @@ def contrast_findings(im, min_ink=INK_DECORATION):
             frac = float(m.mean())
             if frac < min_ink:
                 continue                      # nothing meaningful drawn here
-            cell = L[y:y + CELL, x:x + CELL]
-            fg_px, bg_px = cell[m], cell[~m]
-            if fg_px.size < 40 or bg_px.size < 40:
+            split = _otsu_split(L[y:y + CELL, x:x + CELL].ravel())
+            if split is None:
                 continue
-            bg = float(np.median(bg_px))
-            # Take the extreme of the ink in whichever direction it departs from the
-            # background, so antialiased edges do not drag the reading back toward it.
-            if float(fg_px.mean()) >= bg:
-                fg = float(np.percentile(fg_px, 90))
-                r = _ratio(fg, bg)
-            else:
-                fg = float(np.percentile(fg_px, 10))
-                r = _ratio(bg, fg)
+            hi, lo = split
+            r = _ratio(hi, lo)
             if r < MIN_CONTRAST:
                 out.append((x, y, round(r, 2), round(frac, 3)))
     out.sort(key=lambda t: t[2])
