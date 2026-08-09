@@ -37,9 +37,38 @@ from PIL import Image, ImageDraw, ImageFont
 W, H, FPS = 1080, 1920, 24
 MARGIN = 96
 SYS = "/usr/share/fonts/truetype/liberation"
-F_SERIF = f"{SYS}/LiberationSerif-Bold.ttf"
-F_SANS  = f"{SYS}/LiberationSans-Bold.ttf"
-F_SANSR = f"{SYS}/LiberationSans-Regular.ttf"
+
+# Where apt drops fonts-inter, plus an override so the family can be pointed at an
+# unpacked copy without root when testing locally.
+INTER_DIRS = [
+    os.environ.get("INTER_FONT_DIR", ""),
+    "/usr/share/fonts/opentype/inter",
+    "/usr/share/fonts/truetype/inter",
+]
+
+def _family():
+    """Prefer Inter, fall back to Liberation Sans.
+
+    Inter is installed by the workflows with `apt-get install fonts-inter` -- a
+    Debian package, the same mechanism already used for ffmpeg, not an uploaded
+    font file. Chosen for a larger x-height and more open apertures, which is what
+    survives being watched at roughly 400px on a phone, and for having nine weights
+    where Liberation has two.
+
+    The fallback is the point of doing it this way. If the apt step ever fails on a
+    runner, the reel renders in Liberation and posts exactly as it did before,
+    rather than a scheduled post dying on a missing font file. Degrading is
+    allowed; stopping is not.
+    """
+    for d in INTER_DIRS:
+        if d and os.path.exists(os.path.join(d, "Inter-Regular.otf")):
+            return (f"{d}/Inter-Bold.otf", f"{d}/Inter-Regular.otf",
+                    f"{d}/Inter-SemiBold.otf", "Inter")
+    return (f"{SYS}/LiberationSans-Bold.ttf", f"{SYS}/LiberationSans-Regular.ttf",
+            f"{SYS}/LiberationSans-Bold.ttf", "Liberation Sans")
+
+F_SANS, F_SANSR, F_SEMI, FONT_FAMILY = _family()
+F_SERIF = f"{SYS}/LiberationSerif-Bold.ttf"   # kept for callers; unused since the rebrand
 
 # --- theme -------------------------------------------------------------------
 # Rebranded 2026-08-09 to the site palette, matching carousel_engine.py.
@@ -420,9 +449,14 @@ def render(niche,beats,outdir,badge):
 
     def paint_body(fr,b,fi):
         d=ImageDraw.Draw(fr)
-        f,ls=fit(probe,b.text,F_SANS,132,70,mw-72,4); lh=int(f.size*1.26)
+        # SemiBold, not Bold. Inter Bold at 132px is heavier than Liberation Bold
+        # and closes up the counters; SemiBold matches the old weight impression.
+        f,ls=fit(probe,b.text,F_SEMI,132,70,mw-72,4); lh=int(f.size*1.26)
         lays=[layer(l,f,INK) for l in ls]
-        blockh=lh*len(lays); blockw=max(l.width for l in lays)+72
+        blockh=lh*len(lays)
+        # Clamp the panel to the safe margin. Inter sets wider, and an unclamped
+        # hug-the-longest-line panel ran within a few px of the right edge.
+        blockw=min(max(l.width for l in lays)+72, W-MARGIN+34)
         y0=anchor(blockh)
         grow=ease(clamp(fi/7.0))
         bw=int(blockw*grow)
@@ -443,13 +477,18 @@ def render(niche,beats,outdir,badge):
         if cut>0:
             veil=Image.new("RGB",(W,cut),c["deep"])
             fr.paste(Image.blend(fr.crop((0,H-cut,W,H)),veil,0.90),(0,H-cut))
-        if p>0.55:
-            q=ease(clamp((fi-13)/10.0))
+        # The keyword used to wait for the wipe to be 55% done and then start a
+        # 10-frame fade, so the CTA opened with about half a second of almost empty
+        # screen -- dead air immediately after the last instruction, in a reel that
+        # is only fifteen seconds long. It now rides in with the wipe, the same way
+        # body copy rides in with its panel.
+        if p>0.20:
+            q=ease(clamp((fi-4)/9.0))
             for li,line in enumerate(ls):
                 lay=layer(line,f,c["accent"])
                 fr.paste(fade(lay,int(255*q)),(MARGIN,ay+li*lh+int(26*(1-q))),fade(lay,int(255*q)))
             for li,line in enumerate(sls):
-                r=ease(clamp((fi-20-li)/8.0))
+                r=ease(clamp((fi-11-li)/8.0))
                 if r>0:
                     lay=layer_tracked(line,sf,INK,LABEL_TRACK*sf.size)
                     fr.paste(fade(lay,int(255*r)),(MARGIN,ay+len(ls)*lh+34+li*slh),fade(lay,int(255*r)))

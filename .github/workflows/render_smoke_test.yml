@@ -60,8 +60,8 @@ jobs:
 
       # ffmpeg is not preinstalled on GitHub runners and the reel checks encode a
       # real MP4 to probe it, same as reel-post.yml does.
-      - name: Install ffmpeg
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+      - name: Install ffmpeg and Inter
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-inter
 
       - name: Render and analyse
         run: |

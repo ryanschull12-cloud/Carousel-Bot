@@ -247,7 +247,8 @@ def check_reel(name, carousel, out_dir, f, sheets, audio_dir):
                 f.warn(name, f"body line breaks the copy contract "
                              f"({len(b.text)} chars, {len(b.text.split())} words, "
                              f"max 34/6): {b.text!r}")
-    f.note(name, f"{len(beats)} beats, {sum(b.dur for b in beats):.1f}s of copy")
+    f.note(name, f"{len(beats)} beats, {sum(b.dur for b in beats):.1f}s of copy, "
+                 f"type: {getattr(re_, 'FONT_FAMILY', '?')}")
 
     # --- the hook must be readable at frame 0 -------------------------------
     hook_frames = int(beats[0].dur * re_.FPS)
