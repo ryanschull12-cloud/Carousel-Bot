@@ -280,8 +280,9 @@ def read_time(text, cps=CPS, lo=BEAT_MIN, hi=BEAT_MAX, orient=ORIENT):
 
 
 class Beat:
-    def __init__(self,kind,text,dur,sub=None,num=None):
+    def __init__(self,kind,text,dur,sub=None,num=None,pair=None):
         self.kind,self.text,self.dur,self.sub,self.num=kind,text,dur,sub,num
+        self.pair=pair   # ("€45/lead", "€15/lead") for the proof beat
 
 
 def number_parts(word):
@@ -332,6 +333,10 @@ def emphasis_token(text):
 # opens up; the display hook stays at zero, where added tracking just reads loose
 # and where losing kerning pairs would actually show.
 LABEL_TRACK = 0.02
+
+# The "before" bar on the proof beat: dim enough to read as the past, light enough
+# to actually be seen against the background.
+BAR_WAS = (92, 95, 108)
 
 # 0.55s to resolve the counting figure. Long enough to register as motion, short
 # enough to be finished well before the scroll decision lands.
@@ -468,6 +473,81 @@ def render(niche,beats,outdir,badge):
             if p>0:
                 fr.paste(fade(lay,int(255*p)),(MARGIN+int(22*(1-p)),y0+li*lh),fade(lay,int(255*p)))
 
+    def paint_proof(fr,b,fi):
+        """Before and after, with a directional arrow and bars in proportion.
+
+        Added 2026-08-09. The carousel's before-after format already carries real
+        figures -- "€45/lead" to "€15/lead" -- and the reel was throwing them away.
+        This is the only frame in the reel that looks like evidence rather than
+        advice, which makes it the one worth screenshotting, and saves are the
+        second most weighted signal after sends.
+
+        The bars carry the argument. Two numbers alone ask the viewer to do
+        arithmetic while the frame is moving; two bars of obviously different
+        length do the arithmetic for them before either figure has been read. The
+        after figure counts down (or up) from the before figure rather than
+        appearing, so the change is something they watch happen.
+        """
+        before,after=b.pair
+        d=ImageDraw.Draw(fr)
+        S_BEF,S_AFT,S_LAB = 112, 188, 44
+        f_bef=F(F_SANS,S_BEF); f_aft=F(F_SANS,S_AFT); f_lab=F(F_SANSR,S_LAB)
+        bp,bd,bs=number_parts(before); ap,ad,asf=number_parts(after)
+        bv=int(bd) if bd else None; av=int(ad) if ad else None
+
+        GAP_ARROW=96
+        h_lab=(S_LAB+30) if b.sub else 0
+        blockh=h_lab+int(S_BEF*1.10)+GAP_ARROW+int(S_AFT*1.05)
+        y=anchor(blockh)
+
+        if b.sub:
+            lay=layer_tracked(b.sub,f_lab,DIM,LABEL_TRACK*S_LAB)
+            fr.paste(lay,(MARGIN,y),lay)
+            y+=h_lab
+
+        bar_x=MARGIN+430; bar_w=W-MARGIN-bar_x
+        peak=max(bv or 1, av or 1)
+
+        def bar(cy,frac,grow,col,thick):
+            wpx=int(bar_w*frac*grow)
+            if wpx>4:
+                d.rounded_rectangle([bar_x,cy-thick//2,bar_x+wpx,cy+thick//2],
+                                    radius=thick//3,fill=col)
+
+        # before -- dim, the number they are leaving behind
+        d.text((MARGIN,y),before,font=f_bef,fill=DIM)
+        if bv is not None:
+            # The "before" bar has to recede without disappearing. At (52,54,64)
+            # it measured 1.65:1 against the background -- the element carrying
+            # half the comparison was almost invisible.
+            bar(y+int(S_BEF*0.55),bv/peak,ease(clamp(fi/6.0)),BAR_WAS,42)
+        y_arrow=y+int(S_BEF*1.10)
+
+        # the arrow -- direction is the claim, so it is drawn rather than typed
+        q=ease(clamp((fi-8)/9.0))
+        if q>0:
+            down = (av is not None and bv is not None and av<bv)
+            cx=MARGIN+40; top=y_arrow+8; span=GAP_ARROW-26
+            ln=int(span*q)
+            d.line([(cx,top),(cx,top+ln)] if down else [(cx,top+span),(cx,top+span-ln)],
+                   fill=c["accent"],width=8)
+            head=int(24*q)
+            if head>3:
+                tip = top+ln if down else top+span-ln
+                pts=([(cx,tip+head),(cx-head,tip),(cx+head,tip)] if down
+                     else [(cx,tip-head),(cx-head,tip),(cx+head,tip)])
+                d.polygon(pts,fill=c["accent"])
+
+        # after -- accent, larger, counting across from the old figure
+        y2=y_arrow+GAP_ARROW
+        p=ease(clamp((fi-10)/13.0))
+        shown=after
+        if av is not None and bv is not None:
+            shown=f"{ap}{int(round(bv+(av-bv)*p))}{asf}"
+        d.text((MARGIN,y2),shown,font=f_aft,fill=c["accent"])
+        if av is not None:
+            bar(y2+int(S_AFT*0.55),av/peak,ease(clamp((fi-6)/8.0)),c["accent"],58)
+
     def paint_cta(fr,b,fi):
         f,ls=fit(probe,b.text,F_SANS,200,110,mw,2); lh=int(f.size*1.16)
         sf,sls=fit(probe,b.sub or "",F_SANS,60,42,mw,3); slh=int(sf.size*1.26)
@@ -502,6 +582,7 @@ def render(niche,beats,outdir,badge):
             fr=bg(t)
             if b.kind=="hook":   paint_hook(fr,ease(clamp(fi/TICK_FRAMES)))
             elif b.kind=="stat": paint_stat(fr,b,fi)
+            elif b.kind=="proof":paint_proof(fr,b,fi)
             elif b.kind=="cta":  paint_cta(fr,b,fi)
             else:                paint_body(fr,b,fi)
             chrome(fr,c,badge)
@@ -521,6 +602,22 @@ def render(niche,beats,outdir,badge):
 # ---------------------------------------------------------------------------
 # Beat construction from the content brain's reel_beats block
 # ---------------------------------------------------------------------------
+
+def proof_pair(carousel):
+    """Find a before/after to build the proof beat from.
+
+    Prefers an explicit reel_beats.proof block. Falls back to the first body slide
+    carrying before/after, which the before-after carousel format already produces
+    and which the reel has been discarding since it was written."""
+    rb = carousel.get("reel_beats") or {}
+    p = rb.get("proof") or {}
+    if p.get("before") and p.get("after"):
+        return (str(p["before"]), str(p["after"]), (p.get("label") or "").strip())
+    for body in carousel.get("body_slides") or []:
+        if isinstance(body, dict) and body.get("before") and body.get("after"):
+            return (str(body["before"]), str(body["after"]), "")
+    return None
+
 
 def trim_to_budget(beats, budget=REEL_MAX_S):
     """Keep the reel inside its budget by dropping beats, never by speeding them up.
@@ -563,6 +660,11 @@ def beats_from_carousel(carousel):
                 line = (line.get("text") or "").strip()
             if line:
                 out.append(Beat("body", line, read_time(line)))
+        pr = proof_pair(carousel)
+        if pr:
+            out.append(Beat("proof", None,
+                            read_time(pr[2], lo=2.4, hi=3.6, orient=1.60),
+                            sub=pr[2], pair=(pr[0], pr[1])))
         cta_sub = rb.get("cta_line") or carousel.get("cta_promise", "")
         out.append(Beat("cta", carousel.get("cta_word", "AUDIT"),
                         read_time(cta_sub, lo=2.0, hi=3.2, orient=1.20), sub=cta_sub))

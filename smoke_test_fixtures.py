@@ -105,6 +105,7 @@ META = {
             "Judge results at day 14",
         ],
         "cta_line": "the 14-day template",
+        "proof": {"before": "€45", "after": "€15", "label": "cost per lead, 14 days"},
     },
 }
 

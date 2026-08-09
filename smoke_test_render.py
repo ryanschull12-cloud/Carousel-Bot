@@ -230,7 +230,7 @@ def check_reel(name, carousel, out_dir, f, sheets, audio_dir):
     # frame changes. The hook is exempt: it is deliberately set a touch tight, and
     # the loop tail brings it back for a second pass.
     for b in beats:
-        copy = b.text if b.kind != "stat" else (b.sub or "")
+        copy = b.text if b.kind not in ("stat", "proof") else (b.sub or "")
         if not copy or b.kind == "hook":
             continue
         need = min(0.35 + len(copy) / 20.0, 4.0)
@@ -242,6 +242,14 @@ def check_reel(name, carousel, out_dir, f, sheets, audio_dir):
     # the most that fits on two lines, and a third line adds another return sweep
     # for the eye. Mistral drifts off this, and nothing caught it before.
     for b in beats:
+        if b.kind == "proof" and b.pair:
+            for v in b.pair:
+                if not any(ch.isdigit() for ch in v):
+                    f.warn(name, f"proof figure {v!r} has no number in it")
+                if len(v) > 8:
+                    f.warn(name, f"proof figure {v!r} is {len(v)} chars, max 8 -- "
+                                 f"it sets very large and will shrink the frame's "
+                                 f"dominant element")
         if b.kind == "body" and b.text:
             if len(b.text) > 34 or len(b.text.split()) > 6:
                 f.warn(name, f"body line breaks the copy contract "

@@ -440,6 +440,24 @@ Rules that only apply to reel_beats:
     good: "Switch broad match to phrase"
     bad:  "Judge day 14 results not 2"        (reads as two clauses fused)
     good: "Judge on day 14, not day 2"
+- `proof` — OPTIONAL, but include it whenever the carousel format is before-after or
+  the idea has a measurable before and after. It renders as its own beat: the old
+  figure in grey with a bar, an arrow, and the new figure counting across to land in
+  the accent colour with a shorter bar. It is the only frame in the reel that looks
+  like evidence rather than advice, which makes it the one people screenshot.
+    { "before": "€45", "after": "€15", "label": "cost per lead, 14 days" }
+  Rules:
+    - Both figures carry a number and the SAME unit. "€45" -> "€15", "8%" -> "31%".
+      Never "€45" -> "a third of that", and never mix units.
+    - Eight characters maximum each. They set very large; a long string shrinks the
+      one element on the frame that is supposed to dominate it.
+    - `label` under 6 words, names the metric AND the window: "cost per lead, 14 days",
+      not "results". Without the window the claim is unfalsifiable and reads as a boast.
+    - The movement must match the claim in the body beats. Do not show a cost halving
+      if the body only described a tagging fix.
+    - Use a realistic benchmark figure. Do NOT present it as a specific client's
+      result, and do not invent a precise-looking number to seem credible -- "€45 to
+      €15" is a benchmark, "€47.13 to €14.86" is a fabricated case study.
 - `cta_line` — under 10 words, tells them what commenting the keyword gets them.
 - `send_line` — under 8 words, and the single highest-value line in the whole reel.
   Sends per reach (sharing to DMs) is the most heavily weighted ranking signal on Instagram,
@@ -523,7 +541,7 @@ Use exactly 6 body slides (10 slides total per carousel: hook + bridge + 6 body 
       "cta_save_line": "string — the SAVE ask, 'Save this for your next [topic] [noun]', noun varies by format (see CTA RULES) — never defaults to the same word across a batch",
       "cta_support": "string — optional, under 6 words, urgency/context rendered on the CTA image itself (e.g. 'No cost, just the checklist'). Never the caption or a restatement of it. Can be empty.",
       "caption": "string — starts with save-worthy line using plain search keywords, under 300 characters, ends with exactly 4 hashtags: 2 niche + 1 intent + 1 Irish geo",
-      "reel_beats": { "hook": "string", "stat_number": 0, "stat_label": "string", "body": ["string","string","string","string"], "cta_line": "string", "send_line": "string" },
+      "reel_beats": { "hook": "string", "stat_number": 0, "stat_label": "string", "body": ["string","string","string","string"], "proof": { "before": "string", "after": "string", "label": "string" }, "cta_line": "string", "send_line": "string" },
       "suggested_audio_style": "string — e.g. 'trending upbeat', 'calm voiceover', 'suspenseful build'"
     }
   ]
