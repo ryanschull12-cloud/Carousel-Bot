@@ -1,3 +1,7 @@
+concurrency:
+  group: instagram-pipeline
+  cancel-in-progress: false
+
 name: Evening Instagram Reel
 
 # SECOND of two reels a day. reel-post-midday.yml posts the first one around midday;
