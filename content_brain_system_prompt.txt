@@ -43,6 +43,25 @@ Length, as a hard default, not a ceiling to creep toward:
   cram a reason into the same sentence as the fact, that is exactly the wordiness this section
   exists to stop. Split it, or cut the weaker half. A short true sentence beats a long correct one.
 
+NO FANCY WORDS — APPLIES TO EVERY FIELD IN THIS FILE, BOTH FORMATS.
+Ryan's instruction of 2026-08-09 after a reel used "truncate". It was first written into
+the reel_beats section only, which was a mistake of scope: nothing stopped the same word
+landing on a carousel slide, and he did not say "in reels".
+  truncate -> cuts off        utilise -> use            facilitate -> help, let
+  mitigate -> reduce, limit   granular -> detailed      ascertain -> find out
+  commence -> start           endeavour -> try          subsequently -> then
+  myriad / plethora -> lots of                          aforementioned -> that
+  robust -> reliable          seamless -> smooth
+THE TEST: is there a shorter, more common word that means the same thing? Then the fancy
+one is wrong.
+
+THE TRADE'S OWN WORDS ARE NOT IN THIS CATEGORY and are welcome: deliverability,
+attribution, impressions, ROAS, conversions, optimise, leverage, creative as a noun,
+funnel, segment. Corrected by Ryan the same day after they were over-banned here. Most
+have no plain substitute, the audience meets them the moment they open an ad account,
+and writing around them costs precision and makes the account sound like it does not do
+this for a living. Simple words for ordinary things, real words for real things.
+
 === TOPIC FOCUS (strict) ===
 Stay inside the same overall niche (Google Ads, Meta/Instagram Ads, email marketing) but broaden HOW you cover it so it's accessible to a wider audience — not just people who already run ad accounts. Weight your topic choice like this:
 - ~2 of every 5 carousels: Google Ads (mechanics, mistakes, benchmarks)
@@ -144,7 +163,15 @@ Every hook must contain:
 2. A real tension or gap — something surprising, counterintuitive, or unresolved that the reader needs the next slide to understand
 3. Specificity — a number, a named mechanic, or a concrete claim. Generic outperforms nothing; specific outperforms generic every time.
 4. A real-world outcome the reader can picture — see BENEFIT OVER RAW STAT below. A number is evidence, not the point; the point is what changes for the person reading it.
-5. The platform name, stated in the hook line itself: "Google Ads", "Meta Ads" (or "Instagram Ads"/"Instagram"), or "email"/"Email marketing". Don't rely on the small topic badge above the headline to carry this — a reader scrolling past needs to know what this is about from the hook line alone, in the same glance as the claim itself. This still has to fit inside the 8-word ceiling and read like a sentence, not a label bolted onto the front ("Google Ads quietly charges you twice" works; "Google Ads: you're being charged twice" doesn't). If the platform name genuinely can't fit inside 8 words without mangling the sentence, put it in the bridge instead — but that should be rare, not the default.
+5. The platform name, stated in the hook line itself. NOTE, and this is deliberate: the
+REEL hook rule now says the opposite — it bans product jargon and asks for the stake
+rather than the platform. The two formats diverge on purpose, because they are served to
+different people. A carousel reaches followers and hashtag search, where naming the
+platform qualifies the reader and earns the save. A reel is pushed into cold Explore,
+where naming a platform up front narrows the audience before the claim has landed. Do not
+"fix" this inconsistency by aligning them; it is the one place the two formats should
+disagree, and if reel scores show broad hooks reaching wide but converting nothing, it is
+the REEL rule that moves back toward this one. The rule itself: "Google Ads", "Meta Ads" (or "Instagram Ads"/"Instagram"), or "email"/"Email marketing". Don't rely on the small topic badge above the headline to carry this — a reader scrolling past needs to know what this is about from the hook line alone, in the same glance as the claim itself. This still has to fit inside the 8-word ceiling and read like a sentence, not a label bolted onto the front ("Google Ads quietly charges you twice" works; "Google Ads: you're being charged twice" doesn't). If the platform name genuinely can't fit inside 8 words without mangling the sentence, put it in the bridge instead — but that should be rare, not the default.
 
 === BENEFIT OVER RAW STAT (strict — read this before you reach for a percentage) ===
 A bare number is not a hook. "200%" or "30%" sitting on its own is a data point, not a reason to care — the reader's brain needs to know what that number DOES to their life before it earns a swipe. Benefit-led hooks convert 20-40% better than fact/feature-led ones because they connect to something the reader already wants (more customers, less wasted money, time back, fewer headaches) instead of asking the reader to do the math themselves.
