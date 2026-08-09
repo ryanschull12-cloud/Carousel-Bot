@@ -20,13 +20,20 @@ F_SANS_REG = os.path.join(SYS_DIR, "LiberationSans-Regular.ttf")
 
 AGENCY_HANDLE = "@rd.marketing0"
 
-BG = (240, 239, 234)
-DOT_COLOR = (225, 223, 216)
-TEXT = (20, 20, 20)
-GRAY = (130, 130, 130)
+# Palette lifted from marketing-rd.com's own CSS custom properties so the
+# carousels and the site read as one brand.
+#   --bg #0a0a0d  --bg-alt #0d0e12  --bg-raised #15161c
+#   --ink #f4f5f7 --dim #9a9ca6     --accent #6ea8ff
+BG = (10, 10, 13)            # --bg
+BG_ALT = (13, 14, 18)        # --bg-alt, for vertical gradients
+BG_RAISED = (21, 22, 28)     # --bg-raised, card fills
+DOT_COLOR = (58, 60, 68)     # unlit constellation nodes
+HAIRLINE = (36, 37, 44)      # --line rgba(255,255,255,0.09) over --bg
+TEXT = (244, 245, 247)       # --ink
+GRAY = (154, 156, 166)       # --dim
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-SHADOW = (205, 202, 194)  # soft depth shade for badges, one tone below BG
+SHADOW = (6, 6, 8)           # depth shade, now one tone BELOW bg not above
 
 # FIXED FONT SIZES — never auto-grow beyond these
 HOOK_FONT_SIZE = 96       # Hook slides: big, dramatic, consistent
@@ -58,13 +65,19 @@ EXPERIMENTABLE_CONSTANTS = {
     "CTA_PROMISE_SIZE": {"min": 24, "max": 36},
 }
 
+# One brand blue, three tonal positions around it. Google Ads sits on the
+# true brand hue from marketing-rd.com, Meta pushes violet, Email pushes
+# cyan -- close enough to read as one system, far enough apart to tell the
+# topics apart at a glance. Keys stay accent/dark/light so every existing
+# call site keeps working; on a dark canvas "dark" is the deep tone and
+# "light" is the raised-card tone, which is why they look inverted.
 TOPIC_COLORS = {
-    "google ads": {"accent": (161, 214, 191), "dark": (30, 90, 65), "light": (200, 240, 220)},
-    "meta": {"accent": (240, 172, 168), "dark": (140, 45, 45), "light": (255, 220, 215)},
-    "instagram": {"accent": (240, 172, 168), "dark": (140, 45, 45), "light": (255, 220, 215)},
-    "email": {"accent": (196, 176, 226), "dark": (80, 55, 120), "light": (225, 210, 245)},
+    "google ads": {"accent": (110, 168, 255), "dark": (30, 52, 92), "light": (22, 30, 46)},
+    "meta": {"accent": (146, 154, 255), "dark": (44, 46, 96), "light": (27, 28, 48)},
+    "instagram": {"accent": (146, 154, 255), "dark": (44, 46, 96), "light": (27, 28, 48)},
+    "email": {"accent": (94, 199, 240), "dark": (24, 62, 84), "light": (19, 33, 43)},
 }
-DEFAULT_COLORS = {"accent": (161, 214, 191), "dark": (30, 90, 65), "light": (200, 240, 220)}
+DEFAULT_COLORS = {"accent": (110, 168, 255), "dark": (30, 52, 92), "light": (22, 30, 46)}
 
 
 def colors_for(niche):
@@ -107,10 +120,31 @@ def fit_text_shrink_only(draw, text, max_width, max_lines, target_size, min_size
     return font, wrap_text(draw, text, font, max_width), size
 
 
-def draw_dot_grid(draw, spacing=48, radius=2):
-    for y in range(60, H - 40, spacing):
-        for x in range(60, W - 40, spacing):
-            draw.ellipse([x - radius, y - radius, x + radius, y + radius], fill=DOT_COLOR)
+def draw_dot_grid(draw, spacing=48, radius=2, colors=None, seed=1):
+    """Constellation background, matching marketing-rd.com's hero canvas.
+
+    Scattered nodes with hairline links between near neighbours and roughly
+    one node in seven lit in the niche accent. `spacing` and `radius` are
+    kept in the signature for compatibility with experiment_loop.py, which
+    may still reference them, but are no longer used.
+    """
+    import math, random
+    accent = (colors or DEFAULT_COLORS)["accent"]
+    rng = random.Random(seed * 7919)
+    nodes = [(rng.uniform(-40, W + 40), rng.uniform(-40, H + 40)) for _ in range(34)]
+
+    for i, a in enumerate(nodes):
+        for b in nodes[i + 1:]:
+            d = math.hypot(a[0] - b[0], a[1] - b[1])
+            if d < 300:
+                v = int(46 * (1 - d / 300.0))
+                draw.line([a, b], fill=(v + 10, v + 11, v + 14), width=1)
+
+    for idx, (x, y) in enumerate(nodes):
+        if idx % 7 == 0:
+            draw.ellipse([x - 3.5, y - 3.5, x + 3.5, y + 3.5], fill=accent)
+        else:
+            draw.ellipse([x - 2, y - 2, x + 2, y + 2], fill=DOT_COLOR)
 
 
 def draw_progress_bar(draw, slide_num, total_slides, accent_color, dark_color):
@@ -124,7 +158,7 @@ def draw_progress_bar(draw, slide_num, total_slides, accent_color, dark_color):
         if i < slide_num:
             fill = dark_color
         else:
-            fill = (220, 220, 220)
+            fill = (40, 42, 50)
         draw.rounded_rectangle([x0, bar_y, x1, bar_y + bar_h], radius=4, fill=fill)
 
 
@@ -1110,7 +1144,7 @@ def render_cta_slide_fixed(headline, cta_word, cta_promise, cta_support, save_li
         ty += 30
         for line in support_lines:
             tw = draw.textlength(line, font=f_support)
-            draw.text(((W - tw) / 2, ty), line, font=f_support, fill=(90, 90, 90))
+            draw.text(((W - tw) / 2, ty), line, font=f_support, fill=(120, 122, 132))
             ty += support_line_h
 
     draw_follow_pill(draw, colors)
