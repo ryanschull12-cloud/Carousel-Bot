@@ -1,24 +1,50 @@
 name: Render Smoke Test
 
-# Safety net for GitHub-web edits to the render engine. Runs on every push
-# to main that touches carousel_engine.py (or is triggered manually), and
-# renders one synthetic carousel per format (checklist, steal-this,
-# myth-buster, comparison, before-after) with fake copy. If any format
-# raises an exception or produces the wrong slide count, this job fails
-# and shows a red X on the commit -- catching a broken edit within a
-# couple minutes instead of waiting for the 7:37am daily run to hit it
-# for real. No API keys needed and nothing gets committed or posted --
-# this only checks that the engine still runs.
+# Design QA for the render engines, not just a crash check.
+#
+# The old version of this job ran carousel_engine.py against placeholder copy and
+# passed if nothing raised. It stayed green for the entire dark-palette rebrand
+# while shipping hook slides whose largest element was navy-on-black. A green tick
+# meant "it did not crash", and everyone read it as "it looks fine".
+#
+# It now renders realistic copy plus hostile edge cases, measures contrast, vertical
+# balance and edge clipping on the actual pixels, exercises reel_engine.py end to end
+# (frame-0 hook legibility, loop closure, duration, ffprobe against Meta's Reel spec),
+# and uploads contact sheets and an HTML report as an artifact so there is always
+# something to look at.
+#
+# Hard failures fail the job. Design findings are reported but do not, because a
+# permanently-red CI is a CI nobody reads. Flip --strict once the current findings
+# are cleared and it becomes a ratchet.
 on:
   push:
     branches: [main]
     paths:
       - "carousel_engine.py"
-  workflow_dispatch: {}
+      - "reel_engine.py"
+      - "render_qa.py"
+      - "smoke_test_render.py"
+      - "smoke_test_fixtures.py"
+      - "requirements.txt"
+  pull_request:
+    paths:
+      - "carousel_engine.py"
+      - "reel_engine.py"
+  workflow_dispatch:
+    inputs:
+      strict:
+        description: "Fail the build on design findings too"
+        type: boolean
+        default: false
+      all_reels:
+        description: "Render a reel for every niche, not just one"
+        type: boolean
+        default: false
 
 jobs:
   smoke_test:
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     steps:
       - name: Check out repo
         uses: actions/checkout@v4
@@ -32,5 +58,24 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Render one carousel per format
-        run: python smoke_test_render.py
+      # ffmpeg is not preinstalled on GitHub runners and the reel checks encode a
+      # real MP4 to probe it, same as reel-post.yml does.
+      - name: Install ffmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+
+      - name: Render and analyse
+        run: |
+          python smoke_test_render.py \
+            --out smoke_out \
+            ${{ inputs.strict && '--strict' || '' }} \
+            ${{ inputs.all_reels && '--all-reels' || '' }}
+
+      # Uploaded even when the job fails -- a red X with nothing to look at is how
+      # the last round of problems stayed invisible for seventeen days.
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: render-qa-report
+          path: smoke_out
+          retention-days: 14

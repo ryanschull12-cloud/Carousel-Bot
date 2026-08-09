@@ -9,3 +9,7 @@
 # discovering a break in production.
 requests~=2.34
 Pillow~=12.2
+# Added 2026-08-09 for render_qa.py, which measures contrast and ink distribution
+# on rendered slides. Analysis-only -- nothing in the posting path imports it, so a
+# numpy problem cannot take down a scheduled post.
+numpy~=2.2

@@ -1,0 +1,9 @@
+# Added 2026-08-09. The repo had no .gitignore, so generated artefacts were only
+# staying out of commits by hand.
+
+# Render QA output. Uploaded as a CI artifact on every run, never committed --
+# it is a few MB of JPEGs and an MP4 per run and would bloat the repo fast.
+smoke_out/
+
+__pycache__/
+*.pyc
