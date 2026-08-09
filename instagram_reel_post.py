@@ -206,12 +206,28 @@ def log_post(entry):
     json.dump(log, open(REEL_LOG_PATH, "w"), indent=2)
 
 
-def email(subject, body):
+def email(subject, body, attach=None):
+    """attach: path to a file to send along, or None.
+
+    Added 2026-08-09 so the rendered MP4 reaches Ryan directly. The same file that
+    goes to Instagram is already YouTube Shorts eligible -- 1080x1920, under 60
+    seconds, H.264 -- and Shorts has no API route available on this setup, so the
+    upload is manual and the file has to arrive somewhere he can reach it from a
+    phone. Reels land around 1.5 MB, well inside Gmail's 25 MB limit; anything
+    unexpectedly large is skipped rather than failing the send."""
     if not (GMAIL_ADDRESS and GMAIL_APP_PASSWORD):
         return
     m = EmailMessage()
     m["Subject"], m["From"], m["To"] = subject, GMAIL_ADDRESS, TO_EMAIL
     m.set_content(body)
+    if attach and os.path.exists(attach):
+        size = os.path.getsize(attach)
+        if size > 20 * 1024 * 1024:
+            print(f"attachment {attach} is {size/1048576:.1f} MB — too big to email, skipping")
+        else:
+            with open(attach, "rb") as fh:
+                m.add_attachment(fh.read(), maintype="video", subtype="mp4",
+                                 filename=os.path.basename(attach))
     try:
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as s:
             s.login(GMAIL_ADDRESS, GMAIL_APP_PASSWORD)
@@ -301,6 +317,32 @@ def main():
                   f"nothing to render. Skipping.")
             return
         print(f"Rendered {rel} ({dur:.1f}s, {os.path.getsize(rel)/1048576:.2f} MB)")
+
+        # Send the file at RENDER time, not publish time. The two run as separate
+        # steps and publishing can fail on Instagram's side for reasons that have
+        # nothing to do with the video; the YouTube copy should not be hostage to
+        # that. Everything needed to upload it is in the body, because it will be
+        # read on a phone.
+        hook = (pick.get("reel_beats") or {}).get("hook") or pick.get("hook_slide", "")
+        credit = reel_engine.credit_for(reel_engine.pick_track(today, pick["index"]))
+        body = [
+            "Reel ready to upload to YouTube Shorts.",
+            "",
+            f"Suggested title:  {hook}",
+            "",
+            "Description:",
+            pick.get("caption", ""),
+        ]
+        if credit:
+            body += ["", f"Music: {credit}"]
+        body += ["", f"{dur:.1f}s · 1080x1920 · {os.path.getsize(rel)/1048576:.2f} MB",
+                 f"{pick.get('niche','')} · carousel {pick['index']}",
+                 "",
+                 "Shorts picks it up automatically: it is vertical and under 60s, so "
+                 "no #Shorts tag is needed."]
+        email(f"Reel for YouTube — {today} — {pick.get('niche','')}",
+              "\n".join(body), attach=rel)
+
         if args.render_only:
             return
 
