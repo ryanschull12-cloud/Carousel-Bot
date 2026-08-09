@@ -344,6 +344,22 @@ TICK_FRAMES = 13.0
 
 TAIL_S = 0.6   # crossfade back to the hook so the loop closes
 
+def push_in(fr, p, amount=0.022):
+    """Slow camera move across a beat (2026-08-09). Content-only -- chrome is
+    drawn after this, so the UI stays pinned while the frame drifts. The push
+    resets at every hard cut, where the content change masks it, and the hook
+    starts at exactly 1.0 so frame 0 and the loop tail's target still match.
+    2.2%% over a 2-4s beat is sub-pixel per frame: it reads as production
+    camera drift, not as a zoom effect. Encode moved to PNG intermediates and
+    crf 18 in the same change so H.264 has the bits to keep the moving type
+    sharp -- the risk the research brief flags for exactly this feature."""
+    z = 1.0 + amount * p
+    zw, zh = int(W * z), int(H * z)
+    big = fr.resize((zw, zh), Image.LANCZOS)
+    x, y = (zw - W) // 2, (zh - H) // 2
+    return big.crop((x, y, x + W, y + H))
+
+
 def render(niche,beats,outdir,badge):
     """Frames for one reel.
 
@@ -585,16 +601,20 @@ def render(niche,beats,outdir,badge):
             elif b.kind=="proof":paint_proof(fr,b,fi)
             elif b.kind=="cta":  paint_cta(fr,b,fi)
             else:                paint_body(fr,b,fi)
+            fr=push_in(fr, fi/max(counts[bi]-1,1))
             chrome(fr,c,badge)
-            fr.save(f"{outdir}/f{n:05d}.jpg",quality=88); n+=1
+            # PNG, not JPEG: these are intermediates for x264. Saving them at
+            # JPEG q88 was a second lossy pass before the encoder's own -- the
+            # frames arrived pre-softened. (2026-08-09)
+            fr.save(f"{outdir}/f{n:05d}.png"); n+=1
 
     # ---- tail: return to the hook so the loop closes ----
     if tail:
-        last=Image.open(f"{outdir}/f{n-1:05d}.jpg").convert("RGB")
+        last=Image.open(f"{outdir}/f{n-1:05d}.png").convert("RGB")
         for i in range(tail):
             t=n/total
             fr=Image.blend(last,hook_frame(t),ease((i+1)/tail))
-            fr.save(f"{outdir}/f{n:05d}.jpg",quality=88); n+=1
+            fr.save(f"{outdir}/f{n:05d}.png"); n+=1
 
     return n,n/FPS
 
@@ -785,7 +805,7 @@ def encode(frames_dir, out_mp4, duration, track=None, music_lufs=-26.0):
         except Exception:
             seek = 0.0
     cmd = ["ffmpeg", "-y", "-v", "error",
-           "-framerate", str(FPS), "-i", os.path.join(frames_dir, "f%05d.jpg")]
+           "-framerate", str(FPS), "-i", os.path.join(frames_dir, "f%05d.png")]
     if track:
         cmd += ["-stream_loop", "-1", "-ss", f"{seek:.2f}", "-i", track,
                 "-filter_complex",
@@ -796,7 +816,11 @@ def encode(frames_dir, out_mp4, duration, track=None, music_lufs=-26.0):
     else:
         cmd += ["-f", "lavfi", "-i",
                 "anullsrc=channel_layout=stereo:sample_rate=48000", "-shortest"]
-    cmd += ["-c:v", "libx264", "-preset", "veryfast", "-crf", "21",
+    # preset slow + crf 18 (was veryfast/21, 2026-08-09): text is the whole
+    # frame here, and the camera push means every pixel moves every frame --
+    # veryfast at 21 visibly softened glyph edges. Encode time roughly
+    # doubles and stays well inside the workflow budget.
+    cmd += ["-c:v", "libx264", "-preset", "slow", "-crf", "18",
             "-profile:v", "high", "-level", "4.0", "-pix_fmt", "yuv420p",
             "-x264-params", "keyint=48:min-keyint=48:scenecut=0:open-gop=0",
             "-r", str(FPS),

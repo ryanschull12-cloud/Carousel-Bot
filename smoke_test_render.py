@@ -220,7 +220,10 @@ def check_reel(name, carousel, out_dir, f, sheets, audio_dir):
         f.note(name, traceback.format_exc(limit=4))
         return
 
-    frames = sorted(os.path.join(work, x) for x in os.listdir(work) if x.endswith(".jpg"))
+    # Reel frames moved from JPEG to PNG intermediates (2026-08-09); accept
+    # both so this keeps working against either engine generation.
+    frames = sorted(os.path.join(work, x) for x in os.listdir(work)
+                    if x.endswith((".jpg", ".png")))
     if len(frames) < 2:
         f.fail(name, f"only {len(frames)} frames rendered")
         return

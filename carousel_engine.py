@@ -30,14 +30,80 @@ INTER_DIRS = [
 def _sans_family():
     for d in INTER_DIRS:
         if d and os.path.exists(os.path.join(d, "Inter-Regular.otf")):
-            return (os.path.join(d, "Inter-Bold.otf"), os.path.join(d, "Inter-Regular.otf"))
+            return (os.path.join(d, "Inter-Bold.otf"), os.path.join(d, "Inter-Regular.otf"),
+                    os.path.join(d, "Inter-SemiBold.otf"))
     return (os.path.join(SYS_DIR, "LiberationSans-Bold.ttf"),
-            os.path.join(SYS_DIR, "LiberationSans-Regular.ttf"))
+            os.path.join(SYS_DIR, "LiberationSans-Regular.ttf"),
+            os.path.join(SYS_DIR, "LiberationSans-Bold.ttf"))
 
-F_SANS_BOLD, F_SANS_REG = _sans_family()
+F_SANS_BOLD, F_SANS_REG, F_SEMI = _sans_family()
 # Display face for hooks, bridges, mega stats/phrases, recap headers and
 # before/after values. Was LiberationSerif-Bold until 2026-08-09.
 F_DISPLAY = F_SANS_BOLD
+
+# ---------------------------------------------------------------------------
+# Supersampled rendering (2026-08-09). Slides draw onto a 2x canvas and are
+# LANCZOS-downscaled to 1080x1350 at save time, which anti-aliases every
+# primitive PIL draws hard-edged at 1x -- polygon diagonals, circles, pill
+# corners -- and tightens the type. All layout math stays in 1x coordinates:
+# _SSDraw scales geometry at draw time and measures text with the caller's
+# own 1x font, so wrapping, centering and fitting are bit-for-bit the
+# decisions the 1x engine made. Saves also moved to quality=95 with
+# subsampling=0: PIL's default 4:2:0 chroma subsampling smears the edges of
+# coloured type on dark ground, which reads as blur on a phone.
+# ---------------------------------------------------------------------------
+SS = 2
+
+class _SSDraw:
+    def __init__(self, img):
+        self._d = ImageDraw.Draw(img)
+        self._fonts = {}
+
+    def _xy(self, xy):
+        return [tuple(v * SS for v in p) if isinstance(p, (tuple, list)) else p * SS
+                for p in xy]
+
+    def _font2x(self, font):
+        key = (font.path, font.size)
+        f = self._fonts.get(key)
+        if f is None:
+            f = ImageFont.truetype(font.path, font.size * SS)
+            self._fonts[key] = f
+        return f
+
+    def textlength(self, text, font=None):
+        return self._d.textlength(text, font=font)  # 1x font, 1x answer
+
+    def text(self, xy, text, font=None, fill=None):
+        x, y = xy
+        self._d.text((x * SS, y * SS), text, font=self._font2x(font), fill=fill)
+
+    def rectangle(self, xy, **kw):
+        self._d.rectangle(self._xy(xy), **kw)
+
+    def rounded_rectangle(self, xy, radius=0, width=1, **kw):
+        self._d.rounded_rectangle(self._xy(xy), radius=radius * SS, width=width * SS, **kw)
+
+    def ellipse(self, xy, **kw):
+        if "width" in kw:
+            kw["width"] = kw["width"] * SS
+        self._d.ellipse(self._xy(xy), **kw)
+
+    def line(self, xy, fill=None, width=1, joint=None):
+        self._d.line(self._xy(xy), fill=fill, width=width * SS, joint=joint)
+
+    def polygon(self, xy, **kw):
+        self._d.polygon(self._xy(xy), **kw)
+
+
+def new_slide():
+    """2x canvas + scaling draw proxy. Pair with save_slide()."""
+    img = Image.new("RGB", (W * SS, H * SS), BG)
+    return img, _SSDraw(img)
+
+
+def save_slide(img, out_path):
+    img.resize((W, H), Image.LANCZOS).save(out_path, "JPEG", quality=95, subsampling=0)
 
 AGENCY_HANDLE = "@rd.marketing0"
 
@@ -742,143 +808,155 @@ def draw_bottom_accent_block(draw, y, height, colors):
     """Large accent color block at bottom to fill space."""
     draw.rectangle([0, y, W, y + height], fill=colors["light"])
 
+# ---------------------------------------------------------------------------
+# Mixed-weight text (2026-08-09). The reel hook sets its sentence in Regular
+# with the emphasis token in Bold accent, and Ryan picked that frame out as
+# the design to build on. These helpers bring the same treatment to the
+# carousel: words inside the emphasis span measure and draw in the bold face
+# and the accent colour, everything else in the base face and ink. Wrapping
+# is computed against each word's own font so a bold span can't overflow a
+# line that was measured regular.
+# ---------------------------------------------------------------------------
+
+def _span_words(text, span):
+    """Per-word bold flags: a word is bold if it overlaps `span` in `text`."""
+    i = text.find(span) if span else -1
+    rng = (i, i + len(span)) if i >= 0 else None
+    out, pos = [], 0
+    for w in text.split():
+        j = text.index(w, pos)
+        pos = j + len(w)
+        bold = rng is not None and j < rng[1] and (j + len(w)) > rng[0]
+        out.append((w, bold))
+    return out
+
+
+def layout_mixed(draw, text, span, f_reg, f_bold, max_w):
+    words = _span_words(text, span)
+    sp = draw.textlength(" ", font=f_reg)
+    lines, cur, cw = [], [], 0.0
+    for w, b in words:
+        ww = draw.textlength(w, font=f_bold if b else f_reg)
+        add = ww if not cur else ww + sp
+        if cur and cw + add > max_w:
+            lines.append(cur)
+            cur, cw = [(w, b)], ww
+        else:
+            cur.append((w, b))
+            cw += add
+    if cur:
+        lines.append(cur)
+    return lines
+
+
+def fit_mixed(draw, text, span, max_w, max_lines, target, min_size, reg_path, bold_path):
+    """Shrink-only, same contract as fit_text_shrink_only."""
+    for size in range(target, min_size - 1, -4):
+        f_reg = ImageFont.truetype(reg_path, size)
+        f_bold = ImageFont.truetype(bold_path, size)
+        lines = layout_mixed(draw, text, span, f_reg, f_bold, max_w)
+        widths_ok = all(
+            sum(draw.textlength(w, font=f_bold if b else f_reg) for w, b in ln)
+            + draw.textlength(" ", font=f_reg) * (len(ln) - 1) <= max_w
+            for ln in lines)
+        if len(lines) <= max_lines and widths_ok:
+            return f_reg, f_bold, lines, size
+    f_reg = ImageFont.truetype(reg_path, min_size)
+    f_bold = ImageFont.truetype(bold_path, min_size)
+    return f_reg, f_bold, layout_mixed(draw, text, span, f_reg, f_bold, max_w), min_size
+
+
+def draw_mixed_lines(draw, lines, x, y, f_reg, f_bold, line_h, ink, accent):
+    sp = draw.textlength(" ", font=f_reg)
+    for ln in lines:
+        cx = x
+        for w, b in ln:
+            f = f_bold if b else f_reg
+            draw.text((cx, y), w, font=f, fill=accent if b else ink)
+            cx += draw.textlength(w, font=f) + sp
+        y += line_h
+    return y
+
 
 # ============================================================
 # HOOK SLIDE — fixed size, designed fill
 # ============================================================
 
 def render_hook_slide_fixed(headline, niche, slide_num, total_slides, out_path, pop_phrase=None):
+    """Restyled 2026-08-09 into the reel hook's design language, at Ryan's
+    call after he picked the reel frames out as the look to build on: copy
+    set left-aligned in Regular with the emphasis span in Bold accent, a
+    short accent rule above the block, and negative space doing the work.
+    The old centered stack -- mega phrase up top, icon circle, full-width
+    accent bars, marker block -- repeated the emphasis twice and filled
+    every quiet part of the frame; this says it once, larger than life,
+    and lets the constellation breathe. Emphasis is colour+weight inline,
+    the same call Ryan already made for the reels (block highlight
+    rejected), so the grid finally speaks one language."""
     colors = colors_for(niche)
-    img = Image.new("RGB", (W, H), BG)
-    draw = ImageDraw.Draw(img)
+    img, draw = new_slide()
     draw_dot_grid(draw)
     draw_corner_flag(draw, colors)
     draw_header_v2(draw, niche, slide_num, total_slides, colors)
 
-    max_w = W - 2 * MARGIN - 40  # slightly narrower for better line breaks
-
-    # Real graphic element in the gap between header and the mega text —
-    # this used to just be empty dot-grid space. A niche icon here gives
-    # every hook slide an actual visual mark, not just text on shapes.
-    draw_icon_badge(draw, W / 2, 205, 46, niche, colors)
-
-    # Render the content brain's authored pop_phrase — a hand-picked,
-    # in-context punchy consequence phrase — oversized above the headline.
-    # This now takes priority over a bare regex-matched stat: a lone "30%"
-    # ripped out of its sentence reads as an arbitrary, disconnected number
-    # ("30% of what?"), whereas hook_pop_phrase is chosen specifically to
-    # carry meaning on its own, so it IS the hook, not just a number pulled
-    # from it. The content brain always fills this in, even on hooks that
-    # contain a stat (see content_brain_system_prompt.txt), precisely so
-    # it can be preferred here. A bare stat is now only used as a fallback
-    # for older manifests generated before hook_pop_phrase existed.
-    have_pop = bool(pop_phrase and pop_phrase in headline)
-    stat = None if have_pop else find_stat(headline)
-    top_y = 260
-    if have_pop:
-        top_y, _ = draw_mega_phrase(draw, pop_phrase, top_y, colors, max_w)
-        top_y += 24
-    elif stat:
-        top_y, _ = draw_mega_stat(draw, stat, top_y, colors, max_w)
-        top_y += 24
-
-    # FIXED SIZE: 96px, shrink only if needed
-    font, lines, size = fit_text_shrink_only(draw, headline, max_w, 4, HOOK_FONT_SIZE, 52, F_DISPLAY)
-    line_h = int(size * 1.2)
-    highlight = pop_phrase if have_pop else find_highlight_word(headline)
-
+    max_w = W - 2 * MARGIN
+    span = pop_phrase if (pop_phrase and pop_phrase in headline) else find_highlight_word(headline)
+    f_reg, f_bold, lines, size = fit_mixed(draw, headline, span, max_w, 4,
+                                           HOOK_FONT_SIZE, 52, F_SANS_REG, F_SANS_BOLD)
+    line_h = int(size * 1.14)
     total_h = line_h * len(lines)
 
-    # CENTER the remaining text block in whatever space is left below the stat
-    available_h = H - top_y - 180  # header/stat to progress bar
-    ty = top_y + max(0, (available_h - total_h) // 2)
+    # Upper-third anchor, like the reel hook: the block sits high with air
+    # underneath, not dead-centered.
+    top, bottom = 250, H - 210
+    ty = top + max(0, int((bottom - top - total_h) * 0.34))
 
-    # If text is very short (1-2 lines) and there's no mega element already
-    # doing the attention-grabbing work, add decorative elements
-    if len(lines) <= 2 and not stat and not have_pop:
-        draw_decorative_quote_marks(draw, ty - 40, colors)
-        draw_accent_bar(draw, ty - 60, colors, width=200)
-        draw_accent_bar(draw, ty + total_h + 40, colors, width=200)
-    else:
-        draw_accent_bar(draw, ty - 30, colors)
-        draw_accent_bar(draw, ty + total_h + 20, colors)
+    # The reel hook's mark: one short accent rule above the copy.
+    draw.rectangle([MARGIN, ty - 58, MARGIN + 64, ty - 50], fill=colors["accent"])
 
-    for line in lines:
-        draw_text_highlighted_centered(draw, ty, line, font, highlight, TEXT, colors["accent"], deep_color=colors["dark"])
-        ty += line_h
+    draw_mixed_lines(draw, lines, MARGIN, ty, f_reg, f_bold, line_h, TEXT, colors["accent"])
 
     draw_follow_pill(draw, colors)
     draw_progress_bar(draw, slide_num, total_slides, colors["accent"], colors["dark"])
 
-    img.save(out_path, "JPEG", quality=92)
+    save_slide(img, out_path)
     return out_path
 
-
-# ============================================================
-# BRIDGE SLIDE — fixed size, designed fill
-# ============================================================
 
 def render_bridge_slide_fixed(headline, niche, slide_num, total_slides, out_path, pop_phrase=None):
+    """Same reel-language restyle as the hook (2026-08-09) and the same
+    visual weight, per the re-hook rule -- the bridge must stop a swipe on
+    its own. Differentiated by its mark: a vertical accent bar down the
+    block's left edge (the treatment the original design spec reserved for
+    bridge slides) instead of the hook's rule above."""
     colors = colors_for(niche)
-    img = Image.new("RGB", (W, H), BG)
-    draw = ImageDraw.Draw(img)
+    img, draw = new_slide()
     draw_dot_grid(draw)
-    draw_corner_flag(draw, colors)
     draw_header_v2(draw, niche, slide_num, total_slides, colors)
 
-    max_w = W - 2 * MARGIN - 40
-
-    # Same real graphic mark as the hook slide, slightly smaller — the
-    # bridge is a re-hook and should carry the same visual weight, per the
-    # bridge design rules, so it gets the same icon treatment too.
-    draw_icon_badge(draw, W / 2, 200, 38, niche, colors)
-
-    # Same priority flip as the hook slide: the content brain's authored
-    # bridge_pop_phrase carries actual in-context meaning, so it now wins
-    # over a bare regex-matched stat, which is only used as a fallback for
-    # older manifests that predate bridge_pop_phrase.
-    have_pop = bool(pop_phrase and pop_phrase in headline)
-    stat = None if have_pop else find_stat(headline)
-    top_y = 260
-    if have_pop:
-        top_y, _ = draw_mega_phrase(draw, pop_phrase, top_y, colors, max_w, target=110, min_size=68)
-        top_y += 20
-    elif stat:
-        top_y, _ = draw_mega_stat(draw, stat, top_y, colors, max_w, target=140, min_size=90)
-        top_y += 20
-
-    font, lines, size = fit_text_shrink_only(draw, headline, max_w, 4, BRIDGE_FONT_SIZE, 48, F_DISPLAY)
-    line_h = int(size * 1.2)
-    highlight = pop_phrase if have_pop else find_highlight_word(headline)
-
+    bar_w, bar_gap = 10, 34
+    max_w = W - 2 * MARGIN - bar_w - bar_gap
+    span = pop_phrase if (pop_phrase and pop_phrase in headline) else find_highlight_word(headline)
+    f_reg, f_bold, lines, size = fit_mixed(draw, headline, span, max_w, 4,
+                                           BRIDGE_FONT_SIZE, 48, F_SANS_REG, F_SANS_BOLD)
+    line_h = int(size * 1.14)
     total_h = line_h * len(lines)
-    available_h = H - top_y - 180
-    ty = top_y + max(0, (available_h - total_h) // 2)
 
-    # Bridge mirrors the hook's centered framing (top/bottom accent bars,
-    # plus decorative quote marks on short lines) so slides 1 and 2 carry
-    # the same visual weight, per the re-hook rule.
-    if len(lines) <= 2 and not stat and not have_pop:
-        draw_decorative_quote_marks(draw, ty - 30, colors)
-        draw_accent_bar(draw, ty - 50, colors, width=200)
-        draw_accent_bar(draw, ty + total_h + 30, colors, width=200)
-    else:
-        draw_accent_bar(draw, ty - 25, colors)
-        draw_accent_bar(draw, ty + total_h + 15, colors)
+    top, bottom = 250, H - 210
+    ty = top + max(0, int((bottom - top - total_h) * 0.34))
 
-    for line in lines:
-        draw_text_highlighted_centered(draw, ty, line, font, highlight, TEXT, colors["accent"], deep_color=colors["dark"])
-        ty += line_h
+    draw.rectangle([MARGIN, ty + 6, MARGIN + bar_w, ty + total_h - int(line_h * 0.14)],
+                   fill=colors["accent"])
+    draw_mixed_lines(draw, lines, MARGIN + bar_w + bar_gap, ty, f_reg, f_bold,
+                     line_h, TEXT, colors["accent"])
 
     draw_follow_pill(draw, colors)
     draw_progress_bar(draw, slide_num, total_slides, colors["accent"], colors["dark"])
 
-    img.save(out_path, "JPEG", quality=92)
+    save_slide(img, out_path)
     return out_path
 
 
-# ============================================================
-# BODY SLIDE — fixed size, designed fill
 # ============================================================
 
 def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slides, out_path,
@@ -887,8 +965,7 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
     side_a, side_b = slide_comparison(full_text)
     full_text, explicit_keyword = slide_text_and_keyword(full_text)
     colors = colors_for(niche)
-    img = Image.new("RGB", (W, H), BG)
-    draw = ImageDraw.Draw(img)
+    img, draw = new_slide()
     draw_dot_grid(draw)
     draw_corner_flag(draw, colors)
     draw_header_v2(draw, niche, slide_num, total_slides, colors)
@@ -902,7 +979,9 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
     # FIXED SIZE: 64px (bumped up from 56 for readability), shrink only if
     # needed. Floor raised from 36 to 44 too, so a long body line shrinks
     # less aggressively before it stops looking like the same slide type.
-    font, lines, size = fit_text_shrink_only(draw, full_text, max_w, 4, BODY_FONT_SIZE, 44, F_SANS_BOLD)
+    span = explicit_keyword or find_highlight_word(full_text)
+    f_reg, f_bold, lines, size = fit_mixed(draw, full_text, span, max_w, 4,
+                                           BODY_FONT_SIZE, 44, F_SEMI, F_SANS_BOLD)
     line_h = int(size * 1.3)  # slightly more breathing room between lines than other slide types
 
     total_h = line_h * len(lines)
@@ -925,7 +1004,9 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
     available_h = H - 280 - 200
     top_y = 280 + max(0, (available_h - content_h) // 2)
 
-    badge_x = (W - badge_size) / 2
+    # Chip sits on the panel's left edge, in line with the left-aligned copy
+    # below it, instead of floating centered above a left-aligned block.
+    badge_x = MARGIN + 4
     badge_y = top_y
     block_y = badge_y + badge_size + gap_below_badge
     block_h = card_pad_y * 2 + strip_h + total_h
@@ -935,8 +1016,13 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
     # UPGRADE 3: accent block renders behind EVERY body slide, not just
     # short-text ones — this is what was making some slides look designed
     # and others look plain within the same carousel.
+    # Reel body treatment (2026-08-09): raised panel with an accent bar down
+    # its left edge -- the frame Ryan pointed at. The accent never sits
+    # under copy, it marks the panel's edge.
     draw.rounded_rectangle([block_x0, block_y, block_x1, block_y + block_h],
-                          radius=14, fill=colors["light"])
+                          radius=14, fill=BG_RAISED)
+    draw.rectangle([block_x0, block_y + 10, block_x0 + 7, block_y + block_h - 10],
+                   fill=colors["accent"])
 
     # Number badge or checkbox, now with a soft drop shadow for depth
     shadow_off = 5
@@ -967,7 +1053,6 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
             draw.text((badge_x + (badge_size - tw) / 2, badge_y + badge_size * 0.24),
                      num_text, font=f_num, fill=WHITE)
 
-    highlight = explicit_keyword or find_highlight_word(full_text)
     ty = block_y + card_pad_y
     if has_before_after:
         strip_used = draw_before_after_strip(draw, before_val, after_val, colors, ty, max_w)
@@ -975,9 +1060,10 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
     elif has_comparison:
         strip_used = draw_comparison_strip(draw, side_a, side_b, colors, ty, max_w)
         ty += max(strip_used, strip_h)
-    for line in lines:
-        draw_text_highlighted_centered(draw, ty, line, font, highlight, TEXT, colors["accent"], deep_color=colors["dark"])
-        ty += line_h
+    # Left-aligned mixed-weight copy, keyword in accent bold -- colour+weight
+    # emphasis, same call as the hook and the reels. (2026-08-09)
+    draw_mixed_lines(draw, lines, block_x0 + card_pad_x, ty, f_reg, f_bold,
+                     line_h, TEXT, colors["accent"])
 
     if show_swipe:
         draw_swipe_arrow(draw, colors)
@@ -985,7 +1071,7 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
     draw_follow_pill(draw, colors)
     draw_progress_bar(draw, slide_num, total_slides, colors["accent"], colors["dark"])
 
-    img.save(out_path, "JPEG", quality=92)
+    save_slide(img, out_path)
     return out_path
 
 
@@ -995,8 +1081,7 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
 
 def render_recap_slide_aesthetic(recap_lines, niche, slide_num, total_slides, out_path):
     colors = colors_for(niche)
-    img = Image.new("RGB", (W, H), BG)
-    draw = ImageDraw.Draw(img)
+    img, draw = new_slide()
     draw_dot_grid(draw)
     draw_header_v2(draw, niche, slide_num, total_slides, colors)
 
@@ -1083,7 +1168,7 @@ def render_recap_slide_aesthetic(recap_lines, niche, slide_num, total_slides, ou
     draw_follow_pill(draw, colors)
     draw_progress_bar(draw, slide_num, total_slides, colors["accent"], colors["dark"])
 
-    img.save(out_path, "JPEG", quality=92)
+    save_slide(img, out_path)
     return out_path
 
 
@@ -1132,8 +1217,7 @@ def render_cta_slide_fixed(headline, cta_word, cta_promise, cta_support, save_li
     # BG down into the topic veil tone, echoing how the reel CTA wipes to
     # the topic colour without leaving the dark system.
     colors = colors_for(niche)
-    img = Image.new("RGB", (W, H), BG)
-    draw = ImageDraw.Draw(img)
+    img, draw = new_slide()
     for row in range(H):
         t = row / H
         color = tuple(int(BG[i] + (colors["light"][i] - BG[i]) * t) for i in range(3))
@@ -1245,7 +1329,7 @@ def render_cta_slide_fixed(headline, cta_word, cta_promise, cta_support, save_li
     draw_follow_pill(draw, colors)
     draw_progress_bar(draw, slide_num, total_slides, colors["accent"], colors["dark"])
 
-    img.save(out_path, "JPEG", quality=92)
+    save_slide(img, out_path)
     return out_path
 
 
