@@ -26,6 +26,8 @@ on:
       - "smoke_test_render.py"
       - "smoke_test_fixtures.py"
       - "requirements.txt"
+      - "check_workflow_env.py"
+      - ".github/workflows/**"
   pull_request:
     paths:
       - "carousel_engine.py"
@@ -54,6 +56,12 @@ jobs:
         with:
           python-version: "3.11"
           cache: "pip"
+
+      - name: Check workflow env wiring
+        # Cheap and fails fast. Catches a script quietly depending on config
+        # the workflow never supplies -- the fault that meant the reel MP4
+        # was never emailed once, with a green workflow every run.
+        run: pip install pyyaml && python check_workflow_env.py
 
       - name: Install dependencies
         run: pip install -r requirements.txt

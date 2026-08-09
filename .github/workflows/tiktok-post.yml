@@ -50,6 +50,7 @@ jobs:
       - name: Post carousel 1 to TikTok
         if: vars.TIKTOK_POSTING_PAUSED != 'true'
         env:
+          TIKTOK_POSTING_PAUSED: ${{ vars.TIKTOK_POSTING_PAUSED }}
           TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
           TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
           TIKTOK_REFRESH_TOKEN: ${{ secrets.TIKTOK_REFRESH_TOKEN }}

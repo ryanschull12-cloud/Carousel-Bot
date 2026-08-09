@@ -44,7 +44,12 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Announce pause
+        if: vars.TIKTOK_POSTING_PAUSED == 'true'
+        run: echo "TIKTOK_POSTING_PAUSED is true -- batch posting skipped."
+
       - name: Check out repo
+        if: vars.TIKTOK_POSTING_PAUSED != 'true'
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -62,7 +67,17 @@ jobs:
           git config user.email "actions@github.com"
 
       - name: Post each day to TikTok
+        # KILL SWITCH. This workflow had no reference to TIKTOK_POSTING_PAUSED at
+        # all -- no job-level gate like every other tiktok-post*.yml has, and the
+        # variable was never passed to the script either. Pausing TikTok would have
+        # stopped the three scheduled workflows and left this one posting, which is
+        # the worst possible way for a kill switch to fail: it looks like it worked.
+        # It is manual-dispatch only, so it would have taken someone deliberately
+        # running it while paused -- but that is exactly what a person does when
+        # they are trying to fix something during an incident.
+        if: vars.TIKTOK_POSTING_PAUSED != 'true'
         env:
+          TIKTOK_POSTING_PAUSED: ${{ vars.TIKTOK_POSTING_PAUSED }}
           TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
           TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
           TIKTOK_REFRESH_TOKEN: ${{ secrets.TIKTOK_REFRESH_TOKEN }}
