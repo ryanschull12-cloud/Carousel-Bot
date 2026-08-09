@@ -61,14 +61,36 @@ F=lambda p,s: ImageFont.truetype(p,s)
 ease=lambda t: 1-(1-t)**3
 def clamp(v,a=0.0,b=1.0): return max(a,min(b,v))
 
+def split_overlong(d,w,f,mw):
+    """Break a token wider than the line. Same failure as carousel_engine had:
+    an unbreakable string was returned as its own line and drawn off-canvas.
+    Added 2026-08-09."""
+    if d.textlength(w,font=f)<=mw: return [w]
+    for sep in ("-","/","@","_",".",":",";","="):
+        if sep in w[1:-1]:
+            parts,out,cur=w.split(sep),[],""
+            for i,p in enumerate(parts):
+                piece=p+(sep if i<len(parts)-1 else "")
+                if cur and d.textlength(cur+piece,font=f)>mw: out.append(cur); cur=piece
+                else: cur+=piece
+            if cur: out.append(cur)
+            if all(d.textlength(o,font=f)<=mw for o in out): return out
+    out,cur=[],""
+    for ch in w:
+        if cur and d.textlength(cur+ch,font=f)>mw: out.append(cur); cur=ch
+        else: cur+=ch
+    if cur: out.append(cur)
+    return out
+
 def wrap(d,t,f,mw):
     out,cur=[],""
     for w in t.split():
-        s=(cur+" "+w).strip()
-        if d.textlength(s,font=f)<=mw: cur=s
-        else:
-            if cur: out.append(cur)
-            cur=w
+        for piece in split_overlong(d,w,f,mw):
+            s=(cur+" "+piece).strip()
+            if d.textlength(s,font=f)<=mw: cur=s
+            else:
+                if cur: out.append(cur)
+                cur=piece
     if cur: out.append(cur)
     return out
 
@@ -230,14 +252,25 @@ def beats_from_carousel(carousel):
         if rb.get("stat_number") is not None and rb.get("stat_label"):
             out.append(Beat("stat", None, 2.8, sub=rb["stat_label"], num=int(rb["stat_number"])))
         for line in rb["body"][:4]:
-            out.append(Beat("body", line, 2.2))
+            if isinstance(line, dict):
+                line = (line.get("text") or "").strip()
+            if line:
+                out.append(Beat("body", line, 2.2))
         out.append(Beat("cta", carousel.get("cta_word", "AUDIT"), 3.2,
                         sub=rb.get("cta_line") or carousel.get("cta_promise", "")))
         return out
 
     # --- fallback: no reel_beats on this manifest ---
-    hook = carousel.get("hook_slide") or carousel.get("hook") or ""
-    body = [b for b in (carousel.get("body_slides") or [])][:4]
+    # body_slides entries are dicts ({"text": ..., "keyword": ...}), not strings.
+    # This passed them straight into Beat.text, and render() died on .split() the
+    # moment it tried to wrap them -- so the safety net for a pre-reel_beats
+    # manifest has never once worked. Caught 2026-08-09 by the smoke test's
+    # missing-fields fixture.
+    def _line(b):
+        return (b.get("text") or "").strip() if isinstance(b, dict) else str(b or "").strip()
+
+    hook = _line(carousel.get("hook_slide") or carousel.get("hook") or "")
+    body = [t for t in (_line(b) for b in (carousel.get("body_slides") or [])) if t][:4]
     if not (hook and body):
         return []
     out = [Beat("hook", hook, 2.9)] + [Beat("body", b, 2.2) for b in body]

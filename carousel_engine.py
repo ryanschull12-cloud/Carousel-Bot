@@ -88,17 +88,62 @@ def colors_for(niche):
     return DEFAULT_COLORS
 
 
-def wrap_text(draw, text, font, max_width):
-    words = text.split()
-    lines, cur = [], ""
-    for w in words:
-        test = (cur + " " + w).strip()
-        if draw.textlength(test, font=font) <= max_width:
-            cur = test
-        else:
+def split_overlong(draw, word, font, max_width):
+    """Break a single token that is wider than the line it has to live on.
+
+    Added 2026-08-09. wrap_text used to hand any such token back as its own line
+    and fit_text_shrink_only would shrink until it gave up, then render it anyway
+    -- centred, so it ran off BOTH edges. Nothing raised and nothing looked wrong
+    in a manifest, so it only showed up once the smoke test started reading pixels
+    at the canvas edge. Real copy hits this: DMARC records, tracking URLs, long
+    hyphenated compounds.
+
+    Break at punctuation a reader already parses as a seam before resorting to
+    mid-character splits, and keep the separator on the leading fragment so the
+    line ends on the hyphen rather than starting with one.
+    """
+    if draw.textlength(word, font=font) <= max_width:
+        return [word]
+
+    for sep in ("-", "/", "@", "_", ".", ":", ";", "="):
+        if sep in word[1:-1]:
+            parts, out, cur = word.split(sep), [], ""
+            for i, p in enumerate(parts):
+                piece = p + (sep if i < len(parts) - 1 else "")
+                if cur and draw.textlength(cur + piece, font=font) > max_width:
+                    out.append(cur)
+                    cur = piece
+                else:
+                    cur += piece
             if cur:
-                lines.append(cur)
-            cur = w
+                out.append(cur)
+            if all(draw.textlength(o, font=font) <= max_width for o in out):
+                return out
+
+    # No seam to use -- split by character. Ugly, but legible beats off-canvas.
+    out, cur = [], ""
+    for ch in word:
+        if cur and draw.textlength(cur + ch, font=font) > max_width:
+            out.append(cur)
+            cur = ch
+        else:
+            cur += ch
+    if cur:
+        out.append(cur)
+    return out
+
+
+def wrap_text(draw, text, font, max_width):
+    lines, cur = [], ""
+    for w in text.split():
+        for piece in split_overlong(draw, w, font, max_width):
+            test = (cur + " " + piece).strip()
+            if draw.textlength(test, font=font) <= max_width:
+                cur = test
+            else:
+                if cur:
+                    lines.append(cur)
+                cur = piece
     if cur:
         lines.append(cur)
     return lines
