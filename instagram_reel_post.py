@@ -118,6 +118,27 @@ TO_EMAIL = os.environ.get("TO_EMAIL", GMAIL_ADDRESS)
 GRAPH = "https://graph.instagram.com/v21.0"
 REEL_LOG_PATH = "reel_posted_log.json"
 
+# How many of the day's three reel slots publish through the API. The rest are
+# rendered and emailed for manual upload. Default 1 (2026-08-09, Ryan's call).
+#
+# WHY NOT ALL THREE: Instagram's music library cannot be attached through the API --
+# no trending sounds, ever -- and business accounts are further limited to the Meta
+# Sound Collection. Trending audio is a real distribution lever and the only way to
+# use it is to upload in the app by hand.
+#
+# WHY NOT ZERO: one auto-posted reel a day is a CONTROL. Same pipeline, same copy
+# rules, same design, licensed audio, posted by machine. The two hand-posted ones
+# differ from it in exactly one variable -- the sound -- so comparing them actually
+# measures what trending audio is worth on this account instead of assuming it.
+# Drop to 0 once that question is answered, if it is worth answering.
+#
+# Slots are numbered by their --target-count: morning is 1, midday 2, evening 3.
+# Slot number <= this value publishes; above it, emails.
+#
+# This is NOT IG_POSTING_PAUSED. That one gates carousels too, and turning reels
+# down must never quietly stop the carousels.
+REEL_AUTOPOST_SLOTS = int(os.environ.get("IG_REEL_AUTOPOST_SLOTS", "1") or 1)
+
 
 def pages_url(relative_path):
     owner, repo = GITHUB_REPOSITORY.split("/")
@@ -300,6 +321,10 @@ def main():
 
     carousels = manifest["carousels"]
 
+    # Slot 1 publishes, slots 2 and 3 are emailed for hand-posting with trending
+    # audio. See REEL_AUTOPOST_SLOTS for why one still goes out automatically.
+    autopost = args.target_count <= REEL_AUTOPOST_SLOTS
+
     # Which carousels already became reels today. Two reels a day means the second slot
     # must pick a DIFFERENT carousel, so selection is by "next unposted winner" rather
     # than "highest score" -- the latter would re-render the same one twice.
@@ -343,6 +368,39 @@ def main():
             return
         print(f"Rendered {rel} ({dur:.1f}s, {os.path.getsize(rel)/1048576:.2f} MB)")
 
+        if not autopost:
+            # The per-day dedupe reads this log to decide which carousel each slot
+            # takes. With publishing off nothing would ever be written to it, every
+            # slot would pick remaining[0], and all three would render the SAME reel
+            # -- three copies of one video in the inbox, looking like a mail bug.
+            # media_id stays None until the reel is actually posted by hand;
+            # fetch_performance.py back-fills it by matching the account's reels.
+            log = []
+            if os.path.exists(REEL_LOG_PATH):
+                try:
+                    log = json.load(open(REEL_LOG_PATH))
+                except Exception:
+                    log = []
+            log.append({
+                "media_id": None,
+                "date": today,
+                "index": pick["index"],
+                "niche": pick.get("niche", ""),
+                "angle": pick.get("angle", ""),
+                "format": pick.get("format", ""),
+                "hook": (pick.get("reel_beats") or {}).get("hook")
+                        or pick.get("hook_slide", ""),
+                "media_product_type": "REELS",
+                "trial": False,
+                "scored": False,
+                "delivery": "email",       # posted by hand, with in-app audio
+                "posted_manually": None,   # set by the back-fill once found live
+            })
+            json.dump(log, open(REEL_LOG_PATH, "w"), indent=1, ensure_ascii=False)
+            print(f"Slot {args.target_count} is above IG_REEL_AUTOPOST_SLOTS="
+                  f"{REEL_AUTOPOST_SLOTS} — logged carousel {pick['index']} as "
+                  f"email-delivered so the other slots pick different ones.")
+
         # Send the file at RENDER time, not publish time. The two run as separate
         # steps and publishing can fail on Instagram's side for reasons that have
         # nothing to do with the video; the YouTube copy should not be hostage to
@@ -351,8 +409,34 @@ def main():
         hook = (pick.get("reel_beats") or {}).get("hook") or pick.get("hook_slide", "")
         credit = reel_engine.credit_for(reel_engine.pick_track(today, pick["index"]))
         caption = pick.get("caption", "")
-        body = [
-            "Reel attached. Same file works on both, no re-export needed.",
+        cta_word = pick.get("cta_word", "")
+        cta_promise = pick.get("cta_promise", "")
+        body = []
+        if not autopost:
+            body += [
+                "POST THIS ONE BY HAND — pick a trending sound in the app.",
+                "",
+                "Instagram, in order:",
+                "  1. New post > Reel > upload the attached MP4",
+                "  2. Add audio from the sound picker. Trending audio cannot be",
+                "     attached through the API, which is the whole reason this is",
+                "     not auto-posting.",
+                "  3. Paste the caption below.",
+                "",
+                "── INSTAGRAM CAPTION (copy from here) ─────────",
+                caption,
+                "── (to here) ──────────────────────────────────",
+                "",
+            ]
+            if cta_word:
+                body += [f"Watch for comments saying {cta_word.upper()} — the reel "
+                         f"promises you will DM them {cta_promise or 'the resource'}.",
+                         "The CTA frame says it on screen, so replying is the whole "
+                         "point of posting it.", ""]
+            body += ["The video already has licensed music mixed in. Muting it in "
+                     "favour of a trending sound is fine and expected.", ""]
+        body += [
+            "Same file also works on both of these, no re-export needed.",
             "",
             "── YOUTUBE SHORTS ─────────────────────────────",
             f"Title:  {hook}",
@@ -387,6 +471,16 @@ def main():
 
         if args.render_only:
             return
+
+    if not autopost:
+        # The script decides, not the workflow. Encoding "which slots publish" as a
+        # YAML condition would put the rule in three files that have to agree, and
+        # a --publish-only run by hand would bypass it entirely and post a reel that
+        # was meant for manual upload with a trending sound.
+        print(f"Slot {args.target_count} is above IG_REEL_AUTOPOST_SLOTS="
+              f"{REEL_AUTOPOST_SLOTS} — not publishing. The MP4 was emailed for "
+              f"manual upload with in-app audio.")
+        return
 
     url = pages_url(f"reels/{today}/carousel_{pick['index']}.mp4")
     print(f"Waiting for GitHub Pages to serve {url} ...")

@@ -37,6 +37,7 @@ developers.facebook.com/documentation/instagram-platform/reference/instagram-med
 """
 
 import os
+import re
 import json
 import datetime
 import requests
@@ -293,6 +294,86 @@ def score_carousels(posted_log, performance, today):
     return updated
 
 
+def _norm_caption(t):
+    return re.sub(r"[^a-z0-9]+", "", (t or "").lower())
+
+
+def list_recent_reels(limit=50):
+    """Reels currently on the account, newest first."""
+    r = requests.get(
+        f"{IG_GRAPH}/me/media",
+        params={"fields": "id,caption,media_product_type,timestamp",
+                "limit": limit, "access_token": IG_ACCESS_TOKEN},
+        timeout=30)
+    r.raise_for_status()
+    return [m for m in r.json().get("data", [])
+            if m.get("media_product_type") == "REELS"]
+
+
+def backfill_manual_media_ids(reel_log, today):
+    """Find media_ids for reels Ryan posted BY HAND and write them into the log.
+
+    Reels stopped auto-publishing when IG_REEL_AUTOPOST went false: Instagram's
+    music library cannot be attached through the API, so trending audio requires a
+    manual upload. That is the right call for reach, but it silently killed the
+    scoring loop -- _eligible() requires a media_id, entries logged at render time
+    have none, and every one of them would have been skipped forever with no error.
+    The whole reel instrumentation would have gone quiet and looked like reels
+    simply were not being posted.
+
+    So: list the account's reels and match them back to log entries by caption. The
+    caption is written by the content brain and emailed for pasting, so it is the
+    one string that exists on both sides. Matching is on the first 40 normalised
+    characters -- enough to be unique across a batch, short enough to survive Ryan
+    trimming a hashtag or fixing a typo. Falls back to the hook line.
+
+    IF HE REWRITES THE CAPTION WHOLESALE nothing matches and the reel never scores.
+    That is why this prints a warning naming the reel rather than returning quietly:
+    an unmatched reel is a real gap in the data and has to be visible as one.
+    """
+    pending = [e for e in reel_log
+               if not e.get("media_id") and e.get("delivery") == "email"]
+    if not pending:
+        return False
+    try:
+        live = list_recent_reels()
+    except Exception as e:
+        print(f"Could not list account reels for back-fill: {e}")
+        return False
+
+    updated = False
+    for entry in pending:
+        manifest_entry = load_manifest_entry(entry["date"], entry.get("index")) or {}
+        needle = _norm_caption(manifest_entry.get("caption", ""))[:40]
+        hook_needle = _norm_caption(entry.get("hook", ""))[:40]
+        hit = None
+        for m in live:
+            hay = _norm_caption(m.get("caption", ""))
+            if (needle and needle in hay) or (hook_needle and hook_needle in hay):
+                hit = m
+                break
+        if hit:
+            entry["media_id"] = hit["id"]
+            entry["posted_manually"] = hit.get("timestamp", "")[:10] or True
+            updated = True
+            print(f"Back-filled media_id {hit['id']} for manually posted reel "
+                  f"{entry['date']} #{entry.get('index')} "
+                  f"(\"{entry.get('hook','')[:44]}\")")
+        else:
+            age = None
+            try:
+                age = (today - datetime.date.fromisoformat(entry["date"])).days
+            except Exception:
+                pass
+            if age is not None and age >= SCORE_AFTER_DAYS:
+                print(f"WARNING: reel {entry['date']} #{entry.get('index')} was emailed "
+                      f"for manual posting {age} days ago and no matching reel is on the "
+                      f"account. Either it was never posted, or the caption was rewritten "
+                      f"enough that it cannot be matched — it will never be scored. "
+                      f"Hook: \"{entry.get('hook','')[:60]}\"")
+    return updated
+
+
 def score_reels(reel_log, performance, today):
     updated = False
     for reel in reel_log:
@@ -357,7 +438,11 @@ def main():
 
     today = datetime.date.today()
     carousels_updated = score_carousels(posted_log, performance, today)
+    # Back-fill BEFORE scoring, so a reel found on the account this run can be
+    # scored in the same run rather than waiting another day.
+    backfilled = backfill_manual_media_ids(reel_log, today)
     reels_updated = score_reels(reel_log, performance, today)
+    reels_updated = reels_updated or backfilled
 
     if not (carousels_updated or reels_updated):
         print("No posts were eligible for scoring today.")

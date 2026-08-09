@@ -280,6 +280,89 @@ def build_performance_briefing(performance):
     return "\n".join(lines)
 
 
+MIN_SCORED_REELS_FOR_BRIEFING = 4
+
+
+def build_reel_briefing(performance):
+    """Turn scored reels into guidance for the next batch's reel_beats.
+
+    THIS IS THE LOOP THE REEL INSTRUMENTATION WAS BUILT FOR, and until now it was
+    not connected: fetch_performance.py has been writing scored_reels since the
+    instrumentation landed, and runner.py read only scored_posts, so every reel
+    score collected was stored and never used. The reels could not get better from
+    their own data, only from someone reading the JSON.
+
+    Kept separate from the carousel briefing on purpose. Ryan's framing, and it is
+    the right one: the two are different media. A carousel is judged on saves and
+    credibility; a reel is judged on whether people watch it and send it. Feeding
+    carousel winners into reel copy would optimise video for the wrong signal.
+
+    Reels are ranked on SENDS PER REACH rather than the composite score, because a
+    send is the only signal that earns cold distribution -- someone thought it was
+    worth putting in front of a specific person. skip_rate is surfaced separately
+    where present: it is Meta's own measure of the first three seconds, which makes
+    it the hook's report card and nothing else's.
+    """
+    reels = performance.get("scored_reels", [])
+    if len(reels) < MIN_SCORED_REELS_FOR_BRIEFING:
+        return None
+
+    ranked = sorted(reels, key=lambda r: r.get("sends_per_reach", 0), reverse=True)
+    lines = [
+        f"Real Instagram REEL data from your last {len(reels)} scored reels. These are "
+        "video, judged on watching and sending — NOT the carousel numbers above, and "
+        "not to be optimised the same way:"
+    ]
+
+    def avg_by(key):
+        buckets = {}
+        for r in reels:
+            buckets.setdefault(r.get(key) or "unknown", []).append(
+                r.get("sends_per_reach", 0))
+        out = [(k, sum(v)/len(v), len(v)) for k, v in buckets.items()]
+        out.sort(key=lambda x: x[1], reverse=True)
+        return out
+
+    for label, key in (("Angle", "angle"), ("Format", "format"), ("Niche", "niche")):
+        r = avg_by(key)
+        if len(r) < 2:
+            continue
+        lines.append(f"- {label}: '{r[0][0]}' gets sent most (avg sends/reach "
+                     f"{r[0][1]:.3f}, n={r[0][2]}); '{r[-1][0]}' least "
+                     f"({r[-1][1]:.3f}, n={r[-1][2]})")
+
+    lines.append("Reel hooks that got SENT most (study the shape, never reuse wording):")
+    for r in ranked[:3]:
+        skip = r.get("metrics", {}).get("reels_skip_rate")
+        extra = f", {skip}% gone in 3s" if skip not in (None, "") else ""
+        lines.append(f"  • [sends/reach {r.get('sends_per_reach',0):.3f}{extra}] "
+                     f"\"{r.get('hook','')}\"")
+
+    worst = [r for r in ranked[-2:] if r not in ranked[:3]]
+    if worst:
+        lines.append("Reel hooks that were NOT sent (avoid this shape):")
+        for r in worst:
+            skip = r.get("metrics", {}).get("reels_skip_rate")
+            extra = f", {skip}% gone in 3s" if skip not in (None, "") else ""
+            lines.append(f"  • [sends/reach {r.get('sends_per_reach',0):.3f}{extra}] "
+                         f"\"{r.get('hook','')}\"")
+
+    # skip_rate is the hook's own report card, so call it out separately from the
+    # composite -- a reel can score respectably overall and still be losing most of
+    # its audience in the first three seconds, and that is a hook problem only.
+    with_skip = [r for r in reels
+                 if isinstance(r.get("metrics", {}).get("reels_skip_rate"), (int, float))]
+    if len(with_skip) >= 3:
+        by_skip = sorted(with_skip, key=lambda r: r["metrics"]["reels_skip_rate"])
+        lines.append(
+            f"First-3-seconds retention: best hook loses {by_skip[0]['metrics']['reels_skip_rate']}% "
+            f"(\"{by_skip[0].get('hook','')[:60]}\"), worst loses "
+            f"{by_skip[-1]['metrics']['reels_skip_rate']}% "
+            f"(\"{by_skip[-1].get('hook','')[:60]}\"). This measures the HOOK alone.")
+
+    return "\n".join(lines)
+
+
 def load_experiments():
     """Read experiments.json. Missing/corrupt file = no active experiment today."""
     if not os.path.exists(EXPERIMENTS_PATH):
@@ -793,6 +876,23 @@ def main():
         print(f"Loaded performance data: {len(performance.get('scored_posts', []))} scored post(s) — informing today's batch.")
     else:
         print("Not enough scored performance data yet — generating on style rules alone.")
+
+    # Reels are briefed SEPARATELY and appended, never merged into the carousel
+    # briefing. Different medium, different signal: stills are judged on saves,
+    # video on watching and sending, and averaging the two would optimise both for
+    # neither. Appending rather than replacing means a batch with reel data still
+    # gets its carousel guidance intact.
+    reel_briefing = build_reel_briefing(performance)
+    n_reels = len(performance.get("scored_reels", []))
+    if reel_briefing:
+        print(f"Loaded reel data: {n_reels} scored reel(s) — informing reel_beats.")
+        performance_briefing = ((performance_briefing + "\n\n") if performance_briefing
+                                else "") + reel_briefing
+    elif n_reels:
+        print(f"{n_reels} scored reel(s) on file — need "
+              f"{MIN_SCORED_REELS_FOR_BRIEFING} before reel guidance is trustworthy.")
+    else:
+        print("No scored reels yet — reel_beats generated on the copy contract alone.")
 
     briefing = call_tavily()
     if briefing:

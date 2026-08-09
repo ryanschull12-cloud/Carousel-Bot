@@ -68,6 +68,7 @@ jobs:
         # missing, so the attachment was never sent once. Ryan asked where the
         # downloadable file was; the answer was that it had never been sent.
         env:
+          IG_REEL_AUTOPOST_SLOTS: ${{ vars.IG_REEL_AUTOPOST_SLOTS }}
           GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           TO_EMAIL: ${{ secrets.TO_EMAIL }}
@@ -83,8 +84,14 @@ jobs:
           git push
 
       - name: Publish reel to Instagram
+        # Always runs; the SCRIPT decides whether this slot publishes,
+        # from IG_REEL_AUTOPOST_SLOTS. Keeping the rule in one place
+        # rather than in three YAML conditions that have to agree -- and
+        # a slot above the threshold exits in a second, so the step
+        # costs nothing when it no-ops.
         if: vars.IG_POSTING_PAUSED != 'true'
         env:
+          IG_REEL_AUTOPOST_SLOTS: ${{ vars.IG_REEL_AUTOPOST_SLOTS }}
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           IG_BUSINESS_ACCOUNT_ID: ${{ secrets.IG_BUSINESS_ACCOUNT_ID }}
           GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
