@@ -22,5 +22,17 @@
     "media_product_type": "REELS",
     "trial": false,
     "scored": false
+  },
+  {
+    "media_id": "18053092886550259",
+    "date": "2026-08-09",
+    "index": 2,
+    "niche": "Google Ads",
+    "angle": "behind-the-curtain",
+    "format": "steal-this",
+    "hook": "Google Ads bills you for 3-second bounces\u2014even if they leave immediately",
+    "media_product_type": "REELS",
+    "trial": false,
+    "scored": false
   }
 ]
