@@ -465,6 +465,29 @@ Rules that only apply to reel_beats:
     body[3] — WHAT TO DO. The action, and it must be the fix for the cause named in
               body[1] — not a general tip that happens to sit nearby.
 
+  EMPHASIS — every body line is an OBJECT, not a string:
+    { "text": "...", "emphasis": "..." }
+  `emphasis` is the ONE phrase in that sentence, ONE TO THREE WORDS, that gets set
+  in bold and in the accent colour. It must appear in `text` word for word, in one
+  unbroken run, or the renderer warns and draws the line flat.
+
+  Pick the phrase the whole sentence exists to deliver — the number, the cost, the
+  thing they must do. Not a verb chosen for energy, not the subject, not whatever
+  sounds punchy. On a frame the eye lands on the highlight FIRST and reads outward
+  from it, so a viewer who reads nothing else should still get the point from the
+  highlighted words alone. Read the four emphases in order with the rest deleted: if
+  that sequence does not tell the story, you highlighted the wrong things.
+
+  ONE PHRASE PER LINE. NEVER TWO. Highlighting works only because it is rare — a
+  distinct item is remembered far better than its neighbours, and that effect
+  collapses the moment a second highlight appears to compete with it. Two highlights
+  in a sentence is worse than none, because none at least leaves the reader to find
+  the point themselves instead of pointing at two things at once.
+    good: { "text": "Google bills you the same for a search you never picked, and
+            about a third of the budget goes there.", "emphasis": "a third" }
+    bad:  emphasis "bills you the same for a search"   (seven words: that is not a
+          highlight, that is underlining the sentence)
+
   COHERENCE TESTS — the block fails if ANY of these is true, and you rewrite it:
     - A number appears in one line that contradicts or ignores a number in the hook.
       If the hook says 12 words, body[0] does not introduce 3 words without saying how
@@ -487,9 +510,48 @@ Rules that only apply to reel_beats:
   cliff, this length is the first hypothesis to walk back — but walk it back toward
   ~90 characters, not toward fragments.
 
-    good: "Gmail shows about 45 characters on mobile before it cuts the line off, so
-           everything you wrote after that is invisible to most of your list."
+    good: "Gmail shows about 45 characters on a phone, so everything after that is
+           invisible to most of your list."
     bad:  "First 3 words matter most"   (a telegram: no cause, no cost, no referent)
+
+  PLAIN WORDS ONLY. Ryan's instruction, 2026-08-09, after a reel used "truncate":
+  keep it simple. The reader is a plumber, a dentist, a salon owner. They are not
+  stupid and you must never write down to them — but they do not know your words,
+  and a single unfamiliar word stops the read dead on a moving frame, because there
+  is no time to work it out and no way to scroll back.
+
+  BANNED OUTRIGHT, everywhere in reel_beats. Use the replacement:
+    truncate/truncated -> cuts off, chops off
+    optimise/optimisation -> improve, tune, get more from
+    leverage -> use
+    utilise -> use
+    granular -> detailed
+    robust -> reliable
+    seamless -> smooth
+    mitigate -> reduce, limit
+    facilitate -> help, let
+    deliverability -> whether your email lands in the inbox
+    attribution -> working out which ad got the sale
+    impressions -> times your ad was shown
+    conversions -> sales, bookings, enquiries (say which one)
+    CPA/CPL/ROAS/CTR -> what you pay per customer / per lead / what you get back
+    audience segment -> group of customers
+    creative (as a noun) -> the ad, the image, the video
+    funnel -> the path from ad to sale
+  The list is examples, not the boundary. THE TEST: would this word appear in a text
+  message to a friend who has never run an ad? If not, replace it. If a concept truly
+  needs a term, spend the words to explain it in the same line — you have 95 now.
+
+  SENTENCE SHAPE — write lines that BREAK well. Each body line is wrapped onto 5-6
+  lines on screen, and the renderer breaks at commas and before "and"/"but"/"so"/
+  "because" wherever it can (clause_wrap in reel_engine.py). That only helps if you
+  give it seams to find. So: build each line as TWO clauses joined by a comma and a
+  connective — cause then effect, or fact then consequence. One long clause with no
+  comma gives the wrapper nothing and breaks mid-phrase.
+    good: "Facebook spends the first week learning who buys, so changing anything
+           sends it back to the start."      (comma + "so": a clean seam mid-line)
+    bad:  "Facebook spends the first week of every new campaign working out which
+           people are most likely to buy from your business."   (no seam at all)
 - SAY IT OUT LOUD — applies to every line in reel_beats. A reel is read at speaking
   pace in the reader's head, so syntax that scans fine as printed slide copy can jam in
   a video. Reject and rewrite any line where:
@@ -542,7 +604,10 @@ Add to the JSON for every carousel:
     "hook": "string — under 9 words",
     "stat_number": 15,
     "stat_label": "string — under 10 words, no repeated figure",
-    "body": ["string", "string", "string", "string"],
+    "body": [
+      {"text": "string — 65-95 chars, plain words, two clauses joined by a comma",
+       "emphasis": "string — 1-3 words, appears verbatim and contiguously in text"}
+    ],   // exactly 4 of these
     "cta_line": "string — under 10 words",
     "send_line": "string — under 8 words, names a specific person to send to"
   }
@@ -603,7 +668,7 @@ Use exactly 6 body slides (10 slides total per carousel: hook + bridge + 6 body 
       "cta_save_line": "string — the SAVE ask, 'Save this for your next [topic] [noun]', noun varies by format (see CTA RULES) — never defaults to the same word across a batch",
       "cta_support": "string — optional, under 6 words, urgency/context rendered on the CTA image itself (e.g. 'No cost, just the checklist'). Never the caption or a restatement of it. Can be empty.",
       "caption": "string — starts with save-worthy line using plain search keywords, under 300 characters, ends with exactly 4 hashtags: 2 niche + 1 intent + 1 Irish geo",
-      "reel_beats": { "hook": "string", "stat_number": 0, "stat_label": "string", "body": ["string","string","string","string"], "proof": { "before": "string", "after": "string", "label": "string" }, "cta_line": "string", "send_line": "string" },
+      "reel_beats": { "hook": "string", "stat_number": 0, "stat_label": "string", "body": [{"text":"string","emphasis":"string"},{"text":"string","emphasis":"string"},{"text":"string","emphasis":"string"},{"text":"string","emphasis":"string"}], "proof": { "before": "string", "after": "string", "label": "string" }, "cta_line": "string", "send_line": "string" },
       "suggested_audio_style": "string — e.g. 'trending upbeat', 'calm voiceover', 'suspenseful build'"
     }
   ]

@@ -145,6 +145,39 @@ def fit(d,t,path,start,mn,mw,maxl):
         s-=4
     f=F(path,mn); return f,wrap(d,t,f,mw)
 
+def line_layer(pairs,f_reg,f_bold,accent):
+    """One rendered line of mixed-weight body copy, as a single RGBA layer.
+
+    Emphasised words are set in Bold AND in the accent colour. Both together, not
+    either alone: weight survives the aggressive compression Instagram applies to
+    a 1080x1920 upload, colour survives being watched at thumbnail size, and the
+    two reinforce rather than duplicate.
+
+    Restraint is the whole game here. The isolation effect -- a visually distinct
+    item is recalled far better than its neighbours -- only operates while the
+    distinct item is RARE. Highlight half a sentence and there is no figure and no
+    ground, just noise, which is measurably worse than highlighting nothing. The
+    prompt caps emphasis at one phrase of one to three words per beat for exactly
+    this reason, and the renderer will happily draw more if the brain sends more,
+    so the cap has to hold upstream."""
+    d0=ImageDraw.Draw(Image.new("RGB",(4,4)))
+    sp=d0.textlength(" ",font=f_reg)
+    total=0.0; height=0
+    for i,(w,b) in enumerate(pairs):
+        fnt=f_bold if b else f_reg
+        bb=d0.textbbox((0,0),w,font=fnt)
+        total+=bb[2]-bb[0]
+        height=max(height,bb[3]-bb[1])
+        if i: total+=sp
+    im=Image.new("RGBA",(int(total)+14,height+26),(0,0,0,0))
+    dd=ImageDraw.Draw(im); x=5.0
+    for i,(w,b) in enumerate(pairs):
+        fnt=f_bold if b else f_reg
+        dd.text((x,4),w,font=fnt,fill=(accent if b else INK)+(255,))
+        x+=dd.textlength(w,font=fnt)+(sp if i<len(pairs)-1 else 0)
+    return im
+
+
 def layer(text,fnt,color):
     d0=ImageDraw.Draw(Image.new("RGB",(4,4)))
     bb=d0.textbbox((0,0),text,font=fnt)
@@ -296,9 +329,13 @@ def read_time(text, cps=CPS, lo=BEAT_MIN, hi=BEAT_MAX, orient=ORIENT):
 
 
 class Beat:
-    def __init__(self,kind,text,dur,sub=None,num=None,pair=None):
+    def __init__(self,kind,text,dur,sub=None,num=None,pair=None,emph=None):
         self.kind,self.text,self.dur,self.sub,self.num=kind,text,dur,sub,num
         self.pair=pair   # ("€45/lead", "€15/lead") for the proof beat
+        # emph: the phrase inside text set in Bold accent. Body beats carry real
+        # sentences now, and a sentence with no visual hierarchy is a wall -- the
+        # eye has nowhere to land, so it lands nowhere and the beat is skipped.
+        self.emph=emph
 
 
 def number_parts(word):
@@ -333,6 +370,127 @@ def fit_hook(d,text,emph,maxw,start,mn,maxl):
         if (len(lines)<=maxl and all(wid(l)<=maxw for l in lines)) or size<=mn:
             return fr_,fb,lines
         size-=4
+
+
+# Words that must never END a line. Breaking after any of them strands a
+# grammatical unit across two lines -- "the / house", "in / the room" -- and the
+# eye has to hold the fragment and re-resolve it on the next line. Subtitling
+# practice is unanimous on this (BBC, Netflix and TED style guides all forbid it),
+# and a reel body beat is a subtitle in every respect that matters: read once, on
+# a moving frame, with no chance to go back.
+NO_TRAIL = {
+    "a","an","the","and","or","but","so","if","of","to","in","on","at","for","from",
+    "with","by","as","is","are","was","were","be","been","that","this","these","those",
+    "your","our","their","its","his","her","you","we","they","it","not","no","than",
+    "into","over","under","after","before","because","when","while","which","who",
+}
+
+# Breaking BEFORE these is actively good: they open a clause, so the line ends on a
+# complete thought and the next one starts on a fresh one.
+GOOD_BREAK_BEFORE = {
+    "and","but","so","because","which","that","who","when","while","if","then","or",
+}
+
+
+def clause_wrap(measure, words, maxw, key=lambda w: w):
+    """Greedy wrap, then nudge each break toward the nearest clause boundary.
+
+    Plain greedy wrapping breaks wherever the pixel budget runs out, which lands
+    mid-phrase most of the time. An eye-tracking result the subtitling field has
+    relied on for years: viewers read a two-line block measurably faster when each
+    line ends on a syntactic boundary, because a line ending mid-phrase forces the
+    reader to hold an incomplete unit across the return sweep.
+
+    So: wrap greedily for the width, then walk the break point BACKWARD (never
+    forward -- forward would overflow) up to three words looking for a better seam.
+    A word ending in a comma is the best seam there is, since the writer already
+    marked it. Failing that, break before a conjunction. Failing that, at minimum
+    do not leave an article or preposition dangling at the end of a line.
+    """
+    lines, cur = [], []
+    i = 0
+    while i < len(words):
+        w = words[i]
+        if cur and measure(cur + [w]) > maxw:
+            best = len(cur)
+            for back in range(0, min(3, len(cur) - 1)):
+                j = len(cur) - back                     # candidate: cur[:j]
+                if j < 1:
+                    break
+                # A better seam is only better if the line is still mostly full.
+                # Without this the wrap breaks before every "and" it can reach and
+                # produces stubs -- "and bills" on its own line -- which costs more
+                # in ragged rhythm and extra lines than the clean seam gains. 72%
+                # is the point where a short line still reads as a deliberate break
+                # rather than a mistake.
+                if back and measure(cur[:j]) < maxw * 0.72:
+                    break
+                prev = key(cur[j - 1]).strip('"\'')
+                nxt = key(cur[j]) if j < len(cur) else key(w)
+                if prev.endswith((",", ";", ":", ".", "—")):
+                    best = j; break
+                if back and nxt.strip('"\'').lower() in GOOD_BREAK_BEFORE:
+                    best = j; break
+                if prev.lower() in NO_TRAIL:
+                    continue                            # never end here; keep looking
+                best = j; break
+            lines.append(cur[:best])
+            cur = cur[best:] + [w]
+        else:
+            cur.append(w)
+        i += 1
+    if cur:
+        lines.append(cur)
+    return [l for l in lines if l]
+
+
+def fit_body_mixed(d, text, emph, maxw, start, mn, maxl):
+    """Body copy set in Regular with the emphasis phrase in Bold, clause-wrapped.
+
+    Mirrors fit_hook, but wraps through clause_wrap and accepts a multi-word
+    emphasis phrase rather than a single token. Returns (regular, bold, lines) where
+    each line is a list of (word, is_emphasised) pairs -- the same shape the carousel
+    engine's layout_mixed produces, deliberately, so the two formats stay legible to
+    anyone reading both files.
+    """
+    def norm(w):
+        return w.strip('.,!?:;"\'()').lower()
+
+    words = text.split()
+    # Emphasis is a CONTIGUOUS phrase, located by position, not a bag of words.
+    # Matching word-by-word highlighted every occurrence of every word in the
+    # phrase -- an emphasis of "block every search" also lit up the "search" in
+    # "search terms report" three words earlier, so two separate things appeared
+    # emphasised and neither read as the point.
+    emph_seq = [norm(w) for w in (emph or "").split() if w.strip()]
+    hot = set()
+    if emph_seq:
+        n = len(emph_seq)
+        for i in range(len(words) - n + 1):
+            if [norm(x) for x in words[i:i + n]] == emph_seq:
+                hot = set(range(i, i + n))
+                break
+
+    size = start
+    while True:
+        fr_ = F(F_SANSR, size); fb = F(F_SANS, size)
+        sp = d.textlength(" ", font=fr_)
+        # Carry the index with each word so wrapping cannot lose track of which
+        # occurrence was the emphasised one.
+        items = list(enumerate(words))
+
+        def measure(ws):
+            t = 0.0
+            for i, (idx, x) in enumerate(ws):
+                t += d.textlength(x, font=fb if idx in hot else fr_)
+                if i:
+                    t += sp
+            return t
+
+        lines = clause_wrap(measure, items, maxw, key=lambda it: it[1])
+        if (len(lines) <= maxl and all(measure(l) <= maxw for l in lines)) or size <= mn:
+            return fr_, fb, [[(x, idx in hot) for idx, x in l] for l in lines]
+        size -= 4
 
 
 def emphasis_token(text):
@@ -511,8 +669,12 @@ def render(niche,beats,outdir,badge):
         # floor to 54, with 6 lines allowed -- a 130-char sentence sets at roughly
         # 5 lines around 80px, which is still far above the ~400px-phone legibility
         # floor that drove the original sizing.
-        f,ls=fit(probe,b.text,F_SEMI,112,58,mw-40,6); lh=int(f.size*1.30)
-        lays=[layer(l,f,INK) for l in ls]
+        fr_,fb,ls=fit_body_mixed(probe,b.text,b.emph,mw-40,112,58,6)
+        f=fr_; lh=int(f.size*1.30)
+        # Each line is rendered as ONE layer so the fade/rise stays a single
+        # composite -- per-word pastes would fade at slightly different rates
+        # along a line and read as a shimmer.
+        lays=[line_layer(l,fr_,fb,c["accent"]) for l in ls]
         blockh=lh*len(lays)
         # Panel width is now FIXED and symmetric, not hugged to the longest line
         # (2026-08-09). Hugging meant the right edge landed wherever the wrap
@@ -788,10 +950,23 @@ def beats_from_carousel(carousel):
                             read_time(rb["stat_label"], lo=2.2, hi=4.2, orient=0.90),
                             sub=rb["stat_label"], num=int(rb["stat_number"])))
         for line in rb["body"][:4]:
+            emph = None
             if isinstance(line, dict):
+                # {"text": ..., "emphasis": ...} -- the emphasis phrase is what the
+                # brain wants set in bold accent inside the sentence. Plain strings
+                # still work and simply render unemphasised, so an older manifest
+                # renders rather than crashing.
+                emph = (line.get("emphasis") or line.get("keyword") or "").strip() or None
                 line = (line.get("text") or "").strip()
             if line:
-                out.append(Beat("body", line, read_time(line)))
+                # Guard: an emphasis phrase that is not actually IN the sentence
+                # would silently highlight nothing, and the beat would look like a
+                # wall of text with no explanation of why.
+                if emph and emph.lower() not in line.lower():
+                    print(f"WARNING: emphasis {emph!r} not found in body line — "
+                          f"rendering it unemphasised: {line[:48]!r}")
+                    emph = None
+                out.append(Beat("body", line, read_time(line), emph=emph))
         pr = proof_pair(carousel)
         if pr:
             out.append(Beat("proof", None,

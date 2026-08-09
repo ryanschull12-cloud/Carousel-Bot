@@ -262,12 +262,31 @@ def check_reel(name, carousel, out_dir, f, sheets, audio_dir):
                                  f"it sets very large and will shrink the frame's "
                                  f"dominant element")
         if b.kind == "body" and b.text:
+            # Emphasis checks. The renderer degrades quietly on all three of these
+            # (draws the line flat, or highlights a run so long it stops being a
+            # highlight), so nothing else would ever catch them.
+            if not b.emph:
+                f.warn(name, f"body line has no emphasis phrase -- it renders as a "
+                             f"flat wall with nothing for the eye to land on: {b.text!r}")
+            else:
+                if b.emph.lower() not in b.text.lower():
+                    f.fail(name, f"emphasis {b.emph!r} does not appear in its own body "
+                                 f"line, so nothing is highlighted: {b.text!r}")
+                n_w = len(b.emph.split())
+                if n_w > 3:
+                    f.warn(name, f"emphasis {b.emph!r} is {n_w} words, max 3 -- past "
+                                 f"three it reads as underlining the sentence rather "
+                                 f"than pointing at the thing that matters")
             n_ch = len(b.text)
             if n_ch > 95:
                 f.warn(name, f"body line is {n_ch} chars, max 95 -- at {re_.CPS:.0f} "
                              f"CPS that needs {re_.ORIENT + n_ch/re_.CPS:.1f}s and the "
                              f"beat caps at {re_.BEAT_MAX}s: {b.text!r}")
-            elif n_ch < 65:
+            if "," not in b.text and n_ch > 70:
+                f.warn(name, f"body line is {n_ch} chars with no comma -- clause_wrap "
+                             f"has no seam to break on and will split mid-phrase: "
+                             f"{b.text!r}")
+            if n_ch < 65:
                 f.warn(name, f"body line is {n_ch} chars, min 65 -- too short to carry "
                              f"a cause, which is the telegram failure the contract was "
                              f"rewritten to stop: {b.text!r}")
