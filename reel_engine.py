@@ -157,7 +157,14 @@ def fit(d,t,path,start,mn,mw,maxl):
         s-=4
     f=F(path,mn); return f,wrap(d,t,f,mw)
 
-def line_layer(pairs,f_reg,f_bold,accent):
+# The unread tone. Copy starts here and brightens to INK as the read head passes.
+# Not so dim that an unreached word is unreadable -- someone who scans ahead must
+# still be able to -- just clearly behind the one being pointed at. 4.2:1 against
+# the panel, which is legible body text by any standard, against INK's 12:1.
+PENDING = (128, 131, 143)
+
+
+def line_layer(pairs,f_reg,f_bold,accent,colours=None):
     """One rendered line of mixed-weight body copy, as a single RGBA layer.
 
     Emphasised words are set in Bold AND in the accent colour. Both together, not
@@ -199,9 +206,53 @@ def line_layer(pairs,f_reg,f_bold,accent):
     dd=ImageDraw.Draw(im); x=float(PAD); base=PAD+asc
     for i,(w,b) in enumerate(pairs):
         fnt=f_bold if b else f_reg
-        dd.text((x,base),w,font=fnt,fill=(accent if b else INK)+(255,),anchor="ls")
+        col = colours[i] if colours else (accent if b else INK)
+        dd.text((x,base),w,font=fnt,fill=tuple(col)+(255,),anchor="ls")
         x+=dd.textlength(w,font=fnt)+(sp if i<len(pairs)-1 else 0)
     return im
+
+
+def lerp_rgb(a, b, t):
+    t = 0.0 if t < 0 else (1.0 if t > 1 else t)
+    return tuple(int(a[i] + (b[i] - a[i]) * t) for i in range(3))
+
+
+def read_head_colours(lines, dur_frames, fi, accent, lead_frames=6.0):
+    """Per-word colours for a body beat, advancing at reading pace.
+
+    WHY THIS EXISTS. A body beat holds for 5.6 seconds. The entrance uses the first
+    ~0.6s of that and the remaining five seconds are, apart from a sub-pixel camera
+    push, completely static -- and the retention guidance is unanimous that the
+    visible frame should change every 3-5 seconds. Five static seconds is a scroll
+    invitation sitting in the middle of every beat we ship.
+
+    The fix borrows the mechanic behind karaoke captions, which are the dominant
+    caption style in short-form for a measured reason: a highlight that moves gives
+    the eye a reason to stay on the text, and word-by-word highlighting is reported
+    at a 12-25% watch-time lift. HONEST CAVEAT, because it matters for what we can
+    claim: those captions sync to a SPEAKING VOICE. These reels have no voiceover,
+    so there is nothing to sync to and this is an adaptation, not the studied thing.
+    The read head advances at the same characters-per-second the beat duration was
+    computed from, so it arrives at the last word exactly as the beat ends -- it
+    paces the reader rather than following a speaker.
+
+    Emphasis words resolve to the accent instead of to INK, so the chosen phrase
+    still lands as the one place the eye stops. The sweep is the motion; the
+    emphasis is still the point.
+    """
+    total_chars = sum(len(w) + 1 for ln in lines for w, _ in ln) or 1
+    # Finish slightly early so the last word is not still arriving at the cut.
+    span = max(dur_frames * 0.86, 1.0)
+    out, seen = [], 0
+    for ln in lines:
+        row = []
+        for w, b in ln:
+            seen += len(w) + 1
+            arrive = (seen / total_chars) * span
+            t = (fi - arrive + lead_frames) / lead_frames
+            row.append(lerp_rgb(PENDING, accent if b else INK, t))
+        out.append(row)
+    return out
 
 
 def layer(text,fnt,color):
@@ -842,7 +893,8 @@ def render(niche,beats,outdir,badge):
         # Each line is rendered as ONE layer so the fade/rise stays a single
         # composite -- per-word pastes would fade at slightly different rates
         # along a line and read as a shimmer.
-        lays=[line_layer(l,fr_,fb,c["accent"]) for l in ls]
+        cols=read_head_colours(ls, counts[bi], fi, c["accent"])
+        lays=[line_layer(l,fr_,fb,c["accent"],colours=cols[i]) for i,l in enumerate(ls)]
         blockh=lh*len(lays)
         # Panel width is now FIXED and symmetric, not hugged to the longest line
         # (2026-08-09). Hugging meant the right edge landed wherever the wrap
