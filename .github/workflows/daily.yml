@@ -1,3 +1,17 @@
+concurrency:
+  # Generation and posting MUST NOT overlap. On 2026-08-10 both fired one second
+  # apart: the reel job checked out the repo at 08:21:55 and Daily Carousels
+  # rewrote today's manifest at 08:25:53, four minutes later. The reel therefore
+  # rendered from the PREVIOUS manifest -- one pre-generated on 05 August with no
+  # reel_beats at all -- so it fell through to the fallback path and shipped sliced
+  # carousel fragments on the day the new copy contract went live.
+  #
+  # The reel workflows already shared this group with each other; generation was
+  # never in it, which is the one pairing that actually races. cancel-in-progress
+  # is false so the reel job queues behind generation rather than being dropped.
+  group: instagram-pipeline
+  cancel-in-progress: false
+
 name: Daily Carousels
 
 on:

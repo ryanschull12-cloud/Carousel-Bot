@@ -372,6 +372,18 @@ def main():
     # which the render step has no reason to depend on.
 
     if not args.publish_only:
+        # Loud, because this path produces visibly worse reels and used to do it in
+        # silence. beats_from_carousel falls back to slicing carousel body_slides
+        # when a manifest has no reel_beats -- a safety net so a scheduled run still
+        # ships something, never the intended output. On 2026-08-10 a stale
+        # pre-generated manifest sent every reel down it on the exact morning the
+        # new copy contract went live, and nothing in the logs said so.
+        if not (pick.get("reel_beats") or {}).get("body"):
+            print(f"WARNING: carousel {pick['index']} has no reel_beats — falling back "
+                  f"to slicing carousel copy. The reel will read as disconnected "
+                  f"fragments rather than one argument. This usually means the "
+                  f"manifest is stale or was generated before the reel contract "
+                  f"existed.")
         os.makedirs(os.path.dirname(rel), exist_ok=True)
         path, dur, credit = reel_engine.render_reel(pick, today, pick["index"], rel, "/tmp/reelwork")
         if not path:
