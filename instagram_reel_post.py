@@ -122,7 +122,13 @@ IG_BUSINESS_ACCOUNT_ID = os.environ.get("IG_BUSINESS_ACCOUNT_ID", "")
 GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "")
 GMAIL_ADDRESS = os.environ.get("GMAIL_ADDRESS", "")
 GMAIL_APP_PASSWORD = os.environ.get("GMAIL_APP_PASSWORD", "")
-TO_EMAIL = os.environ.get("TO_EMAIL", GMAIL_ADDRESS)
+# NOT os.environ.get("TO_EMAIL", GMAIL_ADDRESS). GitHub Actions sets an env var for
+# every secret referenced in a workflow, and when the secret does not exist it sets
+# it to the EMPTY STRING rather than leaving it unset -- so .get()'s default never
+# fires, TO_EMAIL becomes "", and the message goes out with no recipient. The
+# fallback existed precisely so a missing TO_EMAIL secret would mail Ryan's own
+# address, and it has never once worked in CI. (2026-08-10)
+TO_EMAIL = os.environ.get("TO_EMAIL") or GMAIL_ADDRESS
 
 GRAPH = "https://graph.instagram.com/v21.0"
 REEL_LOG_PATH = "reel_posted_log.json"
@@ -269,6 +275,10 @@ def email(subject, body, attach=None):
               f"NOT sending {'the MP4 attachment' if attach else 'this email'}. "
               f"Subject was: {subject!r}")
         return
+    if not TO_EMAIL:
+        print("WARNING: no recipient — TO_EMAIL secret is unset and GMAIL_ADDRESS is "
+              f"empty. NOT sending {subject!r}.")
+        return
     m = EmailMessage()
     m["Subject"], m["From"], m["To"] = subject, GMAIL_ADDRESS, TO_EMAIL
     m.set_content(body)
@@ -287,8 +297,13 @@ def email(subject, body, attach=None):
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as s:
             s.login(GMAIL_ADDRESS, GMAIL_APP_PASSWORD)
             s.send_message(m)
+        print(f"emailed {subject!r} to {TO_EMAIL}")
     except Exception as e:
-        print(f"email failed (non-fatal): {e}")
+        # Non-fatal, but it must be findable. A reel that renders and then fails to
+        # reach Ryan is indistinguishable, from the outside, from a reel that was
+        # never made -- which is exactly how the missing MP4 email went unnoticed.
+        print(f"EMAIL FAILED (non-fatal) sending {subject!r} to {TO_EMAIL}: "
+              f"{type(e).__name__}: {e}")
 
 
 def main():

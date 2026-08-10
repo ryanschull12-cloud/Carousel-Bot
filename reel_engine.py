@@ -76,9 +76,21 @@ F_SERIF = f"{SYS}/LiberationSerif-Bold.ttf"   # kept for callers; unused since t
 # colours while the carousels had already moved to near-black with tonal blues.
 # On a profile grid the two formats read as two different accounts, which wastes
 # the only thing a small account has going for it: looking deliberate.
-BG        = (10, 10, 13)      # --bg
-BG_ALT    = (13, 14, 18)      # --bg-alt, bottom of the vertical gradient
-BG_RAISED = (21, 22, 28)      # --bg-raised, body panels
+# Lifted off pure black 2026-08-10. Ryan: the blackout is hard to look at.
+# He is right -- 10,10,13 is effectively #000 on an OLED phone, and a full-bleed
+# near-black frame with 15:1 white type on it is glare in a dark room and a void in
+# a bright one. Every value moved up together so the relationships hold:
+#   BG        10,10,13 -> 26,27,33
+#   BG_ALT    13,14,18 -> 33,34,42
+#   BG_RAISED 21,22,28 -> 44,46,55
+# Ink still sits at 15.7:1 and accent at 7.1:1, both far above anything that could
+# be called a legibility risk -- this costs nothing readable and takes the harshness
+# out. The raised panel gains the most: against the old background it was 1.05:1,
+# which is to say invisible as a panel, and is now 1.27:1, so it reads as a card
+# rather than as a slightly different patch of black.
+BG = (26, 27, 33)      # --bg
+BG_ALT = (33, 34, 42)      # --bg-alt, bottom of the vertical gradient
+BG_RAISED = (44, 46, 55)      # --bg-raised, body panels
 INK       = (244, 245, 247)   # --ink
 DIM       = (154, 156, 166)   # --dim
 

@@ -61,7 +61,13 @@ TIKTOK_REFRESH_TOKEN = os.environ["TIKTOK_REFRESH_TOKEN"]
 GITHUB_REPOSITORY = os.environ["GITHUB_REPOSITORY"]  # e.g. "ryanschull12-cloud/Carousel-Bot"
 GMAIL_ADDRESS = os.environ["GMAIL_ADDRESS"]
 GMAIL_APP_PASSWORD = os.environ["GMAIL_APP_PASSWORD"]
-TO_EMAIL = os.environ.get("TO_EMAIL", GMAIL_ADDRESS)
+# NOT os.environ.get("TO_EMAIL", GMAIL_ADDRESS). GitHub Actions sets an env var for
+# every secret referenced in a workflow, and when the secret does not exist it sets
+# it to the EMPTY STRING rather than leaving it unset -- so .get()'s default never
+# fires, TO_EMAIL becomes "", and the message goes out with no recipient. The
+# fallback existed precisely so a missing TO_EMAIL secret would mail Ryan's own
+# address, and it has never once worked in CI. (2026-08-10)
+TO_EMAIL = os.environ.get("TO_EMAIL") or GMAIL_ADDRESS
 
 # Defaults to SELF_ONLY because that's the only option TikTok allows for
 # an unaudited app -- see the module docstring. Override via repo variable

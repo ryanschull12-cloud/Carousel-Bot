@@ -111,9 +111,21 @@ AGENCY_HANDLE = "@rd.marketing0"
 # carousels and the site read as one brand.
 #   --bg #0a0a0d  --bg-alt #0d0e12  --bg-raised #15161c
 #   --ink #f4f5f7 --dim #9a9ca6     --accent #6ea8ff
-BG = (10, 10, 13)            # --bg
-BG_ALT = (13, 14, 18)        # --bg-alt, for vertical gradients
-BG_RAISED = (21, 22, 28)     # --bg-raised, card fills
+# Lifted off pure black 2026-08-10. Ryan: the blackout is hard to look at.
+# He is right -- 10,10,13 is effectively #000 on an OLED phone, and a full-bleed
+# near-black frame with 15:1 white type on it is glare in a dark room and a void in
+# a bright one. Every value moved up together so the relationships hold:
+#   BG        10,10,13 -> 26,27,33
+#   BG_ALT    13,14,18 -> 33,34,42
+#   BG_RAISED 21,22,28 -> 44,46,55
+# Ink still sits at 15.7:1 and accent at 7.1:1, both far above anything that could
+# be called a legibility risk -- this costs nothing readable and takes the harshness
+# out. The raised panel gains the most: against the old background it was 1.05:1,
+# which is to say invisible as a panel, and is now 1.27:1, so it reads as a card
+# rather than as a slightly different patch of black.
+BG = (26, 27, 33)            # --bg
+BG_ALT = (33, 34, 42)        # --bg-alt, for vertical gradients
+BG_RAISED = (44, 46, 55)     # --bg-raised, card fills
 DOT_COLOR = (58, 60, 68)     # unlit constellation nodes
 HAIRLINE = (36, 37, 44)      # --line rgba(255,255,255,0.09) over --bg
 TEXT = (244, 245, 247)       # --ink
@@ -1048,8 +1060,15 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
             draw.rounded_rectangle([badge_x + shadow_off, badge_y + shadow_off,
                                      badge_x + badge_size + shadow_off, badge_y + badge_size + shadow_off],
                                   radius=8, fill=SHADOW)
+            # Accent, not colors["dark"]. The checkbox was outlined and ticked in
+            # the topic's DARK tone on a near-black canvas: 1.45:1, which is not a
+            # quiet design choice, it is an invisible element that reads as a
+            # rendering fault when you finally notice it. The smoke test had been
+            # reporting this region for weeks and it was filed as quiet chrome.
+            # The numbered badge on non-checklist slides has always been solid and
+            # legible; this now matches it. (2026-08-10)
             draw.rounded_rectangle([badge_x, badge_y, badge_x + badge_size, badge_y + badge_size],
-                                  radius=8, outline=colors["dark"], width=4, fill=BG)
+                                  radius=8, outline=colors["accent"], width=4, fill=BG)
             # Drawn as strokes rather than the "✓" glyph -- Liberation Sans
             # Bold doesn't reliably include that character, which was
             # rendering as a tofu/notdef box instead of a checkmark.
@@ -1057,7 +1076,7 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
                 (badge_x + 18, badge_y + 42),
                 (badge_x + 32, badge_y + 56),
                 (badge_x + 62, badge_y + 22),
-            ], fill=colors["dark"], width=7, joint="curve")
+            ], fill=colors["accent"], width=7, joint="curve")
         else:
             draw.ellipse([badge_x + shadow_off, badge_y + shadow_off,
                           badge_x + badge_size + shadow_off, badge_y + badge_size + shadow_off],

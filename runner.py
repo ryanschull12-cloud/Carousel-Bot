@@ -64,7 +64,13 @@ from carousel_engine import render_carousel
 MISTRAL_API_KEY = os.environ["MISTRAL_API_KEY"]
 GMAIL_ADDRESS = os.environ["GMAIL_ADDRESS"]
 GMAIL_APP_PASSWORD = os.environ["GMAIL_APP_PASSWORD"]
-TO_EMAIL = os.environ.get("TO_EMAIL", GMAIL_ADDRESS)
+# NOT os.environ.get("TO_EMAIL", GMAIL_ADDRESS). GitHub Actions sets an env var for
+# every secret referenced in a workflow, and when the secret does not exist it sets
+# it to the EMPTY STRING rather than leaving it unset -- so .get()'s default never
+# fires, TO_EMAIL becomes "", and the message goes out with no recipient. The
+# fallback existed precisely so a missing TO_EMAIL secret would mail Ryan's own
+# address, and it has never once worked in CI. (2026-08-10)
+TO_EMAIL = os.environ.get("TO_EMAIL") or GMAIL_ADDRESS
 
 # How many of the day's carousels get auto-posted to Instagram. The rest
 # are still generated and emailed, just not auto-posted. These 3 go out at
