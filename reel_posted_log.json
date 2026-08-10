@@ -6,7 +6,7 @@
     "niche": "Google Ads",
     "angle": "behind-the-curtain",
     "format": "steal-this",
-    "hook": "Google Ads calls 15% of buyers \u2018low intent\u2019\u2014they\u2019re not",
+    "hook": "Google Ads calls 15% of buyers ‘low intent’—they’re not",
     "media_product_type": "REELS",
     "trial": false,
     "scored": false
@@ -18,7 +18,7 @@
     "niche": "Email Marketing",
     "angle": "behind-the-curtain",
     "format": "steal-this",
-    "hook": "Gmail cuts off your subject line after 12 words\u2014everything else is invisible",
+    "hook": "Gmail cuts off your subject line after 12 words—everything else is invisible",
     "media_product_type": "REELS",
     "trial": false,
     "scored": false
@@ -30,7 +30,7 @@
     "niche": "Google Ads",
     "angle": "behind-the-curtain",
     "format": "steal-this",
-    "hook": "Google Ads bills you for 3-second bounces\u2014even if they leave immediately",
+    "hook": "Google Ads bills you for 3-second bounces—even if they leave immediately",
     "media_product_type": "REELS",
     "trial": false,
     "scored": false
@@ -42,9 +42,49 @@
     "niche": "Google Ads",
     "angle": "realization",
     "format": "step-by-step",
-    "hook": "Google Ads buries 25% of your best clicks in a report you\u2019ve never opened",
+    "hook": "Google Ads buries 25% of your best clicks in a report you’ve never opened",
     "media_product_type": "REELS",
     "trial": false,
     "scored": false
+  },
+  {
+    "media_id": "18045329123797047",
+    "date": "2026-08-10",
+    "index": 1,
+    "niche": "Email Marketing",
+    "angle": "behind-the-curtain",
+    "format": "steal-this",
+    "hook": "Gmail buries your email if it sees ‘free’ in the subject",
+    "media_product_type": "REELS",
+    "trial": false,
+    "scored": false
+  },
+  {
+    "media_id": null,
+    "date": "2026-08-10",
+    "index": 2,
+    "niche": "Email Marketing",
+    "angle": "contrarian",
+    "format": "before-after",
+    "hook": "Gmail ignores opens—only replies get you inbox placement",
+    "media_product_type": "REELS",
+    "trial": false,
+    "scored": false,
+    "delivery": "email",
+    "posted_manually": null
+  },
+  {
+    "media_id": null,
+    "date": "2026-08-10",
+    "index": 3,
+    "niche": "Google Ads",
+    "angle": "realization",
+    "format": "step-by-step",
+    "hook": "Google Ads hides half your sales in a report you’ve never opened",
+    "media_product_type": "REELS",
+    "trial": false,
+    "scored": false,
+    "delivery": "email",
+    "posted_manually": null
   }
 ]
