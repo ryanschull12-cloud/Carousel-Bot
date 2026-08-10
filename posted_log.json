@@ -379,6 +379,16 @@
       "format": "step-by-step",
       "hook": "Google Ads buries your best clicks in \u2018Other searches\u2019",
       "scored": false
+    },
+    {
+      "media_id": "18100665383252340",
+      "date": "2026-08-10",
+      "index": 1,
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Gmail buries your email if it sees \u2018free\u2019 in the subject",
+      "scored": false
     }
   ]
 }
