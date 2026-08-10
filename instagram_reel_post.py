@@ -35,6 +35,15 @@ def _slot_window_gate():
     if _os.environ.get("GITHUB_EVENT_NAME", "") == "workflow_dispatch":
         print("Manual run -- skipping the Irish time-window check.")
         return
+    if "--ignore-window" in _sys.argv:
+        # Email-only renders are not time-sensitive and must NOT wait for the slot
+        # they are numbered after. The windows exist to land a POST at a good hour;
+        # a reel that Ryan uploads by hand wants the opposite -- the file in his
+        # inbox early, so he can choose when to post it. Without this, slot 2's
+        # video would arrive at 1pm and slot 3's at 7pm, which is the machine
+        # telling him when to do his own job. (2026-08-09)
+        print("--ignore-window -- rendering outside the slot window on purpose.")
+        return
     target = 1
     argv = _sys.argv
     for i, a in enumerate(argv):
@@ -293,6 +302,9 @@ def main():
                     help="Publish as a trial reel (non-followers only).")
     ap.add_argument("--index", type=int, default=None,
                     help="Force a specific carousel index instead of the top-scoring one.")
+    ap.add_argument("--ignore-window", action="store_true",
+                    help="Render outside this slot's Irish time window. For email-only "
+                         "reels, which are not time-sensitive -- see _slot_window_gate.")
     ap.add_argument("--target-count", type=int, default=1,
                     help="By the end of this slot, exactly this many reels should have "
                          "gone out today. Mirrors instagram_post.py: GitHub fires each "
@@ -396,7 +408,10 @@ def main():
                 "delivery": "email",       # posted by hand, with in-app audio
                 "posted_manually": None,   # set by the back-fill once found live
             })
-            json.dump(log, open(REEL_LOG_PATH, "w"), indent=1, ensure_ascii=False)
+            # indent=2 to match the publish path's writer. Two writers using
+            # different indentation rewrite every line of the file whenever they
+            # alternate, which turns a one-entry append into a whole-file diff.
+            json.dump(log, open(REEL_LOG_PATH, "w"), indent=2, ensure_ascii=False)
             print(f"Slot {args.target_count} is above IG_REEL_AUTOPOST_SLOTS="
                   f"{REEL_AUTOPOST_SLOTS} — logged carousel {pick['index']} as "
                   f"email-delivered so the other slots pick different ones.")

@@ -106,6 +106,40 @@ jobs:
           python instagram_reel_post.py --publish-only --target-count 1 \
             ${{ github.event.inputs.trial == 'true' && '--trial' || '' }}
 
+      - name: Render and email the two hand-posted reels
+        # Ryan posts slots 2 and 3 himself so he can use a trending sound, and he
+        # wants both files in his inbox at the START of the day rather than being
+        # pinged at 1pm and 7pm -- the point of hand-posting is that HE picks the
+        # moment. So the morning run produces all three: slot 1 is published above,
+        # these two are rendered, logged and emailed.
+        #
+        # --ignore-window is required: these carry slot 2 and 3 numbering, whose
+        # windows are afternoon and evening, and without it the gate would exit
+        # immediately. They are not being posted, so the window is meaningless.
+        #
+        # The midday and evening workflows still run and are now usually no-ops
+        # (the log already lists these indices for today). That is deliberate
+        # redundancy: if this morning job fails, they still catch the day.
+        if: vars.IG_POSTING_PAUSED != 'true'
+        continue-on-error: true
+        env:
+          IG_REEL_AUTOPOST_SLOTS: ${{ vars.IG_REEL_AUTOPOST_SLOTS }}
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          TO_EMAIL: ${{ secrets.TO_EMAIL }}
+        run: |
+          python instagram_reel_post.py --render-only --target-count 2 --ignore-window
+          python instagram_reel_post.py --render-only --target-count 3 --ignore-window
+
+      - name: Commit the emailed reels
+        if: vars.IG_POSTING_PAUSED != 'true'
+        run: |
+          git config user.name "carousel-bot"
+          git config user.email "actions@github.com"
+          git add docs/reels reel_posted_log.json 2>/dev/null || true
+          git diff --staged --quiet || git commit -m "Render + log emailed reels $(date +'%Y-%m-%d')"
+          git push
+
       - name: Commit reel log
         if: vars.IG_POSTING_PAUSED != 'true'
         run: |
