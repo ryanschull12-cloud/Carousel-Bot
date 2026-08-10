@@ -421,76 +421,6 @@
       ]
     },
     {
-      "date": "2026-08-10",
-      "carousels": [
-        {
-          "niche": "Google Ads",
-          "angle": "behind-the-curtain",
-          "format": "steal-this",
-          "hook": "Google Ads buries 1 in 5 sales in a report you\u2019ve never opened",
-          "hashtags": [
-            "#googleads",
-            "#ppc",
-            "#digitalmarketing",
-            "#sem",
-            "#advertisinghacks"
-          ]
-        },
-        {
-          "niche": "Email Marketing",
-          "angle": "contrarian",
-          "format": "comparison",
-          "hook": "Gmail\u2019s inbox rewards engagement, not list size",
-          "hashtags": [
-            "#emailmarketing",
-            "#deliverability",
-            "#marketingtips",
-            "#crm",
-            "#ecommercemarketing"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "curiosity",
-          "format": "steal-this",
-          "hook": "Google Ads wrongly flags 15% of buyers as 'low intent'",
-          "hashtags": [
-            "#googleads",
-            "#ppc",
-            "#digitalmarketing",
-            "#sem",
-            "#advertisingtips"
-          ]
-        },
-        {
-          "niche": "Email Marketing",
-          "angle": "curiosity",
-          "format": "step-by-step",
-          "hook": "Gmail only reads the first 12 words of your subject line",
-          "hashtags": [
-            "#emailmarketing",
-            "#deliverability",
-            "#marketingtips",
-            "#crm",
-            "#digitalmarketing"
-          ]
-        },
-        {
-          "niche": "Email Marketing",
-          "angle": "realization",
-          "format": "before-after",
-          "hook": "Gmail\u2019s 'Promotions' tab kills 60% of your opens",
-          "hashtags": [
-            "#emailmarketing",
-            "#deliverability",
-            "#marketingtips",
-            "#crm",
-            "#ecommercetips"
-          ]
-        }
-      ]
-    },
-    {
       "date": "2026-08-11",
       "carousels": [
         {
@@ -690,6 +620,71 @@
             "#metaadstips",
             "#paidsocial",
             "#leadgeneration",
+            "#irishbusiness"
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-08-10",
+      "carousels": [
+        {
+          "niche": "Email Marketing",
+          "angle": "behind-the-curtain",
+          "format": "steal-this",
+          "hook": "Gmail buries your email if it sees \u2018free\u2019 in the subject",
+          "hashtags": [
+            "#emailmarketingtips",
+            "#emaildeliverability",
+            "#marketingaudit",
+            "#irishstartup"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "contrarian",
+          "format": "before-after",
+          "hook": "Gmail moves emails with replies to Primary\u2014opens don\u2019t count",
+          "hashtags": [
+            "#emailmarketingtips",
+            "#emaildeliverability",
+            "#conversiontracking",
+            "#corkbusiness"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "realization",
+          "format": "step-by-step",
+          "hook": "Google Ads hides half your sales in a report you\u2019ve never opened",
+          "hashtags": [
+            "#googleadstips",
+            "#ppcmanagement",
+            "#leadgeneration",
+            "#galwaybusiness"
+          ]
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "curiosity",
+          "format": "comparison",
+          "hook": "Meta\u2019s algorithm favors 200 engaged users over 20k lookalikes",
+          "hashtags": [
+            "#metaadstips",
+            "#paidsocial",
+            "#leadgeneration",
+            "#dublinbusiness"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "behind-the-curtain",
+          "format": "steal-this",
+          "hook": "Google Ads bills you for clicks that bounce in 3 seconds",
+          "hashtags": [
+            "#googleadstips",
+            "#ppc",
+            "#marketingaudit",
             "#irishbusiness"
           ]
         }

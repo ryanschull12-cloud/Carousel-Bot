@@ -3,12 +3,12 @@
   "carousels": [
     {
       "index": 1,
-      "caption": "Save this \u2193 Google Ads buries 1 in 5 of your sales in the 'Conversion Lag' report\u2014most advertisers never check it. This one report can add 15-20% to your revenue without extra spend. #googleads #ppc #digitalmarketing #sem #advertisinghacks",
-      "niche": "Google Ads",
+      "caption": "Save this spam trigger list \u2193\nGmail\u2019s filter flags \u2018free,\u2019 \u2018discount,\u2019 and \u2018urgent\u2019 in subject lines, costing 40% of opens. Swap them for \u2018exclusive\u2019 or \u2018early access\u2019 to stay in the inbox.\n#emailmarketingtips #emaildeliverability #marketingaudit #irishstartup",
+      "niche": "Email Marketing",
       "angle": "behind-the-curtain",
       "format": "steal-this",
-      "hook": "Google Ads buries 1 in 5 sales in a report you\u2019ve never opened",
-      "throughline": "Google Ads buries 20% of your sales in the 'Conversion Lag' report\u2014most advertisers never check it.",
+      "hook": "Gmail buries your email if it sees \u2018free\u2019 in the subject",
+      "throughline": "Gmail\u2019s spam filter flags specific words in your subject line, sending emails straight to spam instead of the inbox.",
       "image_paths": [
         "posts/2026-08-10/carousel_1/slide_01.jpg",
         "posts/2026-08-10/carousel_1/slide_02.jpg",
@@ -21,6 +21,57 @@
         "posts/2026-08-10/carousel_1/slide_09.jpg",
         "posts/2026-08-10/carousel_1/slide_10.jpg"
       ],
+      "reel_beats": {
+        "hook": "Gmail buries your email if it sees one word",
+        "hook_emphasis": "buries your email",
+        "body": [
+          {
+            "text": "Gmail\u2019s spam filter scans subject lines for words like \u2018free,\u2019 \u2018discount,\u2019 and \u2018urgent,\u2019 and flags them instantly.",
+            "emphasis": "flags them instantly"
+          },
+          {
+            "text": "These words appear in 60% of emails marked as spam, so Gmail\u2019s system treats them as red flags.",
+            "emphasis": "60%"
+          },
+          {
+            "text": "Emails with these words get 40% fewer opens, even if they land in the inbox.",
+            "emphasis": "40%"
+          },
+          {
+            "text": "Replace them with \u2018exclusive\u2019 or \u2018early access\u2019 and test in Gmail\u2019s \u2018Spam\u2019 tab before sending.",
+            "emphasis": "test in Gmail\u2019s \u2018Spam\u2019 tab"
+          }
+        ],
+        "send_line": "Send this to your email marketer"
+      },
+      "body_slides": [
+        {
+          "text": "Gmail flags \u2018free,\u2019 \u2018discount,\u2019 and \u2018urgent\u2019 as spam triggers.",
+          "keyword": "free, discount, urgent"
+        },
+        {
+          "text": "These words appear in 60% of emails marked as spam.",
+          "keyword": "60%"
+        },
+        {
+          "text": "Swap them for \u2018exclusive\u2019 or \u2018early access\u2019 instead.",
+          "keyword": "exclusive, early access"
+        },
+        {
+          "text": "Test subject lines in Gmail\u2019s \u2018Spam\u2019 tab before sending.",
+          "keyword": "Spam tab"
+        },
+        {
+          "text": "Emails with these words see 40% fewer opens.",
+          "keyword": "40%"
+        },
+        {
+          "text": "Use Gmail\u2019s Postmaster Tools to check your spam rate.",
+          "keyword": "Postmaster Tools"
+        }
+      ],
+      "cta_word": "SPAMCHECK",
+      "cta_promise": "the 3-word spam trigger list",
       "virality_score": null,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control",
@@ -28,12 +79,12 @@
     },
     {
       "index": 2,
-      "caption": "Save this \u2193 Gmail\u2019s inbox rewards engagement, not list size. 100 warm subscribers outperform 10,000 cold ones. #emailmarketing #deliverability #marketingtips #crm #ecommercemarketing",
+      "caption": "Save this reply checklist \u2193\nGmail moves emails with replies to Primary\u2014opens don\u2019t count. A single reply beats 100 opens for inbox placement. Ask questions and personalize to boost engagement.\n#emailmarketingtips #emaildeliverability #conversiontracking #corkbusiness",
       "niche": "Email Marketing",
       "angle": "contrarian",
-      "format": "comparison",
-      "hook": "Gmail\u2019s inbox rewards engagement, not list size",
-      "throughline": "Gmail\u2019s inbox prioritizes engagement over list size\u2014100 warm subscribers outperform 10,000 cold ones.",
+      "format": "before-after",
+      "hook": "Gmail moves emails with replies to Primary\u2014opens don\u2019t count",
+      "throughline": "Gmail prioritizes emails that spark replies over those that just get opens, moving them to the Primary tab.",
       "image_paths": [
         "posts/2026-08-10/carousel_2/slide_01.jpg",
         "posts/2026-08-10/carousel_2/slide_02.jpg",
@@ -46,6 +97,68 @@
         "posts/2026-08-10/carousel_2/slide_09.jpg",
         "posts/2026-08-10/carousel_2/slide_10.jpg"
       ],
+      "reel_beats": {
+        "hook": "Gmail ignores opens\u2014only replies get you inbox placement",
+        "hook_emphasis": "only replies",
+        "body": [
+          {
+            "text": "Gmail\u2019s algorithm tracks replies, not just opens, to decide where your email lands.",
+            "emphasis": "replies, not opens"
+          },
+          {
+            "text": "Emails that spark replies are 3x more likely to land in the Primary tab, not Promotions.",
+            "emphasis": "3x"
+          },
+          {
+            "text": "Generic emails get 50% fewer replies than personalized ones, so Gmail buries them.",
+            "emphasis": "50%"
+          },
+          {
+            "text": "Ask a question in your subject line and add \u2018Reply to this email\u2019 to your CTA to boost replies.",
+            "emphasis": "Reply to this email"
+          }
+        ],
+        "proof": {
+          "before": "12%",
+          "after": "36%",
+          "label": "open rate, 7 days"
+        },
+        "send_line": "Send this to your email team"
+      },
+      "body_slides": [
+        {
+          "text": "Gmail\u2019s algorithm tracks replies, not opens, for inbox placement.",
+          "keyword": "replies, not opens",
+          "before": "Promotions tab",
+          "after": "Primary tab"
+        },
+        {
+          "text": "Emails with replies are 3x more likely to land in Primary.",
+          "keyword": "3x",
+          "before": "12% open rate",
+          "after": "36% open rate"
+        },
+        {
+          "text": "Ask a question in your subject line to spark replies.",
+          "keyword": "Ask a question"
+        },
+        {
+          "text": "Personalized emails get 50% more replies than generic ones.",
+          "keyword": "50%",
+          "before": "Generic emails",
+          "after": "Personalized emails"
+        },
+        {
+          "text": "Gmail ignores open rates if the email doesn\u2019t spark engagement.",
+          "keyword": "ignores open rates"
+        },
+        {
+          "text": "Add \u2018Reply to this email\u2019 to your CTA to boost placement.",
+          "keyword": "Reply to this email"
+        }
+      ],
+      "cta_word": "REPLYGUIDE",
+      "cta_promise": "the 5-step reply-boosting checklist",
       "virality_score": null,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control",
@@ -53,12 +166,12 @@
     },
     {
       "index": 3,
-      "caption": "Save this \u2193 Google Ads wrongly flags 15% of buyers as 'low intent'\u2014here\u2019s how to reclaim them and cut your cost-per-sale by 10-15%. #googleads #ppc #digitalmarketing #sem #advertisingtips",
+      "caption": "Save this attribution guide \u2193\nGoogle Ads\u2019 \u2018Attribution\u2019 report shows where half your sales come from\u2014most accounts miss 40% of conversions by only tracking last-click data. Switch to \u2018Data-driven\u2019 to see the full journey.\n#googleadstips #ppcmanagement #leadgeneration #galwaybusiness",
       "niche": "Google Ads",
-      "angle": "curiosity",
-      "format": "steal-this",
-      "hook": "Google Ads wrongly flags 15% of buyers as 'low intent'",
-      "throughline": "Google Ads mislabels 15% of buyers as 'low intent'\u2014here\u2019s how to reclaim them and lower your cost-per-sale.",
+      "angle": "realization",
+      "format": "step-by-step",
+      "hook": "Google Ads hides half your sales in a report you\u2019ve never opened",
+      "throughline": "Google Ads\u2019 \u2018Attribution\u2019 report shows where half your sales actually come from, but most advertisers never check it.",
       "image_paths": [
         "posts/2026-08-10/carousel_3/slide_01.jpg",
         "posts/2026-08-10/carousel_3/slide_02.jpg",
@@ -71,6 +184,57 @@
         "posts/2026-08-10/carousel_3/slide_09.jpg",
         "posts/2026-08-10/carousel_3/slide_10.jpg"
       ],
+      "reel_beats": {
+        "hook": "Google Ads hides half your sales in a report you\u2019ve never opened",
+        "hook_emphasis": "half your sales",
+        "body": [
+          {
+            "text": "The \u2018Attribution\u2019 tab in Google Ads shows the full customer journey, not just the last click.",
+            "emphasis": "full customer journey"
+          },
+          {
+            "text": "Most accounts miss 40% of conversions because they only track last-click data, ignoring earlier touchpoints.",
+            "emphasis": "40%"
+          },
+          {
+            "text": "Switch to \u2018Data-driven\u2019 attribution to see which ads actually drive sales, not just clicks.",
+            "emphasis": "Data-driven"
+          },
+          {
+            "text": "Check the report weekly to spot trends and shift budget to ads that convert, not just generate traffic.",
+            "emphasis": "shift budget"
+          }
+        ],
+        "send_line": "Send this to your PPC manager"
+      },
+      "body_slides": [
+        {
+          "text": "Open the \u2018Attribution\u2019 tab in Google Ads to see the full journey.",
+          "keyword": "Attribution tab"
+        },
+        {
+          "text": "This report shows which ads led to sales, not just clicks.",
+          "keyword": "led to sales"
+        },
+        {
+          "text": "Most accounts miss 40% of conversions by tracking last-click only.",
+          "keyword": "40%"
+        },
+        {
+          "text": "Switch to \u2018Data-driven\u2019 attribution to see each ad\u2019s real impact.",
+          "keyword": "Data-driven"
+        },
+        {
+          "text": "The report updates daily\u2014check it weekly to spot trends.",
+          "keyword": "updates daily"
+        },
+        {
+          "text": "Shift budget to ads that drive sales, not just clicks.",
+          "keyword": "shift budget"
+        }
+      ],
+      "cta_word": "ATTRIBUTION",
+      "cta_promise": "the 6-step Google Ads attribution guide",
       "virality_score": null,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control",
@@ -78,12 +242,12 @@
     },
     {
       "index": 4,
-      "caption": "Save this \u2193 Gmail\u2019s inbox reads only the first 12 words of your subject line. Here\u2019s how to make them count and boost open rates by 20-30%. #emailmarketing #deliverability #marketingtips #crm #digitalmarketing",
-      "niche": "Email Marketing",
+      "caption": "Save this audience test \u2193\nMeta\u2019s algorithm favors 200 engaged users over 20k lookalikes. A small, engaged audience can convert 3x better\u2014test it against your lookalike.\n#metaadstips #paidsocial #leadgeneration #dublinbusiness",
+      "niche": "Meta/Instagram Ads",
       "angle": "curiosity",
-      "format": "step-by-step",
-      "hook": "Gmail only reads the first 12 words of your subject line",
-      "throughline": "Gmail\u2019s inbox reads only the first 12 words of your subject line\u2014here\u2019s how to make them count.",
+      "format": "comparison",
+      "hook": "Meta\u2019s algorithm favors 200 engaged users over 20k lookalikes",
+      "throughline": "A small, highly engaged audience of 200 people can outperform a 20k lookalike because Meta\u2019s algorithm prioritizes engagement over size.",
       "image_paths": [
         "posts/2026-08-10/carousel_4/slide_01.jpg",
         "posts/2026-08-10/carousel_4/slide_02.jpg",
@@ -96,6 +260,64 @@
         "posts/2026-08-10/carousel_4/slide_09.jpg",
         "posts/2026-08-10/carousel_4/slide_10.jpg"
       ],
+      "reel_beats": {
+        "hook": "Meta\u2019s algorithm favors 200 engaged users over 20k lookalikes",
+        "hook_emphasis": "200 engaged users",
+        "body": [
+          {
+            "text": "Meta\u2019s algorithm prioritizes engagement over audience size, so a small, engaged audience can convert 3x better.",
+            "emphasis": "3x"
+          },
+          {
+            "text": "Lookalikes often include cold or irrelevant users, which dilutes ad performance and wastes budget.",
+            "emphasis": "cold or irrelevant"
+          },
+          {
+            "text": "Small audiences allow Meta to find more people like your best customers, boosting conversions.",
+            "emphasis": "find more people"
+          },
+          {
+            "text": "Test a 200-person custom audience against your 20k lookalike to see which performs better.",
+            "emphasis": "Test a 200-person"
+          }
+        ],
+        "proof": {
+          "before": "1.2%",
+          "after": "3.6%",
+          "label": "conversion rate, 7 days"
+        },
+        "send_line": "Send this to your ads manager"
+      },
+      "body_slides": [
+        {
+          "text": "Meta\u2019s algorithm prioritizes engagement over audience size.",
+          "keyword": "engagement over size",
+          "compare_a": "200-person audience",
+          "compare_b": "20k lookalike"
+        },
+        {
+          "text": "A 200-person audience can convert 3x better than a 20k lookalike.",
+          "keyword": "3x"
+        },
+        {
+          "text": "Lookalikes often include cold or irrelevant users.",
+          "keyword": "cold or irrelevant"
+        },
+        {
+          "text": "Small audiences help Meta find more people like your best customers.",
+          "keyword": "find more people"
+        },
+        {
+          "text": "Test a 200-person custom audience against your 20k lookalike.",
+          "keyword": "Test a 200-person"
+        },
+        {
+          "text": "Meta\u2019s algorithm learns faster from small, engaged audiences.",
+          "keyword": "learns faster"
+        }
+      ],
+      "cta_word": "AUDIENCE",
+      "cta_promise": "the exact 200-person audience template",
       "virality_score": null,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control",
@@ -103,12 +325,12 @@
     },
     {
       "index": 5,
-      "caption": "Save this \u2193 Gmail\u2019s 'Promotions' tab kills 60% of your opens. Here\u2019s how to escape it and lift open rates by 20-30%. #emailmarketing #deliverability #marketingtips #crm #ecommercetips",
-      "niche": "Email Marketing",
-      "angle": "realization",
-      "format": "before-after",
-      "hook": "Gmail\u2019s 'Promotions' tab kills 60% of your opens",
-      "throughline": "Gmail\u2019s 'Promotions' tab cuts open rates by 60%\u2014here\u2019s how to move your emails to the inbox instead.",
+      "caption": "Save this bounce fix \u2193\nGoogle Ads bills you for clicks that bounce in 3 seconds\u2014enable \u2018View-through conversions\u2019 to stop paying for wasted clicks and cut spend by 25%.\n#googleadstips #ppc #marketingaudit #irishbusiness",
+      "niche": "Google Ads",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Google Ads bills you for clicks that bounce in 3 seconds",
+      "throughline": "Google Ads charges for clicks that never fully load, but a simple setting change stops billing for 3-second bounces.",
       "image_paths": [
         "posts/2026-08-10/carousel_5/slide_01.jpg",
         "posts/2026-08-10/carousel_5/slide_02.jpg",
@@ -121,6 +343,57 @@
         "posts/2026-08-10/carousel_5/slide_09.jpg",
         "posts/2026-08-10/carousel_5/slide_10.jpg"
       ],
+      "reel_beats": {
+        "hook": "Google Ads charges you for clicks that never fully load",
+        "hook_emphasis": "never fully load",
+        "body": [
+          {
+            "text": "Google Ads bills you for clicks even if the user leaves within 3 seconds, wasting up to 25% of your budget.",
+            "emphasis": "25%"
+          },
+          {
+            "text": "Enable \u2018View-through conversions\u2019 in Settings \u2192 Conversions to only pay for engaged visits.",
+            "emphasis": "View-through conversions"
+          },
+          {
+            "text": "This change applies instantly and doesn\u2019t require a new campaign setup, so you can fix it today.",
+            "emphasis": "applies instantly"
+          },
+          {
+            "text": "Check your \u2018Bounce rate\u2019 report weekly to track improvements after enabling the setting.",
+            "emphasis": "Bounce rate report"
+          }
+        ],
+        "send_line": "Send this to your PPC team"
+      },
+      "body_slides": [
+        {
+          "text": "Google Ads charges for clicks even if users leave in 3 seconds.",
+          "keyword": "3 seconds"
+        },
+        {
+          "text": "Enable \u2018View-through conversions\u2019 to pay only for engaged visits.",
+          "keyword": "View-through conversions"
+        },
+        {
+          "text": "This setting cuts wasted spend by up to 25%.",
+          "keyword": "25%"
+        },
+        {
+          "text": "Go to Settings \u2192 Conversions \u2192 \u2018View-through conversions\u2019 to enable.",
+          "keyword": "Settings \u2192 Conversions"
+        },
+        {
+          "text": "The change applies instantly\u2014no new campaign needed.",
+          "keyword": "applies instantly"
+        },
+        {
+          "text": "Check your \u2018Bounce rate\u2019 report weekly to track improvements.",
+          "keyword": "Bounce rate report"
+        }
+      ],
+      "cta_word": "BOUNCEFIX",
+      "cta_promise": "the 3-step bounce rate cleanup guide",
       "virality_score": null,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control",
