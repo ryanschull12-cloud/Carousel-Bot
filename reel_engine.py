@@ -88,23 +88,23 @@ F_SERIF = f"{SYS}/LiberationSerif-Bold.ttf"   # kept for callers; unused since t
 # out. The raised panel gains the most: against the old background it was 1.05:1,
 # which is to say invisible as a panel, and is now 1.27:1, so it reads as a card
 # rather than as a slightly different patch of black.
-BG = (26, 27, 33)      # --bg
-BG_ALT = (33, 34, 42)      # --bg-alt, bottom of the vertical gradient
-BG_RAISED = (44, 46, 55)      # --bg-raised, body panels
-INK       = (244, 245, 247)   # --ink
-DIM       = (154, 156, 166)   # --dim
+BG = (247, 246, 242)   # --bg  LIGHT theme restored 2026-08-11; motion unchanged
+BG_ALT = (238, 237, 231)      # --bg-alt, bottom of the vertical gradient
+BG_RAISED = (228, 230, 236)      # --bg-raised, body panels
+INK       = (25, 27, 31)   # --ink
+DIM       = (88, 91, 98)   # --dim
 
 HANDLE = "@rd.marketing0"
 
 # Keys unchanged -- colors_for() matches on substring and the content brain's
 # niche strings have not moved.
 TOPIC = {
- "google ads": {"accent": (110, 168, 255), "deep": (30, 52, 92), "veil": (22, 30, 46)},
- "meta":       {"accent": (146, 154, 255), "deep": (44, 46, 96), "veil": (27, 28, 48)},
- "instagram":  {"accent": (146, 154, 255), "deep": (44, 46, 96), "veil": (27, 28, 48)},
- "email":      {"accent": (94, 199, 240),  "deep": (24, 62, 84), "veil": (19, 33, 43)},
+ "google ads": {"accent": (30, 101, 209), "deep": (17, 44, 92), "veil": (212, 223, 237)},
+ "meta":       {"accent": (84, 90, 214), "deep": (30, 32, 86), "veil": (220, 220, 237)},
+ "instagram":  {"accent": (84, 90, 214), "deep": (30, 32, 86), "veil": (220, 220, 237)},
+ "email":      {"accent": (9, 118, 163),  "deep": (8, 54, 78), "veil": (207, 225, 229)},
 }
-DEF = {"accent": (110, 168, 255), "deep": (30, 52, 92), "veil": (22, 30, 46)}
+DEF = {"accent": (30, 101, 209), "deep": (17, 44, 92), "veil": (212, 223, 237)}
 
 def colors_for(n):
     n=(n or "").lower()
@@ -161,7 +161,7 @@ def fit(d,t,path,start,mn,mw,maxl):
 # Not so dim that an unreached word is unreadable -- someone who scans ahead must
 # still be able to -- just clearly behind the one being pointed at. 4.2:1 against
 # the panel, which is legible body text by any standard, against INK's 12:1.
-PENDING = (128, 131, 143)
+PENDING = (110, 112, 121)
 
 
 def line_layer(pairs,f_reg,f_bold,accent,colours=None):
@@ -342,7 +342,7 @@ def draw_constellation(im, c, t, nodes):
 # Progress track. Visible, not decorative: at 1.4:1 against the background a UI
 # element is not quiet, it is absent. This sits around 3:1, which reads as a track
 # without competing with copy.
-TRACK = (64, 66, 80)
+TRACK = (187, 189, 197)
 
 
 def chrome(im,c,badge,prog=None):
@@ -705,7 +705,7 @@ LABEL_TRACK = 0.02
 
 # The "before" bar on the proof beat: dim enough to read as the past, light enough
 # to actually be seen against the background.
-BAR_WAS = (92, 95, 108)
+BAR_WAS = (149, 150, 159)
 
 # 0.55s to resolve the counting figure. Long enough to register as motion, short
 # enough to be finished well before the scroll decision lands.
@@ -1028,7 +1028,7 @@ def render(niche,beats,outdir,badge):
         p=ease(clamp(fi/16.0))
         cut=int(H*p)
         if cut>0:
-            veil=Image.new("RGB",(W,cut),c["deep"])
+            veil=Image.new("RGB",(W,cut),c["veil"])
             fr.paste(Image.blend(fr.crop((0,H-cut,W,H)),veil,0.90),(0,H-cut))
         # The keyword used to wait for the wipe to be 55% done and then start a
         # 10-frame fade, so the CTA opened with about half a second of almost empty
