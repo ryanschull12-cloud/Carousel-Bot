@@ -123,16 +123,16 @@ AGENCY_HANDLE = "@rd.marketing0"
 # out. The raised panel gains the most: against the old background it was 1.05:1,
 # which is to say invisible as a panel, and is now 1.27:1, so it reads as a card
 # rather than as a slightly different patch of black.
-BG = (26, 27, 33)            # --bg
-BG_ALT = (33, 34, 42)        # --bg-alt, for vertical gradients
-BG_RAISED = (44, 46, 55)     # --bg-raised, card fills
-DOT_COLOR = (58, 60, 68)     # unlit constellation nodes
-HAIRLINE = (36, 37, 44)      # --line rgba(255,255,255,0.09) over --bg
-TEXT = (244, 245, 247)       # --ink
-GRAY = (154, 156, 166)       # --dim
+BG = (247, 246, 242)         # --bg  LIGHT theme restored 2026-08-11
+BG_ALT = (238, 237, 231)        # --bg-alt, for vertical gradients
+BG_RAISED = (228, 230, 236)     # --bg-raised, card fills
+DOT_COLOR = (200, 199, 192)     # unlit constellation nodes
+HAIRLINE = (220, 218, 210)      # --line rgba(255,255,255,0.09) over --bg
+TEXT = (25, 27, 31)       # --ink
+GRAY = (88, 91, 98)       # --dim
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-SHADOW = (6, 6, 8)           # depth shade, now one tone BELOW bg not above
+SHADOW = (230, 228, 220)           # depth shade, now one tone BELOW bg not above
 
 # FIXED FONT SIZES — never auto-grow beyond these
 HOOK_FONT_SIZE = 96       # Hook slides: big, dramatic, consistent
@@ -171,12 +171,12 @@ EXPERIMENTABLE_CONSTANTS = {
 # call site keeps working; on a dark canvas "dark" is the deep tone and
 # "light" is the raised-card tone, which is why they look inverted.
 TOPIC_COLORS = {
-    "google ads": {"accent": (110, 168, 255), "dark": (30, 52, 92), "light": (22, 30, 46)},
-    "meta": {"accent": (146, 154, 255), "dark": (44, 46, 96), "light": (27, 28, 48)},
-    "instagram": {"accent": (146, 154, 255), "dark": (44, 46, 96), "light": (27, 28, 48)},
-    "email": {"accent": (94, 199, 240), "dark": (24, 62, 84), "light": (19, 33, 43)},
+    "google ads": {"accent": (30, 101, 209), "dark": (17, 44, 92), "light": (212, 223, 237)},
+    "meta": {"accent": (84, 90, 214), "dark": (30, 32, 86), "light": (220, 220, 237)},
+    "instagram": {"accent": (84, 90, 214), "dark": (30, 32, 86), "light": (220, 220, 237)},
+    "email": {"accent": (9, 118, 163), "dark": (8, 54, 78), "light": (207, 225, 229)},
 }
-DEFAULT_COLORS = {"accent": (110, 168, 255), "dark": (30, 52, 92), "light": (22, 30, 46)}
+DEFAULT_COLORS = {"accent": (30, 101, 209), "dark": (17, 44, 92), "light": (212, 223, 237)}
 
 
 def colors_for(niche):
@@ -282,7 +282,7 @@ def draw_dot_grid(draw, spacing=48, radius=2, colors=None, seed=1):
             d = math.hypot(a[0] - b[0], a[1] - b[1])
             if d < 300:
                 v = int(46 * (1 - d / 300.0))
-                draw.line([a, b], fill=(v + 10, v + 11, v + 14), width=1)
+                draw.line([a, b], fill=(237 - v, 236 - v, 233 - v), width=1)
 
     for idx, (x, y) in enumerate(nodes):
         if idx % 7 == 0:
@@ -302,7 +302,7 @@ def draw_progress_bar(draw, slide_num, total_slides, accent_color, dark_color):
         if i < slide_num:
             fill = dark_color
         else:
-            fill = (40, 42, 50)
+            fill = (214, 213, 206)
         draw.rounded_rectangle([x0, bar_y, x1, bar_y + bar_h], radius=4, fill=fill)
 
 
@@ -315,7 +315,7 @@ def draw_topic_badge(draw, niche, colors):
     badge_h = 40
     draw.rounded_rectangle([MARGIN, 48, MARGIN + badge_w, 48 + badge_h],
                             radius=badge_h // 2, fill=colors["accent"])
-    draw.text((MARGIN + pad_x, 48 + 8), topic, font=f_badge, fill=colors["dark"])
+    draw.text((MARGIN + pad_x, 48 + 8), topic, font=f_badge, fill=BG)
 
 
 def draw_slide_counter(draw, slide_num, total_slides, dark_color):
@@ -783,7 +783,7 @@ def draw_swipe_arrow(draw, colors):
     px = W - MARGIN - pill_w
     py = H - 140
     draw.rounded_rectangle([px, py, px + pill_w, py + pill_h], radius=pill_h // 2, fill=colors["accent"])
-    draw.text((px + pad, py + 6), arrow_text, font=f_arrow, fill=colors["dark"])
+    draw.text((px + pad, py + 6), arrow_text, font=f_arrow, fill=BG)
 
 
 def draw_follow_pill(draw, colors):
@@ -1130,7 +1130,7 @@ def render_recap_slide_aesthetic(recap_lines, niche, slide_num, total_slides, ou
     bar_h = 70
     draw.rounded_rectangle([ (W - stw)/2 - bar_pad, bar_y, (W + stw)/2 + bar_pad, bar_y + bar_h ],
                             radius=bar_h // 2, fill=colors["accent"])
-    draw.text(((W - stw) / 2, bar_y + 10), save_text, font=f_save_big, fill=colors["dark"])
+    draw.text(((W - stw) / 2, bar_y + 10), save_text, font=f_save_big, fill=BG)
 
     f_sub = ImageFont.truetype(F_SANS_REG, 22)
     # Was niche.lower() — broke proper-noun capitalization for "Google
