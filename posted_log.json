@@ -368,7 +368,7 @@
       "angle": "behind-the-curtain",
       "format": "steal-this",
       "hook": "Google Ads calls 15% of buyers \u2018low intent\u2019\u2014they\u2019re not",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18080108075694355",
@@ -378,7 +378,7 @@
       "angle": "realization",
       "format": "step-by-step",
       "hook": "Google Ads buries your best clicks in \u2018Other searches\u2019",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18100665383252340",

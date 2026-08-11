@@ -647,6 +647,87 @@
       "engagement_rate": 100.0,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "variant"
+    },
+    {
+      "date": "2026-08-08",
+      "media_id": "17895786414590704",
+      "niche": "Google Ads",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Google Ads calls 15% of buyers \u2018low intent\u2019\u2014they\u2019re not",
+      "metrics": {
+        "reach": 1,
+        "saved": 0,
+        "shares": 0,
+        "likes": 1,
+        "comments": 0
+      },
+      "engagement_rate": 100.0,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
+    },
+    {
+      "date": "2026-08-08",
+      "media_id": "18080108075694355",
+      "niche": "Google Ads",
+      "angle": "realization",
+      "format": "step-by-step",
+      "hook": "Google Ads buries your best clicks in \u2018Other searches\u2019",
+      "metrics": {
+        "reach": 1,
+        "saved": 0,
+        "shares": 0,
+        "likes": 1,
+        "comments": 0
+      },
+      "engagement_rate": 100.0,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
+    }
+  ],
+  "scored_reels": [
+    {
+      "date": "2026-08-08",
+      "media_id": "18191867614376632",
+      "niche": "Google Ads",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Google Ads calls 15% of buyers \u2018low intent\u2019\u2014they\u2019re not",
+      "trial": false,
+      "metrics": {
+        "reach": 5,
+        "views": 6,
+        "saved": 0,
+        "shares": 0,
+        "likes": 2,
+        "comments": 0,
+        "total_interactions": 2,
+        "ig_reels_avg_watch_time": 7160,
+        "ig_reels_video_view_total_time": 85924,
+        "reels_skip_rate": 80
+      },
+      "engagement_rate": 40.0,
+      "sends_per_reach": 0.0,
+      "views_per_reach": 1.2,
+      "beat_structure": {
+        "beat_count": 8,
+        "beat_kinds": [
+          "hook",
+          "stat",
+          "body",
+          "body",
+          "body",
+          "body",
+          "cta",
+          "brand"
+        ],
+        "body_beats": 4,
+        "has_stat": true,
+        "has_proof": false,
+        "duration_s": 24.5
+      },
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
     }
   ]
 }
