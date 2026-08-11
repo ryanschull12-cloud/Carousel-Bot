@@ -161,7 +161,7 @@ def fit(d,t,path,start,mn,mw,maxl):
 # Not so dim that an unreached word is unreadable -- someone who scans ahead must
 # still be able to -- just clearly behind the one being pointed at. 4.2:1 against
 # the panel, which is legible body text by any standard, against INK's 12:1.
-PENDING = (110, 112, 121)
+PENDING = (97, 98, 106)
 
 
 def line_layer(pairs,f_reg,f_bold,accent,colours=None):
@@ -705,7 +705,7 @@ LABEL_TRACK = 0.02
 
 # The "before" bar on the proof beat: dim enough to read as the past, light enough
 # to actually be seen against the background.
-BAR_WAS = (149, 150, 159)
+BAR_WAS = (112, 113, 119)
 
 # 0.55s to resolve the counting figure. Long enough to register as motion, short
 # enough to be finished well before the scroll decision lands.
@@ -714,7 +714,7 @@ BAR_WAS = (149, 150, 159)
 # weight. Entrances across every beat moved from the 200-300ms Material band
 # to 330-420ms in the same pass. Hypothesis until reel scores land -- if
 # retention drops at the new pacing, this is the constant to walk back.
-TICK_FRAMES = 19.0
+TICK_FRAMES = 10.0
 
 TAIL_S = 0.6   # crossfade back to the hook so the loop closes
 
@@ -1025,7 +1025,7 @@ def render(niche,beats,outdir,badge):
         sf,sls=fit(probe,tail,F_SANS,60,42,mw,3); slh=int(sf.size*1.26)
         lead_h=int(lf.size*1.6)
         ay=anchor(lead_h+lh*len(ls)+slh*len(sls)+34)
-        p=ease(clamp(fi/16.0))
+        p=ease(clamp(fi/10.0))
         cut=int(H*p)
         if cut>0:
             veil=Image.new("RGB",(W,cut),c["veil"])
