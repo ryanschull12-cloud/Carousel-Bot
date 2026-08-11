@@ -389,6 +389,16 @@
       "format": "steal-this",
       "hook": "Gmail buries your email if it sees \u2018free\u2019 in the subject",
       "scored": false
+    },
+    {
+      "media_id": "17951238987240650",
+      "date": "2026-08-11",
+      "index": 1,
+      "niche": "Email Marketing",
+      "angle": "realization",
+      "format": "before-after",
+      "hook": "Gmail moves emails to Primary when someone replies\u2014not opens",
+      "scored": false
     }
   ]
 }
