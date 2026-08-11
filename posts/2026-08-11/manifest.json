@@ -3,12 +3,12 @@
   "carousels": [
     {
       "index": 1,
-      "caption": "Gmail buries emails that get opens but no replies. One subject line tweak can triple your reply rate\u2014and move you to the top of the inbox. Save this before your next send. #emailmarketing #deliverability #marketingtips #crm #ecommerce",
+      "caption": "Save this \u2193 Gmail moves emails to Primary when someone replies\u2014not opens. One reply can shift your entire list from Promotions to Primary and lift open rates by 20%. Here\u2019s how to spark those replies every send. #emailmarketingtips #emaildeliverability #conversiontracking",
       "niche": "Email Marketing",
-      "angle": "contrarian",
+      "angle": "realization",
       "format": "before-after",
-      "hook": "Gmail buries emails that get opens but no replies",
-      "throughline": "Gmail\u2019s inbox algorithm prioritizes replies over opens, so optimizing for conversation beats chasing open rates.",
+      "hook": "Gmail moves emails to Primary when someone replies\u2014not opens",
+      "throughline": "Gmail prioritizes replies over opens, so sparking conversations moves emails to Primary and boosts long-term deliverability.",
       "image_paths": [
         "posts/2026-08-11/carousel_1/slide_01.jpg",
         "posts/2026-08-11/carousel_1/slide_02.jpg",
@@ -21,6 +21,73 @@
         "posts/2026-08-11/carousel_1/slide_09.jpg",
         "posts/2026-08-11/carousel_1/slide_10.jpg"
       ],
+      "reel_beats": {
+        "hook": "Your emails are buried in Promotions\u2014even with 100 opens",
+        "hook_emphasis": "buried in Promotions",
+        "body": [
+          {
+            "text": "Gmail checks for replies, not just opens, to decide where your email lands.",
+            "emphasis": "replies"
+          },
+          {
+            "text": "One reply tells Gmail this sender is worth keeping in Primary, not spam.",
+            "emphasis": "Primary"
+          },
+          {
+            "text": "Most newsletters get zero replies, so they stay stuck in Promotions forever.",
+            "emphasis": "zero replies"
+          },
+          {
+            "text": "End every email with a quick question to spark replies and move tabs.",
+            "emphasis": "quick question"
+          }
+        ],
+        "proof": {
+          "before": "12%",
+          "after": "32%",
+          "label": "open rate, 30 days"
+        },
+        "cta_line": "",
+        "send_line": "Send this to whoever writes your emails"
+      },
+      "body_slides": [
+        {
+          "text": "Gmail checks for replies, not just opens, to decide tab placement.",
+          "keyword": "replies",
+          "before": "Spam folder",
+          "after": "Primary tab"
+        },
+        {
+          "text": "A single reply signals Gmail this sender is worth keeping close.",
+          "keyword": "single reply",
+          "before": "Low priority",
+          "after": "High priority"
+        },
+        {
+          "text": "Most newsletters get zero replies\u2014those stay buried in Promotions.",
+          "keyword": "zero replies",
+          "before": "Promotions tab",
+          "after": "Primary tab"
+        },
+        {
+          "text": "End with a quick question to spark replies.",
+          "keyword": "quick question",
+          "before": "No replies",
+          "after": "3-5 replies"
+        },
+        {
+          "text": "Emails with replies see 20% higher open rates next send.",
+          "keyword": "20% higher",
+          "before": "12% opens",
+          "after": "32% opens"
+        },
+        {
+          "text": "Check your \u2018Replies\u2019 tab in Gmail\u2014it\u2019s the real deliverability score.",
+          "keyword": "Replies tab"
+        }
+      ],
+      "cta_word": "TEMPLATE",
+      "cta_promise": "the 5-question script that gets replies",
       "virality_score": null,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control",
@@ -28,12 +95,12 @@
     },
     {
       "index": 2,
-      "caption": "Your Google Ads budget is leaking on searches you never see. The search terms report shows every search triggering your ads\u2014most accounts miss the ones that convert. Save this checklist. #googleads #ppc #digitalmarketing #sem #advertising",
-      "niche": "Google Ads",
-      "angle": "realization",
-      "format": "step-by-step",
-      "hook": "Your Google Ads budget is leaking on searches you never see",
-      "throughline": "Google Ads\u2019 search terms report shows the exact searches triggering your ads\u2014most accounts miss the best clicks buried there.",
+      "caption": "Save this \u2193 Gmail\u2019s spam filter skips subject lines\u2014sender reputation decides inbox or spam. A trusted sender lands in inbox even with a weak subject line, while a new sender hits spam despite perfect copy. Here\u2019s how to build reputation fast. #emailmarketingtips #emaildeliverability #marketingaudit",
+      "niche": "Email Marketing",
+      "angle": "contrarian",
+      "format": "comparison",
+      "hook": "Gmail\u2019s spam filter skips subject lines\u2014sender reputation decides inbox or spam",
+      "throughline": "Gmail\u2019s spam filter ignores subject lines and focuses on sender reputation, so building trust beats clever copy every time.",
       "image_paths": [
         "posts/2026-08-11/carousel_2/slide_01.jpg",
         "posts/2026-08-11/carousel_2/slide_02.jpg",
@@ -46,6 +113,60 @@
         "posts/2026-08-11/carousel_2/slide_09.jpg",
         "posts/2026-08-11/carousel_2/slide_10.jpg"
       ],
+      "reel_beats": {
+        "hook": "Your perfect subject line is invisible to Gmail\u2019s filter",
+        "hook_emphasis": "invisible",
+        "body": [
+          {
+            "text": "Gmail\u2019s filter looks at who sent the email, not what the subject says.",
+            "emphasis": "who sent"
+          },
+          {
+            "text": "A trusted sender lands in inbox even with a weak subject line.",
+            "emphasis": "trusted sender"
+          },
+          {
+            "text": "A new sender with a perfect subject still hits spam if Gmail doesn\u2019t trust them.",
+            "emphasis": "new sender"
+          },
+          {
+            "text": "Replies build reputation faster than opens, so spark conversations.",
+            "emphasis": "replies"
+          }
+        ],
+        "cta_line": "",
+        "send_line": "Send this to your email marketer"
+      },
+      "body_slides": [
+        {
+          "text": "Gmail\u2019s filter looks at who sent the email, not what it says.",
+          "keyword": "who sent",
+          "compare_a": "Subject line",
+          "compare_b": "Sender reputation"
+        },
+        {
+          "text": "A trusted sender lands in inbox even with a weak subject line.",
+          "keyword": "trusted sender"
+        },
+        {
+          "text": "A new sender with a perfect subject line still hits spam if Gmail doesn\u2019t trust them.",
+          "keyword": "new sender"
+        },
+        {
+          "text": "Reputation is built on replies, not opens\u2014spark conversations to improve it.",
+          "keyword": "replies"
+        },
+        {
+          "text": "Most spam filters check sender score first, subject line second.",
+          "keyword": "sender score"
+        },
+        {
+          "text": "Check your sender score\u2014it\u2019s the real gatekeeper to the inbox.",
+          "keyword": "sender score"
+        }
+      ],
+      "cta_word": "CHECKLIST",
+      "cta_promise": "the 6-point sender reputation checklist",
       "virality_score": null,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control",
@@ -53,12 +174,12 @@
     },
     {
       "index": 3,
-      "caption": "Smart bidding wastes small budgets on the wrong clicks. Manual bidding lets you pick which clicks get your money\u2014no AI guesswork. Save this before your next bid review. #googleads #ppc #digitalmarketing #sem #advertisinghacks",
+      "caption": "Save this \u2193 Google Ads hides your highest-converting clicks in the \u2018Other searches\u2019 report\u2014where most accounts never look. These are high-intent searches that convert but get buried. Here\u2019s how to find and use them. #googleadstips #ppcmanagement #leadgeneration",
       "niche": "Google Ads",
-      "angle": "contrarian",
-      "format": "comparison",
-      "hook": "Smart bidding wastes small budgets on the wrong clicks",
-      "throughline": "Manual bidding gives small budgets control over where every euro goes, while \u2018smart\u2019 bidding often spreads money too thin.",
+      "angle": "curiosity",
+      "format": "step-by-step",
+      "hook": "Google Ads hides your highest-converting clicks in \u2018Other searches\u2019",
+      "throughline": "Google Ads buries your best-performing clicks in the \u2018Other searches\u2019 report, where most advertisers never look.",
       "image_paths": [
         "posts/2026-08-11/carousel_3/slide_01.jpg",
         "posts/2026-08-11/carousel_3/slide_02.jpg",
@@ -71,6 +192,63 @@
         "posts/2026-08-11/carousel_3/slide_09.jpg",
         "posts/2026-08-11/carousel_3/slide_10.jpg"
       ],
+      "reel_beats": {
+        "hook": "Google is hiding 30% of your best clicks in one report",
+        "hook_emphasis": "hiding 30%",
+        "body": [
+          {
+            "text": "Open the Search Terms report to see what people actually typed.",
+            "emphasis": "Search Terms report"
+          },
+          {
+            "text": "Click \u2018Other searches\u2019\u2014this is where Google buries high-intent clicks.",
+            "emphasis": "Other searches"
+          },
+          {
+            "text": "Sort by conversions to find searches that buy but never show up.",
+            "emphasis": "conversions"
+          },
+          {
+            "text": "Add them as exact match keywords to stop wasting budget on broad searches.",
+            "emphasis": "exact match"
+          }
+        ],
+        "proof": {
+          "before": "\u20ac45",
+          "after": "\u20ac12",
+          "label": "cost per lead, 30 days"
+        },
+        "cta_line": "",
+        "send_line": "Send this to your Google Ads manager"
+      },
+      "body_slides": [
+        {
+          "text": "Open the Search Terms report to see what people actually typed.",
+          "keyword": "Search Terms report"
+        },
+        {
+          "text": "Click \u2018Other searches\u2019\u2014this is where Google buries high-intent clicks.",
+          "keyword": "Other searches"
+        },
+        {
+          "text": "Sort by conversions to find searches that buy but never show up.",
+          "keyword": "conversions"
+        },
+        {
+          "text": "Add high-converting searches as exact match keywords.",
+          "keyword": "exact match"
+        },
+        {
+          "text": "Most accounts miss 20-30% of sales hidden here.",
+          "keyword": "20-30%"
+        },
+        {
+          "text": "Check \u2018Other searches\u2019 weekly\u2014it\u2019s the fastest way to find new buyers.",
+          "keyword": "weekly"
+        }
+      ],
+      "cta_word": "GUIDE",
+      "cta_promise": "the step-by-step \u2018Other searches\u2019 guide",
       "virality_score": null,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control",
@@ -78,12 +256,12 @@
     },
     {
       "index": 4,
-      "caption": "Gmail\u2019s spam filter skips your subject line entirely. It checks the first 100 characters of your email instead. Save this before your next draft. #emailmarketing #deliverability #marketingtips #crm #ecommercemarketing",
-      "niche": "Email Marketing",
+      "caption": "Save this \u2193 Meta\u2019s algorithm boosts ads that use this 3-part script: hook, social proof, clear next step. Ads that follow this get 40% more reach. Copy the script and improve your ads fast. #metaadstips #paidsocial #leadgeneration",
+      "niche": "Meta/Instagram Ads",
       "angle": "behind-the-curtain",
-      "format": "step-by-step",
-      "hook": "Gmail\u2019s spam filter skips your subject line entirely",
-      "throughline": "Gmail\u2019s spam filter checks the first few lines of your email, not just the subject line\u2014so the hook has to land fast.",
+      "format": "steal-this",
+      "hook": "Meta\u2019s algorithm boosts ads that use this 3-part script",
+      "throughline": "Meta\u2019s algorithm favors ads that follow a specific 3-part script: hook, social proof, clear next step.",
       "image_paths": [
         "posts/2026-08-11/carousel_4/slide_01.jpg",
         "posts/2026-08-11/carousel_4/slide_02.jpg",
@@ -96,6 +274,63 @@
         "posts/2026-08-11/carousel_4/slide_09.jpg",
         "posts/2026-08-11/carousel_4/slide_10.jpg"
       ],
+      "reel_beats": {
+        "hook": "Your Meta ads are invisible unless they follow this script",
+        "hook_emphasis": "invisible",
+        "body": [
+          {
+            "text": "Start with a question or bold statement in the first 3 seconds.",
+            "emphasis": "3 seconds"
+          },
+          {
+            "text": "Show real results or testimonials right after the hook.",
+            "emphasis": "real results"
+          },
+          {
+            "text": "End with one simple action\u2014no extra links or choices.",
+            "emphasis": "one simple action"
+          },
+          {
+            "text": "Meta\u2019s system rewards ads that keep people watching past 3 seconds.",
+            "emphasis": "rewards ads"
+          }
+        ],
+        "proof": {
+          "before": "2%",
+          "after": "42%",
+          "label": "reach lift, 7 days"
+        },
+        "cta_line": "",
+        "send_line": "Send this to your ad creative team"
+      },
+      "body_slides": [
+        {
+          "text": "Hook: Start with a question or bold statement in the first 3 seconds.",
+          "keyword": "Hook"
+        },
+        {
+          "text": "Social proof: Show real results or testimonials right after the hook.",
+          "keyword": "Social proof"
+        },
+        {
+          "text": "Clear next step: End with one simple action\u2014no extra links.",
+          "keyword": "Clear next step"
+        },
+        {
+          "text": "Ads with this structure get 40% more reach than unstructured ones.",
+          "keyword": "40% more reach"
+        },
+        {
+          "text": "Meta rewards ads that keep people watching past 3 seconds.",
+          "keyword": "3 seconds"
+        },
+        {
+          "text": "Save this script\u2014it\u2019s the fastest way to improve ad performance.",
+          "keyword": "script"
+        }
+      ],
+      "cta_word": "SCRIPT",
+      "cta_promise": "the exact 3-part ad script",
       "virality_score": null,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control",
@@ -103,12 +338,12 @@
     },
     {
       "index": 5,
-      "caption": "Meta\u2019s algorithm rewards ads that follow this exact script: problem, solution, social proof. Copy this structure to cut your CPM by 20-30%. Save this before your next draft. #metaads #instagramads #paidsocial #digitalmarketing #advertisingtips",
-      "niche": "Meta/Instagram Ads",
-      "angle": "behind-the-curtain",
-      "format": "steal-this",
-      "hook": "Meta\u2019s algorithm rewards ads that follow this exact script",
-      "throughline": "Meta\u2019s algorithm favors ads that follow a specific three-part structure\u2014problem, solution, social proof\u2014which lowers CPM and boosts conversions.",
+      "caption": "Save this \u2193 Google Ads charges you for clicks that bounce in under 2 seconds\u2014even if they leave immediately. Turn on this setting to stop paying for bounces and save 15-20% of your budget. Here\u2019s how to fix it. #googleadstips #ppcmanagement #adspend",
+      "niche": "Google Ads",
+      "angle": "mistake-fear",
+      "format": "checklist",
+      "hook": "Google Ads charges you for clicks that bounce in under 2 seconds",
+      "throughline": "Google Ads charges for clicks that bounce in under 2 seconds, but a simple setting can stop this waste.",
       "image_paths": [
         "posts/2026-08-11/carousel_5/slide_01.jpg",
         "posts/2026-08-11/carousel_5/slide_02.jpg",
@@ -121,6 +356,63 @@
         "posts/2026-08-11/carousel_5/slide_09.jpg",
         "posts/2026-08-11/carousel_5/slide_10.jpg"
       ],
+      "reel_beats": {
+        "hook": "You\u2019re paying Google for clicks that leave in 2 seconds",
+        "hook_emphasis": "leave in 2 seconds",
+        "body": [
+          {
+            "text": "Open campaign settings and click \u2018Additional settings.\u2019",
+            "emphasis": "Additional settings"
+          },
+          {
+            "text": "Find \u2018Exclude low-quality clicks\u2019 and turn it on.",
+            "emphasis": "Exclude low-quality clicks"
+          },
+          {
+            "text": "Set the threshold to 2 seconds\u2014this filters out bounces.",
+            "emphasis": "2 seconds"
+          },
+          {
+            "text": "Google stops charging for clicks that leave too fast, saving you money.",
+            "emphasis": "stops charging"
+          }
+        ],
+        "proof": {
+          "before": "\u20ac300",
+          "after": "\u20ac240",
+          "label": "daily spend, 7 days"
+        },
+        "cta_line": "",
+        "send_line": "Send this to whoever manages your ads"
+      },
+      "body_slides": [
+        {
+          "text": "Open campaign settings and click \u2018Additional settings.\u2019",
+          "keyword": "Additional settings"
+        },
+        {
+          "text": "Find \u2018Exclude low-quality clicks\u2019 and turn it on.",
+          "keyword": "Exclude low-quality clicks"
+        },
+        {
+          "text": "Set the threshold to 2 seconds\u2014this filters out bounces.",
+          "keyword": "2 seconds"
+        },
+        {
+          "text": "Google stops charging for clicks that leave too fast.",
+          "keyword": "stops charging"
+        },
+        {
+          "text": "Most accounts waste 15-20% of budget on these clicks.",
+          "keyword": "15-20%"
+        },
+        {
+          "text": "Check this setting\u2014it takes 2 minutes and saves money daily.",
+          "keyword": "2 minutes"
+        }
+      ],
+      "cta_word": "CHECKLIST",
+      "cta_promise": "the 5-point bounce-check checklist",
       "virality_score": null,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control",

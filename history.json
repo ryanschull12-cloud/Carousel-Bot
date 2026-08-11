@@ -421,76 +421,6 @@
       ]
     },
     {
-      "date": "2026-08-11",
-      "carousels": [
-        {
-          "niche": "Email Marketing",
-          "angle": "contrarian",
-          "format": "before-after",
-          "hook": "Gmail buries emails that get opens but no replies",
-          "hashtags": [
-            "#emailmarketing",
-            "#deliverability",
-            "#marketingtips",
-            "#crm",
-            "#ecommerce"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "realization",
-          "format": "step-by-step",
-          "hook": "Your Google Ads budget is leaking on searches you never see",
-          "hashtags": [
-            "#googleads",
-            "#ppc",
-            "#digitalmarketing",
-            "#sem",
-            "#advertising"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "contrarian",
-          "format": "comparison",
-          "hook": "Smart bidding wastes small budgets on the wrong clicks",
-          "hashtags": [
-            "#googleads",
-            "#ppc",
-            "#digitalmarketing",
-            "#sem",
-            "#advertisinghacks"
-          ]
-        },
-        {
-          "niche": "Email Marketing",
-          "angle": "behind-the-curtain",
-          "format": "step-by-step",
-          "hook": "Gmail\u2019s spam filter skips your subject line entirely",
-          "hashtags": [
-            "#emailmarketing",
-            "#deliverability",
-            "#marketingtips",
-            "#crm",
-            "#ecommercemarketing"
-          ]
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "behind-the-curtain",
-          "format": "steal-this",
-          "hook": "Meta\u2019s algorithm rewards ads that follow this exact script",
-          "hashtags": [
-            "#metaads",
-            "#instagramads",
-            "#paidsocial",
-            "#digitalmarketing",
-            "#advertisingtips"
-          ]
-        }
-      ]
-    },
-    {
       "date": "2026-08-12",
       "carousels": [
         {
@@ -686,6 +616,66 @@
             "#ppc",
             "#marketingaudit",
             "#irishbusiness"
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-08-11",
+      "carousels": [
+        {
+          "niche": "Email Marketing",
+          "angle": "realization",
+          "format": "before-after",
+          "hook": "Gmail moves emails to Primary when someone replies\u2014not opens",
+          "hashtags": [
+            "#emailmarketingtips",
+            "#emaildeliverability",
+            "#conversiontracking"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "contrarian",
+          "format": "comparison",
+          "hook": "Gmail\u2019s spam filter skips subject lines\u2014sender reputation decides inbox or spam",
+          "hashtags": [
+            "#emailmarketingtips",
+            "#emaildeliverability",
+            "#marketingaudit"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "curiosity",
+          "format": "step-by-step",
+          "hook": "Google Ads hides your highest-converting clicks in \u2018Other searches\u2019",
+          "hashtags": [
+            "#googleadstips",
+            "#ppcmanagement",
+            "#leadgeneration"
+          ]
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "behind-the-curtain",
+          "format": "steal-this",
+          "hook": "Meta\u2019s algorithm boosts ads that use this 3-part script",
+          "hashtags": [
+            "#metaadstips",
+            "#paidsocial",
+            "#leadgeneration"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "mistake-fear",
+          "format": "checklist",
+          "hook": "Google Ads charges you for clicks that bounce in under 2 seconds",
+          "hashtags": [
+            "#googleadstips",
+            "#ppcmanagement",
+            "#adspend"
           ]
         }
       ]
