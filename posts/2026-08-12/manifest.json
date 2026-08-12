@@ -3,12 +3,12 @@
   "carousels": [
     {
       "index": 1,
-      "caption": "Save this \u2193 Gmail ignores list size\u2014only opens, replies, and \u2018important\u2019 flags matter. A tiny engaged list lands in the inbox every time. #emailmarketing #deliverability #marketingtips #crm #smallbusiness",
+      "caption": "Gmail\u2019s spam filter ignores your subject line\u2014it\u2019s all about sender reputation. Fix these 6 settings to land in the inbox every time. #emailmarketingtips #emaildeliverability #marketingaudit #smallbusiness",
       "niche": "Email Marketing",
-      "angle": "relief-permission",
-      "format": "myth-buster",
-      "hook": "Gmail ignores list size\u2014only this matters",
-      "throughline": "Gmail prioritizes engagement over list size, so even small but active lists land in the inbox.",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Gmail\u2019s spam filter ignores your subject line\u2014it\u2019s all about sender trust",
+      "throughline": "Gmail\u2019s spam filter prioritizes sender reputation and engagement over subject lines\u2014here\u2019s how to adjust your settings to land in the inbox.",
       "image_paths": [
         "posts/2026-08-12/carousel_1/slide_01.jpg",
         "posts/2026-08-12/carousel_1/slide_02.jpg",
@@ -21,6 +21,57 @@
         "posts/2026-08-12/carousel_1/slide_09.jpg",
         "posts/2026-08-12/carousel_1/slide_10.jpg"
       ],
+      "reel_beats": {
+        "hook": "Gmail buries your emails before reading the subject\u2014it\u2019s all about sender trust",
+        "hook_emphasis": "all about sender trust",
+        "body": [
+          {
+            "text": "Gmail checks your domain\u2019s sending history first, so new senders start in spam.",
+            "emphasis": "sending history"
+          },
+          {
+            "text": "It looks for replies and forwards to decide if your emails are wanted, not just opened.",
+            "emphasis": "replies and forwards"
+          },
+          {
+            "text": "Missing an easy unsubscribe link can get your emails flagged as spam instantly.",
+            "emphasis": "unsubscribe link"
+          },
+          {
+            "text": "Use a warm-up tool like Mailflow to build trust with Gmail\u2019s system over time.",
+            "emphasis": "Mailflow"
+          }
+        ],
+        "send_line": "Send this to your email marketer"
+      },
+      "body_slides": [
+        {
+          "text": "Gmail checks your domain\u2019s sending history before reading the subject.",
+          "keyword": "sending history"
+        },
+        {
+          "text": "New senders start in spam, no matter how clever the subject line is.",
+          "keyword": "new senders"
+        },
+        {
+          "text": "A warm-up tool like Mailflow builds trust with Gmail\u2019s system over time.",
+          "keyword": "Mailflow"
+        },
+        {
+          "text": "Replies and forwards tell Gmail your emails are wanted, not ignored.",
+          "keyword": "replies and forwards"
+        },
+        {
+          "text": "Unsubscribe links must be easy to find\u2014or Gmail flags you as spam.",
+          "keyword": "unsubscribe links"
+        },
+        {
+          "text": "Check your sender score weekly to catch issues before they hurt deliverability.",
+          "keyword": "sender score"
+        }
+      ],
+      "cta_word": "CHECKLIST",
+      "cta_promise": "the 6-step Gmail inbox checklist",
       "virality_score": null,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control",
@@ -28,12 +79,12 @@
     },
     {
       "index": 2,
-      "caption": "Save this \u2193 Google Ads burns 30% of your budget on clicks that never buy. One report shows exactly where the waste is hiding. Fix it in 10 minutes. #googleads #ppc #digitalmarketing #sem #advertising",
-      "niche": "Google Ads",
-      "angle": "realization",
-      "format": "step-by-step",
-      "hook": "Google Ads burns 30% of your budget on clicks that never buy",
-      "throughline": "The 'Search terms' report reveals wasted spend on irrelevant clicks, and fixing it saves 30% of budget.",
+      "caption": "Gmail moves emails with replies to Primary\u2014not opens. Here\u2019s how to get more of them. #emailmarketingtips #emailcopywriting #conversiontracking #smallbusiness",
+      "niche": "Email Marketing",
+      "angle": "contrarian",
+      "format": "comparison",
+      "hook": "Gmail moves emails with replies to Primary\u2014not opens",
+      "throughline": "Gmail prioritizes emails that spark replies over those with high open rates\u2014here\u2019s how to shift your strategy.",
       "image_paths": [
         "posts/2026-08-12/carousel_2/slide_01.jpg",
         "posts/2026-08-12/carousel_2/slide_02.jpg",
@@ -46,6 +97,59 @@
         "posts/2026-08-12/carousel_2/slide_09.jpg",
         "posts/2026-08-12/carousel_2/slide_10.jpg"
       ],
+      "reel_beats": {
+        "hook": "Gmail hides your emails if no one replies\u2014not if they just open them",
+        "hook_emphasis": "hides if no one replies",
+        "body": [
+          {
+            "text": "Gmail\u2019s Primary tab favors emails that get replies, not just opens, so one reply moves you instantly.",
+            "emphasis": "replies"
+          },
+          {
+            "text": "It tracks how often people search for your emails to measure real engagement, not just clicks.",
+            "emphasis": "search for your emails"
+          },
+          {
+            "text": "Emails with replies get 5x more visibility than those with just opens\u2014ask a question to boost them.",
+            "emphasis": "5x more visibility"
+          },
+          {
+            "text": "A short, personal sign-off gets more replies than a generic one\u2014try it today.",
+            "emphasis": "personal sign-off"
+          }
+        ],
+        "send_line": "Send this to your copywriter"
+      },
+      "body_slides": [
+        {
+          "text": "Gmail\u2019s Primary tab favors emails that get replies, not just opens.",
+          "keyword": "Primary tab",
+          "compare_a": "Opens",
+          "compare_b": "Replies"
+        },
+        {
+          "text": "A single reply can move your email from Promotions to Primary in seconds.",
+          "keyword": "single reply"
+        },
+        {
+          "text": "Asking a question in your email boosts replies by 30%.",
+          "keyword": "30%"
+        },
+        {
+          "text": "Emails with replies get 5x more visibility than those with just opens.",
+          "keyword": "5x more visibility"
+        },
+        {
+          "text": "Gmail tracks how often people search for your emails to measure real engagement.",
+          "keyword": "search for your emails"
+        },
+        {
+          "text": "A short, personal sign-off gets more replies than a generic one.",
+          "keyword": "personal sign-off"
+        }
+      ],
+      "cta_word": "TEMPLATE",
+      "cta_promise": "the reply-boosting email script",
       "virality_score": null,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control",
@@ -53,12 +157,12 @@
     },
     {
       "index": 3,
-      "caption": "Save this \u2193 Google Ads charges you for 3-second bounces\u2014unless you turn off \u2018Engaged-view conversions.\u2019 This one setting can save 10-15% of your budget. #googleads #ppc #digitalmarketing #sem #advertisingtips",
+      "caption": "Google Ads buries 20% of your best leads in the \u2018Other searches\u2019 report. Here\u2019s how to find and use them. #googleadstips #ppcmanagement #leadgeneration #smallbusiness",
       "niche": "Google Ads",
-      "angle": "behind-the-curtain",
-      "format": "steal-this",
-      "hook": "Google Ads charges you for 3-second bounces\u2014here\u2019s how to stop it",
-      "throughline": "Google Ads charges for 3-second bounces, but a simple setting stops it and saves budget.",
+      "angle": "realization",
+      "format": "step-by-step",
+      "hook": "Google Ads buries 20% of your best leads in \u2018Other searches\u2019",
+      "throughline": "Google Ads\u2019 \u2018Other searches\u2019 report hides your best leads\u2014here\u2019s how to find and use them.",
       "image_paths": [
         "posts/2026-08-12/carousel_3/slide_01.jpg",
         "posts/2026-08-12/carousel_3/slide_02.jpg",
@@ -71,6 +175,57 @@
         "posts/2026-08-12/carousel_3/slide_09.jpg",
         "posts/2026-08-12/carousel_3/slide_10.jpg"
       ],
+      "reel_beats": {
+        "hook": "Google Ads buries 20% of your best leads in a report you\u2019ve never opened",
+        "hook_emphasis": "20% of your best leads",
+        "body": [
+          {
+            "text": "The \u2018Other searches\u2019 report shows keywords Google thinks match your ad, but most accounts ignore it.",
+            "emphasis": "Other searches"
+          },
+          {
+            "text": "Up to 20% of your best leads hide here, never seen in the main report\u2014check it weekly.",
+            "emphasis": "20%"
+          },
+          {
+            "text": "Add high-converting terms as exact match keywords to save budget and stop wasted spend.",
+            "emphasis": "exact match"
+          },
+          {
+            "text": "Negative keywords here stop irrelevant searches from eating your budget\u2014find them today.",
+            "emphasis": "negative keywords"
+          }
+        ],
+        "send_line": "Send this to your PPC manager"
+      },
+      "body_slides": [
+        {
+          "text": "The \u2018Other searches\u2019 report shows keywords Google thinks match your ad.",
+          "keyword": "Other searches"
+        },
+        {
+          "text": "Up to 20% of your best leads hide here, never seen in the main report.",
+          "keyword": "20%"
+        },
+        {
+          "text": "Open the Search Terms report and filter for \u2018Other searches\u2019 to uncover them.",
+          "keyword": "Search Terms report"
+        },
+        {
+          "text": "Add high-converting terms as exact match keywords to save budget.",
+          "keyword": "exact match"
+        },
+        {
+          "text": "Negative keywords here stop wasted spend on irrelevant searches.",
+          "keyword": "negative keywords"
+        },
+        {
+          "text": "Check this report weekly to catch new opportunities before competitors do.",
+          "keyword": "weekly"
+        }
+      ],
+      "cta_word": "AUDIT",
+      "cta_promise": "the 5-step hidden leads checklist",
       "virality_score": null,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control",
@@ -78,12 +233,12 @@
     },
     {
       "index": 4,
-      "caption": "Save this \u2193 Gmail\u2019s spam filter ignores your subject line\u2014the first 10 words of your email decide inbox or spam. A strong opening line can double your open rates. #emailmarketing #deliverability #marketingtips #crm #ecommercemarketing",
-      "niche": "Email Marketing",
-      "angle": "curiosity",
-      "format": "step-by-step",
-      "hook": "Gmail\u2019s spam filter ignores your subject line\u2014this decides inbox or spam",
-      "throughline": "Gmail\u2019s spam filter ignores subject lines and scans the first 10 words of your email to decide placement.",
+      "caption": "Meta Ads stop learning if no one converts for 3 days\u2014here\u2019s how to wake them back up and cut costs. #metaadstips #paidsocial #adspend #smallbusiness",
+      "niche": "Meta/Instagram Ads",
+      "angle": "mistake-fear",
+      "format": "before-after",
+      "hook": "Meta Ads stop learning if no one converts for 3 days",
+      "throughline": "Meta Ads stop learning after 72 hours of silence\u2014here\u2019s how to restart them and cut costs.",
       "image_paths": [
         "posts/2026-08-12/carousel_4/slide_01.jpg",
         "posts/2026-08-12/carousel_4/slide_02.jpg",
@@ -96,6 +251,66 @@
         "posts/2026-08-12/carousel_4/slide_09.jpg",
         "posts/2026-08-12/carousel_4/slide_10.jpg"
       ],
+      "reel_beats": {
+        "hook": "Meta Ads freeze after 3 days of silence\u2014your costs double overnight",
+        "hook_emphasis": "costs double overnight",
+        "body": [
+          {
+            "text": "Meta\u2019s algorithm pauses learning if no conversions happen for 72 hours, so costs start climbing.",
+            "emphasis": "72 hours"
+          },
+          {
+            "text": "A single conversion restarts the learning phase and can cut your costs in half instantly.",
+            "emphasis": "cut your costs"
+          },
+          {
+            "text": "A small budget boost can trigger conversions and wake the algorithm back up.",
+            "emphasis": "budget boost"
+          },
+          {
+            "text": "Manual bids force Meta to show your ads to the right people faster\u2014try it today.",
+            "emphasis": "manual bids"
+          }
+        ],
+        "proof": {
+          "before": "\u20ac30",
+          "after": "\u20ac12",
+          "label": "cost per lead, 7 days"
+        },
+        "send_line": "Send this to your ad manager"
+      },
+      "body_slides": [
+        {
+          "text": "Meta\u2019s algorithm pauses learning if no conversions happen for 72 hours.",
+          "keyword": "72 hours",
+          "before": "Paused learning",
+          "after": "Active learning"
+        },
+        {
+          "text": "A single conversion restarts the learning phase and lowers costs immediately.",
+          "keyword": "single conversion",
+          "before": "Higher costs",
+          "after": "Lower costs"
+        },
+        {
+          "text": "A small budget boost can trigger conversions and wake the algorithm.",
+          "keyword": "small budget boost"
+        },
+        {
+          "text": "Manual bids force Meta to show ads to the right people faster.",
+          "keyword": "manual bids"
+        },
+        {
+          "text": "Check the \u2018Learning Phase\u2019 column weekly to catch stalled campaigns.",
+          "keyword": "Learning Phase"
+        },
+        {
+          "text": "Refresh audiences every 7 days to keep Meta\u2019s algorithm active.",
+          "keyword": "audience refreshes"
+        }
+      ],
+      "cta_word": "GUIDE",
+      "cta_promise": "the 4-step Meta Ads restart guide",
       "virality_score": null,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control",
@@ -103,12 +318,12 @@
     },
     {
       "index": 5,
-      "caption": "Save this \u2193 Smart bidding works with just 20 conversions\u2014no need to wait for 100. Small accounts can start sooner and save time. #googleads #ppc #digitalmarketing #sem #advertisinghacks",
-      "niche": "Google Ads",
-      "angle": "relief-permission",
-      "format": "myth-buster",
-      "hook": "Smart bidding works with just 20 conversions\u2014no need to wait",
-      "throughline": "Smart bidding works with as few as 20 conversions, so small accounts don\u2019t need to wait for 100.",
+      "caption": "Gmail flags \u2018free\u2019 and \u2018discount\u2019 as spam\u2014here\u2019s what to use instead. #emailmarketingtips #emailcopywriting #marketingaudit #smallbusiness",
+      "niche": "Email Marketing",
+      "angle": "curiosity",
+      "format": "before-after",
+      "hook": "Gmail flags \u2018free\u2019 and \u2018discount\u2019 as spam\u2014here\u2019s what works instead",
+      "throughline": "Gmail\u2019s spam filter skips common trigger words\u2014here\u2019s what to use instead for better deliverability.",
       "image_paths": [
         "posts/2026-08-12/carousel_5/slide_01.jpg",
         "posts/2026-08-12/carousel_5/slide_02.jpg",
@@ -121,6 +336,59 @@
         "posts/2026-08-12/carousel_5/slide_09.jpg",
         "posts/2026-08-12/carousel_5/slide_10.jpg"
       ],
+      "reel_beats": {
+        "hook": "Gmail buries your emails if the subject says \u2018free\u2019 or \u2018discount\u2019\u2014here\u2019s what works instead",
+        "hook_emphasis": "buries if \u2018free\u2019 or \u2018discount\u2019",
+        "body": [
+          {
+            "text": "Gmail flags \u2018free,\u2019 \u2018discount,\u2019 and \u2018urgent\u2019 as spam triggers instantly\u2014avoid them.",
+            "emphasis": "spam triggers"
+          },
+          {
+            "text": "Personalized subject lines with names or locations perform 22% better than generic ones.",
+            "emphasis": "22% better"
+          },
+          {
+            "text": "Questions in subject lines get opened 30% more than statements\u2014try one today.",
+            "emphasis": "30% more"
+          },
+          {
+            "text": "Gmail\u2019s filter checks for natural language, not just keywords\u2014keep it conversational.",
+            "emphasis": "natural language"
+          }
+        ],
+        "send_line": "Send this to your copywriter"
+      },
+      "body_slides": [
+        {
+          "text": "Gmail instantly flags \u2018free,\u2019 \u2018discount,\u2019 and \u2018urgent\u2019 as spam triggers.",
+          "keyword": "free, discount, urgent",
+          "before": "Spam folder",
+          "after": "Inbox"
+        },
+        {
+          "text": "Words like \u2018exclusive\u2019 and \u2018limited\u2019 get past filters but still feel pushy.",
+          "keyword": "exclusive, limited"
+        },
+        {
+          "text": "Personalized subject lines with names or locations perform 22% better.",
+          "keyword": "22%"
+        },
+        {
+          "text": "Questions in subject lines get opened 30% more than statements.",
+          "keyword": "30%"
+        },
+        {
+          "text": "Gmail\u2019s filter checks for natural language, not just keywords.",
+          "keyword": "natural language"
+        },
+        {
+          "text": "Test subject lines with a tool like Litmus before sending.",
+          "keyword": "Litmus"
+        }
+      ],
+      "cta_word": "TEMPLATE",
+      "cta_promise": "the spam-proof subject line template",
       "virality_score": null,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control",

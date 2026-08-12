@@ -421,76 +421,6 @@
       ]
     },
     {
-      "date": "2026-08-12",
-      "carousels": [
-        {
-          "niche": "Email Marketing",
-          "angle": "relief-permission",
-          "format": "myth-buster",
-          "hook": "Gmail ignores list size\u2014only this matters",
-          "hashtags": [
-            "#emailmarketing",
-            "#deliverability",
-            "#marketingtips",
-            "#crm",
-            "#smallbusiness"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "realization",
-          "format": "step-by-step",
-          "hook": "Google Ads burns 30% of your budget on clicks that never buy",
-          "hashtags": [
-            "#googleads",
-            "#ppc",
-            "#digitalmarketing",
-            "#sem",
-            "#advertising"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "behind-the-curtain",
-          "format": "steal-this",
-          "hook": "Google Ads charges you for 3-second bounces\u2014here\u2019s how to stop it",
-          "hashtags": [
-            "#googleads",
-            "#ppc",
-            "#digitalmarketing",
-            "#sem",
-            "#advertisingtips"
-          ]
-        },
-        {
-          "niche": "Email Marketing",
-          "angle": "curiosity",
-          "format": "step-by-step",
-          "hook": "Gmail\u2019s spam filter ignores your subject line\u2014this decides inbox or spam",
-          "hashtags": [
-            "#emailmarketing",
-            "#deliverability",
-            "#marketingtips",
-            "#crm",
-            "#ecommercemarketing"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "relief-permission",
-          "format": "myth-buster",
-          "hook": "Smart bidding works with just 20 conversions\u2014no need to wait",
-          "hashtags": [
-            "#googleads",
-            "#ppc",
-            "#digitalmarketing",
-            "#sem",
-            "#advertisinghacks"
-          ]
-        }
-      ]
-    },
-    {
       "date": "2026-08-09",
       "carousels": [
         {
@@ -676,6 +606,71 @@
             "#googleadstips",
             "#ppcmanagement",
             "#adspend"
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-08-12",
+      "carousels": [
+        {
+          "niche": "Email Marketing",
+          "angle": "behind-the-curtain",
+          "format": "steal-this",
+          "hook": "Gmail\u2019s spam filter ignores your subject line\u2014it\u2019s all about sender trust",
+          "hashtags": [
+            "#emailmarketingtips",
+            "#emaildeliverability",
+            "#marketingaudit",
+            "#smallbusiness"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "contrarian",
+          "format": "comparison",
+          "hook": "Gmail moves emails with replies to Primary\u2014not opens",
+          "hashtags": [
+            "#emailmarketingtips",
+            "#emailcopywriting",
+            "#conversiontracking",
+            "#smallbusiness"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "realization",
+          "format": "step-by-step",
+          "hook": "Google Ads buries 20% of your best leads in \u2018Other searches\u2019",
+          "hashtags": [
+            "#googleadstips",
+            "#ppcmanagement",
+            "#leadgeneration",
+            "#smallbusiness"
+          ]
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "mistake-fear",
+          "format": "before-after",
+          "hook": "Meta Ads stop learning if no one converts for 3 days",
+          "hashtags": [
+            "#metaadstips",
+            "#paidsocial",
+            "#adspend",
+            "#smallbusiness"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "curiosity",
+          "format": "before-after",
+          "hook": "Gmail flags \u2018free\u2019 and \u2018discount\u2019 as spam\u2014here\u2019s what works instead",
+          "hashtags": [
+            "#emailmarketingtips",
+            "#emailcopywriting",
+            "#marketingaudit",
+            "#smallbusiness"
           ]
         }
       ]
