@@ -728,6 +728,92 @@
       },
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control"
+    },
+    {
+      "date": "2026-08-09",
+      "media_id": "18092243750099143",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Gmail cuts off your subject line after 12 words\u2014everything else is invisible",
+      "trial": false,
+      "metrics": {
+        "reach": 111,
+        "views": 124,
+        "saved": 0,
+        "shares": 0,
+        "likes": 3,
+        "comments": 0,
+        "total_interactions": 3,
+        "ig_reels_avg_watch_time": 1643,
+        "ig_reels_video_view_total_time": 205401,
+        "reels_skip_rate": 95.7
+      },
+      "engagement_rate": 2.703,
+      "sends_per_reach": 0.0,
+      "views_per_reach": 1.12,
+      "beat_structure": {
+        "beat_count": 8,
+        "beat_kinds": [
+          "hook",
+          "stat",
+          "body",
+          "body",
+          "body",
+          "body",
+          "cta",
+          "brand"
+        ],
+        "body_beats": 4,
+        "has_stat": true,
+        "has_proof": false,
+        "duration_s": 19.6
+      },
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
+    },
+    {
+      "date": "2026-08-09",
+      "media_id": "18053092886550259",
+      "niche": "Google Ads",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Google Ads bills you for 3-second bounces\u2014even if they leave immediately",
+      "trial": false,
+      "metrics": {
+        "reach": 2,
+        "views": 3,
+        "saved": 0,
+        "shares": 0,
+        "likes": 2,
+        "comments": 0,
+        "total_interactions": 2,
+        "ig_reels_avg_watch_time": 12125,
+        "ig_reels_video_view_total_time": 72750,
+        "reels_skip_rate": 50
+      },
+      "engagement_rate": 100.0,
+      "sends_per_reach": 0.0,
+      "views_per_reach": 1.5,
+      "beat_structure": {
+        "beat_count": 8,
+        "beat_kinds": [
+          "hook",
+          "stat",
+          "body",
+          "body",
+          "body",
+          "body",
+          "cta",
+          "brand"
+        ],
+        "body_beats": 4,
+        "has_stat": true,
+        "has_proof": false,
+        "duration_s": 20.81
+      },
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
     }
   ]
 }
