@@ -1,76 +1,6 @@
 {
   "recent_batches": [
     {
-      "date": "2026-08-03",
-      "carousels": [
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "realization",
-          "format": "before-after",
-          "hook": "Meta Ads CPMs triple after 9 PM\u2014here\u2019s why small accounts pay more",
-          "hashtags": [
-            "#metaads",
-            "#paidsocial",
-            "#digitalmarketing",
-            "#advertisingtips",
-            "#marketinghacks"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "contrarian",
-          "format": "comparison",
-          "hook": "Google Ads\u2019 \u2018smart\u2019 budgeting wastes 30% of small accounts\u2019 spend",
-          "hashtags": [
-            "#googleads",
-            "#ppc",
-            "#digitalmarketing",
-            "#sem",
-            "#advertisinghacks"
-          ]
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "mistake-fear",
-          "format": "checklist",
-          "hook": "Meta\u2019s algorithm stops learning after 50 conversions\u2014here\u2019s how to fix it",
-          "hashtags": [
-            "#metaads",
-            "#paidsocial",
-            "#digitalmarketing",
-            "#marketingtips",
-            "#advertisinghacks"
-          ]
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "curiosity",
-          "format": "comparison",
-          "hook": "A 500-person audience can outperform a 50k lookalike\u2014here\u2019s why",
-          "hashtags": [
-            "#metaads",
-            "#paidsocial",
-            "#digitalmarketing",
-            "#marketingtips",
-            "#advertisingstrategy"
-          ]
-        },
-        {
-          "niche": "Email Marketing",
-          "angle": "behind-the-curtain",
-          "format": "steal-this",
-          "hook": "Gmail flags the first 40 characters of your subject line as spam",
-          "hashtags": [
-            "#emailmarketing",
-            "#deliverability",
-            "#marketingtips",
-            "#crm",
-            "#ecommercemarketing"
-          ]
-        }
-      ]
-    },
-    {
       "date": "2026-08-04",
       "carousels": [
         {
@@ -671,6 +601,71 @@
             "#emailcopywriting",
             "#marketingaudit",
             "#smallbusiness"
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-08-13",
+      "carousels": [
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "behind-the-curtain",
+          "format": "steal-this",
+          "hook": "Meta Ads reward ads that solve a problem in 3 seconds flat",
+          "hashtags": [
+            "#metaadstips",
+            "#paidsocial",
+            "#adcopy",
+            "#smallbusinessireland"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "behind-the-curtain",
+          "format": "before-after",
+          "hook": "Google Ads calls 1 in 7 buyers \u2018low intent\u2019\u2014they\u2019re not",
+          "hashtags": [
+            "#googleadstips",
+            "#ppcmanagement",
+            "#adspend",
+            "#irishbusiness"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "realization",
+          "format": "step-by-step",
+          "hook": "Google Ads hides 1 in 4 of your best leads in plain sight",
+          "hashtags": [
+            "#googleadstips",
+            "#ppcmanagement",
+            "#leadgeneration",
+            "#smallbusinessireland"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "realization",
+          "format": "before-after",
+          "hook": "Gmail moves emails with replies to Primary in hours",
+          "hashtags": [
+            "#emailmarketingtips",
+            "#emailcopywriting",
+            "#conversiontracking",
+            "#irishbusiness"
+          ]
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "curiosity",
+          "format": "step-by-step",
+          "hook": "Meta Ads stop learning if no one converts for 3 days",
+          "hashtags": [
+            "#metaadstips",
+            "#paidsocial",
+            "#adspend",
+            "#businessireland"
           ]
         }
       ]
