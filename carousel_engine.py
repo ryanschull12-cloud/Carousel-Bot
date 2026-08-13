@@ -989,7 +989,7 @@ def render_bridge_slide_fixed(headline, niche, slide_num, total_slides, out_path
 # ============================================================
 
 def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slides, out_path,
-                                checklist_mode=False, show_swipe=False):
+                                checklist_mode=False, step_mode=False, show_swipe=False):
     before_val, after_val = slide_before_after(full_text)
     side_a, side_b = slide_comparison(full_text)
     full_text, explicit_keyword = slide_text_and_keyword(full_text)
@@ -1000,6 +1000,8 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
     draw_header_v2(draw, niche, slide_num, total_slides, colors)
 
     badge_size = 80
+    step_badge_h = 56  # pill badge (step-by-step format) is shorter than the number circle/checkbox
+    badge_dim = step_badge_h if step_mode else badge_size
     gap_below_badge = 28
     card_pad_x = 44
     card_pad_y = 36
@@ -1029,7 +1031,7 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
 
     # Centered stack: number badge on top, card of text centered below it —
     # both centered horizontally on the page instead of left-aligned.
-    content_h = badge_size + gap_below_badge + card_pad_y * 2 + strip_h + total_h
+    content_h = badge_dim + gap_below_badge + card_pad_y * 2 + strip_h + total_h
     available_h = H - 280 - 200
     top_y = 280 + max(0, (available_h - content_h) // 2)
 
@@ -1037,7 +1039,7 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
     # below it, instead of floating centered above a left-aligned block.
     badge_x = MARGIN + 4
     badge_y = top_y
-    block_y = badge_y + badge_size + gap_below_badge
+    block_y = badge_y + badge_dim + gap_below_badge
     block_h = card_pad_y * 2 + strip_h + total_h
     block_x0 = MARGIN
     block_x1 = W - MARGIN
@@ -1077,6 +1079,23 @@ def render_numbered_slide_fixed(number, full_text, niche, slide_num, total_slide
                 (badge_x + 32, badge_y + 56),
                 (badge_x + 62, badge_y + 22),
             ], fill=colors["accent"], width=7, joint="curve")
+        elif step_mode:
+            # "STEP N" pill badge instead of a plain number -- same visual
+            # weight/position as the circle badge, but reads as a labeled
+            # step rather than a bare digit. Matches the accent-pill
+            # language already used for the topic badge (draw_topic_badge).
+            step_text = f"STEP {number}"
+            f_step = ImageFont.truetype(F_SANS_BOLD, 26)
+            tw = draw.textlength(step_text, font=f_step)
+            pad_x = 22
+            pill_w = tw + pad_x * 2
+            draw.rounded_rectangle([badge_x + shadow_off, badge_y + shadow_off,
+                                     badge_x + pill_w + shadow_off, badge_y + step_badge_h + shadow_off],
+                                  radius=step_badge_h // 2, fill=SHADOW)
+            draw.rounded_rectangle([badge_x, badge_y, badge_x + pill_w, badge_y + step_badge_h],
+                                  radius=step_badge_h // 2, fill=colors["accent"])
+            draw.text((badge_x + pad_x, badge_y + (step_badge_h - 26) / 2 - 2),
+                     step_text, font=f_step, fill=BG)
         else:
             draw.ellipse([badge_x + shadow_off, badge_y + shadow_off,
                           badge_x + badge_size + shadow_off, badge_y + badge_size + shadow_off],
@@ -1411,6 +1430,11 @@ def render_carousel(carousel, batch_date, out_dir, carousel_index=0):
     paths.append(p)
 
     checklist_mode = carousel.get("format", "").lower() in ("checklist", "quick-win checklist", "steal-this")
+    # STEP pill badge for step-by-step format only -- sociyell carousel
+    # reference (logged in inspiration.md) used numbered "STEP" labels
+    # instead of a bare number circle; mutually exclusive with
+    # checklist_mode since the two format sets don't overlap.
+    step_mode = carousel.get("format", "").lower() == "step-by-step"
     for i, body in enumerate(body_slides, start=1):
         slide_num = i + 2
         # Used to only show on slides 1, 4, 5 — an arbitrary subset that
@@ -1423,7 +1447,8 @@ def render_carousel(carousel, batch_date, out_dir, carousel_index=0):
         show_swipe = i != len(body_slides)
         p = render_numbered_slide_fixed(i, body, niche, slide_num, total_slides,
                                          os.path.join(out_dir, f"slide_{slide_num:02d}.jpg"),
-                                         checklist_mode=checklist_mode, show_swipe=show_swipe)
+                                         checklist_mode=checklist_mode, step_mode=step_mode,
+                                         show_swipe=show_swipe)
         paths.append(p)
 
     recap_lines = carousel.get("recap_slide", body_slides)
