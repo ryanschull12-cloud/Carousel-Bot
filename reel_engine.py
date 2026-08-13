@@ -103,6 +103,12 @@ TOPIC = {
  "meta":       {"accent": (84, 90, 214), "deep": (30, 32, 86), "veil": (220, 220, 237)},
  "instagram":  {"accent": (84, 90, 214), "deep": (30, 32, 86), "veil": (220, 220, 237)},
  "email":      {"accent": (9, 118, 163),  "deep": (8, 54, 78), "veil": (207, 225, 229)},
+ # Added 2026-08-13 for the new AI Tools niche, matching carousel_engine.py's
+ # amber. Kept AFTER "email" in this dict on purpose: colors_for() matches by
+ # substring in insertion order, and "ai" is literally a substring of "email"
+ # -- "email" has to be checked first or every email-niche reel would match
+ # here instead. Do not reorder this dict.
+ "ai":         {"accent": (196, 122, 36), "deep": (74, 44, 10), "veil": (230, 214, 188)},
 }
 DEF = {"accent": (30, 101, 209), "deep": (17, 44, 92), "veil": (212, 223, 237)}
 

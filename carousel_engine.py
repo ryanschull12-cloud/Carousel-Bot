@@ -175,6 +175,14 @@ TOPIC_COLORS = {
     "meta": {"accent": (84, 90, 214), "dark": (30, 32, 86), "light": (220, 220, 237)},
     "instagram": {"accent": (84, 90, 214), "dark": (30, 32, 86), "light": (220, 220, 237)},
     "email": {"accent": (9, 118, 163), "dark": (8, 54, 78), "light": (207, 225, 229)},
+    # Added 2026-08-13 for the new AI Tools niche -- warm amber, the one tonal
+    # family the other three (blue/violet/cyan) didn't already use, so the
+    # topic badge stays tellable apart from the other three at a glance.
+    # Kept AFTER "email" on purpose: colors_for() matches by substring in
+    # insertion order, and "ai" is literally a substring of "email" -- "email"
+    # has to be checked first or every email-niche carousel would match here
+    # instead. Do not reorder this dict.
+    "ai": {"accent": (196, 122, 36), "dark": (74, 44, 10), "light": (230, 214, 188)},
 }
 DEFAULT_COLORS = {"accent": (30, 101, 209), "dark": (17, 44, 92), "light": (212, 223, 237)}
 
