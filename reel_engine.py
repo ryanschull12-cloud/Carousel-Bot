@@ -19,11 +19,30 @@ move content below y=1600 -- it will be invisible in the app even though it look
 in a preview.
 
 BEAT TYPES, each with its own layout and motion:
-  hook  - serif, word-by-word cascade. The only thing deciding whether the rest is watched.
-  stat  - a single number at 380px counting up from zero, rule wiping beneath it.
-          This is the thumb-stopper; every reel should have exactly one.
-  body  - sans bold, left aligned, accent block hugging the longest line.
-  cta   - background wipes to the topic's dark colour, keyword lands in cream.
+  hook   - serif, word-by-word cascade. The only thing deciding whether the rest is watched.
+  stat   - a single number at 380px counting up from zero, rule wiping beneath it.
+           This is the thumb-stopper; every reel should have exactly one.
+  body   - sans bold, left aligned, accent block hugging the longest line.
+  chart  - a number falling into place with the two bars that explain it. Renderer
+           lives in reel_graphics.py (paint_chart); wired in 2026-08-13. Supersedes
+           the plain "proof" beat when present -- both draw a before/after, and
+           showing both in one ~30s reel is redundant, not additive.
+  screen - a mocked settings panel switching from the wrong option to the right
+           one. Also in reel_graphics.py (paint_screen), also wired 2026-08-13.
+  proof  - legacy before/after (two lines of text, no bars). Only used as a
+           fallback now, when reel_beats has neither "chart" nor "screen".
+  cta    - background wipes to the topic's dark colour, keyword lands in cream.
+
+WHY chart/screen EXISTED BUT DID NOTHING UNTIL 2026-08-13: reel_graphics.py was
+committed 2026-08-12 as renderers only ("nothing calls these yet ... wiring into
+render() and the content-brain schema come next, separately" -- see that commit
+message). This is that follow-up: Beat gained a `data` field to carry either
+painter's dict payload, render()'s dispatch loop calls reel_graphics.paint_chart /
+paint_screen, beats_from_carousel() reads reel_beats.chart / reel_beats.screen and
+picks at most one graphic beat per reel (chart, then screen, then legacy proof --
+never more than one, see beats_from_carousel), and TRIM_ORDER learned both new
+kinds. content_brain_system_prompt.txt's reel_beats contract was extended to match
+in the same pass, so the content side can actually produce this data.
 
 AUDIO: tracks are read from assets/audio/*.mp3 and rotated by date so consecutive reels
 do not share one. API-published reels CANNOT use Instagram's licensed trending audio
@@ -33,6 +52,7 @@ than failing -- silent is worse but shipping beats blocking.
 """
 import os, math, random, re
 from PIL import Image, ImageDraw, ImageFont
+import reel_graphics
 
 W, H, FPS = 1080, 1920, 24
 MARGIN = 96
@@ -93,6 +113,11 @@ BG_ALT = (238, 237, 231)      # --bg-alt, bottom of the vertical gradient
 BG_RAISED = (228, 230, 236)      # --bg-raised, body panels
 INK       = (25, 27, 31)   # --ink
 DIM       = (88, 91, 98)   # --dim
+# Added 2026-08-13 for the chart beat's falling number (reel_graphics.paint_chart),
+# which draws a 4px-offset shadow copy behind the huge figure for depth on a flat
+# light background. Warm off-white, one step down from BG rather than a true grey,
+# so it stays a shadow of THIS background rather than reading as a different theme.
+SHADOW = (224, 222, 216)
 
 HANDLE = "@rd.marketing0"
 
@@ -460,13 +485,20 @@ def read_time(text, cps=CPS, lo=BEAT_MIN, hi=BEAT_MAX, orient=ORIENT):
 
 
 class Beat:
-    def __init__(self,kind,text,dur,sub=None,num=None,pair=None,emph=None):
+    def __init__(self,kind,text,dur,sub=None,num=None,pair=None,emph=None,data=None):
         self.kind,self.text,self.dur,self.sub,self.num=kind,text,dur,sub,num
         self.pair=pair   # ("€45/lead", "€15/lead") for the proof beat
         # emph: the phrase inside text set in Bold accent. Body beats carry real
         # sentences now, and a sentence with no visual hierarchy is a wall -- the
         # eye has nowhere to land, so it lands nowhere and the beat is skipped.
         self.emph=emph
+        # data: the whole dict payload for the chart/screen beats (added 2026-08-13).
+        # Unlike every other beat, these need more structure than text/sub/num/pair
+        # can hold -- chart wants {label,before,after,unit,caption}, screen wants
+        # {title,panel_label,options,wrong,right,mechanism}. Passed straight through
+        # to reel_graphics.paint_chart/paint_screen rather than unpacked into new
+        # Beat fields, so that module stays the one place those shapes are defined.
+        self.data=data
 
 
 def number_parts(word):
@@ -764,6 +796,11 @@ def render(niche,beats,outdir,badge):
     c=colors_for(niche); os.makedirs(outdir,exist_ok=True)
     probe=ImageDraw.Draw(Image.new("RGB",(4,4))); mw=W-2*MARGIN
     grad=base_gradient(); nodes=node_field()
+    # ctx for reel_graphics.py's pure painters (chart/screen), added 2026-08-13.
+    # That module imports nothing from here on purpose (see its own header), so
+    # everything it needs travels in this one dict instead of a dozen args.
+    gctx={"W":W,"H":H,"M":MARGIN,"F":F,"F_SANS":F_SANS,"F_SANSR":F_SANSR,
+          "BG":BG,"INK":INK,"DIM":DIM,"BAR_WAS":BAR_WAS,"SHADOW":SHADOW,"c":c}
 
     counts=[int(b.dur*FPS) for b in beats]
     hook=next((b for b in beats if b.kind=="hook"), None)
@@ -1102,6 +1139,8 @@ def render(niche,beats,outdir,badge):
             if b.kind=="hook":   paint_hook(fr,ease(clamp(fi/TICK_FRAMES)),fi)
             elif b.kind=="stat": paint_stat(fr,b,fi)
             elif b.kind=="proof":paint_proof(fr,b,fi)
+            elif b.kind=="chart":  reel_graphics.paint_chart(fr,gctx,b.data,fi,FPS)
+            elif b.kind=="screen": reel_graphics.paint_screen(fr,gctx,b.data,fi,FPS)
             elif b.kind=="cta":  paint_cta(fr,b,fi)
             elif b.kind=="brand":paint_brand(fr,fi)
             else:                paint_body(fr,b,fi)
@@ -1157,7 +1196,14 @@ def proof_pair(carousel):
 # Stat and proof are decorative by comparison: both are optional in the prompt, both
 # restate something the body already says, and losing either costs a nice frame rather
 # than the meaning. So they go first, and the argument survives.
-TRIM_ORDER = ("stat", "proof", "body")
+#
+# "screen" and "chart" added 2026-08-13, same reasoning: beats_from_carousel below
+# never puts more than one of chart/screen/proof in a reel at once, but all three are
+# still decorative relative to body -- they SHOW the argument, they are not the
+# argument. screen drops before chart because chart is the beat Ryan specifically
+# asked for ("I need the graphs in the videos"); if only one graphic beat is going
+# to survive a tight budget, it should be the one that carries a real number.
+TRIM_ORDER = ("stat", "screen", "chart", "proof", "body")
 
 
 def trim_to_budget(beats, budget=REEL_MAX_S):
@@ -1218,11 +1264,32 @@ def beats_from_carousel(carousel):
                           f"rendering it unemphasised: {line[:48]!r}")
                     emph = None
                 out.append(Beat("body", line, read_time(line), emph=emph))
-        pr = proof_pair(carousel)
-        if pr:
-            out.append(Beat("proof", None,
-                            read_time(pr[2], lo=2.4, hi=3.6, orient=1.60),
-                            sub=pr[2], pair=(pr[0], pr[1])))
+        # Graphic beat (added 2026-08-13): at most ONE of chart / screen / plain
+        # proof per reel. chart and screen both live in reel_graphics.py and were
+        # committed 2026-08-12 as renderers with nothing calling them yet -- this
+        # is the wiring. chart wins when both are present because it carries a real
+        # number (what Ryan asked for); screen is the fallback graphic; plain proof
+        # (two lines of text, no bars) is the last resort for a manifest with
+        # neither, so nothing regresses for carousels generated before this change.
+        graphic = None
+        rb_chart = rb.get("chart") or {}
+        if rb_chart.get("label") and rb_chart.get("before") is not None and rb_chart.get("after") is not None:
+            try:
+                float(rb_chart["before"]); float(rb_chart["after"])
+                graphic = Beat("chart", None, reel_graphics.chart_duration(rb_chart), data=dict(rb_chart))
+            except (TypeError, ValueError):
+                print(f"WARNING: chart beat has non-numeric before/after — skipping: {rb_chart!r}")
+        rb_screen = rb.get("screen") or {}
+        if graphic is None and rb_screen.get("title") and len(rb_screen.get("options") or []) >= 2:
+            graphic = Beat("screen", None, reel_graphics.screen_duration(rb_screen), data=dict(rb_screen))
+        if graphic is not None:
+            out.append(graphic)
+        else:
+            pr = proof_pair(carousel)
+            if pr:
+                out.append(Beat("proof", None,
+                                read_time(pr[2], lo=2.4, hi=3.6, orient=1.60),
+                                sub=pr[2], pair=(pr[0], pr[1])))
         # cta_promise (a noun phrase) is preferred over cta_line (free text): the
         # renderer composes the instruction around it, so a noun phrase is the only
         # shape that reliably produces a sentence. read_time is measured on the
