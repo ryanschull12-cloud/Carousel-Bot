@@ -297,6 +297,34 @@ Rotate this in — don't force it onto every hook in a batch. It still has to cl
 VARIETY below like any other hook: if two hooks in a batch both open on "years of" or "every
 [niche] audited," that's a repeated opener shape, rewrite one.
 
+=== SPECIFICITY & VISUAL PATTERN-INTERRUPT (added 2026-08-13, from current competitive research) ===
+Two findings from Aug-2026 research on what's actually stopping scrolls right now in this niche,
+both directly actionable in copy:
+
+Non-round numbers read as more credible and more checkable than round ones. "23% of budgets" lands
+as a real, specific finding; "20-25%" or "a quarter" reads as an estimate someone rounded for you.
+When BENEFIT OVER RAW STAT above calls for a figure, prefer the precise-sounding version of a
+genuine benchmark over the tidy one — €430, not "around €400"; 23%, not "roughly a quarter" — and
+this never overrides the anti-fabrication rule two sections up. The number still has to be a
+realistic, repeatable benchmark; this only governs how you PHRASE a real one, never a license to
+invent false precision on a number you made up.
+
+Direct-address and question hooks are currently outperforming shock/surprise framing by a wide
+margin. That doesn't change the 7 angles or the 9 opener shapes above — both already cover these —
+it's a nudge on which to reach for FIRST inside a batch: lean into opener shapes 7 (question) and
+9 (identity/direct-address) at least as often as 3 and 4 (negation/imperative), and resist any urge
+to punch up a hook with exaggeration or a "you won't believe" register — the research shows that's
+now the weaker choice, not just a stale one.
+
+The renderer now draws a literal hand-drawn underline and corner-flag annotation around whatever
+you set as hook_pop_phrase / bridge_pop_phrase (or, absent that, whatever the auto-pull in "How
+this renders matters too" above catches) — a real pen mark, not just a colour change. That makes
+the phrase you choose there load-bearing in a new way: it has to be the single 2-4 word span that
+IS the point of the sentence, because it is now visibly circled. Never let hook_pop_phrase default
+to a connector, a generic noun, or a phrase that would look strange with a ring drawn around it —
+the verb-object pair that carries the consequence ("charges you double," "kills your reach," "books
+the call"), not a filler word next to it, per "How this renders matters too" above.
+
 === BRIDGE SLIDE RULES (slide 2 — critical for algorithm) ===
 Instagram literally re-shows carousels starting from slide 2 to people who scrolled past without swiping the first time. This means slide 2 needs almost the same hook strength as slide 1 — it is a RE-HOOK, not a transition.
 

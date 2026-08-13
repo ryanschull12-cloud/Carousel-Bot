@@ -9,6 +9,7 @@ Carousel image engine — FIXED SIZE EDITION:
 from PIL import Image, ImageDraw, ImageFont
 import os
 import re
+import math
 
 W, H = 1080, 1350
 MARGIN = 76
@@ -915,6 +916,68 @@ def draw_mixed_lines(draw, lines, x, y, f_reg, f_bold, line_h, ink, accent):
     return y
 
 
+def bold_run_box(draw, lines, x, y, f_reg, f_bold, line_h):
+    """Bounding box of the first emphasised (bold) run in a mixed-weight block,
+    walked with the exact same cursor math draw_mixed_lines uses -- so a hand-
+    drawn annotation added after the text lands exactly under the words it's
+    flagging instead of drifting off on its own guess. Only the first line
+    carrying a bold word is measured, same simplification reel_engine's hook
+    already makes for a run that wraps. Returns None if nothing is bold.
+    (2026-08-13)"""
+    sp = draw.textlength(" ", font=f_reg)
+    for ln in lines:
+        cx = x
+        run_x0 = run_x1 = None
+        for w, b in ln:
+            f = f_bold if b else f_reg
+            ww = draw.textlength(w, font=f)
+            if b:
+                if run_x0 is None:
+                    run_x0 = cx
+                run_x1 = cx + ww
+            cx += ww + sp
+        if run_x0 is not None:
+            asc, desc = f_bold.getmetrics()
+            return run_x0, run_x1, y, y + asc + desc
+        y += line_h
+    return None
+
+
+def draw_hand_underline_static(draw, x0, x1, y, color, seed=0.0):
+    """Two-pass, hand-wobbled marker underline under an emphasised phrase
+    (2026-08-13) -- the still-image counterpart to reel_engine's animated
+    version, same sine-wobbled double-stroke so a carousel and its matching
+    reel read as one design system. Static images get the fully-drawn mark
+    (there's no time axis to sweep across), which is also just what a real
+    marker stroke looks like once the pen has already passed through."""
+    if x1 <= x0:
+        return
+    width = x1 - x0
+    steps = max(10, int(width / 10))
+    for pass_i, (amp, freq, dy, wpx) in enumerate((
+        (3.6, 8.0, 0.0, 6),
+        (2.6, 13.0, 6.0, 5),
+    )):
+        pts = []
+        for i in range(steps + 1):
+            t = i / steps
+            x = x0 + width * t
+            wob = math.sin(t * freq + seed + pass_i * 1.9) * amp
+            pts.append((x, y + dy + wob))
+        draw.line(pts, fill=color, width=wpx, joint="curve")
+
+
+def draw_tension_flag_static(draw, x, top_y, color):
+    """Small hand-set corner-bracket above-left of an emphasised run
+    (2026-08-13) -- the still-image counterpart to reel_engine's version.
+    Same wordless 'look here' cue, same handwritten-annotation language as
+    draw_hand_underline_static, so a hook slide and its reel match."""
+    s = 20
+    bx, by = x - 16, top_y - 14
+    draw.line([(bx, by + s), (bx, by)], fill=color, width=5)
+    draw.line([(bx, by), (bx + s * 0.75, by)], fill=color, width=5)
+
+
 # ============================================================
 # HOOK SLIDE — fixed size, designed fill
 # ============================================================
@@ -953,6 +1016,18 @@ def render_hook_slide_fixed(headline, niche, slide_num, total_slides, out_path, 
 
     draw_mixed_lines(draw, lines, MARGIN, ty, f_reg, f_bold, line_h, TEXT, colors["accent"])
 
+    # Hand-drawn annotation on the emphasised run (2026-08-13): a wobbled
+    # marker underline plus a small corner-bracket flag, the same language the
+    # reel hook now animates in. The hook slide is the one frame research says
+    # has to work with sound off and in a half-second glance, so the graphic
+    # goes here rather than being spent on a slide already making its case.
+    box = bold_run_box(draw, lines, MARGIN, ty, f_reg, f_bold, line_h)
+    if box:
+        bx0, bx1, by_top, by_bottom = box
+        seed = (bx0 * 0.013) % 6.283
+        draw_hand_underline_static(draw, bx0, bx1, by_bottom + 6, colors["accent"], seed=seed)
+        draw_tension_flag_static(draw, bx0, by_top, colors["accent"])
+
     draw_follow_pill(draw, colors)
     draw_progress_bar(draw, slide_num, total_slides, colors["accent"], colors["dark"])
 
@@ -986,6 +1061,15 @@ def render_bridge_slide_fixed(headline, niche, slide_num, total_slides, out_path
                    fill=colors["accent"])
     draw_mixed_lines(draw, lines, MARGIN + bar_w + bar_gap, ty, f_reg, f_bold,
                      line_h, TEXT, colors["accent"])
+
+    # Underline only here, no corner flag (2026-08-13) -- the bridge already
+    # has its own mark (the vertical bar), so it gets the reinforcement half
+    # of the hook's annotation pair without stacking a second doodle on top.
+    box = bold_run_box(draw, lines, MARGIN + bar_w + bar_gap, ty, f_reg, f_bold, line_h)
+    if box:
+        bx0, bx1, by_top, by_bottom = box
+        seed = (bx0 * 0.021) % 6.283
+        draw_hand_underline_static(draw, bx0, bx1, by_bottom + 6, colors["accent"], seed=seed)
 
     draw_follow_pill(draw, colors)
     draw_progress_bar(draw, slide_num, total_slides, colors["accent"], colors["dark"])

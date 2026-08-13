@@ -756,6 +756,50 @@ TICK_FRAMES = 10.0
 
 TAIL_S = 0.6   # crossfade back to the hook so the loop closes
 
+def draw_hand_underline(d, x0, x1, y, color, prog, seed=0.0):
+    """Two-pass, hand-wobbled marker underline that sweeps in left-to-right
+    (2026-08-13). Replaces the old straight-rectangle sweep under the hook's
+    emphasised run: the current wave of viral Reels in this niche leans hard on
+    hand-drawn annotation marks -- circles, underlines, arrows -- and a straight
+    bar reads as a UI progress element, not a pen mark. Two sine-wobbled strokes,
+    offset in phase and y, read as a rushed double marker pass without needing an
+    actual brush texture. Still just PIL polylines, so the render cost is trivial."""
+    if prog <= 0 or x1 <= x0:
+        return
+    width = x1 - x0
+    reveal_x = x0 + width * clamp(prog)
+    steps = max(10, int(width / 10))
+    for pass_i, (amp, freq, dy, wpx) in enumerate((
+        (3.0, 8.0, 0.0, 5),
+        (2.2, 13.0, 5.0, 4),
+    )):
+        pts = []
+        for i in range(steps + 1):
+            t = i / steps
+            x = x0 + width * t
+            if x > reveal_x:
+                break
+            wob = math.sin(t * freq + seed + pass_i * 1.9) * amp
+            pts.append((x, y + dy + wob))
+        if len(pts) >= 2:
+            d.line(pts, fill=color, width=wpx, joint="curve")
+
+
+def draw_tension_flag(d, x, top_y, color, prog):
+    """Small hand-set corner-bracket that pops in above-left of the hook's
+    emphasised run once its underline finishes (2026-08-13) -- a wordless
+    'look here' cue in the same handwritten-annotation language as
+    draw_hand_underline. Two short strokes, not a full icon: reads instantly at
+    1080px and never sits on top of the word it's flagging."""
+    if prog <= 0:
+        return
+    p = ease(clamp(prog))
+    s = 16 * p
+    bx, by = x - 14, top_y - 10
+    d.line([(bx, by + s), (bx, by)], fill=color, width=4)
+    d.line([(bx, by), (bx + s * 0.75, by)], fill=color, width=4)
+
+
 def push_in(fr, p, amount=0.022):
     """Slow camera move across a beat (2026-08-09). Content-only -- chrome is
     drawn after this, so the UI stays pinned while the frame drifts. The push
@@ -873,16 +917,20 @@ def render(niche,beats,outdir,badge):
                 # and the 6px gap keeps the rule from touching the glyph.
                 _a,_d=f_bold.getmetrics()
                 L["hook_emph_box"]=(run_x0, run_x1, y+_a+_d+6)
-        # Reinforcement, not reveal (2026-08-09): a rule sweeps under the accent
-        # token starting ~0.4s in, well after the whole hook is readable. Motion
-        # lands inside the 1.7s decision window without withholding a word --
-        # the faceless-reel research consistently ties retention to text motion
-        # that reinforces what is already on screen.
-        if fi > 10 and L.get("hook_emph_box"):
+                L["hook_emph_top"]=y
+        # Reinforcement, not reveal (2026-08-09, hand-drawn pass added 2026-08-13):
+        # a wobbled marker underline sweeps under the accent token starting ~0.4s
+        # in, then a small corner-bracket doodle pops above it, both well after the
+        # whole hook is readable. Motion lands inside the 1.7s decision window
+        # without withholding a word -- the faceless-reel research consistently
+        # ties retention to text motion that reinforces what's already on screen,
+        # and the current top-performing wave in this niche renders that
+        # reinforcement as a hand-drawn annotation mark rather than a UI bar.
+        if L.get("hook_emph_box"):
             ex0, ex1, ey = L["hook_emph_box"]
-            sw = ease(clamp((fi - 10) / 14.0))
-            if sw > 0:
-                d.rectangle([ex0, ey, ex0 + (ex1 - ex0) * sw, ey + 7], fill=c["accent"])
+            seed = (ex0 * 0.013) % 6.283  # deterministic per-hook wobble, not literally random
+            draw_hand_underline(d, ex0, ex1, ey, c["accent"], clamp((fi-10)/14.0), seed=seed)
+            draw_tension_flag(d, ex0, L.get("hook_emph_top", ey-70), c["accent"], clamp((fi-26)/10.0))
 
     def hook_frame(t):
         # The tail crossfades back to the hook, so it must match FRAME 0 exactly --
@@ -963,8 +1011,21 @@ def render(niche,beats,outdir,badge):
             pd=ImageDraw.Draw(panel)
             pd.rounded_rectangle([MARGIN-34,y0-30,MARGIN-34+blockw,y0+blockh+26],
                                  radius=10,fill=BG_RAISED+(255,))
-            pd.rectangle([MARGIN-34,y0-30,MARGIN-28,y0+blockh+26],fill=c["accent"]+(255,))
+            # Base bar dims to BAR_WAS rather than solid accent (2026-08-13) so the
+            # travelling highlight below has somewhere to stand out against.
+            pd.rectangle([MARGIN-34,y0-30,MARGIN-28,y0+blockh+26],fill=BAR_WAS+(255,))
             fr.paste(fade(panel,int(255*grow)),(0,0),fade(panel,int(255*grow)))
+        # Reading cursor (2026-08-13): body beats are the bulk of a reel's runtime
+        # and, once the panel settled around frame 18, nothing else moved for the
+        # rest of a 4-6s beat. A short accent segment now travels the length of
+        # the left bar over the beat's full duration -- cheap continuous motion
+        # that tracks reading pace instead of competing with the text for
+        # attention. Gated on grow so it never appears before the panel does.
+        if grow>0.3:
+            travel=clamp(fi/max(counts[bi]-1,1))
+            seg_h=max(40,int(blockh*0.22))
+            seg_y=int((y0-30)+(blockh+56-seg_h)*travel)
+            d.rectangle([MARGIN-34,seg_y,MARGIN-28,seg_y+seg_h],fill=c["accent"])
         for li,lay in enumerate(lays):
             p=ease(clamp((fi-li*3)/15.0))
             if p>0:
