@@ -388,7 +388,7 @@
       "angle": "behind-the-curtain",
       "format": "steal-this",
       "hook": "Gmail buries your email if it sees \u2018free\u2019 in the subject",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "17951238987240650",

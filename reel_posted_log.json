@@ -6,7 +6,7 @@
     "niche": "Google Ads",
     "angle": "behind-the-curtain",
     "format": "steal-this",
-    "hook": "Google Ads calls 15% of buyers ‘low intent’—they’re not",
+    "hook": "Google Ads calls 15% of buyers \u2018low intent\u2019\u2014they\u2019re not",
     "media_product_type": "REELS",
     "trial": false,
     "scored": true
@@ -18,7 +18,7 @@
     "niche": "Email Marketing",
     "angle": "behind-the-curtain",
     "format": "steal-this",
-    "hook": "Gmail cuts off your subject line after 12 words—everything else is invisible",
+    "hook": "Gmail cuts off your subject line after 12 words\u2014everything else is invisible",
     "media_product_type": "REELS",
     "trial": false,
     "scored": true
@@ -30,7 +30,7 @@
     "niche": "Google Ads",
     "angle": "behind-the-curtain",
     "format": "steal-this",
-    "hook": "Google Ads bills you for 3-second bounces—even if they leave immediately",
+    "hook": "Google Ads bills you for 3-second bounces\u2014even if they leave immediately",
     "media_product_type": "REELS",
     "trial": false,
     "scored": true
@@ -42,7 +42,7 @@
     "niche": "Google Ads",
     "angle": "realization",
     "format": "step-by-step",
-    "hook": "Google Ads buries 25% of your best clicks in a report you’ve never opened",
+    "hook": "Google Ads buries 25% of your best clicks in a report you\u2019ve never opened",
     "media_product_type": "REELS",
     "trial": false,
     "scored": false
@@ -54,10 +54,10 @@
     "niche": "Email Marketing",
     "angle": "behind-the-curtain",
     "format": "steal-this",
-    "hook": "Gmail buries your email if it sees ‘free’ in the subject",
+    "hook": "Gmail buries your email if it sees \u2018free\u2019 in the subject",
     "media_product_type": "REELS",
     "trial": false,
-    "scored": false
+    "scored": true
   },
   {
     "media_id": null,
@@ -66,7 +66,7 @@
     "niche": "Email Marketing",
     "angle": "contrarian",
     "format": "before-after",
-    "hook": "Gmail ignores opens—only replies get you inbox placement",
+    "hook": "Gmail ignores opens\u2014only replies get you inbox placement",
     "media_product_type": "REELS",
     "trial": false,
     "scored": false,
@@ -80,7 +80,7 @@
     "niche": "Google Ads",
     "angle": "realization",
     "format": "step-by-step",
-    "hook": "Google Ads hides half your sales in a report you’ve never opened",
+    "hook": "Google Ads hides half your sales in a report you\u2019ve never opened",
     "media_product_type": "REELS",
     "trial": false,
     "scored": false,
@@ -94,7 +94,7 @@
     "niche": "Email Marketing",
     "angle": "realization",
     "format": "before-after",
-    "hook": "Gmail moves emails to Primary when someone replies—not opens",
+    "hook": "Gmail moves emails to Primary when someone replies\u2014not opens",
     "media_product_type": "REELS",
     "trial": false,
     "scored": false
@@ -106,7 +106,7 @@
     "niche": "Email Marketing",
     "angle": "contrarian",
     "format": "comparison",
-    "hook": "Your perfect subject line is invisible to Gmail’s filter",
+    "hook": "Your perfect subject line is invisible to Gmail\u2019s filter",
     "media_product_type": "REELS",
     "trial": false,
     "scored": false,
@@ -134,24 +134,24 @@
     "niche": "Email Marketing",
     "angle": "behind-the-curtain",
     "format": "steal-this",
-    "hook": "Gmail’s spam filter ignores your subject line—it’s all about sender trust",
+    "hook": "Gmail\u2019s spam filter ignores your subject line\u2014it\u2019s all about sender trust",
     "media_product_type": "REELS",
     "trial": false,
     "scored": false
   },
   {
-    "media_id": null,
+    "media_id": "17996453306796624",
     "date": "2026-08-12",
     "index": 2,
     "niche": "Email Marketing",
     "angle": "contrarian",
     "format": "comparison",
-    "hook": "Gmail hides your emails if no one replies—not if they just open them",
+    "hook": "Gmail hides your emails if no one replies\u2014not if they just open them",
     "media_product_type": "REELS",
     "trial": false,
     "scored": false,
     "delivery": "email",
-    "posted_manually": null
+    "posted_manually": "2026-08-12"
   },
   {
     "media_id": null,
@@ -160,7 +160,7 @@
     "niche": "Google Ads",
     "angle": "realization",
     "format": "step-by-step",
-    "hook": "Google Ads buries 20% of your best leads in a report you’ve never opened",
+    "hook": "Google Ads buries 20% of your best leads in a report you\u2019ve never opened",
     "media_product_type": "REELS",
     "trial": false,
     "scored": false,
