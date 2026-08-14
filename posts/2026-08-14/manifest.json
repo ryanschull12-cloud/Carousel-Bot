@@ -1,0 +1,447 @@
+{
+  "batch_date": "2026-08-14",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Gmail\u2019s spam filter ignores \u2018free\u2019 if your sender reputation is strong. Most senders focus on subject lines but miss the real trust signal: replies. Save this checklist \u2193 #emailmarketingtips #emaildeliverability #marketingaudit #irishbusiness",
+      "niche": "Email Marketing",
+      "angle": "relief-permission",
+      "format": "myth-buster",
+      "hook": "Gmail ignores \u2018free\u2019 if your sender score is high",
+      "throughline": "Gmail\u2019s spam filter prioritizes sender reputation over subject-line tricks, allowing trusted senders to use words like \u2018free\u2019 without penalty.",
+      "image_paths": [
+        "posts/2026-08-14/carousel_1/slide_01.jpg",
+        "posts/2026-08-14/carousel_1/slide_02.jpg",
+        "posts/2026-08-14/carousel_1/slide_03.jpg",
+        "posts/2026-08-14/carousel_1/slide_04.jpg",
+        "posts/2026-08-14/carousel_1/slide_05.jpg",
+        "posts/2026-08-14/carousel_1/slide_06.jpg",
+        "posts/2026-08-14/carousel_1/slide_07.jpg",
+        "posts/2026-08-14/carousel_1/slide_08.jpg",
+        "posts/2026-08-14/carousel_1/slide_09.jpg",
+        "posts/2026-08-14/carousel_1/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Gmail lets you say \u2018free\u2019 without going to spam",
+        "hook_emphasis": "say \u2018free\u2019",
+        "body": [
+          {
+            "text": "Gmail\u2019s filter checks sender reputation first, so a high score lets you use \u2018free\u2019 safely.",
+            "emphasis": "sender reputation"
+          },
+          {
+            "text": "Most senders obsess over subject lines but ignore their own sender history, which matters more.",
+            "emphasis": "sender history"
+          },
+          {
+            "text": "Replies and forwards build trust faster than opens, so focus on sparking conversations.",
+            "emphasis": "sparking conversations"
+          },
+          {
+            "text": "Check your reputation in Gmail\u2019s Postmaster Tools\u2014it\u2019s the real reason your emails land in spam.",
+            "emphasis": "Postmaster Tools"
+          }
+        ],
+        "screen": {
+          "title": "What Gmail\u2019s filter really checks",
+          "panel_label": "SPAM FILTER",
+          "options": [
+            [
+              "Subject line",
+              "Checks last"
+            ],
+            [
+              "Sender reputation",
+              "Checks first"
+            ]
+          ],
+          "wrong": 0,
+          "right": 1,
+          "mechanism": "Sender reputation decides inbox placement before subject lines even matter."
+        },
+        "cta_line": "",
+        "send_line": "Send this to your email marketer"
+      },
+      "body_slides": [
+        {
+          "text": "Gmail checks sender history first\u2014subject lines come second.",
+          "keyword": "sender history"
+        },
+        {
+          "text": "A strong reputation lets you use \u2018free\u2019 or \u2018discount\u2019 safely.",
+          "keyword": "strong reputation"
+        },
+        {
+          "text": "Most senders obsess over subject lines but overlook their sender score.",
+          "keyword": "sender score"
+        },
+        {
+          "text": "Gmail\u2019s Postmaster Tools shows your reputation\u2014check it weekly.",
+          "keyword": "Postmaster Tools"
+        },
+        {
+          "text": "Replies and forwards build trust faster than opens ever could.",
+          "keyword": "replies and forwards"
+        },
+        {
+          "text": "Cold lists flag \u2018free\u2019 as spam; warm lists treat it as normal.",
+          "keyword": "warm lists"
+        }
+      ],
+      "cta_word": "CHECKLIST",
+      "cta_promise": "the sender-reputation checklist",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Google Ads hides 23% of buyers in the \u2018Other searches\u2019 report. Most accounts ignore it and waste budget on strangers. Save this audit guide \u2193 #googleadstips #ppcmanagement #leadgeneration #smallbusinessireland",
+      "niche": "Google Ads",
+      "angle": "realization",
+      "format": "before-after",
+      "hook": "Google Ads hides 23% of buyers in \u2018Other searches\u2019",
+      "throughline": "Google Ads buries 20% of your buyers in the \u2018Other searches\u2019 report, but you can recover them with one simple filter.",
+      "image_paths": [
+        "posts/2026-08-14/carousel_2/slide_01.jpg",
+        "posts/2026-08-14/carousel_2/slide_02.jpg",
+        "posts/2026-08-14/carousel_2/slide_03.jpg",
+        "posts/2026-08-14/carousel_2/slide_04.jpg",
+        "posts/2026-08-14/carousel_2/slide_05.jpg",
+        "posts/2026-08-14/carousel_2/slide_06.jpg",
+        "posts/2026-08-14/carousel_2/slide_07.jpg",
+        "posts/2026-08-14/carousel_2/slide_08.jpg",
+        "posts/2026-08-14/carousel_2/slide_09.jpg",
+        "posts/2026-08-14/carousel_2/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Google Ads hides 23% of your buyers in plain sight",
+        "hook_emphasis": "hides 23%",
+        "body": [
+          {
+            "text": "The \u2018Search terms\u2019 report shows what people actually typed to find your ad, but most accounts never open it.",
+            "emphasis": "never open it"
+          },
+          {
+            "text": "\u2018Other searches\u2019 is where Google groups low-volume or new queries, and it holds 23% of your buyers.",
+            "emphasis": "23% of your buyers"
+          },
+          {
+            "text": "Add a filter for \u2018Conversions > 0\u2019 to find the hidden buyers and stop wasting budget on strangers.",
+            "emphasis": "Conversions > 0"
+          },
+          {
+            "text": "Move high-converting terms to your keyword list\u2014this one filter recovers 23% of your sales.",
+            "emphasis": "recovers 23%"
+          }
+        ],
+        "chart": {
+          "label": "buyers found",
+          "before": 77,
+          "after": 100,
+          "unit": "%",
+          "caption": "Filtering \u2018Other searches\u2019 recovers 23% of buyers hidden in plain sight."
+        },
+        "cta_line": "",
+        "send_line": "Send this to your ads manager"
+      },
+      "body_slides": [
+        {
+          "text": "The \u2018Search terms\u2019 report shows what people actually typed to find you.",
+          "keyword": "Search terms",
+          "before": "80% visibility",
+          "after": "100% visibility"
+        },
+        {
+          "text": "\u2018Other searches\u2019 groups low-volume or new queries Google doesn\u2019t surface.",
+          "keyword": "Other searches"
+        },
+        {
+          "text": "Most accounts never check this report and miss 23% of their best buyers.",
+          "keyword": "23%"
+        },
+        {
+          "text": "Filter for \u2018Conversions > 0\u2019 to find the hidden buyers.",
+          "keyword": "Conversions > 0"
+        },
+        {
+          "text": "Add high-converting terms to your keyword list to stop wasting budget.",
+          "keyword": "high-converting terms"
+        },
+        {
+          "text": "Check this report weekly\u2014new hidden buyers appear every few days.",
+          "keyword": "weekly"
+        }
+      ],
+      "cta_word": "AUDIT",
+      "cta_promise": "the hidden-buyers audit guide",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "More budget won\u2019t wake up a cold Meta audience\u2014engagement will. This 48-hour plan warms it up without wasting spend. Save this template \u2193 #metaadstips #paidsocial #adspend #businessireland",
+      "niche": "Meta/Instagram Ads",
+      "angle": "contrarian",
+      "format": "step-by-step",
+      "hook": "More budget won\u2019t wake up a cold Meta audience",
+      "throughline": "Warming up a cold Meta audience takes engagement, not just more budget\u2014here\u2019s the 48-hour plan to fix it.",
+      "image_paths": [
+        "posts/2026-08-14/carousel_3/slide_01.jpg",
+        "posts/2026-08-14/carousel_3/slide_02.jpg",
+        "posts/2026-08-14/carousel_3/slide_03.jpg",
+        "posts/2026-08-14/carousel_3/slide_04.jpg",
+        "posts/2026-08-14/carousel_3/slide_05.jpg",
+        "posts/2026-08-14/carousel_3/slide_06.jpg",
+        "posts/2026-08-14/carousel_3/slide_07.jpg",
+        "posts/2026-08-14/carousel_3/slide_08.jpg",
+        "posts/2026-08-14/carousel_3/slide_09.jpg",
+        "posts/2026-08-14/carousel_3/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Throwing more money at a cold Meta audience won\u2019t wake it up",
+        "hook_emphasis": "won\u2019t wake it up",
+        "body": [
+          {
+            "text": "Cold audiences need engagement first, not just more budget\u2014Meta\u2019s algorithm ignores ads with no replies.",
+            "emphasis": "no replies"
+          },
+          {
+            "text": "Run a poll or question ad in the first 24 hours to spark interactions and signal relevance to Meta.",
+            "emphasis": "poll or question ad"
+          },
+          {
+            "text": "Use a 1% lookalike of your past buyers\u2014smaller lists convert better than broad audiences.",
+            "emphasis": "1% lookalike"
+          },
+          {
+            "text": "Retarget engaged users with a discount or freebie in the next 24 hours to turn cold into warm.",
+            "emphasis": "turn cold into warm"
+          }
+        ],
+        "screen": {
+          "title": "What actually warms a cold audience",
+          "panel_label": "AUDIENCE WARM-UP",
+          "options": [
+            [
+              "More budget",
+              "Ignores engagement"
+            ],
+            [
+              "Engagement first",
+              "Boosts reach"
+            ]
+          ],
+          "wrong": 0,
+          "right": 1,
+          "mechanism": "Engagement signals relevance to Meta, so ads with replies reach more people."
+        },
+        "cta_line": "",
+        "send_line": "Send this to your social ads team"
+      },
+      "body_slides": [
+        {
+          "text": "Cold audiences need engagement first\u2014budget alone won\u2019t fix it.",
+          "keyword": "engagement first"
+        },
+        {
+          "text": "Run a poll or question ad to spark interactions in the first 24 hours.",
+          "keyword": "poll or question ad"
+        },
+        {
+          "text": "Use a 1% lookalike of past buyers\u2014smaller lists convert better.",
+          "keyword": "1% lookalike"
+        },
+        {
+          "text": "Retarget engaged users with a discount or freebie in the next 24 hours.",
+          "keyword": "retarget engaged users"
+        },
+        {
+          "text": "Meta\u2019s algorithm rewards early engagement\u2014more replies mean better reach.",
+          "keyword": "early engagement"
+        },
+        {
+          "text": "Check your ad frequency\u2014over 3 and Meta stops showing it to new people.",
+          "keyword": "frequency over 3"
+        }
+      ],
+      "cta_word": "TEMPLATE",
+      "cta_promise": "the 48-hour warm-up template",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 4,
+      "caption": "Gmail moves emails to Primary after just two replies\u2014not opens. Most senders focus on open rates but miss the real signal: replies. Save this guide \u2193 #emailmarketingtips #emailcopywriting #conversiontracking #irishbusiness",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "before-after",
+      "hook": "Gmail moves emails to Primary after two replies",
+      "throughline": "Gmail moves emails to the Primary tab after just two replies, not opens\u2014here\u2019s how to trigger it.",
+      "image_paths": [
+        "posts/2026-08-14/carousel_4/slide_01.jpg",
+        "posts/2026-08-14/carousel_4/slide_02.jpg",
+        "posts/2026-08-14/carousel_4/slide_03.jpg",
+        "posts/2026-08-14/carousel_4/slide_04.jpg",
+        "posts/2026-08-14/carousel_4/slide_05.jpg",
+        "posts/2026-08-14/carousel_4/slide_06.jpg",
+        "posts/2026-08-14/carousel_4/slide_07.jpg",
+        "posts/2026-08-14/carousel_4/slide_08.jpg",
+        "posts/2026-08-14/carousel_4/slide_09.jpg",
+        "posts/2026-08-14/carousel_4/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Gmail moves your email to Primary after two replies\u2014not opens",
+        "hook_emphasis": "two replies",
+        "body": [
+          {
+            "text": "Gmail\u2019s algorithm watches replies more than opens, so two replies from the same person move you to Primary.",
+            "emphasis": "two replies"
+          },
+          {
+            "text": "Most senders focus on open rates but ignore reply rates, which Gmail sees as a stronger trust signal.",
+            "emphasis": "reply rates"
+          },
+          {
+            "text": "Ask a question in your email to spark replies\u2014even a simple \u2018How\u2019s your week?\u2019 boosts trust.",
+            "emphasis": "ask a question"
+          },
+          {
+            "text": "Check your reply rate\u2014under 2% means Gmail sees you as low trust and buries your emails.",
+            "emphasis": "under 2%"
+          }
+        ],
+        "chart": {
+          "label": "inbox placement",
+          "before": 30,
+          "after": 90,
+          "unit": "%",
+          "caption": "Two replies move 90% of emails to Primary, while opens alone keep most in Promotions."
+        },
+        "cta_line": "",
+        "send_line": "Send this to your email team"
+      },
+      "body_slides": [
+        {
+          "text": "Gmail\u2019s algorithm watches replies more than opens for inbox placement.",
+          "keyword": "replies more than opens"
+        },
+        {
+          "text": "Two replies from the same person move your email to Primary instantly.",
+          "keyword": "two replies"
+        },
+        {
+          "text": "Most senders focus on open rates but overlook reply rates entirely.",
+          "keyword": "reply rates"
+        },
+        {
+          "text": "Ask a question in your email to spark replies\u2014even \u2018How\u2019s your week?\u2019 works.",
+          "keyword": "ask a question"
+        },
+        {
+          "text": "Gmail sees replies as a stronger trust signal than opens.",
+          "keyword": "stronger trust signal"
+        },
+        {
+          "text": "Check your reply rate\u2014under 2% means Gmail sees you as low trust.",
+          "keyword": "under 2%"
+        }
+      ],
+      "cta_word": "GUIDE",
+      "cta_promise": "the reply-rate guide",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Google Ads wastes \u20ac18 of every \u20ac100 on 3-second clicks. This one filter blocks them for good and hands back \u20ac18 of your spend. Save this checklist \u2193 #googleadstips #ppcmanagement #adspend #dublinbusiness",
+      "niche": "Google Ads",
+      "angle": "proof-numbers",
+      "format": "steal-this",
+      "hook": "Google Ads wastes \u20ac18 of every \u20ac100 on 3-second clicks",
+      "throughline": "Most Google Ads accounts waste 18% of their budget on 3-second clicks, but a simple filter can block them forever.",
+      "image_paths": [
+        "posts/2026-08-14/carousel_5/slide_01.jpg",
+        "posts/2026-08-14/carousel_5/slide_02.jpg",
+        "posts/2026-08-14/carousel_5/slide_03.jpg",
+        "posts/2026-08-14/carousel_5/slide_04.jpg",
+        "posts/2026-08-14/carousel_5/slide_05.jpg",
+        "posts/2026-08-14/carousel_5/slide_06.jpg",
+        "posts/2026-08-14/carousel_5/slide_07.jpg",
+        "posts/2026-08-14/carousel_5/slide_08.jpg",
+        "posts/2026-08-14/carousel_5/slide_09.jpg",
+        "posts/2026-08-14/carousel_5/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Google Ads wastes \u20ac18 of every \u20ac100 on clicks that bounce in 3 seconds",
+        "hook_emphasis": "\u20ac18 of every \u20ac100",
+        "body": [
+          {
+            "text": "3-second clicks usually mean bounces\u2014people who leave immediately and never convert.",
+            "emphasis": "3-second clicks"
+          },
+          {
+            "text": "Most accounts ignore this waste and keep paying for dead clicks, draining \u20ac18 of every \u20ac100.",
+            "emphasis": "\u20ac18 of every \u20ac100"
+          },
+          {
+            "text": "Add a filter for \u2018Avg. session duration < 3 sec\u2019 to spot the waste and block it for good.",
+            "emphasis": "block it for good"
+          },
+          {
+            "text": "Exclude these clicks with a negative audience\u2014this one filter hands back \u20ac18 of your spend.",
+            "emphasis": "hands back \u20ac18"
+          }
+        ],
+        "chart": {
+          "label": "budget saved",
+          "before": 82,
+          "after": 100,
+          "unit": "%",
+          "caption": "Blocking 3-second clicks recovers \u20ac18 of every \u20ac100 without cutting spend."
+        },
+        "cta_line": "",
+        "send_line": "Send this to your PPC manager"
+      },
+      "body_slides": [
+        {
+          "text": "3-second clicks usually mean bounces\u2014people who leave immediately.",
+          "keyword": "3-second clicks"
+        },
+        {
+          "text": "Most accounts ignore this waste and keep paying for dead clicks.",
+          "keyword": "dead clicks"
+        },
+        {
+          "text": "Add a filter for \u2018Avg. session duration < 3 sec\u2019 to spot the waste.",
+          "keyword": "Avg. session duration < 3 sec"
+        },
+        {
+          "text": "Exclude these clicks with a negative audience to save \u20ac18 of every \u20ac100.",
+          "keyword": "negative audience"
+        },
+        {
+          "text": "Check this filter weekly\u2014new dead clicks appear every few days.",
+          "keyword": "weekly"
+        },
+        {
+          "text": "This one filter hands back \u20ac18 of every \u20ac100 without cutting spend.",
+          "keyword": "\u20ac18 of every \u20ac100"
+        }
+      ],
+      "cta_word": "CHECKLIST",
+      "cta_promise": "the 3-second-click checklist",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    }
+  ]
+}
