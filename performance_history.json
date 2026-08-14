@@ -701,6 +701,24 @@
       "engagement_rate": 50.0,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control"
+    },
+    {
+      "date": "2026-08-11",
+      "media_id": "17951238987240650",
+      "niche": "Email Marketing",
+      "angle": "realization",
+      "format": "before-after",
+      "hook": "Gmail moves emails to Primary when someone replies\u2014not opens",
+      "metrics": {
+        "reach": 1,
+        "saved": 0,
+        "shares": 0,
+        "likes": 2,
+        "comments": 0
+      },
+      "engagement_rate": 200.0,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
     }
   ],
   "scored_reels": [
@@ -871,6 +889,48 @@
         "has_stat": false,
         "has_proof": false,
         "duration_s": 31.0
+      },
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
+    },
+    {
+      "date": "2026-08-11",
+      "media_id": "18101412863604369",
+      "niche": "Email Marketing",
+      "angle": "realization",
+      "format": "before-after",
+      "hook": "Gmail moves emails to Primary when someone replies\u2014not opens",
+      "trial": false,
+      "metrics": {
+        "reach": 2,
+        "views": 2,
+        "saved": 0,
+        "shares": 0,
+        "likes": 2,
+        "comments": 0,
+        "total_interactions": 2,
+        "ig_reels_avg_watch_time": 7130,
+        "ig_reels_video_view_total_time": 35651,
+        "reels_skip_rate": 50
+      },
+      "engagement_rate": 100.0,
+      "sends_per_reach": 0.0,
+      "views_per_reach": 1.0,
+      "beat_structure": {
+        "beat_count": 7,
+        "beat_kinds": [
+          "hook",
+          "body",
+          "body",
+          "body",
+          "body",
+          "cta",
+          "brand"
+        ],
+        "body_beats": 4,
+        "has_stat": false,
+        "has_proof": false,
+        "duration_s": 30.85
       },
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control"

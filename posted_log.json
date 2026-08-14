@@ -398,7 +398,7 @@
       "angle": "realization",
       "format": "before-after",
       "hook": "Gmail moves emails to Primary when someone replies\u2014not opens",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18112335523778144",
