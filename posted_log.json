@@ -408,7 +408,7 @@
       "angle": "behind-the-curtain",
       "format": "steal-this",
       "hook": "Gmail\u2019s spam filter ignores your subject line\u2014it\u2019s all about sender trust",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18127903822736040",

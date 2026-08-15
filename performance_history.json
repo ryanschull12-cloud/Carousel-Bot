@@ -719,6 +719,24 @@
       "engagement_rate": 200.0,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control"
+    },
+    {
+      "date": "2026-08-12",
+      "media_id": "18112335523778144",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Gmail\u2019s spam filter ignores your subject line\u2014it\u2019s all about sender trust",
+      "metrics": {
+        "reach": 1,
+        "saved": 0,
+        "shares": 0,
+        "likes": 2,
+        "comments": 0
+      },
+      "engagement_rate": 200.0,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
     }
   ],
   "scored_reels": [
@@ -931,6 +949,90 @@
         "has_stat": false,
         "has_proof": false,
         "duration_s": 30.85
+      },
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
+    },
+    {
+      "date": "2026-08-12",
+      "media_id": "18027275273675429",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Gmail\u2019s spam filter ignores your subject line\u2014it\u2019s all about sender trust",
+      "trial": false,
+      "metrics": {
+        "reach": 2,
+        "views": 3,
+        "saved": 0,
+        "shares": 0,
+        "likes": 2,
+        "comments": 0,
+        "total_interactions": 2,
+        "ig_reels_avg_watch_time": 9659,
+        "ig_reels_video_view_total_time": 57956,
+        "reels_skip_rate": 50
+      },
+      "engagement_rate": 100.0,
+      "sends_per_reach": 0.0,
+      "views_per_reach": 1.5,
+      "beat_structure": {
+        "beat_count": 7,
+        "beat_kinds": [
+          "hook",
+          "body",
+          "body",
+          "body",
+          "body",
+          "cta",
+          "brand"
+        ],
+        "body_beats": 4,
+        "has_stat": false,
+        "has_proof": false,
+        "duration_s": 31.9
+      },
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
+    },
+    {
+      "date": "2026-08-12",
+      "media_id": "17996453306796624",
+      "niche": "Email Marketing",
+      "angle": "contrarian",
+      "format": "comparison",
+      "hook": "Gmail hides your emails if no one replies\u2014not if they just open them",
+      "trial": false,
+      "metrics": {
+        "reach": 2,
+        "views": 2,
+        "saved": 0,
+        "shares": 0,
+        "likes": 1,
+        "comments": 0,
+        "total_interactions": 1,
+        "ig_reels_avg_watch_time": 4803,
+        "ig_reels_video_view_total_time": 48031,
+        "reels_skip_rate": 100
+      },
+      "engagement_rate": 50.0,
+      "sends_per_reach": 0.0,
+      "views_per_reach": 1.0,
+      "beat_structure": {
+        "beat_count": 7,
+        "beat_kinds": [
+          "hook",
+          "body",
+          "body",
+          "body",
+          "body",
+          "cta",
+          "brand"
+        ],
+        "body_beats": 4,
+        "has_stat": false,
+        "has_proof": false,
+        "duration_s": 31.9
       },
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control"
