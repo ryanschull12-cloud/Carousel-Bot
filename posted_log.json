@@ -429,6 +429,16 @@
       "format": "myth-buster",
       "hook": "Gmail ignores \u2018free\u2019 if your sender score is high",
       "scored": false
+    },
+    {
+      "media_id": "17940026547336841",
+      "date": "2026-08-15",
+      "index": 1,
+      "niche": "Meta/Instagram Ads",
+      "angle": "relief-permission",
+      "format": "myth-buster",
+      "hook": "Meta lookalikes work best with 300 engaged users",
+      "scored": false
     }
   ]
 }
