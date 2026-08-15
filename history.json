@@ -1,76 +1,6 @@
 {
   "recent_batches": [
     {
-      "date": "2026-08-05",
-      "carousels": [
-        {
-          "niche": "Email Marketing",
-          "angle": "behind-the-curtain",
-          "format": "steal-this",
-          "hook": "Gmail\u2019s filter reads only the first 10 words\u2014here\u2019s what it hates",
-          "hashtags": [
-            "#emailmarketing",
-            "#deliverability",
-            "#marketinghacks",
-            "#crm",
-            "#ecommercetips"
-          ]
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "realization",
-          "format": "step-by-step",
-          "hook": "Meta\u2019s algorithm forgets your ad after 48 hours of silence",
-          "hashtags": [
-            "#metaads",
-            "#paidsocial",
-            "#digitalmarketing",
-            "#advertisingtips",
-            "#marketingstrategy"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "contrarian",
-          "format": "comparison",
-          "hook": "Google Ads\u2019 \u2018smart\u2019 budgeting burns small accounts first",
-          "hashtags": [
-            "#googleads",
-            "#ppc",
-            "#digitalmarketing",
-            "#sem",
-            "#advertisinghacks"
-          ]
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "relief-permission",
-          "format": "myth-buster",
-          "hook": "You don\u2019t need 50k people for Meta\u2019s lookalikes to work",
-          "hashtags": [
-            "#metaads",
-            "#paidsocial",
-            "#digitalmarketing",
-            "#marketingtips",
-            "#advertisingstrategy"
-          ]
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "contrarian",
-          "format": "comparison",
-          "hook": "Meta\u2019s \u2018suggested audiences\u2019 cost 40% more per lead than custom ones",
-          "hashtags": [
-            "#metaads",
-            "#paidsocial",
-            "#digitalmarketing",
-            "#advertisinghacks",
-            "#marketingtips"
-          ]
-        }
-      ]
-    },
-    {
       "date": "2026-08-06",
       "carousels": [
         {
@@ -661,6 +591,66 @@
             "#ppcmanagement",
             "#adspend",
             "#dublinbusiness"
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-08-15",
+      "carousels": [
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "relief-permission",
+          "format": "myth-buster",
+          "hook": "Meta lookalikes work best with 300 engaged users",
+          "hashtags": [
+            "#metaadstips",
+            "#paidsocialtips",
+            "#adspend"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "realization",
+          "format": "before-after",
+          "hook": "Google Ads buries 20% of your buyers in one report",
+          "hashtags": [
+            "#googleadstips",
+            "#ppcmanagement",
+            "#leadgeneration"
+          ]
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "contrarian",
+          "format": "step-by-step",
+          "hook": "More budget burns cash on cold Meta audiences",
+          "hashtags": [
+            "#metaadstips",
+            "#paidsocial",
+            "#adcopy"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "behind-the-curtain",
+          "format": "comparison",
+          "hook": "Gmail\u2019s spam filter ignores subject lines",
+          "hashtags": [
+            "#emailmarketingtips",
+            "#emaildeliverability",
+            "#marketingaudit"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "realization",
+          "format": "before-after",
+          "hook": "Gmail promotes emails after two replies",
+          "hashtags": [
+            "#emailmarketingtips",
+            "#emailcopywriting",
+            "#conversiontracking"
           ]
         }
       ]

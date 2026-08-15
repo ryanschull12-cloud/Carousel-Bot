@@ -1,0 +1,446 @@
+{
+  "batch_date": "2026-08-15",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Save this myth-buster \u2193\nMeta lookalikes work better with 300 engaged users than 30k cold ones. The algorithm already knows who buys from you\u2014use that to cut costs and get better leads.\n#MetaAdsTips #PaidSocialTips #AdSpend",
+      "niche": "Meta/Instagram Ads",
+      "angle": "relief-permission",
+      "format": "myth-buster",
+      "hook": "Meta lookalikes work best with 300 engaged users",
+      "throughline": "A small, engaged audience creates better Meta lookalikes than a large, cold one\u2014here\u2019s why and how to use it.",
+      "image_paths": [
+        "posts/2026-08-15/carousel_1/slide_01.jpg",
+        "posts/2026-08-15/carousel_1/slide_02.jpg",
+        "posts/2026-08-15/carousel_1/slide_03.jpg",
+        "posts/2026-08-15/carousel_1/slide_04.jpg",
+        "posts/2026-08-15/carousel_1/slide_05.jpg",
+        "posts/2026-08-15/carousel_1/slide_06.jpg",
+        "posts/2026-08-15/carousel_1/slide_07.jpg",
+        "posts/2026-08-15/carousel_1/slide_08.jpg",
+        "posts/2026-08-15/carousel_1/slide_09.jpg",
+        "posts/2026-08-15/carousel_1/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Meta lookalikes work better with 300 engaged users than 30k cold ones",
+        "hook_emphasis": "300 engaged users",
+        "body": [
+          {
+            "text": "Meta\u2019s lookalike tool needs people who already interact with your ads, not just a big list.",
+            "emphasis": "interact"
+          },
+          {
+            "text": "300 engaged users create a lookalike that costs 40% less per lead than 30k cold ones.",
+            "emphasis": "40% less"
+          },
+          {
+            "text": "Engaged audiences mean Meta\u2019s algorithm already knows who buys from you, so it targets better.",
+            "emphasis": "knows who buys"
+          },
+          {
+            "text": "Cold lists include people who never saw your ad, so Meta has to guess who might like it.",
+            "emphasis": "has to guess"
+          }
+        ],
+        "chart": {
+          "label": "cost per lead",
+          "before": 75,
+          "after": 45,
+          "unit": "\u20ac",
+          "caption": "Switching from a 30k cold list to 300 engaged users cut cost per lead by 40%."
+        },
+        "send_line": "Send this to whoever builds your Meta audiences"
+      },
+      "body_slides": [
+        {
+          "text": "Meta\u2019s lookalike tool works best with people who already interact with your ads.",
+          "keyword": "interact"
+        },
+        {
+          "text": "300 engaged users create a lookalike that costs 40% less per lead than 30k cold ones.",
+          "keyword": "40% less"
+        },
+        {
+          "text": "Engaged audiences mean Meta\u2019s algorithm already knows who buys from you.",
+          "keyword": "knows who buys"
+        },
+        {
+          "text": "Cold lists include people who never saw your ad\u2014Meta guesses who might like it.",
+          "keyword": "guesses"
+        },
+        {
+          "text": "Check your \u2018Engaged Shoppers\u2019 audience in Meta Ads Manager\u2014it\u2019s often under 1k people.",
+          "keyword": "Engaged Shoppers"
+        },
+        {
+          "text": "Use that small audience to build a lookalike\u2014it\u2019ll outperform a bigger, colder list.",
+          "keyword": "outperform"
+        }
+      ],
+      "cta_word": "LOOKALIKE",
+      "cta_promise": "the exact audience settings that cut cost per lead by 40%",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Save this before-after \u2193\nGoogle Ads buries 20% of your buyers in the \u2018Search terms\u2019 report. Most accounts never check it\u2014adding these searches can cut your cost per lead by 25%.\n#GoogleAdsTips #PPCManagement #LeadGeneration",
+      "niche": "Google Ads",
+      "angle": "realization",
+      "format": "before-after",
+      "hook": "Google Ads buries 20% of your buyers in one report",
+      "throughline": "Google Ads hides 20% of your buyers in the \u2018Search terms\u2019 report\u2014here\u2019s how to find and use them.",
+      "image_paths": [
+        "posts/2026-08-15/carousel_2/slide_01.jpg",
+        "posts/2026-08-15/carousel_2/slide_02.jpg",
+        "posts/2026-08-15/carousel_2/slide_03.jpg",
+        "posts/2026-08-15/carousel_2/slide_04.jpg",
+        "posts/2026-08-15/carousel_2/slide_05.jpg",
+        "posts/2026-08-15/carousel_2/slide_06.jpg",
+        "posts/2026-08-15/carousel_2/slide_07.jpg",
+        "posts/2026-08-15/carousel_2/slide_08.jpg",
+        "posts/2026-08-15/carousel_2/slide_09.jpg",
+        "posts/2026-08-15/carousel_2/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Google Ads buries 20% of your buyers in a report you\u2019ve never opened",
+        "hook_emphasis": "20% of your buyers",
+        "body": [
+          {
+            "text": "Google Ads labels some buyers as \u2018low intent\u2019 even if they bought from you.",
+            "emphasis": "low intent"
+          },
+          {
+            "text": "These buyers are hidden in the \u2018Search terms\u2019 report, not the main dashboard.",
+            "emphasis": "Search terms"
+          },
+          {
+            "text": "Most accounts never check this report\u2014it\u2019s buried under \u2018Keywords\u2019 in the menu.",
+            "emphasis": "buried"
+          },
+          {
+            "text": "Add these searches as new keywords\u2014it can cut your cost per lead by 25%.",
+            "emphasis": "25%"
+          }
+        ],
+        "chart": {
+          "label": "cost per lead",
+          "before": 50,
+          "after": 37,
+          "unit": "\u20ac",
+          "caption": "Adding missing searches from the \u2018Search terms\u2019 report cut cost per lead by 25%."
+        },
+        "send_line": "Send this to whoever runs your Google Ads"
+      },
+      "body_slides": [
+        {
+          "text": "Google Ads labels some buyers as \u2018low intent\u2019\u2014even if they bought from you.",
+          "keyword": "low intent"
+        },
+        {
+          "text": "These buyers hide in the \u2018Search terms\u2019 report, not the main dashboard.",
+          "keyword": "Search terms"
+        },
+        {
+          "text": "Most accounts skip this report\u2014it\u2019s buried under \u2018Keywords\u2019 in the menu.",
+          "keyword": "buried"
+        },
+        {
+          "text": "The missing 20% of buyers often come from searches you didn\u2019t bid on directly.",
+          "keyword": "didn\u2019t bid"
+        },
+        {
+          "text": "Add these searches as new keywords\u2014it can cut cost per lead by 25%.",
+          "keyword": "25%"
+        },
+        {
+          "text": "Before: \u20ac50/lead. After: \u20ac37/lead\u2014just by adding the missing searches.",
+          "keyword": "\u20ac37/lead",
+          "before": "\u20ac50/lead",
+          "after": "\u20ac37/lead"
+        }
+      ],
+      "cta_word": "REPORT",
+      "cta_promise": "the exact steps to find and add your missing buyers",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Save this step-by-step \u2193\nMore budget burns cash on cold Meta audiences. Here\u2019s the 6-step fix that actually works\u2014pause the cold audience, build a warm one, and use a 3-part ad script to re-engage.\n#MetaAdsTips #PaidSocial #AdCopy",
+      "niche": "Meta/Instagram Ads",
+      "angle": "contrarian",
+      "format": "step-by-step",
+      "hook": "More budget burns cash on cold Meta audiences",
+      "throughline": "Throwing more budget at a cold Meta audience won\u2019t fix it\u2014here\u2019s the step-by-step fix that actually works.",
+      "image_paths": [
+        "posts/2026-08-15/carousel_3/slide_01.jpg",
+        "posts/2026-08-15/carousel_3/slide_02.jpg",
+        "posts/2026-08-15/carousel_3/slide_03.jpg",
+        "posts/2026-08-15/carousel_3/slide_04.jpg",
+        "posts/2026-08-15/carousel_3/slide_05.jpg",
+        "posts/2026-08-15/carousel_3/slide_06.jpg",
+        "posts/2026-08-15/carousel_3/slide_07.jpg",
+        "posts/2026-08-15/carousel_3/slide_08.jpg",
+        "posts/2026-08-15/carousel_3/slide_09.jpg",
+        "posts/2026-08-15/carousel_3/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Throwing more budget at a cold Meta audience burns cash\u2014here\u2019s the fix",
+        "hook_emphasis": "burns cash",
+        "body": [
+          {
+            "text": "Step 1: Pause the cold audience\u2014it costs \u20ac2 for every \u20ac1 that converts.",
+            "emphasis": "Pause"
+          },
+          {
+            "text": "Step 2: Build a warm audience of people who visited your site in the last 30 days.",
+            "emphasis": "warm audience"
+          },
+          {
+            "text": "Step 3: Use a 3-part ad script\u2014problem, solution, call to action\u2014to re-engage them.",
+            "emphasis": "3-part ad script"
+          },
+          {
+            "text": "Step 4: Set a frequency cap of 2\u2014don\u2019t show the same ad more than twice a week.",
+            "emphasis": "frequency cap"
+          }
+        ],
+        "screen": {
+          "title": "Which audience setting actually works",
+          "panel_label": "AUDIENCE TARGETING",
+          "options": [
+            [
+              "Cold Audience",
+              "Meta guesses who sees it"
+            ],
+            [
+              "Warm Audience",
+              "People who visited your site"
+            ]
+          ],
+          "wrong": 0,
+          "right": 1,
+          "mechanism": "Warm audiences reach people who already know your business, not strangers."
+        },
+        "send_line": "Send this to whoever manages your Meta Ads"
+      },
+      "body_slides": [
+        {
+          "text": "Step 1: Pause the cold audience\u2014it costs \u20ac2 for every \u20ac1 that converts.",
+          "keyword": "Pause"
+        },
+        {
+          "text": "Step 2: Build a warm audience of people who visited your site in the last 30 days.",
+          "keyword": "warm audience"
+        },
+        {
+          "text": "Step 3: Use a 3-part ad script\u2014problem, solution, call to action\u2014to re-engage them.",
+          "keyword": "3-part ad script"
+        },
+        {
+          "text": "Step 4: Set a frequency cap of 2\u2014don\u2019t show the same ad more than twice a week.",
+          "keyword": "frequency cap"
+        },
+        {
+          "text": "Step 5: After 7 days, check the \u2018Engaged Shoppers\u2019 report\u2014these are your new buyers.",
+          "keyword": "Engaged Shoppers"
+        },
+        {
+          "text": "Step 6: Use that small, engaged audience to build a lookalike\u2014it\u2019ll cost 30% less per lead.",
+          "keyword": "30% less"
+        }
+      ],
+      "cta_word": "FIX",
+      "cta_promise": "the exact 6-step cold audience fix",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 4,
+      "caption": "Save this comparison \u2193\nGmail\u2019s spam filter ignores subject lines and focuses on sender reputation. A high score means your emails land in the inbox\u2014even if the subject is weak.\n#EmailMarketingTips #EmailDeliverability #MarketingAudit",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "comparison",
+      "hook": "Gmail\u2019s spam filter ignores subject lines",
+      "throughline": "Gmail\u2019s spam filter skips subject lines and focuses on sender reputation\u2014here\u2019s how to use that to land in the inbox.",
+      "image_paths": [
+        "posts/2026-08-15/carousel_4/slide_01.jpg",
+        "posts/2026-08-15/carousel_4/slide_02.jpg",
+        "posts/2026-08-15/carousel_4/slide_03.jpg",
+        "posts/2026-08-15/carousel_4/slide_04.jpg",
+        "posts/2026-08-15/carousel_4/slide_05.jpg",
+        "posts/2026-08-15/carousel_4/slide_06.jpg",
+        "posts/2026-08-15/carousel_4/slide_07.jpg",
+        "posts/2026-08-15/carousel_4/slide_08.jpg",
+        "posts/2026-08-15/carousel_4/slide_09.jpg",
+        "posts/2026-08-15/carousel_4/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Gmail\u2019s spam filter ignores your subject line\u2014it\u2019s all about sender trust",
+        "hook_emphasis": "sender trust",
+        "body": [
+          {
+            "text": "Gmail checks your sender reputation first\u2014subject lines come later.",
+            "emphasis": "sender reputation"
+          },
+          {
+            "text": "High sender reputation means Gmail trusts your emails\u2014even if the subject is weak.",
+            "emphasis": "trusts"
+          },
+          {
+            "text": "Low sender reputation means Gmail buries your emails\u2014even if the subject is strong.",
+            "emphasis": "buries"
+          },
+          {
+            "text": "Check your sender score at senderscore.org\u2014above 80 is safe, below 70 is risky.",
+            "emphasis": "senderscore.org"
+          }
+        ],
+        "screen": {
+          "title": "What Gmail checks first",
+          "panel_label": "SPAM FILTER",
+          "options": [
+            [
+              "Subject Line",
+              "Checked second"
+            ],
+            [
+              "Sender Reputation",
+              "Checked first"
+            ]
+          ],
+          "wrong": 0,
+          "right": 1,
+          "mechanism": "Gmail\u2019s spam filter checks sender reputation first\u2014subject lines come later."
+        },
+        "send_line": "Send this to whoever writes your emails"
+      },
+      "body_slides": [
+        {
+          "text": "Gmail\u2019s spam filter checks your sender reputation first\u2014subject lines come later.",
+          "keyword": "sender reputation",
+          "compare_a": "Sender reputation",
+          "compare_b": "Subject line"
+        },
+        {
+          "text": "High sender reputation means Gmail trusts your emails\u2014even if the subject line is weak.",
+          "keyword": "trusts"
+        },
+        {
+          "text": "Low sender reputation means Gmail buries your emails\u2014even if the subject line is strong.",
+          "keyword": "buries"
+        },
+        {
+          "text": "Check your sender score at senderscore.org\u2014above 80 is safe, below 70 is risky.",
+          "keyword": "senderscore.org"
+        },
+        {
+          "text": "Warm up your domain for 30 days before sending big campaigns\u2014it builds trust with Gmail.",
+          "keyword": "30 days"
+        },
+        {
+          "text": "Sender reputation > subject lines\u2014focus on trust first, then tweak the subject.",
+          "keyword": "trust first"
+        }
+      ],
+      "cta_word": "SCORE",
+      "cta_promise": "the exact sender reputation checklist",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Save this before-after \u2193\nGmail promotes emails to Primary after two replies\u2014not opens. Asking questions boosts replies and moves you to the Primary tab, where open rates triple.\n#EmailMarketingTips #EmailCopywriting #ConversionTracking",
+      "niche": "Email Marketing",
+      "angle": "realization",
+      "format": "before-after",
+      "hook": "Gmail promotes emails after two replies",
+      "throughline": "Gmail moves emails to Primary after two replies\u2014not opens\u2014and here\u2019s how to use that to get more visibility.",
+      "image_paths": [
+        "posts/2026-08-15/carousel_5/slide_01.jpg",
+        "posts/2026-08-15/carousel_5/slide_02.jpg",
+        "posts/2026-08-15/carousel_5/slide_03.jpg",
+        "posts/2026-08-15/carousel_5/slide_04.jpg",
+        "posts/2026-08-15/carousel_5/slide_05.jpg",
+        "posts/2026-08-15/carousel_5/slide_06.jpg",
+        "posts/2026-08-15/carousel_5/slide_07.jpg",
+        "posts/2026-08-15/carousel_5/slide_08.jpg",
+        "posts/2026-08-15/carousel_5/slide_09.jpg",
+        "posts/2026-08-15/carousel_5/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Gmail promotes your emails to Primary after two replies\u2014not opens",
+        "hook_emphasis": "two replies",
+        "body": [
+          {
+            "text": "Gmail\u2019s algorithm tracks replies, not opens\u2014two replies move your email to Primary.",
+            "emphasis": "replies"
+          },
+          {
+            "text": "Primary tab emails get 3x more opens than Promotions or Spam.",
+            "emphasis": "3x more opens"
+          },
+          {
+            "text": "Ask a question in your email\u2014it boosts replies and moves you to Primary faster.",
+            "emphasis": "Ask a question"
+          },
+          {
+            "text": "Gmail moves emails to Primary within hours of the second reply\u2014no waiting.",
+            "emphasis": "hours"
+          }
+        ],
+        "chart": {
+          "label": "open rate",
+          "before": 12,
+          "after": 36,
+          "unit": "%",
+          "caption": "Moving from Promotions to Primary tripled open rates in one campaign."
+        },
+        "send_line": "Send this to whoever writes your emails"
+      },
+      "body_slides": [
+        {
+          "text": "Gmail\u2019s algorithm tracks replies, not opens\u2014two replies move your email to Primary.",
+          "keyword": "replies"
+        },
+        {
+          "text": "Primary tab emails get 3x more opens than Promotions or Spam.",
+          "keyword": "3x more opens"
+        },
+        {
+          "text": "Ask a question in your email\u2014it boosts replies and moves you to Primary faster.",
+          "keyword": "Ask a question"
+        },
+        {
+          "text": "Before: 12% open rate in Promotions. After: 36% open rate in Primary.",
+          "keyword": "36% open rate",
+          "before": "12%",
+          "after": "36%"
+        },
+        {
+          "text": "Gmail moves emails to Primary within hours of the second reply\u2014no waiting.",
+          "keyword": "hours"
+        },
+        {
+          "text": "Replies > opens\u2014focus on sparking conversations, not just getting clicks.",
+          "keyword": "conversations"
+        }
+      ],
+      "cta_word": "REPLY",
+      "cta_promise": "the exact email script that gets replies",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    }
+  ]
+}
