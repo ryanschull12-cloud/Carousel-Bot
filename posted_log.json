@@ -439,6 +439,16 @@
       "format": "myth-buster",
       "hook": "Meta lookalikes work best with 300 engaged users",
       "scored": false
+    },
+    {
+      "media_id": "17902765779481454",
+      "date": "2026-08-16",
+      "index": 1,
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "comparison",
+      "hook": "Gmail moves emails to Primary after one reply\u2014no opens needed",
+      "scored": false
     }
   ]
 }
