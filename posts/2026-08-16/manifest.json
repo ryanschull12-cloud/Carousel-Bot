@@ -1,0 +1,443 @@
+{
+  "batch_date": "2026-08-16",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Gmail moves emails to Primary after one reply\u2014not opens. Sender trust beats subject lines every single time. Save this \u2193 #emailmarketingtips #emaildeliverability #marketingaudit #corkbusiness",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "comparison",
+      "hook": "Gmail moves emails to Primary after one reply\u2014no opens needed",
+      "throughline": "Gmail prioritizes sender trust over subject lines, and one reply can move your email to Primary in hours.",
+      "image_paths": [
+        "posts/2026-08-16/carousel_1/slide_01.jpg",
+        "posts/2026-08-16/carousel_1/slide_02.jpg",
+        "posts/2026-08-16/carousel_1/slide_03.jpg",
+        "posts/2026-08-16/carousel_1/slide_04.jpg",
+        "posts/2026-08-16/carousel_1/slide_05.jpg",
+        "posts/2026-08-16/carousel_1/slide_06.jpg",
+        "posts/2026-08-16/carousel_1/slide_07.jpg",
+        "posts/2026-08-16/carousel_1/slide_08.jpg",
+        "posts/2026-08-16/carousel_1/slide_09.jpg",
+        "posts/2026-08-16/carousel_1/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Gmail moves emails to Primary after one reply\u2014no opens needed",
+        "hook_emphasis": "one reply\u2014no opens",
+        "body": [
+          {
+            "text": "Gmail\u2019s filter ignores your subject line if your sender score is low, so trust matters more than words.",
+            "emphasis": "trust matters more"
+          },
+          {
+            "text": "One reply tells Gmail someone actually cares, so your email jumps to the top of the inbox.",
+            "emphasis": "jumps to the top"
+          },
+          {
+            "text": "Emails with replies land in Primary 80% faster than those with just opens, because Gmail sees real engagement.",
+            "emphasis": "80% faster"
+          },
+          {
+            "text": "Your sender score resets daily, so keep replies coming to stay in Primary and out of spam.",
+            "emphasis": "resets daily"
+          }
+        ],
+        "screen": {
+          "title": "What Gmail really checks first",
+          "panel_label": "EMAIL FILTER",
+          "options": [
+            [
+              "Subject line",
+              "Gmail ignores if trust is low"
+            ],
+            [
+              "Sender trust",
+              "One reply moves you to Primary"
+            ]
+          ],
+          "wrong": 0,
+          "right": 1,
+          "mechanism": "Sender trust decides inbox placement faster than any subject line ever could."
+        }
+      },
+      "body_slides": [
+        {
+          "text": "Gmail\u2019s filter checks sender history first\u2014not the subject line.",
+          "keyword": "sender history"
+        },
+        {
+          "text": "One reply tells Gmail someone cares, so your email jumps to Primary.",
+          "keyword": "one reply"
+        },
+        {
+          "text": "Emails with replies land in Primary 80% faster than those with just opens.",
+          "keyword": "80%"
+        },
+        {
+          "text": "Subject lines matter less than whether someone hits \u2018reply\u2019 once.",
+          "keyword": "hits \u2018reply\u2019"
+        },
+        {
+          "text": "Gmail\u2019s trust score resets daily\u2014keep replies coming to stay in Primary.",
+          "keyword": "trust score"
+        },
+        {
+          "compare_a": "Subject lines",
+          "compare_b": "Sender trust",
+          "text": "Subject lines get ignored if your sender score is low.",
+          "keyword": "sender score"
+        }
+      ],
+      "cta_word": "TEMPLATE",
+      "cta_promise": "the exact reply-sparking email script",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Google Ads hides 23% of your highest-converting searches in \u2018Other searches.\u2019 These convert at 2x the rate but vanish into the report. Save this \u2193 #googleadstips #ppcmanagement #leadgeneration #galwaybusiness",
+      "niche": "Google Ads",
+      "angle": "realization",
+      "format": "step-by-step",
+      "hook": "Google Ads hides 23% of your highest-converting searches",
+      "throughline": "Google Ads buries 30% of your best leads in the Search Terms report, and one setting can uncover them.",
+      "image_paths": [
+        "posts/2026-08-16/carousel_2/slide_01.jpg",
+        "posts/2026-08-16/carousel_2/slide_02.jpg",
+        "posts/2026-08-16/carousel_2/slide_03.jpg",
+        "posts/2026-08-16/carousel_2/slide_04.jpg",
+        "posts/2026-08-16/carousel_2/slide_05.jpg",
+        "posts/2026-08-16/carousel_2/slide_06.jpg",
+        "posts/2026-08-16/carousel_2/slide_07.jpg",
+        "posts/2026-08-16/carousel_2/slide_08.jpg",
+        "posts/2026-08-16/carousel_2/slide_09.jpg",
+        "posts/2026-08-16/carousel_2/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Google Ads hides 23% of your highest-converting searches",
+        "hook_emphasis": "23% of highest-converting",
+        "body": [
+          {
+            "text": "Google Ads labels 23% of high-intent searches as \u2018Other searches,\u2019 so you never see them in your main reports.",
+            "emphasis": "Other searches"
+          },
+          {
+            "text": "These searches convert at twice the rate, but most advertisers ignore them because they\u2019re buried.",
+            "emphasis": "twice the rate"
+          },
+          {
+            "text": "Open the Search Terms report, filter for \u2018Other,\u2019 and add the best ones as exact match keywords to stop losing them.",
+            "emphasis": "exact match keywords"
+          },
+          {
+            "text": "Your cost-per-lead drops by 18% once you stop ignoring these hidden searches, because you\u2019re finally targeting the right people.",
+            "emphasis": "18%"
+          }
+        ],
+        "chart": {
+          "label": "cost per lead",
+          "before": 45,
+          "after": 36,
+          "unit": "\u20ac",
+          "caption": "Uncovering \u2018Other searches\u2019 cut cost per lead by 18% in two weeks."
+        }
+      },
+      "body_slides": [
+        {
+          "text": "Google Ads labels 23% of high-intent searches as \u2018Other searches.\u2019",
+          "keyword": "Other searches"
+        },
+        {
+          "text": "These searches convert at twice the rate but never show in your main reports.",
+          "keyword": "twice the rate"
+        },
+        {
+          "text": "Open the Search Terms report and filter for \u2018Other searches\u2019 to find them.",
+          "keyword": "Search Terms report"
+        },
+        {
+          "text": "Add these terms as exact match keywords to stop hiding them.",
+          "keyword": "exact match"
+        },
+        {
+          "text": "Your cost-per-lead drops by 18% once you stop ignoring these searches.",
+          "keyword": "18%"
+        },
+        {
+          "text": "Check this report weekly to keep your best leads from disappearing.",
+          "keyword": "weekly"
+        }
+      ],
+      "cta_word": "CHECKLIST",
+      "cta_promise": "the 5-step Search Terms audit",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Meta\u2019s algorithm freezes after 3 days without a single conversion. Your cost-per-lead doubles because Meta stops finding new buyers. Save this \u2193 #metaadstips #paidsocialtips #adspend #dublinbusiness",
+      "niche": "Meta/Instagram Ads",
+      "angle": "proof-numbers",
+      "format": "before-after",
+      "hook": "Meta\u2019s algorithm freezes after 3 days without a single conversion",
+      "throughline": "Meta Ads stop learning after 3 days of no conversions, and one setting can restart the process.",
+      "image_paths": [
+        "posts/2026-08-16/carousel_3/slide_01.jpg",
+        "posts/2026-08-16/carousel_3/slide_02.jpg",
+        "posts/2026-08-16/carousel_3/slide_03.jpg",
+        "posts/2026-08-16/carousel_3/slide_04.jpg",
+        "posts/2026-08-16/carousel_3/slide_05.jpg",
+        "posts/2026-08-16/carousel_3/slide_06.jpg",
+        "posts/2026-08-16/carousel_3/slide_07.jpg",
+        "posts/2026-08-16/carousel_3/slide_08.jpg",
+        "posts/2026-08-16/carousel_3/slide_09.jpg",
+        "posts/2026-08-16/carousel_3/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Meta\u2019s algorithm freezes after 3 days without a single conversion",
+        "hook_emphasis": "freezes after 3 days",
+        "body": [
+          {
+            "text": "Meta\u2019s algorithm stops learning if no one converts for three days straight, so your ads keep showing to the same people.",
+            "emphasis": "three days"
+          },
+          {
+            "text": "Your cost-per-lead jumps to \u20ac50 because Meta isn\u2019t finding new buyers, and your campaigns freeze in place.",
+            "emphasis": "\u20ac50"
+          },
+          {
+            "text": "Lower your conversion window from 7 days to 1 day to restart the learning process and find new buyers.",
+            "emphasis": "1 day"
+          },
+          {
+            "text": "Your cost-per-lead drops back to \u20ac25 within 48 hours, because Meta finally starts finding the right people again.",
+            "emphasis": "\u20ac25"
+          }
+        ],
+        "chart": {
+          "label": "cost per lead",
+          "before": 50,
+          "after": 25,
+          "unit": "\u20ac",
+          "caption": "Lowering the conversion window cut cost per lead in half within two days."
+        }
+      },
+      "body_slides": [
+        {
+          "text": "Meta\u2019s algorithm stops learning if no one converts for 3 days straight.",
+          "keyword": "3 days"
+        },
+        {
+          "text": "Your ads keep running, but they show to the same people over and over.",
+          "keyword": "same people"
+        },
+        {
+          "text": "Cost-per-lead jumps to \u20ac50 because Meta isn\u2019t finding new buyers.",
+          "keyword": "\u20ac50",
+          "before": "\u20ac25/lead",
+          "after": "\u20ac50/lead"
+        },
+        {
+          "text": "Lower your conversion window from 7 days to 1 day to restart learning.",
+          "keyword": "1 day",
+          "before": "7 days",
+          "after": "1 day"
+        },
+        {
+          "text": "Your cost-per-lead drops back to \u20ac25 within 48 hours of the fix.",
+          "keyword": "\u20ac25",
+          "before": "\u20ac50/lead",
+          "after": "\u20ac25/lead"
+        },
+        {
+          "text": "Check this setting every 3 days to keep your campaigns from freezing.",
+          "keyword": "every 3 days"
+        }
+      ],
+      "cta_word": "GUIDE",
+      "cta_promise": "the exact Meta Ads restart checklist",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 4,
+      "caption": "ChatGPT trains on everything you paste\u2014unless you flip this switch. Free AI tools use your inputs to improve their models by default. Save this \u2193 #aiforbusiness #aitoolsforbusiness #marketingaudit #irishbusiness",
+      "niche": "AI Tools",
+      "angle": "mistake-fear",
+      "format": "checklist",
+      "hook": "ChatGPT trains on everything you paste\u2014unless you flip this switch",
+      "throughline": "Free AI tools like ChatGPT keep what you paste to train on, and one setting can stop the leak.",
+      "image_paths": [
+        "posts/2026-08-16/carousel_4/slide_01.jpg",
+        "posts/2026-08-16/carousel_4/slide_02.jpg",
+        "posts/2026-08-16/carousel_4/slide_03.jpg",
+        "posts/2026-08-16/carousel_4/slide_04.jpg",
+        "posts/2026-08-16/carousel_4/slide_05.jpg",
+        "posts/2026-08-16/carousel_4/slide_06.jpg",
+        "posts/2026-08-16/carousel_4/slide_07.jpg",
+        "posts/2026-08-16/carousel_4/slide_08.jpg",
+        "posts/2026-08-16/carousel_4/slide_09.jpg",
+        "posts/2026-08-16/carousel_4/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "ChatGPT trains on everything you paste\u2014unless you flip this switch",
+        "hook_emphasis": "trains on everything",
+        "body": [
+          {
+            "text": "ChatGPT\u2019s free plan uses everything you paste to train its models, so your data could show up in someone else\u2019s answers.",
+            "emphasis": "train its models"
+          },
+          {
+            "text": "Pasting customer data or ad copy means you\u2019re handing it over to the tool by default, unless you turn off training.",
+            "emphasis": "handing it over"
+          },
+          {
+            "text": "Turn on \u2018Data Controls\u2019 in settings to stop ChatGPT from keeping what you type, and check other free AI tools too.",
+            "emphasis": "Data Controls"
+          },
+          {
+            "text": "Paid plans usually don\u2019t train on your data, but always double-check the settings to keep your business safe.",
+            "emphasis": "double-check"
+          }
+        ],
+        "screen": {
+          "title": "How to stop AI tools from keeping your data",
+          "panel_label": "DATA CONTROLS",
+          "options": [
+            [
+              "Default setting",
+              "AI trains on your inputs"
+            ],
+            [
+              "Data Controls on",
+              "AI stops keeping what you type"
+            ]
+          ],
+          "wrong": 0,
+          "right": 1,
+          "mechanism": "Turning on \u2018Data Controls\u2019 stops free AI tools from using your inputs to train their models."
+        }
+      },
+      "body_slides": [
+        {
+          "text": "ChatGPT\u2019s free plan uses your inputs to train its models by default.",
+          "keyword": "free plan"
+        },
+        {
+          "text": "Pasting customer data or ad copy means it could show up in someone else\u2019s answers.",
+          "keyword": "customer data"
+        },
+        {
+          "text": "Turn on \u2018Data Controls\u2019 in settings to stop ChatGPT from keeping what you type.",
+          "keyword": "Data Controls"
+        },
+        {
+          "text": "Claude and other free AI tools have the same default\u2014check their settings too.",
+          "keyword": "Claude"
+        },
+        {
+          "text": "Paid plans usually don\u2019t train on your data, but always double-check.",
+          "keyword": "Paid plans"
+        },
+        {
+          "text": "Run a quick audit of your AI tools every month to keep your data safe.",
+          "keyword": "audit"
+        }
+      ],
+      "cta_word": "CHECKLIST",
+      "cta_promise": "the 5-point AI data safety checklist",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Gmail skips the spam folder if someone replies\u2014even once. One reply tells Gmail your email belongs in Primary. Save this \u2193 #emailmarketingtips #emailcopywriting #conversiontracking #galwaybusiness",
+      "niche": "Email Marketing",
+      "angle": "proof-numbers",
+      "format": "steal-this",
+      "hook": "Gmail skips the spam folder if someone replies\u2014even once",
+      "throughline": "Emails with replies land in Gmail\u2019s Primary tab 80% faster, and one script can spark those replies.",
+      "image_paths": [
+        "posts/2026-08-16/carousel_5/slide_01.jpg",
+        "posts/2026-08-16/carousel_5/slide_02.jpg",
+        "posts/2026-08-16/carousel_5/slide_03.jpg",
+        "posts/2026-08-16/carousel_5/slide_04.jpg",
+        "posts/2026-08-16/carousel_5/slide_05.jpg",
+        "posts/2026-08-16/carousel_5/slide_06.jpg",
+        "posts/2026-08-16/carousel_5/slide_07.jpg",
+        "posts/2026-08-16/carousel_5/slide_08.jpg",
+        "posts/2026-08-16/carousel_5/slide_09.jpg",
+        "posts/2026-08-16/carousel_5/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Gmail skips the spam folder if someone replies\u2014even once",
+        "hook_emphasis": "skips the spam folder",
+        "body": [
+          {
+            "text": "Gmail\u2019s filter ignores your subject line if your sender score is low, so trust matters more than words.",
+            "emphasis": "trust matters more"
+          },
+          {
+            "text": "One reply tells Gmail someone actually cares, so your email jumps to the top of the inbox.",
+            "emphasis": "jumps to the top"
+          },
+          {
+            "text": "Emails with replies land in Primary 80% faster than those with just opens, because Gmail sees real engagement.",
+            "emphasis": "80% faster"
+          },
+          {
+            "text": "Ask a question in the first line to spark replies, and use this script: \u2018Quick question\u2014does this solve [problem] for you?\u2019",
+            "emphasis": "Quick question"
+          }
+        ],
+        "chart": {
+          "label": "inbox placement speed",
+          "before": 24,
+          "after": 4,
+          "unit": "hours",
+          "caption": "Emails with replies land in Primary 80% faster than those with just opens."
+        }
+      },
+      "body_slides": [
+        {
+          "text": "Gmail\u2019s filter checks sender trust first\u2014not the subject line.",
+          "keyword": "sender trust"
+        },
+        {
+          "text": "One reply tells Gmail someone cares, so your email jumps to Primary.",
+          "keyword": "one reply"
+        },
+        {
+          "text": "Emails with replies land in Primary 80% faster than those with just opens.",
+          "keyword": "80%"
+        },
+        {
+          "text": "Ask a question in the first line to spark replies and skip the spam folder.",
+          "keyword": "Ask a question"
+        },
+        {
+          "text": "Use this script: \u2018Quick question\u2014does this solve [problem] for you?\u2019",
+          "keyword": "Quick question"
+        },
+        {
+          "text": "Check your sender score monthly to keep trust high and emails in Primary.",
+          "keyword": "sender score"
+        }
+      ],
+      "cta_word": "TEMPLATE",
+      "cta_promise": "the exact reply-sparking email script",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    }
+  ]
+}

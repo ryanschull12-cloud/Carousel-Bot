@@ -1,76 +1,6 @@
 {
   "recent_batches": [
     {
-      "date": "2026-08-06",
-      "carousels": [
-        {
-          "niche": "Email Marketing",
-          "angle": "behind-the-curtain",
-          "format": "steal-this",
-          "hook": "Gmail cuts you off after 12 words\u2014here\u2019s what it hates",
-          "hashtags": [
-            "#emailmarketing",
-            "#deliverability",
-            "#marketingtips",
-            "#crm",
-            "#ecommercemarketing"
-          ]
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "mistake-fear",
-          "format": "checklist",
-          "hook": "Meta freezes your ads after 30 conversions\u2014here\u2019s how to wake it up",
-          "hashtags": [
-            "#metaads",
-            "#paidsocial",
-            "#digitalmarketing",
-            "#advertisingtips",
-            "#marketinghacks"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "behind-the-curtain",
-          "format": "comparison",
-          "hook": "Google\u2019s \u2018smart\u2019 bidding burns small budgets in 3 hours",
-          "hashtags": [
-            "#googleads",
-            "#ppc",
-            "#digitalmarketing",
-            "#sem",
-            "#advertisingstrategy"
-          ]
-        },
-        {
-          "niche": "Email Marketing",
-          "angle": "curiosity",
-          "format": "step-by-step",
-          "hook": "Gmail\u2019s 40-character preview is your open-rate secret weapon",
-          "hashtags": [
-            "#emailmarketing",
-            "#deliverability",
-            "#marketingtips",
-            "#crm",
-            "#ecommercetips"
-          ]
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "contrarian",
-          "format": "comparison",
-          "hook": "Meta\u2019s lookalike audiences waste 40% of your budget on strangers",
-          "hashtags": [
-            "#metaads",
-            "#paidsocial",
-            "#digitalmarketing",
-            "#advertisinghacks",
-            "#marketingstrategy"
-          ]
-        }
-      ]
-    },
-    {
       "date": "2026-08-07",
       "carousels": [
         {
@@ -651,6 +581,71 @@
             "#emailmarketingtips",
             "#emailcopywriting",
             "#conversiontracking"
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-08-16",
+      "carousels": [
+        {
+          "niche": "Email Marketing",
+          "angle": "behind-the-curtain",
+          "format": "comparison",
+          "hook": "Gmail moves emails to Primary after one reply\u2014no opens needed",
+          "hashtags": [
+            "#emailmarketingtips",
+            "#emaildeliverability",
+            "#marketingaudit",
+            "#corkbusiness"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "realization",
+          "format": "step-by-step",
+          "hook": "Google Ads hides 23% of your highest-converting searches",
+          "hashtags": [
+            "#googleadstips",
+            "#ppcmanagement",
+            "#leadgeneration",
+            "#galwaybusiness"
+          ]
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "proof-numbers",
+          "format": "before-after",
+          "hook": "Meta\u2019s algorithm freezes after 3 days without a single conversion",
+          "hashtags": [
+            "#metaadstips",
+            "#paidsocialtips",
+            "#adspend",
+            "#dublinbusiness"
+          ]
+        },
+        {
+          "niche": "AI Tools",
+          "angle": "mistake-fear",
+          "format": "checklist",
+          "hook": "ChatGPT trains on everything you paste\u2014unless you flip this switch",
+          "hashtags": [
+            "#aiforbusiness",
+            "#aitoolsforbusiness",
+            "#marketingaudit",
+            "#irishbusiness"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "proof-numbers",
+          "format": "steal-this",
+          "hook": "Gmail skips the spam folder if someone replies\u2014even once",
+          "hashtags": [
+            "#emailmarketingtips",
+            "#emailcopywriting",
+            "#conversiontracking",
+            "#galwaybusiness"
           ]
         }
       ]
