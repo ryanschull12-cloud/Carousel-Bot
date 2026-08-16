@@ -1108,7 +1108,7 @@ def render(niche,beats,outdir,badge):
         free-text field is how it went missing in the first place."""
         lead="COMMENT"
         lf=F(F_SANS,54)
-        f,ls=fit(probe,b.text,F_SANS,200,110,mw,2); lh=int(f.size*1.16)
+        f,ls=fit(probe,b.text,F_SANS,200,110,mw,1); lh=int(f.size*1.16)
         tail=b.sub or ""
         if tail and not re.match(r"(?i)^(and|i.ll|comment|save)\b", tail):
             tail=f"and I'll send you {tail}"
