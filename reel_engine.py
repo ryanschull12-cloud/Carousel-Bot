@@ -478,7 +478,7 @@ BEAT_MAX   = 5.6
 # beat duration, and moving any of them without re-checking the total removes content
 # quietly. The smoke test now asserts all four body beats survive, so the next person
 # to retime a beat gets told rather than shipping a truncated argument.
-REEL_MAX_S = 32.0   # past this, drop a beat rather than speed any of them up
+REEL_MAX_S = 42.0   # past this, drop a beat rather than speed any of them up
 
 def read_time(text, cps=CPS, lo=BEAT_MIN, hi=BEAT_MAX, orient=ORIENT):
     return round(clamp(orient + len(text or "")/cps, lo, hi), 2)
