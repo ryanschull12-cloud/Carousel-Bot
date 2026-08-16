@@ -464,7 +464,7 @@ def anchor(blockh):
 # "not enough said on each slide" strictly worse while appearing to address it. Any
 # future change to CPS/BEAT_MAX has to re-check this ceiling or it will quietly eat
 # the argument the body beats now carry.
-CPS        = 15.0   # characters per second, reading ceiling
+CPS        = 20.0   # characters per second, reading ceiling
 ORIENT     = 0.55   # seconds to find the new copy after a cut
 BEAT_MIN   = 2.2
 BEAT_MAX   = 5.6
@@ -984,8 +984,7 @@ def render(niche,beats,outdir,badge):
         # Each line is rendered as ONE layer so the fade/rise stays a single
         # composite -- per-word pastes would fade at slightly different rates
         # along a line and read as a shimmer.
-        cols=read_head_colours(ls, counts[bi], fi, c["accent"])
-        lays=[line_layer(l,fr_,fb,c["accent"],colours=cols[i]) for i,l in enumerate(ls)]
+        lays=[line_layer(l,fr_,fb,c["accent"]) for l in ls]
         blockh=lh*len(lays)
         # Panel width is now FIXED and symmetric, not hugged to the longest line
         # (2026-08-09). Hugging meant the right edge landed wherever the wrap
@@ -1011,21 +1010,8 @@ def render(niche,beats,outdir,badge):
             pd=ImageDraw.Draw(panel)
             pd.rounded_rectangle([MARGIN-34,y0-30,MARGIN-34+blockw,y0+blockh+26],
                                  radius=10,fill=BG_RAISED+(255,))
-            # Base bar dims to BAR_WAS rather than solid accent (2026-08-13) so the
-            # travelling highlight below has somewhere to stand out against.
-            pd.rectangle([MARGIN-34,y0-30,MARGIN-28,y0+blockh+26],fill=BAR_WAS+(255,))
-            fr.paste(fade(panel,int(255*grow)),(0,0),fade(panel,int(255*grow)))
-        # Reading cursor (2026-08-13): body beats are the bulk of a reel's runtime
-        # and, once the panel settled around frame 18, nothing else moved for the
-        # rest of a 4-6s beat. A short accent segment now travels the length of
-        # the left bar over the beat's full duration -- cheap continuous motion
-        # that tracks reading pace instead of competing with the text for
-        # attention. Gated on grow so it never appears before the panel does.
-        if grow>0.3:
-            travel=clamp(fi/max(counts[bi]-1,1))
-            seg_h=max(40,int(blockh*0.22))
-            seg_y=int((y0-30)+(blockh+56-seg_h)*travel)
-            d.rectangle([MARGIN-34,seg_y,MARGIN-28,seg_y+seg_h],fill=c["accent"])
+                    # Solid accent (2026-08-16, was BAR_WAS): BAR_WAS used to dim this bar        # on purpose so the travelling "reading cursor" highlight had something
+            pd.rectangle([MARGIN-34,y0-30,MARGIN-28,y0+blockh+26],fill=c["accent"]+(255,))
         for li,lay in enumerate(lays):
             p=ease(clamp((fi-li*3)/15.0))
             if p>0:
