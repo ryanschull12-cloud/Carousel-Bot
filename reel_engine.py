@@ -1250,7 +1250,7 @@ def proof_pair(carousel):
 # argument. screen drops before chart because chart is the beat Ryan specifically
 # asked for ("I need the graphs in the videos"); if only one graphic beat is going
 # to survive a tight budget, it should be the one that carries a real number.
-TRIM_ORDER = ("body", "stat", "screen", "chart", "proof")  # REVERSED 2026-08-16: body trims before the graphics now
+TRIM_ORDER = ("stat", "screen", "chart", "proof", "body")
 
 
 def trim_to_budget(beats, budget=REEL_MAX_S):
@@ -1288,36 +1288,21 @@ def beats_from_carousel(carousel):
         # cannot finish an instruction has not been teased, they have been failed.
         out = [Beat("hook", rb["hook"], read_time(rb["hook"], cps=22.0, lo=2.0, hi=3.4),
                     emph=(rb.get("hook_emphasis") or "").strip() or None)]
-        if rb.get("stat_number") is not None and rb.get("stat_label"):
-            # 0.55s of that is the number counting up before the label matters.
-            out.append(Beat("stat", None,
-                            read_time(rb["stat_label"], lo=2.2, hi=4.2, orient=0.90),
-                            sub=rb["stat_label"], num=int(rb["stat_number"])))
-        for line in rb["body"][:2]:  # cut from 4 2026-08-16: reel leans on the graphic, body just supports it
-            emph = None
-            if isinstance(line, dict):
-                # {"text": ..., "emphasis": ...} -- the emphasis phrase is what the
-                # brain wants set in bold accent inside the sentence. Plain strings
-                # still work and simply render unemphasised, so an older manifest
-                # renders rather than crashing.
-                emph = (line.get("emphasis") or line.get("keyword") or "").strip() or None
-                line = (line.get("text") or "").strip()
-            if line:
-                # Guard: an emphasis phrase that is not actually IN the sentence
-                # would silently highlight nothing, and the beat would look like a
-                # wall of text with no explanation of why.
-                if emph and emph.lower() not in line.lower():
-                    print(f"WARNING: emphasis {emph!r} not found in body line — "
-                          f"rendering it unemphasised: {line[:48]!r}")
-                    emph = None
-                out.append(Beat("body", line, read_time(line), emph=emph))
-        # Graphic beat (added 2026-08-13): at most ONE of chart / screen / plain
-        # proof per reel. chart and screen both live in reel_graphics.py and were
-        # committed 2026-08-12 as renderers with nothing calling them yet -- this
-        # is the wiring. chart wins when both are present because it carries a real
-        # number (what Ryan asked for); screen is the fallback graphic; plain proof
-        # (two lines of text, no bars) is the last resort for a manifest with
-        # neither, so nothing regresses for carousels generated before this change.
+        # Graphic beat (added 2026-08-13, moved to slide 2 on 2026-08-16 per Ryan):
+        # at most ONE of chart / screen / plain proof per reel. chart and screen
+        # both live in reel_graphics.py. chart wins when both are present because
+        # it carries a real number (what Ryan asked for); screen is the fallback
+        # graphic; plain proof (two lines of text, no bars) is the last resort for
+        # a manifest with neither, so nothing regresses for older manifests.
+        #
+        # POSITION: this used to run after all four body beats -- a recap of a
+        # claim the viewer had already read. Ryan asked for it inside the first
+        # two slides instead, so it now lands immediately after the hook, before
+        # the mechanism is explained. That is a deliberate proof-upfront trade:
+        # the number sells the scroll-stop, and the body beats that follow explain
+        # WHY it happened rather than reveal THAT it happened. If a future pass
+        # wants the mechanism-first order back, move this block after the body
+        # loop again -- nothing else here depends on where it sits.
         graphic = None
         rb_chart = rb.get("chart") or {}
         if rb_chart.get("label") and rb_chart.get("before") is not None and rb_chart.get("after") is not None:
@@ -1337,6 +1322,29 @@ def beats_from_carousel(carousel):
                 out.append(Beat("proof", None,
                                 read_time(pr[2], lo=2.4, hi=3.6, orient=1.60),
                                 sub=pr[2], pair=(pr[0], pr[1])))
+        if rb.get("stat_number") is not None and rb.get("stat_label"):
+            # 0.55s of that is the number counting up before the label matters.
+            out.append(Beat("stat", None,
+                            read_time(rb["stat_label"], lo=2.2, hi=4.2, orient=0.90),
+                            sub=rb["stat_label"], num=int(rb["stat_number"])))
+        for line in rb["body"][:4]:
+            emph = None
+            if isinstance(line, dict):
+                # {"text": ..., "emphasis": ...} -- the emphasis phrase is what the
+                # brain wants set in bold accent inside the sentence. Plain strings
+                # still work and simply render unemphasised, so an older manifest
+                # renders rather than crashing.
+                emph = (line.get("emphasis") or line.get("keyword") or "").strip() or None
+                line = (line.get("text") or "").strip()
+            if line:
+                # Guard: an emphasis phrase that is not actually IN the sentence
+                # would silently highlight nothing, and the beat would look like a
+                # wall of text with no explanation of why.
+                if emph and emph.lower() not in line.lower():
+                    print(f"WARNING: emphasis {emph!r} not found in body line — "
+                          f"rendering it unemphasised: {line[:48]!r}")
+                    emph = None
+                out.append(Beat("body", line, read_time(line), emph=emph))
         # cta_promise (a noun phrase) is preferred over cta_line (free text): the
         # renderer composes the instruction around it, so a noun phrase is the only
         # shape that reliably produces a sentence. read_time is measured on the
