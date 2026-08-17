@@ -428,7 +428,7 @@
       "angle": "relief-permission",
       "format": "myth-buster",
       "hook": "Gmail ignores \u2018free\u2019 if your sender score is high",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "17940026547336841",

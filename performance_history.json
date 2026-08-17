@@ -755,6 +755,24 @@
       "engagement_rate": 100.0,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control"
+    },
+    {
+      "date": "2026-08-14",
+      "media_id": "17977759196897804",
+      "niche": "Email Marketing",
+      "angle": "relief-permission",
+      "format": "myth-buster",
+      "hook": "Gmail ignores \u2018free\u2019 if your sender score is high",
+      "metrics": {
+        "reach": 2,
+        "saved": 0,
+        "shares": 0,
+        "likes": 2,
+        "comments": 0
+      },
+      "engagement_rate": 100.0,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
     }
   ],
   "scored_reels": [
@@ -1093,6 +1111,47 @@
         "has_stat": false,
         "has_proof": false,
         "duration_s": 30.11
+      },
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
+    },
+    {
+      "date": "2026-08-14",
+      "media_id": "18112761403777167",
+      "niche": "Email Marketing",
+      "angle": "relief-permission",
+      "format": "myth-buster",
+      "hook": "Gmail ignores \u2018free\u2019 if your sender score is high",
+      "trial": false,
+      "metrics": {
+        "reach": 1,
+        "views": 1,
+        "saved": 0,
+        "shares": 0,
+        "likes": 1,
+        "comments": 0,
+        "total_interactions": 1,
+        "ig_reels_avg_watch_time": 7789,
+        "ig_reels_video_view_total_time": 15579,
+        "reels_skip_rate": 100
+      },
+      "engagement_rate": 100.0,
+      "sends_per_reach": 0.0,
+      "views_per_reach": 1.0,
+      "beat_structure": {
+        "beat_count": 6,
+        "beat_kinds": [
+          "hook",
+          "body",
+          "body",
+          "screen",
+          "cta",
+          "brand"
+        ],
+        "body_beats": 2,
+        "has_stat": false,
+        "has_proof": false,
+        "duration_s": 27.25
       },
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control"
