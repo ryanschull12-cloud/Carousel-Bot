@@ -449,6 +449,16 @@
       "format": "comparison",
       "hook": "Gmail moves emails to Primary after one reply\u2014no opens needed",
       "scored": false
+    },
+    {
+      "media_id": "18130242805650379",
+      "date": "2026-08-17",
+      "index": 1,
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "comparison",
+      "hook": "Gmail buries emails with \u2018free\u2019 or \u2018discount\u2019 in the subject",
+      "scored": false
     }
   ]
 }
