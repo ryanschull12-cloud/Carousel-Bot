@@ -1,0 +1,26 @@
+[
+  {
+    "date": "2026-08-17",
+    "index": 1,
+    "clip": "assets/story_reel_footage/latenight_coding_v1.mp4",
+    "hook_lines": [
+      "I let Claude",
+      "run my cold email",
+      "for 7 days\u2014",
+      "here\u2019s the leak"
+    ],
+    "cta_word": "LEAK"
+  },
+  {
+    "date": "2026-08-17",
+    "index": 2,
+    "clip": "assets/story_reel_footage/nyc_office_skyline.mp4",
+    "hook_lines": [
+      "3 months ago",
+      "I had 2 clients.",
+      "Now I have 14\u2014",
+      "here\u2019s the bot"
+    ],
+    "cta_word": "SYSTEM"
+  }
+]
