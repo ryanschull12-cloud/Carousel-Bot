@@ -1,0 +1,71 @@
+concurrency:
+  # Shares the same lock as the carousel/reel workflows. They all commit to main
+  # (posts/, logs) — running this alongside them risks a non-fast-forward push
+  # race, the same class of bug daily.yml's own comment documents for generation
+  # vs. posting. Queuing behind them costs nothing; this job is a few seconds of
+  # ffmpeg work per clip, not a render-heavy one.
+  group: instagram-pipeline
+  cancel-in-progress: false
+
+name: Story Reels (email only, never auto-posted)
+
+# Renders 2 "story reel" pieces a day — single B-roll clip, short on-screen hook,
+# full story/CTA in the caption — and emails both to Ryan. This format was
+# explicitly decided to never auto-post (see the project's story_reel_format_brief.md):
+# Ryan reviews and posts manually, same as the two hand-posted value-reel slots
+# instagram_reel_post.py already emails him. Completely separate content type from
+# the carousel-to-reel pipeline: different script, different footage bank, no
+# beats, no Graph API calls, no GitHub Pages hosting needed.
+
+on:
+  schedule:
+    # Same spread-window pattern as the other daily workflows: GitHub's scheduled
+    # queue for this repo is best-effort and has arrived hours late or not at all
+    # on single-shot triggers before (see daily.yml's comment). The log write in
+    # story_reel_engine.py's rotation logic is not a same-day dedupe gate the way
+    # reel_posted_log.json is for the auto-post slots, so unlike those workflows
+    # this one does NOT need an idempotency check before running — it always
+    # generates a fresh batch. Scheduled once, not repeated across the window, to
+    # avoid emailing Ryan more than one batch on a lucky day when GitHub's queue
+    # fires it more than once.
+    - cron: "30 7 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  story-reels:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install ffmpeg and IBM Plex Sans
+        # fonts-ibm-plex is a Debian package, same mechanism already used for
+        # fonts-inter elsewhere in this repo — not an uploaded font file.
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-ibm-plex
+
+      - name: Install Python deps
+        run: pip install -r requirements.txt
+
+      - name: Render story reels + email
+        env:
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          TO_EMAIL: ${{ secrets.TO_EMAIL }}
+        run: python story_reel_engine.py --count 2
+
+      - name: Commit rendered reels + log
+        run: |
+          git config user.name "carousel-bot"
+          git config user.email "actions@github.com"
+          git add posts/story_reels story_reel_log.json 2>/dev/null || true
+          git diff --staged --quiet || git commit -m "Render + email story reels $(date +'%Y-%m-%d')"
+          git push
