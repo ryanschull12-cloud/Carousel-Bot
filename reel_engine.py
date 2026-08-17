@@ -1250,7 +1250,7 @@ def proof_pair(carousel):
 # argument. screen drops before chart because chart is the beat Ryan specifically
 # asked for ("I need the graphs in the videos"); if only one graphic beat is going
 # to survive a tight budget, it should be the one that carries a real number.
-TRIM_ORDER = ("stat", "screen", "chart", "proof", "body")
+TRIM_ORDER = ("body", "stat", "screen", "chart", "proof")  # REVERSED 2026-08-16: body trims before the graphics now
 
 
 def trim_to_budget(beats, budget=REEL_MAX_S):
@@ -1327,7 +1327,7 @@ def beats_from_carousel(carousel):
             out.append(Beat("stat", None,
                             read_time(rb["stat_label"], lo=2.2, hi=4.2, orient=0.90),
                             sub=rb["stat_label"], num=int(rb["stat_number"])))
-        for line in rb["body"][:4]:
+        for line in rb["body"][:2]:  # cut from 4 2026-08-16: reel leans on the graphic, body just supports it
             emph = None
             if isinstance(line, dict):
                 # {"text": ..., "emphasis": ...} -- the emphasis phrase is what the

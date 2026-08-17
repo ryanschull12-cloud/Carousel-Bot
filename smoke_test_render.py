@@ -308,16 +308,20 @@ def check_reel(name, carousel, out_dir, f, sheets, audio_dir):
     except Exception:
         pass
 
-    # All four body beats must survive the budget. They are one argument -- what
-    # happens, why, what it costs, what to do -- so losing the tail leaves a reel
-    # that states a problem and stops. This is checked because it has already
-    # happened once, from a change to a completely different beat's duration.
+    # Body is capped at 2 beats on purpose (2026-08-16, "Rebalance reels toward
+    # graphics"): the graphic beat now carries more of the argument, body just
+    # supports it, and beats_from_carousel() only ever reads rb["body"][:2]. This
+    # check used to require 4 -- that was right when body carried the whole
+    # argument, but it hard-failed every run after the cap shipped since only 2
+    # can ever exist. Checking against min(2, src_body) keeps the ORIGINAL intent
+    # (the budget must not additionally truncate what's already a short list)
+    # without flagging the deliberate cut as a regression.
     n_body = sum(1 for b in beats if b.kind == "body")
     src_body = len(((carousel.get("reel_beats") or {}).get("body")) or [])
-    if src_body and n_body < min(4, src_body):
-        f.fail(name, f"only {n_body} of {src_body} body beats survived the {re_.REEL_MAX_S}s "
-                     f"budget -- the argument is truncated, and the beat dropped is the "
-                     f"one that says what to do")
+    if src_body and n_body < min(2, src_body):
+        f.fail(name, f"only {n_body} of {min(2, src_body)} body beats survived the "
+                     f"{re_.REEL_MAX_S}s budget -- the argument is truncated further "
+                     f"than the intentional 2-beat cap already allows")
 
     # The CTA is the frame the whole reel exists to reach, and it is composed as
     # "COMMENT" / keyword / "and I'll send you <promise>". A promise carrying its own
