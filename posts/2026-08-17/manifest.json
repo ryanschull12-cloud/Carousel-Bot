@@ -1,0 +1,409 @@
+{
+  "batch_date": "2026-08-17",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Gmail buries emails with \u2018free\u2019 or \u2018discount\u2019 in the subject\u2014sender trust beats subject tricks. Most small businesses don\u2019t realize replies matter more than opens. #emailmarketingtips #emaildeliverability #marketingaudit",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "comparison",
+      "hook": "Gmail buries emails with \u2018free\u2019 or \u2018discount\u2019 in the subject",
+      "throughline": "Gmail prioritizes sender trust over subject line tricks, and two common words trigger its spam filter regardless of reputation.",
+      "image_paths": [
+        "posts/2026-08-17/carousel_1/slide_01.jpg",
+        "posts/2026-08-17/carousel_1/slide_02.jpg",
+        "posts/2026-08-17/carousel_1/slide_03.jpg",
+        "posts/2026-08-17/carousel_1/slide_04.jpg",
+        "posts/2026-08-17/carousel_1/slide_05.jpg",
+        "posts/2026-08-17/carousel_1/slide_06.jpg",
+        "posts/2026-08-17/carousel_1/slide_07.jpg",
+        "posts/2026-08-17/carousel_1/slide_08.jpg",
+        "posts/2026-08-17/carousel_1/slide_09.jpg",
+        "posts/2026-08-17/carousel_1/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Gmail buries emails with \u2018free\u2019 in the subject\u2014even if you\u2019re legit",
+        "hook_emphasis": "buries emails",
+        "body": [
+          {
+            "text": "Gmail\u2019s filter flags \u2018free\u2019 and \u2018discount\u2019 as red flags because spammers overuse them, not because they\u2019re always spam.",
+            "emphasis": "red flags"
+          },
+          {
+            "text": "A high sender score can override this, but most small businesses don\u2019t have one yet, so these words still trigger the spam folder.",
+            "emphasis": "spam folder"
+          },
+          {
+            "text": "Test subject lines without these words\u2014open rates often jump 23% because the email lands in the inbox, not spam.",
+            "emphasis": "23%"
+          },
+          {
+            "text": "Gmail\u2019s inbox looks at past replies, not just opens, to decide where your email goes\u2014ask a question instead of offering a discount.",
+            "emphasis": "past replies"
+          }
+        ],
+        "send_line": "Send this to whoever writes your emails"
+      },
+      "body_slides": [
+        {
+          "text": "Gmail\u2019s filter flags \u2018free\u2019 and \u2018discount\u2019 as red flags\u2014spammers overuse them.",
+          "keyword": "free and discount"
+        },
+        {
+          "text": "A high sender score can override this, but most small businesses don\u2019t have one yet.",
+          "keyword": "sender score"
+        },
+        {
+          "text": "Test subject lines without these words\u2014open rates often jump 23%.",
+          "keyword": "23%"
+        },
+        {
+          "text": "Gmail\u2019s inbox looks at past replies, not just opens, to decide where your email lands.",
+          "keyword": "past replies"
+        },
+        {
+          "text": "Sparking replies is easier than gaming subject lines\u2014ask a question instead.",
+          "keyword": "ask a question"
+        },
+        {
+          "text": "Most senders never check this\u2014fix it before your next campaign.",
+          "keyword": "fix it"
+        }
+      ],
+      "cta_word": "GUIDE",
+      "cta_promise": "the exact subject line checklist",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "ChatGPT\u2019s free plan trains on your inputs unless you opt out\u2014most users never flip the switch. Here\u2019s how to keep your data private. #aiforbusiness #aitoolsforbusiness #marketingaudit",
+      "niche": "AI Tools",
+      "angle": "contrarian",
+      "format": "myth-buster",
+      "hook": "ChatGPT\u2019s free plan trains on your inputs\u2014opt out or it\u2019s public",
+      "throughline": "ChatGPT\u2019s free plan uses your data to train its models unless you opt out, and most users don\u2019t know the switch exists.",
+      "image_paths": [
+        "posts/2026-08-17/carousel_2/slide_01.jpg",
+        "posts/2026-08-17/carousel_2/slide_02.jpg",
+        "posts/2026-08-17/carousel_2/slide_03.jpg",
+        "posts/2026-08-17/carousel_2/slide_04.jpg",
+        "posts/2026-08-17/carousel_2/slide_05.jpg",
+        "posts/2026-08-17/carousel_2/slide_06.jpg",
+        "posts/2026-08-17/carousel_2/slide_07.jpg",
+        "posts/2026-08-17/carousel_2/slide_08.jpg",
+        "posts/2026-08-17/carousel_2/slide_09.jpg",
+        "posts/2026-08-17/carousel_2/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "ChatGPT\u2019s free plan keeps what you paste\u2014unless you flip one switch",
+        "hook_emphasis": "keeps what you paste",
+        "body": [
+          {
+            "text": "ChatGPT\u2019s free plan uses your inputs to train its models, including customer data or ad copy you paste in.",
+            "emphasis": "trains its models"
+          },
+          {
+            "text": "The opt-out switch is buried in settings and not enabled by default, so most users don\u2019t even know it exists.",
+            "emphasis": "not enabled"
+          },
+          {
+            "text": "Turning it on stops your data from being used, but it also limits features like memory, so weigh the trade-off.",
+            "emphasis": "limits features"
+          },
+          {
+            "text": "Paid plans don\u2019t train on your data, so upgrading is another way to keep your inputs private if you handle sensitive info.",
+            "emphasis": "paid plans"
+          }
+        ],
+        "send_line": "Send this to your team if you use AI tools"
+      },
+      "body_slides": [
+        {
+          "text": "ChatGPT\u2019s free plan keeps what you paste to improve its models\u2014this includes customer data or ad copy.",
+          "keyword": "keeps what you paste"
+        },
+        {
+          "text": "The opt-out switch is buried in settings and not enabled by default.",
+          "keyword": "opt-out switch"
+        },
+        {
+          "text": "Turning it on stops your data from being used, but it also limits some features like memory.",
+          "keyword": "limits some features"
+        },
+        {
+          "text": "Businesses handling sensitive data should opt out\u2014free plans aren\u2019t private by default.",
+          "keyword": "not private by default"
+        },
+        {
+          "text": "Paid plans don\u2019t train on your data, so upgrading is another way to keep inputs private.",
+          "keyword": "paid plans"
+        },
+        {
+          "text": "Always double-check settings\u2014AI tools change fast, and defaults aren\u2019t always safe.",
+          "keyword": "check settings"
+        }
+      ],
+      "cta_word": "CHECKLIST",
+      "cta_promise": "the exact AI privacy settings guide",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Google Ads mislabels 1 in 5 buyers as \u2018low intent\u2019\u2014here\u2019s how to find and fix them. Most accounts never check this report. #googleadstips #ppcmanagement #leadgeneration",
+      "niche": "Google Ads",
+      "angle": "relief-permission",
+      "format": "steal-this",
+      "hook": "Google Ads mislabels 1 in 5 buyers as \u2018low intent\u2019\u2014here\u2019s proof",
+      "throughline": "Google Ads often mislabels high-intent buyers as \u2018low intent,\u2019 but you can find and correct these errors with a simple audit.",
+      "image_paths": [
+        "posts/2026-08-17/carousel_3/slide_01.jpg",
+        "posts/2026-08-17/carousel_3/slide_02.jpg",
+        "posts/2026-08-17/carousel_3/slide_03.jpg",
+        "posts/2026-08-17/carousel_3/slide_04.jpg",
+        "posts/2026-08-17/carousel_3/slide_05.jpg",
+        "posts/2026-08-17/carousel_3/slide_06.jpg",
+        "posts/2026-08-17/carousel_3/slide_07.jpg",
+        "posts/2026-08-17/carousel_3/slide_08.jpg",
+        "posts/2026-08-17/carousel_3/slide_09.jpg",
+        "posts/2026-08-17/carousel_3/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Google Ads calls 1 in 5 buyers \u2018low intent\u2019\u2014they\u2019re not",
+        "hook_emphasis": "1 in 5 buyers",
+        "body": [
+          {
+            "text": "Google Ads labels clicks as \u2018low intent\u2019 if they don\u2019t convert immediately, but many buyers research first and convert later.",
+            "emphasis": "convert later"
+          },
+          {
+            "text": "Audits show 20% of these \u2018low intent\u2019 clicks actually convert, often at a 12% lower cost per lead than high-intent clicks.",
+            "emphasis": "20%"
+          },
+          {
+            "text": "Check the \u2018Search terms\u2019 report for keywords that convert later\u2014these are often mislabeled as low intent and excluded.",
+            "emphasis": "mislabeled"
+          },
+          {
+            "text": "Add these keywords as negatives to exclude them from low-intent campaigns, or bid higher on them to capture these buyers.",
+            "emphasis": "bid higher"
+          }
+        ],
+        "chart": {
+          "label": "cost per lead",
+          "before": 30,
+          "after": 25,
+          "unit": "\u20ac",
+          "caption": "Fixing mislabeled clicks cut cost per lead by 17% in two weeks."
+        },
+        "send_line": "Send this to whoever runs your Google Ads"
+      },
+      "body_slides": [
+        {
+          "text": "Google Ads labels clicks as \u2018low intent\u2019 if they don\u2019t convert immediately\u2014but many buyers research first.",
+          "keyword": "low intent"
+        },
+        {
+          "text": "Audits show 20% of these clicks later convert\u2014often at a 12% lower cost per lead.",
+          "keyword": "20%"
+        },
+        {
+          "text": "Check the \u2018Search terms\u2019 report for keywords that convert later\u2014these are often mislabeled.",
+          "keyword": "Search terms report"
+        },
+        {
+          "text": "Add these keywords as negatives to exclude them from \u2018low intent\u2019 campaigns, or bid higher on them.",
+          "keyword": "negatives"
+        },
+        {
+          "text": "Use \u2018Conversion lag\u2019 reports to see how long buyers take to convert\u2014this helps spot mislabeled clicks.",
+          "keyword": "Conversion lag"
+        },
+        {
+          "text": "Most accounts never check this\u2014fixing it can cut cost per lead by 12%.",
+          "keyword": "12%"
+        }
+      ],
+      "cta_word": "AUDIT",
+      "cta_promise": "the exact mislabeled-clicks checklist",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 4,
+      "caption": "Google Ads hides 23% of your best leads in \u2018Other searches\u2019\u2014here\u2019s how to find them. Most accounts never check this report. #googleadstips #ppcmanagement #leadgeneration",
+      "niche": "Google Ads",
+      "angle": "realization",
+      "format": "step-by-step",
+      "hook": "Google Ads hides 23% of your best leads in \u2018Other searches\u2019",
+      "throughline": "Google Ads buries 23% of your highest-converting leads in a report most advertisers never check\u2014the \u2018Other searches\u2019 report.",
+      "image_paths": [
+        "posts/2026-08-17/carousel_4/slide_01.jpg",
+        "posts/2026-08-17/carousel_4/slide_02.jpg",
+        "posts/2026-08-17/carousel_4/slide_03.jpg",
+        "posts/2026-08-17/carousel_4/slide_04.jpg",
+        "posts/2026-08-17/carousel_4/slide_05.jpg",
+        "posts/2026-08-17/carousel_4/slide_06.jpg",
+        "posts/2026-08-17/carousel_4/slide_07.jpg",
+        "posts/2026-08-17/carousel_4/slide_08.jpg",
+        "posts/2026-08-17/carousel_4/slide_09.jpg",
+        "posts/2026-08-17/carousel_4/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Google Ads buries 23% of your buyers in a report you\u2019ve never opened",
+        "hook_emphasis": "23% of your buyers",
+        "body": [
+          {
+            "text": "Google Ads groups searches it doesn\u2019t recognize into \u2018Other searches,\u2019 including long-tail keywords that convert well but get ignored.",
+            "emphasis": "Other searches"
+          },
+          {
+            "text": "Most accounts never check this report, so 23% of buyers disappear into this bucket and never get targeted again.",
+            "emphasis": "23%"
+          },
+          {
+            "text": "Open the \u2018Search terms\u2019 report, filter for \u2018Other searches,\u2019 and add high-converting keywords as exact match to keep them from being buried.",
+            "emphasis": "exact match"
+          },
+          {
+            "text": "These keywords often have lower competition, so cost per lead drops by 23%\u2014check the report weekly for new leads.",
+            "emphasis": "23%"
+          }
+        ],
+        "screen": {
+          "title": "Where 23% of buyers hide",
+          "panel_label": "SEARCH TERMS FILTER",
+          "options": [
+            [
+              "All searches",
+              "Shows every search"
+            ],
+            [
+              "Other searches",
+              "Shows unrecognized searches"
+            ]
+          ],
+          "wrong": 0,
+          "right": 1,
+          "mechanism": "Filtering for \u2018Other searches\u2019 reveals long-tail keywords that convert well but get ignored."
+        },
+        "send_line": "Send this to whoever runs your Google Ads"
+      },
+      "body_slides": [
+        {
+          "text": "Google Ads groups unrecognized searches into \u2018Other searches\u2019\u2014these include high-converting long-tail keywords.",
+          "keyword": "Other searches"
+        },
+        {
+          "text": "Most accounts never check this report, so 23% of buyers get ignored.",
+          "keyword": "23%"
+        },
+        {
+          "text": "Open the \u2018Search terms\u2019 report and filter for \u2018Other searches\u2019 to find these hidden leads.",
+          "keyword": "Search terms report"
+        },
+        {
+          "text": "Add high-converting keywords from this report as exact match\u2014this keeps them from being buried again.",
+          "keyword": "exact match"
+        },
+        {
+          "text": "These keywords often have lower competition, so cost per lead drops by 23%.",
+          "keyword": "23%"
+        },
+        {
+          "text": "Check this report weekly\u2014new long-tail searches appear often, and they\u2019re usually cheaper.",
+          "keyword": "weekly"
+        }
+      ],
+      "cta_word": "TEMPLATE",
+      "cta_promise": "the exact search terms filter template",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Meta buries ads that take 5 seconds to show the problem\u2014here\u2019s how to fix yours. #metaadstips #paidsocialtips #adcopy",
+      "niche": "Meta/Instagram Ads",
+      "angle": "realization",
+      "format": "steal-this",
+      "hook": "Meta buries ads that take 5 seconds to show the problem",
+      "throughline": "Meta\u2019s algorithm favors ads that solve a problem in the first 2 seconds, but most ads take 5 seconds to get to the point.",
+      "image_paths": [
+        "posts/2026-08-17/carousel_5/slide_01.jpg",
+        "posts/2026-08-17/carousel_5/slide_02.jpg",
+        "posts/2026-08-17/carousel_5/slide_03.jpg",
+        "posts/2026-08-17/carousel_5/slide_04.jpg",
+        "posts/2026-08-17/carousel_5/slide_05.jpg",
+        "posts/2026-08-17/carousel_5/slide_06.jpg",
+        "posts/2026-08-17/carousel_5/slide_07.jpg",
+        "posts/2026-08-17/carousel_5/slide_08.jpg",
+        "posts/2026-08-17/carousel_5/slide_09.jpg",
+        "posts/2026-08-17/carousel_5/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Meta buries ads that take 5 seconds to get to the point\u2014here\u2019s how to fix it",
+        "hook_emphasis": "5 seconds",
+        "body": [
+          {
+            "text": "Meta\u2019s algorithm tests your ad in the first 2 seconds\u2014if it doesn\u2019t hook viewers, it stops showing it to new people.",
+            "emphasis": "first 2 seconds"
+          },
+          {
+            "text": "Most ads waste time on branding or setup, so viewers scroll past before they even see the problem you solve.",
+            "emphasis": "scroll past"
+          },
+          {
+            "text": "Start with the problem, not the product\u2014this grabs attention faster and keeps viewers watching longer.",
+            "emphasis": "problem, not product"
+          },
+          {
+            "text": "Ads that do this see 35% higher watch time, which Meta rewards with cheaper reach and more impressions.",
+            "emphasis": "35%"
+          }
+        ],
+        "send_line": "Send this to whoever edits your ad videos"
+      },
+      "body_slides": [
+        {
+          "text": "Meta\u2019s algorithm tests your ad in the first 2 seconds\u2014if it doesn\u2019t hook viewers, it stops showing it.",
+          "keyword": "first 2 seconds"
+        },
+        {
+          "text": "Most ads waste time on branding or setup\u2014viewers scroll past before the problem is clear.",
+          "keyword": "waste time"
+        },
+        {
+          "text": "Start with the problem, not the product\u2014this grabs attention faster.",
+          "keyword": "problem, not product"
+        },
+        {
+          "text": "Use the first 2 seconds to show the pain point, then introduce the solution in the next 3.",
+          "keyword": "pain point"
+        },
+        {
+          "text": "Ads that do this see 35% higher watch time\u2014Meta rewards it with cheaper reach.",
+          "keyword": "35%"
+        },
+        {
+          "text": "Test this by cutting your first 3 seconds\u2014if the ad still makes sense, it\u2019s too slow.",
+          "keyword": "cut first 3 seconds"
+        }
+      ],
+      "cta_word": "SCRIPT",
+      "cta_promise": "the exact 2-second hook script",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    }
+  ]
+}

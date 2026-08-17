@@ -1,76 +1,6 @@
 {
   "recent_batches": [
     {
-      "date": "2026-08-07",
-      "carousels": [
-        {
-          "niche": "Email Marketing",
-          "angle": "behind-the-curtain",
-          "format": "steal-this",
-          "hook": "Gmail only reads the first 12 words of your subject line",
-          "hashtags": [
-            "#emailmarketing",
-            "#deliverability",
-            "#marketingtips",
-            "#crm",
-            "#ecommercestrategy"
-          ]
-        },
-        {
-          "niche": "Email Marketing",
-          "angle": "relief-permission",
-          "format": "myth-buster",
-          "hook": "500 engaged subscribers beat 10,000 cold ones in Gmail\u2019s inbox",
-          "hashtags": [
-            "#emailmarketing",
-            "#deliverability",
-            "#marketingtips",
-            "#crm",
-            "#smallbusinessmarketing"
-          ]
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "mistake-fear",
-          "format": "checklist",
-          "hook": "Meta resets your audience after 3 days\u2014here\u2019s how to stop it",
-          "hashtags": [
-            "#metaads",
-            "#paidsocial",
-            "#digitalmarketing",
-            "#advertisingtips",
-            "#marketingstrategy"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "behind-the-curtain",
-          "format": "steal-this",
-          "hook": "Google Ads wrongly labels 20% of buyers as \u2018low intent\u2019",
-          "hashtags": [
-            "#googleads",
-            "#ppc",
-            "#digitalmarketing",
-            "#sem",
-            "#advertisinghacks"
-          ]
-        },
-        {
-          "niche": "Email Marketing",
-          "angle": "mistake-fear",
-          "format": "checklist",
-          "hook": "Gmail buries subject lines with \u2018free,\u2019 \u2018discount,\u2019 or \u2018urgent\u2019",
-          "hashtags": [
-            "#emailmarketing",
-            "#deliverability",
-            "#marketingtips",
-            "#crm",
-            "#ecommercemarketing"
-          ]
-        }
-      ]
-    },
-    {
       "date": "2026-08-08",
       "carousels": [
         {
@@ -646,6 +576,66 @@
             "#emailcopywriting",
             "#conversiontracking",
             "#galwaybusiness"
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-08-17",
+      "carousels": [
+        {
+          "niche": "Email Marketing",
+          "angle": "behind-the-curtain",
+          "format": "comparison",
+          "hook": "Gmail buries emails with \u2018free\u2019 or \u2018discount\u2019 in the subject",
+          "hashtags": [
+            "#emailmarketingtips",
+            "#emaildeliverability",
+            "#marketingaudit"
+          ]
+        },
+        {
+          "niche": "AI Tools",
+          "angle": "contrarian",
+          "format": "myth-buster",
+          "hook": "ChatGPT\u2019s free plan trains on your inputs\u2014opt out or it\u2019s public",
+          "hashtags": [
+            "#aiforbusiness",
+            "#aitoolsforbusiness",
+            "#marketingaudit"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "relief-permission",
+          "format": "steal-this",
+          "hook": "Google Ads mislabels 1 in 5 buyers as \u2018low intent\u2019\u2014here\u2019s proof",
+          "hashtags": [
+            "#googleadstips",
+            "#ppcmanagement",
+            "#leadgeneration"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "realization",
+          "format": "step-by-step",
+          "hook": "Google Ads hides 23% of your best leads in \u2018Other searches\u2019",
+          "hashtags": [
+            "#googleadstips",
+            "#ppcmanagement",
+            "#leadgeneration"
+          ]
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "realization",
+          "format": "steal-this",
+          "hook": "Meta buries ads that take 5 seconds to show the problem",
+          "hashtags": [
+            "#metaadstips",
+            "#paidsocialtips",
+            "#adcopy"
           ]
         }
       ]
