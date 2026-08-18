@@ -202,5 +202,65 @@
       "210%. Here's how."
     ],
     "cta_word": "AUDIT"
+  },
+  {
+    "date": "2026-08-18",
+    "index": 1,
+    "clip": "assets/story_reel_footage/daytime_skyline_desk.mp4",
+    "hook_lines": [
+      "I gave my cold email",
+      "to Claude for 7 days",
+      "and it booked \u20ac8k in",
+      "new pipeline. Here's exactly what changed."
+    ],
+    "cta_word": "LEADS"
+  },
+  {
+    "date": "2026-08-18",
+    "index": 2,
+    "clip": "assets/story_reel_footage/executive_office_16th.mp4",
+    "hook_lines": [
+      "I let AI run my",
+      "client onboarding for",
+      "30 days and it cut",
+      "drop-offs by 62%. Here's what I found."
+    ],
+    "cta_word": "SYSTEM"
+  },
+  {
+    "date": "2026-08-18",
+    "index": 3,
+    "clip": "assets/story_reel_footage/glasses_code_reflection.mp4",
+    "hook_lines": [
+      "I gave Claude my",
+      "Google Ads account",
+      "and it cut CPA from",
+      "\u20ac47 to \u20ac11. Steal the process below."
+    ],
+    "cta_word": "AUDIT"
+  },
+  {
+    "date": "2026-08-18",
+    "index": 4,
+    "clip": "assets/story_reel_footage/clean_office_desk.mp4",
+    "hook_lines": [
+      "I handed 3 clients'",
+      "Meta Ads to AI and",
+      "we added \u20ac18k in",
+      "new revenue. Reverse-engineering it below."
+    ],
+    "cta_word": "LEAK"
+  },
+  {
+    "date": "2026-08-18",
+    "index": 5,
+    "clip": "assets/story_reel_footage/dual_monitor_coding.mp4",
+    "hook_lines": [
+      "I let AI rebuild a",
+      "landing page and",
+      "conversions jumped",
+      "310%. The playbook's in the caption."
+    ],
+    "cta_word": "CHECKLIST"
   }
 ]
