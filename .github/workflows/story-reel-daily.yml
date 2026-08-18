@@ -29,7 +29,12 @@ on:
     # avoid emailing Ryan more than one batch on a lucky day when GitHub's queue
     # fires it more than once.
     - cron: "30 7 * * *"
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      count:
+        description: "Number of story reels to generate"
+        required: false
+        default: "2"
 
 permissions:
   contents: write
@@ -60,7 +65,8 @@ jobs:
           GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           TO_EMAIL: ${{ secrets.TO_EMAIL }}
-        run: python story_reel_engine.py --count 2
+          COUNT: ${{ github.event.inputs.count || '2' }}
+        run: python story_reel_engine.py --count "$COUNT"
 
       - name: Commit rendered reels + log
         run: |
