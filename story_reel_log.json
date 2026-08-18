@@ -118,5 +118,29 @@
       ""
     ],
     "cta_word": "AUDIT"
+  },
+  {
+    "date": "2026-08-18",
+    "index": 1,
+    "clip": "assets/story_reel_footage/clean_office_desk.mp4",
+    "hook_lines": [
+      "I let Claude run my",
+      "client's Meta Ads for",
+      "30 days\u2014CPA dropped 78%.",
+      "Here's how."
+    ],
+    "cta_word": "SYSTEM"
+  },
+  {
+    "date": "2026-08-18",
+    "index": 2,
+    "clip": "assets/story_reel_footage/finance_city_balcony.mp4",
+    "hook_lines": [
+      "I gave my cold email",
+      "list to AI and booked",
+      "\u20ac8k across 3 clients",
+      "in one week. Here's how."
+    ],
+    "cta_word": "LEADS"
   }
 ]
