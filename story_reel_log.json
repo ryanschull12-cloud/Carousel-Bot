@@ -46,5 +46,29 @@
       "paying clients"
     ],
     "cta_word": "REPLY"
+  },
+  {
+    "date": "2026-08-18",
+    "index": 1,
+    "clip": "assets/story_reel_footage/purple_desk_silhouette.mp4",
+    "hook_lines": [
+      "I gave Claude my",
+      "entire ad account\u2014",
+      "it cut spend by 78%",
+      "and doubled ROAS"
+    ],
+    "cta_word": "SYSTEM"
+  },
+  {
+    "date": "2026-08-18",
+    "index": 2,
+    "clip": "assets/story_reel_footage/code_screen_dark.mp4",
+    "hook_lines": [
+      "Local business hit",
+      "\u20ac187k in 60 days\u2014",
+      "all from one",
+      "cold email sequence"
+    ],
+    "cta_word": "LEADS"
   }
 ]
