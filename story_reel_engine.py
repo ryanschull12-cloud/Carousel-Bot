@@ -34,6 +34,7 @@ import argparse, glob, json, os, random, smtplib, subprocess, sys, time
 from email.message import EmailMessage
 
 import requests
+from PIL import ImageFont
 
 MISTRAL_API_KEY = os.environ.get("MISTRAL_API_KEY", "")
 MISTRAL_URL = "https://api.mistral.ai/v1/chat/completions"
@@ -55,7 +56,14 @@ LINE_HEIGHT = 82
 TEXT_COLOR = "0xFFE9C7"
 TOP_Y = 340          # vertical center of the 4-line text block
 REEL_DURATION = 18   # seconds, looped/trimmed regardless of source clip length
-MAX_LINE_CHARS = 26  # safety-net wrap width if a hook line comes back too long
+
+# Pixel-accurate hook fitting (added 2026-08-19, replacing a character-count
+# heuristic — see fit_hook_lines() below for why).
+FRAME_WIDTH = 1080
+SAFE_MARGIN = 60           # px kept clear on each side so text never touches/crosses the frame edge
+MAX_TEXT_WIDTH = FRAME_WIDTH - 2 * SAFE_MARGIN
+MIN_FONT_SIZE = 44         # readable floor; matches the project's "shrink only if needed" rule elsewhere
+FONT_STEP = 4
 
 
 def call_mistral(system_prompt, user_content, temperature=0.95):
@@ -137,33 +145,74 @@ def pick_clips(n):
     return chosen
 
 
-def wrap_hook_lines(hook_lines):
-    """Safety net: Mistral is instructed to keep each line under ~24 chars, but
-    re-wrap defensively in case a line comes back long, so a render never overflows
-    the frame the way an early manual draft did (script5_v2_centered.mp4, fixed
-    2026-08-17 by shortening lines rather than shrinking font past readability)."""
-    out = []
-    for line in hook_lines[:4]:
-        line = line.strip()
-        if len(line) <= MAX_LINE_CHARS:
-            out.append(line)
-            continue
-        words = line.split()
-        cur = ""
-        for w in words:
-            trial = f"{cur} {w}".strip()
-            if len(trial) > MAX_LINE_CHARS and cur:
-                out.append(cur)
-                cur = w
-            else:
-                cur = trial
-        if cur:
+def _text_width(text, font):
+    """Actual rendered pixel width of `text` in `font` — bold letters like W/M
+    are much wider than i/l, so a plain character count (the old approach)
+    routinely under- or over-estimated how wide a line would render."""
+    bbox = font.getbbox(text)
+    return bbox[2] - bbox[0]
+
+
+def _wrap_at_width(line, font):
+    """Word-wrap `line` so every resulting sub-line's rendered width fits inside
+    MAX_TEXT_WIDTH at `font`'s size."""
+    words = line.split()
+    out, cur = [], ""
+    for w in words:
+        trial = f"{cur} {w}".strip()
+        if cur and _text_width(trial, font) > MAX_TEXT_WIDTH:
             out.append(cur)
-    return out[:4] if out else ["Read the caption", "below ↓"]
+            cur = w
+        else:
+            cur = trial
+    if cur:
+        out.append(cur)
+    return out
+
+
+def fit_hook_lines(hook_lines):
+    """Pixel-accurate hook fitting. Replaces a character-count heuristic
+    (MAX_LINE_CHARS=26) that was fixed on 2026-08-17 but broke again once the
+    hook formula moved to full sentences with longer closer phrases
+    (2026-08-18/19): several real hooks measured right at or past the edge of
+    the 1080px frame at the fixed 68px font, so lines rendered clipped or
+    crowded together ("cutting off ... all over the place", per Ryan).
+
+    Fix: measure actual rendered pixel width with the real font (not a char
+    count), wrap each line to fit inside a safe margin, and if the hook still
+    doesn't fit in 4 lines, shrink the font in small steps down to a readable
+    floor (44px) and re-measure — the same "shrink only if needed" pattern
+    already used for font sizing elsewhere in the project — instead of ever
+    letting a line render wider than the frame."""
+    size = FONT_SIZE
+    while size >= MIN_FONT_SIZE:
+        font = ImageFont.truetype(FONT, size)
+        wrapped = []
+        for line in hook_lines[:4]:
+            line = line.strip()
+            if not line:
+                continue
+            wrapped.extend(_wrap_at_width(line, font))
+        if wrapped and len(wrapped) <= 4 and all(
+            _text_width(l, font) <= MAX_TEXT_WIDTH for l in wrapped
+        ):
+            return wrapped, size, int(size * 1.2)
+        size -= FONT_STEP
+
+    # Fallback at the font floor: still pixel-wrapped (so no single line can
+    # overflow the frame), hard-capped at 4 lines even if that means dropping
+    # trailing content — better than a broken render.
+    font = ImageFont.truetype(FONT, MIN_FONT_SIZE)
+    wrapped = []
+    for line in hook_lines[:4]:
+        wrapped.extend(_wrap_at_width(line.strip(), font))
+    if not wrapped:
+        wrapped = ["Read the caption", "below ↓"]
+    return wrapped[:4], MIN_FONT_SIZE, int(MIN_FONT_SIZE * 1.2)
 
 
 def render_reel(clip_path, hook_lines, out_path, duration=REEL_DURATION):
-    lines = wrap_hook_lines(hook_lines)
+    lines, font_size, line_height = fit_hook_lines(hook_lines)
     n = len(lines)
     # center the block of n lines around TOP_Y
     offset_start = -(n - 1) / 2
@@ -180,8 +229,8 @@ def render_reel(clip_path, hook_lines, out_path, duration=REEL_DURATION):
         y_mult = offset_start + i
         filters.append(
             f"drawtext=fontfile={FONT}:textfile={tf}:fontcolor={TEXT_COLOR}:"
-            f"fontsize={FONT_SIZE}:shadowx=2:shadowy=2:shadowcolor=black@0.5:"
-            f"x=(w-text_w)/2:y={TOP_Y}+({LINE_HEIGHT}*{y_mult})"
+            f"fontsize={font_size}:shadowx=2:shadowy=2:shadowcolor=black@0.5:"
+            f"x=(w-text_w)/2:y={TOP_Y}+({line_height}*{y_mult})"
         )
     vf = ",".join(filters)
     cmd = [
