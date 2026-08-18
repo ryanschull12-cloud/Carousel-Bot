@@ -94,5 +94,29 @@
       "their ads."
     ],
     "cta_word": "AUDIT"
+  },
+  {
+    "date": "2026-08-18",
+    "index": 1,
+    "clip": "assets/story_reel_footage/latenight_coding_v2.mp4",
+    "hook_lines": [
+      "I gave my cold email / to Claude and it / landed \u20ac124k in / new deals. Here's how.",
+      "",
+      "",
+      ""
+    ],
+    "cta_word": "LEADS"
+  },
+  {
+    "date": "2026-08-18",
+    "index": 2,
+    "clip": "assets/story_reel_footage/glasses_code_reflection.mp4",
+    "hook_lines": [
+      "I handed a client\u2019s / Google Ads to AI / and cut their CPA / from \u20ac89 to \u20ac12. Here's how.",
+      "",
+      "",
+      ""
+    ],
+    "cta_word": "AUDIT"
   }
 ]
