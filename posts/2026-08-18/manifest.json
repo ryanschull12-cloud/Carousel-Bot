@@ -1,0 +1,467 @@
+{
+  "batch_date": "2026-08-18",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "ChatGPT\u2019s free plan trains on everything you paste\u2014unless you flip this one setting. Most users never check it, but it takes 60 seconds to opt out and keep your business data private. Save this for your next AI privacy audit \u2193\n#aiforbusiness #aitoolsforbusiness #marketingaudit #irishsmallbusiness",
+      "niche": "AI Tools",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "ChatGPT\u2019s free plan trains on your pasted data",
+      "throughline": "ChatGPT\u2019s free plan uses your pasted data to train its models\u2014here\u2019s how to opt out and keep your inputs private.",
+      "image_paths": [
+        "posts/2026-08-18/carousel_1/slide_01.jpg",
+        "posts/2026-08-18/carousel_1/slide_02.jpg",
+        "posts/2026-08-18/carousel_1/slide_03.jpg",
+        "posts/2026-08-18/carousel_1/slide_04.jpg",
+        "posts/2026-08-18/carousel_1/slide_05.jpg",
+        "posts/2026-08-18/carousel_1/slide_06.jpg",
+        "posts/2026-08-18/carousel_1/slide_07.jpg",
+        "posts/2026-08-18/carousel_1/slide_08.jpg",
+        "posts/2026-08-18/carousel_1/slide_09.jpg",
+        "posts/2026-08-18/carousel_1/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "ChatGPT\u2019s free plan trains on your business data",
+        "hook_emphasis": "your business data",
+        "stat_number": 0,
+        "stat_label": "",
+        "body": [
+          {
+            "text": "Every prompt and file you paste into ChatGPT\u2019s free plan gets stored to train its models.",
+            "emphasis": "stored to train"
+          },
+          {
+            "text": "That data can resurface in responses to other users, including your business details.",
+            "emphasis": "resurface"
+          },
+          {
+            "text": "The fix is one setting: disable \u2018Improve the model for everyone\u2019 under Data controls.",
+            "emphasis": "one setting"
+          },
+          {
+            "text": "Paid plans don\u2019t train on your data by default\u2014free plans do unless you opt out.",
+            "emphasis": "free plans do"
+          }
+        ],
+        "chart": {
+          "label": "Data privacy",
+          "before": 100,
+          "after": 0,
+          "unit": "%",
+          "caption": "Opting out stops ChatGPT from training on your pasted data immediately."
+        },
+        "cta_line": "",
+        "send_line": "Send this to whoever handles your AI tools"
+      },
+      "body_slides": [
+        {
+          "text": "ChatGPT\u2019s free plan stores every prompt and file you paste to train its AI models.",
+          "keyword": "stores every prompt"
+        },
+        {
+          "text": "That data can resurface in responses to other users\u2014including your business details.",
+          "keyword": "resurface in responses"
+        },
+        {
+          "text": "The fix: disable \u2018Improve the model for everyone\u2019 in settings.",
+          "keyword": "disable \u2018Improve the model\u2019"
+        },
+        {
+          "text": "This setting sits under \u2018Data controls\u2019\u2014most users never check it.",
+          "keyword": "Data controls"
+        },
+        {
+          "text": "Paid plans don\u2019t train on your data by default\u2014free plans do unless you opt out.",
+          "keyword": "paid plans don\u2019t train"
+        },
+        {
+          "text": "Flip the switch once and your pastes stay private from that moment on.",
+          "keyword": "stay private"
+        }
+      ],
+      "cta_word": "CHECKLIST",
+      "cta_promise": "the exact steps to lock your ChatGPT data",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Meta Ads convert better with 300 engaged fans than 30k cold lookalikes. The algorithm learns faster from people who already know your brand\u2014here\u2019s how to build audiences that convert. Save this for your next test \u2193\n#metaadstips #paidsocialtips #leadgeneration #smallbusinessireland",
+      "niche": "Meta/Instagram Ads",
+      "angle": "relief-permission",
+      "format": "steal-this",
+      "hook": "Meta Ads convert better with 300 fans than 30k lookalikes",
+      "throughline": "Meta Ads perform better with small, engaged audiences than large, unengaged lookalikes\u2014here\u2019s how to build them.",
+      "image_paths": [
+        "posts/2026-08-18/carousel_2/slide_01.jpg",
+        "posts/2026-08-18/carousel_2/slide_02.jpg",
+        "posts/2026-08-18/carousel_2/slide_03.jpg",
+        "posts/2026-08-18/carousel_2/slide_04.jpg",
+        "posts/2026-08-18/carousel_2/slide_05.jpg",
+        "posts/2026-08-18/carousel_2/slide_06.jpg",
+        "posts/2026-08-18/carousel_2/slide_07.jpg",
+        "posts/2026-08-18/carousel_2/slide_08.jpg",
+        "posts/2026-08-18/carousel_2/slide_09.jpg",
+        "posts/2026-08-18/carousel_2/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "300 engaged fans beat 30k lookalikes on Meta",
+        "hook_emphasis": "300 engaged fans",
+        "stat_number": 0,
+        "stat_label": "",
+        "body": [
+          {
+            "text": "Meta\u2019s algorithm favors audiences that already know your brand, even if they\u2019re small.",
+            "emphasis": "already know"
+          },
+          {
+            "text": "A 300-person list of past buyers often outperforms a 30k lookalike audience.",
+            "emphasis": "300-person list"
+          },
+          {
+            "text": "Lookalikes dilute intent\u2014Meta shows ads to people who don\u2019t care, wasting budget.",
+            "emphasis": "don\u2019t care"
+          },
+          {
+            "text": "Start with a custom audience of website visitors or past buyers instead.",
+            "emphasis": "custom audience"
+          }
+        ],
+        "screen": {
+          "title": "Which audience works best?",
+          "panel_label": "AUDIENCE TYPE",
+          "options": [
+            [
+              "Lookalike (30k)",
+              "Cold strangers"
+            ],
+            [
+              "Custom (300)",
+              "Past buyers"
+            ]
+          ],
+          "wrong": 0,
+          "right": 1,
+          "mechanism": "Custom audiences reach people who already know your brand\u2014Meta\u2019s algorithm learns faster from them."
+        },
+        "cta_line": "",
+        "send_line": "Send this to whoever runs your ads"
+      },
+      "body_slides": [
+        {
+          "text": "Meta\u2019s algorithm favors audiences that already know your brand\u2014even if they\u2019re small.",
+          "keyword": "know your brand"
+        },
+        {
+          "text": "A 300-person list of past buyers often beats a 30k lookalike audience.",
+          "keyword": "300-person list"
+        },
+        {
+          "text": "Lookalikes dilute intent\u2014Meta shows ads to people who don\u2019t care.",
+          "keyword": "dilute intent"
+        },
+        {
+          "text": "Start with a custom audience of website visitors or past buyers instead.",
+          "keyword": "custom audience"
+        },
+        {
+          "text": "Meta\u2019s system learns faster from engaged users than from cold strangers.",
+          "keyword": "learns faster"
+        },
+        {
+          "text": "Test a small audience first\u2014scale only after it starts converting.",
+          "keyword": "test small audience"
+        }
+      ],
+      "cta_word": "TEMPLATE",
+      "cta_promise": "the exact audience setup for small lists",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Meta Ads don\u2019t need 50 conversions to start learning\u2014just 3 a day keeps the algorithm active. Skip a day and it resets. Save this for your next campaign setup \u2193\n#metaadstips #facebookadstips #adspend #irishbusiness",
+      "niche": "Meta/Instagram Ads",
+      "angle": "relief-permission",
+      "format": "myth-buster",
+      "hook": "Meta Ads learn with just 3 conversions a day",
+      "throughline": "Meta Ads don\u2019t need 50 conversions to start learning\u2014just 3 a day keeps the algorithm active.",
+      "image_paths": [
+        "posts/2026-08-18/carousel_3/slide_01.jpg",
+        "posts/2026-08-18/carousel_3/slide_02.jpg",
+        "posts/2026-08-18/carousel_3/slide_03.jpg",
+        "posts/2026-08-18/carousel_3/slide_04.jpg",
+        "posts/2026-08-18/carousel_3/slide_05.jpg",
+        "posts/2026-08-18/carousel_3/slide_06.jpg",
+        "posts/2026-08-18/carousel_3/slide_07.jpg",
+        "posts/2026-08-18/carousel_3/slide_08.jpg",
+        "posts/2026-08-18/carousel_3/slide_09.jpg",
+        "posts/2026-08-18/carousel_3/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Meta Ads learn with just 3 conversions a day",
+        "hook_emphasis": "3 conversions",
+        "stat_number": 0,
+        "stat_label": "",
+        "body": [
+          {
+            "text": "Meta\u2019s learning phase starts with just 3 conversions a day\u2014not the 50 you\u2019ve heard.",
+            "emphasis": "3 conversions"
+          },
+          {
+            "text": "The algorithm needs consistent data, not volume\u2014skip a day and it resets.",
+            "emphasis": "skip a day"
+          },
+          {
+            "text": "The 50-conversion myth wastes budget\u2014most accounts see results with far fewer.",
+            "emphasis": "myth"
+          },
+          {
+            "text": "Focus on steady conversions, not a single big number\u2014daily beats big budgets with gaps.",
+            "emphasis": "daily beats"
+          }
+        ],
+        "chart": {
+          "label": "Conversions needed",
+          "before": 50,
+          "after": 3,
+          "unit": "",
+          "caption": "Meta\u2019s algorithm starts learning with just 3 conversions a day\u2014no need to wait for 50."
+        },
+        "cta_line": "",
+        "send_line": "Send this to your ads manager"
+      },
+      "body_slides": [
+        {
+          "text": "Meta\u2019s learning phase starts with just 3 conversions a day\u2014not 50.",
+          "keyword": "3 conversions"
+        },
+        {
+          "text": "The algorithm needs consistent data, not volume\u2014skip a day and it resets.",
+          "keyword": "consistent data"
+        },
+        {
+          "text": "The 50-conversion myth wastes budget\u2014most accounts see results with far fewer.",
+          "keyword": "50-conversion myth"
+        },
+        {
+          "text": "Focus on steady conversions, not a single big number.",
+          "keyword": "steady conversions"
+        },
+        {
+          "text": "If conversions drop to zero, Meta freezes learning after 3 days.",
+          "keyword": "freezes learning"
+        },
+        {
+          "text": "A small budget with daily conversions beats a big budget with gaps.",
+          "keyword": "daily conversions"
+        }
+      ],
+      "cta_word": "GUIDE",
+      "cta_promise": "the exact conversion targets for Meta Ads",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 4,
+      "caption": "Google Ads buries 25% of your buyers in the \u2018Search terms\u2019 report\u2014most accounts never check it. Here\u2019s how to find and recover them in 10 minutes. Save this for your next cleanup \u2193\n#googleadstips #ppcmanagement #searchads #dublinbusiness",
+      "niche": "Google Ads",
+      "angle": "behind-the-curtain",
+      "format": "step-by-step",
+      "hook": "Google Ads buries 25% of your buyers in one report",
+      "throughline": "Google Ads hides 25% of your buyers in the \u2018Search terms\u2019 report\u2014here\u2019s how to find and recover them.",
+      "image_paths": [
+        "posts/2026-08-18/carousel_4/slide_01.jpg",
+        "posts/2026-08-18/carousel_4/slide_02.jpg",
+        "posts/2026-08-18/carousel_4/slide_03.jpg",
+        "posts/2026-08-18/carousel_4/slide_04.jpg",
+        "posts/2026-08-18/carousel_4/slide_05.jpg",
+        "posts/2026-08-18/carousel_4/slide_06.jpg",
+        "posts/2026-08-18/carousel_4/slide_07.jpg",
+        "posts/2026-08-18/carousel_4/slide_08.jpg",
+        "posts/2026-08-18/carousel_4/slide_09.jpg",
+        "posts/2026-08-18/carousel_4/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Google Ads buries 25% of your buyers in one report",
+        "hook_emphasis": "25% of your buyers",
+        "stat_number": 25,
+        "stat_label": "of buyers hidden in one report",
+        "body": [
+          {
+            "text": "Google Ads hides 25% of your buyers in the \u2018Search terms\u2019 report\u2014most accounts never open it.",
+            "emphasis": "never open it"
+          },
+          {
+            "text": "This report shows what people actually typed, not just the keywords you picked.",
+            "emphasis": "actually typed"
+          },
+          {
+            "text": "Step 1: Open the \u2018Search terms\u2019 report under \u2018Keywords\u2019 in your dashboard.",
+            "emphasis": "Search terms report"
+          },
+          {
+            "text": "Step 2: Sort by conversions to find the hidden buyers you\u2019re missing.",
+            "emphasis": "hidden buyers"
+          }
+        ],
+        "screen": {
+          "title": "Where are your hidden buyers?",
+          "panel_label": "REPORT TYPE",
+          "options": [
+            [
+              "Keywords",
+              "What you picked"
+            ],
+            [
+              "Search terms",
+              "What people typed"
+            ]
+          ],
+          "wrong": 0,
+          "right": 1,
+          "mechanism": "The \u2018Search terms\u2019 report shows what people actually typed\u201425% of your buyers hide here."
+        },
+        "cta_line": "",
+        "send_line": "Send this to whoever runs your Google Ads"
+      },
+      "body_slides": [
+        {
+          "text": "Google Ads hides 25% of your buyers in the \u2018Search terms\u2019 report.",
+          "keyword": "25% of buyers"
+        },
+        {
+          "text": "This report shows what people actually typed\u2014not just the keywords you picked.",
+          "keyword": "actually typed"
+        },
+        {
+          "text": "Most accounts skip it, missing buyers searching in unexpected ways.",
+          "keyword": "skip it"
+        },
+        {
+          "text": "Step 1: Open the \u2018Search terms\u2019 report under \u2018Keywords\u2019 in your dashboard.",
+          "keyword": "Search terms report"
+        },
+        {
+          "text": "Step 2: Sort by conversions to find the hidden buyers.",
+          "keyword": "sort by conversions"
+        },
+        {
+          "text": "Step 3: Add the best searches as keywords to bring those buyers back.",
+          "keyword": "add as keywords"
+        }
+      ],
+      "cta_word": "AUDIT",
+      "cta_promise": "the 3-step search terms audit",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Gmail ignores clever subject lines if your sender score is high. Trust beats creativity every time\u2014here\u2019s how to build it and land in Primary. Save this for your next email review \u2193\n#emailmarketingtips #emaildeliverability #conversiontracking #irishstartup",
+      "niche": "Email Marketing",
+      "angle": "contrarian",
+      "format": "comparison",
+      "hook": "Gmail ignores clever subject lines if your sender score is high",
+      "throughline": "Gmail prioritizes sender reputation over subject lines\u2014here\u2019s how to build trust and land in the Primary tab.",
+      "image_paths": [
+        "posts/2026-08-18/carousel_5/slide_01.jpg",
+        "posts/2026-08-18/carousel_5/slide_02.jpg",
+        "posts/2026-08-18/carousel_5/slide_03.jpg",
+        "posts/2026-08-18/carousel_5/slide_04.jpg",
+        "posts/2026-08-18/carousel_5/slide_05.jpg",
+        "posts/2026-08-18/carousel_5/slide_06.jpg",
+        "posts/2026-08-18/carousel_5/slide_07.jpg",
+        "posts/2026-08-18/carousel_5/slide_08.jpg",
+        "posts/2026-08-18/carousel_5/slide_09.jpg",
+        "posts/2026-08-18/carousel_5/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Gmail ignores your subject line if your sender score is high",
+        "hook_emphasis": "sender score is high",
+        "stat_number": 0,
+        "stat_label": "",
+        "body": [
+          {
+            "text": "Gmail\u2019s filter cares more about who you are than what your subject line says.",
+            "emphasis": "who you are"
+          },
+          {
+            "text": "A high sender score means your emails land in Primary, even with a weak subject.",
+            "emphasis": "high sender score"
+          },
+          {
+            "text": "Sender score is built on opens, replies, and how often people move you to Primary.",
+            "emphasis": "opens, replies"
+          },
+          {
+            "text": "Encourage replies and moves to Primary\u2014Gmail skips the spam folder entirely once your score is high.",
+            "emphasis": "skips the spam"
+          }
+        ],
+        "screen": {
+          "title": "What lands your email in Primary?",
+          "panel_label": "FILTER CRITERIA",
+          "options": [
+            [
+              "Clever subject",
+              "What you say"
+            ],
+            [
+              "High trust",
+              "Who you are"
+            ]
+          ],
+          "wrong": 0,
+          "right": 1,
+          "mechanism": "Gmail\u2019s filter prioritizes sender trust over subject lines\u2014high trust lands you in Primary every time."
+        },
+        "cta_line": "",
+        "send_line": "Send this to your email marketer"
+      },
+      "body_slides": [
+        {
+          "text": "Gmail\u2019s filter cares more about who you are than what your subject line says.",
+          "keyword": "who you are"
+        },
+        {
+          "text": "A high sender score means your emails land in Primary, even with a weak subject.",
+          "keyword": "high sender score"
+        },
+        {
+          "text": "Sender score is built on opens, replies, and how often people move you to Primary.",
+          "keyword": "opens, replies"
+        },
+        {
+          "compare_a": "Clever subject",
+          "compare_b": "High trust",
+          "text": "A clever subject loses to a trusted sender\u2014Gmail skips the spam check.",
+          "keyword": "trusted sender"
+        },
+        {
+          "text": "Encourage replies and moves to Primary to boost your sender score over time.",
+          "keyword": "encourage replies"
+        },
+        {
+          "text": "Once your score is high, Gmail skips the spam folder entirely\u2014even for generic subjects.",
+          "keyword": "skips the spam folder"
+        }
+      ],
+      "cta_word": "CHECKLIST",
+      "cta_promise": "the 5-step sender score checklist",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    }
+  ]
+}

@@ -1,76 +1,6 @@
 {
   "recent_batches": [
     {
-      "date": "2026-08-08",
-      "carousels": [
-        {
-          "niche": "Google Ads",
-          "angle": "behind-the-curtain",
-          "format": "steal-this",
-          "hook": "Google Ads calls 15% of buyers \u2018low intent\u2019\u2014they\u2019re not",
-          "hashtags": [
-            "#googleads",
-            "#ppc",
-            "#digitalmarketing",
-            "#sem",
-            "#advertisingtips"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "realization",
-          "format": "step-by-step",
-          "hook": "Google Ads buries your best clicks in \u2018Other searches\u2019",
-          "hashtags": [
-            "#googleads",
-            "#ppc",
-            "#digitalmarketing",
-            "#sem",
-            "#advertisinghacks"
-          ]
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "curiosity",
-          "format": "comparison",
-          "hook": "Meta\u2019s 30k lookalike loses to a 300-person list\u2014here\u2019s why",
-          "hashtags": [
-            "#metaads",
-            "#paidsocial",
-            "#digitalmarketing",
-            "#advertisingtips",
-            "#marketinghacks"
-          ]
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "contrarian",
-          "format": "comparison",
-          "hook": "Meta\u2019s \u2018engaged\u2019 audiences cost 40% more\u2014here\u2019s the cheaper alternative",
-          "hashtags": [
-            "#metaads",
-            "#paidsocial",
-            "#digitalmarketing",
-            "#advertisinghacks",
-            "#marketingstrategy"
-          ]
-        },
-        {
-          "niche": "Email Marketing",
-          "angle": "behind-the-curtain",
-          "format": "checklist",
-          "hook": "Gmail buries emails with these three words in the subject",
-          "hashtags": [
-            "#emailmarketing",
-            "#deliverability",
-            "#marketingtips",
-            "#crm",
-            "#ecommercemarketing"
-          ]
-        }
-      ]
-    },
-    {
       "date": "2026-08-09",
       "carousels": [
         {
@@ -636,6 +566,71 @@
             "#metaadstips",
             "#paidsocialtips",
             "#adcopy"
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-08-18",
+      "carousels": [
+        {
+          "niche": "AI Tools",
+          "angle": "behind-the-curtain",
+          "format": "steal-this",
+          "hook": "ChatGPT\u2019s free plan trains on your pasted data",
+          "hashtags": [
+            "#aiforbusiness",
+            "#aitoolsforbusiness",
+            "#marketingaudit",
+            "#irishsmallbusiness"
+          ]
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "relief-permission",
+          "format": "steal-this",
+          "hook": "Meta Ads convert better with 300 fans than 30k lookalikes",
+          "hashtags": [
+            "#metaadstips",
+            "#paidsocialtips",
+            "#leadgeneration",
+            "#smallbusinessireland"
+          ]
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "relief-permission",
+          "format": "myth-buster",
+          "hook": "Meta Ads learn with just 3 conversions a day",
+          "hashtags": [
+            "#metaadstips",
+            "#facebookadstips",
+            "#adspend",
+            "#irishbusiness"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "behind-the-curtain",
+          "format": "step-by-step",
+          "hook": "Google Ads buries 25% of your buyers in one report",
+          "hashtags": [
+            "#googleadstips",
+            "#ppcmanagement",
+            "#searchads",
+            "#dublinbusiness"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "contrarian",
+          "format": "comparison",
+          "hook": "Gmail ignores clever subject lines if your sender score is high",
+          "hashtags": [
+            "#emailmarketingtips",
+            "#emaildeliverability",
+            "#conversiontracking",
+            "#irishstartup"
           ]
         }
       ]
