@@ -82,6 +82,13 @@ def call_mistral(system_prompt, user_content, temperature=0.95):
         ],
         "temperature": temperature,
         "response_format": {"type": "json_object"},
+        # Explicit and generous (added 2026-08-19). Without this, a run under a
+        # heavier system prompt + several detailed reels once came back as
+        # syntactically-valid JSON with every field empty instead of raising —
+        # almost certainly the completion hitting an implicit token ceiling
+        # mid-generation. This gives several detailed reels (each caption now
+        # runs long with the short-paragraph formatting) plenty of headroom.
+        "max_tokens": 8000,
     }
     last_error, last_exception = None, None
     for attempt in range(5):
@@ -107,6 +114,51 @@ def call_mistral(system_prompt, user_content, temperature=0.95):
     if last_error is not None:
         last_error.raise_for_status()
     raise RuntimeError(f"Mistral request failed after 5 attempts: {last_exception}")
+
+
+def _is_valid_reel(reel):
+    """A reel is usable only if it actually has a hook and a caption. Added
+    2026-08-19 after a run silently emailed a reel with every field empty —
+    Mistral's json_object mode can apparently hit a token ceiling mid-generation
+    and still close out valid-but-empty JSON rather than erroring, so nothing
+    downstream can assume a syntactically valid response has real content."""
+    return bool(reel.get("hook_lines")) and bool(str(reel.get("caption", "")).strip())
+
+
+def generate_reels(system_prompt, count, max_attempts=3):
+    """Ask Mistral for `count` reels, retrying (up to max_attempts total calls)
+    if any come back empty/malformed, until either `count` valid reels are
+    collected or attempts run out. Better to ship fewer real reels than to
+    silently email blank ones."""
+    valid = []
+    seen_hooks = set()
+    for attempt in range(1, max_attempts + 1):
+        still_needed = count - len(valid)
+        if still_needed <= 0:
+            break
+        user_content = (
+            f"Generate {still_needed} story reels for today's batch. Each must be genuinely "
+            f"different in angle, mechanism, and specific numbers from the others."
+        )
+        result = call_mistral(system_prompt, user_content)
+        # Mistral is asked for {"reels": [...]} but occasionally returns a bare
+        # JSON array instead (more likely at higher counts) — handle both shapes.
+        batch = result if isinstance(result, list) else result.get("reels", [])
+        fresh = [
+            r for r in batch
+            if _is_valid_reel(r) and " ".join(r.get("hook_lines", [])) not in seen_hooks
+        ]
+        for r in fresh:
+            seen_hooks.add(" ".join(r.get("hook_lines", [])))
+        dropped = len(batch) - len(fresh)
+        if dropped:
+            print(f"attempt {attempt}/{max_attempts}: Mistral returned {len(batch)} reel(s), "
+                  f"{dropped} empty/malformed/duplicate — discarding those and retrying "
+                  f"for the shortfall")
+        valid.extend(fresh)
+        print(f"attempt {attempt}/{max_attempts}: {len(fresh)} valid new reel(s), "
+              f"{len(valid)}/{count} total so far")
+    return valid[:count]
 
 
 def load_log():
@@ -301,21 +353,14 @@ def main():
         sys.exit(1)
 
     system_prompt = open(SYSTEM_PROMPT_PATH).read()
-    user_content = (
-        f"Generate {args.count} story reels for today's batch. Each must be genuinely "
-        f"different in angle, mechanism, and specific numbers from the others."
-    )
-    result = call_mistral(system_prompt, user_content)
-    # Mistral is asked for {"reels": [...]} but occasionally returns a bare
-    # JSON array instead (more likely at higher --count values) — handle both
-    # shapes rather than crashing on result.get().
-    if isinstance(result, list):
-        reels = result[: args.count]
-    else:
-        reels = result.get("reels", [])[: args.count]
+    reels = generate_reels(system_prompt, args.count)
     if not reels:
-        print("Mistral returned no reels — nothing to render.")
+        print("Mistral returned no usable reels after retries — nothing to render.")
         sys.exit(1)
+    if len(reels) < args.count:
+        print(f"WARNING: proceeding with {len(reels)}/{args.count} reels — "
+              f"retries could not fill the shortfall. Better a smaller real batch "
+              f"than padding with empty ones.")
 
     clips = pick_clips(len(reels))
     os.makedirs("posts/story_reels", exist_ok=True)
