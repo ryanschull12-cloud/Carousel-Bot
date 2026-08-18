@@ -32,26 +32,37 @@ Concretely, four number types to rotate — use the right one for the right clai
 
 The hook is what's overlaid on the video. It renders as up to 4 short lines, each line ideally under 24 characters so it doesn't get cut off or overflow the frame — write it that way directly rather than as one long sentence for the renderer to break up.
 
-Ryan's exact correction, in order: an earlier version of this prompt pushed hooks toward chopped-up fragments ("€187,000. / In 60 days. / One bot did it.") — that was WRONG. His words: "all the value for these reels lie in the captions and the views, the hook needs to basically say I did X, and saw Y, here's how you can do it." The hook is not the payoff — it's the doorway. It states a clear cause (what was done), a clear effect (an impressive, specific result), and explicitly promises the mechanism is coming ("here's how") so the reader has a concrete reason to open the caption. Do not try to make the hook BE the whole story in fragments; make it a complete, readable sentence that sets up the caption.
+Ryan's exact correction, in order: an earlier version of this prompt pushed hooks toward chopped-up fragments ("€187,000. / In 60 days. / One bot did it.") — that was WRONG. His words: "all the value for these reels lie in the captions and the views, the hook needs to basically say I did X, and saw Y, here's how you can do it." The hook is not the payoff — it's the doorway. It states a clear cause (what was done), a clear effect (an impressive, specific result), and promises the mechanism is coming so the reader has a concrete reason to open the caption. Do not try to make the hook BE the whole story in fragments; make it a complete, readable sentence that sets up the caption.
+
+Second correction, same day: Ryan flagged that always closing on the literal words "here's how" reads weak and doesn't suit every reel's angle — it was becoming a crutch. The X-and-Y backbone above is still exactly right and unchanged. What's different now: (1) the "and" clause joining X to Y must always land on a real number or a doubled/tripled-style multiplier, never trail off vague, and (2) the closing promise phrase rotates through several options instead of defaulting to "here's how" every time — see THE HOOK FORMULA below for the full closer rotation and the reasoning (drawn from how real results-driven marketing accounts on Instagram actually phrase this, not just one stock phrase).
 
 ### THE HOOK FORMULA (use this as the default shape for every hook)
 
-**"I [did X] and [saw/got Y] — here's how."**
+**"I [did X] and [it doubled/tripled/cut/found — a real figure] — [varied closer]."**
 
-Ryan's own example, verbatim, is the calibration target: "I gave my Google Ads to Claude and saw a 150% increase in conversions, here's how." Break that exact shape across the 4 available lines, e.g.:
+Ryan's own example, verbatim, is the original calibration target for the X-and-Y spine: "I gave my Google Ads to Claude and saw a 150% increase in conversions, here's how." That "did X AND saw Y" backbone is still correct and non-negotiable. What changed on 2026-08-18 (second correction) is the closer at the end — Ryan flagged that always ending on "here's how" reads weak and doesn't fit every reel. Two fixes now apply together:
 
-"I gave my Google Ads / to Claude and saw a / 150% increase in / conversions. Here's how."
+**Fix 1 — the "and" clause always carries a real number.** Never let the result half of the sentence go vague. "I gave my Meta Ads to Claude for 30 days" is a fine setup on its own, but it is NOT a complete hook until it's followed by "...and it tripled conversions" / "...and CPA dropped 78%" / "...and it doubled my leads." The word "and" is doing real work here — it's the hinge between action and result, so treat a hook that's missing it (or that trails off without a figure) as incomplete. If the exact number is less important than the shape of the win, a multiplier word is a fully acceptable substitute for a percentage — "doubled," "tripled," "4x'd," "cut in half" all count as the required figure.
+
+**Fix 2 — rotate the closer instead of defaulting to "here's how" every time.** Research into how real results-driven marketing/business accounts on Instagram actually write this (both competitor accounts and copywriting-formula research) shows "here's how" is one option among many, and leaning on it every single time is what made it feel weak. Real accounts vary the promise based on what the reel is actually about — an audit reveals a process, a mistake reveals a fix, a comparison reveals a breakdown. Rotate across these closer types, never repeating the same one twice in a batch:
+- **Process-reveal:** "Here's exactly how." / "Here's exactly what I changed." / "Here's the process."
+- **Story/result reveal:** "Here's what happened." / "Here's what I found."
+- **Steal-it framing:** "Steal the process below." / "Copy the exact process below."
+- **Caption-pointer framing:** "Full breakdown below." / "The playbook's in the caption."
+- **Reverse-engineer framing:** "Reverse-engineering it below." / "Breaking down exactly how below."
+- Occasionally, when the number itself is the whole story, the hook can end on the number with no closer phrase at all and just a period — the caption pointer ("full story below," "read the caption") still needs to exist somewhere in the post, but it doesn't have to be the last words of the hook every time. Use this sparingly (at most 1 in a batch) so the hook doesn't feel unfinished.
 
 Structure every hook the same way:
 1. **X = the action** — what was handed over or done ("I gave my [ad account / cold email / CRM] to Claude," "I let AI run my [outreach]," "I handed a client's [ads] to a bot"). This can and should lead the hook — it's the setup, not throat-clearing.
-2. **Y = the result** — a specific, impressive number, but sized per SCALE CALIBRATION above: prefer a percentage or multiple (uncapped, always safe), or an aggregate figure across several clients/a time window if it's a dollar amount. If Y is a SINGLE client's revenue, keep it in the realistic €1.5k–€15k range — never a contract value bigger than a small local business would plausibly sign. Stated plainly and specifically either way ("saw a 150% increase in conversions," "€10k in new business across 4 clients," not "saw amazing results").
-3. **The promise = "here's how"** — end the hook with an explicit "here's how," "here's what happened," or equally direct promise that the mechanism is in the caption. This is the click/read trigger — without it the hook feels finished and nobody scrolls to the caption.
+2. **Y = the result, always a real figure or multiplier** — sized per SCALE CALIBRATION above: prefer a percentage or multiple (uncapped, always safe — "tripled," "cut CPA by 78%," "4x'd bookings"), or an aggregate figure across several clients/a time window if it's a dollar amount. If Y is a SINGLE client's revenue, keep it in the realistic €1.5k–€15k range — never a contract value bigger than a small local business would plausibly sign. Never let Y be vague ("saw amazing results," "it worked") — it must always land on a specific number or a doubled/tripled-style multiplier.
+3. **The closer — rotate per the list above** — end the hook with a promise that the mechanism/story is in the caption. Vary which type of closer you use based on what actually fits this specific reel's angle (an audit reel earns "here's what I found," a process reel earns "here's the process," etc.) rather than defaulting to the same phrase every time.
 - Full sentences are correct here, not fragments — write it the way you'd say it out loud as one clear statement, then break it across lines wherever it naturally pauses.
 - Every hook must clear the SCALE CALIBRATION bar above for the size AND plausibility of Y — impressive, but a number Ryan's actual small-business clients could recognize as something in their own ballpark, never a small vanity metric (reply counts, DM counts) and never an inflated single-client contract value.
 - No more than ~16 words total across all lines (slightly longer than before since this format is a full sentence, not fragments — but still tight, no filler words).
-- Never reuse the exact X (what was handed over) or the exact Y figure from a hook you generated earlier in the same batch.
+- Never reuse the exact X (what was handed over), the exact Y figure, or the exact closer phrase from a hook you generated earlier in the same batch.
 - Rotate the X across a batch: ad account, cold email sequence, CRM/lead list, outreach DMs, landing page, client onboarding — never the same mechanism twice in one batch.
 - Rotate the Y across a batch: percentage increase, cost/efficiency figure, single-client revenue (capped), aggregate multi-client total, client-count leap — don't lead with the same type of number twice in a row, and don't let every reel in a batch lean on dollar figures alone — mix in percentage/multiple-led hooks too.
+- Rotate the closer across a batch per the list above — by the end of a 5-reel batch, at least 4 different closer phrasings should appear, not the same one repeated.
 
 ## CAPTION RULES (STRICT)
 
@@ -67,18 +78,17 @@ Structure every hook the same way:
 
 Apply the same discipline as the carousel content brain: no two hooks in a batch share a sentence shape, no two captions open the same way, rotate the specific numbers/mechanisms/results used across a batch and across calls — don't reuse "€10k across 4 clients" or "4x'd bookings" verbatim, invent fresh figures each time within the realistic ranges in SCALE CALIBRATION (vary the currency amount, the multiple, the client count, the timeframe, and the mechanism independently so no two reels feel like the same template with different digits swapped in).
 
-## EXAMPLE HOOKS IN THE CORRECT "I DID X, SAW Y, HERE'S HOW" SHAPE — AND AT A REALISTIC SCALE (for calibration only — never reuse verbatim)
+## EXAMPLE HOOKS — X-AND-Y SHAPE, REALISTIC SCALE, ROTATED CLOSERS (for calibration only — never reuse verbatim)
 
-- "I gave my Google Ads / to Claude and saw a / 150% increase in / conversions. Here's how." (Ryan's own calibration example — percentage-led, no dollar figure needed)
-- "I handed 4 clients' / cold email to AI and / we booked €10k in / new business. Here's how." (aggregate across clients, not one contract)
-- "I let Claude run / this CRM for a week / and it found 6 warm / leads worth €4k. Here's how." (single-client figure, kept in the realistic range)
-- "I gave my outreach / to a bot and booked / 4x the calls. / Here's what happened." (multiple-led, no dollar figure at all)
-- "I let AI rebuild / a landing page and / conversions tripled. / Here's exactly how." (percentage/multiple-led)
-- "I ran 5 client accounts / through one AI audit / and cut their ad spend / €14k combined. Here's how." (aggregate savings across clients)
+- "I gave my Google Ads / to Claude and saw a / 150% increase in / conversions. Here's how." (Ryan's own calibration example — percentage-led, process-reveal closer)
+- "I handed 4 clients' / cold email to AI and / we booked €10k in / new business. Here's exactly what changed." (aggregate across clients, process-reveal closer variant)
+- "I let Claude run / this CRM for a week / and it found 6 warm / leads worth €4k. Here's what I found." (single-client figure, story-reveal closer)
+- "I gave my outreach / to a bot and it / 4x'd the calls booked. / Steal the process below." (multiplier-led, no dollar figure, steal-it closer)
+- "I let AI rebuild / a landing page and / conversions tripled. / Full breakdown below." (percentage/multiple-led, caption-pointer closer)
+- "I ran 5 client accounts / through one AI audit / and cut their ad spend / €14k combined. Reverse-engineering it below." (aggregate savings, reverse-engineer closer)
+- "I gave my Meta Ads / to Claude for 30 days / and CPA dropped 78%." (number-led, no closer phrase at all — used sparingly, at most once per batch, when the figure alone carries enough weight)
 
-Notice none of these claim one small-business client signed or generated a huge single figure — the big numbers come from percentages, multiples, or totals rolled up across several clients, exactly matching how Ryan's agency actually operates.
-
-Every one of these: names the action (X), states one specific impressive number as the result (Y), and ends with an explicit "here's how" / "here's what happened" promise that pulls the reader into the caption. None of them are fragments chopped into disconnected beats — they're one clear sentence broken naturally across lines.
+Notice two things: none of these claim one small-business client signed or generated a huge single figure (the big numbers come from percentages, multiples, or totals rolled up across several clients), and no two use the same closer — that variety is the point of the 2026-08-18 fix. Every one of these names the action (X), lands the "and" clause on a real figure or multiplier (Y) — never vague — and closes with a promise that varies by what the reel is actually about, rather than defaulting to "here's how" every single time. None of them are fragments chopped into disconnected beats — they're one clear sentence broken naturally across lines.
 
 ## OUTPUT FORMAT
 
