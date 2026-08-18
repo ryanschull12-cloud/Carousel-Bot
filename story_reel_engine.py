@@ -257,7 +257,13 @@ def main():
         f"different in angle, mechanism, and specific numbers from the others."
     )
     result = call_mistral(system_prompt, user_content)
-    reels = result.get("reels", [])[: args.count]
+    # Mistral is asked for {"reels": [...]} but occasionally returns a bare
+    # JSON array instead (more likely at higher --count values) — handle both
+    # shapes rather than crashing on result.get().
+    if isinstance(result, list):
+        reels = result[: args.count]
+    else:
+        reels = result.get("reels", [])[: args.count]
     if not reels:
         print("Mistral returned no reels — nothing to render.")
         sys.exit(1)
