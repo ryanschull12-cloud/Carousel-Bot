@@ -438,7 +438,7 @@
       "angle": "relief-permission",
       "format": "myth-buster",
       "hook": "Meta lookalikes work best with 300 engaged users",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "17902765779481454",

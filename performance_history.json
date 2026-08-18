@@ -773,6 +773,24 @@
       "engagement_rate": 100.0,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control"
+    },
+    {
+      "date": "2026-08-15",
+      "media_id": "17940026547336841",
+      "niche": "Meta/Instagram Ads",
+      "angle": "relief-permission",
+      "format": "myth-buster",
+      "hook": "Meta lookalikes work best with 300 engaged users",
+      "metrics": {
+        "reach": 1,
+        "saved": 0,
+        "shares": 0,
+        "likes": 1,
+        "comments": 0
+      },
+      "engagement_rate": 100.0,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
     }
   ],
   "scored_reels": [
@@ -1152,6 +1170,47 @@
         "has_stat": false,
         "has_proof": false,
         "duration_s": 27.25
+      },
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
+    },
+    {
+      "date": "2026-08-15",
+      "media_id": "18167141311455291",
+      "niche": "Meta/Instagram Ads",
+      "angle": "relief-permission",
+      "format": "myth-buster",
+      "hook": "Meta lookalikes work best with 300 engaged users",
+      "trial": false,
+      "metrics": {
+        "reach": 2,
+        "views": 2,
+        "saved": 0,
+        "shares": 0,
+        "likes": 2,
+        "comments": 0,
+        "total_interactions": 2,
+        "ig_reels_avg_watch_time": 10206,
+        "ig_reels_video_view_total_time": 40826,
+        "reels_skip_rate": 0
+      },
+      "engagement_rate": 100.0,
+      "sends_per_reach": 0.0,
+      "views_per_reach": 1.0,
+      "beat_structure": {
+        "beat_count": 6,
+        "beat_kinds": [
+          "hook",
+          "chart",
+          "body",
+          "body",
+          "cta",
+          "brand"
+        ],
+        "body_beats": 2,
+        "has_stat": false,
+        "has_proof": false,
+        "duration_s": 26.08
       },
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control"
