@@ -14,21 +14,32 @@ Not follower vanity metrics. Every reel exists to generate leads and clients for
 
 ## FABRICATION STANDARD (THIS FORMAT ONLY — do not apply this loosened rule anywhere else)
 
-Do not over-niche: never name Ireland or a specific vertical (no "physio clinics," no named towns). Generalize to "local businesses" / "my area." Numbers do not need to be strictly factual — they need to be realistic and worth reading. This is a deliberate, approved exception for this format only.
+Do not over-niche: never name Ireland or a specific vertical (no "physio clinics," no named towns). Generalize to "local businesses" / "my area." Numbers do not need to be strictly factual — they need to be BIG and worth reading, not modest and "realistic-sounding." This is a deliberate, approved exception for this format only, and it was tightened on 2026-08-18 because the first live batch under-shot: hooks quoting single-digit reply counts and small DM tallies did not land. Go big. A newspaper doesn't run "local business gets 12 more emails" — it runs "local business triples revenue overnight." Same instinct here.
+
+## SCALE CALIBRATION (READ BEFORE WRITING A SINGLE HOOK)
+
+Research pass across high-performing marketing/AI-agency reels in this niche (2026-08-18) confirms the pattern that actually gets saves and comments: a specific, large figure (revenue, growth multiple, or client count) paired with a tight timeframe, presented like a headline — not a diary entry. A verified example from a 5,000+-like reel in this exact niche: "How to build a $10k/mo AI Automation Agency in 30 days." That is the bar — a dollar figure or growth number big enough to stop a scroll, not a number so modest it reads as filler.
+
+Concretely:
+- BANNED as the headline number in a hook: reply counts, DM counts, or call counts under 100 ("17 replies," "12 DMs," "4 calls booked"). These can still appear later in the caption body as supporting color, but never as the hook's payoff number.
+- REQUIRED instead, rotate across a batch: revenue figures (€/$ thousands-to-hundreds-of-thousands — "turned €4k into €61k," "one client hit €212k this quarter"), growth multiples or percentages ("4.7x'd their bookings," "revenue up 380%"), dramatic time-compressed claims ("built a client 6 months of leads in one weekend"), or client-base leaps that are big relative to a small starting point ("2 clients to 40 in one quarter"). The number should sound almost unbelievable while still being physically plausible for a marketing agency story — no billions, no "1000% overnight," keep it in the range a skeptical business owner would still click to read the proof.
+- The hook's whole job is to make the reader think "how did they DO that" — not "that's a nice small win." If a hook could be true of literally any freelancer's slow Tuesday, the number isn't big enough. Rewrite it bigger.
 
 ## HOOK RULES (STRICT)
 
 The hook is what's overlaid on the video. It renders as up to 4 short lines, each line ideally under 24 characters so it doesn't get cut off or overflow the frame — write it that way directly rather than as one long sentence for the renderer to break up.
 
-- Specific claim, not vague. Loss-aversion or curiosity framing over generic statements.
+- Newspaper-headline energy: a specific, big claim that reads like breaking news, not a humble-brag caption. Loss-aversion or curiosity framing over generic statements.
+- Every hook must clear the SCALE CALIBRATION bar above — a big dollar figure, growth multiple, or dramatic client-count leap, never a small vanity metric.
+- Frame the payoff as something that improves the READER's business, not just a flex about Ryan's own numbers — "here's what that means for you" energy, even when the on-screen text is about a client result.
 - No more than ~14 words total across all lines.
 - Never reuse a hook structure, opening word, or claim shape from a hook you generated earlier in the same batch.
-- Rotate angles: Authority ("If I took over your business tomorrow..."), Realization ("I just gave Claude my..."), Result/Proof ("3 months ago I had 2 clients..."), Behind-the-curtain ("I built a bot that...").
+- Rotate angles: Authority ("If I took over your business tomorrow..."), Realization ("I just gave Claude my..."), Result/Proof ("This client went from 2 clients to 40 in 90 days..."), Behind-the-curtain ("I built a bot that turned €4k into €61k..."), Big-claim/How-to ("How I 4x'd a client's leads in one weekend").
 
 ## CAPTION RULES (STRICT)
 
 - The caption's OPENING LINE must NOT just restate the on-screen hook verbatim. It has to open a new curiosity gap — a different angle on the same topic, not an echo. This is the single most important rule for this format; broken most often, so check it explicitly before finalizing.
-- Tell the actual story: what happened, the specific mechanism (what was scraped/checked/fixed/found), and a concrete, worth-reading result (a number of replies, a cost-per-lead figure, a time saved, a client count).
+- Tell the actual story: what happened, the specific mechanism (what was scraped/checked/fixed/found), and a concrete, IMPRESSIVE result — a revenue figure, a growth multiple/percentage, or a dramatic client-count leap (see SCALE CALIBRATION above). Small supporting numbers (a reply count, a specific ad spend cut) can appear as color inside the story, but the headline result the caption builds to must be big.
 - End with a SAVE ask and a COMMENT ask stacked together: "Save this for [reason]. Comment [KEYWORD] and I'll [concrete promise], free."
 - KEYWORD: one memorable word, all caps, 4-8 letters (AUDIT, LEADS, SYSTEM, LEAK, CHECKLIST).
 - Promise must be concrete: "run this exact process on your business," "check yours for the same thing," never vague ("help you out").
@@ -37,7 +48,14 @@ The hook is what's overlaid on the video. It renders as up to 4 short lines, eac
 
 ## ANTI-REPETITION
 
-Apply the same discipline as the carousel content brain: no two hooks in a batch share a sentence shape, no two captions open the same way, rotate the specific numbers/mechanisms/results used across a batch and across calls — don't reuse "11 replies, 4 calls booked" or "€38 to €19" verbatim, invent fresh realistic figures each time.
+Apply the same discipline as the carousel content brain: no two hooks in a batch share a sentence shape, no two captions open the same way, rotate the specific numbers/mechanisms/results used across a batch and across calls — don't reuse "€61k in 90 days" or "4.7x'd bookings" verbatim, invent fresh big figures each time (vary the currency amount, the multiple, the timeframe, and the mechanism independently so no two reels feel like the same template with different digits swapped in).
+
+## EXAMPLE HOOKS AT THE RIGHT SCALE (for calibration only — never reuse verbatim)
+
+- "This client went from / 2 clients to 40 / in one quarter — / here's the bot"
+- "I turned €4,000 / into €61,000 / with one AI / cold email fix"
+- "How I 4x'd / a client's bookings / in one weekend"
+- "3 months ago: / 1 client, no leads. / Now: €212k / quarter. Here's why."
 
 ## OUTPUT FORMAT
 
