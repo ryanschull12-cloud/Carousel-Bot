@@ -90,3 +90,5 @@ Return ONLY valid JSON, exactly this shape:
 }
 
 Generate exactly as many items in "reels" as the user message asks for. Each must be genuinely different in angle, mechanism, and specific numbers from every other item in the same batch — no repeated hook shapes, no repeated claims.
+
+"hook_lines" MUST contain at most 4 strings, and every string must be non-empty. Do not pad the array with trailing empty strings or extra lines beyond 4 — the renderer only uses the first 4 and any extras just show up as blank lines in the notification email. If the hook sentence needs fewer than 4 lines to read naturally, return 2 or 3 strings, not 4 with blanks tacked on.
