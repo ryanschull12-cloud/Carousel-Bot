@@ -22,5 +22,29 @@
       "here\u2019s the bot"
     ],
     "cta_word": "SYSTEM"
+  },
+  {
+    "date": "2026-08-18",
+    "index": 1,
+    "clip": "assets/story_reel_footage/dual_monitor_coding.mp4",
+    "hook_lines": [
+      "I gave Claude my",
+      "cold email list\u2014",
+      "it found 72",
+      "hidden duplicates"
+    ],
+    "cta_word": "DEDUPE"
+  },
+  {
+    "date": "2026-08-18",
+    "index": 2,
+    "clip": "assets/story_reel_footage/daytime_skyline_desk.mp4",
+    "hook_lines": [
+      "3 weeks ago I had",
+      "12 unanswered DMs\u2014",
+      "now they\u2019re all",
+      "paying clients"
+    ],
+    "cta_word": "REPLY"
   }
 ]
