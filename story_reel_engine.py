@@ -20,8 +20,14 @@ without a reason logged here:
     Top, not the lower third: Instagram's own Reels UI (caption preview,
     like/comment/share icons) occupies the bottom-right on a real phone and
     will cover text placed there — this is deliberate, not an accident.
-  - Styling: soft shadow only (shadowx=2 shadowy=2 black@0.5), no boxed
-    border — a boxed/bordered look tested worse and read as dated.
+  - Styling: soft shadow (shadowx=2 shadowy=2 black@0.5) plus, added
+    2026-08-19, a full-width low-opacity scrim (black@0.32) behind the whole
+    text block for guaranteed contrast on bright footage. This is NOT the
+    per-line boxed/bordered caption look rejected on 2026-08-17 ("tested
+    worse and read as dated") — no border, no pill shape, just a wash
+    spanning the full frame width regardless of text length. Research-backed
+    (see render_reel()'s comment) as the standard fix for hook text
+    disappearing over lighter B-roll frames.
   - Motion: subtle Ken Burns zoom (1.0x -> 1.08x over the clip) instead of a
     static loop — a completely static background reads as a dead visual hook.
   - Silent by default (-an). Trending audio is a real distribution lever but
@@ -273,6 +279,21 @@ def render_reel(clip_path, hook_lines, out_path, duration=REEL_DURATION):
         f"scale={1200 if True else 1080}:2133,"
         f"zoompan=z='min(zoom+0.0015,1.08)':d=1:s=1080x1920:fps=30"
     ]
+    # Full-width soft scrim behind the whole text block (added 2026-08-19,
+    # research-backed). The locked 2026-08-17 design note rejected per-line
+    # boxed/bordered captions because that "tested worse and read as dated" —
+    # this is deliberately NOT that: no border, no per-line pill, just a low-
+    # opacity dark wash spanning the full frame width behind the text zone, so
+    # contrast holds even over a bright patch of B-roll. Real reel research
+    # (digitalzoomstudio.net, 2026) backs a background treatment behind hook
+    # text over shadow-only as the standard for guaranteed legibility; this is
+    # the least visually intrusive way to get that guarantee.
+    scrim_top = TOP_Y + line_height * offset_start - int(font_size * 0.8)
+    scrim_height = line_height * n + int(font_size * 1.5)
+    filters.append(
+        f"drawbox=x=0:y={scrim_top}:w={FRAME_WIDTH}:h={scrim_height}:"
+        f"color=black@0.32:t=fill"
+    )
     for i, line in enumerate(lines):
         tf = f"/tmp/story_reel_line_{i}.txt"
         with open(tf, "w") as fh:
@@ -282,6 +303,14 @@ def render_reel(clip_path, hook_lines, out_path, duration=REEL_DURATION):
         filters.append(
             f"drawtext=fontfile={FONT}:textfile={tf}:fontcolor={TEXT_COLOR}:"
             f"fontsize={font_size}:shadowx=2:shadowy=2:shadowcolor=black@0.5:"
+            # expansion=none is load-bearing, not decorative (found 2026-08-19):
+            # ffmpeg's drawtext parses a bare "%" as the start of an expansion
+            # token (e.g. %{pts}) by default, and nearly every hook here
+            # contains a literal "%" ("310%", "78% off ads"...). Without this,
+            # ffmpeg logs "Stray % near ..." and silently mangles or drops
+            # that line — exactly the "text cutting off / all over the place"
+            # Ryan reported, reproduced locally and confirmed by this fix.
+            f"expansion=none:"
             f"x=(w-text_w)/2:y={TOP_Y}+({line_height}*{y_mult})"
         )
     vf = ",".join(filters)
