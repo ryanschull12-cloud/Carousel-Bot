@@ -64,14 +64,17 @@ Structure every hook the same way:
 - Rotate the Y across a batch: percentage increase, cost/efficiency figure, single-client revenue (capped), aggregate multi-client total, client-count leap — don't lead with the same type of number twice in a row, and don't let every reel in a batch lean on dollar figures alone — mix in percentage/multiple-led hooks too.
 - Rotate the closer across a batch per the list above — by the end of a 5-reel batch, at least 4 different closer phrasings should appear, not the same one repeated.
 
-## CAPTION RULES (STRICT)
+## CAPTION RULES (STRICT — formatting rules updated 2026-08-18 based on real high-performer research)
 
 - The caption's OPENING LINE must NOT just restate the on-screen hook verbatim. It has to open a new curiosity gap — a different angle on the same topic, not an echo. This is the single most important rule for this format; broken most often, so check it explicitly before finalizing.
 - Tell the actual story: what happened, the specific mechanism (what was scraped/checked/fixed/found), and a concrete, IMPRESSIVE result sized per SCALE CALIBRATION above — a percentage/multiple, a small-business-scale efficiency figure, a capped single-client revenue number (€1.5k–€15k), or an aggregate total across several clients. Small supporting numbers (a reply count, a specific ad spend cut) can appear as color inside the story, but the headline result the caption builds to must never imply a single small-business client is worth a six-figure (or high-five-figure) contract — that breaks trust the moment a reader does the math.
 - End with a SAVE ask and a COMMENT ask stacked together: "Save this for [reason]. Comment [KEYWORD] and I'll [concrete promise], free."
 - KEYWORD: one memorable word, all caps, 4-8 letters (AUDIT, LEADS, SYSTEM, LEAK, CHECKLIST).
-- Promise must be concrete: "run this exact process on your business," "check yours for the same thing," never vague ("help you out").
+- **The promise must be the literal, specific artifact from THIS exact reel — never a generic "free audit."** Ryan's correction on 2026-08-18: a generic audit offer is weak and interchangeable across every reel; the promise should be the exact thing the reel just talked about, made tangible. Look at what the caption's mechanism section actually produced and promise THAT specific artifact: if the reel is about cold email subject lines, promise "the exact 3 subject lines that hit a 62% open rate," not "a free audit of your emails." If it's about negative keywords in a Google Ads account, promise "the exact list of 127 negative keywords I'd add to yours," not "a free ad audit." If it's about a landing page rewrite, promise "the exact headline and CTA copy I used," not "a free landing page check." The promise should sound like something with real, immediate, copy-pasteable value — because it's describing the specific thing that was just built or found in the story, not a generic service offer.
+  - Bad (banned): "run a free audit," "check yours for the same thing," "help you out," "free consultation."
+  - Good: "the exact 3 subject lines," "the negative keyword list I removed," "the Loom script I used for onboarding," "the 4 ad variations that outperformed the rest," "the exact prompts I used to rewrite it."
 - 3-5 relevant hashtags at the very end, marketing/lead-gen focused (#digitalmarketing #leadgeneration #marketingagency #smallbusinessmarketing #aitools — rotate, don't reuse the same 3-5 every time).
+- **Formatting — short, single-idea paragraphs with frequent line breaks, not dense blocks.** Research into how real high-performing marketing/business accounts actually format captions (checked directly on Instagram, not just guidelines) shows a clear pattern: even long captions are broken into many short paragraphs — often just one sentence, sometimes a sentence fragment — with a blank line between nearly every one. A 200+ word caption from a top-performing account can read in 10+ short paragraph breaks and still feel fast to read on a phone. Dense 3-4 sentence blocks (the old default) read slower and heavier on mobile and get skipped. Apply this: after the opening curiosity-gap line, break the story into short beats — one idea per paragraph, one to two sentences max, blank line between each. The numbered-list exception (checklist/audit framing) still applies as before.
 - Caption body should read as natural short paragraphs, not a listicle, UNLESS the hook is explicitly framed as a checklist/audit (e.g. "7 things I'd check first") — in that case a numbered list in the caption is correct and expected.
 
 ## ANTI-REPETITION
@@ -100,7 +103,7 @@ Return ONLY valid JSON, exactly this shape:
       "hook_lines": ["line one", "line two", "line three", "line four"],
       "caption": "full caption text including the SAVE/COMMENT CTA and hashtags",
       "cta_word": "KEYWORD",
-      "cta_promise": "concrete thing being promised"
+      "cta_promise": "the literal specific artifact from this reel's story (e.g. 'the exact 3 subject lines that hit 62% opens'), never a generic 'free audit'"
     }
   ]
 }
