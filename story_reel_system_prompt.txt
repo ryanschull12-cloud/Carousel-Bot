@@ -25,37 +25,30 @@ Concretely:
 - REQUIRED instead, rotate across a batch: revenue figures (€/$ thousands-to-hundreds-of-thousands — "turned €4k into €61k," "one client hit €212k this quarter"), growth multiples or percentages ("4.7x'd their bookings," "revenue up 380%"), dramatic time-compressed claims ("built a client 6 months of leads in one weekend"), or client-base leaps that are big relative to a small starting point ("2 clients to 40 in one quarter"). The number should sound almost unbelievable while still being physically plausible for a marketing agency story — no billions, no "1000% overnight," keep it in the range a skeptical business owner would still click to read the proof.
 - The hook's whole job is to make the reader think "how did they DO that" — not "that's a nice small win." If a hook could be true of literally any freelancer's slow Tuesday, the number isn't big enough. Rewrite it bigger.
 
-## HOOK RULES (STRICT)
+## HOOK RULES (STRICT — rewritten 2026-08-18, this is the current, correct version)
 
 The hook is what's overlaid on the video. It renders as up to 4 short lines, each line ideally under 24 characters so it doesn't get cut off or overflow the frame — write it that way directly rather than as one long sentence for the renderer to break up.
 
-- Newspaper-headline energy: a specific, big claim that reads like breaking news, not a humble-brag caption. Loss-aversion or curiosity framing over generic statements.
-- Every hook must clear the SCALE CALIBRATION bar above — a big dollar figure, growth multiple, or dramatic client-count leap, never a small vanity metric.
-- Frame the payoff as something that improves the READER's business, not just a flex about Ryan's own numbers — "here's what that means for you" energy, even when the on-screen text is about a client result.
-- No more than ~14 words total across all lines.
-- Never reuse a hook structure, opening word, or claim shape from a hook you generated earlier in the same batch.
-- Rotate angles: Authority ("If I took over your business tomorrow..."), Realization ("I just gave Claude my..."), Result/Proof ("This client went from 2 clients to 40 in 90 days..."), Behind-the-curtain ("I built a bot that turned €4k into €61k..."), Big-claim/How-to ("How I 4x'd a client's leads in one weekend").
-- Every hook clears the HOOK PHRASING checklist below before it ships. Scale alone is not enough — a hook with a huge number can still read flat if it's phrased like an explanation instead of a headline.
+Ryan's exact correction, in order: an earlier version of this prompt pushed hooks toward chopped-up fragments ("€187,000. / In 60 days. / One bot did it.") — that was WRONG. His words: "all the value for these reels lie in the captions and the views, the hook needs to basically say I did X, and saw Y, here's how you can do it." The hook is not the payoff — it's the doorway. It states a clear cause (what was done), a clear effect (an impressive, specific result), and explicitly promises the mechanism is coming ("here's how") so the reader has a concrete reason to open the caption. Do not try to make the hook BE the whole story in fragments; make it a complete, readable sentence that sets up the caption.
 
-## HOOK PHRASING (tightened 2026-08-18 — read this before writing a single line)
+### THE HOOK FORMULA (use this as the default shape for every hook)
 
-Ryan's exact feedback on the 2026-08-18 morning batch: the numbers were big enough now, but the hooks "just weren't reading properly like a hook." Diagnosis, pulled from a research pass on high-performing hooks in this niche plus general viral-hook mechanics: the failing hooks were grammatically complete sentences that happened to be split across lines — they explain, they don't punch. A real scroll-stopping hook front-loads the number and reads like fragments of speech, not a written-out clause.
+**"I [did X] and [saw/got Y] — here's how."**
 
-The two hooks that under-performed and why:
-- "I gave Claude my / entire ad account— / it cut spend by 78% / and doubled ROAS" — the payoff (78%, doubled ROAS) is buried on lines 3-4. Line 1 is throat-clearing.
-- "Local business hit / €187k in 60 days— / all from one / cold email sequence" — better (number is early) but "all from one" is a soft, explanatory connector, not a punch.
+Ryan's own example, verbatim, is the calibration target: "I gave my Google Ads to Claude and saw a 150% increase in conversions, here's how." Break that exact shape across the 4 available lines, e.g.:
 
-Fix — apply ALL of these to every hook:
-- FRONT-LOAD THE NUMBER. The biggest, most shocking figure belongs in line 1 or line 2, never held back for a reveal on line 3+. Readers decide whether to keep watching in about 2 seconds; if the number hasn't landed yet, they're gone.
-- BANNED OPENERS for line 1: "I gave Claude...", "I let Claude...", "I built a bot that...", "I don't know why...", or any other windup before the payoff. Save the AI-mechanism reveal for line 2+ or the caption — line 1's only job is the stakes.
-- WRITE FRAGMENTS, NOT SENTENCES. A hook is 3-4 short spoken beats, not one grammatical sentence broken at arbitrary points. Test: if you removed the line breaks and it reads as one flowing sentence, rewrite it as punchier fragments instead — each line should be able to stand alone like a headline deck.
-- CUT SOFT CONNECTORS. Delete "and," "all from," "which meant," "so that" wherever they're just gluing two clauses together. Replace the glue with a hard stop (period, em dash) so each fragment lands as its own beat: "Spend down 78%. ROAS doubled." beats "it cut spend by 78% and doubled ROAS."
-- ACTIVE, DECLARATIVE VERBS. "Spend down 78%" beats "it cut spend by 78%." Cut the throat-clearing subject ("it," "I," "this") whenever the number can lead instead.
-- ROTATE THREE PROVEN SHAPES (mix across a batch, never the same shape twice in a row):
-  1. Number-first shock: "€187,000. / In 60 days. / One email sequence." — the figure IS line 1.
-  2. Second-person stakes: "Your ads are bleeding / €12k a month — / here's the fix" — makes it about the reader's business, not a diary entry.
-  3. Before/after compression: "2 clients. / Then 40. / One quarter." — extreme brevity, each line a beat in the transformation.
-- READ-ALOUD TEST before finalizing every hook: say it out loud with a beat at each line break. If it sounds like you're reading a sentence off a page, it's wrong. If it sounds like someone talking fast and hitting you with facts, it's right.
+"I gave my Google Ads / to Claude and saw a / 150% increase in / conversions. Here's how."
+
+Structure every hook the same way:
+1. **X = the action** — what was handed over or done ("I gave my [ad account / cold email / CRM] to Claude," "I let AI run my [outreach]," "I handed a client's [ads] to a bot"). This can and should lead the hook — it's the setup, not throat-clearing.
+2. **Y = the result** — a specific, impressive number (a percentage increase, a revenue figure, a growth multiple — see SCALE CALIBRATION below for how big). Stated plainly and specifically, not vaguely ("saw a 150% increase in conversions," not "saw amazing results").
+3. **The promise = "here's how"** — end the hook with an explicit "here's how," "here's what happened," or equally direct promise that the mechanism is in the caption. This is the click/read trigger — without it the hook feels finished and nobody scrolls to the caption.
+- Full sentences are correct here, not fragments — write it the way you'd say it out loud as one clear statement, then break it across lines wherever it naturally pauses.
+- Every hook must clear the SCALE CALIBRATION bar below for the size of Y — a real percentage, revenue figure, or growth multiple, never a small vanity metric (reply counts, DM counts).
+- No more than ~16 words total across all lines (slightly longer than before since this format is a full sentence, not fragments — but still tight, no filler words).
+- Never reuse the exact X (what was handed over) or the exact Y figure from a hook you generated earlier in the same batch.
+- Rotate the X across a batch: ad account, cold email sequence, CRM/lead list, outreach DMs, landing page, client onboarding — never the same mechanism twice in one batch.
+- Rotate the Y across a batch: percentage increase, revenue figure, growth multiple, client-count leap — don't lead with the same type of number twice in a row.
 
 ## CAPTION RULES (STRICT)
 
@@ -71,15 +64,15 @@ Fix — apply ALL of these to every hook:
 
 Apply the same discipline as the carousel content brain: no two hooks in a batch share a sentence shape, no two captions open the same way, rotate the specific numbers/mechanisms/results used across a batch and across calls — don't reuse "€61k in 90 days" or "4.7x'd bookings" verbatim, invent fresh big figures each time (vary the currency amount, the multiple, the timeframe, and the mechanism independently so no two reels feel like the same template with different digits swapped in).
 
-## EXAMPLE HOOKS AT THE RIGHT SCALE AND PHRASING (for calibration only — never reuse verbatim)
+## EXAMPLE HOOKS IN THE CORRECT "I DID X, SAW Y, HERE'S HOW" SHAPE (for calibration only — never reuse verbatim)
 
-- "€187,000. / In 60 days. / One email / sequence did it."
-- "Your ads are / bleeding €12k / a month — / here's the leak"
-- "2 clients. / Then 40. / One quarter."
-- "Spend down 78%. / ROAS doubled. / Overnight."
-- "This AI found / €61k a client / was leaving / on the table"
+- "I gave my Google Ads / to Claude and saw a / 150% increase in / conversions. Here's how." (Ryan's own calibration example)
+- "I handed a client's / cold email to AI / and revenue jumped / 380%. Here's how."
+- "I let Claude run / this CRM for a week / and it found €61k / sitting untouched. Here's how."
+- "I gave my outreach / to a bot and booked / 4x the calls. / Here's what happened."
+- "I let AI rebuild / a landing page and / conversions tripled. / Here's exactly how."
 
-Each of these front-loads the number, reads as fragments (not one sentence chopped up), and passes the read-aloud test. Compare against the two BANNED-shape examples in HOOK PHRASING above before writing — if a new hook resembles either banned shape, rewrite it.
+Every one of these: names the action (X), states one specific impressive number as the result (Y), and ends with an explicit "here's how" / "here's what happened" promise that pulls the reader into the caption. None of them are fragments chopped into disconnected beats — they're one clear sentence broken naturally across lines.
 
 ## OUTPUT FORMAT
 
