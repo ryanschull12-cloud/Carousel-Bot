@@ -9,8 +9,11 @@ concurrency:
 
 name: Story Reels (email only, never auto-posted)
 
-# Renders 2 "story reel" pieces a day — single B-roll clip, short on-screen hook,
-# full story/CTA in the caption — and emails both to Ryan. This format was
+# Renders 3 "story reel" pieces a day — single B-roll clip, short on-screen hook,
+# full story/CTA in the caption — and emails all three to Ryan. Bumped from 2 to 3
+# on 2026-08-18: testing showed 5-at-once occasionally drops a video attachment or
+# two off the notification email (likely an SMTP/Gmail payload-size cap), while 3
+# has come through clean every time. This format was
 # explicitly decided to never auto-post (see the project's story_reel_format_brief.md):
 # Ryan reviews and posts manually, same as the two hand-posted value-reel slots
 # instagram_reel_post.py already emails him. Completely separate content type from
@@ -34,7 +37,7 @@ on:
       count:
         description: "Number of story reels to generate"
         required: false
-        default: "2"
+        default: "3"
 
 permissions:
   contents: write
@@ -65,7 +68,7 @@ jobs:
           GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           TO_EMAIL: ${{ secrets.TO_EMAIL }}
-          COUNT: ${{ github.event.inputs.count || '2' }}
+          COUNT: ${{ github.event.inputs.count || '3' }}
         run: python story_reel_engine.py --count "$COUNT"
 
       - name: Commit rendered reels + log
