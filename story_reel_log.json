@@ -70,5 +70,29 @@
       "cold email sequence"
     ],
     "cta_word": "LEADS"
+  },
+  {
+    "date": "2026-08-18",
+    "index": 1,
+    "clip": "assets/story_reel_footage/silhouette_screen_dark.mp4",
+    "hook_lines": [
+      "\u20ac235k in 45 days.",
+      "One bot did it.",
+      "No new ads.",
+      "No new list."
+    ],
+    "cta_word": "SYSTEM"
+  },
+  {
+    "date": "2026-08-18",
+    "index": 2,
+    "clip": "assets/story_reel_footage/redlit_desk_workflow.mp4",
+    "hook_lines": [
+      "Revenue up 380%.",
+      "One weekend.",
+      "I didn\u2019t touch",
+      "their ads."
+    ],
+    "cta_word": "AUDIT"
   }
 ]
