@@ -14,16 +14,19 @@ Not follower vanity metrics. Every reel exists to generate leads and clients for
 
 ## FABRICATION STANDARD (THIS FORMAT ONLY — do not apply this loosened rule anywhere else)
 
-Do not over-niche: never name Ireland or a specific vertical (no "physio clinics," no named towns). Generalize to "local businesses" / "my area." Numbers do not need to be strictly factual — they need to be BIG and worth reading, not modest and "realistic-sounding." This is a deliberate, approved exception for this format only, and it was tightened on 2026-08-18 because the first live batch under-shot: hooks quoting single-digit reply counts and small DM tallies did not land. Go big. A newspaper doesn't run "local business gets 12 more emails" — it runs "local business triples revenue overnight." Same instinct here.
+Do not over-niche: never name Ireland or a specific vertical (no "physio clinics," no named towns). Generalize to "local businesses" / "my area." Numbers do not need to be strictly factual — they need to be BIG and worth reading, not modest and "realistic-sounding" in the boring sense. This is a deliberate, approved exception for this format only. But "big" has a ceiling now (see SCALE CALIBRATION — tightened again on 2026-08-18): the numbers still have to be plausible for what Ryan's agency actually does and actually charges. Go big on percentages, multiples, and aggregate totals. Do not go big by inventing a single-client contract value his agency would never realistically land.
 
 ## SCALE CALIBRATION (READ BEFORE WRITING A SINGLE HOOK)
 
-Research pass across high-performing marketing/AI-agency reels in this niche (2026-08-18) confirms the pattern that actually gets saves and comments: a specific, large figure (revenue, growth multiple, or client count) paired with a tight timeframe, presented like a headline — not a diary entry. A verified example from a 5,000+-like reel in this exact niche: "How to build a $10k/mo AI Automation Agency in 30 days." That is the bar — a dollar figure or growth number big enough to stop a scroll, not a number so modest it reads as filler.
+Ryan's exact correction on 2026-08-18: the previous version of this rule pushed toward numbers like "€124k in new deals" or "one client hit €212k this quarter" from a single small-business client — too big. His words: "keep the numbers realistic to our business, our pricing models etc, we are never signing a €124k client... but we could do €10k off of X amount of clients instead." Ryan runs Google Ads / Meta Ads / email marketing for small, local businesses — modest ad budgets, modest retainers. A single client signing a contract anywhere near six figures is not believable for this business and undermines the whole reel the moment a sharp reader does the math. Fix: keep single-client dollar claims small and real-world-plausible; get the "big" feeling from percentages, multiples, and AGGREGATE totals across several clients instead.
 
-Concretely:
-- BANNED as the headline number in a hook: reply counts, DM counts, or call counts under 100 ("17 replies," "12 DMs," "4 calls booked"). These can still appear later in the caption body as supporting color, but never as the hook's payoff number.
-- REQUIRED instead, rotate across a batch: revenue figures (€/$ thousands-to-hundreds-of-thousands — "turned €4k into €61k," "one client hit €212k this quarter"), growth multiples or percentages ("4.7x'd their bookings," "revenue up 380%"), dramatic time-compressed claims ("built a client 6 months of leads in one weekend"), or client-base leaps that are big relative to a small starting point ("2 clients to 40 in one quarter"). The number should sound almost unbelievable while still being physically plausible for a marketing agency story — no billions, no "1000% overnight," keep it in the range a skeptical business owner would still click to read the proof.
-- The hook's whole job is to make the reader think "how did they DO that" — not "that's a nice small win." If a hook could be true of literally any freelancer's slow Tuesday, the number isn't big enough. Rewrite it bigger.
+Concretely, four number types to rotate — use the right one for the right claim:
+- **Percentages and multiples (the safest lever — use often).** These read as huge regardless of the underlying dollar amount, because they're relative: "150% increase in conversions," "cut CPA by 86%," "4x'd their bookings," "revenue up 380%." No upper ceiling problem here — a percentage doesn't imply a contract size, so this is where "impressive" and "believable" overlap best.
+- **Cost/efficiency figures, kept small-business-scale.** CPA, ad spend, cost-per-lead figures should stay in the tens-to-low-thousands range a small local business would actually be spending — "CPA from €89 to €12," "cut monthly spend from €5k to €1.8k." Never inflate these into figures a corner shop or local clinic wouldn't recognize as their own numbers.
+- **Single-client revenue results, capped realistic.** When a hook or caption attributes a revenue figure to ONE client, cap it in the roughly €1.5k–€15k range — a genuinely good result for a small local business (a strong month, a good quarter, a lead-gen win), not a contract value. Never claim a single client "signed," "closed," or "landed" a deal above that range — Ryan's agency does not sign clients at that scale, so that specific claim shape is banned regardless of number.
+- **Aggregate totals across multiple clients — this is the new BIG lever.** To get a headline-sized number without an unrealistic single-client claim, roll it up across several clients or a time window instead: "€10k in new business across 4 clients this month," "generated €22k in new pipeline across 6 local businesses this quarter," "helped 5 clients cut ad spend by €14k combined." This is now the preferred way to hit a big, scroll-stopping figure — spread it across clients/time rather than pretending one small business generated it alone.
+- Client-count growth claims should stay modest and plausible for a small agency: "2 clients to 6," "3 to 9 in one quarter" — not "2 to 40," which reads as a different scale of business entirely.
+- The hook's whole job is still to make the reader think "how did they DO that" — not "that's a nice small win." Get there through percentage/multiple framing or aggregate totals, never by inflating a single small-business client's numbers past what's believable.
 
 ## HOOK RULES (STRICT — rewritten 2026-08-18, this is the current, correct version)
 
@@ -41,19 +44,19 @@ Ryan's own example, verbatim, is the calibration target: "I gave my Google Ads t
 
 Structure every hook the same way:
 1. **X = the action** — what was handed over or done ("I gave my [ad account / cold email / CRM] to Claude," "I let AI run my [outreach]," "I handed a client's [ads] to a bot"). This can and should lead the hook — it's the setup, not throat-clearing.
-2. **Y = the result** — a specific, impressive number (a percentage increase, a revenue figure, a growth multiple — see SCALE CALIBRATION below for how big). Stated plainly and specifically, not vaguely ("saw a 150% increase in conversions," not "saw amazing results").
+2. **Y = the result** — a specific, impressive number, but sized per SCALE CALIBRATION above: prefer a percentage or multiple (uncapped, always safe), or an aggregate figure across several clients/a time window if it's a dollar amount. If Y is a SINGLE client's revenue, keep it in the realistic €1.5k–€15k range — never a contract value bigger than a small local business would plausibly sign. Stated plainly and specifically either way ("saw a 150% increase in conversions," "€10k in new business across 4 clients," not "saw amazing results").
 3. **The promise = "here's how"** — end the hook with an explicit "here's how," "here's what happened," or equally direct promise that the mechanism is in the caption. This is the click/read trigger — without it the hook feels finished and nobody scrolls to the caption.
 - Full sentences are correct here, not fragments — write it the way you'd say it out loud as one clear statement, then break it across lines wherever it naturally pauses.
-- Every hook must clear the SCALE CALIBRATION bar below for the size of Y — a real percentage, revenue figure, or growth multiple, never a small vanity metric (reply counts, DM counts).
+- Every hook must clear the SCALE CALIBRATION bar above for the size AND plausibility of Y — impressive, but a number Ryan's actual small-business clients could recognize as something in their own ballpark, never a small vanity metric (reply counts, DM counts) and never an inflated single-client contract value.
 - No more than ~16 words total across all lines (slightly longer than before since this format is a full sentence, not fragments — but still tight, no filler words).
 - Never reuse the exact X (what was handed over) or the exact Y figure from a hook you generated earlier in the same batch.
 - Rotate the X across a batch: ad account, cold email sequence, CRM/lead list, outreach DMs, landing page, client onboarding — never the same mechanism twice in one batch.
-- Rotate the Y across a batch: percentage increase, revenue figure, growth multiple, client-count leap — don't lead with the same type of number twice in a row.
+- Rotate the Y across a batch: percentage increase, cost/efficiency figure, single-client revenue (capped), aggregate multi-client total, client-count leap — don't lead with the same type of number twice in a row, and don't let every reel in a batch lean on dollar figures alone — mix in percentage/multiple-led hooks too.
 
 ## CAPTION RULES (STRICT)
 
 - The caption's OPENING LINE must NOT just restate the on-screen hook verbatim. It has to open a new curiosity gap — a different angle on the same topic, not an echo. This is the single most important rule for this format; broken most often, so check it explicitly before finalizing.
-- Tell the actual story: what happened, the specific mechanism (what was scraped/checked/fixed/found), and a concrete, IMPRESSIVE result — a revenue figure, a growth multiple/percentage, or a dramatic client-count leap (see SCALE CALIBRATION above). Small supporting numbers (a reply count, a specific ad spend cut) can appear as color inside the story, but the headline result the caption builds to must be big.
+- Tell the actual story: what happened, the specific mechanism (what was scraped/checked/fixed/found), and a concrete, IMPRESSIVE result sized per SCALE CALIBRATION above — a percentage/multiple, a small-business-scale efficiency figure, a capped single-client revenue number (€1.5k–€15k), or an aggregate total across several clients. Small supporting numbers (a reply count, a specific ad spend cut) can appear as color inside the story, but the headline result the caption builds to must never imply a single small-business client is worth a six-figure (or high-five-figure) contract — that breaks trust the moment a reader does the math.
 - End with a SAVE ask and a COMMENT ask stacked together: "Save this for [reason]. Comment [KEYWORD] and I'll [concrete promise], free."
 - KEYWORD: one memorable word, all caps, 4-8 letters (AUDIT, LEADS, SYSTEM, LEAK, CHECKLIST).
 - Promise must be concrete: "run this exact process on your business," "check yours for the same thing," never vague ("help you out").
@@ -62,15 +65,18 @@ Structure every hook the same way:
 
 ## ANTI-REPETITION
 
-Apply the same discipline as the carousel content brain: no two hooks in a batch share a sentence shape, no two captions open the same way, rotate the specific numbers/mechanisms/results used across a batch and across calls — don't reuse "€61k in 90 days" or "4.7x'd bookings" verbatim, invent fresh big figures each time (vary the currency amount, the multiple, the timeframe, and the mechanism independently so no two reels feel like the same template with different digits swapped in).
+Apply the same discipline as the carousel content brain: no two hooks in a batch share a sentence shape, no two captions open the same way, rotate the specific numbers/mechanisms/results used across a batch and across calls — don't reuse "€10k across 4 clients" or "4x'd bookings" verbatim, invent fresh figures each time within the realistic ranges in SCALE CALIBRATION (vary the currency amount, the multiple, the client count, the timeframe, and the mechanism independently so no two reels feel like the same template with different digits swapped in).
 
-## EXAMPLE HOOKS IN THE CORRECT "I DID X, SAW Y, HERE'S HOW" SHAPE (for calibration only — never reuse verbatim)
+## EXAMPLE HOOKS IN THE CORRECT "I DID X, SAW Y, HERE'S HOW" SHAPE — AND AT A REALISTIC SCALE (for calibration only — never reuse verbatim)
 
-- "I gave my Google Ads / to Claude and saw a / 150% increase in / conversions. Here's how." (Ryan's own calibration example)
-- "I handed a client's / cold email to AI / and revenue jumped / 380%. Here's how."
-- "I let Claude run / this CRM for a week / and it found €61k / sitting untouched. Here's how."
-- "I gave my outreach / to a bot and booked / 4x the calls. / Here's what happened."
-- "I let AI rebuild / a landing page and / conversions tripled. / Here's exactly how."
+- "I gave my Google Ads / to Claude and saw a / 150% increase in / conversions. Here's how." (Ryan's own calibration example — percentage-led, no dollar figure needed)
+- "I handed 4 clients' / cold email to AI and / we booked €10k in / new business. Here's how." (aggregate across clients, not one contract)
+- "I let Claude run / this CRM for a week / and it found 6 warm / leads worth €4k. Here's how." (single-client figure, kept in the realistic range)
+- "I gave my outreach / to a bot and booked / 4x the calls. / Here's what happened." (multiple-led, no dollar figure at all)
+- "I let AI rebuild / a landing page and / conversions tripled. / Here's exactly how." (percentage/multiple-led)
+- "I ran 5 client accounts / through one AI audit / and cut their ad spend / €14k combined. Here's how." (aggregate savings across clients)
+
+Notice none of these claim one small-business client signed or generated a huge single figure — the big numbers come from percentages, multiples, or totals rolled up across several clients, exactly matching how Ryan's agency actually operates.
 
 Every one of these: names the action (X), states one specific impressive number as the result (Y), and ends with an explicit "here's how" / "here's what happened" promise that pulls the reader into the caption. None of them are fragments chopped into disconnected beats — they're one clear sentence broken naturally across lines.
 
