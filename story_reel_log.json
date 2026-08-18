@@ -142,5 +142,65 @@
       "in one week. Here's how."
     ],
     "cta_word": "LEADS"
+  },
+  {
+    "date": "2026-08-18",
+    "index": 1,
+    "clip": "assets/story_reel_footage/executive_office_16th.mp4",
+    "hook_lines": [
+      "I gave my Meta Ads",
+      "to Claude for 30 days",
+      "and cut CPA by 78%.",
+      "Here's exactly how."
+    ],
+    "cta_word": "SYSTEM"
+  },
+  {
+    "date": "2026-08-18",
+    "index": 2,
+    "clip": "assets/story_reel_footage/redlit_desk_workflow.mp4",
+    "hook_lines": [
+      "I handed my cold email",
+      "to a bot for a week",
+      "and booked \u20ac8,200 in",
+      "new pipeline. Here's how."
+    ],
+    "cta_word": "LEAK"
+  },
+  {
+    "date": "2026-08-18",
+    "index": 3,
+    "clip": "assets/story_reel_footage/code_screen_dark.mp4",
+    "hook_lines": [
+      "I let AI analyze",
+      "6 client ad accounts",
+      "and found \u20ac12k in",
+      "wasted spend. Here's how."
+    ],
+    "cta_word": "CHECK"
+  },
+  {
+    "date": "2026-08-18",
+    "index": 4,
+    "clip": "assets/story_reel_footage/nyc_office_skyline.mp4",
+    "hook_lines": [
+      "I gave Claude my CRM",
+      "and it found 11 warm",
+      "leads worth \u20ac6,500.",
+      "Here's what happened."
+    ],
+    "cta_word": "LEADS"
+  },
+  {
+    "date": "2026-08-18",
+    "index": 5,
+    "clip": "assets/story_reel_footage/latenight_coding_v2.mp4",
+    "hook_lines": [
+      "I let AI rewrite",
+      "one client\u2019s landing page",
+      "and conversions jumped",
+      "210%. Here's how."
+    ],
+    "cta_word": "AUDIT"
   }
 ]
