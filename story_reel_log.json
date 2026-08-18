@@ -341,5 +341,41 @@
       "Steal the process below."
     ],
     "cta_word": "SYSTEM"
+  },
+  {
+    "date": "2026-08-18",
+    "index": 1,
+    "clip": "assets/story_reel_footage/nyc_office_skyline.mp4",
+    "hook_lines": [
+      "I handed my cold email",
+      "to Claude for 7 days",
+      "and it booked \u20ac8.2k",
+      "in new deals. Here's exactly what changed."
+    ],
+    "cta_word": "LEADS"
+  },
+  {
+    "date": "2026-08-18",
+    "index": 2,
+    "clip": "assets/story_reel_footage/code_screen_dark.mp4",
+    "hook_lines": [
+      "I let AI audit 3 client",
+      "Google Ads accounts",
+      "and cut their CPA by 63%",
+      "combined. Reverse-engineering it below."
+    ],
+    "cta_word": "LEAK"
+  },
+  {
+    "date": "2026-08-18",
+    "index": 3,
+    "clip": "assets/story_reel_footage/redlit_desk_workflow.mp4",
+    "hook_lines": [
+      "I gave my client onboarding",
+      "to a bot and it",
+      "3x\u2019d the close rate.",
+      "Steal the process below."
+    ],
+    "cta_word": "SYSTEM"
   }
 ]
