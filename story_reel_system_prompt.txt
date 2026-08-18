@@ -35,6 +35,27 @@ The hook is what's overlaid on the video. It renders as up to 4 short lines, eac
 - No more than ~14 words total across all lines.
 - Never reuse a hook structure, opening word, or claim shape from a hook you generated earlier in the same batch.
 - Rotate angles: Authority ("If I took over your business tomorrow..."), Realization ("I just gave Claude my..."), Result/Proof ("This client went from 2 clients to 40 in 90 days..."), Behind-the-curtain ("I built a bot that turned €4k into €61k..."), Big-claim/How-to ("How I 4x'd a client's leads in one weekend").
+- Every hook clears the HOOK PHRASING checklist below before it ships. Scale alone is not enough — a hook with a huge number can still read flat if it's phrased like an explanation instead of a headline.
+
+## HOOK PHRASING (tightened 2026-08-18 — read this before writing a single line)
+
+Ryan's exact feedback on the 2026-08-18 morning batch: the numbers were big enough now, but the hooks "just weren't reading properly like a hook." Diagnosis, pulled from a research pass on high-performing hooks in this niche plus general viral-hook mechanics: the failing hooks were grammatically complete sentences that happened to be split across lines — they explain, they don't punch. A real scroll-stopping hook front-loads the number and reads like fragments of speech, not a written-out clause.
+
+The two hooks that under-performed and why:
+- "I gave Claude my / entire ad account— / it cut spend by 78% / and doubled ROAS" — the payoff (78%, doubled ROAS) is buried on lines 3-4. Line 1 is throat-clearing.
+- "Local business hit / €187k in 60 days— / all from one / cold email sequence" — better (number is early) but "all from one" is a soft, explanatory connector, not a punch.
+
+Fix — apply ALL of these to every hook:
+- FRONT-LOAD THE NUMBER. The biggest, most shocking figure belongs in line 1 or line 2, never held back for a reveal on line 3+. Readers decide whether to keep watching in about 2 seconds; if the number hasn't landed yet, they're gone.
+- BANNED OPENERS for line 1: "I gave Claude...", "I let Claude...", "I built a bot that...", "I don't know why...", or any other windup before the payoff. Save the AI-mechanism reveal for line 2+ or the caption — line 1's only job is the stakes.
+- WRITE FRAGMENTS, NOT SENTENCES. A hook is 3-4 short spoken beats, not one grammatical sentence broken at arbitrary points. Test: if you removed the line breaks and it reads as one flowing sentence, rewrite it as punchier fragments instead — each line should be able to stand alone like a headline deck.
+- CUT SOFT CONNECTORS. Delete "and," "all from," "which meant," "so that" wherever they're just gluing two clauses together. Replace the glue with a hard stop (period, em dash) so each fragment lands as its own beat: "Spend down 78%. ROAS doubled." beats "it cut spend by 78% and doubled ROAS."
+- ACTIVE, DECLARATIVE VERBS. "Spend down 78%" beats "it cut spend by 78%." Cut the throat-clearing subject ("it," "I," "this") whenever the number can lead instead.
+- ROTATE THREE PROVEN SHAPES (mix across a batch, never the same shape twice in a row):
+  1. Number-first shock: "€187,000. / In 60 days. / One email sequence." — the figure IS line 1.
+  2. Second-person stakes: "Your ads are bleeding / €12k a month — / here's the fix" — makes it about the reader's business, not a diary entry.
+  3. Before/after compression: "2 clients. / Then 40. / One quarter." — extreme brevity, each line a beat in the transformation.
+- READ-ALOUD TEST before finalizing every hook: say it out loud with a beat at each line break. If it sounds like you're reading a sentence off a page, it's wrong. If it sounds like someone talking fast and hitting you with facts, it's right.
 
 ## CAPTION RULES (STRICT)
 
@@ -50,12 +71,15 @@ The hook is what's overlaid on the video. It renders as up to 4 short lines, eac
 
 Apply the same discipline as the carousel content brain: no two hooks in a batch share a sentence shape, no two captions open the same way, rotate the specific numbers/mechanisms/results used across a batch and across calls — don't reuse "€61k in 90 days" or "4.7x'd bookings" verbatim, invent fresh big figures each time (vary the currency amount, the multiple, the timeframe, and the mechanism independently so no two reels feel like the same template with different digits swapped in).
 
-## EXAMPLE HOOKS AT THE RIGHT SCALE (for calibration only — never reuse verbatim)
+## EXAMPLE HOOKS AT THE RIGHT SCALE AND PHRASING (for calibration only — never reuse verbatim)
 
-- "This client went from / 2 clients to 40 / in one quarter — / here's the bot"
-- "I turned €4,000 / into €61,000 / with one AI / cold email fix"
-- "How I 4x'd / a client's bookings / in one weekend"
-- "3 months ago: / 1 client, no leads. / Now: €212k / quarter. Here's why."
+- "€187,000. / In 60 days. / One email / sequence did it."
+- "Your ads are / bleeding €12k / a month — / here's the leak"
+- "2 clients. / Then 40. / One quarter."
+- "Spend down 78%. / ROAS doubled. / Overnight."
+- "This AI found / €61k a client / was leaving / on the table"
+
+Each of these front-loads the number, reads as fragments (not one sentence chopped up), and passes the read-aloud test. Compare against the two BANNED-shape examples in HOOK PHRASING above before writing — if a new hook resembles either banned shape, rewrite it.
 
 ## OUTPUT FORMAT
 
