@@ -434,5 +434,19 @@
     "scored": false,
     "delivery": "email",
     "posted_manually": null
+  },
+  {
+    "media_id": null,
+    "date": "2026-08-19",
+    "index": 3,
+    "niche": "Email Marketing",
+    "angle": "behind-the-curtain",
+    "format": "checklist",
+    "hook": "Gmail moves your email to Primary after one reply",
+    "media_product_type": "REELS",
+    "trial": false,
+    "scored": false,
+    "delivery": "email",
+    "posted_manually": null
   }
 ]
