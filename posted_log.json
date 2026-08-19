@@ -448,7 +448,7 @@
       "angle": "behind-the-curtain",
       "format": "comparison",
       "hook": "Gmail moves emails to Primary after one reply\u2014no opens needed",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18130242805650379",
