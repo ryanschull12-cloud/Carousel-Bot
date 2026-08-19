@@ -1,71 +1,6 @@
 {
   "recent_batches": [
     {
-      "date": "2026-08-09",
-      "carousels": [
-        {
-          "niche": "Email Marketing",
-          "angle": "behind-the-curtain",
-          "format": "steal-this",
-          "hook": "Gmail cuts off your subject line after 12 words\u2014everything else is invisible",
-          "hashtags": [
-            "#emailmarketingtips",
-            "#emaildeliverability",
-            "#marketingaudit",
-            "#irishbusiness"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "behind-the-curtain",
-          "format": "steal-this",
-          "hook": "Google Ads bills you for 3-second bounces\u2014even if they leave immediately",
-          "hashtags": [
-            "#googleadstips",
-            "#ppcmanagement",
-            "#marketingaudit",
-            "#smallbusinessireland"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "realization",
-          "format": "step-by-step",
-          "hook": "Google Ads buries 25% of your best clicks in a report you\u2019ve never opened",
-          "hashtags": [
-            "#googleadstips",
-            "#ppc",
-            "#leadgeneration",
-            "#irishbusiness"
-          ]
-        },
-        {
-          "niche": "Email Marketing",
-          "angle": "contrarian",
-          "format": "before-after",
-          "hook": "Gmail\u2019s filter favors emails that spark replies\u2014opens don\u2019t matter as much",
-          "hashtags": [
-            "#emailmarketingtips",
-            "#emaildeliverability",
-            "#conversiontracking",
-            "#smallbusinessireland"
-          ]
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "mistake-fear",
-          "format": "checklist",
-          "hook": "Meta Ads freeze after 50 conversions\u2014your campaigns stop getting smarter",
-          "hashtags": [
-            "#metaadstips",
-            "#paidsocial",
-            "#leadgeneration",
-            "#irishbusiness"
-          ]
-        }
-      ]
-    },
-    {
       "date": "2026-08-10",
       "carousels": [
         {
@@ -631,6 +566,71 @@
             "#emaildeliverability",
             "#conversiontracking",
             "#irishstartup"
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-08-19",
+      "carousels": [
+        {
+          "niche": "AI Tools",
+          "angle": "curiosity",
+          "format": "step-by-step",
+          "hook": "ChatGPT\u2019s free plan trains on your pasted data",
+          "hashtags": [
+            "#aiforbusiness",
+            "#aitoolsforbusiness",
+            "#marketingaudit",
+            "#irishbusiness"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "realization",
+          "format": "before-after",
+          "hook": "Google Ads calls 1 in 5 buyers \u2018low intent\u2019\u2014they\u2019re not",
+          "hashtags": [
+            "#googleadstips",
+            "#ppcmanagement",
+            "#searchads",
+            "#corkbusiness"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "behind-the-curtain",
+          "format": "checklist",
+          "hook": "Gmail moves your email to Primary after one reply",
+          "hashtags": [
+            "#emailmarketingtips",
+            "#emaildeliverability",
+            "#conversiontracking",
+            "#galwaybusiness"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "relief-permission",
+          "format": "myth-buster",
+          "hook": "Gmail ignores \u2018free\u2019 if your sender score is 90+",
+          "hashtags": [
+            "#emailmarketingtips",
+            "#emaildeliverability",
+            "#marketingbudget",
+            "#dublinbusiness"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "realization",
+          "format": "steal-this",
+          "hook": "Google Ads buries 20% of your buyers in \u2018low intent\u2019",
+          "hashtags": [
+            "#googleadstips",
+            "#ppcmanagement",
+            "#leadgeneration",
+            "#irishsmallbusiness"
           ]
         }
       ]

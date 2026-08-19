@@ -1,0 +1,452 @@
+{
+  "batch_date": "2026-08-19",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "ChatGPT\u2019s free plan trains on everything you paste\u2014unless you flip this switch. \nMost users don\u2019t know their data is being stored. Here\u2019s how to opt out in 30 seconds. \n#aiforbusiness #aitoolsforbusiness #marketingaudit #irishbusiness",
+      "niche": "AI Tools",
+      "angle": "curiosity",
+      "format": "step-by-step",
+      "hook": "ChatGPT\u2019s free plan trains on your pasted data",
+      "throughline": "ChatGPT\u2019s free plan uses your pasted data to train its AI\u2014here\u2019s how to stop it and keep your business info private.",
+      "image_paths": [
+        "posts/2026-08-19/carousel_1/slide_01.jpg",
+        "posts/2026-08-19/carousel_1/slide_02.jpg",
+        "posts/2026-08-19/carousel_1/slide_03.jpg",
+        "posts/2026-08-19/carousel_1/slide_04.jpg",
+        "posts/2026-08-19/carousel_1/slide_05.jpg",
+        "posts/2026-08-19/carousel_1/slide_06.jpg",
+        "posts/2026-08-19/carousel_1/slide_07.jpg",
+        "posts/2026-08-19/carousel_1/slide_08.jpg",
+        "posts/2026-08-19/carousel_1/slide_09.jpg",
+        "posts/2026-08-19/carousel_1/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "ChatGPT\u2019s free plan trains on your pasted data",
+        "hook_emphasis": "trains on your data",
+        "body": [
+          {
+            "text": "Open settings, click \u2018Data controls,\u2019 and you\u2019ll see a toggle called \u2018Improve the model for everyone.\u2019",
+            "emphasis": "Improve the model"
+          },
+          {
+            "text": "It\u2019s on by default, which means every chat, customer detail, or ad copy you paste is stored.",
+            "emphasis": "on by default"
+          },
+          {
+            "text": "Turning it off stops your business data from being used to train future AI versions.",
+            "emphasis": "stops your data"
+          },
+          {
+            "text": "Paid plans don\u2019t train on your data, but free users must opt out manually\u2014check it now.",
+            "emphasis": "opt out manually"
+          }
+        ],
+        "screen": {
+          "title": "Flip this switch to stop training",
+          "panel_label": "DATA CONTROLS",
+          "options": [
+            [
+              "Improve the model for everyone",
+              "ChatGPT trains on your data"
+            ],
+            [
+              "Do not train on my data",
+              "Your chats stay private"
+            ]
+          ],
+          "wrong": 0,
+          "right": 1,
+          "mechanism": "Turning this off stops ChatGPT from using your pasted data to train its AI."
+        },
+        "send_line": "Send this to your team"
+      },
+      "body_slides": [
+        {
+          "text": "Open ChatGPT settings \u2192 click \u2018Data controls\u2019 \u2192 find \u2018Improve the model for everyone\u2019",
+          "keyword": "Data controls"
+        },
+        {
+          "text": "This toggle is on by default\u2014it lets ChatGPT use your chats to train future AI",
+          "keyword": "on by default"
+        },
+        {
+          "text": "Turning it off stops your business data, customer details, or ad copy from being stored",
+          "keyword": "stops your data"
+        },
+        {
+          "text": "Paid plans don\u2019t train on your data, but free users must opt out manually",
+          "keyword": "opt out manually"
+        },
+        {
+          "text": "Even one paste with customer info can be used if the toggle stays on",
+          "keyword": "one paste"
+        },
+        {
+          "text": "Check this setting every few weeks\u2014updates sometimes reset it",
+          "keyword": "reset it"
+        }
+      ],
+      "cta_word": "GUIDE",
+      "cta_promise": "the exact steps to opt out",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Google Ads calls 1 in 5 buyers \u2018low intent\u2019\u2014they\u2019re not. Here\u2019s how to find them. \nMost accounts waste 15% of budget on mislabeled searches. This report holds the missing 20%. \n#googleadstips #ppcmanagement #searchads #corkbusiness",
+      "niche": "Google Ads",
+      "angle": "realization",
+      "format": "before-after",
+      "hook": "Google Ads calls 1 in 5 buyers \u2018low intent\u2019\u2014they\u2019re not",
+      "throughline": "Google Ads mislabels 20% of buyers as low intent\u2014here\u2019s how to find and convert them.",
+      "image_paths": [
+        "posts/2026-08-19/carousel_2/slide_01.jpg",
+        "posts/2026-08-19/carousel_2/slide_02.jpg",
+        "posts/2026-08-19/carousel_2/slide_03.jpg",
+        "posts/2026-08-19/carousel_2/slide_04.jpg",
+        "posts/2026-08-19/carousel_2/slide_05.jpg",
+        "posts/2026-08-19/carousel_2/slide_06.jpg",
+        "posts/2026-08-19/carousel_2/slide_07.jpg",
+        "posts/2026-08-19/carousel_2/slide_08.jpg",
+        "posts/2026-08-19/carousel_2/slide_09.jpg",
+        "posts/2026-08-19/carousel_2/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Google Ads mislabels 1 in 5 buyers as low intent",
+        "hook_emphasis": "mislabels 1 in 5",
+        "body": [
+          {
+            "text": "Open the Search terms report and filter for \u2018Low intent\u2019 conversions\u2014these are buyers Google got wrong.",
+            "emphasis": "Low intent conversions"
+          },
+          {
+            "text": "Some convert at 12%, not 0%, but most accounts ignore them because they\u2019re buried in \u2018Other searches.\u2019",
+            "emphasis": "convert at 12%"
+          },
+          {
+            "text": "Add them as a custom audience and bid higher to reach them again\u2014this can save 8% of your budget.",
+            "emphasis": "save 8%"
+          },
+          {
+            "text": "Run this check weekly\u2014Google updates labels every few days, so yesterday\u2019s \u2018low intent\u2019 might be today\u2019s buyer.",
+            "emphasis": "check weekly"
+          }
+        ],
+        "chart": {
+          "label": "budget saved",
+          "before": 15,
+          "after": 8,
+          "unit": "%",
+          "caption": "Finding mislabeled buyers cuts wasted spend by nearly half."
+        },
+        "send_line": "Send this to your ads manager"
+      },
+      "body_slides": [
+        {
+          "text": "Open the \u2018Search terms\u2019 report \u2192 filter by \u2018Low intent\u2019 conversions",
+          "keyword": "Search terms"
+        },
+        {
+          "text": "These are buyers Google got wrong\u2014some convert at 12%, not 0%",
+          "keyword": "convert at 12%"
+        },
+        {
+          "text": "Add them as a custom audience \u2192 bid higher to reach them again",
+          "keyword": "custom audience"
+        },
+        {
+          "text": "Before: 15% of budget wasted on mislabeled searches. After: 8% saved",
+          "keyword": "8% saved",
+          "before": "15%",
+          "after": "8%"
+        },
+        {
+          "text": "Most accounts ignore this report\u2014it\u2019s buried under \u2018Other searches\u2019",
+          "keyword": "Other searches"
+        },
+        {
+          "text": "Run this check weekly\u2014Google updates labels every few days",
+          "keyword": "weekly"
+        }
+      ],
+      "cta_word": "AUDIT",
+      "cta_promise": "the 6-step buyer recovery checklist",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Gmail moves your email to Primary after one reply\u2014here\u2019s how to get more. \nOpens don\u2019t matter as much as replies. This checklist helps you trigger them. \n#emailmarketingtips #emaildeliverability #conversiontracking #galwaybusiness",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "checklist",
+      "hook": "Gmail moves your email to Primary after one reply",
+      "throughline": "Gmail moves emails to Primary after one reply\u2014here\u2019s how to trigger replies and boost inbox placement.",
+      "image_paths": [
+        "posts/2026-08-19/carousel_3/slide_01.jpg",
+        "posts/2026-08-19/carousel_3/slide_02.jpg",
+        "posts/2026-08-19/carousel_3/slide_03.jpg",
+        "posts/2026-08-19/carousel_3/slide_04.jpg",
+        "posts/2026-08-19/carousel_3/slide_05.jpg",
+        "posts/2026-08-19/carousel_3/slide_06.jpg",
+        "posts/2026-08-19/carousel_3/slide_07.jpg",
+        "posts/2026-08-19/carousel_3/slide_08.jpg",
+        "posts/2026-08-19/carousel_3/slide_09.jpg",
+        "posts/2026-08-19/carousel_3/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Gmail moves your email to Primary after one reply",
+        "hook_emphasis": "one reply",
+        "body": [
+          {
+            "text": "Ask a question in the first line\u2014\u2018What\u2019s your biggest challenge with X?\u2019\u2014to spark replies instantly.",
+            "emphasis": "Ask a question"
+          },
+          {
+            "text": "Short subject lines (under 6 words) get more replies than long, clever ones.",
+            "emphasis": "under 6 words"
+          },
+          {
+            "text": "Add a P.S. with a clear call to action\u2014\u2018Hit reply and tell me your thoughts\u2019\u2014to boost engagement.",
+            "emphasis": "P.S."
+          },
+          {
+            "text": "Send from a real person\u2019s name, not \u2018noreply@\u2019\u2014replies go to Primary faster and stay there.",
+            "emphasis": "real person\u2019s name"
+          }
+        ],
+        "screen": {
+          "title": "Trigger replies to reach Primary",
+          "panel_label": "EMAIL SETUP",
+          "options": [
+            [
+              "noreply@yourbusiness.com",
+              "Gmail buries these"
+            ],
+            [
+              "john@yourbusiness.com",
+              "Replies go to Primary"
+            ]
+          ],
+          "wrong": 0,
+          "right": 1,
+          "mechanism": "Sending from a real name increases replies and inbox placement."
+        },
+        "send_line": "Send this to your email team"
+      },
+      "body_slides": [
+        {
+          "text": "Ask a question in the first line: \u2018What\u2019s your biggest challenge with X?\u2019",
+          "keyword": "Ask a question"
+        },
+        {
+          "text": "Keep subject lines under 6 words to boost reply rates",
+          "keyword": "under 6 words"
+        },
+        {
+          "text": "Add a P.S. with a clear call to action: \u2018Hit reply and tell me your thoughts\u2019",
+          "keyword": "P.S."
+        },
+        {
+          "text": "Send from a real person\u2019s name, not \u2018noreply@\u2019\u2014replies go to Primary faster",
+          "keyword": "real person\u2019s name"
+        },
+        {
+          "text": "Follow up within 24 hours if no reply\u2014Gmail notices quick engagement",
+          "keyword": "24 hours"
+        },
+        {
+          "text": "Aim for 3-5% reply rates to see a lift in inbox placement",
+          "keyword": "3-5%"
+        }
+      ],
+      "cta_word": "CHECKLIST",
+      "cta_promise": "the 6-step reply trigger guide",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 4,
+      "caption": "Gmail ignores \u2018free\u2019 if your sender score is 90+\u2014here\u2019s how to keep it that way. \nSpammy words don\u2019t matter if your score is strong. This myth-buster shows you how. \n#emailmarketingtips #emaildeliverability #marketingbudget #dublinbusiness",
+      "niche": "Email Marketing",
+      "angle": "relief-permission",
+      "format": "myth-buster",
+      "hook": "Gmail ignores \u2018free\u2019 if your sender score is 90+",
+      "throughline": "Gmail ignores \u2018free\u2019 in subject lines if your sender score is high\u2014here\u2019s how to keep it high and avoid spam filters.",
+      "image_paths": [
+        "posts/2026-08-19/carousel_4/slide_01.jpg",
+        "posts/2026-08-19/carousel_4/slide_02.jpg",
+        "posts/2026-08-19/carousel_4/slide_03.jpg",
+        "posts/2026-08-19/carousel_4/slide_04.jpg",
+        "posts/2026-08-19/carousel_4/slide_05.jpg",
+        "posts/2026-08-19/carousel_4/slide_06.jpg",
+        "posts/2026-08-19/carousel_4/slide_07.jpg",
+        "posts/2026-08-19/carousel_4/slide_08.jpg",
+        "posts/2026-08-19/carousel_4/slide_09.jpg",
+        "posts/2026-08-19/carousel_4/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Gmail ignores \u2018free\u2019 if your sender score is 90+",
+        "hook_emphasis": "90+",
+        "body": [
+          {
+            "text": "Your sender score is a number (0-100) that Gmail uses to judge your emails\u2014aim for 90+.",
+            "emphasis": "90+"
+          },
+          {
+            "text": "A high score lets you use \u2018free,\u2019 \u2018discount,\u2019 or \u2018limited time\u2019 without getting flagged.",
+            "emphasis": "high score"
+          },
+          {
+            "text": "Low scores (under 70) get sent to spam even without spammy words\u2014check yours at senderscore.org.",
+            "emphasis": "under 70"
+          },
+          {
+            "text": "Warm up new domains for 4-6 weeks before sending bulk emails to keep your score high.",
+            "emphasis": "4-6 weeks"
+          }
+        ],
+        "screen": {
+          "title": "Sender score trumps spammy words",
+          "panel_label": "SCORE RANGE",
+          "options": [
+            [
+              "Under 70",
+              "Gmail flags you"
+            ],
+            [
+              "90+",
+              "Safe to use \u2018free\u2019"
+            ]
+          ],
+          "wrong": 0,
+          "right": 1,
+          "mechanism": "A high sender score lets you use words like \u2018free\u2019 without being flagged."
+        },
+        "send_line": "Send this to your email marketer"
+      },
+      "body_slides": [
+        {
+          "text": "Sender score is a number (0-100) Gmail uses to judge your emails",
+          "keyword": "0-100"
+        },
+        {
+          "text": "Aim for 90+\u2014this lets you use \u2018free,\u2019 \u2018discount,\u2019 or \u2018limited time\u2019 safely",
+          "keyword": "90+"
+        },
+        {
+          "text": "Low scores (under 70) get flagged even without spammy words",
+          "keyword": "under 70"
+        },
+        {
+          "text": "Check your score for free at senderscore.org\u2014it updates weekly",
+          "keyword": "senderscore.org"
+        },
+        {
+          "text": "Warm up new domains for 4-6 weeks before sending bulk emails",
+          "keyword": "4-6 weeks"
+        },
+        {
+          "text": "Clean your list every 3 months\u2014remove unengaged subscribers",
+          "keyword": "every 3 months"
+        }
+      ],
+      "cta_word": "GUIDE",
+      "cta_promise": "the sender score checklist",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Google Ads buries 20% of your buyers in \u2018low intent\u2019\u2014here\u2019s how to find and convert them. \nMost accounts waste 15% of budget on these searches. This framework recovers them. \n#googleadstips #ppcmanagement #leadgeneration #irishsmallbusiness",
+      "niche": "Google Ads",
+      "angle": "realization",
+      "format": "steal-this",
+      "hook": "Google Ads buries 20% of your buyers in \u2018low intent\u2019",
+      "throughline": "Google Ads mislabels 1 in 5 buyers as low intent\u2014here\u2019s the 6-step framework to recover them and cut wasted spend.",
+      "image_paths": [
+        "posts/2026-08-19/carousel_5/slide_01.jpg",
+        "posts/2026-08-19/carousel_5/slide_02.jpg",
+        "posts/2026-08-19/carousel_5/slide_03.jpg",
+        "posts/2026-08-19/carousel_5/slide_04.jpg",
+        "posts/2026-08-19/carousel_5/slide_05.jpg",
+        "posts/2026-08-19/carousel_5/slide_06.jpg",
+        "posts/2026-08-19/carousel_5/slide_07.jpg",
+        "posts/2026-08-19/carousel_5/slide_08.jpg",
+        "posts/2026-08-19/carousel_5/slide_09.jpg",
+        "posts/2026-08-19/carousel_5/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Google Ads calls 1 in 5 buyers \u2018low intent\u2019\u2014they\u2019re not",
+        "hook_emphasis": "1 in 5 buyers",
+        "body": [
+          {
+            "text": "Open the Search terms report, filter by \u2018Conversions,\u2019 and sort by \u2018Low intent\u2019\u2014these are buyers Google got wrong.",
+            "emphasis": "Low intent"
+          },
+          {
+            "text": "Look for terms with 3+ conversions\u2014these are mislabeled and convert at 12%, not 0%.",
+            "emphasis": "3+ conversions"
+          },
+          {
+            "text": "Add them as a custom audience and bid 20% higher to reach them again\u2014this cuts wasted spend by 8%.",
+            "emphasis": "20% higher"
+          },
+          {
+            "text": "Run this check weekly\u2014Google updates intent labels every few days, so yesterday\u2019s \u2018low intent\u2019 might be today\u2019s buyer.",
+            "emphasis": "check weekly"
+          }
+        ],
+        "chart": {
+          "label": "wasted spend cut",
+          "before": 15,
+          "after": 8,
+          "unit": "%",
+          "caption": "Recovering mislabeled buyers cuts wasted spend by nearly half."
+        },
+        "send_line": "Send this to your ads team"
+      },
+      "body_slides": [
+        {
+          "text": "Open the \u2018Search terms\u2019 report \u2192 filter by \u2018Conversions\u2019 \u2192 sort by \u2018Low intent\u2019",
+          "keyword": "Search terms"
+        },
+        {
+          "text": "Look for terms with 3+ conversions\u2014these are mislabeled buyers",
+          "keyword": "3+ conversions"
+        },
+        {
+          "text": "Add them as a custom audience \u2192 exclude \u2018Low intent\u2019 from targeting",
+          "keyword": "custom audience"
+        },
+        {
+          "text": "Bid 20% higher on this audience to reach them again",
+          "keyword": "20% higher"
+        },
+        {
+          "text": "Run this check weekly\u2014Google updates intent labels every few days",
+          "keyword": "weekly"
+        },
+        {
+          "text": "Most accounts waste 15% of budget on these mislabeled searches",
+          "keyword": "15% waste"
+        }
+      ],
+      "cta_word": "TEMPLATE",
+      "cta_promise": "the exact buyer recovery framework",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    }
+  ]
+}
