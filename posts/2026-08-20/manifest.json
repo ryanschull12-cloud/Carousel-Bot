@@ -1,0 +1,409 @@
+{
+  "batch_date": "2026-08-20",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "ChatGPT\u2019s free plan trains on every paste\u2014flip one setting to keep customer data private. Most users never check this toggle. #aiforbusiness #aitoolsforbusiness #marketingaudit #irishbusiness",
+      "niche": "AI Tools",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "ChatGPT\u2019s free plan trains on your pasted customer data",
+      "throughline": "ChatGPT\u2019s free plan uses your pasted data to train its model\u2014here\u2019s how to opt out and keep customer details private.",
+      "image_paths": [
+        "posts/2026-08-20/carousel_1/slide_01.jpg",
+        "posts/2026-08-20/carousel_1/slide_02.jpg",
+        "posts/2026-08-20/carousel_1/slide_03.jpg",
+        "posts/2026-08-20/carousel_1/slide_04.jpg",
+        "posts/2026-08-20/carousel_1/slide_05.jpg",
+        "posts/2026-08-20/carousel_1/slide_06.jpg",
+        "posts/2026-08-20/carousel_1/slide_07.jpg",
+        "posts/2026-08-20/carousel_1/slide_08.jpg",
+        "posts/2026-08-20/carousel_1/slide_09.jpg",
+        "posts/2026-08-20/carousel_1/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "You\u2019re training ChatGPT on your customer list for free",
+        "hook_emphasis": "training ChatGPT",
+        "body": [
+          {
+            "text": "ChatGPT\u2019s free plan uses every paste to improve its answers, including customer data.",
+            "emphasis": "customer data"
+          },
+          {
+            "text": "Names, emails, or notes could end up in future responses to other users.",
+            "emphasis": "could end up"
+          },
+          {
+            "text": "Open Settings \u2192 Data Controls \u2192 turn off \u2018Improve the model for everyone.\u2019",
+            "emphasis": "turn off"
+          },
+          {
+            "text": "This one toggle stops OpenAI from using your pastes to train future models.",
+            "emphasis": "stops OpenAI"
+          }
+        ],
+        "screen": {
+          "title": "Turn off training in ChatGPT",
+          "panel_label": "DATA CONTROLS",
+          "options": [
+            [
+              "Improve the model for everyone",
+              "Uses your data to train"
+            ],
+            [
+              "Do not use my data",
+              "Keeps your data private"
+            ]
+          ],
+          "wrong": 0,
+          "right": 1,
+          "mechanism": "Turning this off stops OpenAI from using your pasted data to train future models."
+        },
+        "send_line": "Send this to whoever runs your AI tools"
+      },
+      "body_slides": [
+        {
+          "text": "ChatGPT\u2019s free plan trains on every paste to improve its answers.",
+          "keyword": "trains on every paste"
+        },
+        {
+          "text": "Customer emails, phone numbers, or notes could leak into future responses.",
+          "keyword": "could leak"
+        },
+        {
+          "text": "Open Settings \u2192 Data Controls \u2192 turn off \u2018Improve the model for everyone.\u2019",
+          "keyword": "turn off"
+        },
+        {
+          "text": "This stops OpenAI from using your pastes to train future models.",
+          "keyword": "stops OpenAI"
+        },
+        {
+          "text": "Do it once\u2014it stays off until you change it back.",
+          "keyword": "stays off"
+        },
+        {
+          "text": "Use ChatGPT\u2019s paid plan if you need full privacy without toggling settings.",
+          "keyword": "paid plan"
+        }
+      ],
+      "cta_word": "TEMPLATE",
+      "cta_promise": "the privacy checklist for AI tools",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Gmail\u2019s spam filter ignores \u2018free\u2019 if your list replies\u2014sender trust beats subject line tricks every time. #emailmarketingtips #emaildeliverability #conversiontracking #galwaybusiness",
+      "niche": "Email Marketing",
+      "angle": "relief-permission",
+      "format": "myth-buster",
+      "hook": "Gmail ignores \u2018free\u2019 if your list replies",
+      "throughline": "Gmail\u2019s spam filter prioritizes sender trust over subject line keywords\u2014using \u2018free\u2019 won\u2019t hurt deliverability if your list engages.",
+      "image_paths": [
+        "posts/2026-08-20/carousel_2/slide_01.jpg",
+        "posts/2026-08-20/carousel_2/slide_02.jpg",
+        "posts/2026-08-20/carousel_2/slide_03.jpg",
+        "posts/2026-08-20/carousel_2/slide_04.jpg",
+        "posts/2026-08-20/carousel_2/slide_05.jpg",
+        "posts/2026-08-20/carousel_2/slide_06.jpg",
+        "posts/2026-08-20/carousel_2/slide_07.jpg",
+        "posts/2026-08-20/carousel_2/slide_08.jpg",
+        "posts/2026-08-20/carousel_2/slide_09.jpg",
+        "posts/2026-08-20/carousel_2/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Gmail ignores \u2018free\u2019 if your list replies",
+        "hook_emphasis": "ignores \u2018free\u2019",
+        "body": [
+          {
+            "text": "Gmail\u2019s spam filter checks sender reputation first, not the words in your subject line.",
+            "emphasis": "sender reputation"
+          },
+          {
+            "text": "If your list replies, Gmail sees you as a trusted sender\u2014even if you use \u2018free.\u2019",
+            "emphasis": "trusted sender"
+          },
+          {
+            "text": "Spam filters flag ignored emails, not ones with certain words.",
+            "emphasis": "ignored emails"
+          },
+          {
+            "text": "Focus on getting replies, not avoiding words\u2014Gmail rewards engagement over tricks.",
+            "emphasis": "rewards engagement"
+          }
+        ],
+        "send_line": "Send this to whoever writes your emails"
+      },
+      "body_slides": [
+        {
+          "text": "Gmail\u2019s spam filter checks sender reputation first, not subject lines.",
+          "keyword": "sender reputation"
+        },
+        {
+          "text": "If your list replies, Gmail sees you as a trusted sender\u2014even with \u2018free.\u2019",
+          "keyword": "trusted sender"
+        },
+        {
+          "text": "Spam filters flag ignored emails, not ones with certain words.",
+          "keyword": "ignored emails"
+        },
+        {
+          "text": "Test subject lines with \u2018free\u2019\u2014if replies stay high, Gmail won\u2019t bury them.",
+          "keyword": "replies stay high"
+        },
+        {
+          "text": "A high sender score lets you use any word without triggering spam filters.",
+          "keyword": "high sender score"
+        },
+        {
+          "text": "Focus on replies, not word choice\u2014Gmail rewards engagement.",
+          "keyword": "rewards engagement"
+        }
+      ],
+      "cta_word": "GUIDE",
+      "cta_promise": "the 5-step sender trust checklist",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Google Ads mislabels 17% of buyers as \u2018low intent\u2019\u2014the Search Terms report reveals which searches actually convert. #googleadstips #ppcmanagement #searchads #corkbusiness",
+      "niche": "Google Ads",
+      "angle": "behind-the-curtain",
+      "format": "myth-buster",
+      "hook": "Google Ads mislabels 17% of buyers as \u2018low intent\u2019",
+      "throughline": "Google Ads mislabels 1 in 6 buyers as \u2018low intent\u2019\u2014the Search Terms report reveals the real story and saves wasted budget.",
+      "image_paths": [
+        "posts/2026-08-20/carousel_3/slide_01.jpg",
+        "posts/2026-08-20/carousel_3/slide_02.jpg",
+        "posts/2026-08-20/carousel_3/slide_03.jpg",
+        "posts/2026-08-20/carousel_3/slide_04.jpg",
+        "posts/2026-08-20/carousel_3/slide_05.jpg",
+        "posts/2026-08-20/carousel_3/slide_06.jpg",
+        "posts/2026-08-20/carousel_3/slide_07.jpg",
+        "posts/2026-08-20/carousel_3/slide_08.jpg",
+        "posts/2026-08-20/carousel_3/slide_09.jpg",
+        "posts/2026-08-20/carousel_3/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Google Ads calls 1 in 6 buyers \u2018low intent\u2019\u2014they\u2019re not",
+        "hook_emphasis": "1 in 6 buyers",
+        "body": [
+          {
+            "text": "Google Ads labels clicks as \u2018low intent\u2019 based on search history, not actual purchases.",
+            "emphasis": "search history"
+          },
+          {
+            "text": "The Search Terms report shows which searches led to sales\u2014even if Google called them cold.",
+            "emphasis": "led to sales"
+          },
+          {
+            "text": "Sort by conversions to find \u2018low intent\u2019 searches that actually bought.",
+            "emphasis": "actually bought"
+          },
+          {
+            "text": "Add these terms as exact match keywords to stop wasting budget on wrong labels.",
+            "emphasis": "stop wasting budget"
+          }
+        ],
+        "chart": {
+          "label": "buyers mislabeled",
+          "before": 17,
+          "after": 3,
+          "unit": "%",
+          "caption": "Adding exact match keywords cut mislabeled buyers from 17% to 3% in two weeks."
+        },
+        "send_line": "Send this to whoever runs your Google Ads"
+      },
+      "body_slides": [
+        {
+          "text": "Google Ads labels clicks as \u2018low intent\u2019 based on search history, not purchases.",
+          "keyword": "search history"
+        },
+        {
+          "text": "The Search Terms report reveals which searches led to sales\u2014even if Google called them cold.",
+          "keyword": "Search Terms report"
+        },
+        {
+          "text": "Sort by conversions to find \u2018low intent\u2019 searches that actually bought.",
+          "keyword": "sort by conversions"
+        },
+        {
+          "text": "Add these as exact match keywords to stop wasting budget on wrong labels.",
+          "keyword": "exact match keywords"
+        },
+        {
+          "text": "Most accounts never check this report\u2014it\u2019s buried in the interface.",
+          "keyword": "never check"
+        },
+        {
+          "text": "Run it weekly to catch mislabeled buyers before they drain your budget.",
+          "keyword": "run it weekly"
+        }
+      ],
+      "cta_word": "AUDIT",
+      "cta_promise": "the 7-point Google Ads audit checklist",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 4,
+      "caption": "Meta Ads freeze if no one buys for 2 days\u2014here\u2019s how to restart learning without losing data or doubling spend. #metaadstips #paidsocialtips #leadgeneration #dublinbusiness",
+      "niche": "Meta/Instagram Ads",
+      "angle": "mistake-fear",
+      "format": "step-by-step",
+      "hook": "Meta Ads freeze if no one buys for 2 days",
+      "throughline": "Meta Ads pause learning after 48 hours without a sale\u2014here\u2019s how to restart it without losing data or doubling spend.",
+      "image_paths": [
+        "posts/2026-08-20/carousel_4/slide_01.jpg",
+        "posts/2026-08-20/carousel_4/slide_02.jpg",
+        "posts/2026-08-20/carousel_4/slide_03.jpg",
+        "posts/2026-08-20/carousel_4/slide_04.jpg",
+        "posts/2026-08-20/carousel_4/slide_05.jpg",
+        "posts/2026-08-20/carousel_4/slide_06.jpg",
+        "posts/2026-08-20/carousel_4/slide_07.jpg",
+        "posts/2026-08-20/carousel_4/slide_08.jpg",
+        "posts/2026-08-20/carousel_4/slide_09.jpg",
+        "posts/2026-08-20/carousel_4/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Meta Ads stop learning if no one converts for 2 days",
+        "hook_emphasis": "stop learning",
+        "body": [
+          {
+            "text": "Meta\u2019s algorithm stops learning if no one converts for 48 hours, freezing performance.",
+            "emphasis": "freezing performance"
+          },
+          {
+            "text": "Check the \u2018Learning Phase\u2019 column in Ads Manager\u2014if it says \u2018Learning Limited,\u2019 act fast.",
+            "emphasis": "Learning Limited"
+          },
+          {
+            "text": "Lower your budget by 10% for 24 hours to trigger a restart without losing data.",
+            "emphasis": "lower budget"
+          },
+          {
+            "text": "Wait for one conversion\u2014this restarts the learning phase, then raise your budget back.",
+            "emphasis": "one conversion"
+          }
+        ],
+        "send_line": "Send this to whoever runs your Meta Ads"
+      },
+      "body_slides": [
+        {
+          "text": "Meta\u2019s algorithm stops learning if no one converts for 48 hours.",
+          "keyword": "stops learning"
+        },
+        {
+          "text": "This freezes your ad\u2019s performance\u2014it won\u2019t improve until restarted.",
+          "keyword": "freezes performance"
+        },
+        {
+          "text": "Step 1: Check the \u2018Learning Phase\u2019 column in Ads Manager.",
+          "keyword": "Learning Phase"
+        },
+        {
+          "text": "Step 2: If it says \u2018Learning Limited,\u2019 lower your budget by 10% for 24 hours.",
+          "keyword": "lower budget"
+        },
+        {
+          "text": "Step 3: Wait for one conversion\u2014this restarts the learning phase.",
+          "keyword": "one conversion"
+        },
+        {
+          "text": "Step 4: Raise your budget back to normal once learning resumes.",
+          "keyword": "raise budget"
+        }
+      ],
+      "cta_word": "CHECKLIST",
+      "cta_promise": "the 4-step Meta Ads restart guide",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "One reply moves your email to Gmail\u2019s Primary tab\u2014here\u2019s how to get that reply in 24 hours and boost open rates. #emailmarketingtips #emaildeliverability #conversiontracking #irishsmallbusiness",
+      "niche": "Email Marketing",
+      "angle": "curiosity",
+      "format": "step-by-step",
+      "hook": "One reply moves your email to Gmail\u2019s Primary tab",
+      "throughline": "Gmail moves your email to Primary after one reply\u2014here\u2019s how to trigger that reply in 24 hours and boost open rates.",
+      "image_paths": [
+        "posts/2026-08-20/carousel_5/slide_01.jpg",
+        "posts/2026-08-20/carousel_5/slide_02.jpg",
+        "posts/2026-08-20/carousel_5/slide_03.jpg",
+        "posts/2026-08-20/carousel_5/slide_04.jpg",
+        "posts/2026-08-20/carousel_5/slide_05.jpg",
+        "posts/2026-08-20/carousel_5/slide_06.jpg",
+        "posts/2026-08-20/carousel_5/slide_07.jpg",
+        "posts/2026-08-20/carousel_5/slide_08.jpg",
+        "posts/2026-08-20/carousel_5/slide_09.jpg",
+        "posts/2026-08-20/carousel_5/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Gmail moves your email to Primary after one reply",
+        "hook_emphasis": "one reply",
+        "body": [
+          {
+            "text": "Gmail\u2019s algorithm checks for replies\u2014one moves your email to Primary, boosting open rates.",
+            "emphasis": "boosting open rates"
+          },
+          {
+            "text": "Send a short, personal email asking for a quick reply\u2014under 50 words works best.",
+            "emphasis": "under 50 words"
+          },
+          {
+            "text": "Use a question in the subject line\u2014\u2018Quick question?\u2019 gets the fastest replies.",
+            "emphasis": "Quick question"
+          },
+          {
+            "text": "Send it early in the day\u2014morning replies trigger Gmail\u2019s Primary move faster.",
+            "emphasis": "morning replies"
+          }
+        ],
+        "send_line": "Send this to whoever writes your emails"
+      },
+      "body_slides": [
+        {
+          "text": "Gmail\u2019s algorithm checks for replies\u2014one moves your email to Primary.",
+          "keyword": "checks for replies"
+        },
+        {
+          "text": "Step 1: Send a short, personal email asking for a quick reply.",
+          "keyword": "quick reply"
+        },
+        {
+          "text": "Step 2: Use a question in the subject line\u2014\u2018Quick question?\u2019 works best.",
+          "keyword": "subject line"
+        },
+        {
+          "text": "Step 3: Keep the email under 50 words\u2014people reply faster to short messages.",
+          "keyword": "under 50 words"
+        },
+        {
+          "text": "Step 4: Send it early in the day\u2014morning replies trigger Gmail\u2019s Primary move.",
+          "keyword": "morning replies"
+        },
+        {
+          "text": "Step 5: Follow up in 24 hours if no reply\u2014Gmail sees this as engagement.",
+          "keyword": "follow up"
+        }
+      ],
+      "cta_word": "TEMPLATE",
+      "cta_promise": "the exact email template for replies",
+      "virality_score": null,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    }
+  ]
+}

@@ -1,71 +1,6 @@
 {
   "recent_batches": [
     {
-      "date": "2026-08-10",
-      "carousels": [
-        {
-          "niche": "Email Marketing",
-          "angle": "behind-the-curtain",
-          "format": "steal-this",
-          "hook": "Gmail buries your email if it sees \u2018free\u2019 in the subject",
-          "hashtags": [
-            "#emailmarketingtips",
-            "#emaildeliverability",
-            "#marketingaudit",
-            "#irishstartup"
-          ]
-        },
-        {
-          "niche": "Email Marketing",
-          "angle": "contrarian",
-          "format": "before-after",
-          "hook": "Gmail moves emails with replies to Primary\u2014opens don\u2019t count",
-          "hashtags": [
-            "#emailmarketingtips",
-            "#emaildeliverability",
-            "#conversiontracking",
-            "#corkbusiness"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "realization",
-          "format": "step-by-step",
-          "hook": "Google Ads hides half your sales in a report you\u2019ve never opened",
-          "hashtags": [
-            "#googleadstips",
-            "#ppcmanagement",
-            "#leadgeneration",
-            "#galwaybusiness"
-          ]
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "curiosity",
-          "format": "comparison",
-          "hook": "Meta\u2019s algorithm favors 200 engaged users over 20k lookalikes",
-          "hashtags": [
-            "#metaadstips",
-            "#paidsocial",
-            "#leadgeneration",
-            "#dublinbusiness"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "behind-the-curtain",
-          "format": "steal-this",
-          "hook": "Google Ads bills you for clicks that bounce in 3 seconds",
-          "hashtags": [
-            "#googleadstips",
-            "#ppc",
-            "#marketingaudit",
-            "#irishbusiness"
-          ]
-        }
-      ]
-    },
-    {
       "date": "2026-08-11",
       "carousels": [
         {
@@ -630,6 +565,71 @@
             "#googleadstips",
             "#ppcmanagement",
             "#leadgeneration",
+            "#irishsmallbusiness"
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-08-20",
+      "carousels": [
+        {
+          "niche": "AI Tools",
+          "angle": "behind-the-curtain",
+          "format": "steal-this",
+          "hook": "ChatGPT\u2019s free plan trains on your pasted customer data",
+          "hashtags": [
+            "#aiforbusiness",
+            "#aitoolsforbusiness",
+            "#marketingaudit",
+            "#irishbusiness"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "relief-permission",
+          "format": "myth-buster",
+          "hook": "Gmail ignores \u2018free\u2019 if your list replies",
+          "hashtags": [
+            "#emailmarketingtips",
+            "#emaildeliverability",
+            "#conversiontracking",
+            "#galwaybusiness"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "behind-the-curtain",
+          "format": "myth-buster",
+          "hook": "Google Ads mislabels 17% of buyers as \u2018low intent\u2019",
+          "hashtags": [
+            "#googleadstips",
+            "#ppcmanagement",
+            "#searchads",
+            "#corkbusiness"
+          ]
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "mistake-fear",
+          "format": "step-by-step",
+          "hook": "Meta Ads freeze if no one buys for 2 days",
+          "hashtags": [
+            "#metaadstips",
+            "#paidsocialtips",
+            "#leadgeneration",
+            "#dublinbusiness"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "curiosity",
+          "format": "step-by-step",
+          "hook": "One reply moves your email to Gmail\u2019s Primary tab",
+          "hashtags": [
+            "#emailmarketingtips",
+            "#emaildeliverability",
+            "#conversiontracking",
             "#irishsmallbusiness"
           ]
         }
