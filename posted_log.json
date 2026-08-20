@@ -458,7 +458,7 @@
       "angle": "behind-the-curtain",
       "format": "comparison",
       "hook": "Gmail buries emails with \u2018free\u2019 or \u2018discount\u2019 in the subject",
-      "scored": false
+      "scored": true
     },
     {
       "media_id": "18148528807534912",

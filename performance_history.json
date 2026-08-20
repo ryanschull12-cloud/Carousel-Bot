@@ -809,6 +809,24 @@
       "engagement_rate": 100.0,
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control"
+    },
+    {
+      "date": "2026-08-17",
+      "media_id": "18130242805650379",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "comparison",
+      "hook": "Gmail buries emails with \u2018free\u2019 or \u2018discount\u2019 in the subject",
+      "metrics": {
+        "reach": 2,
+        "saved": 0,
+        "shares": 0,
+        "likes": 1,
+        "comments": 0
+      },
+      "engagement_rate": 50.0,
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
     }
   ],
   "scored_reels": [
@@ -1270,6 +1288,46 @@
         "has_stat": false,
         "has_proof": false,
         "duration_s": 28.3
+      },
+      "experiment_id": "exp-20260725-1",
+      "experiment_arm": "control"
+    },
+    {
+      "date": "2026-08-17",
+      "media_id": "18146192227549331",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "comparison",
+      "hook": "Gmail buries emails with \u2018free\u2019 or \u2018discount\u2019 in the subject",
+      "trial": false,
+      "metrics": {
+        "reach": 2,
+        "views": 3,
+        "saved": 0,
+        "shares": 0,
+        "likes": 1,
+        "comments": 0,
+        "total_interactions": 1,
+        "ig_reels_avg_watch_time": 6669,
+        "ig_reels_video_view_total_time": 26676,
+        "reels_skip_rate": 0
+      },
+      "engagement_rate": 50.0,
+      "sends_per_reach": 0.0,
+      "views_per_reach": 1.5,
+      "beat_structure": {
+        "beat_count": 5,
+        "beat_kinds": [
+          "hook",
+          "body",
+          "body",
+          "cta",
+          "brand"
+        ],
+        "body_beats": 2,
+        "has_stat": false,
+        "has_proof": false,
+        "duration_s": 20.7
       },
       "experiment_id": "exp-20260725-1",
       "experiment_arm": "control"
