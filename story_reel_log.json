@@ -449,5 +449,41 @@
       "Steal the process below."
     ],
     "cta_word": "COPY"
+  },
+  {
+    "date": "2026-08-21",
+    "index": 1,
+    "clip": "assets/story_reel_footage/finance_city_balcony.mp4",
+    "hook_lines": [
+      "I gave my cold email",
+      "to Claude for 7 days",
+      "and open rates jumped",
+      "to 62%. Steal the process below."
+    ],
+    "cta_word": "LEAK"
+  },
+  {
+    "date": "2026-08-21",
+    "index": 2,
+    "clip": "assets/story_reel_footage/silhouette_screen_dark.mp4",
+    "hook_lines": [
+      "I handed 3 clients'",
+      "Google Ads to AI",
+      "and cut their CPA",
+      "from \u20ac42 to \u20ac9. Here's exactly how."
+    ],
+    "cta_word": "CHECKLIST"
+  },
+  {
+    "date": "2026-08-21",
+    "index": 3,
+    "clip": "assets/story_reel_footage/dual_monitor_coding.mp4",
+    "hook_lines": [
+      "I let AI rewrite",
+      "a client\u2019s landing page",
+      "and conversions",
+      "tripled. Full breakdown below."
+    ],
+    "cta_word": "SCRIPT"
   }
 ]
