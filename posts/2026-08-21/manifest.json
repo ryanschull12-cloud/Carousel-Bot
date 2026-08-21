@@ -1,0 +1,443 @@
+{
+  "batch_date": "2026-08-21",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Save this AI privacy checklist \u2193\nFree tools like Claude train on pasted data\u2014flip one toggle to stop it. These 6 steps keep customer info private without losing AI features.\n#aiforbusiness #aitoolsforbusiness #marketingaudit #smallbusinessireland",
+      "niche": "AI Tools",
+      "angle": "mistake-fear",
+      "format": "checklist",
+      "hook": "Claude trains on every paste by default",
+      "throughline": "Free AI tools use your pasted data to train their models\u2014here\u2019s how to stop it and keep customer info private.",
+      "image_paths": [
+        "posts/2026-08-21/carousel_1/slide_01.jpg",
+        "posts/2026-08-21/carousel_1/slide_02.jpg",
+        "posts/2026-08-21/carousel_1/slide_03.jpg",
+        "posts/2026-08-21/carousel_1/slide_04.jpg",
+        "posts/2026-08-21/carousel_1/slide_05.jpg",
+        "posts/2026-08-21/carousel_1/slide_06.jpg",
+        "posts/2026-08-21/carousel_1/slide_07.jpg",
+        "posts/2026-08-21/carousel_1/slide_08.jpg",
+        "posts/2026-08-21/carousel_1/slide_09.jpg",
+        "posts/2026-08-21/carousel_1/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Your customer lists train Claude unless you flip this toggle",
+        "hook_emphasis": "customer lists",
+        "body": [
+          {
+            "text": "Claude\u2019s default setting lets it use pasted data to train its models, so customer lists or private notes can end up in its training set.",
+            "emphasis": "training set"
+          },
+          {
+            "text": "Flip the \u2018Data Sharing\u2019 toggle in settings to \u2018Off\u2019 to stop it, but this may limit some AI features.",
+            "emphasis": "Data Sharing"
+          },
+          {
+            "text": "Paid plans keep your data private without losing features, so consider upgrading if privacy matters.",
+            "emphasis": "Paid plans"
+          },
+          {
+            "text": "Always check settings after updates, because defaults often reset to training mode.",
+            "emphasis": "reset"
+          }
+        ],
+        "screen": {
+          "title": "Stop Claude training on your data",
+          "panel_label": "DATA SETTINGS",
+          "options": [
+            [
+              "Data Sharing: On",
+              "Trains on pasted data"
+            ],
+            [
+              "Data Sharing: Off",
+              "Keeps data private"
+            ]
+          ],
+          "wrong": 0,
+          "right": 1,
+          "mechanism": "Turning off data sharing stops Claude from using your pasted data to train its models."
+        },
+        "cta_line": "",
+        "send_line": "Send this to your team lead"
+      },
+      "body_slides": [
+        {
+          "text": "Claude\u2019s default setting lets it use pasted data to train its models.",
+          "keyword": "default setting"
+        },
+        {
+          "text": "Customer lists, emails, or private notes could end up in its training set.",
+          "keyword": "training set"
+        },
+        {
+          "text": "Flip the \u2018Data Sharing\u2019 toggle in settings to \u2018Off\u2019 to stop it.",
+          "keyword": "Data Sharing"
+        },
+        {
+          "text": "This keeps your data private but may limit some AI features.",
+          "keyword": "private"
+        },
+        {
+          "text": "Paid plans keep privacy without losing features.",
+          "keyword": "paid plan"
+        },
+        {
+          "text": "Check settings after updates\u2014defaults often reset.",
+          "keyword": "settings"
+        }
+      ],
+      "cta_word": "CHECKLIST",
+      "cta_promise": "the 6-step AI privacy checklist",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Save this ChatGPT privacy guide \u2193\nFree plans store pasted data forever\u2014flip one toggle to stop it. These 6 steps protect sensitive info without losing access.\n#aiforbusiness #smallbusinessai #marketingaudit #irishbusiness",
+      "niche": "AI Tools",
+      "angle": "mistake-fear",
+      "format": "checklist",
+      "hook": "ChatGPT\u2019s free plan never deletes pasted data",
+      "throughline": "ChatGPT\u2019s free plan stores your pasted data forever\u2014here\u2019s how to opt out and protect sensitive info.",
+      "image_paths": [
+        "posts/2026-08-21/carousel_2/slide_01.jpg",
+        "posts/2026-08-21/carousel_2/slide_02.jpg",
+        "posts/2026-08-21/carousel_2/slide_03.jpg",
+        "posts/2026-08-21/carousel_2/slide_04.jpg",
+        "posts/2026-08-21/carousel_2/slide_05.jpg",
+        "posts/2026-08-21/carousel_2/slide_06.jpg",
+        "posts/2026-08-21/carousel_2/slide_07.jpg",
+        "posts/2026-08-21/carousel_2/slide_08.jpg",
+        "posts/2026-08-21/carousel_2/slide_09.jpg",
+        "posts/2026-08-21/carousel_2/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Your pasted data trains ChatGPT forever unless you flip this toggle",
+        "hook_emphasis": "forever",
+        "body": [
+          {
+            "text": "ChatGPT\u2019s free plan stores every prompt and pasted data to train its models, so sensitive info could be kept indefinitely.",
+            "emphasis": "stores"
+          },
+          {
+            "text": "Flip the \u2018Chat History & Training\u2019 toggle to \u2018Off\u2019 in settings to stop it, but this deletes chat history too.",
+            "emphasis": "Chat History & Training"
+          },
+          {
+            "text": "Paid plans keep your chat history without training on your data, so consider upgrading if privacy matters.",
+            "emphasis": "Paid plans"
+          },
+          {
+            "text": "Clear old chats regularly to remove stored data, because even deleted chats may linger.",
+            "emphasis": "Clear old chats"
+          }
+        ],
+        "screen": {
+          "title": "Stop ChatGPT training on your data",
+          "panel_label": "PRIVACY SETTINGS",
+          "options": [
+            [
+              "Chat History & Training: On",
+              "Stores and trains on data"
+            ],
+            [
+              "Chat History & Training: Off",
+              "Keeps data private"
+            ]
+          ],
+          "wrong": 0,
+          "right": 1,
+          "mechanism": "Turning off chat history stops ChatGPT from storing or training on your pasted data."
+        },
+        "cta_line": "",
+        "send_line": "Send this to your data officer"
+      },
+      "body_slides": [
+        {
+          "text": "ChatGPT\u2019s free plan stores every prompt and pasted data to train its models.",
+          "keyword": "stores"
+        },
+        {
+          "text": "Customer emails, private notes, or sensitive info could be kept indefinitely.",
+          "keyword": "sensitive info"
+        },
+        {
+          "text": "Flip the \u2018Chat History & Training\u2019 toggle to \u2018Off\u2019 in settings.",
+          "keyword": "Chat History & Training"
+        },
+        {
+          "text": "This stops ChatGPT from using your data but deletes chat history too.",
+          "keyword": "deletes"
+        },
+        {
+          "text": "Paid plans keep history without training on your data.",
+          "keyword": "paid plan"
+        },
+        {
+          "text": "Clear old chats regularly to remove stored data.",
+          "keyword": "Clear old chats"
+        }
+      ],
+      "cta_word": "CHECKLIST",
+      "cta_promise": "the 6-step ChatGPT privacy guide",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Save this email template \u2193\nGmail\u2019s Primary tab opens for emails with replies\u2014trigger it in 24 hours with this 6-step template. Boost sender score and land in inboxes.\n#emailmarketingtips #emaildeliverability #conversiontracking #dublinbusiness",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Gmail\u2019s Primary tab opens for emails with replies",
+      "throughline": "Gmail\u2019s Primary tab prioritizes emails with replies\u2014here\u2019s how to trigger that first reply in 24 hours.",
+      "image_paths": [
+        "posts/2026-08-21/carousel_3/slide_01.jpg",
+        "posts/2026-08-21/carousel_3/slide_02.jpg",
+        "posts/2026-08-21/carousel_3/slide_03.jpg",
+        "posts/2026-08-21/carousel_3/slide_04.jpg",
+        "posts/2026-08-21/carousel_3/slide_05.jpg",
+        "posts/2026-08-21/carousel_3/slide_06.jpg",
+        "posts/2026-08-21/carousel_3/slide_07.jpg",
+        "posts/2026-08-21/carousel_3/slide_08.jpg",
+        "posts/2026-08-21/carousel_3/slide_09.jpg",
+        "posts/2026-08-21/carousel_3/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "One reply moves your email to Gmail\u2019s Primary tab\u2014here\u2019s how",
+        "hook_emphasis": "Primary tab",
+        "body": [
+          {
+            "text": "Gmail\u2019s Primary tab prioritizes emails that get replies, so a single reply boosts your sender score and moves future emails to the top.",
+            "emphasis": "replies"
+          },
+          {
+            "text": "Send a short, personal follow-up 24 hours after the first email to trigger that first reply, using a simple question like \u2018Did this help?\u2019",
+            "emphasis": "follow-up"
+          },
+          {
+            "text": "Use a clear \u2018Reply\u2019 button in your email to guide readers, and test subject lines to find what gets the most replies.",
+            "emphasis": "Reply button"
+          },
+          {
+            "text": "This works because Gmail sees replies as a signal of trust, so one reply can change where your emails land for good.",
+            "emphasis": "trust"
+          }
+        ],
+        "cta_line": "",
+        "send_line": "Send this to your email marketer"
+      },
+      "body_slides": [
+        {
+          "text": "Gmail\u2019s Primary tab prioritizes emails that get replies over opens or clicks.",
+          "keyword": "replies"
+        },
+        {
+          "text": "A single reply boosts your sender score and moves future emails to Primary.",
+          "keyword": "sender score"
+        },
+        {
+          "text": "Send a short, personal follow-up 24 hours after the first email.",
+          "keyword": "follow-up"
+        },
+        {
+          "text": "Ask a simple question like \u2018Did this help?\u2019 to make replying easy.",
+          "keyword": "simple question"
+        },
+        {
+          "text": "Use a clear \u2018Reply\u2019 button in your email to guide readers.",
+          "keyword": "Reply button"
+        },
+        {
+          "text": "Test subject lines to find what gets the most replies\u2014then use it.",
+          "keyword": "subject lines"
+        }
+      ],
+      "cta_word": "TEMPLATE",
+      "cta_promise": "the 24-hour reply email template",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 4,
+      "caption": "Save this Google Ads guide \u2193\nGoogle Ads charges the same for browsers and buyers\u2014fix it with one setting. Cut wasted spend by 30% and boost conversions with these 6 steps.\n#googleadstips #ppcmanagement #leadgeneration #galwaybusiness",
+      "niche": "Google Ads",
+      "angle": "realization",
+      "format": "before-after",
+      "hook": "Google Ads charges the same for browsers and buyers",
+      "throughline": "Google Ads treats browsers and buyers the same\u2014here\u2019s how to fix it and cut wasted spend by 30%.",
+      "image_paths": [
+        "posts/2026-08-21/carousel_4/slide_01.jpg",
+        "posts/2026-08-21/carousel_4/slide_02.jpg",
+        "posts/2026-08-21/carousel_4/slide_03.jpg",
+        "posts/2026-08-21/carousel_4/slide_04.jpg",
+        "posts/2026-08-21/carousel_4/slide_05.jpg",
+        "posts/2026-08-21/carousel_4/slide_06.jpg",
+        "posts/2026-08-21/carousel_4/slide_07.jpg",
+        "posts/2026-08-21/carousel_4/slide_08.jpg",
+        "posts/2026-08-21/carousel_4/slide_09.jpg",
+        "posts/2026-08-21/carousel_4/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Google Ads bills you the same for a browser and a buyer\u2014here\u2019s the fix",
+        "hook_emphasis": "bills the same",
+        "body": [
+          {
+            "text": "Google Ads shows ads to anyone searching, even if they\u2019re just browsing, so use \u2018Audience Segments\u2019 to target people ready to buy instead.",
+            "emphasis": "Audience Segments"
+          },
+          {
+            "text": "Exclude \u2018low-intent\u2019 searches like \u2018how to\u2019 or \u2018best free\u2019 from your campaigns, because these waste budget on people who won\u2019t convert.",
+            "emphasis": "low-intent"
+          },
+          {
+            "text": "Switch to \u2018Phrase Match\u2019 to show ads only for searches that mean it, cutting wasted spend by 30% and boosting conversion rates.",
+            "emphasis": "Phrase Match"
+          },
+          {
+            "text": "Check the \u2018Search Terms\u2019 report weekly to cut more waste, because even small changes add up to big savings over time.",
+            "emphasis": "Search Terms"
+          }
+        ],
+        "chart": {
+          "label": "cost per lead",
+          "before": 45,
+          "after": 30,
+          "unit": "\u20ac",
+          "caption": "Fixing audience targeting cut cost per lead by 30% in two weeks."
+        },
+        "cta_line": "",
+        "send_line": "Send this to your ads manager"
+      },
+      "body_slides": [
+        {
+          "text": "Google Ads shows ads to anyone searching, even if they\u2019re just browsing.",
+          "keyword": "browsing",
+          "before": "\u20ac45/lead",
+          "after": "\u20ac30/lead"
+        },
+        {
+          "text": "Use \u2018Audience Segments\u2019 to target people ready to buy.",
+          "keyword": "Audience Segments",
+          "before": "Broad audience",
+          "after": "Buyers only"
+        },
+        {
+          "text": "Exclude \u2018low-intent\u2019 searches like \u2018how to\u2019 or \u2018best free\u2019 from campaigns.",
+          "keyword": "low-intent",
+          "before": "All searches",
+          "after": "High-intent only"
+        },
+        {
+          "text": "Switch to \u2018Phrase Match\u2019 to show ads only for searches that mean it.",
+          "keyword": "Phrase Match",
+          "before": "Broad match",
+          "after": "Phrase match"
+        },
+        {
+          "text": "Check the \u2018Search Terms\u2019 report weekly to cut wasted spend.",
+          "keyword": "Search Terms",
+          "before": "\u20ac100 wasted",
+          "after": "\u20ac0 wasted"
+        },
+        {
+          "text": "This cuts wasted spend by 30% and boosts conversion rates.",
+          "keyword": "30%",
+          "before": "2% conversions",
+          "after": "5% conversions"
+        }
+      ],
+      "cta_word": "GUIDE",
+      "cta_promise": "the 6-step Google Ads cleanup guide",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Save this email template \u2193\nOne reply moves your email to Gmail\u2019s Primary tab\u2014get it in 24 hours with this 6-step template. Boost opens and land in inboxes.\n#emailmarketingtips #emailcopywriting #conversiontracking #corkbusiness",
+      "niche": "Email Marketing",
+      "angle": "curiosity",
+      "format": "step-by-step",
+      "hook": "One reply moves your email to Gmail\u2019s Primary tab",
+      "throughline": "One reply moves your email to Gmail\u2019s Primary tab\u2014here\u2019s how to get that reply in 24 hours.",
+      "image_paths": [
+        "posts/2026-08-21/carousel_5/slide_01.jpg",
+        "posts/2026-08-21/carousel_5/slide_02.jpg",
+        "posts/2026-08-21/carousel_5/slide_03.jpg",
+        "posts/2026-08-21/carousel_5/slide_04.jpg",
+        "posts/2026-08-21/carousel_5/slide_05.jpg",
+        "posts/2026-08-21/carousel_5/slide_06.jpg",
+        "posts/2026-08-21/carousel_5/slide_07.jpg",
+        "posts/2026-08-21/carousel_5/slide_08.jpg",
+        "posts/2026-08-21/carousel_5/slide_09.jpg",
+        "posts/2026-08-21/carousel_5/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "One reply moves your email to Gmail\u2019s Primary tab\u2014here\u2019s how",
+        "hook_emphasis": "Primary tab",
+        "body": [
+          {
+            "text": "Send a short, personal email with a clear question to make replying easy, because vague emails get ignored.",
+            "emphasis": "clear question"
+          },
+          {
+            "text": "Follow up 24 hours later with a gentle nudge, because most replies come after the second touch.",
+            "emphasis": "24 hours"
+          },
+          {
+            "text": "Use a simple subject line like \u2018Quick question\u2019 to boost opens, and include a \u2018Reply\u2019 button to guide readers.",
+            "emphasis": "Reply button"
+          },
+          {
+            "text": "Test different send times to find when replies peak, and track which emails move to Primary fastest for future sends.",
+            "emphasis": "send times"
+          }
+        ],
+        "cta_line": "",
+        "send_line": "Send this to your email team"
+      },
+      "body_slides": [
+        {
+          "text": "Send a short, personal email with a clear question\u2014this makes replying easy.",
+          "keyword": "clear question"
+        },
+        {
+          "text": "Follow up 24 hours later with a gentle nudge\u2014most replies come after the second touch.",
+          "keyword": "24 hours"
+        },
+        {
+          "text": "Use a simple subject line like \u2018Quick question\u2019 to boost opens.",
+          "keyword": "subject line"
+        },
+        {
+          "text": "Include a \u2018Reply\u2019 button in your email to guide readers.",
+          "keyword": "Reply button"
+        },
+        {
+          "text": "Test different send times to find when replies peak.",
+          "keyword": "send times"
+        },
+        {
+          "text": "Track replies to see which emails move to Primary fastest\u2014then repeat it.",
+          "keyword": "Track replies"
+        }
+      ],
+      "cta_word": "TEMPLATE",
+      "cta_promise": "the 24-hour reply email template",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    }
+  ]
+}

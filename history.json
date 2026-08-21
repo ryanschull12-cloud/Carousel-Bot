@@ -1,66 +1,6 @@
 {
   "recent_batches": [
     {
-      "date": "2026-08-11",
-      "carousels": [
-        {
-          "niche": "Email Marketing",
-          "angle": "realization",
-          "format": "before-after",
-          "hook": "Gmail moves emails to Primary when someone replies\u2014not opens",
-          "hashtags": [
-            "#emailmarketingtips",
-            "#emaildeliverability",
-            "#conversiontracking"
-          ]
-        },
-        {
-          "niche": "Email Marketing",
-          "angle": "contrarian",
-          "format": "comparison",
-          "hook": "Gmail\u2019s spam filter skips subject lines\u2014sender reputation decides inbox or spam",
-          "hashtags": [
-            "#emailmarketingtips",
-            "#emaildeliverability",
-            "#marketingaudit"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "curiosity",
-          "format": "step-by-step",
-          "hook": "Google Ads hides your highest-converting clicks in \u2018Other searches\u2019",
-          "hashtags": [
-            "#googleadstips",
-            "#ppcmanagement",
-            "#leadgeneration"
-          ]
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "behind-the-curtain",
-          "format": "steal-this",
-          "hook": "Meta\u2019s algorithm boosts ads that use this 3-part script",
-          "hashtags": [
-            "#metaadstips",
-            "#paidsocial",
-            "#leadgeneration"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "mistake-fear",
-          "format": "checklist",
-          "hook": "Google Ads charges you for clicks that bounce in under 2 seconds",
-          "hashtags": [
-            "#googleadstips",
-            "#ppcmanagement",
-            "#adspend"
-          ]
-        }
-      ]
-    },
-    {
       "date": "2026-08-12",
       "carousels": [
         {
@@ -631,6 +571,71 @@
             "#emaildeliverability",
             "#conversiontracking",
             "#irishsmallbusiness"
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-08-21",
+      "carousels": [
+        {
+          "niche": "AI Tools",
+          "angle": "mistake-fear",
+          "format": "checklist",
+          "hook": "Claude trains on every paste by default",
+          "hashtags": [
+            "#aiforbusiness",
+            "#aitoolsforbusiness",
+            "#marketingaudit",
+            "#smallbusinessireland"
+          ]
+        },
+        {
+          "niche": "AI Tools",
+          "angle": "mistake-fear",
+          "format": "checklist",
+          "hook": "ChatGPT\u2019s free plan never deletes pasted data",
+          "hashtags": [
+            "#aiforbusiness",
+            "#smallbusinessai",
+            "#marketingaudit",
+            "#irishbusiness"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "behind-the-curtain",
+          "format": "steal-this",
+          "hook": "Gmail\u2019s Primary tab opens for emails with replies",
+          "hashtags": [
+            "#emailmarketingtips",
+            "#emaildeliverability",
+            "#conversiontracking",
+            "#dublinbusiness"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "realization",
+          "format": "before-after",
+          "hook": "Google Ads charges the same for browsers and buyers",
+          "hashtags": [
+            "#googleadstips",
+            "#ppcmanagement",
+            "#leadgeneration",
+            "#galwaybusiness"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "curiosity",
+          "format": "step-by-step",
+          "hook": "One reply moves your email to Gmail\u2019s Primary tab",
+          "hashtags": [
+            "#emailmarketingtips",
+            "#emailcopywriting",
+            "#conversiontracking",
+            "#corkbusiness"
           ]
         }
       ]
