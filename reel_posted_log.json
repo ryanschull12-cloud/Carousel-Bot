@@ -488,5 +488,33 @@
     "scored": false,
     "delivery": "email",
     "posted_manually": null
+  },
+  {
+    "media_id": null,
+    "date": "2026-08-21",
+    "index": 1,
+    "niche": "AI Tools",
+    "angle": "mistake-fear",
+    "format": "checklist",
+    "hook": "Your customer lists train Claude unless you flip this toggle",
+    "media_product_type": "REELS",
+    "trial": false,
+    "scored": false,
+    "delivery": "email",
+    "posted_manually": null
+  },
+  {
+    "media_id": null,
+    "date": "2026-08-21",
+    "index": 2,
+    "niche": "AI Tools",
+    "angle": "mistake-fear",
+    "format": "checklist",
+    "hook": "Your pasted data trains ChatGPT forever unless you flip this toggle",
+    "media_product_type": "REELS",
+    "trial": false,
+    "scored": false,
+    "delivery": "email",
+    "posted_manually": null
   }
 ]
