@@ -530,5 +530,33 @@
     "scored": false,
     "delivery": "email",
     "posted_manually": null
+  },
+  {
+    "media_id": null,
+    "date": "2026-08-22",
+    "index": 1,
+    "niche": "AI Tools",
+    "angle": "behind-the-curtain",
+    "format": "step-by-step",
+    "hook": "Your pasted customer data trains Claude’s AI by default",
+    "media_product_type": "REELS",
+    "trial": false,
+    "scored": false,
+    "delivery": "email",
+    "posted_manually": null
+  },
+  {
+    "media_id": null,
+    "date": "2026-08-22",
+    "index": 2,
+    "niche": "Email Marketing",
+    "angle": "curiosity",
+    "format": "before-after",
+    "hook": "One reply moves your email to Gmail’s Primary tab instantly",
+    "media_product_type": "REELS",
+    "trial": false,
+    "scored": false,
+    "delivery": "email",
+    "posted_manually": null
   }
 ]
