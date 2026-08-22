@@ -1,71 +1,6 @@
 {
   "recent_batches": [
     {
-      "date": "2026-08-12",
-      "carousels": [
-        {
-          "niche": "Email Marketing",
-          "angle": "behind-the-curtain",
-          "format": "steal-this",
-          "hook": "Gmail\u2019s spam filter ignores your subject line\u2014it\u2019s all about sender trust",
-          "hashtags": [
-            "#emailmarketingtips",
-            "#emaildeliverability",
-            "#marketingaudit",
-            "#smallbusiness"
-          ]
-        },
-        {
-          "niche": "Email Marketing",
-          "angle": "contrarian",
-          "format": "comparison",
-          "hook": "Gmail moves emails with replies to Primary\u2014not opens",
-          "hashtags": [
-            "#emailmarketingtips",
-            "#emailcopywriting",
-            "#conversiontracking",
-            "#smallbusiness"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "realization",
-          "format": "step-by-step",
-          "hook": "Google Ads buries 20% of your best leads in \u2018Other searches\u2019",
-          "hashtags": [
-            "#googleadstips",
-            "#ppcmanagement",
-            "#leadgeneration",
-            "#smallbusiness"
-          ]
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "mistake-fear",
-          "format": "before-after",
-          "hook": "Meta Ads stop learning if no one converts for 3 days",
-          "hashtags": [
-            "#metaadstips",
-            "#paidsocial",
-            "#adspend",
-            "#smallbusiness"
-          ]
-        },
-        {
-          "niche": "Email Marketing",
-          "angle": "curiosity",
-          "format": "before-after",
-          "hook": "Gmail flags \u2018free\u2019 and \u2018discount\u2019 as spam\u2014here\u2019s what works instead",
-          "hashtags": [
-            "#emailmarketingtips",
-            "#emailcopywriting",
-            "#marketingaudit",
-            "#smallbusiness"
-          ]
-        }
-      ]
-    },
-    {
       "date": "2026-08-13",
       "carousels": [
         {
@@ -635,6 +570,71 @@
             "#emailmarketingtips",
             "#emailcopywriting",
             "#conversiontracking",
+            "#corkbusiness"
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-08-22",
+      "carousels": [
+        {
+          "niche": "AI Tools",
+          "angle": "behind-the-curtain",
+          "format": "step-by-step",
+          "hook": "Claude\u2019s free plan trains on your pasted data by default",
+          "hashtags": [
+            "#aiforbusiness",
+            "#aitoolsforbusiness",
+            "#marketingaudit",
+            "#irishstartup"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "curiosity",
+          "format": "before-after",
+          "hook": "One reply moves your email to Gmail\u2019s Primary tab instantly",
+          "hashtags": [
+            "#emailmarketingtips",
+            "#emaildeliverability",
+            "#leadgeneration",
+            "#irishbusiness"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "realization",
+          "format": "before-after",
+          "hook": "Google Ads charges \u20ac0.50 for a browser and \u20ac0.50 for a buyer",
+          "hashtags": [
+            "#googleadstips",
+            "#ppcmanagement",
+            "#searchads",
+            "#dublinbusiness"
+          ]
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "realization",
+          "format": "steal-this",
+          "hook": "Meta Ads bury creatives that take 3 seconds to show the problem",
+          "hashtags": [
+            "#metaadstips",
+            "#paidsocialtips",
+            "#adcopy",
+            "#smallbusinessireland"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "behind-the-curtain",
+          "format": "step-by-step",
+          "hook": "Google Ads hides 17% of buyers in \u2018Other searches\u2019",
+          "hashtags": [
+            "#googleadstips",
+            "#ppcmanagement",
+            "#leadgeneration",
             "#corkbusiness"
           ]
         }

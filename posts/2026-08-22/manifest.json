@@ -1,0 +1,444 @@
+{
+  "batch_date": "2026-08-22",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Save this checklist \u2193\nClaude\u2019s free plan trains on everything you paste\u2014customer emails, ad copy, private notes. One toggle keeps it private. #aiforbusiness #aitoolsforbusiness #marketingaudit #irishstartup",
+      "niche": "AI Tools",
+      "angle": "behind-the-curtain",
+      "format": "step-by-step",
+      "hook": "Claude\u2019s free plan trains on your pasted data by default",
+      "throughline": "Claude\u2019s free plan automatically uses pasted data to train its AI\u2014unless you disable this one setting, your customer details could become public.",
+      "image_paths": [
+        "posts/2026-08-22/carousel_1/slide_01.jpg",
+        "posts/2026-08-22/carousel_1/slide_02.jpg",
+        "posts/2026-08-22/carousel_1/slide_03.jpg",
+        "posts/2026-08-22/carousel_1/slide_04.jpg",
+        "posts/2026-08-22/carousel_1/slide_05.jpg",
+        "posts/2026-08-22/carousel_1/slide_06.jpg",
+        "posts/2026-08-22/carousel_1/slide_07.jpg",
+        "posts/2026-08-22/carousel_1/slide_08.jpg",
+        "posts/2026-08-22/carousel_1/slide_09.jpg",
+        "posts/2026-08-22/carousel_1/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Your pasted customer data trains Claude\u2019s AI by default",
+        "hook_emphasis": "trains Claude\u2019s AI",
+        "body": [
+          {
+            "text": "Claude\u2019s free plan uses every paste to improve its AI, including private customer details.",
+            "emphasis": "private customer details"
+          },
+          {
+            "text": "The \u2018Data Sharing\u2019 setting is on by default, so your inputs could appear in future responses.",
+            "emphasis": "on by default"
+          },
+          {
+            "text": "This means your ad copy, emails, or notes might be used to train models for other users.",
+            "emphasis": "train models for others"
+          },
+          {
+            "text": "Disable it in settings to keep your data private\u2014paid plans don\u2019t do this unless you opt in.",
+            "emphasis": "Disable it in settings"
+          }
+        ],
+        "screen": {
+          "title": "Turn off Claude\u2019s data training",
+          "panel_label": "DATA SHARING",
+          "options": [
+            [
+              "On",
+              "Trains on your pasted text"
+            ],
+            [
+              "Off",
+              "Keeps your data private"
+            ]
+          ],
+          "wrong": 0,
+          "right": 1,
+          "mechanism": "Disabling this stops Claude from using your pasted text to train its AI models."
+        },
+        "send_line": "Send this to your team lead"
+      },
+      "body_slides": [
+        {
+          "text": "Open Claude\u2019s settings and find \u2018Data Sharing\u2019\u2014it\u2019s enabled by default.",
+          "keyword": "Data Sharing"
+        },
+        {
+          "text": "This setting lets Claude use your pasted text to improve its models.",
+          "keyword": "pasted text"
+        },
+        {
+          "text": "Customer emails, ad copy, or private notes could appear in future responses.",
+          "keyword": "private notes"
+        },
+        {
+          "text": "Toggle it off to stop Claude from storing or learning from your inputs.",
+          "keyword": "Toggle it off"
+        },
+        {
+          "text": "Paid plans don\u2019t train on your data unless you opt in\u2014free plans do the opposite.",
+          "keyword": "Paid plans"
+        },
+        {
+          "text": "Check this setting every few weeks\u2014updates sometimes reset it.",
+          "keyword": "reset it"
+        }
+      ],
+      "cta_word": "CHECKLIST",
+      "cta_promise": "the exact steps to lock Claude\u2019s settings",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Save this \u2193\nOne reply moves your email to Gmail\u2019s Primary tab\u2014no opens needed. Open rates jump 50% just by asking for a quick reply. #emailmarketingtips #emaildeliverability #leadgeneration #irishbusiness",
+      "niche": "Email Marketing",
+      "angle": "curiosity",
+      "format": "before-after",
+      "hook": "One reply moves your email to Gmail\u2019s Primary tab instantly",
+      "throughline": "Gmail moves your email to the Primary tab when someone replies\u2014this small action boosts open rates and keeps your messages out of spam.",
+      "image_paths": [
+        "posts/2026-08-22/carousel_2/slide_01.jpg",
+        "posts/2026-08-22/carousel_2/slide_02.jpg",
+        "posts/2026-08-22/carousel_2/slide_03.jpg",
+        "posts/2026-08-22/carousel_2/slide_04.jpg",
+        "posts/2026-08-22/carousel_2/slide_05.jpg",
+        "posts/2026-08-22/carousel_2/slide_06.jpg",
+        "posts/2026-08-22/carousel_2/slide_07.jpg",
+        "posts/2026-08-22/carousel_2/slide_08.jpg",
+        "posts/2026-08-22/carousel_2/slide_09.jpg",
+        "posts/2026-08-22/carousel_2/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "One reply moves your email to Gmail\u2019s Primary tab instantly",
+        "hook_emphasis": "moves instantly",
+        "body": [
+          {
+            "text": "Gmail\u2019s algorithm tracks replies, not just opens, to decide where your email lands.",
+            "emphasis": "tracks replies"
+          },
+          {
+            "text": "A single reply tells Gmail your email is important, so it moves to the Primary tab.",
+            "emphasis": "moves to Primary"
+          },
+          {
+            "text": "Emails in Primary get 50% more opens than those stuck in Promotions or Spam.",
+            "emphasis": "50% more opens"
+          },
+          {
+            "text": "Ask a friend or colleague to reply\u2014even a short \u2018Got it\u2019 is enough to trigger the shift.",
+            "emphasis": "\u2018Got it\u2019"
+          }
+        ],
+        "chart": {
+          "label": "open rate boost",
+          "before": 20,
+          "after": 50,
+          "unit": "%",
+          "caption": "Emails moved to Primary see a 50%+ jump in open rates within hours."
+        },
+        "send_line": "Send this to your email marketer"
+      },
+      "body_slides": [
+        {
+          "text": "Gmail\u2019s algorithm tracks replies to decide where your email lands.",
+          "keyword": "tracks replies"
+        },
+        {
+          "text": "A single reply tells Gmail your email is important\u2014no opens needed.",
+          "keyword": "single reply"
+        },
+        {
+          "text": "Before: Emails land in Promotions or Spam, where most people ignore them.",
+          "keyword": "Promotions or Spam",
+          "before": "Promotions/Spam"
+        },
+        {
+          "text": "After: Emails move to Primary, where open rates jump by 50%.",
+          "keyword": "50%",
+          "after": "50% more opens"
+        },
+        {
+          "text": "Ask a friend or colleague to reply\u2014even a short \u2018Got it\u2019 works.",
+          "keyword": "\u2018Got it\u2019"
+        },
+        {
+          "text": "This trick works for newsletters, cold emails, and follow-ups.",
+          "keyword": "cold emails"
+        }
+      ],
+      "cta_word": "TEMPLATE",
+      "cta_promise": "the exact reply request to use",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Save this \u2193\nGoogle Ads charges the same for every click, but the Search Terms report shows which ones actually buy. Cut 30% of wasted spend in 5 minutes. #googleadstips #ppcmanagement #searchads #dublinbusiness",
+      "niche": "Google Ads",
+      "angle": "realization",
+      "format": "before-after",
+      "hook": "Google Ads charges \u20ac0.50 for a browser and \u20ac0.50 for a buyer",
+      "throughline": "Google Ads charges the same for every click, but the Search Terms report reveals which searches actually lead to sales\u2014helping you cut wasted spend.",
+      "image_paths": [
+        "posts/2026-08-22/carousel_3/slide_01.jpg",
+        "posts/2026-08-22/carousel_3/slide_02.jpg",
+        "posts/2026-08-22/carousel_3/slide_03.jpg",
+        "posts/2026-08-22/carousel_3/slide_04.jpg",
+        "posts/2026-08-22/carousel_3/slide_05.jpg",
+        "posts/2026-08-22/carousel_3/slide_06.jpg",
+        "posts/2026-08-22/carousel_3/slide_07.jpg",
+        "posts/2026-08-22/carousel_3/slide_08.jpg",
+        "posts/2026-08-22/carousel_3/slide_09.jpg",
+        "posts/2026-08-22/carousel_3/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "You\u2019re paying Google the same for a buyer and a browser",
+        "hook_emphasis": "paying the same",
+        "body": [
+          {
+            "text": "Google Ads bills you for every click, whether it\u2019s a serious buyer or someone just browsing.",
+            "emphasis": "bills for every click"
+          },
+          {
+            "text": "The Search Terms report shows what people actually typed before clicking your ad.",
+            "emphasis": "Search Terms report"
+          },
+          {
+            "text": "About 30% of clicks come from searches that never convert\u2014cutting them saves budget.",
+            "emphasis": "30% of clicks"
+          },
+          {
+            "text": "Exclude irrelevant terms and focus on the ones that drive real sales to lower costs.",
+            "emphasis": "lower costs"
+          }
+        ],
+        "chart": {
+          "label": "wasted spend cut",
+          "before": 30,
+          "after": 0,
+          "unit": "%",
+          "caption": "Excluding bad searches cuts wasted spend by 30% in one week."
+        },
+        "send_line": "Send this to your ads manager"
+      },
+      "body_slides": [
+        {
+          "text": "Google Ads bills every click the same, whether it\u2019s a buyer or a browser.",
+          "keyword": "every click the same"
+        },
+        {
+          "text": "The Search Terms report shows what people actually typed before clicking.",
+          "keyword": "Search Terms report"
+        },
+        {
+          "text": "Before: You pay for clicks that never convert, wasting up to 30% of budget.",
+          "keyword": "wasting 30%",
+          "before": "30% waste"
+        },
+        {
+          "text": "After: Exclude irrelevant searches and focus on terms that drive sales.",
+          "keyword": "drive sales",
+          "after": "0% waste"
+        },
+        {
+          "text": "Filter for conversions that took 7+ days to see which searches lead to real buyers.",
+          "keyword": "7+ days"
+        },
+        {
+          "text": "Update your keywords weekly\u2014this report changes as search trends shift.",
+          "keyword": "Update weekly"
+        }
+      ],
+      "cta_word": "GUIDE",
+      "cta_promise": "the exact steps to check Search Terms",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 4,
+      "caption": "Save this template \u2193\nMeta Ads bury creatives that take 3 seconds to show the problem. This script boosts CTR by 40%\u2014grab it now. #metaadstips #paidsocialtips #adcopy #smallbusinessireland",
+      "niche": "Meta/Instagram Ads",
+      "angle": "realization",
+      "format": "steal-this",
+      "hook": "Meta Ads bury creatives that take 3 seconds to show the problem",
+      "throughline": "Meta Ads reward creatives that solve a problem in the first 2 seconds\u2014this template speeds up every ad and boosts conversions.",
+      "image_paths": [
+        "posts/2026-08-22/carousel_4/slide_01.jpg",
+        "posts/2026-08-22/carousel_4/slide_02.jpg",
+        "posts/2026-08-22/carousel_4/slide_03.jpg",
+        "posts/2026-08-22/carousel_4/slide_04.jpg",
+        "posts/2026-08-22/carousel_4/slide_05.jpg",
+        "posts/2026-08-22/carousel_4/slide_06.jpg",
+        "posts/2026-08-22/carousel_4/slide_07.jpg",
+        "posts/2026-08-22/carousel_4/slide_08.jpg",
+        "posts/2026-08-22/carousel_4/slide_09.jpg",
+        "posts/2026-08-22/carousel_4/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Meta buries ads that take 3 seconds to show the problem",
+        "hook_emphasis": "takes 3 seconds",
+        "body": [
+          {
+            "text": "Meta\u2019s algorithm favors ads that solve a problem in the first 2 seconds of the video.",
+            "emphasis": "first 2 seconds"
+          },
+          {
+            "text": "Ads that start with the product instead of the problem lose viewers before the hook lands.",
+            "emphasis": "lose viewers"
+          },
+          {
+            "text": "Use this script: \u2018Tired of [problem]? Here\u2019s how [solution] works in seconds.\u2019",
+            "emphasis": "this script"
+          },
+          {
+            "text": "Text overlay in the first 2 seconds ensures the message lands even without sound.",
+            "emphasis": "Text overlay"
+          }
+        ],
+        "screen": {
+          "title": "Meta Ads 2-second script",
+          "panel_label": "AD OPENING",
+          "options": [
+            [
+              "Product first",
+              "Loses viewers fast"
+            ],
+            [
+              "Problem first",
+              "Grabs attention in 2 sec"
+            ]
+          ],
+          "wrong": 0,
+          "right": 1,
+          "mechanism": "Starting with the problem boosts retention and conversions in the first 2 seconds."
+        },
+        "send_line": "Send this to your creative team"
+      },
+      "body_slides": [
+        {
+          "text": "Meta\u2019s algorithm favors ads that grab attention in the first 2 seconds.",
+          "keyword": "first 2 seconds"
+        },
+        {
+          "text": "Start with the problem, not the product\u2014people scroll past sales pitches.",
+          "keyword": "problem, not product"
+        },
+        {
+          "text": "Use this script: \u2018Tired of [problem]? Here\u2019s how [solution] works.\u2019",
+          "keyword": "this script"
+        },
+        {
+          "text": "Add text overlay in the first 2 seconds\u2014most people watch without sound.",
+          "keyword": "text overlay"
+        },
+        {
+          "text": "Test 3-5 variations of the opening line to see which problem resonates.",
+          "keyword": "3-5 variations"
+        },
+        {
+          "text": "Ads that follow this structure see 40% higher click-through rates.",
+          "keyword": "40% higher"
+        }
+      ],
+      "cta_word": "TEMPLATE",
+      "cta_promise": "the exact 2-second ad script",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Save this checklist \u2193\nGoogle Ads hides 17% of buyers in \u2018Other searches\u2019\u2014this report reveals them. Recover lost leads in 10 minutes. #googleadstips #ppcmanagement #leadgeneration #corkbusiness",
+      "niche": "Google Ads",
+      "angle": "behind-the-curtain",
+      "format": "step-by-step",
+      "hook": "Google Ads hides 17% of buyers in \u2018Other searches\u2019",
+      "throughline": "Google Ads hides 1 in 6 buyers in the \u2018Other searches\u2019 report\u2014this step-by-step guide reveals them and recovers lost leads.",
+      "image_paths": [
+        "posts/2026-08-22/carousel_5/slide_01.jpg",
+        "posts/2026-08-22/carousel_5/slide_02.jpg",
+        "posts/2026-08-22/carousel_5/slide_03.jpg",
+        "posts/2026-08-22/carousel_5/slide_04.jpg",
+        "posts/2026-08-22/carousel_5/slide_05.jpg",
+        "posts/2026-08-22/carousel_5/slide_06.jpg",
+        "posts/2026-08-22/carousel_5/slide_07.jpg",
+        "posts/2026-08-22/carousel_5/slide_08.jpg",
+        "posts/2026-08-22/carousel_5/slide_09.jpg",
+        "posts/2026-08-22/carousel_5/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Google Ads hides 17% of your buyers in one report",
+        "hook_emphasis": "17% of your buyers",
+        "body": [
+          {
+            "text": "Google Ads labels 17% of searches as \u2018Other searches\u2019\u2014many of these are real buyers.",
+            "emphasis": "17% of searches"
+          },
+          {
+            "text": "The Search Terms report shows these hidden leads, but most accounts never check it.",
+            "emphasis": "hidden leads"
+          },
+          {
+            "text": "Sort by conversions to find the searches that actually drive sales, not just clicks.",
+            "emphasis": "drive sales"
+          },
+          {
+            "text": "Add these terms as exact match keywords to capture buyers Google mislabeled as \u2018low intent.\u2019",
+            "emphasis": "exact match keywords"
+          }
+        ],
+        "chart": {
+          "label": "hidden leads found",
+          "before": 0,
+          "after": 17,
+          "unit": "%",
+          "caption": "Checking \u2018Other searches\u2019 reveals 17% more buyers in one report."
+        },
+        "send_line": "Send this to your PPC manager"
+      },
+      "body_slides": [
+        {
+          "text": "Open the Search Terms report and filter for \u2018Other searches.\u2019",
+          "keyword": "Other searches"
+        },
+        {
+          "text": "This report shows searches Google labels \u2018low intent\u2019\u2014but many are buyers.",
+          "keyword": "low intent"
+        },
+        {
+          "text": "Sort by conversions to find the hidden leads\u2014these are real sales you\u2019re missing.",
+          "keyword": "real sales"
+        },
+        {
+          "text": "Add high-converting terms as exact match keywords to capture these buyers.",
+          "keyword": "exact match"
+        },
+        {
+          "text": "Exclude terms with no conversions to stop wasting budget on irrelevant searches.",
+          "keyword": "Exclude terms"
+        },
+        {
+          "text": "Check this report weekly\u2014Google updates it as search trends change.",
+          "keyword": "Check weekly"
+        }
+      ],
+      "cta_word": "CHECKLIST",
+      "cta_promise": "the exact steps to find hidden leads",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    }
+  ]
+}
