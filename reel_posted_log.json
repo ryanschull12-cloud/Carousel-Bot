@@ -558,5 +558,19 @@
     "scored": false,
     "delivery": "email",
     "posted_manually": null
+  },
+  {
+    "media_id": null,
+    "date": "2026-08-22",
+    "index": 3,
+    "niche": "Google Ads",
+    "angle": "realization",
+    "format": "before-after",
+    "hook": "You’re paying Google the same for a buyer and a browser",
+    "media_product_type": "REELS",
+    "trial": false,
+    "scored": false,
+    "delivery": "email",
+    "posted_manually": null
   }
 ]
