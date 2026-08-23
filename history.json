@@ -1,71 +1,6 @@
 {
   "recent_batches": [
     {
-      "date": "2026-08-13",
-      "carousels": [
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "behind-the-curtain",
-          "format": "steal-this",
-          "hook": "Meta Ads reward ads that solve a problem in 3 seconds flat",
-          "hashtags": [
-            "#metaadstips",
-            "#paidsocial",
-            "#adcopy",
-            "#smallbusinessireland"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "behind-the-curtain",
-          "format": "before-after",
-          "hook": "Google Ads calls 1 in 7 buyers \u2018low intent\u2019\u2014they\u2019re not",
-          "hashtags": [
-            "#googleadstips",
-            "#ppcmanagement",
-            "#adspend",
-            "#irishbusiness"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "realization",
-          "format": "step-by-step",
-          "hook": "Google Ads hides 1 in 4 of your best leads in plain sight",
-          "hashtags": [
-            "#googleadstips",
-            "#ppcmanagement",
-            "#leadgeneration",
-            "#smallbusinessireland"
-          ]
-        },
-        {
-          "niche": "Email Marketing",
-          "angle": "realization",
-          "format": "before-after",
-          "hook": "Gmail moves emails with replies to Primary in hours",
-          "hashtags": [
-            "#emailmarketingtips",
-            "#emailcopywriting",
-            "#conversiontracking",
-            "#irishbusiness"
-          ]
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "curiosity",
-          "format": "step-by-step",
-          "hook": "Meta Ads stop learning if no one converts for 3 days",
-          "hashtags": [
-            "#metaadstips",
-            "#paidsocial",
-            "#adspend",
-            "#businessireland"
-          ]
-        }
-      ]
-    },
-    {
       "date": "2026-08-14",
       "carousels": [
         {
@@ -636,6 +571,71 @@
             "#ppcmanagement",
             "#leadgeneration",
             "#corkbusiness"
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-08-23",
+      "carousels": [
+        {
+          "niche": "Email Marketing",
+          "angle": "realization",
+          "format": "step-by-step",
+          "hook": "Gmail moves emails to Primary after one reply",
+          "hashtags": [
+            "#emailmarketingtips",
+            "#emaildeliverability",
+            "#leadgeneration",
+            "#irishstartup"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "behind-the-curtain",
+          "format": "steal-this",
+          "hook": "Google Ads buries 17% of buyers in \u2018Other searches\u2019",
+          "hashtags": [
+            "#googleadstips",
+            "#ppcmanagement",
+            "#searchads",
+            "#dublinbusiness"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "mistake-fear",
+          "format": "before-after",
+          "hook": "Google Ads charges \u20ac0.50 for a browser and a buyer",
+          "hashtags": [
+            "#googleadstips",
+            "#ppcmanagement",
+            "#leadgeneration",
+            "#galwaybusiness"
+          ]
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "behind-the-curtain",
+          "format": "myth-buster",
+          "hook": "Meta Ads reward ads that show the problem in 2 seconds",
+          "hashtags": [
+            "#metaadstips",
+            "#paidsocialtips",
+            "#adcopy",
+            "#corkbusiness"
+          ]
+        },
+        {
+          "niche": "AI Tools",
+          "angle": "contrarian",
+          "format": "comparison",
+          "hook": "Claude\u2019s free plan never trains on your data",
+          "hashtags": [
+            "#aiforbusiness",
+            "#aitoolsforbusiness",
+            "#marketingaudit",
+            "#irishbusiness"
           ]
         }
       ]

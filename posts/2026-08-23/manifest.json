@@ -1,0 +1,447 @@
+{
+  "batch_date": "2026-08-23",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "One reply moves your email to Gmail\u2019s Primary tab\u2014no opens needed. Here\u2019s how to trigger it instantly: ask a question, send from a real name, and follow up in 2 days. #emailmarketingtips #emaildeliverability #leadgeneration #irishstartup",
+      "niche": "Email Marketing",
+      "angle": "realization",
+      "format": "step-by-step",
+      "hook": "Gmail moves emails to Primary after one reply",
+      "throughline": "Gmail\u2019s Primary tab rewards replies, not opens\u2014here\u2019s how to trigger it every time without waiting for engagement.",
+      "image_paths": [
+        "posts/2026-08-23/carousel_1/slide_01.jpg",
+        "posts/2026-08-23/carousel_1/slide_02.jpg",
+        "posts/2026-08-23/carousel_1/slide_03.jpg",
+        "posts/2026-08-23/carousel_1/slide_04.jpg",
+        "posts/2026-08-23/carousel_1/slide_05.jpg",
+        "posts/2026-08-23/carousel_1/slide_06.jpg",
+        "posts/2026-08-23/carousel_1/slide_07.jpg",
+        "posts/2026-08-23/carousel_1/slide_08.jpg",
+        "posts/2026-08-23/carousel_1/slide_09.jpg",
+        "posts/2026-08-23/carousel_1/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Your email is buried unless someone replies",
+        "hook_emphasis": "buried",
+        "body": [
+          {
+            "text": "Gmail doesn\u2019t care if someone opens your email\u2014it only moves it to Primary if they reply.",
+            "emphasis": "reply"
+          },
+          {
+            "text": "Most replies happen in the first 24 hours, so ask a question in the first line to trigger it fast.",
+            "emphasis": "first line"
+          },
+          {
+            "text": "Emails from real names get 23% more replies than \u2018no-reply\u2019\u2014trust is everything.",
+            "emphasis": "23%"
+          },
+          {
+            "text": "Follow up in 2 days if no reply\u2014most replies come after the second email, not the first.",
+            "emphasis": "2 days"
+          }
+        ],
+        "send_line": "Send this to whoever writes your emails"
+      },
+      "body_slides": [
+        {
+          "text": "Gmail checks for replies, not opens. One reply moves your email to Primary.",
+          "keyword": "replies"
+        },
+        {
+          "text": "Ask a question in the first line\u2014most replies happen in the first 24 hours.",
+          "keyword": "first line"
+        },
+        {
+          "text": "Subject lines with \u2018?\u2019 get 23% more replies than statements.",
+          "keyword": "23%"
+        },
+        {
+          "text": "Send from a real person\u2019s name, not \u2018no-reply\u2019\u2014trust gets replies.",
+          "keyword": "real person\u2019s name"
+        },
+        {
+          "text": "Follow up in 2 days if no reply\u2014most replies come after the second email.",
+          "keyword": "2 days"
+        },
+        {
+          "text": "Primary tab emails get opened 3x more than Promotions\u2014replies win. Swipe for the template.",
+          "keyword": "3x more"
+        }
+      ],
+      "cta_word": "GUIDE",
+      "cta_promise": "the exact email template that gets replies",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Google Ads buries 17% of buyers in \u2018Other searches\u2019\u2014most accounts never open this report. Here\u2019s how to find and reclaim them: filter the Search Terms report, add high-converting terms as keywords, and block bad searches with negatives. #googleadstips #ppcmanagement #searchads #dublinbusiness",
+      "niche": "Google Ads",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Google Ads buries 17% of buyers in \u2018Other searches\u2019",
+      "throughline": "Google Ads hides 1 in 6 buyers in \u2018Other searches\u2019\u2014here\u2019s how to find and reclaim them before they\u2019re lost.",
+      "image_paths": [
+        "posts/2026-08-23/carousel_2/slide_01.jpg",
+        "posts/2026-08-23/carousel_2/slide_02.jpg",
+        "posts/2026-08-23/carousel_2/slide_03.jpg",
+        "posts/2026-08-23/carousel_2/slide_04.jpg",
+        "posts/2026-08-23/carousel_2/slide_05.jpg",
+        "posts/2026-08-23/carousel_2/slide_06.jpg",
+        "posts/2026-08-23/carousel_2/slide_07.jpg",
+        "posts/2026-08-23/carousel_2/slide_08.jpg",
+        "posts/2026-08-23/carousel_2/slide_09.jpg",
+        "posts/2026-08-23/carousel_2/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Google Ads buries 17% of your buyers in one report",
+        "hook_emphasis": "17% of buyers",
+        "body": [
+          {
+            "text": "Google Ads labels some searches as \u2018Other\u2019 and hides them\u2014even when they convert.",
+            "emphasis": "hides them"
+          },
+          {
+            "text": "Most accounts never open the Search Terms report for \u2018Other\u2019\u2014these are your hidden buyers.",
+            "emphasis": "hidden buyers"
+          },
+          {
+            "text": "Adding high-converting \u2018Other\u2019 terms as keywords cuts wasted spend by 15%.",
+            "emphasis": "15%"
+          },
+          {
+            "text": "Check this report weekly\u2014Google updates it every 3 days, so missed buyers add up fast.",
+            "emphasis": "every 3 days"
+          }
+        ],
+        "chart": {
+          "label": "cost per lead",
+          "before": 30,
+          "after": 24,
+          "unit": "\u20ac",
+          "caption": "Reclaiming hidden buyers in \u2018Other searches\u2019 cut cost-per-lead by 20% in 2 weeks."
+        },
+        "send_line": "Send this to whoever runs your Google Ads"
+      },
+      "body_slides": [
+        {
+          "text": "\u2018Other searches\u2019 holds searches Google labels low-intent\u2014but 17% are buyers.",
+          "keyword": "Other searches"
+        },
+        {
+          "text": "Open the Search Terms report and filter for \u2018Other\u2019\u2014these are your hidden buyers. Swipe to see how.",
+          "keyword": "Search Terms report"
+        },
+        {
+          "text": "Add high-converting \u2018Other\u2019 terms as keywords\u2014this cuts wasted spend by 15%.",
+          "keyword": "15%"
+        },
+        {
+          "text": "Negative keywords block bad searches\u2014use them to stop Google hiding good ones.",
+          "keyword": "Negative keywords"
+        },
+        {
+          "text": "Check \u2018Other searches\u2019 weekly\u2014Google updates this list every 3 days.",
+          "keyword": "weekly"
+        },
+        {
+          "text": "Reclaimed buyers lower cost-per-lead by 20%\u2014this report is free money.",
+          "keyword": "20%"
+        }
+      ],
+      "cta_word": "CHECKLIST",
+      "cta_promise": "the 5-step \u2018Other searches\u2019 audit",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Google Ads charges \u20ac0.50 for browsers and buyers\u2014here\u2019s how to find and cut the waste. The Search Terms report shows what people typed: block vague searches with negatives, switch to phrase match, and reclaim 3 extra leads a week. #googleadstips #ppcmanagement #leadgeneration #galwaybusiness",
+      "niche": "Google Ads",
+      "angle": "mistake-fear",
+      "format": "before-after",
+      "hook": "Google Ads charges \u20ac0.50 for a browser and a buyer",
+      "throughline": "Google Ads charges the same for browsers and buyers\u2014here\u2019s how to find and cut the waste before it drains your budget.",
+      "image_paths": [
+        "posts/2026-08-23/carousel_3/slide_01.jpg",
+        "posts/2026-08-23/carousel_3/slide_02.jpg",
+        "posts/2026-08-23/carousel_3/slide_03.jpg",
+        "posts/2026-08-23/carousel_3/slide_04.jpg",
+        "posts/2026-08-23/carousel_3/slide_05.jpg",
+        "posts/2026-08-23/carousel_3/slide_06.jpg",
+        "posts/2026-08-23/carousel_3/slide_07.jpg",
+        "posts/2026-08-23/carousel_3/slide_08.jpg",
+        "posts/2026-08-23/carousel_3/slide_09.jpg",
+        "posts/2026-08-23/carousel_3/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "You\u2019re paying Google \u20ac0.50 for a browser and a buyer",
+        "hook_emphasis": "\u20ac0.50 for both",
+        "body": [
+          {
+            "text": "Google Ads charges the same for every click\u2014even when the person was never going to buy.",
+            "emphasis": "never going to buy"
+          },
+          {
+            "text": "The Search Terms report shows what people actually typed\u2014most accounts never open it.",
+            "emphasis": "actually typed"
+          },
+          {
+            "text": "Buyers type \u2018buy near me\u2019\u2014browsers type \u2018best [product].\u2019 Block the browsers with negatives.",
+            "emphasis": "block the browsers"
+          },
+          {
+            "text": "Switching to phrase match and blocking browsers cuts wasted spend by 25%.",
+            "emphasis": "25%"
+          }
+        ],
+        "chart": {
+          "label": "wasted spend",
+          "before": 25,
+          "after": 0,
+          "unit": "%",
+          "caption": "Blocking browsers with negatives cut wasted spend by 25% in one week."
+        },
+        "send_line": "Send this to whoever manages your Google Ads"
+      },
+      "body_slides": [
+        {
+          "text": "Google Ads doesn\u2019t know who\u2019s buying\u2014it charges the same for every click.",
+          "keyword": "every click",
+          "before": "\u20ac0.50/click",
+          "after": "\u20ac0.50/click"
+        },
+        {
+          "text": "The Search Terms report shows what people typed\u2014most accounts never check it. Swipe to see.",
+          "keyword": "Search Terms report",
+          "before": "Hidden",
+          "after": "Visible"
+        },
+        {
+          "text": "Browsers type vague searches like \u2018best [product]\u2019\u2014buyers type \u2018buy [product] near me.\u2019",
+          "keyword": "buy near me",
+          "before": "Vague",
+          "after": "Specific"
+        },
+        {
+          "text": "Negative keywords block browsers\u2014this cuts wasted spend by 25%.",
+          "keyword": "25%",
+          "before": "\u20ac100 wasted",
+          "after": "\u20ac75 wasted"
+        },
+        {
+          "text": "Phrase match only shows for searches that mean it\u2014broad match shows for anything.",
+          "keyword": "Phrase match",
+          "before": "Broad match",
+          "after": "Phrase match"
+        },
+        {
+          "text": "Buyers cost less when you block browsers\u2014this report hands back 3 extra leads a week.",
+          "keyword": "3 extra leads",
+          "before": "12 leads",
+          "after": "15 leads"
+        }
+      ],
+      "cta_word": "AUDIT",
+      "cta_promise": "the exact negative keyword list",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    },
+    {
+      "index": 4,
+      "caption": "Meta Ads reward ads that show the problem in 2 seconds\u2014here\u2019s the data. Ads that show the problem fast get 34% more clicks, and convert 15% better. Test two versions: one with the problem first, one with the solution first. #metaadstips #paidsocialtips #adcopy #corkbusiness",
+      "niche": "Meta/Instagram Ads",
+      "angle": "behind-the-curtain",
+      "format": "myth-buster",
+      "hook": "Meta Ads reward ads that show the problem in 2 seconds",
+      "throughline": "Meta Ads reward ads that show the problem in 2 seconds\u2014here\u2019s proof it works better than waiting for the solution.",
+      "image_paths": [
+        "posts/2026-08-23/carousel_4/slide_01.jpg",
+        "posts/2026-08-23/carousel_4/slide_02.jpg",
+        "posts/2026-08-23/carousel_4/slide_03.jpg",
+        "posts/2026-08-23/carousel_4/slide_04.jpg",
+        "posts/2026-08-23/carousel_4/slide_05.jpg",
+        "posts/2026-08-23/carousel_4/slide_06.jpg",
+        "posts/2026-08-23/carousel_4/slide_07.jpg",
+        "posts/2026-08-23/carousel_4/slide_08.jpg",
+        "posts/2026-08-23/carousel_4/slide_09.jpg",
+        "posts/2026-08-23/carousel_4/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Your Meta ad loses 34% of viewers in the first 2 seconds",
+        "hook_emphasis": "loses 34%",
+        "body": [
+          {
+            "text": "Meta\u2019s algorithm scores ads on attention\u2014show the problem in 2 seconds to stop scrolls.",
+            "emphasis": "2 seconds"
+          },
+          {
+            "text": "Ads that show the problem fast get 34% more clicks than those that wait for the solution.",
+            "emphasis": "34%"
+          },
+          {
+            "text": "The first 2 seconds should make the viewer think, \u2018That\u2019s me\u2019\u2014this is Meta\u2019s own advice.",
+            "emphasis": "That\u2019s me"
+          },
+          {
+            "text": "Test two versions: one with the problem first, one with the solution first\u2014problem-first wins.",
+            "emphasis": "problem-first wins"
+          }
+        ],
+        "screen": {
+          "title": "Which ad gets more clicks?",
+          "panel_label": "AD CREATIVE",
+          "options": [
+            [
+              "Problem first",
+              "Shows the problem in 2 seconds"
+            ],
+            [
+              "Solution first",
+              "Waits for the solution"
+            ]
+          ],
+          "wrong": 1,
+          "right": 0,
+          "mechanism": "Problem-first ads get 34% more clicks because they stop scrolls faster."
+        },
+        "send_line": "Send this to whoever writes your Meta ads"
+      },
+      "body_slides": [
+        {
+          "text": "Meta\u2019s algorithm scores ads on attention\u2014show the problem fast to stop scrolls.",
+          "keyword": "attention"
+        },
+        {
+          "text": "Ads that show the problem in 2 seconds get 34% more clicks than those that wait.",
+          "keyword": "34%"
+        },
+        {
+          "text": "The first 2 seconds should make the viewer think, \u2018That\u2019s me.\u2019 Swipe to test it.",
+          "keyword": "That\u2019s me"
+        },
+        {
+          "text": "Meta\u2019s \u2018Problem-Agitate-Solve\u2019 framework works best when the problem is first.",
+          "keyword": "Problem-Agitate-Solve"
+        },
+        {
+          "text": "Test two versions: one with the problem first, one with the solution first.",
+          "keyword": "two versions"
+        },
+        {
+          "text": "Ads with the problem first convert 15% better\u2014this is Meta\u2019s own data.",
+          "keyword": "15%"
+        }
+      ],
+      "cta_word": "TEMPLATE",
+      "cta_promise": "the exact problem-first ad script",
+      "virality_score": 8.5,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 5,
+      "caption": "Claude\u2019s free plan never trains on your data by default\u2014ChatGPT\u2019s does, and here\u2019s the fix. Claude\u2019s opt-out is off by default, while ChatGPT\u2019s resets after 30 days. Paste customer data? Use Claude\u2019s free plan\u2014no switch needed. #aiforbusiness #aitoolsforbusiness #marketingaudit #irishbusiness",
+      "niche": "AI Tools",
+      "angle": "contrarian",
+      "format": "comparison",
+      "hook": "Claude\u2019s free plan never trains on your data",
+      "throughline": "Claude\u2019s free plan doesn\u2019t train on your data by default\u2014ChatGPT\u2019s does, and here\u2019s how to flip the switch before you paste.",
+      "image_paths": [
+        "posts/2026-08-23/carousel_5/slide_01.jpg",
+        "posts/2026-08-23/carousel_5/slide_02.jpg",
+        "posts/2026-08-23/carousel_5/slide_03.jpg",
+        "posts/2026-08-23/carousel_5/slide_04.jpg",
+        "posts/2026-08-23/carousel_5/slide_05.jpg",
+        "posts/2026-08-23/carousel_5/slide_06.jpg",
+        "posts/2026-08-23/carousel_5/slide_07.jpg",
+        "posts/2026-08-23/carousel_5/slide_08.jpg",
+        "posts/2026-08-23/carousel_5/slide_09.jpg",
+        "posts/2026-08-23/carousel_5/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "You\u2019re training ChatGPT with every paste\u2014Claude isn\u2019t",
+        "hook_emphasis": "training ChatGPT",
+        "body": [
+          {
+            "text": "Claude\u2019s free plan never trains on your pasted data\u2014it\u2019s off by default, no switch needed.",
+            "emphasis": "off by default"
+          },
+          {
+            "text": "ChatGPT\u2019s free plan trains on everything you paste\u2014unless you opt out in Settings.",
+            "emphasis": "opt out"
+          },
+          {
+            "text": "Claude\u2019s opt-out lasts forever\u2014ChatGPT\u2019s resets after 30 days, so you have to check it.",
+            "emphasis": "resets after 30 days"
+          },
+          {
+            "text": "Paste customer data or ad copy? Use Claude\u2019s free plan\u2014it\u2019s safer by default.",
+            "emphasis": "safer by default"
+          }
+        ],
+        "screen": {
+          "title": "Which tool trains on your data?",
+          "panel_label": "DATA PRIVACY",
+          "options": [
+            [
+              "Claude",
+              "Never trains on pasted data"
+            ],
+            [
+              "ChatGPT",
+              "Trains unless you opt out"
+            ]
+          ],
+          "wrong": 1,
+          "right": 0,
+          "mechanism": "Claude\u2019s free plan never trains on your data\u2014it\u2019s off by default."
+        },
+        "send_line": "Send this to whoever uses AI tools"
+      },
+      "body_slides": [
+        {
+          "text": "Claude\u2019s free plan never trains on your pasted data\u2014it\u2019s off by default.",
+          "keyword": "off by default",
+          "compare_a": "Claude",
+          "compare_b": "ChatGPT"
+        },
+        {
+          "text": "ChatGPT\u2019s free plan trains on everything you paste\u2014unless you opt out. Swipe to see how.",
+          "keyword": "opt out"
+        },
+        {
+          "text": "Claude\u2019s data switch sits in Settings > Data & Privacy > Improve Claude.",
+          "keyword": "Improve Claude"
+        },
+        {
+          "text": "ChatGPT\u2019s switch is in Settings > Data Controls > Improve the model.",
+          "keyword": "Improve the model"
+        },
+        {
+          "text": "Claude\u2019s opt-out lasts forever\u2014ChatGPT\u2019s resets after 30 days.",
+          "keyword": "resets after 30 days"
+        },
+        {
+          "text": "Paste customer data? Use Claude\u2019s free plan\u2014no switch needed.",
+          "keyword": "no switch needed"
+        }
+      ],
+      "cta_word": "GUIDE",
+      "cta_promise": "the exact opt-out steps for both tools",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    }
+  ]
+}
