@@ -600,5 +600,19 @@
     "scored": false,
     "delivery": "email",
     "posted_manually": null
+  },
+  {
+    "media_id": null,
+    "date": "2026-08-23",
+    "index": 2,
+    "niche": "Google Ads",
+    "angle": "behind-the-curtain",
+    "format": "steal-this",
+    "hook": "Google Ads buries 17% of your buyers in one report",
+    "media_product_type": "REELS",
+    "trial": false,
+    "scored": false,
+    "delivery": "email",
+    "posted_manually": null
   }
 ]
