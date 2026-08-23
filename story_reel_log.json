@@ -485,5 +485,41 @@
       "tripled. Full breakdown below."
     ],
     "cta_word": "SCRIPT"
+  },
+  {
+    "date": "2026-08-23",
+    "index": 1,
+    "clip": "assets/story_reel_footage/nyc_office_skyline.mp4",
+    "hook_lines": [
+      "I gave my cold email",
+      "to Claude for 7 days",
+      "and open rates hit 62%.",
+      "Here's exactly what changed."
+    ],
+    "cta_word": "LEAK"
+  },
+  {
+    "date": "2026-08-23",
+    "index": 2,
+    "clip": "assets/story_reel_footage/clean_office_desk.mp4",
+    "hook_lines": [
+      "I ran 3 client ad accounts",
+      "through one AI audit",
+      "and cut their CPA by 68%.",
+      "Reverse-engineering it below."
+    ],
+    "cta_word": "CHECK"
+  },
+  {
+    "date": "2026-08-23",
+    "index": 3,
+    "clip": "assets/story_reel_footage/silhouette_screen_dark.mp4",
+    "hook_lines": [
+      "I handed a client\u2019s",
+      "landing page to AI",
+      "and conversions tripled.",
+      "Breaking down exactly how below."
+    ],
+    "cta_word": "COPY"
   }
 ]
