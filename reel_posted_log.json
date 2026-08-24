@@ -614,5 +614,33 @@
     "scored": false,
     "delivery": "email",
     "posted_manually": null
+  },
+  {
+    "media_id": null,
+    "date": "2026-08-24",
+    "index": 1,
+    "niche": "AI Tools",
+    "angle": "mistake-fear",
+    "format": "step-by-step",
+    "hook": "You’re training Claude for free—with your customer data",
+    "media_product_type": "REELS",
+    "trial": false,
+    "scored": false,
+    "delivery": "email",
+    "posted_manually": null
+  },
+  {
+    "media_id": null,
+    "date": "2026-08-24",
+    "index": 2,
+    "niche": "Email Marketing",
+    "angle": "behind-the-curtain",
+    "format": "comparison",
+    "hook": "Gmail buries your email unless someone replies",
+    "media_product_type": "REELS",
+    "trial": false,
+    "scored": false,
+    "delivery": "email",
+    "posted_manually": null
   }
 ]
