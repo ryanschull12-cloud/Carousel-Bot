@@ -1,0 +1,442 @@
+{
+  "batch_date": "2026-08-24",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Save this checklist \u2193\nClaude\u2019s free plan trains on pasted data by default\u2014flip one switch to stop it. Most users never check, and sensitive customer info stays in their system for 30 days. Here\u2019s how to opt out in under two minutes.\n#aitoolsforbusiness #aiforbusiness #marketingaudit #irishsmallbusiness",
+      "niche": "AI Tools",
+      "angle": "mistake-fear",
+      "format": "step-by-step",
+      "hook": "Claude\u2019s free plan trains on every paste by default",
+      "throughline": "Claude\u2019s free plan automatically trains on pasted data unless you opt out\u2014here\u2019s how to stop it and protect your customer information.",
+      "image_paths": [
+        "posts/2026-08-24/carousel_1/slide_01.jpg",
+        "posts/2026-08-24/carousel_1/slide_02.jpg",
+        "posts/2026-08-24/carousel_1/slide_03.jpg",
+        "posts/2026-08-24/carousel_1/slide_04.jpg",
+        "posts/2026-08-24/carousel_1/slide_05.jpg",
+        "posts/2026-08-24/carousel_1/slide_06.jpg",
+        "posts/2026-08-24/carousel_1/slide_07.jpg",
+        "posts/2026-08-24/carousel_1/slide_08.jpg",
+        "posts/2026-08-24/carousel_1/slide_09.jpg",
+        "posts/2026-08-24/carousel_1/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "You\u2019re training Claude for free\u2014with your customer data",
+        "hook_emphasis": "customer data",
+        "body": [
+          {
+            "text": "Claude\u2019s free plan uses every paste to train its AI, so your customer emails and order details stay in their system for 30 days.",
+            "emphasis": "30 days"
+          },
+          {
+            "text": "It\u2019s on by default, so most users never notice\u2014and their sensitive data gets stored without permission.",
+            "emphasis": "on by default"
+          },
+          {
+            "text": "This costs you privacy, not money, but the fix takes 60 seconds\u2014one toggle in settings.",
+            "emphasis": "60 seconds"
+          },
+          {
+            "text": "Open settings, flip \u2018Improve Claude\u2019 off, and avoid pasting anything sensitive until you do.",
+            "emphasis": "flip off"
+          }
+        ],
+        "screen": {
+          "title": "Stop Claude training on your data",
+          "panel_label": "DATA PRIVACY",
+          "options": [
+            [
+              "Improve Claude with your data",
+              "Trains on pasted inputs"
+            ],
+            [
+              "Do not improve Claude",
+              "No training on inputs"
+            ]
+          ],
+          "wrong": 0,
+          "right": 1,
+          "mechanism": "Flipping this switch stops Claude from using your pasted data to train its AI\u2014paid plans never train on inputs."
+        },
+        "send_line": "Send this to whoever runs your AI tools"
+      },
+      "body_slides": [
+        {
+          "text": "Open Claude\u2019s settings from the top-right menu\u2014it\u2019s under \u2018Data & Privacy.\u2019",
+          "keyword": "Data & Privacy"
+        },
+        {
+          "text": "Find the toggle labeled \u2018Improve Claude with your data\u2019\u2014it\u2019s on by default.",
+          "keyword": "Improve Claude"
+        },
+        {
+          "text": "Flip it off to stop Claude from training on anything you paste.",
+          "keyword": "flip it off"
+        },
+        {
+          "text": "Past inputs stay for 30 days unless you delete chats.",
+          "keyword": "30 days"
+        },
+        {
+          "text": "Avoid pasting customer emails, phone numbers, or order details.",
+          "keyword": "customer emails"
+        },
+        {
+          "text": "Use Claude\u2019s paid plan for sensitive data\u2014it never trains on inputs.",
+          "keyword": "paid plan"
+        }
+      ],
+      "cta_word": "CHECKLIST",
+      "cta_promise": "the 6-step Claude privacy guide",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Save this comparison \u2193\nGmail\u2019s Primary tab opens for emails with replies\u2014not clever subject lines. One reply moves your email in, two lock it for future sends, and a sender score above 90 skips spam entirely. Here\u2019s what actually decides where your email lands.\n#emailmarketingtips #emaildeliverability #leadgeneration #galwaybusiness",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "comparison",
+      "hook": "Gmail moves emails to Primary after one reply",
+      "throughline": "Gmail\u2019s Primary tab prioritizes engagement over subject lines\u2014here\u2019s how replies, opens, and sender score actually decide where your email lands.",
+      "image_paths": [
+        "posts/2026-08-24/carousel_2/slide_01.jpg",
+        "posts/2026-08-24/carousel_2/slide_02.jpg",
+        "posts/2026-08-24/carousel_2/slide_03.jpg",
+        "posts/2026-08-24/carousel_2/slide_04.jpg",
+        "posts/2026-08-24/carousel_2/slide_05.jpg",
+        "posts/2026-08-24/carousel_2/slide_06.jpg",
+        "posts/2026-08-24/carousel_2/slide_07.jpg",
+        "posts/2026-08-24/carousel_2/slide_08.jpg",
+        "posts/2026-08-24/carousel_2/slide_09.jpg",
+        "posts/2026-08-24/carousel_2/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Gmail buries your email unless someone replies",
+        "hook_emphasis": "someone replies",
+        "body": [
+          {
+            "text": "Gmail\u2019s Primary tab only opens for emails that get replies\u2014subject lines are just the first hurdle.",
+            "emphasis": "replies"
+          },
+          {
+            "text": "After one reply, Gmail moves your email to Primary and keeps it there for future sends.",
+            "emphasis": "one reply"
+          },
+          {
+            "text": "This costs you opens\u2014emails in Primary get 43% more views than those in Promotions.",
+            "emphasis": "43% more"
+          },
+          {
+            "text": "Ask one person to reply, then watch your open rate climb without changing a word.",
+            "emphasis": "ask one person"
+          }
+        ],
+        "chart": {
+          "label": "open rate boost",
+          "before": 25,
+          "after": 43,
+          "unit": "%",
+          "caption": "Emails in Primary get 43% more opens than those in Promotions\u2014one reply moves them there."
+        },
+        "send_line": "Send this to your email marketer"
+      },
+      "body_slides": [
+        {
+          "text": "One reply moves your email to Primary\u2014even with a generic subject line.",
+          "keyword": "one reply",
+          "compare_a": "Subject lines",
+          "compare_b": "Replies"
+        },
+        {
+          "text": "After the first open, Gmail tracks engagement instead of subject lines.",
+          "keyword": "first open"
+        },
+        {
+          "text": "A sender score above 90 skips the spam filter entirely.",
+          "keyword": "sender score 90"
+        },
+        {
+          "text": "Emails with replies get 43% more opens in Primary than those without.",
+          "keyword": "43% more"
+        },
+        {
+          "text": "Gmail ignores \u2018urgent\u2019 or \u2018free\u2019 in subject lines if your sender score is high.",
+          "keyword": "ignores \u2018urgent\u2019"
+        },
+        {
+          "text": "Two replies lock your email in Primary for future sends.",
+          "keyword": "two replies"
+        }
+      ],
+      "cta_word": "GUIDE",
+      "cta_promise": "the exact Gmail engagement checklist",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Save this checklist \u2193\nClaude\u2019s free plan trains on pasted data by default\u2014flip one switch to stop it. Most users never check, and sensitive customer info stays in their system for 30 days. Here\u2019s the exact checklist to opt out in under a minute.\n#aiforbusiness #aitoolsforbusiness #marketingaudit #corkbusiness",
+      "niche": "AI Tools",
+      "angle": "realization",
+      "format": "checklist",
+      "hook": "Claude\u2019s free tier trains on every paste you make",
+      "throughline": "Claude\u2019s free plan trains on pasted data by default\u2014here\u2019s the exact checklist to opt out and keep your customer data private.",
+      "image_paths": [
+        "posts/2026-08-24/carousel_3/slide_01.jpg",
+        "posts/2026-08-24/carousel_3/slide_02.jpg",
+        "posts/2026-08-24/carousel_3/slide_03.jpg",
+        "posts/2026-08-24/carousel_3/slide_04.jpg",
+        "posts/2026-08-24/carousel_3/slide_05.jpg",
+        "posts/2026-08-24/carousel_3/slide_06.jpg",
+        "posts/2026-08-24/carousel_3/slide_07.jpg",
+        "posts/2026-08-24/carousel_3/slide_08.jpg",
+        "posts/2026-08-24/carousel_3/slide_09.jpg",
+        "posts/2026-08-24/carousel_3/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Claude trains on every paste\u2014unless you opt out",
+        "hook_emphasis": "every paste",
+        "body": [
+          {
+            "text": "Claude\u2019s free plan uses every paste to train its AI, so your customer data stays in their system for 30 days.",
+            "emphasis": "30 days"
+          },
+          {
+            "text": "It\u2019s on by default, so most users never notice\u2014and their sensitive data gets stored without permission.",
+            "emphasis": "on by default"
+          },
+          {
+            "text": "This costs you privacy, not money, but the fix takes 60 seconds\u2014one toggle in settings.",
+            "emphasis": "60 seconds"
+          },
+          {
+            "text": "Open settings, flip \u2018Improve Claude\u2019 off, and avoid pasting anything sensitive until you do.",
+            "emphasis": "flip off"
+          }
+        ],
+        "screen": {
+          "title": "Stop Claude training on your data",
+          "panel_label": "DATA PRIVACY",
+          "options": [
+            [
+              "Improve Claude with your data",
+              "Trains on pasted inputs"
+            ],
+            [
+              "Do not improve Claude",
+              "No training on inputs"
+            ]
+          ],
+          "wrong": 0,
+          "right": 1,
+          "mechanism": "Flipping this switch stops Claude from using your pasted data to train its AI\u2014paid plans never train on inputs."
+        },
+        "send_line": "Send this to your AI tool manager"
+      },
+      "body_slides": [
+        {
+          "text": "Open Claude\u2019s settings and go to \u2018Data & Privacy\u2019\u2014it\u2019s the last menu item.",
+          "keyword": "Data & Privacy"
+        },
+        {
+          "text": "Find the toggle labeled \u2018Improve Claude with your data\u2019\u2014it\u2019s on by default.",
+          "keyword": "Improve Claude"
+        },
+        {
+          "text": "Flip it off to stop Claude from training on anything you paste.",
+          "keyword": "flip it off"
+        },
+        {
+          "text": "Past inputs stay for 30 days unless you delete chats.",
+          "keyword": "30 days"
+        },
+        {
+          "text": "Avoid pasting customer emails, phone numbers, or order details.",
+          "keyword": "customer emails"
+        },
+        {
+          "text": "Use Claude\u2019s paid plan for sensitive data\u2014it never trains on inputs.",
+          "keyword": "paid plan"
+        }
+      ],
+      "cta_word": "CHECKLIST",
+      "cta_promise": "the Claude privacy checklist",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 4,
+      "caption": "Save this checklist \u2193\nGoogle Ads wastes 30% of your budget on browsers\u2014one report shows which searches never convert. Sort by conversions, add wasteful searches as negatives, and cut wasted spend by 30% without touching your budget. Here\u2019s how to do it in 5 minutes.\n#googleadstips #ppcmanagement #searchads #irishbusiness",
+      "niche": "Google Ads",
+      "angle": "realization",
+      "format": "step-by-step",
+      "hook": "Google Ads wastes 30% of your budget on browsers",
+      "throughline": "Google Ads charges the same for browsers and buyers\u2014here\u2019s how to find and exclude the searches that waste your budget.",
+      "image_paths": [
+        "posts/2026-08-24/carousel_4/slide_01.jpg",
+        "posts/2026-08-24/carousel_4/slide_02.jpg",
+        "posts/2026-08-24/carousel_4/slide_03.jpg",
+        "posts/2026-08-24/carousel_4/slide_04.jpg",
+        "posts/2026-08-24/carousel_4/slide_05.jpg",
+        "posts/2026-08-24/carousel_4/slide_06.jpg",
+        "posts/2026-08-24/carousel_4/slide_07.jpg",
+        "posts/2026-08-24/carousel_4/slide_08.jpg",
+        "posts/2026-08-24/carousel_4/slide_09.jpg",
+        "posts/2026-08-24/carousel_4/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Google Ads burns 30% of your budget on searches that never buy",
+        "hook_emphasis": "30% burned",
+        "body": [
+          {
+            "text": "Google Ads charges the same for a search that bounces and one that converts, so wasteful searches drain your budget.",
+            "emphasis": "same charge"
+          },
+          {
+            "text": "The Search terms report shows which searches actually lead to sales\u2014and which just waste money.",
+            "emphasis": "Search terms"
+          },
+          {
+            "text": "This costs you 30% of your budget on average\u2014without you even noticing.",
+            "emphasis": "30%"
+          },
+          {
+            "text": "Sort by conversions, add wasteful searches as negatives, and watch your cost per lead drop.",
+            "emphasis": "add negatives"
+          }
+        ],
+        "chart": {
+          "label": "wasted spend cut",
+          "before": 30,
+          "after": 0,
+          "unit": "%",
+          "caption": "Adding negative keywords cuts wasted spend by 30%\u2014without reducing your ad budget."
+        },
+        "send_line": "Send this to whoever runs your ads"
+      },
+      "body_slides": [
+        {
+          "text": "Open the \u2018Search terms\u2019 report under \u2018Keywords\u2019 in your dashboard.",
+          "keyword": "Search terms"
+        },
+        {
+          "text": "Sort by conversions to see which searches actually lead to sales.",
+          "keyword": "conversions"
+        },
+        {
+          "text": "Look for searches with zero conversions but high spend\u2014these are browsers.",
+          "keyword": "zero conversions"
+        },
+        {
+          "text": "Add these as negative keywords to stop Google from showing your ad for them.",
+          "keyword": "negative keywords"
+        },
+        {
+          "text": "Check this weekly\u2014new wasteful searches pop up as trends change.",
+          "keyword": "weekly"
+        },
+        {
+          "text": "This cuts wasted spend by 30% on average without touching your budget.",
+          "keyword": "30%"
+        }
+      ],
+      "cta_word": "AUDIT",
+      "cta_promise": "the 6-step Google Ads waste checklist",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Save this myth-buster \u2193\nGmail\u2019s spam filter ignores \u2018urgent\u2019 in subject lines\u2014sender score matters more. A score above 90 skips the spam filter entirely, and one reply moves your email to Primary. Here\u2019s what actually decides whether your email gets opened or buried.\n#emailmarketingtips #emaildeliverability #leadgeneration #dublinbusiness",
+      "niche": "Email Marketing",
+      "angle": "relief-permission",
+      "format": "myth-buster",
+      "hook": "Gmail\u2019s spam filter skips \u2018urgent\u2019 if your sender score is high",
+      "throughline": "Gmail\u2019s spam filter ignores \u2018urgent\u2019 in subject lines\u2014here\u2019s what actually decides whether your email gets opened or buried.",
+      "image_paths": [
+        "posts/2026-08-24/carousel_5/slide_01.jpg",
+        "posts/2026-08-24/carousel_5/slide_02.jpg",
+        "posts/2026-08-24/carousel_5/slide_03.jpg",
+        "posts/2026-08-24/carousel_5/slide_04.jpg",
+        "posts/2026-08-24/carousel_5/slide_05.jpg",
+        "posts/2026-08-24/carousel_5/slide_06.jpg",
+        "posts/2026-08-24/carousel_5/slide_07.jpg",
+        "posts/2026-08-24/carousel_5/slide_08.jpg",
+        "posts/2026-08-24/carousel_5/slide_09.jpg",
+        "posts/2026-08-24/carousel_5/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Gmail ignores \u2018urgent\u2019 in your subject line if your sender score is high",
+        "hook_emphasis": "ignores \u2018urgent\u2019",
+        "body": [
+          {
+            "text": "Gmail\u2019s spam filter looks at sender score first\u2014subject lines are a distant second.",
+            "emphasis": "sender score"
+          },
+          {
+            "text": "A score above 90 skips the spam filter entirely, no matter what your subject says.",
+            "emphasis": "90"
+          },
+          {
+            "text": "This saves you from spam\u2014emails with high sender scores get opened 43% more often.",
+            "emphasis": "43% more"
+          },
+          {
+            "text": "Focus on building sender trust, not clever subject lines, and watch your open rate climb.",
+            "emphasis": "sender trust"
+          }
+        ],
+        "chart": {
+          "label": "open rate boost",
+          "before": 25,
+          "after": 43,
+          "unit": "%",
+          "caption": "Emails with a sender score above 90 get opened 43% more often\u2014subject lines don\u2019t matter as much."
+        },
+        "send_line": "Send this to your email marketer"
+      },
+      "body_slides": [
+        {
+          "text": "Gmail\u2019s spam filter checks sender score first\u2014subject lines come second.",
+          "keyword": "sender score"
+        },
+        {
+          "text": "A score above 90 skips the spam filter entirely.",
+          "keyword": "90"
+        },
+        {
+          "text": "\u2018Urgent\u2019 or \u2018free\u2019 in subject lines only flags emails with low sender scores.",
+          "keyword": "flags low scores"
+        },
+        {
+          "text": "One reply moves your email to Primary\u2014Gmail prioritizes engagement.",
+          "keyword": "one reply"
+        },
+        {
+          "text": "Subject lines matter for the first open\u2014after that, Gmail tracks replies.",
+          "keyword": "first open"
+        },
+        {
+          "text": "Focus on sender trust\u2014it\u2019s the only thing Gmail\u2019s spam filter cares about.",
+          "keyword": "sender trust"
+        }
+      ],
+      "cta_word": "TEMPLATE",
+      "cta_promise": "the exact sender score checklist",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    }
+  ]
+}
