@@ -642,5 +642,19 @@
     "scored": false,
     "delivery": "email",
     "posted_manually": null
+  },
+  {
+    "media_id": null,
+    "date": "2026-08-24",
+    "index": 3,
+    "niche": "AI Tools",
+    "angle": "realization",
+    "format": "checklist",
+    "hook": "Claude trains on every paste—unless you opt out",
+    "media_product_type": "REELS",
+    "trial": false,
+    "scored": false,
+    "delivery": "email",
+    "posted_manually": null
   }
 ]
