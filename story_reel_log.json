@@ -521,5 +521,41 @@
       "Breaking down exactly how below."
     ],
     "cta_word": "COPY"
+  },
+  {
+    "date": "2026-08-24",
+    "index": 1,
+    "clip": "assets/story_reel_footage/code_screen_dark.mp4",
+    "hook_lines": [
+      "I gave my cold email",
+      "to Claude for 7 days",
+      "and replies jumped 210%.",
+      "Here's exactly what changed."
+    ],
+    "cta_word": "REPLY"
+  },
+  {
+    "date": "2026-08-24",
+    "index": 2,
+    "clip": "assets/story_reel_footage/purple_desk_silhouette.mp4",
+    "hook_lines": [
+      "I let AI audit 5",
+      "Google Ads accounts",
+      "and cut spend \u20ac9k total.",
+      "Reverse-engineering it below."
+    ],
+    "cta_word": "LEAK"
+  },
+  {
+    "date": "2026-08-24",
+    "index": 3,
+    "clip": "assets/story_reel_footage/latenight_coding_v1.mp4",
+    "hook_lines": [
+      "I handed a client\u2019s",
+      "landing page to AI",
+      "and leads tripled.",
+      "Steal the process below."
+    ],
+    "cta_word": "COPY"
   }
 ]
