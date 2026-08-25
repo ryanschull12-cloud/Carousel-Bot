@@ -656,5 +656,33 @@
     "scored": false,
     "delivery": "email",
     "posted_manually": null
+  },
+  {
+    "media_id": null,
+    "date": "2026-08-25",
+    "index": 1,
+    "niche": "Email Marketing",
+    "angle": "relief-permission",
+    "format": "myth-buster",
+    "hook": "Gmail ignores ‘free’ if your list replies",
+    "media_product_type": "REELS",
+    "trial": false,
+    "scored": false,
+    "delivery": "email",
+    "posted_manually": null
+  },
+  {
+    "media_id": null,
+    "date": "2026-08-25",
+    "index": 2,
+    "niche": "Email Marketing",
+    "angle": "realization",
+    "format": "before-after",
+    "hook": "One reply moves your email to Primary—not opens",
+    "media_product_type": "REELS",
+    "trial": false,
+    "scored": false,
+    "delivery": "email",
+    "posted_manually": null
   }
 ]
