@@ -1,66 +1,6 @@
 {
   "recent_batches": [
     {
-      "date": "2026-08-15",
-      "carousels": [
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "relief-permission",
-          "format": "myth-buster",
-          "hook": "Meta lookalikes work best with 300 engaged users",
-          "hashtags": [
-            "#metaadstips",
-            "#paidsocialtips",
-            "#adspend"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "realization",
-          "format": "before-after",
-          "hook": "Google Ads buries 20% of your buyers in one report",
-          "hashtags": [
-            "#googleadstips",
-            "#ppcmanagement",
-            "#leadgeneration"
-          ]
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "contrarian",
-          "format": "step-by-step",
-          "hook": "More budget burns cash on cold Meta audiences",
-          "hashtags": [
-            "#metaadstips",
-            "#paidsocial",
-            "#adcopy"
-          ]
-        },
-        {
-          "niche": "Email Marketing",
-          "angle": "behind-the-curtain",
-          "format": "comparison",
-          "hook": "Gmail\u2019s spam filter ignores subject lines",
-          "hashtags": [
-            "#emailmarketingtips",
-            "#emaildeliverability",
-            "#marketingaudit"
-          ]
-        },
-        {
-          "niche": "Email Marketing",
-          "angle": "realization",
-          "format": "before-after",
-          "hook": "Gmail promotes emails after two replies",
-          "hashtags": [
-            "#emailmarketingtips",
-            "#emailcopywriting",
-            "#conversiontracking"
-          ]
-        }
-      ]
-    },
-    {
       "date": "2026-08-16",
       "carousels": [
         {
@@ -636,6 +576,71 @@
             "#emaildeliverability",
             "#leadgeneration",
             "#dublinbusiness"
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-08-25",
+      "carousels": [
+        {
+          "niche": "Email Marketing",
+          "angle": "relief-permission",
+          "format": "myth-buster",
+          "hook": "Gmail ignores \u2018free\u2019 if your list replies",
+          "hashtags": [
+            "#emailmarketingtips",
+            "#emaildeliverability",
+            "#leadgeneration",
+            "#irishsmallbusiness"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "realization",
+          "format": "before-after",
+          "hook": "One reply moves your email to Gmail\u2019s Primary tab",
+          "hashtags": [
+            "#emailmarketingtips",
+            "#emaildeliverability",
+            "#leadgeneration",
+            "#dublinbusiness"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "mistake-fear",
+          "format": "before-after",
+          "hook": "Google Ads wastes \u20ac0.50 on every bounce",
+          "hashtags": [
+            "#googleadstips",
+            "#ppcmanagement",
+            "#searchads",
+            "#galwaybusiness"
+          ]
+        },
+        {
+          "niche": "AI Tools",
+          "angle": "behind-the-curtain",
+          "format": "checklist",
+          "hook": "Claude trains on everything you paste by default",
+          "hashtags": [
+            "#aiforbusiness",
+            "#aitoolsforbusiness",
+            "#marketingaudit",
+            "#corkbusiness"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "behind-the-curtain",
+          "format": "step-by-step",
+          "hook": "Google Ads buries 17% of your buyers in one report",
+          "hashtags": [
+            "#googleadstips",
+            "#ppcmanagement",
+            "#searchads",
+            "#irishbusiness"
           ]
         }
       ]

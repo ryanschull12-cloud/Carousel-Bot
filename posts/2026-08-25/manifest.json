@@ -1,0 +1,446 @@
+{
+  "batch_date": "2026-08-25",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Gmail\u2019s spam filter ignores \u2018free\u2019 if your sender score is high. Replies matter more than opens\u2014here\u2019s how to check your score and keep your emails in the inbox. #emailmarketingtips #emaildeliverability #leadgeneration #irishsmallbusiness",
+      "niche": "Email Marketing",
+      "angle": "relief-permission",
+      "format": "myth-buster",
+      "hook": "Gmail ignores \u2018free\u2019 if your list replies",
+      "throughline": "Gmail\u2019s spam filter prioritizes sender reputation over trigger words like \u2018free\u2019\u2014so you can use them without fear if your list is healthy.",
+      "image_paths": [
+        "posts/2026-08-25/carousel_1/slide_01.jpg",
+        "posts/2026-08-25/carousel_1/slide_02.jpg",
+        "posts/2026-08-25/carousel_1/slide_03.jpg",
+        "posts/2026-08-25/carousel_1/slide_04.jpg",
+        "posts/2026-08-25/carousel_1/slide_05.jpg",
+        "posts/2026-08-25/carousel_1/slide_06.jpg",
+        "posts/2026-08-25/carousel_1/slide_07.jpg",
+        "posts/2026-08-25/carousel_1/slide_08.jpg",
+        "posts/2026-08-25/carousel_1/slide_09.jpg",
+        "posts/2026-08-25/carousel_1/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Gmail ignores \u2018free\u2019 if your list replies",
+        "hook_emphasis": "ignores \u2018free\u2019",
+        "stat_number": 30,
+        "stat_label": "more emails land in inbox",
+        "body": [
+          {
+            "text": "Gmail\u2019s spam filter doesn\u2019t care about trigger words like \u2018free\u2019 if your sender score is high.",
+            "emphasis": "doesn\u2019t care"
+          },
+          {
+            "text": "It looks at how many people reply to your emails, not just open them, to decide where they go.",
+            "emphasis": "reply"
+          },
+          {
+            "text": "A sender score above 90 means Gmail skips the spam folder, even if your subject line has \u2018free\u2019 in it.",
+            "emphasis": "90"
+          },
+          {
+            "text": "Check your sender score in Google Postmaster Tools\u2014it\u2019s free and takes two minutes to set up.",
+            "emphasis": "Postmaster Tools"
+          }
+        ],
+        "chart": {
+          "label": "inbox placement",
+          "before": 60,
+          "after": 90,
+          "unit": "%",
+          "caption": "Lists with high sender scores see 30% more emails land in the inbox, not spam."
+        },
+        "send_line": "Send this to your email team"
+      },
+      "body_slides": [
+        {
+          "text": "Gmail\u2019s filter looks at replies, not just opens, to decide where your email lands.",
+          "keyword": "replies"
+        },
+        {
+          "text": "A sender score above 90 means Gmail skips spam checks for words like \u2018free\u2019 or \u2018discount.\u2019",
+          "keyword": "90"
+        },
+        {
+          "text": "Lists with healthy sender scores see 30% more emails land in the inbox, not spam.",
+          "keyword": "30%"
+        },
+        {
+          "text": "Check your sender score in Google Postmaster Tools\u2014it\u2019s free and takes two minutes.",
+          "keyword": "Postmaster Tools"
+        },
+        {
+          "text": "Emails with replies move to Primary, even if the subject line says \u2018free.\u2019",
+          "keyword": "Primary"
+        },
+        {
+          "text": "The fix isn\u2019t removing words\u2014it\u2019s making sure your list actually wants what you send.",
+          "keyword": "wants"
+        }
+      ],
+      "cta_word": "GUIDE",
+      "cta_promise": "the sender score checklist",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Gmail\u2019s Primary tab opens for emails with just one reply\u2014no opens needed. Here\u2019s how to get more replies and land in the right tab. #emailmarketingtips #emaildeliverability #leadgeneration #dublinbusiness",
+      "niche": "Email Marketing",
+      "angle": "realization",
+      "format": "before-after",
+      "hook": "One reply moves your email to Gmail\u2019s Primary tab",
+      "throughline": "Gmail moves emails to the Primary tab after just one reply\u2014no opens needed\u2014so focus on replies, not open rates.",
+      "image_paths": [
+        "posts/2026-08-25/carousel_2/slide_01.jpg",
+        "posts/2026-08-25/carousel_2/slide_02.jpg",
+        "posts/2026-08-25/carousel_2/slide_03.jpg",
+        "posts/2026-08-25/carousel_2/slide_04.jpg",
+        "posts/2026-08-25/carousel_2/slide_05.jpg",
+        "posts/2026-08-25/carousel_2/slide_06.jpg",
+        "posts/2026-08-25/carousel_2/slide_07.jpg",
+        "posts/2026-08-25/carousel_2/slide_08.jpg",
+        "posts/2026-08-25/carousel_2/slide_09.jpg",
+        "posts/2026-08-25/carousel_2/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "One reply moves your email to Primary\u2014not opens",
+        "hook_emphasis": "one reply",
+        "stat_number": 40,
+        "stat_label": "more replies with a question",
+        "body": [
+          {
+            "text": "Gmail\u2019s Primary tab looks for replies, not opens, to decide where your email goes.",
+            "emphasis": "replies"
+          },
+          {
+            "text": "One reply moves your email to Primary, even if no one opens it first\u2014no opens needed.",
+            "emphasis": "one reply"
+          },
+          {
+            "text": "Most lists see 40% more replies when they ask a question in the first line of the email.",
+            "emphasis": "40%"
+          },
+          {
+            "text": "Emails with replies get shown to more people, even if the open rate is low\u2014focus on replies.",
+            "emphasis": "replies"
+          }
+        ],
+        "chart": {
+          "label": "replies",
+          "before": 1,
+          "after": 10,
+          "unit": "",
+          "caption": "Asking a question in the first line can increase replies by 40% or more."
+        },
+        "send_line": "Send this to your email team"
+      },
+      "body_slides": [
+        {
+          "text": "Gmail\u2019s Primary tab looks for replies, not opens, to decide where your email goes.",
+          "keyword": "replies"
+        },
+        {
+          "text": "One reply moves your email to Primary, even if no one opens it first.",
+          "keyword": "one reply"
+        },
+        {
+          "text": "Asking a question in the first line gets 40% more replies.",
+          "keyword": "40%"
+        },
+        {
+          "text": "Emails with replies get shown to more people, even if open rates are low.",
+          "keyword": "shown"
+        },
+        {
+          "text": "Before: 2% open rate, 0 replies. After: 1 reply, email moves to Primary instantly.",
+          "keyword": "Primary",
+          "before": "2%",
+          "after": "1 reply"
+        },
+        {
+          "text": "The fix isn\u2019t more opens\u2014it\u2019s making sure your email gets at least one reply.",
+          "keyword": "one reply"
+        }
+      ],
+      "cta_word": "TEMPLATE",
+      "cta_promise": "the reply-first email template",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Google Ads wastes \u20ac0.50 on every bounce\u2014here\u2019s how to find and block the wasted clicks. #googleadstips #ppcmanagement #searchads #galwaybusiness",
+      "niche": "Google Ads",
+      "angle": "mistake-fear",
+      "format": "before-after",
+      "hook": "Google Ads wastes \u20ac0.50 on every bounce",
+      "throughline": "Google Ads charges the same for clicks that bounce as for those that convert\u2014so you need to filter out the bounces to save money.",
+      "image_paths": [
+        "posts/2026-08-25/carousel_3/slide_01.jpg",
+        "posts/2026-08-25/carousel_3/slide_02.jpg",
+        "posts/2026-08-25/carousel_3/slide_03.jpg",
+        "posts/2026-08-25/carousel_3/slide_04.jpg",
+        "posts/2026-08-25/carousel_3/slide_05.jpg",
+        "posts/2026-08-25/carousel_3/slide_06.jpg",
+        "posts/2026-08-25/carousel_3/slide_07.jpg",
+        "posts/2026-08-25/carousel_3/slide_08.jpg",
+        "posts/2026-08-25/carousel_3/slide_09.jpg",
+        "posts/2026-08-25/carousel_3/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Google Ads bills you \u20ac0.50 for a bounce and \u20ac0.50 for a sale",
+        "hook_emphasis": "bounce and sale",
+        "stat_number": 25,
+        "stat_label": "of budget wasted on bounces",
+        "body": [
+          {
+            "text": "Google Ads charges you the same for a click that bounces as for one that buys\u2014no discount for bounces.",
+            "emphasis": "same"
+          },
+          {
+            "text": "The Search Terms report shows which searches led to clicks but never converted\u2014those are your bounces.",
+            "emphasis": "Search Terms"
+          },
+          {
+            "text": "Most accounts waste 25% of their budget on searches that were never going to buy\u2014block them with negatives.",
+            "emphasis": "25%"
+          },
+          {
+            "text": "Add negative keywords to stop paying for bounces\u2014this cuts wasted spend by 30% without losing sales.",
+            "emphasis": "negative keywords"
+          }
+        ],
+        "chart": {
+          "label": "cost per click",
+          "before": 50,
+          "after": 35,
+          "unit": "\u20ac",
+          "caption": "Blocking wasted clicks can cut cost per click by 30% while keeping the same conversions."
+        },
+        "send_line": "Send this to your ads manager"
+      },
+      "body_slides": [
+        {
+          "text": "Google Ads charges you the same for a click that bounces as for one that buys.",
+          "keyword": "bounces"
+        },
+        {
+          "text": "The Search Terms report shows which searches led to clicks but never converted.",
+          "keyword": "Search Terms"
+        },
+        {
+          "text": "Most accounts waste 25% of their budget on searches that were never going to buy.",
+          "keyword": "25%"
+        },
+        {
+          "text": "Before: \u20ac0.50 per click, 10% conversion rate. After: \u20ac0.35 per click, same conversions.",
+          "keyword": "\u20ac0.35",
+          "before": "\u20ac0.50",
+          "after": "\u20ac0.35"
+        },
+        {
+          "text": "Add negative keywords to block searches that bounce\u2014this cuts wasted spend by 30%.",
+          "keyword": "negative keywords"
+        },
+        {
+          "text": "The fix isn\u2019t more budget\u2014it\u2019s making sure every click has a chance to convert.",
+          "keyword": "chance"
+        }
+      ],
+      "cta_word": "AUDIT",
+      "cta_promise": "the wasted-click checklist",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 4,
+      "caption": "Claude trains on everything you paste by default\u2014unless you flip this switch. Here\u2019s how to opt out and keep your data private. #aiforbusiness #aitoolsforbusiness #marketingaudit #corkbusiness",
+      "niche": "AI Tools",
+      "angle": "behind-the-curtain",
+      "format": "checklist",
+      "hook": "Claude trains on everything you paste by default",
+      "throughline": "Claude\u2019s free plan keeps your pasted data forever by default\u2014so you need to opt out to protect sensitive information.",
+      "image_paths": [
+        "posts/2026-08-25/carousel_4/slide_01.jpg",
+        "posts/2026-08-25/carousel_4/slide_02.jpg",
+        "posts/2026-08-25/carousel_4/slide_03.jpg",
+        "posts/2026-08-25/carousel_4/slide_04.jpg",
+        "posts/2026-08-25/carousel_4/slide_05.jpg",
+        "posts/2026-08-25/carousel_4/slide_06.jpg",
+        "posts/2026-08-25/carousel_4/slide_07.jpg",
+        "posts/2026-08-25/carousel_4/slide_08.jpg",
+        "posts/2026-08-25/carousel_4/slide_09.jpg",
+        "posts/2026-08-25/carousel_4/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Claude trains on everything you paste\u2014unless you flip this switch",
+        "hook_emphasis": "trains on everything",
+        "body": [
+          {
+            "text": "Claude\u2019s free plan trains on everything you paste\u2014customer emails, ad copy, even passwords by default.",
+            "emphasis": "trains"
+          },
+          {
+            "text": "The default setting keeps your data forever, even after you delete your account\u2014no opt-out by default.",
+            "emphasis": "forever"
+          },
+          {
+            "text": "Flip the \u2018Data Sharing\u2019 switch to \u2018Off\u2019 in settings\u2014it takes 10 seconds and stops Claude from using your inputs.",
+            "emphasis": "Data Sharing"
+          },
+          {
+            "text": "Most businesses don\u2019t know this switch exists\u2014check yours now to keep your data private, not public.",
+            "emphasis": "private"
+          }
+        ],
+        "screen": {
+          "title": "Turn off data sharing in Claude",
+          "panel_label": "DATA SETTINGS",
+          "options": [
+            [
+              "Data Sharing On",
+              "Claude trains on your inputs"
+            ],
+            [
+              "Data Sharing Off",
+              "Your data stays private"
+            ]
+          ],
+          "wrong": 0,
+          "right": 1,
+          "mechanism": "Turning off data sharing stops Claude from training on your pasted data\u2014keeps it private."
+        },
+        "send_line": "Send this to your tech team"
+      },
+      "body_slides": [
+        {
+          "text": "Claude\u2019s free plan uses your pasted data\u2014emails, ad copy, even passwords\u2014to train its models.",
+          "keyword": "uses your data"
+        },
+        {
+          "text": "The default setting keeps your data forever, even after you delete your account.",
+          "keyword": "default setting"
+        },
+        {
+          "text": "Flip \u2018Data Sharing\u2019 to \u2018Off\u2019 in settings\u2014it takes 10 seconds and stops Claude from using your inputs.",
+          "keyword": "Data Sharing"
+        },
+        {
+          "text": "Most businesses don\u2019t know this switch exists\u2014check yours now to keep data private.",
+          "keyword": "private"
+        },
+        {
+          "text": "Before: Data stored forever. After: Data deleted when you close the chat\u2014no training.",
+          "keyword": "deleted",
+          "before": "forever",
+          "after": "deleted"
+        },
+        {
+          "text": "The fix isn\u2019t avoiding Claude\u2014it\u2019s making sure your data stays yours.",
+          "keyword": "stays yours"
+        }
+      ],
+      "cta_word": "CHECKLIST",
+      "cta_promise": "the data privacy checklist",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Google Ads buries 17% of your buyers in \u2018Other searches\u2019\u2014here\u2019s how to find and target them all. #googleadstips #ppcmanagement #searchads #irishbusiness",
+      "niche": "Google Ads",
+      "angle": "behind-the-curtain",
+      "format": "step-by-step",
+      "hook": "Google Ads buries 17% of your buyers in one report",
+      "throughline": "Google Ads hides 17% of your buyers in the \u2018Other searches\u2019 report\u2014so you need to check it to find and target them.",
+      "image_paths": [
+        "posts/2026-08-25/carousel_5/slide_01.jpg",
+        "posts/2026-08-25/carousel_5/slide_02.jpg",
+        "posts/2026-08-25/carousel_5/slide_03.jpg",
+        "posts/2026-08-25/carousel_5/slide_04.jpg",
+        "posts/2026-08-25/carousel_5/slide_05.jpg",
+        "posts/2026-08-25/carousel_5/slide_06.jpg",
+        "posts/2026-08-25/carousel_5/slide_07.jpg",
+        "posts/2026-08-25/carousel_5/slide_08.jpg",
+        "posts/2026-08-25/carousel_5/slide_09.jpg",
+        "posts/2026-08-25/carousel_5/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Google Ads buries 17% of your buyers in one report",
+        "hook_emphasis": "17%",
+        "stat_number": 17,
+        "stat_label": "of buyers hidden",
+        "body": [
+          {
+            "text": "Google Ads groups some searches into \u2018Other searches\u2019\u2014these are real buyers you\u2019re missing out on.",
+            "emphasis": "Other searches"
+          },
+          {
+            "text": "The Search Terms report shows \u2018Other searches\u2019\u2014click it to see the hidden buyers Google buried.",
+            "emphasis": "Search Terms"
+          },
+          {
+            "text": "Most accounts find 17% of their best buyers hidden in this report\u2014check yours to find them.",
+            "emphasis": "17%"
+          },
+          {
+            "text": "Add the hidden searches as keywords\u2014this brings back the buyers Google hid and boosts your reach.",
+            "emphasis": "keywords"
+          }
+        ],
+        "chart": {
+          "label": "buyers found",
+          "before": 83,
+          "after": 100,
+          "unit": "%",
+          "caption": "Checking \u2018Other searches\u2019 can bring back 17% of your hidden buyers\u2014no extra spend needed."
+        },
+        "send_line": "Send this to your ads manager"
+      },
+      "body_slides": [
+        {
+          "text": "Google Ads groups some searches into \u2018Other searches\u2019\u2014these are real buyers you\u2019re missing.",
+          "keyword": "Other searches"
+        },
+        {
+          "text": "The Search Terms report shows \u2018Other searches\u2019\u2014click it to see the hidden buyers.",
+          "keyword": "Search Terms"
+        },
+        {
+          "text": "Most accounts find 17% of their best buyers hidden in this report\u2014check yours now.",
+          "keyword": "17%"
+        },
+        {
+          "text": "Add the hidden searches as keywords\u2014this brings back buyers Google buried.",
+          "keyword": "keywords"
+        },
+        {
+          "text": "Before: 83% of buyers shown. After: 100% of buyers shown\u2014no one hidden.",
+          "keyword": "100%",
+          "before": "83%",
+          "after": "100%"
+        },
+        {
+          "text": "The fix isn\u2019t more budget\u2014it\u2019s making sure you\u2019re targeting all your buyers, not just most.",
+          "keyword": "all buyers"
+        }
+      ],
+      "cta_word": "GUIDE",
+      "cta_promise": "the hidden-buyers checklist",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    }
+  ]
+}
