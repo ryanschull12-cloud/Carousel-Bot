@@ -557,5 +557,41 @@
       "Steal the process below."
     ],
     "cta_word": "COPY"
+  },
+  {
+    "date": "2026-08-25",
+    "index": 1,
+    "clip": "assets/story_reel_footage/daytime_skyline_desk.mp4",
+    "hook_lines": [
+      "I gave my cold email",
+      "to Claude for 7 days",
+      "and it booked \u20ac8k",
+      "in new meetings. Here's exactly what changed."
+    ],
+    "cta_word": "LEAKS"
+  },
+  {
+    "date": "2026-08-25",
+    "index": 2,
+    "clip": "assets/story_reel_footage/silhouette_screen_dark.mp4",
+    "hook_lines": [
+      "I let AI audit 3 client",
+      "Google Ads accounts",
+      "and cut their CPA",
+      "by 64%. Reverse-engineering it below."
+    ],
+    "cta_word": "CHECK"
+  },
+  {
+    "date": "2026-08-25",
+    "index": 3,
+    "clip": "assets/story_reel_footage/finance_city_balcony.mp4",
+    "hook_lines": [
+      "I handed a client's",
+      "landing page to AI",
+      "and it 3x'd their",
+      "leads. Steal the process below."
+    ],
+    "cta_word": "COPY"
   }
 ]
