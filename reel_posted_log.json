@@ -684,5 +684,19 @@
     "scored": false,
     "delivery": "email",
     "posted_manually": null
+  },
+  {
+    "media_id": null,
+    "date": "2026-08-25",
+    "index": 3,
+    "niche": "Google Ads",
+    "angle": "mistake-fear",
+    "format": "before-after",
+    "hook": "Google Ads bills you €0.50 for a bounce and €0.50 for a sale",
+    "media_product_type": "REELS",
+    "trial": false,
+    "scored": false,
+    "delivery": "email",
+    "posted_manually": null
   }
 ]
