@@ -1,71 +1,6 @@
 {
   "recent_batches": [
     {
-      "date": "2026-08-16",
-      "carousels": [
-        {
-          "niche": "Email Marketing",
-          "angle": "behind-the-curtain",
-          "format": "comparison",
-          "hook": "Gmail moves emails to Primary after one reply\u2014no opens needed",
-          "hashtags": [
-            "#emailmarketingtips",
-            "#emaildeliverability",
-            "#marketingaudit",
-            "#corkbusiness"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "realization",
-          "format": "step-by-step",
-          "hook": "Google Ads hides 23% of your highest-converting searches",
-          "hashtags": [
-            "#googleadstips",
-            "#ppcmanagement",
-            "#leadgeneration",
-            "#galwaybusiness"
-          ]
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "proof-numbers",
-          "format": "before-after",
-          "hook": "Meta\u2019s algorithm freezes after 3 days without a single conversion",
-          "hashtags": [
-            "#metaadstips",
-            "#paidsocialtips",
-            "#adspend",
-            "#dublinbusiness"
-          ]
-        },
-        {
-          "niche": "AI Tools",
-          "angle": "mistake-fear",
-          "format": "checklist",
-          "hook": "ChatGPT trains on everything you paste\u2014unless you flip this switch",
-          "hashtags": [
-            "#aiforbusiness",
-            "#aitoolsforbusiness",
-            "#marketingaudit",
-            "#irishbusiness"
-          ]
-        },
-        {
-          "niche": "Email Marketing",
-          "angle": "proof-numbers",
-          "format": "steal-this",
-          "hook": "Gmail skips the spam folder if someone replies\u2014even once",
-          "hashtags": [
-            "#emailmarketingtips",
-            "#emailcopywriting",
-            "#conversiontracking",
-            "#galwaybusiness"
-          ]
-        }
-      ]
-    },
-    {
       "date": "2026-08-17",
       "carousels": [
         {
@@ -641,6 +576,71 @@
             "#ppcmanagement",
             "#searchads",
             "#irishbusiness"
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-08-26",
+      "carousels": [
+        {
+          "niche": "Google Ads",
+          "angle": "behind-the-curtain",
+          "format": "steal-this",
+          "hook": "Google Ads buries 12% of your buyers in \u2018Other searches\u2019\u2014one filter uncovers them",
+          "hashtags": [
+            "#googleadstips",
+            "#ppcmanagement",
+            "#searchads",
+            "#corkbusiness"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "behind-the-curtain",
+          "format": "steal-this",
+          "hook": "Gmail moves your email to Primary after one reply\u2014here\u2019s how to get it",
+          "hashtags": [
+            "#emailmarketingtips",
+            "#emaildeliverability",
+            "#leadgeneration",
+            "#galwaybusiness"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "realization",
+          "format": "before-after",
+          "hook": "Google Ads treats a 3-second bounce like a buyer\u2014here\u2019s how to stop it",
+          "hashtags": [
+            "#googleadstips",
+            "#ppcmanagement",
+            "#searchads",
+            "#galwaybusiness"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "proof-numbers",
+          "format": "before-after",
+          "hook": "One reply trains Gmail to trust your emails for 30 days",
+          "hashtags": [
+            "#emailmarketingtips",
+            "#emaildeliverability",
+            "#leadgeneration",
+            "#irishsmallbusiness"
+          ]
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "proof-numbers",
+          "format": "myth-buster",
+          "hook": "Meta buries ads that take 5 seconds to show the problem",
+          "hashtags": [
+            "#metaadstips",
+            "#adsmanagertips",
+            "#paidsocialtips",
+            "#dublinbusiness"
           ]
         }
       ]

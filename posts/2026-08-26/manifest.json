@@ -1,0 +1,456 @@
+{
+  "batch_date": "2026-08-26",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Google Ads buries 12% of your buyers in \u2018Other searches\u2019\u2014but one filter brings them back. Most accounts never check this report, and it costs them real money every week. #googleadstips #ppcmanagement #searchads #corkbusiness",
+      "niche": "Google Ads",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Google Ads buries 12% of your buyers in \u2018Other searches\u2019\u2014one filter uncovers them",
+      "throughline": "Google Ads quietly hides 12% of your buyers in a report most accounts never check, but one simple filter brings them back.",
+      "image_paths": [
+        "posts/2026-08-26/carousel_1/slide_01.jpg",
+        "posts/2026-08-26/carousel_1/slide_02.jpg",
+        "posts/2026-08-26/carousel_1/slide_03.jpg",
+        "posts/2026-08-26/carousel_1/slide_04.jpg",
+        "posts/2026-08-26/carousel_1/slide_05.jpg",
+        "posts/2026-08-26/carousel_1/slide_06.jpg",
+        "posts/2026-08-26/carousel_1/slide_07.jpg",
+        "posts/2026-08-26/carousel_1/slide_08.jpg",
+        "posts/2026-08-26/carousel_1/slide_09.jpg",
+        "posts/2026-08-26/carousel_1/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "You are paying Google for searches that already bought from you",
+        "hook_emphasis": "already bought",
+        "body": [
+          {
+            "text": "Google\u2019s \u2018Other searches\u2019 report groups real searches to keep the list short, but some of them are your best buyers.",
+            "emphasis": "best buyers"
+          },
+          {
+            "text": "Most accounts see 12% of their budget go here and never look, because the report seems empty at first glance.",
+            "emphasis": "12%"
+          },
+          {
+            "text": "Filter for conversions in the last 30 days, and suddenly you see the searches that actually handed you customers.",
+            "emphasis": "handed you customers"
+          },
+          {
+            "text": "Add those as exact match keywords, and you stop paying for the same search twice\u2014one account found 12% more buyers this way.",
+            "emphasis": "12% more buyers"
+          }
+        ],
+        "chart": {
+          "label": "hidden buyers found",
+          "before": 0,
+          "after": 12,
+          "unit": "%",
+          "caption": "Filtering the Search terms report for conversions reveals 12% more buyers most accounts miss."
+        },
+        "send_line": "Send this to whoever runs your ads"
+      },
+      "body_slides": [
+        {
+          "text": "The \u2018Search terms\u2019 report lists every search that triggered your ad, including \u2018Other searches.\u2019",
+          "keyword": "Search terms"
+        },
+        {
+          "text": "These aren\u2019t junk\u2014they\u2019re real searches Google groups to keep the report short.",
+          "keyword": "real searches"
+        },
+        {
+          "text": "Most accounts lose 12% of their budget here and never look.",
+          "keyword": "12%"
+        },
+        {
+          "text": "Filter for conversions in the last 30 days to see which hidden searches actually bought.",
+          "keyword": "conversions"
+        },
+        {
+          "text": "Add the best ones as exact match keywords to stop paying for the same search twice.",
+          "keyword": "exact match"
+        },
+        {
+          "text": "One account found 12% more buyers this way\u2014all from searches they already paid for.",
+          "keyword": "12% more buyers"
+        }
+      ],
+      "cta_word": "CHECKLIST",
+      "cta_promise": "the exact 7-step audit to find hidden buyers",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Gmail moves your email to Primary after one reply\u2014and a single question in the subject line can trigger it. Most lists never ask, and it costs them opens every week. #emailmarketingtips #emaildeliverability #leadgeneration #galwaybusiness",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Gmail moves your email to Primary after one reply\u2014here\u2019s how to get it",
+      "throughline": "Gmail\u2019s Primary tab opens for emails that get even one reply, and a single question in the subject line can trigger it.",
+      "image_paths": [
+        "posts/2026-08-26/carousel_2/slide_01.jpg",
+        "posts/2026-08-26/carousel_2/slide_02.jpg",
+        "posts/2026-08-26/carousel_2/slide_03.jpg",
+        "posts/2026-08-26/carousel_2/slide_04.jpg",
+        "posts/2026-08-26/carousel_2/slide_05.jpg",
+        "posts/2026-08-26/carousel_2/slide_06.jpg",
+        "posts/2026-08-26/carousel_2/slide_07.jpg",
+        "posts/2026-08-26/carousel_2/slide_08.jpg",
+        "posts/2026-08-26/carousel_2/slide_09.jpg",
+        "posts/2026-08-26/carousel_2/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Gmail hides your email unless someone replies\u2014even once",
+        "hook_emphasis": "hides your email",
+        "body": [
+          {
+            "text": "Gmail\u2019s Primary tab watches replies, not opens\u2014one reply moves your email there for 30 days.",
+            "emphasis": "30 days"
+          },
+          {
+            "text": "A subject line that asks a question gets replies faster than one that sells, because it feels personal.",
+            "emphasis": "feels personal"
+          },
+          {
+            "text": "\u2018Quick question\u2019 or \u2018Did you see this?\u2019 work better than \u201820% off today only\u2019\u2014one account saw opens jump from 18% to 42%.",
+            "emphasis": "18% to 42%"
+          },
+          {
+            "text": "Keep the question under 8 words so it doesn\u2019t get cut off on mobile\u2014that\u2019s where most of your list reads.",
+            "emphasis": "under 8 words"
+          }
+        ],
+        "chart": {
+          "label": "open rate jump",
+          "before": 18,
+          "after": 42,
+          "unit": "%",
+          "caption": "One question subject line moved open rates from 18% to 42% by triggering Gmail\u2019s Primary tab."
+        },
+        "send_line": "Send this to whoever writes your emails"
+      },
+      "body_slides": [
+        {
+          "text": "Gmail watches replies, not opens\u2014one reply moves your email to Primary for 30 days.",
+          "keyword": "replies"
+        },
+        {
+          "text": "A subject line that asks a question gets replies faster than one that sells.",
+          "keyword": "asks a question"
+        },
+        {
+          "text": "\u2018Quick question\u2019 or \u2018Did you see this?\u2019 work better than \u201820% off today only.\u2019",
+          "keyword": "Quick question"
+        },
+        {
+          "text": "The first reply trains Gmail to trust your sender address for a month.",
+          "keyword": "trains Gmail"
+        },
+        {
+          "text": "One account saw open rates jump from 18% to 42% after one question subject line.",
+          "keyword": "42%"
+        },
+        {
+          "text": "Keep the question under 8 words so it doesn\u2019t get cut off on mobile.",
+          "keyword": "under 8 words"
+        }
+      ],
+      "cta_word": "TEMPLATE",
+      "cta_promise": "the exact 5 subject line templates that get replies",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Google Ads treats a 3-second bounce like a buyer\u2014but one setting stops you paying for the bounces. Most accounts waste 30% of their budget this way. #googleadstips #ppcmanagement #searchads #galwaybusiness",
+      "niche": "Google Ads",
+      "angle": "realization",
+      "format": "before-after",
+      "hook": "Google Ads treats a 3-second bounce like a buyer\u2014here\u2019s how to stop it",
+      "throughline": "Google Ads charges the same price for a bounce and a buyer, but one setting stops you paying for the bounces.",
+      "image_paths": [
+        "posts/2026-08-26/carousel_3/slide_01.jpg",
+        "posts/2026-08-26/carousel_3/slide_02.jpg",
+        "posts/2026-08-26/carousel_3/slide_03.jpg",
+        "posts/2026-08-26/carousel_3/slide_04.jpg",
+        "posts/2026-08-26/carousel_3/slide_05.jpg",
+        "posts/2026-08-26/carousel_3/slide_06.jpg",
+        "posts/2026-08-26/carousel_3/slide_07.jpg",
+        "posts/2026-08-26/carousel_3/slide_08.jpg",
+        "posts/2026-08-26/carousel_3/slide_09.jpg",
+        "posts/2026-08-26/carousel_3/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "You are paying Google for visitors who leave in 3 seconds",
+        "hook_emphasis": "leave in 3 seconds",
+        "body": [
+          {
+            "text": "Google Ads bills you the same for a bounce and a buyer\u2014even if the visitor leaves in 3 seconds.",
+            "emphasis": "3 seconds"
+          },
+          {
+            "text": "Most accounts waste 30% of their budget on these bounces, because the platform doesn\u2019t care who stays.",
+            "emphasis": "30%"
+          },
+          {
+            "text": "Exclude high-bounce devices with a -100% bid adjustment, and you stop paying for them entirely.",
+            "emphasis": "-100%"
+          },
+          {
+            "text": "One account cut their cost per lead from \u20ac45 to \u20ac12 just by stopping mobile bounces\u2014that\u2019s real money back.",
+            "emphasis": "\u20ac45 to \u20ac12"
+          }
+        ],
+        "chart": {
+          "label": "cost per lead",
+          "before": 45,
+          "after": 12,
+          "unit": "\u20ac",
+          "caption": "Excluding high-bounce devices cut cost per lead from \u20ac45 to \u20ac12 by stopping waste on 3-second bounces."
+        },
+        "send_line": "Send this to whoever manages your ads"
+      },
+      "body_slides": [
+        {
+          "text": "Google Ads charges the same for every click\u2014even if the visitor leaves in 3 seconds.",
+          "keyword": "every click",
+          "before": "\u20ac0.50 per bounce",
+          "after": "\u20ac0.00 per bounce"
+        },
+        {
+          "text": "Most accounts waste 30% of their budget on these bounces\u2014money that could go to real buyers.",
+          "keyword": "30%",
+          "before": "30% wasted",
+          "after": "10% wasted"
+        },
+        {
+          "text": "Exclude high-bounce devices with a -100% bid adjustment to stop paying for them.",
+          "keyword": "bid adjustment",
+          "before": "all devices",
+          "after": "high-bounce devices excluded"
+        },
+        {
+          "text": "One account cut their cost per lead from \u20ac45 to \u20ac12 just by stopping mobile bounces.",
+          "keyword": "\u20ac45 to \u20ac12",
+          "before": "\u20ac45/lead",
+          "after": "\u20ac12/lead"
+        },
+        {
+          "text": "Check the \u2018Devices\u2019 report to see which ones waste your budget\u2014usually mobile or tablet.",
+          "keyword": "Devices report",
+          "before": "no exclusions",
+          "after": "excluded devices"
+        },
+        {
+          "text": "A -100% bid adjustment on high-bounce devices stops you paying for them entirely.",
+          "keyword": "-100%",
+          "before": "paying for bounces",
+          "after": "no bounces paid"
+        }
+      ],
+      "cta_word": "AUDIT",
+      "cta_promise": "the exact device exclusion checklist",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 4,
+      "caption": "One reply to your email trains Gmail to trust your emails for 30 days\u2014and a high sender score keeps them in Primary. Most lists never ask for replies, and it costs them opens every week. #emailmarketingtips #emaildeliverability #leadgeneration #irishsmallbusiness",
+      "niche": "Email Marketing",
+      "angle": "proof-numbers",
+      "format": "before-after",
+      "hook": "One reply trains Gmail to trust your emails for 30 days",
+      "throughline": "One reply to your email moves it to Gmail\u2019s Primary tab for 30 days, and a high sender score keeps it there.",
+      "image_paths": [
+        "posts/2026-08-26/carousel_4/slide_01.jpg",
+        "posts/2026-08-26/carousel_4/slide_02.jpg",
+        "posts/2026-08-26/carousel_4/slide_03.jpg",
+        "posts/2026-08-26/carousel_4/slide_04.jpg",
+        "posts/2026-08-26/carousel_4/slide_05.jpg",
+        "posts/2026-08-26/carousel_4/slide_06.jpg",
+        "posts/2026-08-26/carousel_4/slide_07.jpg",
+        "posts/2026-08-26/carousel_4/slide_08.jpg",
+        "posts/2026-08-26/carousel_4/slide_09.jpg",
+        "posts/2026-08-26/carousel_4/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Gmail hides your email unless your sender score is high",
+        "hook_emphasis": "sender score is high",
+        "body": [
+          {
+            "text": "Gmail\u2019s Primary tab opens for emails that get even one reply, and keeps them there for 30 days.",
+            "emphasis": "30 days"
+          },
+          {
+            "text": "A sender score over 90 tells Gmail your emails are safe\u2014even if they use words like \u2018free\u2019 or \u2018discount.\u2019",
+            "emphasis": "over 90"
+          },
+          {
+            "text": "One account saw open rates jump from 22% to 58% after one reply moved their email to Primary\u2014that\u2019s real customers back.",
+            "emphasis": "22% to 58%"
+          },
+          {
+            "text": "Check your sender score for free at senderscore.org\u2014most accounts sit between 70 and 85, and that\u2019s not high enough.",
+            "emphasis": "70 and 85"
+          }
+        ],
+        "chart": {
+          "label": "open rate jump",
+          "before": 22,
+          "after": 58,
+          "unit": "%",
+          "caption": "One reply moved an email to Gmail\u2019s Primary tab and jumped open rates from 22% to 58%."
+        },
+        "send_line": "Send this to whoever sends your emails"
+      },
+      "body_slides": [
+        {
+          "text": "Gmail\u2019s Primary tab opens for emails that get even one reply\u2014and keeps them there for 30 days.",
+          "keyword": "one reply",
+          "before": "Promotions tab",
+          "after": "Primary tab"
+        },
+        {
+          "text": "A sender score over 90 tells Gmail your emails are safe\u2014even if they use words like \u2018free\u2019 or \u2018discount.\u2019",
+          "keyword": "sender score over 90",
+          "before": "spam folder",
+          "after": "inbox"
+        },
+        {
+          "text": "One account saw open rates jump from 22% to 58% after one reply moved their email to Primary.",
+          "keyword": "22% to 58%",
+          "before": "22% open rate",
+          "after": "58% open rate"
+        },
+        {
+          "text": "Sender score is built on replies, not opens\u2014so ask a question in the subject line to get them.",
+          "keyword": "replies",
+          "before": "opens only",
+          "after": "replies too"
+        },
+        {
+          "text": "Gmail\u2019s spam filter ignores \u2018free\u2019 if your sender score is high\u2014but buries it if your score is low.",
+          "keyword": "ignores \u2018free\u2019",
+          "before": "\u2018free\u2019 = spam",
+          "after": "\u2018free\u2019 = inbox"
+        },
+        {
+          "text": "Check your sender score for free at senderscore.org\u2014most accounts sit between 70 and 85.",
+          "keyword": "senderscore.org",
+          "before": "unknown score",
+          "after": "known score"
+        }
+      ],
+      "cta_word": "GUIDE",
+      "cta_promise": "the exact sender score checklist",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Meta buries ads that take 5 seconds to show the problem\u2014not the solution. Most accounts start with the solution, and it costs them clicks every week. #metaadstips #adsmanagertips #paidsocialtips #dublinbusiness",
+      "niche": "Meta/Instagram Ads",
+      "angle": "proof-numbers",
+      "format": "myth-buster",
+      "hook": "Meta buries ads that take 5 seconds to show the problem",
+      "throughline": "Meta Ads reward creatives that show the problem in the first 2 seconds, not the solution\u2014and 6-second ads convert better than 15-second ones.",
+      "image_paths": [
+        "posts/2026-08-26/carousel_5/slide_01.jpg",
+        "posts/2026-08-26/carousel_5/slide_02.jpg",
+        "posts/2026-08-26/carousel_5/slide_03.jpg",
+        "posts/2026-08-26/carousel_5/slide_04.jpg",
+        "posts/2026-08-26/carousel_5/slide_05.jpg",
+        "posts/2026-08-26/carousel_5/slide_06.jpg",
+        "posts/2026-08-26/carousel_5/slide_07.jpg",
+        "posts/2026-08-26/carousel_5/slide_08.jpg",
+        "posts/2026-08-26/carousel_5/slide_09.jpg",
+        "posts/2026-08-26/carousel_5/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Meta buries your ad if it takes 5 seconds to show the problem",
+        "hook_emphasis": "takes 5 seconds",
+        "body": [
+          {
+            "text": "Meta\u2019s algorithm watches the first 2 seconds to see if the viewer relates to the problem\u2014not the solution.",
+            "emphasis": "first 2 seconds"
+          },
+          {
+            "text": "Ads that show the problem in the first 2 seconds get 30% more clicks than ones that start with the solution.",
+            "emphasis": "30% more clicks"
+          },
+          {
+            "text": "The best creative length is 6 seconds\u2014long enough to show the problem, short enough to keep attention.",
+            "emphasis": "6 seconds"
+          },
+          {
+            "text": "One account saw cost per lead drop from \u20ac22 to \u20ac8 after switching to 6-second problem-first ads\u2014that\u2019s real money saved.",
+            "emphasis": "\u20ac22 to \u20ac8"
+          }
+        ],
+        "chart": {
+          "label": "cost per lead",
+          "before": 22,
+          "after": 8,
+          "unit": "\u20ac",
+          "caption": "Switching to 6-second problem-first ads cut cost per lead from \u20ac22 to \u20ac8."
+        },
+        "send_line": "Send this to whoever creates your ads"
+      },
+      "body_slides": [
+        {
+          "text": "Meta\u2019s algorithm watches the first 2 seconds to see if the viewer relates to the problem\u2014not the solution.",
+          "keyword": "first 2 seconds",
+          "compare_a": "Problem first",
+          "compare_b": "Solution first"
+        },
+        {
+          "text": "Ads that show the problem in the first 2 seconds get 30% more clicks than ones that start with the solution.",
+          "keyword": "30% more clicks",
+          "compare_a": "Problem first",
+          "compare_b": "Solution first"
+        },
+        {
+          "text": "The best creative length is 6 seconds\u2014long enough to show the problem, short enough to keep attention.",
+          "keyword": "6 seconds",
+          "before": "15-second ads",
+          "after": "6-second ads"
+        },
+        {
+          "text": "One account saw cost per lead drop from \u20ac22 to \u20ac8 after switching to 6-second problem-first ads.",
+          "keyword": "\u20ac22 to \u20ac8",
+          "before": "\u20ac22/lead",
+          "after": "\u20ac8/lead"
+        },
+        {
+          "text": "Meta\u2019s algorithm buries ads that take 5 seconds to show the problem\u2014it thinks the viewer won\u2019t relate.",
+          "keyword": "5 seconds",
+          "before": "5-second delay",
+          "after": "2-second problem"
+        },
+        {
+          "text": "Test 6-second ads with the problem in the first 2 seconds\u2014most accounts never try this.",
+          "keyword": "6-second ads",
+          "before": "no test",
+          "after": "tested"
+        }
+      ],
+      "cta_word": "TEMPLATE",
+      "cta_promise": "the exact 6-second ad script template",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    }
+  ]
+}
