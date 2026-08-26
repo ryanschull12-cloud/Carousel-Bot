@@ -593,5 +593,41 @@
       "leads. Steal the process below."
     ],
     "cta_word": "COPY"
+  },
+  {
+    "date": "2026-08-26",
+    "index": 1,
+    "clip": "assets/story_reel_footage/latenight_coding_v2.mp4",
+    "hook_lines": [
+      "I gave my cold email",
+      "to Claude for 7 days",
+      "and open rates jumped 120%.",
+      "Here's exactly what changed."
+    ],
+    "cta_word": "OPEN"
+  },
+  {
+    "date": "2026-08-26",
+    "index": 2,
+    "clip": "assets/story_reel_footage/redlit_desk_workflow.mp4",
+    "hook_lines": [
+      "I handed 3 clients'",
+      "Google Ads to AI",
+      "and cut their spend by \u20ac9k",
+      "combined. Reverse-engineering it below."
+    ],
+    "cta_word": "LEAK"
+  },
+  {
+    "date": "2026-08-26",
+    "index": 3,
+    "clip": "assets/story_reel_footage/executive_office_16th.mp4",
+    "hook_lines": [
+      "I let Claude rewrite",
+      "a client\u2019s landing page",
+      "and conversions 3x\u2019d",
+      "in 48 hours. The playbook's in the caption."
+    ],
+    "cta_word": "COPY"
   }
 ]
