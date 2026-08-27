@@ -629,5 +629,41 @@
       "in 48 hours. The playbook's in the caption."
     ],
     "cta_word": "COPY"
+  },
+  {
+    "date": "2026-08-27",
+    "index": 1,
+    "clip": "assets/story_reel_footage/daytime_skyline_desk.mp4",
+    "hook_lines": [
+      "I gave my cold email",
+      "to Claude for 7 days",
+      "and open rates hit 62%.",
+      "Here's exactly what changed."
+    ],
+    "cta_word": "LEAK"
+  },
+  {
+    "date": "2026-08-27",
+    "index": 2,
+    "clip": "assets/story_reel_footage/code_screen_dark.mp4",
+    "hook_lines": [
+      "I handed 3 clients'",
+      "Google Ads to AI",
+      "and cut their CPA to \u20ac11.",
+      "The playbook's in the caption."
+    ],
+    "cta_word": "CHECKLIST"
+  },
+  {
+    "date": "2026-08-27",
+    "index": 3,
+    "clip": "assets/story_reel_footage/latenight_coding_v1.mp4",
+    "hook_lines": [
+      "I let AI rewrite",
+      "a client's landing page",
+      "and bookings tripled.",
+      "Steal the process below."
+    ],
+    "cta_word": "SYSTEM"
   }
 ]
