@@ -1,66 +1,6 @@
 {
   "recent_batches": [
     {
-      "date": "2026-08-17",
-      "carousels": [
-        {
-          "niche": "Email Marketing",
-          "angle": "behind-the-curtain",
-          "format": "comparison",
-          "hook": "Gmail buries emails with \u2018free\u2019 or \u2018discount\u2019 in the subject",
-          "hashtags": [
-            "#emailmarketingtips",
-            "#emaildeliverability",
-            "#marketingaudit"
-          ]
-        },
-        {
-          "niche": "AI Tools",
-          "angle": "contrarian",
-          "format": "myth-buster",
-          "hook": "ChatGPT\u2019s free plan trains on your inputs\u2014opt out or it\u2019s public",
-          "hashtags": [
-            "#aiforbusiness",
-            "#aitoolsforbusiness",
-            "#marketingaudit"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "relief-permission",
-          "format": "steal-this",
-          "hook": "Google Ads mislabels 1 in 5 buyers as \u2018low intent\u2019\u2014here\u2019s proof",
-          "hashtags": [
-            "#googleadstips",
-            "#ppcmanagement",
-            "#leadgeneration"
-          ]
-        },
-        {
-          "niche": "Google Ads",
-          "angle": "realization",
-          "format": "step-by-step",
-          "hook": "Google Ads hides 23% of your best leads in \u2018Other searches\u2019",
-          "hashtags": [
-            "#googleadstips",
-            "#ppcmanagement",
-            "#leadgeneration"
-          ]
-        },
-        {
-          "niche": "Meta/Instagram Ads",
-          "angle": "realization",
-          "format": "steal-this",
-          "hook": "Meta buries ads that take 5 seconds to show the problem",
-          "hashtags": [
-            "#metaadstips",
-            "#paidsocialtips",
-            "#adcopy"
-          ]
-        }
-      ]
-    },
-    {
       "date": "2026-08-18",
       "carousels": [
         {
@@ -641,6 +581,71 @@
             "#adsmanagertips",
             "#paidsocialtips",
             "#dublinbusiness"
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-08-28",
+      "carousels": [
+        {
+          "niche": "Google Ads",
+          "angle": "mistake-fear",
+          "format": "before-after",
+          "hook": "Google Ads wastes budget on 3-second bounces",
+          "hashtags": [
+            "#googleadstips",
+            "#ppcmanagement",
+            "#searchads",
+            "#irishentrepreneur"
+          ]
+        },
+        {
+          "niche": "Meta/Instagram Ads",
+          "angle": "realization",
+          "format": "comparison",
+          "hook": "Meta buries ads that take 4 seconds to hook",
+          "hashtags": [
+            "#metaadstips",
+            "#adsmanagertips",
+            "#paidsocialtips",
+            "#irishstartup"
+          ]
+        },
+        {
+          "niche": "Email Marketing",
+          "angle": "behind-the-curtain",
+          "format": "step-by-step",
+          "hook": "Gmail\u2019s Primary tab opens after one reply",
+          "hashtags": [
+            "#emailmarketingtips",
+            "#emaildeliverability",
+            "#leadgeneration",
+            "#galwaybusiness"
+          ]
+        },
+        {
+          "niche": "AI Tools",
+          "angle": "mistake-fear",
+          "format": "checklist",
+          "hook": "Free AI tools train on your pasted data",
+          "hashtags": [
+            "#aiforbusiness",
+            "#aitoolsforbusiness",
+            "#marketingaudit",
+            "#corkbusiness"
+          ]
+        },
+        {
+          "niche": "Google Ads",
+          "angle": "behind-the-curtain",
+          "format": "steal-this",
+          "hook": "Google Ads hides 12% of your buyers in one report",
+          "hashtags": [
+            "#googleadstips",
+            "#ppcmanagement",
+            "#searchads",
+            "#irishbusiness"
           ]
         }
       ]

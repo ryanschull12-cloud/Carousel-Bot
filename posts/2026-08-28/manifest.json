@@ -1,0 +1,442 @@
+{
+  "batch_date": "2026-08-28",
+  "carousels": [
+    {
+      "index": 1,
+      "caption": "Google Ads wastes 20-30% of budget on 3-second bounces. The Search Terms report shows exactly which clicks never scrolled. Filter for visits under 10 seconds and exclude those searches to stop paying for dead clicks. #googleadstips #ppcmanagement #searchads #irishentrepreneur",
+      "niche": "Google Ads",
+      "angle": "mistake-fear",
+      "format": "before-after",
+      "hook": "Google Ads wastes budget on 3-second bounces",
+      "throughline": "Google Ads quietly charges you for clicks that never had a chance to convert, and one filter can stop it.",
+      "image_paths": [
+        "posts/2026-08-28/carousel_1/slide_01.jpg",
+        "posts/2026-08-28/carousel_1/slide_02.jpg",
+        "posts/2026-08-28/carousel_1/slide_03.jpg",
+        "posts/2026-08-28/carousel_1/slide_04.jpg",
+        "posts/2026-08-28/carousel_1/slide_05.jpg",
+        "posts/2026-08-28/carousel_1/slide_06.jpg",
+        "posts/2026-08-28/carousel_1/slide_07.jpg",
+        "posts/2026-08-28/carousel_1/slide_08.jpg",
+        "posts/2026-08-28/carousel_1/slide_09.jpg",
+        "posts/2026-08-28/carousel_1/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "You\u2019re paying Google for clicks that left in 3 seconds",
+        "hook_emphasis": "left in 3 seconds",
+        "body": [
+          {
+            "text": "Google Ads counts a 3-second bounce as a real visit, so you pay for it.",
+            "emphasis": "3-second bounce"
+          },
+          {
+            "text": "The Search Terms report shows which clicks never scrolled past the first line.",
+            "emphasis": "never scrolled"
+          },
+          {
+            "text": "Most accounts waste 20-30% of budget on these bounces, not buyers.",
+            "emphasis": "20-30%"
+          },
+          {
+            "text": "Filter for visits under 10 seconds and exclude those searches to save money.",
+            "emphasis": "exclude those searches"
+          }
+        ],
+        "chart": {
+          "label": "cost per lead",
+          "before": 45,
+          "after": 30,
+          "unit": "\u20ac",
+          "caption": "Filtering out 3-second bounces cut cost per lead by a third in two weeks."
+        },
+        "send_line": "Send this to whoever runs your ads"
+      },
+      "body_slides": [
+        {
+          "text": "Google Ads treats a 3-second bounce like a real visit.",
+          "keyword": "3-second bounce"
+        },
+        {
+          "text": "The Search Terms report shows which clicks never scrolled.",
+          "keyword": "Search Terms report"
+        },
+        {
+          "text": "Filter for visits under 10 seconds to find wasted spend.",
+          "keyword": "under 10 seconds"
+        },
+        {
+          "text": "Most accounts see 20-30% of budget go to these bounces.",
+          "keyword": "20-30%"
+        },
+        {
+          "text": "Exclude those searches to stop paying for dead clicks.",
+          "keyword": "Exclude searches"
+        },
+        {
+          "text": "A clean account spends \u20ac0.30 on buyers, not \u20ac0.30 on bounces.",
+          "keyword": "\u20ac0.30 on buyers",
+          "before": "\u20ac0.30 on bounces",
+          "after": "\u20ac0.30 on buyers"
+        }
+      ],
+      "cta_word": "FILTER",
+      "cta_promise": "the exact bounce filter settings",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 2,
+      "caption": "Meta Ads bury creatives that take 4 seconds to hook. The first 2 seconds decide who watches. Show the problem fast, not the solution, to reach 3x more people. Test 3 hooks to find the fastest one. #metaadstips #adsmanagertips #paidsocialtips #irishstartup",
+      "niche": "Meta/Instagram Ads",
+      "angle": "realization",
+      "format": "comparison",
+      "hook": "Meta buries ads that take 4 seconds to hook",
+      "throughline": "Meta Ads reward creatives that show the problem fast, and bury those that take too long.",
+      "image_paths": [
+        "posts/2026-08-28/carousel_2/slide_01.jpg",
+        "posts/2026-08-28/carousel_2/slide_02.jpg",
+        "posts/2026-08-28/carousel_2/slide_03.jpg",
+        "posts/2026-08-28/carousel_2/slide_04.jpg",
+        "posts/2026-08-28/carousel_2/slide_05.jpg",
+        "posts/2026-08-28/carousel_2/slide_06.jpg",
+        "posts/2026-08-28/carousel_2/slide_07.jpg",
+        "posts/2026-08-28/carousel_2/slide_08.jpg",
+        "posts/2026-08-28/carousel_2/slide_09.jpg",
+        "posts/2026-08-28/carousel_2/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Meta buries ads that take 4 seconds to show the problem",
+        "hook_emphasis": "4 seconds",
+        "body": [
+          {
+            "text": "Meta tests your ad in the first 2 seconds to decide who sees it.",
+            "emphasis": "first 2 seconds"
+          },
+          {
+            "text": "Ads that show the problem fast get shown to 3x more people.",
+            "emphasis": "3x more people"
+          },
+          {
+            "text": "Slow ads get buried even if the rest of the creative is perfect.",
+            "emphasis": "buried"
+          },
+          {
+            "text": "Test 3 different hooks to find the fastest one and cut costs.",
+            "emphasis": "cut costs"
+          }
+        ],
+        "screen": {
+          "title": "Which hook works fastest?",
+          "panel_label": "AD TESTING",
+          "options": [
+            [
+              "Show solution first",
+              "Takes 4+ seconds to hook"
+            ],
+            [
+              "Show problem first",
+              "Hooks in 2 seconds"
+            ]
+          ],
+          "wrong": 0,
+          "right": 1,
+          "mechanism": "Problem-first hooks reach 3x more people and cut cost per lead."
+        },
+        "send_line": "Send this to your ad creative team"
+      },
+      "body_slides": [
+        {
+          "text": "Meta\u2019s system tests your ad in the first 2 seconds.",
+          "keyword": "first 2 seconds",
+          "compare_a": "Fast hook",
+          "compare_b": "Slow hook"
+        },
+        {
+          "text": "Fast-hook ads get shown to 3x more people than slow ones.",
+          "keyword": "3x more people"
+        },
+        {
+          "text": "Show the problem in the first frame, not the solution.",
+          "keyword": "problem first"
+        },
+        {
+          "text": "Slow ads get buried even if the rest is perfect.",
+          "keyword": "buried"
+        },
+        {
+          "text": "Test 3 different hooks to find the fastest one.",
+          "keyword": "3 different hooks"
+        },
+        {
+          "text": "A 2-second hook can cut cost per lead by half.",
+          "keyword": "cut cost by half"
+        }
+      ],
+      "cta_word": "HOOKS",
+      "cta_promise": "the 3 fastest ad hooks we use",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 3,
+      "caption": "Gmail\u2019s Primary tab opens for emails that get replies, not opens. One reply trains Gmail to trust your emails for 30 days. Ask questions and avoid no-reply addresses to get more replies. #emailmarketingtips #emaildeliverability #leadgeneration #galwaybusiness",
+      "niche": "Email Marketing",
+      "angle": "behind-the-curtain",
+      "format": "step-by-step",
+      "hook": "Gmail\u2019s Primary tab opens after one reply",
+      "throughline": "Gmail\u2019s Primary tab opens for emails that feel personal, not promotional, and one reply trains it for 30 days.",
+      "image_paths": [
+        "posts/2026-08-28/carousel_3/slide_01.jpg",
+        "posts/2026-08-28/carousel_3/slide_02.jpg",
+        "posts/2026-08-28/carousel_3/slide_03.jpg",
+        "posts/2026-08-28/carousel_3/slide_04.jpg",
+        "posts/2026-08-28/carousel_3/slide_05.jpg",
+        "posts/2026-08-28/carousel_3/slide_06.jpg",
+        "posts/2026-08-28/carousel_3/slide_07.jpg",
+        "posts/2026-08-28/carousel_3/slide_08.jpg",
+        "posts/2026-08-28/carousel_3/slide_09.jpg",
+        "posts/2026-08-28/carousel_3/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Gmail moves your email to Primary after one reply\u2014not opens",
+        "hook_emphasis": "one reply",
+        "body": [
+          {
+            "text": "Gmail moves emails to Primary when someone replies, not when they open.",
+            "emphasis": "replies, not opens"
+          },
+          {
+            "text": "A reply tells Gmail your email is personal, not promotional or spam.",
+            "emphasis": "personal, not spam"
+          },
+          {
+            "text": "One reply trains Gmail to trust your emails for 30 days, not just one send.",
+            "emphasis": "30 days"
+          },
+          {
+            "text": "Ask a question in your email to get replies and stay in Primary.",
+            "emphasis": "Ask a question"
+          }
+        ],
+        "proof": {
+          "before": "Promotions",
+          "after": "Primary",
+          "label": "tab after one reply"
+        },
+        "send_line": "Send this to your email team"
+      },
+      "body_slides": [
+        {
+          "text": "Gmail moves emails to Primary when someone replies, not opens.",
+          "keyword": "replies, not opens"
+        },
+        {
+          "text": "A reply tells Gmail your email is personal, not spam.",
+          "keyword": "personal, not spam"
+        },
+        {
+          "text": "One reply trains Gmail to trust your emails for 30 days.",
+          "keyword": "30 days"
+        },
+        {
+          "text": "Ask a question in your email to get replies.",
+          "keyword": "Ask a question"
+        },
+        {
+          "text": "Avoid \u2018no-reply\u2019 addresses to let people respond.",
+          "keyword": "no-reply"
+        },
+        {
+          "text": "A healthy list gets 5-10 replies per 100 emails sent.",
+          "keyword": "5-10 replies"
+        }
+      ],
+      "cta_word": "TEMPLATE",
+      "cta_promise": "the exact reply-friendly email template",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": true
+    },
+    {
+      "index": 4,
+      "caption": "Free AI tools train on everything you paste, including customer data. One setting can stop them from learning. Turn off data sharing, check privacy policies, and use paid plans for sensitive info. #aiforbusiness #aitoolsforbusiness #marketingaudit #corkbusiness",
+      "niche": "AI Tools",
+      "angle": "mistake-fear",
+      "format": "checklist",
+      "hook": "Free AI tools train on your pasted data",
+      "throughline": "Free AI tools train on everything you paste, and one setting can stop it.",
+      "image_paths": [
+        "posts/2026-08-28/carousel_4/slide_01.jpg",
+        "posts/2026-08-28/carousel_4/slide_02.jpg",
+        "posts/2026-08-28/carousel_4/slide_03.jpg",
+        "posts/2026-08-28/carousel_4/slide_04.jpg",
+        "posts/2026-08-28/carousel_4/slide_05.jpg",
+        "posts/2026-08-28/carousel_4/slide_06.jpg",
+        "posts/2026-08-28/carousel_4/slide_07.jpg",
+        "posts/2026-08-28/carousel_4/slide_08.jpg",
+        "posts/2026-08-28/carousel_4/slide_09.jpg",
+        "posts/2026-08-28/carousel_4/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Free AI tools train on every paste\u2014including customer data",
+        "hook_emphasis": "customer data",
+        "body": [
+          {
+            "text": "Free AI tools like ChatGPT train on everything you paste into them.",
+            "emphasis": "everything you paste"
+          },
+          {
+            "text": "They keep your data to improve their models, not just answer your question.",
+            "emphasis": "keep your data"
+          },
+          {
+            "text": "Turn off \u2018data sharing\u2019 in settings to stop them from learning your inputs.",
+            "emphasis": "Turn off data sharing"
+          },
+          {
+            "text": "Paid plans usually don\u2019t train on your data by default\u2014use them for sensitive info.",
+            "emphasis": "Paid plans"
+          }
+        ],
+        "screen": {
+          "title": "Which setting stops AI from learning?",
+          "panel_label": "PRIVACY SETTINGS",
+          "options": [
+            [
+              "Data sharing on",
+              "AI trains on your inputs"
+            ],
+            [
+              "Data sharing off",
+              "AI doesn\u2019t train on your inputs"
+            ]
+          ],
+          "wrong": 0,
+          "right": 1,
+          "mechanism": "Turning off data sharing stops free AI tools from training on your pasted data."
+        },
+        "send_line": "Send this to your team before pasting data"
+      },
+      "body_slides": [
+        {
+          "text": "Free AI tools like ChatGPT train on everything you paste.",
+          "keyword": "train on everything"
+        },
+        {
+          "text": "They keep your data to improve their models, not just answer you.",
+          "keyword": "keep your data"
+        },
+        {
+          "text": "Turn off \u2018data sharing\u2019 in settings to stop them learning.",
+          "keyword": "Turn off data sharing"
+        },
+        {
+          "text": "Paid plans usually don\u2019t train on your data by default.",
+          "keyword": "Paid plans"
+        },
+        {
+          "text": "Check the privacy policy before pasting customer info.",
+          "keyword": "privacy policy"
+        },
+        {
+          "text": "Use a private window if you can\u2019t turn off data sharing.",
+          "keyword": "private window"
+        }
+      ],
+      "cta_word": "CHECKLIST",
+      "cta_promise": "the 5-step AI privacy checklist",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    },
+    {
+      "index": 5,
+      "caption": "Google Ads hides 12% of your best leads in the \u2018Other searches\u2019 report. Most accounts never check it. Filter for conversions with 7+ day delays to find buyers who took longer to decide. Add their searches to your keywords to get more leads. #googleadstips #ppcmanagement #searchads #irishbusiness",
+      "niche": "Google Ads",
+      "angle": "behind-the-curtain",
+      "format": "steal-this",
+      "hook": "Google Ads hides 12% of your buyers in one report",
+      "throughline": "Google Ads hides 12% of your best leads in a report most accounts never check, and one filter uncovers them.",
+      "image_paths": [
+        "posts/2026-08-28/carousel_5/slide_01.jpg",
+        "posts/2026-08-28/carousel_5/slide_02.jpg",
+        "posts/2026-08-28/carousel_5/slide_03.jpg",
+        "posts/2026-08-28/carousel_5/slide_04.jpg",
+        "posts/2026-08-28/carousel_5/slide_05.jpg",
+        "posts/2026-08-28/carousel_5/slide_06.jpg",
+        "posts/2026-08-28/carousel_5/slide_07.jpg",
+        "posts/2026-08-28/carousel_5/slide_08.jpg",
+        "posts/2026-08-28/carousel_5/slide_09.jpg",
+        "posts/2026-08-28/carousel_5/slide_10.jpg"
+      ],
+      "reel_beats": {
+        "hook": "Google Ads hides 12% of your buyers in a report you\u2019ve never opened",
+        "hook_emphasis": "12% of your buyers",
+        "body": [
+          {
+            "text": "Google Ads buries 12% of your buyers in the \u2018Other searches\u2019 report.",
+            "emphasis": "Other searches report"
+          },
+          {
+            "text": "Most accounts never check this report, so they miss these leads entirely.",
+            "emphasis": "miss these leads"
+          },
+          {
+            "text": "Filter for conversions with 7+ day delays to find buyers who took longer to decide.",
+            "emphasis": "7+ day delays"
+          },
+          {
+            "text": "Add these searches to your keywords to get more leads from the same budget.",
+            "emphasis": "more leads"
+          }
+        ],
+        "chart": {
+          "label": "leads found",
+          "before": 88,
+          "after": 100,
+          "unit": "",
+          "caption": "Checking \u2018Other searches\u2019 added 12% more leads without extra spend."
+        },
+        "send_line": "Send this to whoever runs your Google Ads"
+      },
+      "body_slides": [
+        {
+          "text": "Google Ads buries 12% of your buyers in the \u2018Other searches\u2019 report.",
+          "keyword": "Other searches report"
+        },
+        {
+          "text": "Most accounts never check this report, so they miss these leads.",
+          "keyword": "never check"
+        },
+        {
+          "text": "Filter for conversions with 7+ day delays to find hidden buyers.",
+          "keyword": "7+ day delays"
+        },
+        {
+          "text": "These buyers took longer to decide but still converted.",
+          "keyword": "took longer"
+        },
+        {
+          "text": "Add these searches to your keywords to get more leads.",
+          "keyword": "Add these searches"
+        },
+        {
+          "text": "Healthy accounts check this report weekly to find missed leads.",
+          "keyword": "check weekly"
+        }
+      ],
+      "cta_word": "REPORT",
+      "cta_promise": "the exact \u2018Other searches\u2019 filter settings",
+      "virality_score": null,
+      "experiment_id": "exp-20260820-2",
+      "experiment_arm": "control",
+      "post_to_instagram": false
+    }
+  ]
+}
