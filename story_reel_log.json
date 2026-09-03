@@ -665,5 +665,35 @@
       "Steal the process below."
     ],
     "cta_word": "SYSTEM"
+  },
+  {
+    "date": "2026-09-03",
+    "index": 1,
+    "clip": "assets/story_reel_footage/dual_monitor_coding.mp4",
+    "hook_lines": [
+      "I gave my cold email / to Claude for 7 days",
+      "and it 5x\u2019d the replies. / Here\u2019s exactly what changed."
+    ],
+    "cta_word": "LEAKS"
+  },
+  {
+    "date": "2026-09-03",
+    "index": 2,
+    "clip": "assets/story_reel_footage/nyc_office_skyline.mp4",
+    "hook_lines": [
+      "I let AI audit / 3 client Google Ads / accounts in one hour",
+      "and cut wasted spend / \u20ac9,200 combined. Here\u2019s what I found."
+    ],
+    "cta_word": "CHECK"
+  },
+  {
+    "date": "2026-09-03",
+    "index": 3,
+    "clip": "assets/story_reel_footage/glasses_code_reflection.mp4",
+    "hook_lines": [
+      "I handed a client\u2019s / landing page to AI",
+      "and doubled conversions / in 24 hours. Steal the process below."
+    ],
+    "cta_word": "PAGE"
   }
 ]
