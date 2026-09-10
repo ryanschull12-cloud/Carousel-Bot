@@ -1,18 +1,5 @@
 {
-  "active": {
-    "id": "exp-20260820-2",
-    "created": "2026-08-20",
-    "started": "2026-08-20",
-    "type": "design_constant",
-    "hypothesis": "Increasing RECAP_CARD_TEXT_SIZE will improve readability of recap slides, reinforcing key takeaways and boosting engagement by making the content more digestible and memorable.",
-    "source": "internal+external",
-    "research_note": "Internal data shows 'step-by-step' and 'before-after' formats (which rely heavily on recap slides) have the highest engagement (108.33 and 103.70 avg). External research emphasizes clarity and consistency in carousel design for better retention and interaction.",
-    "design_constant": {
-      "constant": "RECAP_CARD_TEXT_SIZE",
-      "control_value": 26,
-      "variant_value": 30
-    }
-  },
+  "active": null,
   "history": [
     {
       "id": "exp-20260725-1",
@@ -34,6 +21,27 @@
       "n_control": 38,
       "n_variant": 1,
       "resolved_date": "2026-08-20"
+    },
+    {
+      "id": "exp-20260820-2",
+      "created": "2026-08-20",
+      "started": "2026-08-20",
+      "type": "design_constant",
+      "hypothesis": "Increasing RECAP_CARD_TEXT_SIZE will improve readability of recap slides, reinforcing key takeaways and boosting engagement by making the content more digestible and memorable.",
+      "source": "internal+external",
+      "research_note": "Internal data shows 'step-by-step' and 'before-after' formats (which rely heavily on recap slides) have the highest engagement (108.33 and 103.70 avg). External research emphasizes clarity and consistency in carousel design for better retention and interaction.",
+      "design_constant": {
+        "constant": "RECAP_CARD_TEXT_SIZE",
+        "control_value": 26,
+        "variant_value": 30
+      },
+      "status": "rejected",
+      "note": "Timed out after 21 days without reaching 6 scored posts per arm (had 0 variant / 0 control) \u2014 closing as inconclusive rather than leaving it stuck.",
+      "control_avg": null,
+      "variant_avg": null,
+      "n_control": 0,
+      "n_variant": 0,
+      "resolved_date": "2026-09-10"
     }
   ]
 }
